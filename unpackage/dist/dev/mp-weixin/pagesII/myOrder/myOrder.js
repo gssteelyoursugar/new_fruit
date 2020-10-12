@@ -545,7 +545,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
@@ -653,16 +652,16 @@ var thorui = __webpack_require__(/*! @/common/tui-clipboard/tui-clipboard.js */ 
 
           break;
         case 'slideDown':
-          if (this.pageIndex > 1) {
-            this.pageIndex--;
-          }
-          uni.showLoading({
-            title: '加载中',
-            duration: 2000 });
-
-          this.getOrderData();
-          uni.hideLoading();
-          log('我下滑了~');
+          // if (this.pageIndex > 1) {
+          // 	this.pageIndex--
+          // }
+          // uni.showLoading({
+          // 	title: '加载中',
+          // 	duration: 2000
+          // })
+          // this.getOrderData()
+          // uni.hideLoading()
+          // log('我下滑了~')
           break;
         case 'slideLeft':
           log('我左滑了~');
@@ -840,6 +839,7 @@ var thorui = __webpack_require__(/*! @/common/tui-clipboard/tui-clipboard.js */ 
           _this5.$forceUpdate();
           return;
         }
+
         var newData = res.data.data;
         // this.myOrderData = newData
         // newData.map(item=>{

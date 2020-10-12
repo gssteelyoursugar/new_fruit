@@ -372,47 +372,36 @@ var _console = console,log = _console.log;var form = __webpack_require__(/*! @/c
       addressInfo: '', //详细地址
       files: [], //最多上传9张图片
       imageList: [], category: 'image', ctx: {} };}, methods: { //地址选择弹出
-    picker: function picker(e) {console.log("pick=============", e); //获取选中的三级信息
+    picker: function picker(e) {//获取选中的三级信息
       var value = e.detail.value; //这个是三级的picker分别选中的下标，value=[].length = 3,第一个是一级，第二个是二级。。。
       var one = this.addressOne[value[0]];var two = this.addressTwo[value[1]];var three = this.addressThree[value[2]];this.text1 = one.name + " " + two.name + " " + three.name; // console.log("选中的三级信息======",this.text1)
       // this.StoreInfo.address = this.text1
-      this.idAddress = three.id;log("选中的三级ID======", this.idAddress); /* if (this.selectList.length > 0) {
-                                                                      	let provice = this.selectList[value[0]].text
-                                                                      	let city = this.selectList[value[0]].children[value[1]].text
-                                                                      	let district = this.selectList[value[0]].children[value[1]].children[value[2]].text
-                                                                      	this.text = provice + " " + city + " " + district;
-                                                                      	this.id = this.selectList[value[0]].children[value[1]].children[value[2]].value
-                                                                      } */}, toArr: function toArr(object) {var arr = [];for (var i in object) {arr.push(object[i].name);}return arr;}, columnPicker: function columnPicker(e) {//console.log("columnPicker=======",e)
+      this.idAddress = three.id; /* if (this.selectList.length > 0) {
+                                 	let provice = this.selectList[value[0]].text
+                                 	let city = this.selectList[value[0]].children[value[1]].text
+                                 	let district = this.selectList[value[0]].children[value[1]].children[value[2]].text
+                                 	this.text = provice + " " + city + " " + district;
+                                 	this.id = this.selectList[value[0]].children[value[1]].children[value[2]].value
+                                 } */}, toArr: function toArr(object) {var arr = [];for (var i in object) {arr.push(object[i].name);}return arr;}, columnPicker: function columnPicker(e) {//console.log("columnPicker=======",e)
       //第几列 下标从0开始,0=一级选择，1=二级选择，2=三级选择
       var column = e.detail.column; //第几行 下标从0开始
       var value = e.detail.value;if (column === 0) {//获取一级选中的地址信息
-        var one = this.addressOne[value];console.log("选中的一级===", one.name); //一级固定不变，设置二级，三级
+        var one = this.addressOne[value]; //一级固定不变，设置二级，三级
         var two = this.getAddressByPId(one.id); //获取二级，根据一级选中的id，获取二级关联的pid
         var three = this.getAddressByPId(two[0].id); //获取三级，默认显示二级的第一个地址的三级信息
         //保存地址
         this.addressTwo = two;this.addressThree = three; //设置地址
-        this.multiArray = [this.multiArray[0], this.toArr(two), this.toArr(three)];this.value = [value, 0, 0];log(this.value);} else if (column === 1) {//获取二级选中的地址信息
-        var _two = this.addressTwo[value];console.log("选中的二级===", _two.name); //一级\二级固定不变，设置三级
+        this.multiArray = [this.multiArray[0], this.toArr(two), this.toArr(three)];this.value = [value, 0, 0];} else if (column === 1) {//获取二级选中的地址信息
+        var _two = this.addressTwo[value]; //一级\二级固定不变，设置三级
         var _three = this.getAddressByPId(_two.id); //获取三级，根据二级选中的id，获取三级关联的pid
         //保存地址
         this.addressThree = _three; //设置地址
         this.multiArray = [this.multiArray[0], this.multiArray[1], this.toArr(_three)];this.value = [this.value[0], value, 0];} else if (column === 2) {//获取二级选中的地址信息
-        var _three2 = this.addressThree[value];console.log("选中的三级===", _three2.id);this.ADDressID = _three2.id;console.log(this.ADDressID);}}, //获取地理信息,这个地方要
-    postAddressDatas: function postAddressDatas() {var _this = this;
-      var that = this;
-      (0, _api.publicing)(_request.postAddressList).
-      then(function (res) {
-        log(res.data);
-        log(res);
-
-        _this.addressAllData = res.data;
-
-        //初始化三级信息
+        var _three2 = this.addressThree[value];this.ADDressID = _three2.id;}}, //获取地理信息,这个地方要
+    postAddressDatas: function postAddressDatas() {var _this = this;var that = this;(0, _api.publicing)(_request.postAddressList).then(function (res) {_this.addressAllData = res.data; //初始化三级信息
         _this.addressOne = _this.getAddressByPId("0"); //一级地址
         _this.addressTwo = _this.getAddressByPId(_this.addressOne[0].id); //默认显示一级的第一个地址的二级地址
         _this.addressThree = _this.getAddressByPId(_this.addressTwo[0].id); //默认显示二级的第一个地址的三级地址
-        console.log(_this.addressTwo[0].id);
-
 
 
         _this.multiArray = [

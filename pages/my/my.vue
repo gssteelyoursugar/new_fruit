@@ -259,6 +259,7 @@
 
 	export default {
 		onLoad: function(options) {
+			this.getOrderData()
 			this.$forceUpdate()
 			console.log("这里是onload")
 			// this.getMerchants()
@@ -335,7 +336,6 @@
 				}, 1000);
 			},
 
-
 			//获取头像昵称
 			getUserInfo(event) {
 				log(event)
@@ -373,7 +373,8 @@
 				}
 				uni.showLoading({
 					title: '加载中',
-					icon: 'none'
+					icon: 'none',
+					duration: 2000
 					// mask:true
 				})
 				publicing2(loginis, data) //发送请求携带参数
@@ -395,7 +396,9 @@
 							return
 
 						} else if (res.statusCode == 200) {
-
+							setTimeout(()=>{
+								this.getOrderData()
+							},100)
 							log(res)
 						}
 
@@ -510,6 +513,7 @@
 				listing(getMyOrder, data)
 					.then((res) => {
 						let list = res.data.data
+						console.log(list)
 						let fukuanList = []
 						let fahuoList = []
 						let shouhuoList = []

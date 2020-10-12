@@ -629,7 +629,7 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 //
 var setuserdata = uni.getStorageSync('userIN'); //用户信息
 var setdata = uni.getStorageSync('usermen'); //Token
-var _console = console,log = _console.log;var logins = __webpack_require__(/*! ../../login/login.js */ 54);var _default = { onLoad: function onLoad(options) {var _this = this;this.$forceUpdate();console.log("这里是onload"); // this.getMerchants()
+var _console = console,log = _console.log;var logins = __webpack_require__(/*! ../../login/login.js */ 54);var _default = { onLoad: function onLoad(options) {var _this = this;this.getOrderData();this.$forceUpdate();console.log("这里是onload"); // this.getMerchants()
     // this.getWxdata()
     var obj = {}; // obj = wx.getMenuButtonBoundingClientRect();
     uni.getSystemInfo({ success: function success(res) {_this.width = obj.left || res.windowWidth;_this.height = obj.top ? obj.top + obj.height + 8 : res.statusBarHeight + 44;_this.top = obj.top ? obj.top + (obj.height - 32) / 2 : res.statusBarHeight + 6;_this.scrollH = res.windowWidth * 0.6;} });}, data: function data() {// var value = this.ApproveStatus
@@ -663,9 +663,9 @@ var _console = console,log = _console.log;var logins = __webpack_require__(/*! .
           var code = res.code;_this2.wxLoging(code);}, fail: function fail(err) {log(err);} });}, //发code给后台换取token
     wxLoging: function wxLoging(code) {var _this3 = this;log(code); // let appid = wx.getAccountInfoSync().miniProgram.appId
       // let secret = "956f8c9345cbe06a42c6494f7bb53f7f"
-      var data = { code: code };uni.showLoading({ title: '加载中', icon: 'none' // mask:true
+      var data = { code: code };uni.showLoading({ title: '加载中', icon: 'none', duration: 2000 // mask:true
       });(0, _api.publicing2)(_request.loginis, data) //发送请求携带参数
-      .then(function (res) {if (res.statusCode == 500) {uni.showModal({ title: '提示', content: '服务器错误，请重新登录获取信息', success: function success(res) {if (res.confirm) {console.log('用户点击确定');uni.hideLoading();} else if (res.cancel) {console.log('用户点击取消');uni.hideLoading();}} });return;} else if (res.statusCode == 200) {log(res);} // log(res) //获得token
+      .then(function (res) {if (res.statusCode == 500) {uni.showModal({ title: '提示', content: '服务器错误，请重新登录获取信息', success: function success(res) {if (res.confirm) {console.log('用户点击确定');uni.hideLoading();} else if (res.cancel) {console.log('用户点击取消');uni.hideLoading();}} });return;} else if (res.statusCode == 200) {setTimeout(function () {_this3.getOrderData();}, 100);log(res);} // log(res) //获得token
         uni.setStorageSync('usermen', res.data.token); //把token存在本地，小程序提供如同浏览器cookie
         uni.hideLoading();_this3.getMerchants(); // this.ifUser()
         // if(res.data.msg == 'success'){
@@ -701,10 +701,14 @@ var _console = console,log = _console.log;var logins = __webpack_require__(/*! .
     // 	})
     // },
     // 获取订单
-    getOrderData: function getOrderData() {var _this5 = this;var setdata = uni.getStorageSync('usermen');var data = { token: setdata, pageNo: 1, pageSize: 100 };(0, _api.listing)(_request.getMyOrder, data).then(function (res) {var list = res.data.data;var fukuanList = [];var fahuoList = [];var shouhuoList = [];var tuikuanList = [];if (list.length === 0) return;list.forEach(function (item) {if (item.payStatus == 0) {fukuanList.push(item);}if (item.tradeStatus == 1 || item.tradeStatus == 3) {fahuoList.push(item);}if (item.tradeStatus == 4) {shouhuoList.push(item);}if (item.tradeStatus == 7) {tuikuanList.push(item);}});_this5.fukuanList = fukuanList.length;_this5.fahuoList = fahuoList.length;_this5.shouhuoList = shouhuoList.length;_this5.tuikuanList = tuikuanList.length;_this5.$forceUpdate();}).catch(function (err) {log(err);});}, ifUser: function ifUser() {var setuserdata = uni.getStorageSync('userIN');if (!setuserdata) {this.wxlogin = false;} else {this.wxlogin = true;this.usering = setuserdata;}}, //认证店铺
+    getOrderData: function getOrderData() {var _this5 = this;var setdata = uni.getStorageSync('usermen');var data = { token: setdata, pageNo: 1, pageSize: 100 };(0, _api.listing)(_request.getMyOrder, data).then(function (res) {var list = res.data.data;console.log(list);var fukuanList = [];var fahuoList = [];var shouhuoList = [];var tuikuanList = [];if (list.length === 0) return;list.forEach(function (item) {if (item.payStatus == 0) {fukuanList.push(item);}if (item.tradeStatus == 1 || item.tradeStatus == 3) {fahuoList.push(item);}if (item.tradeStatus == 4) {shouhuoList.push(item);}if (item.tradeStatus == 7) {tuikuanList.push(item);}});_this5.fukuanList = fukuanList.length;_this5.fahuoList = fahuoList.length;_this5.shouhuoList = shouhuoList.length;_this5.tuikuanList = tuikuanList.length;_this5.$forceUpdate();}).catch(function (err) {log(err);});}, ifUser: function ifUser() {var setuserdata = uni.getStorageSync('userIN');if (!setuserdata) {this.wxlogin = false;} else {this.wxlogin = true;this.usering = setuserdata;}}, //认证店铺
     tendShop: function tendShop() {var setdata = uni.getStorageSync('usermen');if (!setdata) {uni.showToast({ title: '请先登录', icon: 'none' }); // log(setdata)
         this.modaishow = true;} else {// this.modaishow = false
-        uni.navigateTo({ url: '../../pagesII/tendShop/tendShop' });}}, tendShop2: function tendShop2() {
+        uni.navigateTo({ url: '../../pagesII/tendShop/tendShop' });
+      }
+
+    },
+    tendShop2: function tendShop2() {
       uni.navigateTo({
         url: '../../pagesII/StoreInformation/StoreInformation' });
 

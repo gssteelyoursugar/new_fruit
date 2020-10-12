@@ -384,7 +384,6 @@
 				</view>
 			</wyb-slide-listener>
 		</view>
-
 		<uni-load-more iconType="snow" :status="loadStatus"></uni-load-more>
 		<!--加载loadding-->
 		<!-- <tui-loadmore v-if="loadding" type="red"></tui-loadmore>
@@ -502,16 +501,16 @@
 
 						break
 					case 'slideDown':
-						if (this.pageIndex > 1) {
-							this.pageIndex--
-						}
-						uni.showLoading({
-							title: '加载中',
-							duration: 2000
-						})
-						this.getOrderData()
-						uni.hideLoading()
-						log('我下滑了~')
+						// if (this.pageIndex > 1) {
+						// 	this.pageIndex--
+						// }
+						// uni.showLoading({
+						// 	title: '加载中',
+						// 	duration: 2000
+						// })
+						// this.getOrderData()
+						// uni.hideLoading()
+						// log('我下滑了~')
 						break
 					case 'slideLeft':
 						log('我左滑了~')
@@ -689,6 +688,7 @@
 							this.$forceUpdate()
 							return
 						}
+						
 						let newData = res.data.data
 						// this.myOrderData = newData
 						// newData.map(item=>{

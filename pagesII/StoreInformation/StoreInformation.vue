@@ -180,7 +180,6 @@
 			//地址选择弹出
 
 			picker: function(e) {
-				console.log("pick=============", e)
 
 				//获取选中的三级信息
 				let value = e.detail.value; //这个是三级的picker分别选中的下标，value=[].length = 3,第一个是一级，第二个是二级。。。
@@ -192,7 +191,6 @@
 				// this.StoreInfo.address = this.text1
 
 				this.idAddress = three.id
-				log("选中的三级ID======", this.idAddress)
 
 				/* if (this.selectList.length > 0) {
 					let provice = this.selectList[value[0]].text
@@ -219,7 +217,6 @@
 				if (column === 0) {
 					//获取一级选中的地址信息
 					let one = this.addressOne[value]
-					console.log("选中的一级===", one.name)
 
 					//一级固定不变，设置二级，三级
 					let two = this.getAddressByPId(one.id) //获取二级，根据一级选中的id，获取二级关联的pid
@@ -234,11 +231,9 @@
 						this.toArr(three)
 					];
 					this.value = [value, 0, 0]
-					log(this.value)
 				} else if (column === 1) {
 					//获取二级选中的地址信息
 					let two = this.addressTwo[value]
-					console.log("选中的二级===", two.name)
 
 					//一级\二级固定不变，设置三级
 					let three = this.getAddressByPId(two.id) //获取三级，根据二级选中的id，获取三级关联的pid
@@ -254,10 +249,8 @@
 				} else if (column === 2) {
 					//获取二级选中的地址信息
 					let three = this.addressThree[value]
-					console.log("选中的三级===", three.id)
 
 					this.ADDressID = three.id
-					console.log(this.ADDressID)
 				}
 			},
 
@@ -266,16 +259,12 @@
 				let that = this;
 				publicing(postAddressList)
 					.then((res) => {
-						log(res.data)
-						log(res)
-
 						this.addressAllData = res.data
 
 						//初始化三级信息
 						this.addressOne = this.getAddressByPId("0") //一级地址
 						this.addressTwo = this.getAddressByPId(this.addressOne[0].id) //默认显示一级的第一个地址的二级地址
 						this.addressThree = this.getAddressByPId(this.addressTwo[0].id) //默认显示二级的第一个地址的三级地址
-						console.log(this.addressTwo[0].id)
 
 
 

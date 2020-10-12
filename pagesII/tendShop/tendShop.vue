@@ -457,10 +457,10 @@
 						}
 					}
 					console.log("修改的图片去除没修改的====",imgDataLi.length);
-					if(imgDataLi.length < 4){
+					if(imgDataLi.length < 1){
 						
 						uni.showToast({
-							title:'共需要四张图',
+							title:'至少要上传一张照片',
 							icon:'none'
 						})
 						return
