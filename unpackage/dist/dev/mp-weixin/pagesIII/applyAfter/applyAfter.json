@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "申请售后",
+  "usingComponents": {
+    "tui-list-cell": "/components/tui-list-cell/tui-list-cell",
+    "tui-icon": "/components/tui-icon/tui-icon"
+  }
+}

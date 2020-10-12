@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "售后订单",
+  "usingComponents": {
+    "tui-tabs": "/components/tui-tabs/tui-tabs",
+    "tui-list-cell": "/components/tui-list-cell/tui-list-cell",
+    "tui-button": "/components/tui-button/tui-button",
+    "tui-nomore": "/components/tui-nomore/tui-nomore"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "enablePullDownRefresh": true,
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "tui-icon": "/components/tui-icon/tui-icon",
+    "tui-countdown": "/components/tui-countdown/tui-countdown"
+  }
+}

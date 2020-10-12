@@ -1,0 +1,275 @@
+
+page {
+	background-color: #f7f7f7;
+}
+.container {
+	/* padding-bottom: 110rpx; */
+}
+.tui-my-bg {
+	width: 100%;
+	height: 464rpx;
+	display: block;
+}
+.tui-rank-bg {
+	position: absolute;
+	width: 381rpx;
+	height: 112rpx;
+	left: 0;
+	top: 170rpx;
+	padding: 0 30rpx;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+
+/* 排行榜 */
+.tui-cent-box {
+	-webkit-border-radius: 60rpx 60rpx 0 0;
+	        border-radius: 60rpx 60rpx 0 0;
+	/* height: 2000px; */
+	background-color: #fff;
+	position: relative;
+	top: -42rpx;
+	padding: 0 30rpx;
+}
+.tui-tab-rank-cent {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	padding: 20rpx 0;
+	border-bottom: 1rpx solid rgba(238, 238, 238, 1);
+}
+.rank-box {
+	margin-right: 10rpx;
+	border: 1px solid transparent;
+	-webkit-border-radius: 6rpx;
+	        border-radius: 6rpx;
+	overflow: hidden;
+}
+.rank-box text {
+	position: absolute;
+	font-size: 20rpx;
+	display: inline-block;
+	width: 44rpx;
+	background: #fff;
+	color: #fff;
+	text-align: center;
+	height: 20rpx;
+	line-height: 20rpx;
+	-webkit-border-radius: 4rpx 0 16rpx 0;
+	        border-radius: 4rpx 0 16rpx 0;
+}
+.img-rink {
+	width: 180rpx;
+	height: 180rpx;
+	display: block;
+	background: #eee;
+	-webkit-border-radius: 6rpx;
+	        border-radius: 6rpx;
+}
+.tui-pro-tit {
+
+	-webkit-box-flex: 5;
+
+	-webkit-flex: 5;
+
+	        flex: 5;
+}
+.tag-tit {
+	/* 渐变色 */
+	background-image: -webkit-gradient(linear, left top, right top, from(#00C94A), to(#00AC3F));
+	background-image: -webkit-linear-gradient(left, #00C94A, #00AC3F);
+	background-image: linear-gradient(to right, #00C94A, #00AC3F);
+	margin-right: 10rpx;
+	padding: 0 10rpx;
+	-webkit-border-radius: 15rpx 0 15rpx 0;
+	        border-radius: 15rpx 0 15rpx 0;
+	color: #fff;
+	font-size: 24rpx;
+}
+.tag-tit2 {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+}
+.tag-tit2-price {
+	color: #FF5600;
+	font-size: 24rpx;
+}
+.tag-tit2-text {
+	color: #555;
+	font-size: 20rpx;
+}
+.tag-tit3-text {
+	font-size: 24rpx;
+	font-weight: 500;
+	color: #FF5600;
+}
+.tui-shop-car {
+	width: 94rpx;
+	height: 94rpx;
+	display: block;
+}
+.tag-tit-text {
+	font-size: 28rpx;
+	color: #333;
+}
+.tui-tab-rank {
+	margin: 10rpx 0;
+}
+.actineclass {
+	display: block;
+}
+.errorclass {
+	display: none;
+}
+.activetext {
+	color: #fff !important;
+	background-image: -webkit-gradient(linear, left top, right top, from(#FF943D), to(#FF5600));
+	background-image: -webkit-linear-gradient(left, #FF943D, #FF5600);
+	background-image: linear-gradient(to right, #FF943D, #FF5600);
+	-webkit-border-radius: 60rpx;
+	        border-radius: 60rpx;
+	font-size: 32rpx !important;
+}
+.tui-cent-tab {
+	position: relative;
+	top: 50rpx;
+	height: 60rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+	-webkit-border-radius: 60rpx;
+	        border-radius: 60rpx;
+	background-color: #f7f7f7;
+	margin-bottom: 80rpx;
+}
+.tui-tab-btn {
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	        flex: 1;
+	width: 25%;
+	text-align: center;
+	font-size: 28rpx;
+	color: #555;
+	line-height: 60rpx;
+}
+.tui-header-box {
+	width: 100%;
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 995;
+}
+.tui-header {
+	width: 100%;
+	font-size: 18px;
+	line-height: 18px;
+	font-weight: 500;
+	height: 32px;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+}
+.tui-header-icon {
+	position: fixed;
+	top: 0;
+	left: 10px;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-align: start;
+	-webkit-align-items: flex-start;
+	        align-items: flex-start;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+	height: 32px;
+	-webkit-transform: translateZ(0);
+	        transform: translateZ(0);
+	z-index: 9999;
+}
+.tui-header-icon .tui-badge {
+	background: #e41f19 !important;
+	position: absolute;
+	right: -4px;
+}
+.tui-icon-ml {
+	margin-left: 20rpx;
+}
+.tui-icon-box {
+	position: relative;
+	height: 20px !important;
+	width: 20px !important;
+	padding: 6px !important;
+
+	-webkit-border-radius: 50%;
+
+	        border-radius: 50%;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+}
+.tui-banner-swiper {
+	position: relative;
+}
+
+/* 地区 */
+.tui-info-center {
+	position: absolute;
+	width: 100%;
+	height: 128rpx;
+	line-height: 50rpx;
+	left: 0;
+	top: 300rpx;
+	padding: 0 30rpx;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+	/* display: flex; */
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	color: #fff;
+}
+.tui-info-day {
+	font-size: 28rpx;
+}
+.tui-info-quanguo {
+	font-size: 32rpx;
+}
+.tui-banner-tag {
+	position: absolute;
+	color: #fff;
+	bottom: 30rpx;
+	right: 0;
+}
+.tui-slide-image {
+	width: 100%;
+	display: block;
+}
+
+/*顶部菜单*/
+

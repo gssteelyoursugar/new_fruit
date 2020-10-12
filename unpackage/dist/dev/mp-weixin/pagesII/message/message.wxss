@@ -1,0 +1,139 @@
+
+.tui-header-box {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	background: #fff;
+	font-size: 32rpx;
+	color: #393939;
+	padding: 50rpx 30rpx 20rpx;
+}
+.container {
+	padding-bottom: env(safe-area-inset-bottom);
+}
+.tui-item-box {
+	width: 100%;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+.tui-list-cell_name {
+	padding-left: 20rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+}
+.tui-ml-auto {
+	margin-left: auto;
+}
+.tui-right {
+	margin-left: auto;
+	margin-right: 34rpx;
+	font-size: 26rpx;
+	color: #999;
+}
+.tui-logo {
+	height: 52rpx;
+	width: 52rpx;
+	-webkit-flex-shrink: 0;
+	        flex-shrink: 0;
+}
+.tui-flex {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+.tui-msg-box {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+.tui-msg-pic {
+	width: 100rpx;
+	height: 100rpx;
+	-webkit-border-radius: 50%;
+	        border-radius: 50%;
+	display: block;
+	margin-right: 24rpx;
+	-webkit-flex-shrink: 0;
+	        flex-shrink: 0;
+}
+.tui-msg-item {
+	max-width: 500rpx;
+	min-height: 80rpx;
+	overflow: hidden;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	        flex-direction: column;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+}
+.tui-msg-name {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	font-size: 34rpx;
+	line-height: 1;
+	color: #262b3a;
+}
+.tui-msg-content {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	font-size: 26rpx;
+	line-height: 1;
+	color: #9397a4;
+}
+.tui-msg-right {
+	max-width: 120rpx;
+	height: 88rpx;
+	margin-left: auto;
+	text-align: right;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	        flex-direction: column;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+	-webkit-box-align: end;
+	-webkit-align-items: flex-end;
+	        align-items: flex-end;
+}
+.tui-right-dot {
+	height: 76rpx !important;
+	padding-bottom: 10rpx !important;
+}
+.tui-msg-time {
+	width: 100%;
+	font-size: 24rpx;
+	line-height: 24rpx;
+	color: #9397a4;
+}
+
