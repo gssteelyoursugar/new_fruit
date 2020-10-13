@@ -358,7 +358,6 @@ var _console = console,log = _console.log;var _default = { data: function data()
         _this2.mm = parseInt(_this2.ts / 60 % 60); //计算剩余的分钟数
         _this2.ss = parseInt(_this2.ts % 60, 10); //计算剩余的秒数
         log(_this2.dd + "天" + _this2.hh + "时" + _this2.mm + "分" + _this2.ss + "秒");
-
       }).
       catch(function (err) {
         log(err);

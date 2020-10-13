@@ -219,7 +219,6 @@
 						this.mm = parseInt(this.ts / 60 % 60); //计算剩余的分钟数
 						this.ss = parseInt(this.ts % 60, 10); //计算剩余的秒数
 						log(this.dd + "天" + this.hh + "时" + this.mm + "分" + this.ss + "秒")
-
 					})
 					.catch((err) => {
 						log(err)
@@ -654,3 +653,5 @@
 
 	/* end */
 </style>
+
+

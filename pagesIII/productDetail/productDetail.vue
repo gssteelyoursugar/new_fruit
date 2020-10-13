@@ -1,9 +1,9 @@
 <template>
 	<view class="container">
 		<!--header-->
-		<view class="tui-header-box" :style="{ height: height + 'px', background: 'rgba(255,255,255,' + opcity + ')' }">
-			<view class="tui-header" :style="{ paddingTop: top + 'px', opacity: opcity }"></view>
-			<view class="tui-header-icon" :style="{ marginTop: top + 'px' }" style="border: 1rpx solid #ccc;border-radius: 50rpx;">
+		<view class="tui-header-box" :style="{ height: navHeight + 'px', background: 'rgba(255,255,255,' + opcity + ')' }">
+			<!-- <view class="tui-header" :style="{ paddingTop: top + 'px', opacity: opcity }"></view> -->
+			<view class="tui-header-icon" :style="{ marginTop: iconTop + 'px' }" style="border: 1rpx solid #ccc;border-radius: 50rpx;">
 				<view class="tui-icon-box box-line" style="margin-top: 2rpx;" @tap="back">
 					<tui-icon name="arrowleft" :size="30" :color="opcity >= 1 ? '#000' : '#fff'"></tui-icon>
 				</view>
@@ -12,7 +12,7 @@
 					<tui-icon name="home-fill" :size="20" color="#000"></tui-icon>
 				</view>
 			</view>
-			<tui-tabs size="32" :tabs="tabs" :isFixed="scrollTop >= 0" :currentTab="currentTab" selectedColor="#00C52A"
+			<tui-tabs size="32" :top="tabsTop" :tabs="tabs" :isFixed="scrollTop >= 0" :currentTab="currentTab" selectedColor="#00C52A"
 			 sliderBgColor="#00C52A" @change="changeNum" itemWidth="50%"></tui-tabs>
 		</view>
 		<!--  -->
@@ -505,15 +505,33 @@
 				value: 1,
 				collected: false,
 				Sumify: '',
-				token: ''
+				token: '',
+				navHeight: 64,
+				iconTop: 24,
+				tabsTop: 64
 			};
 		},
-		onLoad: function(options) {
-			uni.getSystemInfo({
-				success(e) {
-					console.log(e)
-				}
-			})
+		onLoad (options) {
+			console.log("这里是onload")
+			
+			// 导航栏高度 = 状态栏高度 + 胶囊高度 + 胶囊上下边距
+			try {
+			    const res = uni.getSystemInfoSync();
+				let { statusBarHeight } = res
+				// #ifndef H5 || APP-PLUS || MP-ALIPAY
+				let info = uni.getMenuButtonBoundingClientRect()
+				let { top, bottom } = info
+				let buttonHeight = (bottom - statusBarHeight) + (top - statusBarHeight)
+				this.navHeight = statusBarHeight + buttonHeight + top - statusBarHeight
+				this.iconTop = statusBarHeight + (top-statusBarHeight)
+				this.tabsTop = statusBarHeight + buttonHeight + top - statusBarHeight
+				console.log(this.navHeight,buttonHeight)
+				// #endif
+				
+				
+			} catch (err) {
+			    console.log(err)
+			}
 			// this.getHomelist()
 			let setdata = uni.getStorageSync('usermen');
 			this.token = setdata;
@@ -531,17 +549,17 @@
 			// #ifdef MP-ALIPAY
 			my.hideAddToDesktopMenu();
 			// #endif
-
-			setTimeout(() => {
-				uni.getSystemInfo({
-					success: res => {
-						this.width = obj.left || res.windowWidth;
-						this.height = obj.top ? obj.top + obj.height + 8 : res.statusBarHeight + 44;
-						this.top = obj.top ? obj.top + (obj.height - 32) / 2 : res.statusBarHeight + 6;
-						this.scrollH = res.windowWidth;
-					}
-				});
-			}, 0);
+		// 	setTimeout(() => {
+		// 		uni.getSystemInfo({
+		// 			success: res => {
+		// 				this.width = obj.left || res.windowWidth;
+		// 				this.height = obj.top ? obj.top + obj.height + 8 : res.statusBarHeight + 44;
+		// 				this.top = obj.top ? obj.top + (obj.height - 32) / 2 : res.statusBarHeight + 6;
+		// 				this.scrollH = res.windowWidth;
+		// 			}
+		// 		});
+		// 	}, 0);
+		// 
 		},
 		computed: {
 			swiperList() {

@@ -2,7 +2,7 @@
 	<view
 		class="tui-tabs-view"
 		:class="[isFixed ? 'tui-tabs-fixed' : 'tui-tabs-relative', unlined ? 'tui-unlined' : '']"
-		:style="{ width: tabsWidth + 'px', height: height + 'rpx', padding: `0 ${padding}rpx`, background: backgroundColor, top: isFixed ? top + 'px' : 'auto' }"
+		:style="{ width: tabsWidth + 'px', height: height + 'rpx', padding: `0 ${padding}rpx`, background: backgroundColor, top: top + 'px' }"
 	>
 		<view v-for="(item, index) in tabs" :key="index" class="tui-tabs-item" :style="{ width: itemWidth }" @tap.stop="swichTabs(index)">
 			<view
@@ -153,7 +153,6 @@ export default {
 	},
 	created() {
 		// 高度自适应
-		setTimeout(() => {
 			uni.getSystemInfo({
 				success: res => {
 					this.winWidth = res.windowWidth;
@@ -161,7 +160,6 @@ export default {
 					this.checkCor();
 				}
 			});
-		}, 20);
 	},
 	data() {
 		return {

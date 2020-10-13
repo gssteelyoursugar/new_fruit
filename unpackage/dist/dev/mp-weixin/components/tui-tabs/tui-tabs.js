@@ -269,15 +269,13 @@ var _default2 =
 
   created: function created() {var _this = this;
     // 高度自适应
-    setTimeout(function () {
-      uni.getSystemInfo({
-        success: function success(res) {
-          _this.winWidth = res.windowWidth;
-          _this.tabsWidth = _this.width == 0 ? _this.winWidth : _this.width;
-          _this.checkCor();
-        } });
+    uni.getSystemInfo({
+      success: function success(res) {
+        _this.winWidth = res.windowWidth;
+        _this.tabsWidth = _this.width == 0 ? _this.winWidth : _this.width;
+        _this.checkCor();
+      } });
 
-    }, 20);
   },
   data: function data() {
     return {
