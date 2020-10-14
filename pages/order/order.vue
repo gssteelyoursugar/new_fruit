@@ -18,7 +18,7 @@
 			<image src="../../static/images/orderBMG.png" mode="widthFix"></image>
 			<text class="color-text">进货单为空，赶紧去逛逛</text>
 			<view class="color-border" @tap="goIndex"><text>去逛逛</text></view>
-		</view
+		</view>
 		<checkbox-group @change="buyChange">
 			<view class="tui-cart-cell  tui-mtop" v-for="(item, index) in orderObj" :key="index">
 				<view class="tui-activity">
@@ -34,7 +34,8 @@
 						<view class="tui-goods-item">
 							<label class="tui-checkbox">
 								<!-- <checkbox :value="itemTwo.id" :checked="checkFlag" color="#fff" ></checkbox> -->
-								<checkbox @click="setIds(itemTwo.id)" :value="itemTwo.id" :checked="itemTwo.selected" color="#fff"></checkbox>
+								 <!-- @click="setIds(itemTwo.id)" -->
+								<checkbox :value="itemTwo.id" :checked="itemTwo.selected" color="#fff"></checkbox>
 							</label>
 							<image :src="itemTwo.url" class="tui-goods-img" @tap="gotoList(itemTwo.goodsId)" />
 							<view class="tui-goods-info">
@@ -45,6 +46,7 @@
 								<view class="tui-goods-model">
 									<view class="tui-model-text">{{ itemTwo.kg1 }}斤装</view>
 								</view>
+								
 								<view class="tui-price-box">
 									<view class="tui-goods-price">
 										<text class="goods-price-tag">￥</text>
@@ -136,7 +138,6 @@
 				valueNum: 0,
 				url: 'http://192.168.1.10:8980',
 				orderObj: [],
-				isEmpty: false,
 				openid: '',
 				neworder: [],
 				isCheck: false,
@@ -192,7 +193,6 @@
 					}
 				],
 				isEdit: false,
-
 				pageIndex: 1,
 				loadding: false,
 				pullUpOn: true,
@@ -326,6 +326,7 @@
 						}
 					}
 				}
+				let order = this.orderObj
 				this.allPrice = allPrice.toFixed(2); //保留两位小数toFixed
 			},
 			//请求订单列表
@@ -335,15 +336,17 @@
 				let data = {
 					token: setdata
 				};
-				// log(setdata)
 				listing(getCart, data)
 					.then(res => {
-						if (res.data.data.length === 0) {
-							this.isEmpty = true
-						} else {
-							this.isEmpty = false
-						}
-						this.orderObj = res.data.data;
+						let lists = res.data.data
+						lists.forEach(item=>{
+							console.log(item)
+							item.list.forEach(itm=>{
+								Object.assign(itm,{selected:false})
+								console.log("itm",itm)
+							})
+						})
+						this.orderObj = lists;
 					})
 					.catch(err => {
 						log(err);
@@ -392,7 +395,6 @@
 					})
 				}
 				this.orderObj[e.custom].list[e.index].number = e.value;
-
 				//计算价格
 				this.jieSuanPrice();
 
@@ -548,83 +550,41 @@
 					url: '../../pagesIII/submitOrder/submitOrder?ids=' + ids
 				});
 			},
-			setIds(id) {
-				this.curId = id
-				let list = this.cartIds
-				let arr = this.orderObj
+			// setIds(id) {
+			// 	this.curId = id
 				
-				if (list.includes(id)) {
-					arr.forEach((item,idx) => {
-						item.list.forEach((itm, index) => {
-							if (itm.id === id) {
-								Object.assign(itm, {
-									selected: true
-								})
-							}
-						})
-					})
-					this.orderObj = arr
-				} else {
-					arr.forEach(item => {
-						item.list.forEach((itm, index) => {
-							console.log(itm.id)
-							if (itm.id === id) {
-								Object.assign(itm, {
-									selected: false
-								})
-							}
-							console.log(itm)
-						})
-					})
-					this.orderObj = arr
-				}
-				this.orderObjarr
-			},
+			// },
 			//加购单,勾选
 			buyChange(e) {
-				console.log(e)
-				let allLength = 0 //进货单总商品数量
-				let oList = this.orderObj;
-				let list = e.detail.value;
-				if (list.includes(this.curId)) {
-					oList.forEach(item => {
-						item.list.forEach((itm, index) => {
-							if (itm.id === this.curId) {
-								Object.assign(itm, {
-									selected: true
-								})
-							}
+				let lists = this.orderObj
+				let target = e.detail.value
+				let selectedNum = 0
+				lists.forEach(item=> {
+					selectedNum += item.list.length
+					item.list.forEach((itm,index)=> {
+						console.log(itm)
+						let idxs = target.findIndex(im=>{
+							console.log(im)
+							return itm.id === im
 						})
+						console.log(idxs)
+						if (idxs !== -1) {
+							itm.selected = true
+						} else {
+							itm.selected = false
+						}
 					})
-				} else {
-					oList.forEach(item => {
-						item.list.forEach((itm, index) => {
-							if (itm.id === this.curId) {
-								Object.assign(itm, {
-									selected: false
-								})
-							}
-						})
-					})
+				})
+				if (selectedNum === target.length){
+					this.isAll = true
+				}else {
+					this.isAll = false
 				}
-				this.cartIds = list
-				console.log(this.cartIds)
-				for (let i = 0; i < oList.length; i++) {
-					allLength += oList[i].list.length
-				}
-				
-				if (allLength !== e.detail.value.length) {
-					this.isAll = false;
-				}
-				if (allLength === e.detail.value.length) {
-					this.isAll = true;
-				}
-				// if (e.detail.value.length === 0) {
-				// 	this.isAll = false;
-				// }
-				console.log(this.isAll)
+				this.orderObj = lists
+				this.cartIds = target
 				//计算价格
 				this.jieSuanPrice();
+				console.log(lists,selectedNum)
 			},
 			//全选
 			checkAll(e) {

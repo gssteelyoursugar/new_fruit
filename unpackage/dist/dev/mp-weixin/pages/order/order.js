@@ -272,6 +272,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
 var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
@@ -381,6 +383,8 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 //
 //
 //
+//
+//
 //请求方式
 //请求地址
 var _console = console,log = _console.log;var setdata = uni.getStorageSync('usermen');var _default = { data: function data() {return { tips: '', modaishow: false, isActive: true, //显示
@@ -389,17 +393,13 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       flag: false, checkFlag: false, //默认选中
       allFlag: '', //全选
       checkedArr: [], //存放选中的数据
-      valueNum: 0, url: 'http://192.168.1.10:8980', orderObj: [], isEmpty: false, openid: '', neworder: [], isCheck: false, dataList: [{ id: 'q2020811', buyNum: 1, price: 299.5, selected: false, imgsrc: '../../static/images/putao1.png', shopName: '大葡萄' }, { id: 'q2020812', buyNum: 2, price: 499, selected: false, imgsrc: '../../static/images/niuyouguo1.png', shopName: '大哈密瓜' }, { id: 'q2020813', buyNum: 3, price: 199, selected: false, imgsrc: '../../static/images/putao1.png', shopName: '大紫葡萄' }], isAll: false, totalPrice: 0, buyNum: 0, cartIds: [], //购物车id
+      valueNum: 0, url: 'http://192.168.1.10:8980', orderObj: [], openid: '', neworder: [], isCheck: false, dataList: [{ id: 'q2020811', buyNum: 1, price: 299.5, selected: false, imgsrc: '../../static/images/putao1.png', shopName: '大葡萄' }, { id: 'q2020812', buyNum: 2, price: 499, selected: false, imgsrc: '../../static/images/niuyouguo1.png', shopName: '大哈密瓜' }, { id: 'q2020813', buyNum: 3, price: 199, selected: false, imgsrc: '../../static/images/putao1.png', shopName: '大紫葡萄' }], isAll: false, totalPrice: 0, buyNum: 0, cartIds: [], //购物车id
       actions: [{ name: '删除', color: '#fff', fontsize: 28, width: 64, background: '#F82400' }], actions2: [{ name: '看相似', color: '#fff', fontsize: 28, width: 64, background: '#FF7035' }, { name: '删除', color: '#fff', fontsize: 28, width: 64, background: '#F82400' }], isEdit: false, pageIndex: 1, loadding: false, pullUpOn: true, allPrice: 0, //总价
       curId: 0 };}, filters: { getPrice: function getPrice(price) {price = price || 0;return price.toFixed(2);} }, methods: { goIndex: function goIndex() {uni.switchTab({ url: '../index/index' });}, init: function init(bull, tips) {this.modaishow = bull;this.tips = tips;}, //获取头像昵称
     getUserInfo: function getUserInfo(event) {// log(event)
       this.usering = event.detail.userInfo;uni.setStorageSync('userIN', event.detail.userInfo); //把头像存在本地，小程序提供如同浏览器cookie
-      var userING = uni.setStorageSync('userIN', event.detail.userInfo);if (event.detail.userInfo) {var wxing = event.detail.userInfo;
-        this.wxCode(wxing.avatarUrl, wxing.nickName);
-      }
-      // wx.startPullDownRefresh()
-    },
-    //获取code
+      var userING = uni.setStorageSync('userIN', event.detail.userInfo);if (event.detail.userInfo) {var wxing = event.detail.userInfo;this.wxCode(wxing.avatarUrl, wxing.nickName);} // wx.startPullDownRefresh()
+    }, //获取code
     wxCode: function wxCode(avatarUrl, nickName) {var _this = this;
       wx.login({
         success: function success(res) {
@@ -496,6 +496,7 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
           }
         }
       }
+      var order = this.orderObj;
       this.allPrice = allPrice.toFixed(2); //保留两位小数toFixed
     },
     //请求订单列表
@@ -505,15 +506,17 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       var data = {
         token: setdata };
 
-      // log(setdata)
       (0, _api.listing)(_request.getCart, data).
       then(function (res) {
-        if (res.data.data.length === 0) {
-          _this4.isEmpty = true;
-        } else {
-          _this4.isEmpty = false;
-        }
-        _this4.orderObj = res.data.data;
+        var lists = res.data.data;
+        lists.forEach(function (item) {
+          console.log(item);
+          item.list.forEach(function (itm) {
+            Object.assign(itm, { selected: false });
+            console.log("itm", itm);
+          });
+        });
+        _this4.orderObj = lists;
       }).
       catch(function (err) {
         log(err);
@@ -562,7 +565,6 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
 
       }
       this.orderObj[e.custom].list[e.index].number = e.value;
-
       //计算价格
       this.jieSuanPrice();
 
@@ -718,86 +720,44 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
         url: '../../pagesIII/submitOrder/submitOrder?ids=' + ids });
 
     },
-    setIds: function setIds(id) {
-      this.curId = id;
-      var list = this.cartIds;
-      var arr = this.orderObj;
+    // setIds(id) {
+    // 	this.curId = id
 
-      if (list.includes(id)) {
-        arr.forEach(function (item, idx) {
-          item.list.forEach(function (itm, index) {
-            if (itm.id === id) {
-              Object.assign(itm, {
-                selected: true });
-
-            }
-          });
-        });
-        this.orderObj = arr;
-      } else {
-        arr.forEach(function (item) {
-          item.list.forEach(function (itm, index) {
-            console.log(itm.id);
-            if (itm.id === id) {
-              Object.assign(itm, {
-                selected: false });
-
-            }
-            console.log(itm);
-          });
-        });
-        this.orderObj = arr;
-      }
-      this.orderObjarr;
-    },
+    // },
     //加购单,勾选
-    buyChange: function buyChange(e) {var _this6 = this;
-      console.log(e);
-      var allLength = 0; //进货单总商品数量
-      var oList = this.orderObj;
-      var list = e.detail.value;
-      if (list.includes(this.curId)) {
-        oList.forEach(function (item) {
-          item.list.forEach(function (itm, index) {
-            if (itm.id === _this6.curId) {
-              Object.assign(itm, {
-                selected: true });
-
-            }
+    buyChange: function buyChange(e) {
+      var lists = this.orderObj;
+      var target = e.detail.value;
+      var selectedNum = 0;
+      lists.forEach(function (item) {
+        selectedNum += item.list.length;
+        item.list.forEach(function (itm, index) {
+          console.log(itm);
+          var idxs = target.findIndex(function (im) {
+            console.log(im);
+            return itm.id === im;
           });
+          console.log(idxs);
+          if (idxs !== -1) {
+            itm.selected = true;
+          } else {
+            itm.selected = false;
+          }
         });
+      });
+      if (selectedNum === target.length) {
+        this.isAll = true;
       } else {
-        oList.forEach(function (item) {
-          item.list.forEach(function (itm, index) {
-            if (itm.id === _this6.curId) {
-              Object.assign(itm, {
-                selected: false });
-
-            }
-          });
-        });
-      }
-      this.cartIds = list;
-      console.log(this.cartIds);
-      for (var i = 0; i < oList.length; i++) {
-        allLength += oList[i].list.length;
-      }
-
-      if (allLength !== e.detail.value.length) {
         this.isAll = false;
       }
-      if (allLength === e.detail.value.length) {
-        this.isAll = true;
-      }
-      // if (e.detail.value.length === 0) {
-      // 	this.isAll = false;
-      // }
-      console.log(this.isAll);
+      this.orderObj = lists;
+      this.cartIds = target;
       //计算价格
       this.jieSuanPrice();
+      console.log(lists, selectedNum);
     },
     //全选
-    checkAll: function checkAll(e) {var _this7 = this;
+    checkAll: function checkAll(e) {var _this6 = this;
       this.isAll = !this.isAll;
       console.log(this.isAll);
       var lists = this.orderObj;
@@ -806,7 +766,7 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
         lists.forEach(function (item) {
           item.list.forEach(function (itm) {
             itm.selected = false;
-            _this7.$forceUpdate();
+            _this6.$forceUpdate();
           });
         });
         console.log(lists);
@@ -818,7 +778,7 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
           item.list.forEach(function (itm) {
             itm.selected = true;
             arr.push(itm.id);
-            _this7.$forceUpdate();
+            _this6.$forceUpdate();
           });
         });
         console.log(lists);
