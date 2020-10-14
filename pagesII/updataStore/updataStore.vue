@@ -428,10 +428,10 @@
 					}
 					console.log("修改的图片去除没修改的====", urlList.length);
 					console.log("修改的图片去除没修改的====", urlList);
-					if (urlList.length < 4) {
+					if (urlList.length < 1) {
 
 						uni.showToast({
-							title: '重新编辑需要上传四张图片！',
+							title: '重新编辑至少需要上传1张图片！',
 							icon: 'none'
 						})
 						return

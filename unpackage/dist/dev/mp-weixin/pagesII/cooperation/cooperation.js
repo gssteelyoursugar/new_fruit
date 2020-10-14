@@ -178,10 +178,29 @@ var _default =
 {
   data: function data() {
     return {
-      title: 'Hello' };
+      title: 'Hello',
+      statusHeight: 20,
+      boxHeight: 44 };
 
   },
   onLoad: function onLoad() {
+    var res = uni.getSystemInfoSync();var
+
+    statusBarHeight =
+    res.statusBarHeight;
+
+    var info = uni.getMenuButtonBoundingClientRect();var
+
+    top =
+
+    info.top,bottom = info.bottom;
+    this.statusHeight = statusBarHeight;
+    var buttonHeight = bottom - statusBarHeight + (top - statusBarHeight);
+    var navHeight = statusBarHeight + buttonHeight + top - statusBarHeight;
+    this.boxHeight = navHeight - statusBarHeight;
+
+    console.log(statusBarHeight, navHeight, buttonHeight);
+
 
   },
   methods: {

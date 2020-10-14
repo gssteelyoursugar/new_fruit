@@ -84,7 +84,7 @@
 						<view class="tui-btn-ml" v-if="item.payStatus == 0">
 							<view class="tui-btn-ml-pay" @tap="payGo(item.orderNumber)">
 								<text>去支付</text>
-								<tui-countdown :time="(item.time - item.createDate) /15" :hours="false" borderColor="#fff" @end="endOfTime(item.id)"></tui-countdown>
+								<tui-countdown :time="countDown" :hours="false" borderColor="#fff" @end="endOfTime(item.id)"></tui-countdown>
 							</view>
 						</view>
 						<view class="tui-btn-ml" v-if="item.tradeStatus == 5">
@@ -437,7 +437,8 @@
 				pullUpOn: true,
 				scrollTop: 0,
 				myOrderData: [],
-				url: ''
+				url: '',
+				countDown: 0
 			}
 		},
 		computed: {
@@ -688,7 +689,7 @@
 							this.$forceUpdate()
 							return
 						}
-						
+						this.countDown = (res.data.data.time-res.data.data.createDate)
 						let newData = res.data.data
 						// this.myOrderData = newData
 						// newData.map(item=>{

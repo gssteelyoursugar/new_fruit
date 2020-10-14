@@ -7,18 +7,18 @@
 				<tui-button type="gray" :plain="true" shape="circle" width="160rpx" height="60rpx" :size="24" @click="editGoods">{{isEdit?"完成":"编辑商品"}}</tui-button>
 			</view>
 		</view> -->
-		<view class="container-img" v-if="orderObj.length == 0" :class="{ active: isActive, 'text-danger': hasError }">
-			<image src="../../static/images/orderBMG.png" mode="widthFix"></image>
-			<text class="color-text">进货单为空，赶紧去逛逛</text>
-			<view class="color-border" @tap="goIndex"><text>去逛逛</text></view>
-		</view>
+		
 		<view class="container-img" v-if="modaishow">
 			<image src="../../static/images/big_logo.png" mode="widthFix" class="img-quanguo"></image>
 			<!-- <text class="color-text">{{tips}}</text> -->
 			<view class="btnbox"><button class="btn" type="default" open-type="getUserInfo" @getuserinfo="getUserInfo">去登陆</button></view>
 		</view>
-
 		<!-- #endif -->
+		<view class="empty-img" v-if="!modaishow&&orderObj.length=== 0">
+			<image src="../../static/images/orderBMG.png" mode="widthFix"></image>
+			<text class="color-text">进货单为空，赶紧去逛逛</text>
+			<view class="color-border" @tap="goIndex"><text>去逛逛</text></view>
+		</view
 		<checkbox-group @change="buyChange">
 			<view class="tui-cart-cell  tui-mtop" v-for="(item, index) in orderObj" :key="index">
 				<view class="tui-activity">
@@ -136,6 +136,7 @@
 				valueNum: 0,
 				url: 'http://192.168.1.10:8980',
 				orderObj: [],
+				isEmpty: false,
 				openid: '',
 				neworder: [],
 				isCheck: false,
@@ -337,15 +338,12 @@
 				// log(setdata)
 				listing(getCart, data)
 					.then(res => {
-						// log(res.data.data)
+						if (res.data.data.length === 0) {
+							this.isEmpty = true
+						} else {
+							this.isEmpty = false
+						}
 						this.orderObj = res.data.data;
-						// for(var i=0;i<this.orderObj.length;i++){
-						// 	for( var j=0; j<this.orderObj[i].list.length;j++){
-						// 		this.orderObj[i].list[j].selected = false
-						// 	}
-						// }
-
-						// log(this.orderObj)
 					})
 					.catch(err => {
 						log(err);
@@ -1218,7 +1216,7 @@
 		padding-bottom: 30upx;
 	}
 
-	.container-img {
+	.empty-img {
 		/* margin-top: 150rpx; */
 		display: flex;
 		flex-direction: column;

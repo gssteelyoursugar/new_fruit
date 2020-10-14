@@ -105,7 +105,7 @@
 			<view class="fruit-info-title">
 				<view>水果身份</view>
 			</view>
-			
+
 			<view class="frui-info-wrap">
 				<view class="fruit-info-item">
 					<view class="left-item">种类:</view>
@@ -128,7 +128,7 @@
 					<view class="right-item">塑料胶框</view>
 				</view>
 			</view>
-			
+
 			<!-- 水果标准 -->
 			<view class="tui-height-full">
 				<view class="tui-title-line">
@@ -143,7 +143,7 @@
 						<text class=" tui-text-left tui-title-class">口感星级</text>
 						<tui-rate :current="4" active="#ff7900" :hollow="true" :disabled="true" :size="16"></tui-rate>
 					</view>
-			
+
 				</view>
 				<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
 					<view class="tui-left-one">
@@ -154,7 +154,7 @@
 						<text class="tui-text-left tui-title-class">外观星级</text>
 						<tui-rate :current="4" active="#ff7900" :hollow="true" :disabled="true" :size="16"></tui-rate>
 					</view>
-			
+
 				</view>
 				<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
 					<view class="tui-left-one2">
@@ -165,7 +165,7 @@
 						<text class=" tui-text-left tui-title-class ">不良率</text>
 						<text class=" tui-text-left tui-title-class">{{shopListdata.data.rejectRatio || 0}}</text>
 					</view>
-			
+
 				</view>
 				<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
 					<view class="tui-left-one2">
@@ -176,7 +176,7 @@
 						<text class="tui-text-left tui-title-class">酸度</text>
 						<text class="tui-text-left tui-title-class">{{shopListdata.data.acidity || 0}}</text>
 					</view>
-			
+
 				</view>
 				<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
 					<view class="tui-left-one2">
@@ -187,7 +187,7 @@
 						<text class="tui-text-left tui-title-class">硬度</text>
 						<text class="tui-text-left tui-title-class">{{shopListdata.data.hardness || 0}}</text>
 					</view>
-			
+
 				</view>
 				<!-- 	<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
 					<view class="tui-left-one">
@@ -225,10 +225,10 @@
 					</view>
 					
 				</view> -->
-			
-			
+
+
 			</view>
-			
+
 			<!-- 免赔情况 -->
 			<view class="tui-height-full">
 				<view class="tui-title-line">
@@ -241,7 +241,7 @@
 					<view class="tui-right-one">
 						<text class="iconfont icon-quan"></text><text class="tui-name-class">轻微风花</text>
 					</view>
-			
+
 				</view>
 				<view class="tui-height-flex tui-height-flex-top">
 					<view class="tui-left-one1">
@@ -250,9 +250,9 @@
 					<view class="tui-right-one">
 						<text class="iconfont icon-quan"></text><text class="tui-name-class">轻微流浆</text>
 					</view>
-			
+
 				</view>
-			
+
 			</view>
 			<!-- 可售后情况 -->
 			<view class="tui-height-full ">
@@ -266,7 +266,7 @@
 					<view class="tui-right-one">
 						<text class="iconfont icon-quan"></text><text class="tui-name-class">压伤</text>
 					</view>
-			
+
 				</view>
 				<view class="tui-height-flex tui-height-flex-top">
 					<view class="tui-left-one1">
@@ -275,23 +275,50 @@
 					<view class="tui-right-one">
 						<text class="iconfont icon-quan"></text><text class="tui-name-class">单果重量不达标</text>
 					</view>
-			
+
 				</view>
 			</view>
-			
+
 		</view>
 
 	</view>
 </template>
 
 <script>
+	import {
+		listing
+	} from '../../api/api.js';
+	//请求地址
+
+	import {
+		getDetails
+	} from '../../api/request.js';
 	export default {
 		name: "orderDetail",
 		data() {
 			return {
-				
+				order_id: ''
 			};
 		},
+		methods: {
+			getOrderDetail() {
+				let data = {
+					token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzZXNzaW9uS2V5IjoialNvVU5VVTJXMCtWbWRuV29td0VIZz09Iiwiand0LWlkIjoiMDA3MTcyMzgtOGU4ZS00YjhkLTkxOTAtMDhhNGEwYmQwOTFkIiwid3hPcGVuSWQiOiJvb0MwNDRfdjVMMTBXOXVubU1lNnhRQjNRLVRJIn0.Ndj3uDbgAfK3VRUq9lcRT3pFs5uZUJQADfHMNO9-dAE",
+					id: 1315975296124047360
+				};
+				listing(getDetails, data).then(res=>{
+					console.log(res)
+				})
+			}
+		},
+		onLoad(opt){
+			this.order_id = opt.id
+		},
+		onShow() {
+			console.log("这里是onShow")
+			this.getOrderDetail()
+
+		}
 	}
 </script>
 
@@ -423,6 +450,7 @@
 			border-radius: 30rpx;
 			padding: 40rpx 40rpx;
 			margin: 20rpx 0 80rpx;
+
 			.snap-title {
 				display: flex;
 				justify-content: space-between;
@@ -566,15 +594,18 @@
 				flex-wrap: wrap;
 				justify-content: space-between;
 				padding: 36rpx 0;
+
 				.fruit-info-item {
 					display: flex;
 					align-items: center;
 					font-size: 28rpx;
 					width: 50%;
 					padding: 6rpx 0;
+
 					.left-item {
 						color: #939297;
 					}
+
 					.right-item {
 						color: #333;
 						margin-left: 16rpx;
@@ -584,23 +615,23 @@
 
 		}
 	}
-	
+
 	.tui-height-full {
 		background-color: #fff;
 		margin: 40rpx 0;
 	}
-	
+
 	.shuoming {
 		line-height: 60rpx;
 		font-size: 28rpx;
 		padding: 20rpx 10rpx;
 	}
-	
+
 	.shuoming text {
 		color: #00BC45;
 		font-weight: bold;
 	}
-	
+
 	.tui-title-line {
 		color: rgba(51, 51, 51, 1);
 		font-weight: 400;
@@ -609,58 +640,58 @@
 		border-bottom: 1px solid #f5f5f5;
 		margin-bottom: 30rpx;
 	}
-	
+
 	.tui-height-flex {
 		display: flex;
-	
+
 	}
-	
+
 	.tui-height-flex-top {
 		margin: 28rpx 0;
 		display: flex;
 		justify-content: space-between;
-	
+
 	}
-	
+
 	.tui-bottom-border {
 		border-bottom: 1rpx solid rgba(245, 245, 245, 1);
 		padding-bottom: 10rpx;
 		color: rgba(51, 51, 51, 1);
-	
-	
+
+
 	}
-	
+
 	.tui-pay-color {
 		color: rgba(146, 147, 151, 1);
 		font-size: 27rpx;
 	}
-	
+
 	.tui-height-flex-two {
 		display: flex;
 		height: 80rpx;
 		line-height: 80rpx;
-	
-	
+
+
 	}
-	
+
 	.tui-border-1px {
 		border-top: 1px solid rgba(244, 245, 247, 1);
 		border-left: 1px solid rgba(244, 245, 247, 1);
 		border-right: 1px solid rgba(244, 245, 247, 1);
 	}
-	
+
 	.heigth-tui {
 		background-color: #fff;
 		border-radius: 50rpx;
 		height: 518rpx;
-	
+
 	}
-	
+
 	.text-indent {
 		text-indent: 2em;
 		letter-spacing: 4rpx;
 	}
-	
+
 	.line-higth-cent {
 		color: rgba(112, 112, 112, 1);
 		font-size: 24rpx;
@@ -668,12 +699,12 @@
 		padding: 53rpx;
 		font-weight: 500;
 	}
-	
+
 	.tui-border-1px:last-child {
 		border-bottom: 1px solid rgba(244, 245, 247, 1);
-	
+
 	}
-	
+
 	.tui-magin-cente {
 		text-align: center;
 		font-size: 40rpx;
@@ -681,56 +712,57 @@
 		color: #fff;
 		margin-bottom: 20rpx;
 	}
-	
+
 	.tui-left-one {
 		display: flex;
 		justify-content: space-between;
 		padding-right: 10rpx;
 		flex: 4;
 		border-right: 1px solid rgba(244, 245, 247, 1);
-		
+
 	}
+
 	.tui-height-flex-two {
 		.tui-left-one {
 			&:last-child {
-			border-right: none
+				border-right: none
 			}
 		}
 	}
-	
+
 	.tui-left-one1 {
 		flex: 4;
 		display: flex;
 		align-items: center;
 
 	}
-	
+
 	.tui-left-one2 {
 		flex: 4;
 		border-right: 1px solid rgba(244, 245, 247, 1);
-		
+
 	}
-	
+
 	.tui-title-class {
 		font-size: 24rpx;
 		color: rgba(146, 147, 151, 1);
 	}
-	
+
 	.tui-name-class {
 		font-size: 32rpx;
 		color: rgba(51, 51, 51, 1);
 	}
-	
+
 	.icon-quan {
 		margin-right: 10rpx;
 		color: rgba(0, 197, 42, 1);
 		font-size: 20rpx;
 	}
-	
+
 	.tui-text-left {
 		margin-left: 40rpx;
 	}
-	
+
 	.tui-right-one {
 		flex: 3;
 		display: flex;

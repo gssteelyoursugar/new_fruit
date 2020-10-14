@@ -9,7 +9,7 @@
 	background: #fff;
 	font-size: 32rpx;
 	color: #393939;
-	padding: 50rpx 30rpx 20rpx;
+	padding: 0 30rpx;
 }
 .container {
 	padding-bottom: env(safe-area-inset-bottom);

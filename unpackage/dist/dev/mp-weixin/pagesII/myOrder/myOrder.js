@@ -588,7 +588,8 @@ var thorui = __webpack_require__(/*! @/common/tui-clipboard/tui-clipboard.js */ 
       pullUpOn: true,
       scrollTop: 0,
       myOrderData: [],
-      url: '' };
+      url: '',
+      countDown: 0 };
 
   },
   computed: {
@@ -839,7 +840,7 @@ var thorui = __webpack_require__(/*! @/common/tui-clipboard/tui-clipboard.js */ 
           _this5.$forceUpdate();
           return;
         }
-
+        _this5.countDown = res.data.data.time - res.data.data.createDate;
         var newData = res.data.data;
         // this.myOrderData = newData
         // newData.map(item=>{

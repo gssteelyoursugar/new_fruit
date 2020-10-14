@@ -668,7 +668,7 @@
 						this.WxPublicMsg = res.data.data.WxPublicMsg
 						this.WxPublicMsgID = res.data.data.WxPublicMsg.id //公告id
 						this.WxPostersBottomAdve = res.data.data.WxPostersBottomAdve
-						this.NewGoods = res.data.data.NewGoods //新果上市
+						this.NewGoods = res.data.data.NewGoods.goods //新果上市
 						this.WxActivity = res.data.data.WxActivity //限量区数据ID+倒计时
 						this.WxActivityID = res.data.data.WxActivity.id //限量区数据ID+倒计时
 						this.WxActivityList = res.data.data.WxActivity.list //首页限量区数据

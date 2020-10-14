@@ -503,7 +503,7 @@
 	margin: 0 auto;
 	padding-bottom: 30rpx;
 }
-.container-img {
+.empty-img {
 	/* margin-top: 150rpx; */
 	display: -webkit-box;
 	display: -webkit-flex;

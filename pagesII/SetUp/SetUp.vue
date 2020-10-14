@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<!--header-->
-		<view class="tui-header-box">
+		<view class="tui-header-box" :style="{paddingTop: statusHeight+ 'px',height: boxHeight+ 'px'}">
 			<view class="tui-icon-box" @tap="back">
 				<tui-icon name="arrowleft" :size="30" color="#333"></tui-icon>
 			</view>
@@ -13,7 +13,7 @@
 				<view class="tui-title">
 					WIFI下自动播放视频
 					<!-- <switch class="tui-switch" color="rgba(0, 197, 42, 1)" @change="switchChange( $event)"></switch> -->
-					<ss-switch selColor="#00C52A"   v-model="switchValue" @change="switchInput"></ss-switch>
+					<ss-switch selColor="#00C52A" v-model="switchValue" @change="switchInput"></ss-switch>
 				</view>
 			</tui-list-cell>
 		</view>
@@ -28,7 +28,29 @@
 		data() {
 			return {
 				switchValue: false,
+				statusHeight: 20,
+				boxHeight: 44
 			}
+		},
+		onLoad() {
+			const res = uni.getSystemInfoSync();
+			let {
+				statusBarHeight
+			} = res
+			// #ifndef H5 || APP-PLUS || MP-ALIPAY
+			let info = uni.getMenuButtonBoundingClientRect()
+			let {
+				top,
+				bottom
+			} = info
+			this.statusHeight = statusBarHeight
+			let buttonHeight = (bottom - statusBarHeight) + (top - statusBarHeight)
+			let navHeight = statusBarHeight + buttonHeight + top - statusBarHeight
+			this.boxHeight = navHeight - statusBarHeight
+
+			console.log(statusBarHeight, navHeight, buttonHeight)
+			// #endif
+
 		},
 		methods: {
 			switchInput(e) {
@@ -59,7 +81,7 @@
 		background: #fff;
 		font-size: 32rpx;
 		color: #393939;
-		padding: 50rpx 30rpx 20rpx;
+		padding: 0 30rpx;
 	}
 
 	.log-out {

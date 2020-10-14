@@ -23,14 +23,14 @@
 				<view class=" tui-cell-view">
 					<scroll-view scroll-x="true" class="scroll" scroll-with-animation="true">
 						<view class="prefer-dis">
-							<block v-for="(item, index) in preferdata" :key="index">
+							<block v-for="(item, index) in infoList" :key="index">
 								<view class="prefer-view">
 									<view class="tui-img-text">
-										<image :src="item.image" mode="aspectFill" class="tui-img"></image>
+										<image :src="item.url" mode="aspectFill" class="tui-img"></image>
 										<view class="tui-tag-mag">
-											<text class="tui-tag-name">柚子</text>
-											<text class="tui-tag-name2">正宗容县沙田柚老树果水分足</text>
-											<view class="tui-tag-time">预计上市时间2020-9-11</view>
+											<text class="tui-tag-name">{{item.labelName}}</text>
+											<text class="tui-tag-name2">{{item.title}}</text>
+											<view class="tui-tag-time">预计上市时间{{item.time}}</view>
 										</view>
 									</view>
 								</view>
@@ -101,6 +101,7 @@
 
 		data() {
 			return {
+				infoList: [],
 				GoodsData: [],
 				url: '',
 				preferdata: [{
@@ -179,7 +180,8 @@
 				listing2(getNewsAll, data)
 					.then((res) => {
 						log(res)
-						this.GoodsData = res.data.data
+						this.infoList = res.data.data.imgage
+						this.GoodsData = res.data.data.goods
 					})
 					.catch((err) => {
 						log(err)

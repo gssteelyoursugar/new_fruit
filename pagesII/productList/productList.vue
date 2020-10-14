@@ -5,22 +5,22 @@
 			<image src="../../static/images/orderBMG.png" mode="widthFix"></image>
 			<text class="color-text">当前水果没有货，再看看别的吧</text>
 		</view>
-		<view class="tui-header-box">
-			<view class="tui-header" :style="{ width: width + 'px', height: height + 'px' }">
-				<view class="tui-back" :style="{ marginTop: arrowTop + 'px' }" @tap="back">
-					<tui-icon name="arrowleft" color="#000"></tui-icon>
-				</view>
-				<view class="tui--top-title">找水果</view>
-				<!-- <view class="tui-searchbox tui-search-mr" :style="{ marginTop: inputTop + 'px' }" @tap="search">
-					<icon type="search" :size="13" color="#999"></icon>
-					<text class="tui-search-text" v-if="!searchKey">搜索圈果商品</text>
-					<view class="tui-search-key" v-if="searchKey">
-						<view class="tui-key-text">{{ searchKey }}</view>
-						<tui-icon name="shut" :size="12" color="#fff"></tui-icon>
-					</view>
-				</view> -->
+		<view class="tui-header-box" :style="{paddingTop: statusHeight+ 'px',height: boxHeight+ 'px'}">
+			<view class="tui-icon-box" @tap="back">
+				<tui-icon name="arrowleft" :size="30" color="#333"></tui-icon>
 			</view>
+			<view class="tui-header">找水果</view>
+			<!-- <view class="tui-searchbox tui-search-mr" :style="{ marginTop: inputTop + 'px' }" @tap="search">
+				<icon type="search" :size="13" color="#999"></icon>
+				<text class="tui-search-text" v-if="!searchKey">搜索圈果商品</text>
+				<view class="tui-search-key" v-if="searchKey">
+					<view class="tui-key-text">{{ searchKey }}</view>
+					<tui-icon name="shut" :size="12" color="#fff"></tui-icon>
+				</view>
+			</view> -->
 		</view>
+
+
 		<!--header-->
 
 		<!-- 搜索框 -->
@@ -229,14 +229,14 @@
 						 type="number" />
 						<tui-icon name="reduce" color="#333" :size="14"></tui-icon>
 						<input placeholder-class="tui-phcolor" v-model="optionList.rtWidth" class="tui-input" placeholder="不限" maxlength="11"
-						 type="number" /><text  class="content-text">毫米</text>
+						 type="number" /><text class="content-text">毫米</text>
 					</view>
 					<view class="tui-drawer-title">
 						<text class="tui-title-bold">口感等级</text>
 					</view>
 					<view class="tui-drawer-content">
 						<view class="content" @click="useOutClickSide">
-							<easy-select :options="tasteBox" ref="easySelect"  size="mini" :selectName="'ltTaste'" :value="optionList.ltTaste"
+							<easy-select :options="tasteBox" ref="easySelect" size="mini" :selectName="'ltTaste'" :value="optionList.ltTaste"
 							 @selectOne="selectItem"></easy-select>
 						</view>
 						<tui-icon name="reduce" color="#333" :size="14"></tui-icon>
@@ -250,11 +250,13 @@
 					</view>
 					<view class="tui-drawer-content">
 						<view class="content" @click="useOutClickSide">
-							<easy-select :options="colorBox" ref="easySelect" :selectName="'ltColor'" size="mini" :value="optionList.ltColor" @selectOne="selectItem"></easy-select>
+							<easy-select :options="colorBox" ref="easySelect" :selectName="'ltColor'" size="mini" :value="optionList.ltColor"
+							 @selectOne="selectItem"></easy-select>
 						</view>
 						<tui-icon name="reduce" color="#333" :size="14"></tui-icon>
 						<view class="content" @click="useOutClickSide">
-							<easy-select :options="colorBox" ref="easySelect" :selectName="'rtColor'" size="mini" :value="optionList.rtColor" @selectOne="selectItem"></easy-select>
+							<easy-select :options="colorBox" ref="easySelect" :selectName="'rtColor'" size="mini" :value="optionList.rtColor"
+							 @selectOne="selectItem"></easy-select>
 						</view><text class="content-text" style="color: #fff;">星</text>
 					</view>
 					<view class="tui-drawer-title">
@@ -262,11 +264,13 @@
 					</view>
 					<view class="tui-drawer-content">
 						<view class="content" @click="useOutClickSide">
-							<easy-select :options="facadeBox" ref="easySelect" :selectName="'ltShape'" size="mini" :value="optionList.ltShape" @selectOne="selectItem"></easy-select>
+							<easy-select :options="facadeBox" ref="easySelect" :selectName="'ltShape'" size="mini" :value="optionList.ltShape"
+							 @selectOne="selectItem"></easy-select>
 						</view>
 						<tui-icon name="reduce" color="#333" :size="14"></tui-icon>
 						<view class="content" @click="useOutClickSide">
-							<easy-select :options="facadeBox" ref="easySelect" :selectName="'rtShape'" size="mini" :value="optionList.rtShape" @selectOne="selectItem"></easy-select>
+							<easy-select :options="facadeBox" ref="easySelect" :selectName="'rtShape'" size="mini" :value="optionList.rtShape"
+							 @selectOne="selectItem"></easy-select>
 						</view>
 						<text class="content-text" style="color: #fff;">星</text>
 					</view>
@@ -278,7 +282,7 @@
 						 type="number" />
 						<tui-icon name="reduce" color="#333" :size="14"></tui-icon>
 						<input placeholder-class="tui-phcolor" v-model="optionList.rtRight" class="tui-input" placeholder="不限" maxlength="11"
-						 type="number" /><text  class="content-text">%</text>
+						 type="number" /><text class="content-text">%</text>
 					</view>
 					<view class="tui-drawer-title">
 						<text class="tui-title-bold">价格区间</text>
@@ -513,7 +517,9 @@
 					rtRight: '', //不良右
 					ltPrice: '', //价格左
 					rtPrice: '', //价格右边
-				}
+				},
+				statusHeight: 20,
+				boxHeight: 44
 			};
 		},
 		onLoad(options) {
@@ -533,7 +539,7 @@
 				log(this.mangguoID)
 				this.ShopIng()
 			}
-			
+
 			//this.searchKey = options.name
 			let obj = {};
 			// #ifdef MP-WEIXIN
@@ -559,24 +565,10 @@
 			});
 		},
 		computed: {
-			tasteBox () {
+			tasteBox() {
 				let arr = []
 				let data = this.taste_level
-				data.forEach((item,index)=>{
-					let tmp = {
-						num: index,
-						star: index + 1, 
-						label: item.title,
-						value: item.title
-					}
-					arr.push(tmp)
-				})
-				return arr
-			},
-			colorBox() {
-				let arr = []
-				let data = this.color_level
-				data.forEach((item,index)=>{
+				data.forEach((item, index) => {
 					let tmp = {
 						num: index,
 						star: index + 1,
@@ -587,10 +579,24 @@
 				})
 				return arr
 			},
-			facadeBox () {
+			colorBox() {
+				let arr = []
+				let data = this.color_level
+				data.forEach((item, index) => {
+					let tmp = {
+						num: index,
+						star: index + 1,
+						label: item.title,
+						value: item.title
+					}
+					arr.push(tmp)
+				})
+				return arr
+			},
+			facadeBox() {
 				let arr = []
 				let data = this.facade_level
-				data.forEach((item,index)=>{
+				data.forEach((item, index) => {
 					let tmp = {
 						num: index,
 						star: index + 1,
@@ -632,7 +638,6 @@
 				this.dropdownShow2 = !this.dropdownShow2
 			},
 			getSearch(serrchName) {
-
 				let data = {
 					pageNo: 1,
 					pageSize: 10,
@@ -641,7 +646,7 @@
 				listing(getGoodsall, data)
 					.then((res) => {
 						log(res)
-						this.goods = res.data.data[0].goods
+						this.goods = res.data.data.goods
 						log(this.goods)
 					})
 					.catch((err) => {
@@ -705,7 +710,7 @@
 				// }
 				// this.isActives1 = !this.isActives1
 				this.isActives1 = this.dropScreenShow
-				log('颜色事件isActives1=' + this.isActives1, '弹层事件=' + this.dropScreenShow)
+				// log('颜色事件isActives1=' + this.isActives1, '弹层事件=' + this.dropScreenShow)
 				// 	this.dropScreenShow = !this.dropScreenShow
 				// this.dropScreenShow2 = false
 				// log(this.dropNum)
@@ -768,7 +773,6 @@
 					url: '../../pages/search/search'
 				})
 			},
-
 			Sales(id) {
 				log(id)
 			},
@@ -778,8 +782,7 @@
 			Videosl(id) {
 				log(id)
 			},
-
-			activeGo(name, id,idx) {
+			activeGo(name, id, idx) {
 				this.optionList[name] = id
 				this.num = idx
 				console.log(this.optionList)
@@ -791,9 +794,9 @@
 					id,
 					label
 				} = e
-				this.optionList[s_name]=label
-				console.log("optionList:",this.optionList)
-				
+				this.optionList[s_name] = label
+				console.log("optionList:", this.optionList)
+
 			},
 			//关闭
 			isFalse() {
@@ -809,13 +812,12 @@
 				this.isActives2 = true
 				this.isActives = true
 			},
-			
+
 			useOutClickSide() {
 				this.$refs.easySelect.hideOptions && this.$refs.easySelect.hideOptions()
 			},
 			//销量升序
 			getshopDESC() {
-
 				let data = {
 					pageNo: 1,
 					pageSize: 10,
@@ -824,7 +826,7 @@
 				listing(getGoodsall, data)
 					.then((res) => {
 						log(res)
-						this.goods = res.data.data[0].goods
+						this.goods = res.data.data.goods
 					})
 					.catch((err) => {
 						log(err)
@@ -841,8 +843,9 @@
 				}
 				listing(getGoodsall, data)
 					.then((res) => {
+
 						log(res)
-						this.goods = res.data.data[0].goods
+						this.goods = res.data.data.goods
 					})
 					.catch((err) => {
 						log(err)
@@ -859,7 +862,7 @@
 				listing(getGoodsall, data)
 					.then((res) => {
 						log(res)
-						this.goods = res.data.data[0].goods
+						this.goods = res.data.data.goods
 					})
 					.catch((err) => {
 						log(err)
@@ -874,7 +877,7 @@
 				}
 				listing(getGoodsall, data)
 					.then((res) => {
-						this.goods = res.data.data[0].goods
+						this.goods = res.data.data.goods
 					})
 					.catch((err) => {
 						log(err)
@@ -892,25 +895,25 @@
 				Promise.all([listing(getGoodsall, data), listing(getAttribute, data2)])
 					// listing(getGoodsall,data)
 					.then((res) => {
+
 						this.seleVarieties = res[1].data.data
 						if (this.seleVarieties === undefined) {
 							this.seleVarieties = this.seleVarieties
-						} else if (this.seleVarieties != undefined) {
-						}
-						this.color_level = res[0].data.data[0].color_level
-						this.facade_level = res[0].data.data[0].facade_level
-						this.fruit_level = res[0].data.data[0].fruit_level
-						this.shape_level = res[0].data.data[0].shape_level
-						this.goods = res[0].data.data[0].goods
-						this.packaging = res[0].data.data[0].packaging
-						this.species = res[0].data.data[0].species
+						} else if (this.seleVarieties != undefined) {}
+						this.color_level = res[0].data.data.color_level
+						this.facade_level = res[0].data.data.facade_level
+						this.fruit_level = res[0].data.data.fruit_level
+						this.shape_level = res[0].data.data.shape_level
+						this.goods = res[0].data.data.goods
+						this.packaging = res[0].data.data.packaging
+						this.species = res[0].data.data.species
 						for (var i = 0; i < this.species.length; i++) {
 							this.species[i].isActives = this.activeA
 						}
-						this.storage_mode = res[0].data.data[0].storage_mode
-						this.taste_level = res[0].data.data[0].taste_level
-						this.variety = res[0].data.data[0].variety
-						
+						this.storage_mode = res[0].data.data.storage_mode
+						this.taste_level = res[0].data.data.taste_level
+						this.variety = res[0].data.data.variety
+
 					})
 					.catch((err) => {
 						log(err)
@@ -936,7 +939,7 @@
 				this.$nextTick(() => {
 					this.scrollTop = 0;
 				});
-				
+
 				this.dropScreenShow = false;
 				this.attrIndex = -1;
 			},
@@ -945,21 +948,21 @@
 				this.isActives = false
 				// this.btnCloseDrop();
 				this.dropScreenShow2 = false
-				console.log('我真的点击了',dd)
+				console.log('我真的点击了', dd)
 				// this.dropScreenShow = false
 			},
-			showDropdownList(){
+			showDropdownList() {
 				this.selectH = 246;
 				this.tabIndex = 0;
 			},
-			hideDropdownList () {
+			hideDropdownList() {
 				this.selectH = 0;
 			},
-			dropdownItem () {
+			dropdownItem() {
 				log('2')
 			},
 			//筛选事件汇总
-			screen (e) {
+			screen(e) {
 
 				let index = e.currentTarget.dataset.index ? e.currentTarget.dataset.index : e;
 				console.log(index)
@@ -1119,6 +1122,10 @@
 		z-index: 99998;
 		left: 0;
 		top: 0;
+		overflow: hidden;
+		display: flex;
+		align-items: center;
+		padding: 0 30rpx;
 	}
 
 	.tui-header {
@@ -1562,7 +1569,7 @@
 		justify-content: space-between;
 		box-sizing: border-box;
 	}
-	
+
 	.tui-drawer-content .content-text {
 		width: 10%;
 	}
@@ -1576,7 +1583,7 @@
 		text-align: center;
 		font-size: 24rpx;
 		color: #333;
-		
+
 		border-radius: 40rpx;
 	}
 

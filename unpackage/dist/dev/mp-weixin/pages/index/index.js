@@ -820,7 +820,7 @@ var isFirst1 = true;var _default =
         _this4.WxPublicMsg = res.data.data.WxPublicMsg;
         _this4.WxPublicMsgID = res.data.data.WxPublicMsg.id; //公告id
         _this4.WxPostersBottomAdve = res.data.data.WxPostersBottomAdve;
-        _this4.NewGoods = res.data.data.NewGoods; //新果上市
+        _this4.NewGoods = res.data.data.NewGoods.goods; //新果上市
         _this4.WxActivity = res.data.data.WxActivity; //限量区数据ID+倒计时
         _this4.WxActivityID = res.data.data.WxActivity.id; //限量区数据ID+倒计时
         _this4.WxActivityList = res.data.data.WxActivity.list; //首页限量区数据

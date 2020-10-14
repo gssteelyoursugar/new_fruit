@@ -389,12 +389,13 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       flag: false, checkFlag: false, //默认选中
       allFlag: '', //全选
       checkedArr: [], //存放选中的数据
-      valueNum: 0, url: 'http://192.168.1.10:8980', orderObj: [], openid: '', neworder: [], isCheck: false, dataList: [{ id: 'q2020811', buyNum: 1, price: 299.5, selected: false, imgsrc: '../../static/images/putao1.png', shopName: '大葡萄' }, { id: 'q2020812', buyNum: 2, price: 499, selected: false, imgsrc: '../../static/images/niuyouguo1.png', shopName: '大哈密瓜' }, { id: 'q2020813', buyNum: 3, price: 199, selected: false, imgsrc: '../../static/images/putao1.png', shopName: '大紫葡萄' }], isAll: false, totalPrice: 0, buyNum: 0, cartIds: [], //购物车id
+      valueNum: 0, url: 'http://192.168.1.10:8980', orderObj: [], isEmpty: false, openid: '', neworder: [], isCheck: false, dataList: [{ id: 'q2020811', buyNum: 1, price: 299.5, selected: false, imgsrc: '../../static/images/putao1.png', shopName: '大葡萄' }, { id: 'q2020812', buyNum: 2, price: 499, selected: false, imgsrc: '../../static/images/niuyouguo1.png', shopName: '大哈密瓜' }, { id: 'q2020813', buyNum: 3, price: 199, selected: false, imgsrc: '../../static/images/putao1.png', shopName: '大紫葡萄' }], isAll: false, totalPrice: 0, buyNum: 0, cartIds: [], //购物车id
       actions: [{ name: '删除', color: '#fff', fontsize: 28, width: 64, background: '#F82400' }], actions2: [{ name: '看相似', color: '#fff', fontsize: 28, width: 64, background: '#FF7035' }, { name: '删除', color: '#fff', fontsize: 28, width: 64, background: '#F82400' }], isEdit: false, pageIndex: 1, loadding: false, pullUpOn: true, allPrice: 0, //总价
       curId: 0 };}, filters: { getPrice: function getPrice(price) {price = price || 0;return price.toFixed(2);} }, methods: { goIndex: function goIndex() {uni.switchTab({ url: '../index/index' });}, init: function init(bull, tips) {this.modaishow = bull;this.tips = tips;}, //获取头像昵称
     getUserInfo: function getUserInfo(event) {// log(event)
       this.usering = event.detail.userInfo;uni.setStorageSync('userIN', event.detail.userInfo); //把头像存在本地，小程序提供如同浏览器cookie
-      var userING = uni.setStorageSync('userIN', event.detail.userInfo);if (event.detail.userInfo) {var wxing = event.detail.userInfo;this.wxCode(wxing.avatarUrl, wxing.nickName);
+      var userING = uni.setStorageSync('userIN', event.detail.userInfo);if (event.detail.userInfo) {var wxing = event.detail.userInfo;
+        this.wxCode(wxing.avatarUrl, wxing.nickName);
       }
       // wx.startPullDownRefresh()
     },
@@ -507,15 +508,12 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       // log(setdata)
       (0, _api.listing)(_request.getCart, data).
       then(function (res) {
-        // log(res.data.data)
+        if (res.data.data.length === 0) {
+          _this4.isEmpty = true;
+        } else {
+          _this4.isEmpty = false;
+        }
         _this4.orderObj = res.data.data;
-        // for(var i=0;i<this.orderObj.length;i++){
-        // 	for( var j=0; j<this.orderObj[i].list.length;j++){
-        // 		this.orderObj[i].list[j].selected = false
-        // 	}
-        // }
-
-        // log(this.orderObj)
       }).
       catch(function (err) {
         log(err);

@@ -296,7 +296,9 @@ console,log = _console.log;var _default = (_data$filters$onPullD = {
     1), _defineProperty(_ref, "loadding",
     false), _defineProperty(_ref, "pullUpOn",
     true), _defineProperty(_ref, "allPrice",
-    0), _ref;
+    0), _defineProperty(_ref, "statusHeight",
+    20), _defineProperty(_ref, "boxHeight",
+    44), _ref;
 
   },
   filters: {
@@ -313,6 +315,25 @@ console,log = _console.log;var _default = (_data$filters$onPullD = {
     setTimeout(function () {
       uni.stopPullDownRefresh();
     }, 1000);
+  },
+  onLoad: function onLoad() {
+    var res = uni.getSystemInfoSync();var
+
+    statusBarHeight =
+    res.statusBarHeight;
+
+    var info = uni.getMenuButtonBoundingClientRect();var
+
+    top =
+
+    info.top,bottom = info.bottom;
+    this.statusHeight = statusBarHeight;
+    var buttonHeight = bottom - statusBarHeight + (top - statusBarHeight);
+    var navHeight = statusBarHeight + buttonHeight + top - statusBarHeight;
+    this.boxHeight = navHeight - statusBarHeight;
+
+    console.log(statusBarHeight, navHeight, buttonHeight);
+
   },
   methods: {
     back: function back() {

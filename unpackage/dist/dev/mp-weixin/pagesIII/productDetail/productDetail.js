@@ -126,12 +126,12 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   var f0 =
-    _vm.shopListdata.data.totalPirce !== undefined
-      ? _vm._f("filterNum")(_vm.shopListdata.data.totalPirce)
+    _vm.shopListdata.totalPirce !== undefined
+      ? _vm._f("filterNum")(_vm.shopListdata.totalPirce)
       : null
   var f1 =
-    _vm.shopListdata.data.viewNumber !== undefined
-      ? _vm._f("filterNum")(_vm.shopListdata.data.viewNumber)
+    _vm.shopListdata.viewNumber !== undefined
+      ? _vm._f("filterNum")(_vm.shopListdata.viewNumber)
       : null
   _vm.$mp.data = Object.assign(
     {},
@@ -176,6 +176,17 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -980,6 +991,17 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //请求地址
 var setdata = uni.getStorageSync('usermen');var _console = console,log = _console.log;var _default = { data: function data() {return { ApproveStatus: 0, //店铺认证状态
       isLogin: false, current: 0, //星星
@@ -995,8 +1017,8 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
       posters: 'https://www.thorui.cn/img/product/4.png', //视频封面
       //videos:'https://6e6f-normal-env-ta6pc-1300924598.tcb.qcloud.la/video-swiper/1589851354869410.mp4?sign=1f636557effa496e074332e3f4b9b8aa&t=1589851461',
       bannerIndex: 0, userInfoData: {}, //物流信息
-      topMenu: [{ icon: 'message', text: '消息', size: 26, badge: 3 }, { icon: 'home', text: '首页', size: 23, badge: 0 }, { icon: 'people', text: '我的', size: 26, badge: 0 }, { icon: 'cart', text: '购物车', size: 23, badge: 2 }, { icon: 'kefu', text: '客服小蜜', size: 26, badge: 0 }, { icon: 'feedback', text: '我要反馈', size: 23, badge: 0 }, { icon: 'share', text: '分享', size: 26, badge: 0 }], productID: 0, menuShow: false, popupShow: false, value: 1, collected: false, Sumify: '', token: '', navHeight: 64, iconTop: 24, tabsTop: 64 };}, onLoad: function onLoad(options) {console.log("这里是onload"); // 导航栏高度 = 状态栏高度 + 胶囊高度 + 胶囊上下边距
-    try {var res = uni.getSystemInfoSync();var statusBarHeight = res.statusBarHeight;var info = uni.getMenuButtonBoundingClientRect();var top = info.top,bottom = info.bottom;var buttonHeight = bottom - statusBarHeight + (top - statusBarHeight);this.navHeight = statusBarHeight + buttonHeight + top - statusBarHeight;this.iconTop = statusBarHeight + (top - statusBarHeight);this.tabsTop = statusBarHeight + buttonHeight + top - statusBarHeight;console.log(this.navHeight, buttonHeight);} catch (err) {console.log(err);} // this.getHomelist()
+      topMenu: [{ icon: 'message', text: '消息', size: 26, badge: 3 }, { icon: 'home', text: '首页', size: 23, badge: 0 }, { icon: 'people', text: '我的', size: 26, badge: 0 }, { icon: 'cart', text: '购物车', size: 23, badge: 2 }, { icon: 'kefu', text: '客服小蜜', size: 26, badge: 0 }, { icon: 'feedback', text: '我要反馈', size: 23, badge: 0 }, { icon: 'share', text: '分享', size: 26, badge: 0 }], productID: 0, menuShow: false, popupShow: false, value: 1, collected: false, Sumify: '', token: '', navHeight: 64, iconTop: 24, tabsTop: 64, canPraise: true, netStatus: true };}, onLoad: function onLoad(options) {// 导航栏高度 = 状态栏高度 + 胶囊高度 + 胶囊上下边距
+    var that = this;try {var res = uni.getSystemInfoSync();var statusBarHeight = res.statusBarHeight;uni.getNetworkType({ success: function success(res) {console.log(res.networkType);if (res.networkType === 'wifi') {that.netStatus = true;}if (res.networkType !== 'wifi') {that.netStatus = false;setTimeout(function () {that.netStatus = true;}, 3000);}} });uni.onNetworkStatusChange(function (res) {console.log(res.isConnected);console.log(res.networkType);if (res.isConnected && res.networkType !== 'wifi') {that.netStatus = false;setTimeout(function () {that.netStatus = true;}, 3000);}if (res.isConnected && res.networkType === 'wifi') {that.netStatus = true;}});var info = uni.getMenuButtonBoundingClientRect();var top = info.top,bottom = info.bottom;var buttonHeight = bottom - statusBarHeight + (top - statusBarHeight);that.navHeight = statusBarHeight + buttonHeight + top - statusBarHeight;that.iconTop = statusBarHeight + (top - statusBarHeight);that.tabsTop = statusBarHeight + buttonHeight + top - statusBarHeight;console.log(that.navHeight, buttonHeight);} catch (err) {console.log(err);} // this.getHomelist()
     var setdata = uni.getStorageSync('usermen');this.token = setdata;this.productID = options.id;this.postDetails();this.postSettle();this.getMerchants();var obj = {};obj = wx.getMenuButtonBoundingClientRect(); // 	setTimeout(() => {
     // 		uni.getSystemInfo({
     // 			success: res => {
@@ -1008,7 +1030,7 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
     // 		});
     // 	}, 0);
     // 
-  }, computed: { swiperList: function swiperList() {var list = this.urlList;return list;} }, filters: { filterNum: function filterNum(val) {if (val === 'undefined') {return 0;}if (val) {var words = (val + '').split('');var res = '';if (words.length === 1) {res = val;}if (words.length === 2) {res = words[0] + '0多';}if (words.length === 3) {res = words[0] + '00多';}if (words.length === 4) {res = words[0] + '千多';}if (words.length === 5) {res = words[0] + '万多';}if (words.length === 6) {res = words[0] + words[1] + '万多';}if (words.length === 7) {res = words[0] + '百万多';}return res;} else {return val;}} }, methods: { clickLink: function clickLink(e) {console.log(e);}, //购买前获取申请店铺状态信息
+  }, computed: { swiperList: function swiperList() {var vList = this.shopListdata;var uList = this.urlList;if (vList && vList.urlVideo !== '') {uList.unshift(vList.urlVideo);console.log("uList", "you", uList, uList.length);return uList;} else {console.log("uList", "meiyou", uList, uList.length);return uList;}} }, filters: { filterNum: function filterNum(val) {if (val) {var words = (val + '').split('');var res = '';if (words.length === 1) {res = val;}if (words.length === 2) {res = words[0] + '0多';}if (words.length === 3) {res = words[0] + '00多';}if (words.length === 4) {res = words[0] + '千多';}if (words.length === 5) {res = words[0] + '万多';}if (words.length === 6) {res = words[0] + words[1] + '万多';}if (words.length === 7) {res = words[0] + '百万多';}return res;} else {return val;}} }, methods: { clickLink: function clickLink(e) {console.log(e);}, //购买前获取申请店铺状态信息
     getMerchants: function getMerchants() {var _this = this;var data = { token: setdata };(0, _api.listing)(_request.getClient, data).then(function (res) {// log(res);
         ///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
         _this.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
@@ -1020,8 +1042,8 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
         this.modaishow = false;var data = { goodsId: id, token: setdata, number: this.value2, type: 'nowGoods' };(0, _api.publicing)(_request.postmyOrder, data).then(function (res) {// log(res);
           var ids = res.data.data;var code = res.data.code;if (code == -1) {uni.showToast({ title: "".concat(res.data.msg), icon: 'none', duration: 2000 });uni.hideLoading();return;} else if (code == 200) {uni.showToast({ title: "".concat(res.data.msg), icon: 'none', duration: 2000 });uni.navigateTo({ url: '../../pagesIII/submitOrder/submitOrder?ids=' + ids });}}).catch(function (err) {log(err);});}}, //重复点赞
     praiseLikeTwo: function praiseLikeTwo() {uni.showToast({ title: '重复点赞', icon: 'none' });}, //点赞
-    praiseLike: function praiseLike(id) {var _this3 = this;var setdata = uni.getStorageSync('usermen');if (!setdata) {this.modaishow = true;} else {this.modaishow = false;var data = { goodsId: id, token: setdata };if (this.shopListdata.data.isPraise == true) {uni.showToast({ title: '重复点赞', icon: 'none' });return;} else if (this.shopListdata.data.isPraise == false) {(0, _api.publicing)(_request.postPraise, data).then(function (res) {// log(res);
-            _this3.postDetails();uni.showToast({ title: '成功', icon: 'none' });}).catch(function (err) {log(err);});}}}, change2: function change2(e) {this.value2 = e.value;}, // 显示
+    praiseLike: function praiseLike(id) {var _this3 = this;var setdata = uni.getStorageSync('usermen');if (!setdata) {this.modaishow = true;} else {this.modaishow = false;var data = { goodsId: id, token: setdata };if (this.shopListdata.isPraise == true) {uni.showToast({ title: '重复点赞', icon: 'none' });return;}if (this.canPraise === false) {uni.showToast({ title: '重复点赞', icon: 'none' });return;}if (this.shopListdata.isPraise === false) {this.canPraise = false;(0, _api.publicing)(_request.postPraise, data).then(function (res) {log(res); // this.postDetails();
+            _this3.shopListdata.praiseNumber++;uni.showToast({ title: '成功', icon: 'none' });}).catch(function (err) {log(err);});}}}, change2: function change2(e) {this.value2 = e.value;}, // 显示
     init: function init() {this.modaishow = true;}, // 取消
     messcancel: function messcancel() {this.modaishow = false;}, //弹出立即购买
     showPopup: function showPopup() {var setdata = uni.getStorageSync('usermen');if (!setdata) {this.modaishow = true;} else {this.modaishow = false;this.$refs.popup.show();}if (this.ApproveStatus != 1) {uni.showToast({ title: '您还没有验证店铺', icon: 'none' });return;}}, //获取微信昵称
@@ -1036,13 +1058,50 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
       .then(function (res) {uni.setStorageSync('usermen', res.data.token); //把token存在本地，小程序提供如同浏览器cookie
         var setdata = uni.getStorageSync('usermen');uni.showToast({ title: '登陆成功' });_this5.getMerchants();uni.hideLoading();}).catch(function (err) {log(err);});}, //收藏订单
     likeOrder: function likeOrder(id) {var _this6 = this;var setdata = uni.getStorageSync('usermen'); //判断是否登录才能收藏
-      if (!setdata) {this.modaishow = true;} else {this.modaishow = false;var data = { goodsId: id, token: setdata };if (this.shopListdata.data.isCollection == true) {uni.showToast({ title: '重复收藏', icon: 'none' });return;} else if (this.shopListdata.data.isCollection == false) {(0, _api.publicing)(_request.postLike, data).then(function (res) {_this6.postDetails();uni.showToast({ title: '收藏成功', icon: 'none' });}).catch(function (err) {log(err);});}}}, //请求商品详情
-    postDetails: function postDetails() {var _this7 = this;uni.showLoading({ title: '加载中' });var data = { id: this.productID, token: setdata }; // 批量并发请求多个接口，Promise.all =>可以并发请求多个接口。并且同时得到多个接口的数据
+      if (!setdata) {this.modaishow = true;} else {this.modaishow = false;var data = { goodsId: id, token: setdata };if (this.shopListdata.isCollection == true) {uni.showToast({ title: '重复收藏', icon: 'none' });return;
+        } else if (this.shopListdata.isCollection == false) {
+          (0, _api.publicing)(_request.postLike, data).
+          then(function (res) {
+            _this6.postDetails();
+            uni.showToast({
+              title: '收藏成功',
+              icon: 'none' });
+
+          }).
+          catch(function (err) {
+            log(err);
+          });
+        }
+      }
+    },
+    //请求商品详情
+
+    postDetails: function postDetails() {var _this7 = this;
+      uni.showLoading({
+        title: '加载中' });
+
+      var data = {
+        id: this.productID,
+        token: setdata };
+
+      // 批量并发请求多个接口，Promise.all =>可以并发请求多个接口。并且同时得到多个接口的数据
       //这个方法是异步执行的，值还没有赋值，后就先执行了postAct这个，异步，同步，
-      (0, _api.publicing)(_request.postdelist, data).then(function (res) {// console.log("res",res.data); 
-        _this7.shopListdata = res.data;_this7.labelList = res.data.data.labelList;_this7.urlList = res.data.data.urlList; // console.log(this.labelList);
-      }).catch(function (err) {console.log(err);});uni.hideLoading();}, //立即购买/加进货单
-    postShopping: function postShopping(id) {var _this8 = this;var setdata = uni.getStorageSync('usermen');
+      (0, _api.publicing)(_request.postdelist, data).
+      then(function (res) {
+        console.log("res123", res);
+        _this7.shopListdata = res.data.data;
+        _this7.labelList = res.data.data.labelList;
+        _this7.urlList = res.data.data.urlList;
+        // console.log(this.labelList);
+      }).
+      catch(function (err) {
+        console.log(err);
+      });
+      uni.hideLoading();
+    },
+    //立即购买/加进货单
+    postShopping: function postShopping(id) {var _this8 = this;
+      var setdata = uni.getStorageSync('usermen');
       if (!setdata) {
         this.modaishow = true;
       } else {
@@ -1054,7 +1113,7 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
           token: setdata,
           number: 1 };
 
-        if (this.shopListdata.data.isCart == true) {
+        if (this.shopListdata.isCart == true) {
           uni.showToast({
             title: '重复加入进货单',
             icon: 'none',
@@ -1062,7 +1121,7 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
 
           uni.hideLoading();
           return;
-        } else if (this.shopListdata.data.isCart == false) {
+        } else if (this.shopListdata.isCart == false) {
           (0, _api.publicing)(_request.postmyOrder, data).
           then(function (res) {
             var code = res.data.code;

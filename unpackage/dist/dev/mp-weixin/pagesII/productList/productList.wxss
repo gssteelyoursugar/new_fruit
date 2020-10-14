@@ -71,6 +71,14 @@ page {
 	z-index: 99998;
 	left: 0;
 	top: 0;
+	overflow: hidden;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	padding: 0 30rpx;
 }
 .tui-header {
 	display: -webkit-box;
@@ -567,9 +575,9 @@ page {
 	text-align: center;
 	font-size: 24rpx;
 	color: #333;
-	
+
 	-webkit-border-radius: 40rpx;
-	
+
 	        border-radius: 40rpx;
 }
 .tui-phcolor {

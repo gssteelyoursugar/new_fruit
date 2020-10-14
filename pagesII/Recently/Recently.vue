@@ -1,7 +1,7 @@
 <template>
 	<view class="container">
 		<!--header-->
-		<view class="tui-header-box">
+		<view class="tui-header-box"  :style="{paddingTop: statusHeight+ 'px',height: boxHeight+ 'px'}">
 			<view class="tui-icon-box" @tap="back"><tui-icon name="arrowleft" :size="30" color="#333"></tui-icon></view>
 			<view class="tui-header">最近看过</view>
 		</view>
@@ -157,7 +157,9 @@ export default {
 			pageIndex: 1,
 			loadding: false,
 			pullUpOn: true,
-			allPrice: 0 //总价
+			allPrice: 0, //总价
+			statusHeight: 20,
+			boxHeight: 44
 		};
 	},
 	filters: {
@@ -174,6 +176,25 @@ export default {
 		setTimeout(function() {
 			uni.stopPullDownRefresh();
 		}, 1000);
+	},
+	onLoad(){
+		const res = uni.getSystemInfoSync();
+		let {
+			statusBarHeight
+		} = res
+		// #ifndef H5 || APP-PLUS || MP-ALIPAY
+		let info = uni.getMenuButtonBoundingClientRect()
+		let {
+			top,
+			bottom
+		} = info
+		this.statusHeight = statusBarHeight
+		let buttonHeight = (bottom - statusBarHeight) + (top - statusBarHeight)
+		let navHeight = statusBarHeight + buttonHeight + top - statusBarHeight
+		this.boxHeight = navHeight - statusBarHeight
+		
+		console.log(statusBarHeight,navHeight, buttonHeight)
+		// #endif
 	},
 	methods: {
 		back: function() {
@@ -438,7 +459,7 @@ export default {
 	background: #fff;
 	font-size: 32rpx;
 	color: #393939;
-	padding: 50rpx 30rpx 20rpx;
+	padding: 0 30rpx;
 }
 /* 隐藏 */
 .text-danger {

@@ -3813,6 +3813,8 @@ module.exports = [{
 var _errdata = __webpack_require__(/*! api/errdata.js */ 20); // 封装请求：get post
 // 引进提示
 
+
+
 // GET带token
 var listing = function listing(urling, shopdata) {
   return new Promise(function (resolve, reject) {
@@ -3859,9 +3861,6 @@ exports.listing = listing;var listing2 = function listing2(urling, shopdata) {
     });
   });
 };
-
-
-
 
 // POST请求,后台默认键值对方式
 exports.listing2 = listing2;var publicing = function publicing(urling, shopdata) {

@@ -468,10 +468,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
 var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
 var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
+//
+//
+//
+//
 //
 //
 //
@@ -825,7 +833,7 @@ var _console = console,log = _console.log;var _default = { data: function data()
         rtRight: '', //不良右
         ltPrice: '', //价格左
         rtPrice: '' //价格右边
-      } };}, onLoad: function onLoad(options) {var _this = this;var pages = getCurrentPages();var curPage = pages[pages.length - 1]; // 当前页面路径
+      }, statusHeight: 20, boxHeight: 44 };}, onLoad: function onLoad(options) {var _this = this;var pages = getCurrentPages();var curPage = pages[pages.length - 1]; // 当前页面路径
     var beforePage = pages[pages.length - 2]; // 前一个页面路径
     log(beforePage.$page.fullPath);if (beforePage.$page.fullPath === '/pagesII/searchGoods/searchGoods') {log('我执行了搜索'); //搜索	
       this.getSearch(options.name);} else {// console.log(options)
@@ -835,10 +843,7 @@ var _console = console,log = _console.log;var _default = { data: function data()
         _this.dropScreenH = _this.height * 750 / res.windowWidth + 186;_this.drawerH = res.windowHeight - uni.upx2px(100) - _this.height;} });}, computed: { tasteBox: function tasteBox() {var arr = [];var data = this.taste_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title };arr.push(tmp);});return arr;}, colorBox: function colorBox() {var arr = [];var data = this.color_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title };arr.push(tmp);});return arr;}, facadeBox: function facadeBox() {var arr = [];var data = this.facade_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title };arr.push(tmp);});return arr;} }, methods: { //点击搜索
     goToSearchGoods: function goToSearchGoods() {uni.navigateTo({ url: '../../pagesII/searchGoods/searchGoods' });}, //商品详情页
     gotoList: function gotoList(id) {log(id);uni.navigateTo({ url: '../../pagesIII/productDetail/productDetail?id=' + id });}, //下拉选
-    dropDownList: function dropDownList(index, name) {if (index !== -1) {console.log("index：" + index, name);}this.title = name;this.dropdownShow = !this.dropdownShow;}, dropDownList2: function dropDownList2(index, name) {if (index !== -1) {console.log("index：" + index, name);}this.title = name;this.dropdownShow2 = !this.dropdownShow2;}, getSearch: function getSearch(serrchName) {var _this2 = this;var data = { pageNo: 1, pageSize: 10, name: serrchName };(0, _api.listing)(_request.getGoodsall, data).then(function (res) {log(res);_this2.goods = res.data.data[0].goods;log(_this2.goods);}).catch(function (err) {log(err);});}, /* 第一个筛选 */Total: function Total(index) {this.num = index;log(this.num);if (this.num == 0) {this.ShopIng();log('综合');} else if (this.num == 1) {if (this.sleter) {log('销量升序');this.getshopDESC();} else {this.getshopASC();log('销量降序');}this.sleter = !this.sleter;} else if (this.num == 2) {if (this.sleter2) {log('价格升序');this.getpriceDESC();} else {log('价格降序');this.getpriceASC();}this.sleter2 = !this.sleter2;} else if (this.num == 3) {uni.navigateTo({ url: '../../pagesIII/videos/videos' });
-
-        log('视频选果');
-
+    dropDownList: function dropDownList(index, name) {if (index !== -1) {console.log("index：" + index, name);}this.title = name;this.dropdownShow = !this.dropdownShow;}, dropDownList2: function dropDownList2(index, name) {if (index !== -1) {console.log("index：" + index, name);}this.title = name;this.dropdownShow2 = !this.dropdownShow2;}, getSearch: function getSearch(serrchName) {var _this2 = this;var data = { pageNo: 1, pageSize: 10, name: serrchName };(0, _api.listing)(_request.getGoodsall, data).then(function (res) {log(res);_this2.goods = res.data.data.goods;log(_this2.goods);}).catch(function (err) {log(err);});}, /* 第一个筛选 */Total: function Total(index) {this.num = index;log(this.num);if (this.num == 0) {this.ShopIng();log('综合');} else if (this.num == 1) {if (this.sleter) {log('销量升序');this.getshopDESC();} else {this.getshopASC();log('销量降序');}this.sleter = !this.sleter;} else if (this.num == 2) {if (this.sleter2) {log('价格升序');this.getpriceDESC();} else {log('价格降序');this.getpriceASC();}this.sleter2 = !this.sleter2;} else if (this.num == 3) {uni.navigateTo({ url: '../../pagesIII/videos/videos' });log('视频选果');
       } else if (this.num == 4) {
 
         uni.navigateTo({
@@ -862,7 +867,7 @@ var _console = console,log = _console.log;var _default = { data: function data()
       // }
       // this.isActives1 = !this.isActives1
       this.isActives1 = this.dropScreenShow;
-      log('颜色事件isActives1=' + this.isActives1, '弹层事件=' + this.dropScreenShow);
+      // log('颜色事件isActives1=' + this.isActives1, '弹层事件=' + this.dropScreenShow)
       // 	this.dropScreenShow = !this.dropScreenShow
       // this.dropScreenShow2 = false
       // log(this.dropNum)
@@ -925,7 +930,6 @@ var _console = console,log = _console.log;var _default = { data: function data()
         url: '../../pages/search/search' });
 
     },
-
     Sales: function Sales(id) {
       log(id);
     },
@@ -935,7 +939,6 @@ var _console = console,log = _console.log;var _default = { data: function data()
     Videosl: function Videosl(id) {
       log(id);
     },
-
     activeGo: function activeGo(name, id, idx) {
       this.optionList[name] = id;
       this.num = idx;
@@ -972,7 +975,6 @@ var _console = console,log = _console.log;var _default = { data: function data()
     },
     //销量升序
     getshopDESC: function getshopDESC() {var _this3 = this;
-
       var data = {
         pageNo: 1,
         pageSize: 10,
@@ -981,7 +983,7 @@ var _console = console,log = _console.log;var _default = { data: function data()
       (0, _api.listing)(_request.getGoodsall, data).
       then(function (res) {
         log(res);
-        _this3.goods = res.data.data[0].goods;
+        _this3.goods = res.data.data.goods;
       }).
       catch(function (err) {
         log(err);
@@ -998,8 +1000,9 @@ var _console = console,log = _console.log;var _default = { data: function data()
 
       (0, _api.listing)(_request.getGoodsall, data).
       then(function (res) {
+
         log(res);
-        _this4.goods = res.data.data[0].goods;
+        _this4.goods = res.data.data.goods;
       }).
       catch(function (err) {
         log(err);
@@ -1016,7 +1019,7 @@ var _console = console,log = _console.log;var _default = { data: function data()
       (0, _api.listing)(_request.getGoodsall, data).
       then(function (res) {
         log(res);
-        _this5.goods = res.data.data[0].goods;
+        _this5.goods = res.data.data.goods;
       }).
       catch(function (err) {
         log(err);
@@ -1031,7 +1034,7 @@ var _console = console,log = _console.log;var _default = { data: function data()
 
       (0, _api.listing)(_request.getGoodsall, data).
       then(function (res) {
-        _this6.goods = res.data.data[0].goods;
+        _this6.goods = res.data.data.goods;
       }).
       catch(function (err) {
         log(err);
@@ -1049,24 +1052,24 @@ var _console = console,log = _console.log;var _default = { data: function data()
       Promise.all([(0, _api.listing)(_request.getGoodsall, data), (0, _api.listing)(_request.getAttribute, data2)])
       // listing(getGoodsall,data)
       .then(function (res) {
+
         _this7.seleVarieties = res[1].data.data;
         if (_this7.seleVarieties === undefined) {
           _this7.seleVarieties = _this7.seleVarieties;
-        } else if (_this7.seleVarieties != undefined) {
-        }
-        _this7.color_level = res[0].data.data[0].color_level;
-        _this7.facade_level = res[0].data.data[0].facade_level;
-        _this7.fruit_level = res[0].data.data[0].fruit_level;
-        _this7.shape_level = res[0].data.data[0].shape_level;
-        _this7.goods = res[0].data.data[0].goods;
-        _this7.packaging = res[0].data.data[0].packaging;
-        _this7.species = res[0].data.data[0].species;
+        } else if (_this7.seleVarieties != undefined) {}
+        _this7.color_level = res[0].data.data.color_level;
+        _this7.facade_level = res[0].data.data.facade_level;
+        _this7.fruit_level = res[0].data.data.fruit_level;
+        _this7.shape_level = res[0].data.data.shape_level;
+        _this7.goods = res[0].data.data.goods;
+        _this7.packaging = res[0].data.data.packaging;
+        _this7.species = res[0].data.data.species;
         for (var i = 0; i < _this7.species.length; i++) {
           _this7.species[i].isActives = _this7.activeA;
         }
-        _this7.storage_mode = res[0].data.data[0].storage_mode;
-        _this7.taste_level = res[0].data.data[0].taste_level;
-        _this7.variety = res[0].data.data[0].variety;
+        _this7.storage_mode = res[0].data.data.storage_mode;
+        _this7.taste_level = res[0].data.data.taste_level;
+        _this7.variety = res[0].data.data.variety;
 
       }).
       catch(function (err) {

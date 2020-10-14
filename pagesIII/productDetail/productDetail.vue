@@ -15,24 +15,34 @@
 			<tui-tabs size="32" :top="tabsTop" :tabs="tabs" :isFixed="scrollTop >= 0" :currentTab="currentTab" selectedColor="#00C52A"
 			 sliderBgColor="#00C52A" @change="changeNum" itemWidth="50%"></tui-tabs>
 		</view>
-		<!--  -->
 
 		<!--选项卡一-->
 		<view :class="[currentTab === 0 ? 'actineclass' : 'errorclass']">
 			<view class="tui-banner-swiper">
 				<swiper :autoplay="false" :interval="5000" :duration="150" :circular="true" :style="{ height: 520 + 'rpx' }"
 				 @change="bannerChange">
-					<!-- <swiper-item :data-index="index" >
-							<video :src="videos" :poster="posters" :show-fullscreen-btn="false" class="tui-slide-image" :style="{ height: scrollH + 'px' }" ></video>
-						</swiper-item> -->
-					<block v-for="(item, index) in urlList" :key="index">
+					<!-- https://qg-qr.oss-cn-shenzhen.aliyuncs.com/test/1602326575865.mp4?Expires=1917686575&OSSAccessKeyId=LTAI4G74cnhsbDWNkfvuNew3&Signature=D3SFuMpki6hbX6iNKTPXQQ%2BcgpM%3 -->
+					<swiper-item v-if="shopListdata.urlVideo!==''">
+						<video id="myVideo" v-if="shopListdata.urlVideo!==''"  :src="shopListdata.urlVideo" :show-fullscreen-btn="false" style="width:100%;height:100%;"></video>
+					</swiper-item> 
+					<block v-for="(item, index) in swiperList" :key="index" v-if="shopListdata.urlVideo!=='' && index>0">
+						<swiper-item :data-index="index">
+							<image :src="item" class="tui-slide-image" :style="{ height: scrollH + 'px' }" />
+						</swiper-item>
+					</block>
+					<block v-for="(item, index) in swiperList" :key="index" v-if="shopListdata.urlVideo==='' ">
 						<swiper-item :data-index="index">
 							<image :src="item" class="tui-slide-image" :style="{ height: scrollH + 'px' }" />
 						</swiper-item>
 					</block>
 				</swiper>
-				<view class="tui-banner-tag">{{ bannerIndex + 1 || 0}}/{{ urlList.length ||0}}</view>
+				<view class="tui-banner-tag">
+					{{ bannerIndex + 1 || 0}}/{{ swiperList.length ||0}}
+				</view>
+				<view class="net-tip" v-if="!netStatus&& shopListdata.urlVideo!==''">当前为非wifi环境，使用流量播放视频</view>
 			</view>
+
+
 
 			<view class="tui-pro-detail">
 				<view class="tui-product-title tui-border-radius">
@@ -41,21 +51,21 @@
 							<text class="tag-tit">{{ item.name || ''}}</text>
 						</block>
 
-						<text class="tag-tit-text">{{ shopListdata.data.name ||''}}</text>
+						<text class="tag-tit-text">{{ shopListdata.name ||''}}</text>
 
 						<view class="tag-tit-pra">
-							<tui-icon name="agree" color="#999" :size="15" v-if="!shopListdata.data.isPraise" @tap="praiseLike(shopListdata.data.id)"></tui-icon>
-							<tui-icon name="agree-fill" color="#ff0000" :size="15" v-if="shopListdata.data.isPraise" @tap="praiseLikeTwo"></tui-icon>
-							<text>点赞{{ shopListdata.data.praiseNumber ||0}}</text>
+							<tui-icon name="agree" color="#999" :size="15" v-if="canPraise" @tap="praiseLike(shopListdata.id)"></tui-icon>
+							<tui-icon name="agree-fill" color="#ff0000" :size="15" v-if="!canPraise" @tap="praiseLikeTwo"></tui-icon>
+							<text>点赞{{ shopListdata.praiseNumber ||0}}</text>
 						</view>
 					</view>
-					<view class="tui-original-price tui-gray">{{ shopListdata.data.describe ||0}}</view>
+					<view class="tui-original-price tui-gray">{{ shopListdata.describe ||0}}</view>
 
 					<view class="tui-pro-titbox">
 						<view class="tui-pro-title">
-							<text class="tui-pro-title-tag" v-if="shopListdata.data.number">仅剩{{ shopListdata.data.number || 0 }}件</text>
-							<text class="tui-pro-title-tag" v-if="shopListdata.data.totalPirce!== undefined">成交{{ shopListdata.data.totalPirce | filterNum }}元</text>
-							<text class="tui-pro-title-tag" v-if="shopListdata.data.viewNumber!== undefined">{{ shopListdata.data.viewNumber | filterNum }}人看</text>
+							<text class="tui-pro-title-tag" v-if="shopListdata.number">仅剩{{ shopListdata.number || 0 }}件</text>
+							<text class="tui-pro-title-tag" v-if="shopListdata.totalPirce!== undefined">成交{{ shopListdata.totalPirce | filterNum }}元</text>
+							<text class="tui-pro-title-tag" v-if="shopListdata.viewNumber!== undefined">{{ shopListdata.viewNumber | filterNum }}人看</text>
 						</view>
 						<button open-type="share" class="tui-share-btn tui-share-position" @tap="onShare">
 							<tui-tag type="gray" shape="circleLeft" padding="12rpx 16rpx">
@@ -70,12 +80,12 @@
 						<view class="tui-sale-info tui-size tui-gray">
 							<view class="tui-magin">
 								<text class="tui-code">￥</text>
-								<text class="tui-price-one">{{ shopListdata.data.platformPrice }}</text>
+								<text class="tui-price-one">{{ shopListdata.platformPrice }}</text>
 								<text style="font-size:28rpx;color: #FF6500;">元</text>
-								/件
+								<text>/件</text>
 							</view>
-							<view class="tui-huaxian">￥{{ shopListdata.data.marketPrice ||0}}/件</view>
-							<view class="tui-text-overflow">{{ shopListdata.data.specification ||''}}, 水果净重约{{ shopListdata.data.kg2 ||0}}斤</view>
+							<view class="tui-huaxian">￥{{ shopListdata.marketPrice ||0}}/件</view>
+							<view class="tui-text-overflow">{{ shopListdata.specification ||''}}, 水果净重约{{ shopListdata.kg2 ||0}}斤</view>
 						</view>
 					</view>
 				</view>
@@ -85,31 +95,31 @@
 					<view class="tui-height-flex">
 						<view class="tui-left-one1">
 							<text class="tui-title-class">品&nbsp; &nbsp;种：</text>
-							<text class="tui-name-class" style="font-size: 24rpx;">{{ shopListdata.data.classify }}</text>
+							<text class="tui-name-class" style="font-size: 24rpx;">{{ shopListdata.classify }}</text>
 						</view>
-						<view class="tui-right-one">
+						<!-- <view class="tui-right-one">
 							<text class="tui-title-class">批&nbsp;次&nbsp;号 ：</text>
-							<text class="tui-name-class" style="font-size: 24rpx;">{{ shopListdata.data.officeId }}</text>
-						</view>
+							<text class="tui-name-class" style="font-size: 24rpx;">{{ shopListdata.officeId }}</text>
+						</view> -->
 					</view>
 					<view class="tui-height-flex">
 						<view class="tui-left-one1">
 							<text class="tui-title-class">原产地：</text>
-							<text class="tui-name-class" style="font-size: 24rpx;">{{ shopListdata.data.originAddress }}</text>
+							<text class="tui-name-class" style="font-size: 24rpx;">{{ shopListdata.originAddress }}</text>
 						</view>
 						<view class="tui-right-one">
 							<text class="tui-title-class">发&nbsp;货&nbsp;地 ：</text>
-							<text class="tui-name-class" style="font-size: 24rpx;">{{ shopListdata.data.shipmentsAddress }}</text>
+							<text class="tui-name-class" style="font-size: 24rpx;">{{ shopListdata.shipmentsAddress }}</text>
 						</view>
 					</view>
 					<view class="tui-height-flex">
 						<view class="tui-left-one1">
 							<text class="tui-title-class">包&nbsp; &nbsp;装：</text>
-							<text class="tui-name-class" style="font-size: 24rpx;">{{ shopListdata.data.packaging }}</text>
+							<text class="tui-name-class" style="font-size: 24rpx;">{{ shopListdata.packaging }}</text>
 						</view>
 						<view class="tui-right-one">
 							<text class="tui-title-class">储藏方式：</text>
-							<text class="tui-name-class" style="font-size: 24rpx;">{{ shopListdata.data.storageMode }}</text>
+							<text class="tui-name-class" style="font-size: 24rpx;">{{ shopListdata.storageMode }}</text>
 						</view>
 					</view>
 				</view>
@@ -119,51 +129,51 @@
 					<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
 						<view class="tui-left-one">
 							<text class="tui-text-left tui-title-class">果品星级</text>
-							<tui-rate :current="shopListdata.data.fruitStar" active="#ff7900" :hollow="true" :disabled="true" :size="16"></tui-rate>
+							<tui-rate :current="shopListdata.fruitStar" active="#ff7900" :hollow="true" :disabled="true" :size="16"></tui-rate>
 						</view>
 						<view class="tui-left-one">
 							<text class=" tui-text-left tui-title-class">口感星级</text>
-							<tui-rate :current="shopListdata.data.tasteLevel" active="#ff7900" :hollow="true" :disabled="true" :size="16"></tui-rate>
+							<tui-rate :current="shopListdata.tasteLevel" active="#ff7900" :hollow="true" :disabled="true" :size="16"></tui-rate>
 						</view>
 					</view>
 					<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
 						<view class="tui-left-one">
 							<text class="tui-text-left tui-title-class">果色星级</text>
-							<tui-rate :current="shopListdata.data.colorLevel" active="#ff7900" :hollow="true" :disabled="true" :size="16"></tui-rate>
+							<tui-rate :current="shopListdata.colorLevel" active="#ff7900" :hollow="true" :disabled="true" :size="16"></tui-rate>
 						</view>
 						<view class="tui-left-one">
 							<text class="tui-text-left tui-title-class">外观星级</text>
-							<tui-rate :current="shopListdata.data.facadeLevel" active="#ff7900" :hollow="true" :disabled="true" :size="16"></tui-rate>
+							<tui-rate :current="shopListdata.facadeLevel" active="#ff7900" :hollow="true" :disabled="true" :size="16"></tui-rate>
 						</view>
 					</view>
 					<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
 						<view class="tui-left-one2">
 							<text class="tui-text-left tui-title-class">果径大小</text>
-							<text class=" tui-text-left tui-title-class">{{ shopListdata.data.platformPrice }}mm</text>
+							<text class=" tui-text-left tui-title-class">{{ shopListdata.platformPrice }}mm</text>
 						</view>
 						<view class="tui-right-one" style="flex: 4;">
 							<text class=" tui-text-left tui-title-class ">不良率</text>
-							<text class=" tui-text-left tui-title-class">{{ shopListdata.data.rejectRatio }}</text>
+							<text class=" tui-text-left tui-title-class">{{ shopListdata.rejectRatio }}</text>
 						</view>
 					</view>
 					<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
 						<view class="tui-left-one2">
 							<text class="tui-text-left tui-title-class">糖分</text>
-							<text class=" tui-text-left tui-title-class">{{ shopListdata.data.sugar }}</text>
+							<text class=" tui-text-left tui-title-class">{{ shopListdata.sugar }}</text>
 						</view>
 						<view class="tui-right-one" style="flex: 4;">
 							<text class="tui-text-left tui-title-class">酸度</text>
-							<text class="tui-text-left tui-title-class">{{ shopListdata.data.acidity }}</text>
+							<text class="tui-text-left tui-title-class">{{ shopListdata.acidity }}</text>
 						</view>
 					</view>
 					<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
 						<view class="tui-left-one2">
 							<text class="tui-text-left tui-title-class">水分</text>
-							<text class="tui-text-left tui-title-class">{{ shopListdata.data.moisture }}</text>
+							<text class="tui-text-left tui-title-class">{{ shopListdata.moisture }}</text>
 						</view>
 						<view class="tui-right-one" style="flex: 4;">
 							<text class="tui-text-left tui-title-class">硬度</text>
-							<text class="tui-text-left tui-title-class">{{ shopListdata.data.hardness }}</text>
+							<text class="tui-text-left tui-title-class">{{ shopListdata.hardness }}</text>
 						</view>
 					</view>
 					<!-- 	<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
@@ -171,7 +181,7 @@
 							<text class="tui-text-left tui-title-class">外观等级</text>
 						</view>
 						<view class="tui-right-one">
-							<text class="tui-title-class">{{shopListdata.data.facadeLevel}}</text>
+							<text class="tui-title-class">{{shopListdata.facadeLevel}}</text>
 						</view>
 						
 					</view>
@@ -180,7 +190,7 @@
 							<text class="tui-text-left tui-title-class">果形等级</text>
 						</view>
 						<view class="tui-right-one">
-							<text class="tui-title-class">{{shopListdata.data.shapeLevel}}</text>
+							<text class="tui-title-class">{{shopListdata.shapeLevel}}</text>
 						</view>
 						
 					</view>
@@ -189,7 +199,7 @@
 							<text class="tui-text-left tui-title-class">不良率</text>
 						</view>
 						<view class="tui-right-one">
-							<text class="tui-title-class">{{shopListdata.data.rejectRatio}}</text>
+							<text class="tui-title-class">{{shopListdata.rejectRatio}}</text>
 						</view>
 						
 					</view>
@@ -198,7 +208,7 @@
 							<text class="tui-text-left tui-title-class">售后时效	</text>
 						</view>
 						<view class="tui-right-one">
-							<text class=" tui-title-class">{{shopListdata.data.afterSalesTime}}</text>
+							<text class=" tui-title-class">{{shopListdata.afterSalesTime}}</text>
 						</view>
 						
 					</view> -->
@@ -208,13 +218,14 @@
 				<view class="tui-height-full">
 					<view class="tui-title-line"><text>物流配送</text></view>
 					<view class="tui-height-flex tui-bottom-border">
-						<text class="" style="font-size: 28rpx;padding: 20rpx 0;color: #333;" v-if="userInfoData.address && userInfoData.addressDetails">配送至 {{ userInfoData.address}} {{ userInfoData.addressDetails }}</text>
+						<text class="" style="font-size: 28rpx;padding: 20rpx 0;color: #333;" v-if="userInfoData.address && userInfoData.addressDetails">配送至
+							{{ userInfoData.address}} {{ userInfoData.addressDetails }}</text>
 						<text class="" v-else style="font-size: 28rpx;padding: 20rpx 0;color: #333;">
 							暂无地址信息
 						</text>
 					</view>
 					<view class="">
-						<text class="tui-pay-color">16:00前完成支付，{{ shopListdata.data.shipmentsDay }}天送达</text>
+						<text class="tui-pay-color">16:00前完成支付，{{ shopListdata.shipmentsDay }}天送达</text>
 					</view>
 				</view>
 				<!-- 水果描述 -->
@@ -225,7 +236,7 @@
 				<view class="tui-product-img tui-radius-all">
 					<!-- <image src="../../static/images/putao1.png"
 					 mode="widthFix"></image> -->
-					 <jyf-parser selectable @linkpress="clickLink" :html="shopListdata.data.remarks"></jyf-parser>
+					<jyf-parser selectable @linkpress="clickLink" :html="shopListdata.remarks"></jyf-parser>
 				</view>
 			</view>
 		</view>
@@ -304,14 +315,14 @@
 		<!--底部操作栏-->
 		<view class="tui-operation">
 			<view class="tui-operation-left tui-col-5">
-				<view class="tui-operation-item" hover-class="tui-opcity" :hover-stay-time="150" @tap="likeOrder(shopListdata.data.id)">
-					<tui-icon name="like" :size="22" color="#333" v-if="!shopListdata.data.isCollection"></tui-icon>
-					<tui-icon name="like-fill" :size="22" color="#ff0000" v-if="shopListdata.data.isCollection"></tui-icon>
+				<view class="tui-operation-item" hover-class="tui-opcity" :hover-stay-time="150" @tap="likeOrder(shopListdata.id)">
+					<tui-icon name="like" :size="22" color="#333" v-if="!shopListdata.isCollection"></tui-icon>
+					<tui-icon name="like-fill" :size="22" color="#ff0000" v-if="shopListdata.isCollection"></tui-icon>
 					<view class="tui-operation-text tui-scale-small">收藏</view>
 				</view>
-				<view class="tui-operation-item" hover-class="tui-opcity" :hover-stay-time="150" @tap="postShopping(shopListdata.data.id)">
-					<tui-icon name="order" :size="22" color="#333" v-if="!shopListdata.data.isCart"></tui-icon>
-					<tui-icon name="order" :size="22" color="#ff0000" v-if="shopListdata.data.isCart"></tui-icon>
+				<view class="tui-operation-item" hover-class="tui-opcity" :hover-stay-time="150" @tap="postShopping(shopListdata.id)">
+					<tui-icon name="order" :size="22" color="#333" v-if="!shopListdata.isCart"></tui-icon>
+					<tui-icon name="order" :size="22" color="#ff0000" v-if="shopListdata.isCart"></tui-icon>
 					<view class="tui-operation-text tui-scale-small">加入进货单</view>
 				</view>
 				<!-- <view class="tui-operation-item" hover-class="tui-opcity" :hover-stay-time="150">
@@ -339,20 +350,20 @@
 							<image :src="urlList[0]" mode="aspectFill" class="img-rink"></image>
 							<view class="tui-pro-tit" style="padding: 0 30rpx 0 0;">
 								<text class="tag-tit">{{ item.name }}</text>
-								<text class="tag-tit-text" style="font-size:28rpx">{{ shopListdata.data.name }}</text>
+								<text class="tag-tit-text" style="font-size:28rpx">{{ shopListdata.name }}</text>
 								<view class="tag-tit2">
 									<view class="">
-										<view class="tag-tit2-price list-desc">{{ shopListdata.data.specification }}</view>
+										<view class="tag-tit2-price list-desc">{{ shopListdata.specification }}</view>
 										<view class="tag-tit2-num" style="align-items: baseline;">
 											<view class="shabi">
 												<text class="tui-price-one" style="font-size: 20rpx;">￥</text>
 												<view class="tui-price-one">
-													{{ shopListdata.data.platformPrice }}
+													{{ shopListdata.platformPrice }}
 													<text style="font-size: 24rpx;">元</text>
 												</view>
 												/件
 											</view>
-											<view class="tui-huaxian">￥{{ shopListdata.data.totalPirce }}</view>
+											<view class="tui-huaxian">￥{{ shopListdata.totalPirce }}</view>
 										</view>
 									</view>
 
@@ -371,15 +382,15 @@
 				<view class="tui-pay-flex-box">
 					<view class="tui-pay-flex">
 						<view class="tui-pay1-flex">
-							<!-- <text>合计{{shopListdata.data.platformPrice * value2}}含运费</text> -->
+							<!-- <text>合计{{shopListdata.platformPrice * value2}}含运费</text> -->
 							<text style="color: #333333;font-size: 24rpx;margin-right:4rpx">合计:</text>
 							<text style="color: #FF5600;font-size: 20rpx;">¥</text>
-							<text style="font-weight: bold;">{{ shopListdata.data.platformPrice * value2 }}</text>
+							<text style="font-weight: bold;">{{ shopListdata.platformPrice * value2 }}</text>
 							<text style="color: #FF5600;font-size: 22rpx;margin-right:8rpx">元</text>
 							<text style="color: #888888;font-size: 22rpx;">含运费</text>
 						</view>
 
-						<button class="tui-pay2-flex" @tap="buyNow(shopListdata.data.id)">结算</button>
+						<button class="tui-pay2-flex" @tap="buyNow(shopListdata.id)">结算</button>
 					</view>
 				</view>
 			</block>
@@ -508,29 +519,62 @@
 				token: '',
 				navHeight: 64,
 				iconTop: 24,
-				tabsTop: 64
+				tabsTop: 64,
+				canPraise: true,
+				netStatus: true,
 			};
 		},
-		onLoad (options) {
-			console.log("这里是onload")
-			
+		onLoad(options) {
 			// 导航栏高度 = 状态栏高度 + 胶囊高度 + 胶囊上下边距
+			let that = this
 			try {
-			    const res = uni.getSystemInfoSync();
-				let { statusBarHeight } = res
+				const res = uni.getSystemInfoSync();
+				let {
+					statusBarHeight
+				} = res
+				uni.getNetworkType({
+					success: function(res) {
+						console.log(res.networkType);
+						if (res.networkType === 'wifi') {
+							that.netStatus = true
+						}
+						if (res.networkType !== 'wifi') {
+							that.netStatus = false
+							setTimeout(function() {
+								that.netStatus = true
+							}, 3000)
+						}
+					}
+				});
+				uni.onNetworkStatusChange(function(res) {
+					console.log(res.isConnected);
+					console.log(res.networkType);
+					if (res.isConnected && res.networkType !== 'wifi') {
+						that.netStatus = false
+						setTimeout(function() {
+							that.netStatus = true
+						}, 3000)
+					}
+					if (res.isConnected && res.networkType === 'wifi') {
+						that.netStatus = true
+					}
+				});
 				// #ifndef H5 || APP-PLUS || MP-ALIPAY
 				let info = uni.getMenuButtonBoundingClientRect()
-				let { top, bottom } = info
+				let {
+					top,
+					bottom
+				} = info
 				let buttonHeight = (bottom - statusBarHeight) + (top - statusBarHeight)
-				this.navHeight = statusBarHeight + buttonHeight + top - statusBarHeight
-				this.iconTop = statusBarHeight + (top-statusBarHeight)
-				this.tabsTop = statusBarHeight + buttonHeight + top - statusBarHeight
-				console.log(this.navHeight,buttonHeight)
+				that.navHeight = statusBarHeight + buttonHeight + top - statusBarHeight
+				that.iconTop = statusBarHeight + (top - statusBarHeight)
+				that.tabsTop = statusBarHeight + buttonHeight + top - statusBarHeight
+				console.log(that.navHeight, buttonHeight)
 				// #endif
-				
-				
+
+
 			} catch (err) {
-			    console.log(err)
+				console.log(err)
 			}
 			// this.getHomelist()
 			let setdata = uni.getStorageSync('usermen');
@@ -549,29 +593,36 @@
 			// #ifdef MP-ALIPAY
 			my.hideAddToDesktopMenu();
 			// #endif
-		// 	setTimeout(() => {
-		// 		uni.getSystemInfo({
-		// 			success: res => {
-		// 				this.width = obj.left || res.windowWidth;
-		// 				this.height = obj.top ? obj.top + obj.height + 8 : res.statusBarHeight + 44;
-		// 				this.top = obj.top ? obj.top + (obj.height - 32) / 2 : res.statusBarHeight + 6;
-		// 				this.scrollH = res.windowWidth;
-		// 			}
-		// 		});
-		// 	}, 0);
-		// 
+			// 	setTimeout(() => {
+			// 		uni.getSystemInfo({
+			// 			success: res => {
+			// 				this.width = obj.left || res.windowWidth;
+			// 				this.height = obj.top ? obj.top + obj.height + 8 : res.statusBarHeight + 44;
+			// 				this.top = obj.top ? obj.top + (obj.height - 32) / 2 : res.statusBarHeight + 6;
+			// 				this.scrollH = res.windowWidth;
+			// 			}
+			// 		});
+			// 	}, 0);
+			// 
 		},
 		computed: {
 			swiperList() {
-				let list = this.urlList
-				return list
+				let vList = this.shopListdata
+				let uList = this.urlList
+				if (vList && vList.urlVideo !== ''){
+					uList.unshift(vList.urlVideo)
+					console.log("uList","you",uList,uList.length,)
+					return uList
+				} else {
+					console.log("uList","meiyou",uList,uList.length)
+					return uList
+				}				
 			}
+			
 		},
 		filters: {
 			filterNum(val) {
-				if (val === 'undefined') {
-					return 0
-				}
+
 				if (val) {
 					let words = (val + '').split('');
 
@@ -603,8 +654,9 @@
 				}
 			}
 		},
+
 		methods: {
-			clickLink(e){
+			clickLink(e) {
 				console.log(e)
 			},
 			//购买前获取申请店铺状态信息
@@ -617,7 +669,7 @@
 						// log(res);
 						///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
 						this.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
-						
+
 						// log(this.ApproveStatus);
 					})
 					.catch(err => {
@@ -699,22 +751,31 @@
 					this.modaishow = true;
 				} else {
 					this.modaishow = false;
-
 					let data = {
 						goodsId: id,
 						token: setdata
 					};
-					if (this.shopListdata.data.isPraise == true) {
+					if (this.shopListdata.isPraise == true) {
 						uni.showToast({
 							title: '重复点赞',
 							icon: 'none'
 						});
 						return;
-					} else if (this.shopListdata.data.isPraise == false) {
+					}
+					if (this.canPraise === false) {
+						uni.showToast({
+							title: '重复点赞',
+							icon: 'none'
+						});
+						return;
+					}
+					if (this.shopListdata.isPraise === false) {
+						this.canPraise = false
 						publicing(postPraise, data)
 							.then(res => {
-								// log(res);
-								this.postDetails();
+								log(res);
+								// this.postDetails();
+								this.shopListdata.praiseNumber++
 								uni.showToast({
 									title: '成功',
 									icon: 'none'
@@ -740,7 +801,7 @@
 			},
 			//弹出立即购买
 			showPopup() {
-				
+
 				let setdata = uni.getStorageSync('usermen');
 				if (!setdata) {
 					this.modaishow = true;
@@ -815,13 +876,13 @@
 						goodsId: id,
 						token: setdata
 					};
-					if (this.shopListdata.data.isCollection == true) {
+					if (this.shopListdata.isCollection == true) {
 						uni.showToast({
 							title: '重复收藏',
 							icon: 'none'
 						});
 						return;
-					} else if (this.shopListdata.data.isCollection == false) {
+					} else if (this.shopListdata.isCollection == false) {
 						publicing(postLike, data)
 							.then(res => {
 								this.postDetails();
@@ -846,14 +907,12 @@
 					id: this.productID,
 					token: setdata
 				};
-
 				// 批量并发请求多个接口，Promise.all =>可以并发请求多个接口。并且同时得到多个接口的数据
-
 				//这个方法是异步执行的，值还没有赋值，后就先执行了postAct这个，异步，同步，
 				publicing(postdelist, data)
 					.then(res => {
-						// console.log("res",res.data); 
-						this.shopListdata = res.data;
+						console.log("res123", res);
+						this.shopListdata = res.data.data;
 						this.labelList = res.data.data.labelList;
 						this.urlList = res.data.data.urlList;
 						// console.log(this.labelList);
@@ -877,7 +936,7 @@
 						token: setdata,
 						number: 1
 					};
-					if (this.shopListdata.data.isCart == true) {
+					if (this.shopListdata.isCart == true) {
 						uni.showToast({
 							title: '重复加入进货单',
 							icon: 'none',
@@ -885,7 +944,7 @@
 						});
 						uni.hideLoading();
 						return;
-					} else if (this.shopListdata.data.isCart == false) {
+					} else if (this.shopListdata.isCart == false) {
 						publicing(postmyOrder, data)
 							.then(res => {
 								let code = res.data.code;
@@ -1263,13 +1322,25 @@
 	.tui-banner-tag {
 		position: absolute;
 		color: #fff;
-		bottom: 20rpx;
+		bottom: 70rpx;
 		right: 40rpx;
 		background: #b6b6b6;
 		font-size: 32rpx;
 		padding: 4rpx 0;
 		border-radius: 40rpx;
 		width: 100rpx;
+		text-align: center;
+	}
+
+	.net-tip {
+		color: #fff;
+		position: absolute;
+		left: 16rpx;
+		bottom: 30rpx;
+		background: rgba(0, 0, 0, .5);
+		font-size: 28rpx;
+		padding: 20rpx;
+		border-radius: 14rpx;
 		text-align: center;
 	}
 
@@ -1378,17 +1449,18 @@
 	.tui-huaxian {
 		text-decoration: line-through;
 		font-size: 24rpx;
-		min-width: 65px;
+		margin: 0 10rpx;
 	}
 
 	.tui-magin {
 		margin: 10rpx 0;
-		max-width: 120rpx;
-		min-width: 22%;
+		display: flex;
+		flex-wrap: nowrap;
+		align-items: baseline;
 	}
 
 	.tui-text-overflow {
-		width: 460rpx;
+		/* width: 460rpx; */
 		overflow: hidden;
 		white-space: nowrap;
 		text-overflow: ellipsis;
