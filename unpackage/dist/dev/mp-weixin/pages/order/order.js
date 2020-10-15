@@ -732,12 +732,12 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       lists.forEach(function (item) {
         selectedNum += item.list.length;
         item.list.forEach(function (itm, index) {
-          console.log(itm);
+          // console.log(itm)
           var idxs = target.findIndex(function (im) {
-            console.log(im);
+            // console.log(im)
             return itm.id === im;
           });
-          console.log(idxs);
+          // console.log(idxs)
           if (idxs !== -1) {
             itm.selected = true;
           } else {

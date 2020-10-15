@@ -40,7 +40,7 @@
 					<block v-for="(item,index) in goodList" :key="index">
 						<view class="tui-tab-rank-cent" @tap="gotoList(item.id)">
 							<view class="rank-box" :style="{borderColor: rankColor[index]}">
-								<text v-if="index<4" :style="{backgroundColor: rankColor[index]}">{{"0"+(index+1)}}</text>
+								<text v-if="index<10" :style="{backgroundColor: rankColor[index]}">{{"0"+(index+1)}}</text>
 								<image :src="item.url" mode="aspectFill" class="img-rink"></image>
 							</view>
 							<view class="tui-pro-tit">
@@ -55,7 +55,11 @@
 											<text style="font-size: 20rpx;color: #b6b6b6;">/件</text>
 										</view>
 										<view class="tag-tit2-text">
-											累计成交 <text class="tag-tit3-text">{{item.totalPrice || 0}}</text> 万元
+											累计成交
+											<text class="tag-tit3-text">
+												<!-- {{item.totalPrice |filterNum}} -->
+												{{12322.9 | filterNum }}
+											</text> 元
 										</view>
 									</view>
 									<image src="../../static/images/shopcar@2x.png" mode="aspectFill" class="tui-shop-car"></image>
@@ -72,7 +76,7 @@
 					<block v-for="(item,index) in goodList" :key="index">
 						<view class="tui-tab-rank-cent" @tap="gotoList(item.id)">
 								<view class="rank-box" :style="{borderColor: rankColor[index]}">
-									<text v-if="index<4" :style="{backgroundColor: rankColor[index]}">{{"0"+(index+1)}}</text>
+									<text v-if="index<10" :style="{backgroundColor: rankColor[index]}">{{"0"+(index+1)}}</text>
 									<image :src="item.url" mode="aspectFill" class="img-rink"></image>
 								</view>
 								<view class="tui-pro-tit">
@@ -103,7 +107,7 @@
 					<block v-for="(item,index) in goodList" :key="index">
 						<view class="tui-tab-rank-cent" @tap="gotoList(item.id)">
 								<view class="rank-box" :style="{borderColor: rankColor[index]}">
-									<text v-if="index<4" :style="{backgroundColor: rankColor[index]}">{{"0"+(index+1)}}</text>
+									<text v-if="index<10" :style="{backgroundColor: rankColor[index]}">{{"0"+(index+1)}}</text>
 									
 									<image :src="item.url" mode="aspectFill" class="img-rink"></image>
 								</view>
@@ -136,7 +140,7 @@
 					<block v-for="(item,index) in goodList" :key="index">
 						<view class="tui-tab-rank-cent" @tap="gotoList(item.id)">
 								<view class="rank-box" :style="{borderColor: rankColor[index]}">
-									<text v-if="index<4" :style="{backgroundColor: rankColor[index]}">{{"0"+(index+1)}}</text>
+									<text v-if="index<10" :style="{backgroundColor: rankColor[index]}">{{"0"+(index+1)}}</text>
 									<image :src="item.url" mode="aspectFill" class="img-rink"></image>
 								</view>
 								<view class="tui-pro-tit">
@@ -186,7 +190,7 @@
 	export default {
 		data() {
 			return {
-				rankColor: ['#FF5C00', '#9AA8BB', '#C8AA8D', '#E3E3E3'],
+				rankColor: ['#FF5C00', '#9AA8BB', '#C8AA8D', '#E3E3E3','#47323c','#47323c','#47323c','#47323c','#47323c','#47323c'],
 				url: '',
 				goodList: [],
 				hideing: 0,
@@ -263,6 +267,24 @@
 			},
 			currDay(){
 				return new Date().getDate()
+			},
+		
+		},
+		filters: {
+			filterNum(val) {
+				let data = Math.floor(val)+''
+				let res = data.split("")
+				const unit = ['','','','千','万','万','万','万','亿']
+				if (res.length < 4) {
+					return data
+				}else {
+					if (res[1]!== 0) {
+						return res[0]+""+res[1]+unit[res.length]
+					} else {
+						return res[0]+""+unit[res.length]
+					}
+				}
+				
 			}
 		},
 		methods: {

@@ -11,7 +11,8 @@
 			</view>
 		</view> -->
 		<!--header-->
-		<view class="tui-header-box">
+
+		<view class="tui-header-box" :style="{paddingTop: statusHeight+ 'px',height: boxHeight+ 'px'}">
 			<view class="tui-icon-box" @tap="back">
 				<tui-icon name="arrowleft" :size="30" color="#333"></tui-icon>
 			</view>
@@ -20,7 +21,7 @@
 		<!--header-->
 		<!--header-->
 		<!--banner-->
-		<view class="tui-banner-swiper">
+		<view class="tui-banner-swiper" :style="">
 			<image :src="imageUrl" class="tui-my-bg" mode="aspectFill"></image>
 		</view>
 		<view class="tui-cent-box">
@@ -33,10 +34,11 @@
 					<text class="tite-color-time">距离结束时间</text>
 				</view>
 				<view class="class-name-left tui-line-hight">
-					<tui-countdown :time="ts" width="26" height="30" color="#fff" borderColor="#000" backgroundColor="#000" colonColor="#000" @end="endOfTime"></tui-countdown>
+					<tui-countdown :time="ts" width="26" height="30" color="#fff" borderColor="#000" backgroundColor="#000" colonColor="#000"
+					 @end="endOfTime"></tui-countdown>
 				</view>
 			</view>
-			<view class="tui-cent-box-felx1">
+			<!-- <view class="tui-cent-box-felx1">
 				<view class="class-name-left">
 					<image src="../../static/images/gengduo@3x.png" mode="aspectFit" class="imgtime2"></image>
 				</view>
@@ -46,7 +48,7 @@
 				</view>
 
 			</view>
-
+ -->
 		</view>
 		<view class="tui-rink-sceate">
 			<view class="tui-rank-list">
@@ -65,7 +67,7 @@
 										</view>
 									</view>
 									<view class="tag-tit2-price">
-										<text style="color:#555;margin-right: 6rpx;font-size: 24rpx;">限量价</text> 
+										<text style="color:#555;margin-right: 6rpx;font-size: 24rpx;">限量价</text>
 										<text style="font-size: 20rpx;">¥</text>
 										<text style="font-size: 40rpx;font-weight: bold;margin: 6rpx 0;">{{item.marketPrice}}</text>
 										<text style="font-size: 24rpx;font-weight: 400;">元</text>
@@ -135,12 +137,13 @@
 				endTime: 0,
 				createTime: 0,
 				ts: 0,
-				te: 3
+				te: 3,
+				boxHeight: '',
+				statusHeight: ""
 			};
 		},
 		onLoad: function(options) {
 			this.WxActivityID = options.id
-			log(this.WxActivityID)
 			this.getLimit()
 			this.url = imgurl
 			this.getLimit()
@@ -149,27 +152,24 @@
 			setTimeout(function() {
 				that.loading = true
 			}, 500)
+			let res = uni.getSystemInfoSync()
+			let {
+				statusBarHeight
+			} = res
+			// #ifndef H5 || APP-PLUS || MP-ALIPAY
+			let info = uni.getMenuButtonBoundingClientRect()
+			let {
+				top,
+				bottom
+			} = info
+			this.statusHeight = statusBarHeight
+			let buttonHeight = (bottom - statusBarHeight) + (top - statusBarHeight)
+			let navHeight = statusBarHeight + buttonHeight + top - statusBarHeight
+			this.boxHeight = navHeight - statusBarHeight
 
-			// #ifdef MP-WEIXIN
-			obj = wx.getMenuButtonBoundingClientRect();
-			// #endif
-			// #ifdef MP-BAIDU
-			obj = swan.getMenuButtonBoundingClientRect();
-			// #endif
-			// #ifdef MP-ALIPAY
-			my.hideAddToDesktopMenu();
+			console.log(statusBarHeight, navHeight, buttonHeight)
 			// #endif
 
-			setTimeout(() => {
-				uni.getSystemInfo({
-					success: res => {
-						this.width = obj.left || res.windowWidth;
-						this.height = obj.top ? obj.top + obj.height + 8 : res.statusBarHeight + 44;
-						this.top = obj.top ? obj.top + (obj.height - 32) / 2 : res.statusBarHeight + 6;
-						this.scrollH = res.windowWidth;
-					}
-				});
-			}, 0);
 		},
 
 		methods: {
@@ -476,7 +476,7 @@
 		margin: 4rpx 0 2rpx;
 
 	}
-	
+
 	.robb-item {
 		background: #00C52A;
 		font-size: 24rpx;
@@ -548,12 +548,12 @@
 		background: #fff;
 		font-size: 32rpx;
 		color: #393939;
-		padding: 50rpx 30rpx 20rpx;
+		padding: 0 30rpx;
 		position: fixed;
+		left: 0;
+		right: 0;
+		top: 0;
 		width: 100%;
-		z-index: 999999;
-		border-bottom: 1px solid #e5e5e5;
-
 	}
 
 	/* 
@@ -607,7 +607,7 @@
 		top: 0;
 		width: 100%;
 		z-index: -1;
-
+		height: 446rpx;
 	}
 
 	/* 地区 */
@@ -653,5 +653,3 @@
 
 	/* end */
 </style>
-
-

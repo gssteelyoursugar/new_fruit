@@ -306,7 +306,7 @@
 
 <style>
 	page {
-		background-color: #f7f7f7;
+		background-color: #00C42A;
 	}
 
 	.container {
@@ -315,7 +315,7 @@
 	}
 
 	.tui-rank-list {
-		padding: 0 30rpx;
+		padding: 0 30rpx 100rpx;
 	}
 
 	/* 滑动广告 */
@@ -513,7 +513,7 @@
 	}
 
 	.tui-tab-rank {
-		margin: 10rpx 0;
+		margin: 10rpx 0 50rpx;
 		/* border-bottom: 1rpx solid #ccc; */
 	}
 
@@ -546,6 +546,7 @@
 	.tui-rink-sceate {
 		position: absolute;
 		background-color: #00C42A;
+		width: 100%;
 	}
 
 	.tui-tab-btn {

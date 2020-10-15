@@ -206,13 +206,22 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
 var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
+
+
+
+
 var _request = __webpack_require__(/*! ../../api/request.js */ 21);var _data$filters$onPullD;function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+
+
+
+
+
+
 var setdata = uni.getStorageSync('usermen');var _console =
+
+
 console,log = _console.log;var _default = (_data$filters$onPullD = {
 
   data: function data() {var _ref;
@@ -236,8 +245,7 @@ console,log = _console.log;var _default = (_data$filters$onPullD = {
     ''), _defineProperty(_ref, "neworder",
     []), _defineProperty(_ref, "dataList",
 
-    [
-    {
+    [{
       id: 'q2020811',
       buyNum: 1,
       price: 299.5,
@@ -266,17 +274,14 @@ console,log = _console.log;var _default = (_data$filters$onPullD = {
     0), _defineProperty(_ref, "buyNum",
     0), _defineProperty(_ref, "cartIds",
     []), _defineProperty(_ref, "actions",
-    [
-    {
+    [{
       name: '删除',
       color: '#fff',
       fontsize: 28,
       width: 64,
       background: '#F82400' }]), _defineProperty(_ref, "actions2",
 
-
-    [
-    {
+    [{
       name: '看相似',
       color: '#fff',
       fontsize: 28,

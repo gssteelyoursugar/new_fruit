@@ -302,11 +302,12 @@ page {
 		background: #fff;
 		font-size: 32rpx;
 		color: #393939;
-		padding: 50rpx 30rpx 20rpx;
+		padding: 0 30rpx;
 		position: fixed;
+		left: 0;
+		right: 0;
+		top: 0;
 		width: 100%;
-		z-index: 999999;
-		border-bottom: 1px solid #e5e5e5;
 }
 
 /* 
@@ -365,6 +366,7 @@ page {
 		top: 0;
 		width: 100%;
 		z-index: -1;
+		height: 446rpx;
 }
 
 /* 地区 */

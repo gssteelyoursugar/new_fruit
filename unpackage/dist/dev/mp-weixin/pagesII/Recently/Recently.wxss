@@ -9,12 +9,17 @@
 	background: #fff;
 	font-size: 32rpx;
 	color: #393939;
-	padding: 0 30rpx;
+	position: fixed;
+	width: 100%;
+	z-index: 999;
+	top: 0;
 }
+
 /* 隐藏 */
 .text-danger {
 	display: none !important;
 }
+
 /* 显示 */
 .active {
 	display: block;
@@ -46,8 +51,9 @@
 	color: rgba(112, 112, 112, 1);
 }
 .tui-mtop {
-	margin: 20rpx 0;
+	/* margin: 20rpx 0; */
 }
+
 /* 头像 */
 .tui-head-log {
 	width: 40rpx;
@@ -367,6 +373,7 @@
 	padding-left: 30rpx;
 	font-size: 30rpx !important;
 }
+
 /*猜你喜欢*/
 .tui-youlike {
 	padding-left: 12rpx;
@@ -454,6 +461,7 @@
 	font-size: 24rpx;
 	color: #656565;
 }
+
 /* ==== */
 .order-no {
 	width: 400rpx;
@@ -470,7 +478,7 @@
 	padding-bottom: 30rpx;
 }
 .container-img {
-	margin-top: 150rpx;
+	margin-top: 260rpx;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
@@ -491,19 +499,32 @@
 .btnbox {
 	position: relative;
 	top: 100rpx;
-	width: 100%;
+	width: 280rpx;
+	-webkit-border-radius: 100rpx;
+	        border-radius: 100rpx;
+	overflow: hidden;
+	-webkit-box-shadow: 0 0 8rpx 2rpx rgba(0, 197, 42, 1) !important;
+	        box-shadow: 0 0 8rpx 2rpx rgba(0, 197, 42, 1) !important;
+	border: 1px solid rgba(0, 197, 42, 1);
 }
-button::after {
-	/* border: 2rpx solid #00AC3F; */
+.btnbox button::after {
+	content: "";
+	width: 0%;
+	height: 0%;
+	position: absolute;
+	border: none;
+	-webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 }
 button {
 	background-color: #fff !important;
 	/* background-color: transparent; */
-
 	padding-left: 0;
-
 	padding-right: 0;
-
 	line-height: inherit;
 }
 button {
@@ -513,12 +534,12 @@ button {
 .btn {
 	-webkit-border-radius: 100rpx;
 	        border-radius: 100rpx;
-	height: 60rpx;
-	width: 30%;
+	height: 80rpx;
+	width: 280rpx;
+	line-height: 76rpx;
 	background-color: #ffffff;
-	border: 1rpx solid rgba(0, 197, 42, 1);
+	border: 1px solid rgba(0, 197, 42, 1);
 	color: rgba(0, 197, 42, 1) !important;
-	padding: 10rpx 0;
 	font-size: 30rpx;
 }
 

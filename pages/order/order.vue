@@ -562,12 +562,12 @@
 				lists.forEach(item=> {
 					selectedNum += item.list.length
 					item.list.forEach((itm,index)=> {
-						console.log(itm)
+						// console.log(itm)
 						let idxs = target.findIndex(im=>{
-							console.log(im)
+							// console.log(im)
 							return itm.id === im
 						})
-						console.log(idxs)
+						// console.log(idxs)
 						if (idxs !== -1) {
 							itm.selected = true
 						} else {
