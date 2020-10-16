@@ -1,19 +1,21 @@
 <template>
 	<view class="container">
 		<tui-tabs :tabs="tabs" :isFixed="scrollTop>=0" :currentTab="currentTab" selectedColor="#00C52A" sliderBgColor="#00C52A"
-		 @change="change" itemWidth="50%"></tui-tabs>
+		 @change="change" itemWidth="50%">
+		 </tui-tabs>
 		<!--选项卡全部订单-->
 		<view :class="[currentTab === 0 ? 'actineclass' : 'errorclass']">
 				<view class="tui-order-item" v-for="(item,index) in AfterSaleData" :key="index">
 					<tui-list-cell :hover="false" :lineLeft="false">
 						<view class="tui-goods-title">
-							<view>订单号：{{item.order_number}} <text class="iconfont icon-lujing182" @click="clipboard(item.order_number)"></text></view>
-							<view class="tui-order-status" v-if="item.after_sale_status ==0 ">审核中</view>
+							<view>服务单号：{{item.after_sale_number}} <text class="iconfont icon-lujing182" @click="clipboard(item.after_sale_number)"></text></view>
+							<view class="tui-order-status" v-if="item.after_sale_status ==0 ">处理中</view>
 							<view class="tui-order-status" v-if="item.after_sale_status ==1 ">同意</view>
 							<view class="tui-order-status" v-if="item.after_sale_status ==2 ">拒绝</view>
 							<view class="tui-order-status" v-if="item.after_sale_status ==3 ">待确认</view>
 							<view class="tui-order-status" v-if="item.after_sale_status ==4 ">已确认</view>
 							<view class="tui-order-status" v-if="item.after_sale_status ==5 ">已取消</view>
+							<view class="tui-order-status" v-if="item.after_sale_status ==11 ">处理完成</view>
 							
 						</view>
 					</tui-list-cell>
@@ -25,8 +27,8 @@
 									<view class="tui-goods-name"><text class="tag-tit">采手精选</text>{{item.name}}</view>
 									<view class="tui-goods-attr">{{item.specification}}×{{item.goods_number}}</view>
 									<view class="tui-goods-flex">
-										<view class="tui-goods-attr1">￥{{item.platform_price}}元</view>
-										<view class="tui-goods-attr">实付{{item.market_price}}元(含运费)</view>
+										<view class="tui-goods-attr1"><text class="iconyuan">￥</text> <text class="yuanText">{{item.platform_price}} </text><text class="yuanPrice">元</text> </view>
+										<view class="tui-goods-attr">实付: <text class="yuan-tui"> {{item.order_total_price}}</text> (含运费)</view>
 									</view>
 									
 								</view>
@@ -46,17 +48,28 @@
 						</view>
 					</tui-list-cell> -->
 					<view class="tui-order-btn">
-						<view class="tui-btn-ml">
-							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle"  @tap="goAfterCancel(item.order_item_id)">取消申请</tui-button>
+						<view class="tui-btn-ml" v-if="item.after_sale_status ==0 ||item.after_sale_status ==3 ">
+							<button  type="primary"  hover-class='none' class="icon-img3"  @tap="goAfterCancel(item.order_item_id,item.id)">取消申请</button>
+							
 						</view>
-						<view class="tui-btn-ml">
-							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="goAfterDetail(item.id)">申请详情</tui-button>
+						<view class="tui-btn-ml" v-if="item.after_sale_status ==5 ">
+
+							<button  type="primary"  hover-class='none' class="icon-img3"   @tap="goAfter(item.order_item_id)">重新申请</button>
+
+							
+
+							
 						</view>
-						<view class="tui-btn-ml">
-							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="goAfterSaleDetail(item.id)">售后详情</tui-button>
+						<view class="tui-btn-ml" v-if="item.after_sale_status ==0||item.after_sale_status ==1||item.after_sale_status ==3||item.after_sale_status ==5 ">
+							<button  type="primary"  hover-class='none' class="icon-img3"  @tap="goAfterDetail(item.id)">申请详情</button>
 						</view>
-						<view class="tui-btn-ml" >
-							<button type="primary"   class="icon-img3" @tap="goAfterConfirm(item.order_item_id)">去确认</button>
+						<view class="tui-btn-ml" v-if="item.after_sale_status ==11 ">
+							<button  type="primary"  hover-class='none' class="icon-img3" @tap="goAfterSaleDetail(item.id)">售后详情</button>
+							
+						</view>
+						<view class="tui-btn-ml" v-if="item.after_sale_status ==3 ">
+							
+							<button type="primary"   class="icon-img3" @tap="goAfterConfirm(item.id)" >去确认</button>
 						</view>
 					</view>
 				</view>
@@ -66,8 +79,8 @@
 			<view class="tui-order-item" v-for="(item,index) in AfterSaleData" :key="index">
 				<tui-list-cell :hover="false" :lineLeft="false">
 					<view class="tui-goods-title">
-						<view>订单号：{{item.order_number}} <text class="iconfont icon-lujing182" @click="clipboard(item.order_number)"></text></view>
-						<view class="tui-order-status">待处理</view>
+						<view>服务单号：{{item.after_sale_number}} <text class="iconfont icon-lujing182" @click="clipboard(item.after_sale_number)"></text></view>
+						<view class="tui-order-status">待确认</view>
 					</view>
 				</tui-list-cell>
 				
@@ -78,8 +91,8 @@
 								<view class="tui-goods-name"><text class="tag-tit">采手精选</text>{{item.name}}</view>
 								<view class="tui-goods-attr">{{item.specification}}×{{item.goods_number}}</view>
 								<view class="tui-goods-flex">
-									<view class="tui-goods-attr1">￥{{item.platform_price}}元</view>
-									<view class="tui-goods-attr">实付{{item.market_price}}元(含运费)</view>
+									<view class="tui-goods-attr1"><text class="iconyuan">￥</text> <text class="yuanText">{{item.platform_price}} </text><text class="yuanPrice">元</text> </view>
+									<view class="tui-goods-attr">实付: <text class="yuan-tui"> {{item.order_total_price}}.00</text> (含运费)</view>
 								</view>
 								
 							</view>
@@ -99,15 +112,25 @@
 					</view>
 				</tui-list-cell> -->
 				<view class="tui-order-btn">
-					<view class="tui-btn-ml">
-						<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle"  @tap="goAfterCancel(item.order_item_id)">取消申请</tui-button>
+					<view class="tui-btn-ml" v-if="item.after_sale_status ==0 ||item.after_sale_status ==3 ">
+						<button type="primary"   class="icon-img3"  @tap="goAfterCancel(item.order_item_id,item.id)" >取消申请</button>
 					</view>
-					<view class="tui-btn-ml">
-						<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="goAfterDetail(item.id)">申请详情</tui-button>
+					<view class="tui-btn-ml" v-if="item.after_sale_status ==0||item.after_sale_status ==1||item.after_sale_status ==3 ">
+						<button type="primary"   class="icon-img3"  @tap="goAfterDetail(item.id)" >申请详情</button>
 					</view>
-					<view class="tui-btn-ml" >
-						<button type="primary"   class="icon-img3" @tap="goAfterConfirm(item.order_item_id)">去确认</button>
+					<view class="tui-btn-ml" v-if="item.after_sale_status ==3 ">
+						<button type="primary"   class="icon-img3" @tap="goAfterConfirm(item.id)">去确认</button>
 					</view>
+				</view>
+			</view>
+		</view>
+		<view class="warp" v-if="modaishow">
+			<view class="warp-view">
+				<view class="warp-text1">温馨提示</view>
+				<view class="warp-text">确定要取消申请?</view>
+				<view class="warp-flex">
+					<button @click="goBack" plain="true" class="color-green"> 否</button>
+					<button @click="Goyes" plain="true"  class="color-green">是</button>
 				</view>
 			</view>
 		</view>
@@ -124,36 +147,87 @@
 
 <script>
 	import {listing,publicing} from '../../api/api.js'
-	import {posAfterSaleList} from '../../api/request.js'
+	import {posAfterSaleList,postAfterCen,getBeConfirmed} from '../../api/request.js'
 	var setdata = uni.getStorageSync('usermen')
 	var {log} = console
 	const thorui = require("@/common/tui-clipboard/tui-clipboard.js")
 	export default {
 		data() {
 			return {
-				hamiguaPNG:'http://192.168.1.10:8980/js/userfiles/fileupload/202008/1299161489108729858.png',
-				mangguoPNG:'http://192.168.1.10:8980/js/userfiles/fileupload/202008/1298932901905809410.png',
-				tabs: [{
-					name: "全部"
-				}, {
-					name: "待确认(1)"
-				}],
+				tabs: [
+					{
+						name: "全部"
+					}, 
+					{
+						name: "待确认"
+					},
+				],
+				count:0,
 				currentTab: 0,
 				pageIndex: 1,
 				loadding: false,
 				pullUpOn: true,
 				scrollTop: 0,
 				AfterSaleData:[],//列表数据
+				modaishow:false,
+				flag:false,
+				itemid:'',
+				idNum:''
+				
 			}
 		},
 		methods: {
+			//确定取消
+			Goyes(){
+					var setdata = uni.getStorageSync('usermen')
+					let data ={
+						token:setdata,
+						orderItemId:this.itemid,
+						id:this.idNum
+					}
+					log(data)
+					publicing(postAfterCen,data)
+					.then((res)=>{
+						log(res)
+						this.postAfterSalelist()
+						this.messcancel()
+					})
+					.catch((err)=>{
+						log(err)
+					})
+			},
+			//获取待确认
+			getBeConfirmedData(){
+				
+				var setdata = uni.getStorageSync('usermen')
+				let data ={
+					token:setdata
+				}
+				listing(getBeConfirmed,data)
+				.then((res)=>{
+					log(res)
+					this.count = res.data.data.count
+					log(this.count)
+					
+					this.$set (this.tabs, 1, {name:`待确认(${this.count})`})
+					
+				})
+				.catch((err)=>{
+					log(err)
+				})
+			},
+			//点击取消
+			goBack(){
+				this.messcancel()
+			},
+			
 			//售后列表请求
 			postAfterSalelist(){
 				var setdata = uni.getStorageSync('usermen')
 				let data ={
 					token:setdata,
 					afterSaleStatus:3
-				
+					
 				}
 				if(this.currentTab ===0 ){  //如果是默认全部不传afterSaleStatus参数
 					delete data.afterSaleStatus
@@ -167,6 +241,13 @@
 					log(err)
 				})
 			},
+				//重新申请售后
+						goAfter(id){
+							
+							uni.navigateTo({
+								url:'../../pagesIII/applyAfter/applyAfter?id=' + id
+							})
+						},
 			//复制
 			//event 当需要异步请求返回数据再进行复制时，需要传入此参数，或者异步方法转为同步方法（H5端）
 			clipboard(event) {
@@ -182,6 +263,15 @@
 					// #endif
 					},event)
 				},
+				
+				// 显示
+				init(){
+					this.modaishow = true
+				},
+				// 取消
+				messcancel(){
+					this.modaishow = false
+				},
 			
 			//申请详情
 			goAfterDetail(id){
@@ -196,14 +286,21 @@
 				})
 			},
 			//取消申请
-			goAfterCancel(id){
-				log(id)
+			goAfterCancel(order_id,id){
+				this.init()
+				this.itemid = order_id
+				this.idNum = id
+				log(this.itemid)
+				
+				
+				
+				// this.Goyes(id)
 			},
 			//去确认售后/售后反馈
 			goAfterConfirm(id){
 				log(id)
 				uni.navigateTo({
-					url:'../../pagesIII/confirmAfter/confirmAfter'
+					url:'../../pagesIII/confirmAfter/confirmAfter?id='+id
 				})
 			},
 			change(e) {
@@ -211,8 +308,10 @@
 				console.log(this.currentTab)
 				if(this.currentTab === 0  ){//全部默认0
 					this.postAfterSalelist()
+					this.getBeConfirmedData()
 				}else if (this.currentTab === 1 ){//待确认
 					this.postAfterSalelist()
+					this.getBeConfirmedData()
 				}
 			},
 			detail() {
@@ -225,12 +324,13 @@
 			// console.log(options.id)
 			this.id = options.id
 			this.postAfterSalelist()
+			this.getBeConfirmedData()
 			// this.getGoods()
 		},
 		onPullDownRefresh() {
 			setTimeout(() => {
 				uni.stopPullDownRefresh()
-			}, 200);
+			}, );
 		},
 		onReachBottom() {
 			//只是测试效果，逻辑以实际数据为准
@@ -239,7 +339,7 @@
 			setTimeout(() => {
 				this.loadding = false
 				this.pullUpOn = false
-			}, 1000)
+			}, )
 		},
 		onPageScroll(e) {
 			this.scrollTop = e.scrollTop;
@@ -274,7 +374,7 @@
 	.icon-lujing182{
 		font-size: 30rpx;
 		color: rgba(182, 182, 182, 1);
-		margin-left: 6rpx;
+		margin-left: 12rpx;
 	}
 
 	.tui-order-status {
@@ -307,7 +407,7 @@
 
 	.tui-goods-center {
 		flex: 1;
-		padding: 20rpx 8rpx;
+		padding: 0rpx 8rpx;
 		box-sizing: border-box;
 	}
 
@@ -328,8 +428,8 @@
 	}
 
 	.tui-goods-attr {
-		font-size: 22rpx;
-		color: #888888;
+		font-size: 12px;
+		color: rgba(102, 102, 102, 1);
 		line-height: 32rpx;
 		padding-top: 20rpx;
 		word-break: break-all;
@@ -339,8 +439,14 @@
 		-webkit-box-orient: vertical;
 		-webkit-line-clamp: 2;
 	}
+	.yuan-tui{
+		color: rgba(51, 51, 51, 1);
+		font-size: 14px;
+		font-weight: bold;
+
+	}
 	.tui-goods-attr1 {
-		font-size: 22rpx;
+		
 		color: rgba(255, 86, 0, 1);
 		line-height: 32rpx;
 		padding-top: 20rpx;
@@ -350,6 +456,17 @@
 		display: -webkit-box;
 		-webkit-box-orient: vertical;
 		-webkit-line-clamp: 2;
+	}
+	.iconyuan{
+		font-size: 8px;
+		color: rgba(255, 86, 0, 1);
+	}
+	.yuanText{
+		font-size: 16px;
+		font-weight: bold;
+	}
+	.yuanPrice{
+		font-size: 12px;
 	}
 
 	.tui-price-right {
@@ -397,20 +514,103 @@
 	.tui-btn-ml {
 		margin-left: 20rpx;
 	}
-	.icon-img3{
-		background-image: linear-gradient(to right, rgba(0, 197, 42, 1) , rgba(0, 188, 69, 1));
+	.tui-btn-ml:last-child >>>.icon-img3{
+		background-image: linear-gradient(to right, #00C94A , #00AC3F);
 		color: #fff!important;
+		border: none!important;
+		
+	}
+	.icon-img3{
+		background-color: #fff!important;
+		color: #333!important;
 		width: 152rpx!important;
 		height: 56rpx!important;
 		line-height: 56rpx;
 		font-size: 26rpx!important;
 		border-radius: 50rpx!important;
-		/* border: 1rpx solid #929292!important; */
+		border: 1rpx solid #929292!important;
+		
 		
 	
 	}
 	.green-btn{
 		background-image: linear-gradient(to right, rgba(0, 197, 42, 1) , rgba(0, 188, 69, 1));
 	}
+	/* 去除button默认样式 */
+	
+	button::after {
+	border: none;
+	
+	}
+	
+	button {
+	background-color: transparent;
+	
+	padding-left: 0;
+	
+	padding-right: 0;
+	
+	line-height:inherit;
+	border-radius:0;
+	
+	}
+	
+	
 
+
+/* 模态弹窗布局 */
+	.warp{position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background: rgba(0,0,0,0.6);
+	z-index: 9999;}
+	.warp-view{width: 500upx;
+			height: 260upx;
+			background: #FFFFFF;
+			margin: auto;
+			position: absolute;
+			-webkit-position:absolute;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+			border-radius: 8upx;
+			overflow: hidden;
+			}
+	.warp-text{
+		text-align: center;
+		margin-top: 34upx;
+		font-size: 34upx;
+		color: #666666;
+			}
+	.warp-text1{
+		text-align: center;
+		height: 60rpx;
+		line-height: 60rpx;
+		font-size: 34upx;
+		color: #fff;
+		background-color: rgba(0, 197, 42, 1);
+			}		
+	.warp-flex{ display: flex;
+		justify-content: space-around;
+		border-top: 1upx solid #EEEEEE;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: 80upx;
+		line-height: 80upx;
+		}
+		.color-green{
+			color: rgba(0, 197, 42, 1);
+		}
+	.warp-flex button{border: none;
+	font-size: 30upx;
+	}
+		.warp-flex button:nth-child(2){
+			color: rgba(0, 197, 42, 1);
+		}
+	/*end  */
 </style>

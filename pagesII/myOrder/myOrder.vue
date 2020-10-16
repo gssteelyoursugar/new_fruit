@@ -90,7 +90,7 @@
 						<view class="tui-btn-ml" v-if="item.tradeStatus == 5">
 							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="buyAgain(item.wx_goods_id)">再次下单</tui-button>
 						</view>
-						<view class="tui-btn-ml" v-if="item.tradeStatus == 6">
+						<view class="tui-btn-ml" v-if="item.tradeStatus == 6 || item.tradeStatus == 2 ||item.payStatus == 1">
 							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="goAfter(item.id)">申请售后</tui-button>
 						</view>
 						<view class="tui-btn-ml" v-if="item.tradeStatus == 7">

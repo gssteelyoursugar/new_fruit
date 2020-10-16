@@ -97,6 +97,26 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var l0 = _vm.__map(_vm.files, function(item, index) {
+    var $orig = _vm.__get_orig(item)
+
+    var g0 = item.indexOf(".mp4")
+    var g1 = item.indexOf(".mp4")
+    return {
+      $orig: $orig,
+      g0: g0,
+      g1: g1
+    }
+  })
+
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        l0: l0
+      }
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -130,81 +150,187 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
-{
-  data: function data() {
-    return {};
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
-  },
-  methods: {} };exports.default = _default;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _api = __webpack_require__(/*! ../../api/api.js */ 19);
+var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var thorui = __webpack_require__(/*! @/common/tui-clipboard/tui-clipboard.js */ 82);var _console = console,log = _console.log;var _default = { data: function data() {return { refund_money: '', //退款金额
+      id: '', DetailsData: {}, //详情数据
+      files: [] };}, methods: { //复制
+    //event 当需要异步请求返回数据再进行复制时，需要传入此参数，或者异步方法转为同步方法（H5端）
+    clipboard: function clipboard(event) {console.log(event);var data = event;thorui.getClipboardData(data, function (res) {}, event);}, //图片预览
+    previewImage: function previewImage(e) {log(e.currentTarget.id);uni.previewImage({ current: e.currentTarget.id, urls: this.files });}, //获取详情信息
+    postAfterDetails: function postAfterDetails() {var _this = this;var setdata = uni.getStorageSync('usermen');var data = { token: setdata, id: this.id };(0, _api.publicing)(_request.posAfterDetails, data).then(function (res) {log(res);_this.DetailsData = res.data.data;_this.refund_money = res.data.data.refund_money; //退款金额
+        // this.DetailsData.after_sale_mode = '退款'
+        // this.files = res.data.data.imgList
+        var new_arr = res.data.data.imgList.map(function (obj) {return obj.url;}); //把图片链接提取出来
+        _this.files = new_arr;}).catch(function (err) {log(err);});} }, onLoad: function onLoad(options) {console.log(options.id);this.id = options.id;this.postAfterDetails();} };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

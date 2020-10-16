@@ -3,11 +3,11 @@
 		<view class="tui-searchbox">
 			<view class="tui-search-input">
 				<icon type="search" :size='13' color='#333'></icon>
-				<input confirm-type="search" placeholder="大家都在搜：芒果" placeholder-class="tui-input-plholder" class="tui-input"
-				 v-model.trim="key" @confirm="inputKey" />
+				<input confirm-type="search" placeholder="搜索您要购买的商品或类型" placeholder-class="tui-input-plholder" class="tui-input"
+				 v-model="key" @confirm="inputKey" />
 				<icon type="clear" :size='13' color='#bcbcbc' @tap="cleanKey" v-show="key"></icon>
 			</view>
-			<view class="tui-cancle" @tap="back">取消</view>
+			<view class="tui-cancle" @tap="inputKey">搜索</view>
 		</view>
 
 		<view class="tui-search-history" v-show="history.length>0 && !key">
@@ -15,8 +15,8 @@
 				<view class="tui-search-title">搜索历史</view>
 			</view>
 			<view class="tui-history-content">
-				<block  v-for="(item,index) in history" :key="index">
-					<tui-tag  @click="clickItem(item)" style="color: #555;" margin="0 24rpx 24rpx 0" type="gray" shape="circle">{{item}}</tui-tag>
+				<block v-for="(item,index) in history" :key="index">
+					<tui-tag @click="clickItem(item)" style="color: #555;" margin="0 24rpx 24rpx 0" type="gray" shape="circle">{{item}}</tui-tag>
 				</block>
 			</view>
 			<!-- <tui-icon name="delete" :size='14' color='#333'  class="tui-icon-delete"></tui-icon> -->
@@ -25,19 +25,7 @@
 				<text>清空历史记录</text>
 			</view>
 		</view>
-		<view v-show="key">
-			<view class="tui-header" @click="clickItem(key)">
-				<view class="tui-header-left tui-noboredr">搜索 “{{key}}”</view>
-			</view>
-			
-			<view class="tui-result-box">
-				<block v-for="(item,index) in searchList" :key="index">
-					<view class="tui-result-item" hover-class="tui-opcity" :hover-stay-time="150">
-						<rich-text :nodes="item.showKey"></rich-text>
-					</view>
-				</block>
-			</view>
-		</view>
+
 
 		<view class="tui-search-hot">
 			<view class="tui-hot-header">
@@ -60,37 +48,19 @@
 
 <script>
 	const util = require("@/utils/util.js")
-	import {mapState,mapMutations} from 'vuex'
+	import {
+		mapState,
+		mapMutations
+	} from 'vuex'
 	export default {
 		data() {
 			return {
-				//搜索历史
-				// history: [
-				// 	"美洲杯",
-				// 	"D站观点",
-				// 	"C罗",
-				// 	"早安D站",
-				// 	"2019退役球星",
-				// 	"女神大会",
-				// 	"德利赫特",
-				// 	"托雷斯",
-				// 	"自热火锅",
-				// 	"华为手机",
-				// 	"有机酸奶"
-				// ],
-
+				// 热门搜索
 				hot: [
-					"德利赫特",
-					"托雷斯",
-					"早安D站",
-					"D站观点",
-					"德利赫特",
-					"美洲杯",
-					"华为手机",
-					"C罗",
-					"自热火锅",
-					"2019退役球星",
-					"女神大会"
+					"芒果",
+					"哈密瓜",
+					"火龙果",
+					"蜜柚"
 				],
 				key: "",
 				showActionSheet: false,
@@ -99,21 +69,22 @@
 				searchResult: [
 					// "按照展示的列表输入关键词看效果","thorui","2019退役球星","搜索关键词高亮显示","模拟搜索结果集","开源不易，需要鼓励","人人为我，我为人人",
 				],
-				searchList: []
 			}
 		},
 		computed: {
 			...mapState(['history'])
 		},
 		methods: {
-			...mapMutations(['saveSearch','clearSearch']),
+			...mapMutations(['saveSearch', 'clearSearch']),
 			clickItem(val) {
-				this.saveSearch({data:val})
-				this.key=""
-				uni.navigateTo({
-					url:'../../pagesII/productList/productList?name=' + val
+				this.saveSearch({
+					data: val
 				})
-				
+				this.key = ""
+				uni.navigateTo({
+					url: '../../pagesII/productList/productList?name=' + val
+				})
+
 			},
 			back: function() {
 				uni.navigateBack();
@@ -135,22 +106,30 @@
 				}
 			},
 			inputKey(e) {
-				let name = e.detail.value
+				let name = e.detail.value || this.key
+				let that = this
+				console.log(name)
 				if (name === '') {
 					uni.showToast({
 						title: "请输入关键词",
 						icon: "none"
 					})
+					return
 				}
-				this.key = util.trim(e.detail.value);
+				let result = name.trim()
 				uni.navigateTo({
-					url:'../../pagesII/productList/productList?name=' + this.key
+					url: '../../pagesII/productList/productList?name=' + result,
+					success: function() {
+						that.saveSearch({
+							data: result
+						})
+						that.key = ""
+					}
 				})
-				this.saveSearch({data:this.key})
-				this.key = ""
+
 			}
 		},
-		onLoad (options) {
+		onLoad(options) {
 			console.log(this.history)
 		}
 	}
@@ -184,6 +163,8 @@
 		display: flex;
 		align-items: center;
 		flex-wrap: nowrap;
+		background: #F5F5F5;
+
 	}
 
 	.tui-input {
@@ -199,9 +180,9 @@
 	}
 
 	.tui-cancle {
-		color: #888;
+		color: #333;
 		font-size: 28rpx;
-		padding-left: 30rpx;
+		padding-left: 10rpx;
 		flex-shrink: 0;
 	}
 

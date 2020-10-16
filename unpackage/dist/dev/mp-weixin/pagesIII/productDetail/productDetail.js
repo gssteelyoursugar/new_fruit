@@ -94,31 +94,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiIcon: function() {
-    return __webpack_require__.e(/*! import() | components/tui-icon/tui-icon */ "components/tui-icon/tui-icon").then(__webpack_require__.bind(null, /*! @/components/tui-icon/tui-icon.vue */ 373))
+    return __webpack_require__.e(/*! import() | components/tui-icon/tui-icon */ "components/tui-icon/tui-icon").then(__webpack_require__.bind(null, /*! @/components/tui-icon/tui-icon.vue */ 383))
   },
   tuiTabs: function() {
-    return __webpack_require__.e(/*! import() | components/tui-tabs/tui-tabs */ "components/tui-tabs/tui-tabs").then(__webpack_require__.bind(null, /*! @/components/tui-tabs/tui-tabs.vue */ 464))
+    return __webpack_require__.e(/*! import() | components/tui-tabs/tui-tabs */ "components/tui-tabs/tui-tabs").then(__webpack_require__.bind(null, /*! @/components/tui-tabs/tui-tabs.vue */ 474))
   },
   tuiTag: function() {
-    return __webpack_require__.e(/*! import() | components/tui-tag/tui-tag */ "components/tui-tag/tui-tag").then(__webpack_require__.bind(null, /*! @/components/tui-tag/tui-tag.vue */ 483))
+    return __webpack_require__.e(/*! import() | components/tui-tag/tui-tag */ "components/tui-tag/tui-tag").then(__webpack_require__.bind(null, /*! @/components/tui-tag/tui-tag.vue */ 493))
   },
   tuiRate: function() {
-    return __webpack_require__.e(/*! import() | components/tui-rate/tui-rate */ "components/tui-rate/tui-rate").then(__webpack_require__.bind(null, /*! @/components/tui-rate/tui-rate.vue */ 528))
+    return __webpack_require__.e(/*! import() | components/tui-rate/tui-rate */ "components/tui-rate/tui-rate").then(__webpack_require__.bind(null, /*! @/components/tui-rate/tui-rate.vue */ 538))
   },
   jyfParser: function() {
-    return Promise.all(/*! import() | components/jyf-parser/jyf-parser */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/jyf-parser/jyf-parser")]).then(__webpack_require__.bind(null, /*! @/components/jyf-parser/jyf-parser.vue */ 518))
+    return Promise.all(/*! import() | components/jyf-parser/jyf-parser */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/jyf-parser/jyf-parser")]).then(__webpack_require__.bind(null, /*! @/components/jyf-parser/jyf-parser.vue */ 528))
   },
   tuiNomore: function() {
-    return __webpack_require__.e(/*! import() | components/tui-nomore/tui-nomore */ "components/tui-nomore/tui-nomore").then(__webpack_require__.bind(null, /*! @/components/tui-nomore/tui-nomore.vue */ 387))
+    return __webpack_require__.e(/*! import() | components/tui-nomore/tui-nomore */ "components/tui-nomore/tui-nomore").then(__webpack_require__.bind(null, /*! @/components/tui-nomore/tui-nomore.vue */ 397))
   },
   tuiButton: function() {
-    return __webpack_require__.e(/*! import() | components/tui-button/tui-button */ "components/tui-button/tui-button").then(__webpack_require__.bind(null, /*! @/components/tui-button/tui-button.vue */ 429))
+    return __webpack_require__.e(/*! import() | components/tui-button/tui-button */ "components/tui-button/tui-button").then(__webpack_require__.bind(null, /*! @/components/tui-button/tui-button.vue */ 439))
   },
   wybPopup: function() {
-    return __webpack_require__.e(/*! import() | components/wyb-popup/wyb-popup */ "components/wyb-popup/wyb-popup").then(__webpack_require__.bind(null, /*! @/components/wyb-popup/wyb-popup.vue */ 535))
+    return __webpack_require__.e(/*! import() | components/wyb-popup/wyb-popup */ "components/wyb-popup/wyb-popup").then(__webpack_require__.bind(null, /*! @/components/wyb-popup/wyb-popup.vue */ 545))
   },
   tuiNumberbox: function() {
-    return __webpack_require__.e(/*! import() | components/tui-numberbox/tui-numberbox */ "components/tui-numberbox/tui-numberbox").then(__webpack_require__.bind(null, /*! @/components/tui-numberbox/tui-numberbox.vue */ 422))
+    return __webpack_require__.e(/*! import() | components/tui-numberbox/tui-numberbox */ "components/tui-numberbox/tui-numberbox").then(__webpack_require__.bind(null, /*! @/components/tui-numberbox/tui-numberbox.vue */ 432))
   }
 }
 var render = function() {

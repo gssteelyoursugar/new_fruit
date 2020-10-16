@@ -5,8 +5,11 @@
 				<view class="uplode-file">
 					<image v-if="types == 'image'" class="uploade-img" :src="upload" :data-src="upload" @tap="previewImage"></image>
 					<image v-if="types == 'image'" class="clear-one-icon" :src="clearIcon" @tap="delImage(index)"></image>
-					<video v-if="types == 'video'" class="uploade-img" :src="upload" controls>
-						<cover-image v-if="types == 'video'" class="clear-one-icon" :src="clearIcon" @tap="delImage(index)"></cover-image>
+					<video v-if="types == 'video'" class="uploade-img" :src="upload" controls >
+						<!-- <cover-image v-if="types == 'video'" class="clear-one-icon" :src="clearIcon" @tap="delImage(index)"></cover-image> -->
+						<view class="clear-one-icon" v-if="types == 'video'" @tap="delImage(index)">
+							<tui-icon color="#ed3f14" :size="18" name="close-fill"   ></tui-icon>
+						</view>
 					</video>
 				</view>
 			</block>
@@ -20,6 +23,7 @@
 </template>
 
 <script>
+	import {uploading} from '../../api/request.js'
 	export default{
 		props: {
 			types: {
@@ -34,15 +38,15 @@
 			},
 			clearIcon: {
 				type: String,
-				default: 'http://img1.imgtn.bdimg.com/it/u=451604666,2295832001&fm=26&gp=0.jpg'
+				default: ''
 			},
 			uploadIcon: {
 				type: String,
-				default: ''
+				default: '../../static/images/videoImg.png'
 			},
 			uploadUrl: {
 				type: String,
-				default: ''
+				default: uploading
 			},
 			deleteUrl: {
 				type: String,
@@ -112,14 +116,18 @@
 					break;
 					case 'video' :
 						uni.chooseVideo({
+							
 							sourceType: ['camera', 'album'],
 							success: (res) => {
 								let size = (res.size / 1024/1024)
-								// console.log(res.tempFilePath)
+								console.log(res.tempFilePath)
 								if(Math.ceil(res.size / 1024) < this.upload_max * 1024){
 									this.uploads.push(res.tempFilePath)
+									uni.showLoading({
+										title:'上传中...'
+									})
 									uni.uploadFile({
-										url: this.uploadUrl, //仅为示例，非真实的接口地址
+										url: uploading, //接口地址
 										filePath: res.tempFilePath,
 										name: 'file',
 										//请求参数
@@ -127,7 +135,12 @@
 											'user': 'test'
 										},
 										success: (uploadFileRes) => {
+											console.log(JSON.parse(uploadFileRes.data));
+											this.uploadFileResData = JSON.parse(uploadFileRes.data)
+											this.uploadData = this.uploadFileResData.data
+											
 											this.$emit('successVideo',uploadFileRes)
+											uni.hideLoading()
 										}
 									});
 								}else {
@@ -138,9 +151,10 @@
 								}
 							},
 							fail: (err) => {
-								uni.showModal({
-									content: JSON.stringify(err)
-								});
+								// uni.showModal({
+								// 	content: JSON.stringify(err)
+								// });
+								console.log(err)
 							}
 						});
 					break;
@@ -177,13 +191,13 @@
 			upload(){
 				if(!this.uploadUrl) {
 					uni.showModal({
-						content: '请填写上传接口'
+						content: uploading
 					});
 					return;
 				};
 				for (let i of this.uploadImages) {
 					uni.uploadFile({
-						url: this.uploadUrl, //仅为示例，非真实的接口地址
+						url: uploading, //接口地址
 						filePath: i,
 						name: 'file',
 						//请求参数
@@ -207,7 +221,7 @@
 		flex-wrap: wrap;
 	}
 	.uplode-file {
-		margin: 10upx;
+		/* margin: 10upx; */
 		width: 210upx;
 		height: 210upx;
 		position: relative;
@@ -216,6 +230,7 @@
 		display: block;
 		width: 210upx;
 		height: 210upx;
+		margin-left: 20rpx;
 	}
 	.clear-one{
 		position: absolute;
@@ -226,8 +241,8 @@
 		position: absolute;
 		width: 20px;
 		height: 20px;
-		top: 0;
-		right: 0;
+		top: 16rpx;
+		right: -4rpx;
 		z-index: 9;
 	}
 	.uploader-input-box {
@@ -235,7 +250,9 @@
 		margin:10upx;
 		width: 208upx;
 		height: 208upx;
-		border: 2upx solid #D9D9D9;
+		/* border: 2upx solid #D9D9D9; */
+		background-color: #F7F7F7;
+
 	}
 	.uploader-input-box:before,
 	.uploader-input-box:after {
@@ -273,9 +290,9 @@
 	}
 	.uploader-icon{
 		position: relative;
-		margin:10upx;
-		width: 208upx;
-		height: 208upx;
+		margin-left:20upx;
+		width: 168upx;
+		height: 168upx;
 	}
 	.uploader-icon .image-cion{
 		width: 100%;

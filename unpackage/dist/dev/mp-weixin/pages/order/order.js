@@ -94,13 +94,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiSwipeAction: function() {
-    return __webpack_require__.e(/*! import() | components/tui-swipe-action/tui-swipe-action */ "components/tui-swipe-action/tui-swipe-action").then(__webpack_require__.bind(null, /*! @/components/tui-swipe-action/tui-swipe-action.vue */ 415))
+    return __webpack_require__.e(/*! import() | components/tui-swipe-action/tui-swipe-action */ "components/tui-swipe-action/tui-swipe-action").then(__webpack_require__.bind(null, /*! @/components/tui-swipe-action/tui-swipe-action.vue */ 425))
   },
   tuiNumberbox: function() {
-    return __webpack_require__.e(/*! import() | components/tui-numberbox/tui-numberbox */ "components/tui-numberbox/tui-numberbox").then(__webpack_require__.bind(null, /*! @/components/tui-numberbox/tui-numberbox.vue */ 422))
+    return __webpack_require__.e(/*! import() | components/tui-numberbox/tui-numberbox */ "components/tui-numberbox/tui-numberbox").then(__webpack_require__.bind(null, /*! @/components/tui-numberbox/tui-numberbox.vue */ 432))
   },
   tuiButton: function() {
-    return __webpack_require__.e(/*! import() | components/tui-button/tui-button */ "components/tui-button/tui-button").then(__webpack_require__.bind(null, /*! @/components/tui-button/tui-button.vue */ 429))
+    return __webpack_require__.e(/*! import() | components/tui-button/tui-button */ "components/tui-button/tui-button").then(__webpack_require__.bind(null, /*! @/components/tui-button/tui-button.vue */ 439))
   }
 }
 var render = function() {

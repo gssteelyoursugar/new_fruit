@@ -1,22 +1,28 @@
 <template>
 	<view >
 		<view class="tui-tab-rank" >
-			<view class="tui-time-title"><text class="title-time-left font-size-color">订单编号: {{DetailsData.order_number}}</text> </view>
+			<view class="tui-time-title"><text class="title-time-left font-size-color">订单号: {{DetailsData.order_number}}</text>
+			 <text class="iconfont icon-lujing182" @click="clipboard(DetailsData.order_number)"></text>
+			 </view>
 		<view class="tui-tab-rank-cent">
 			<image :src="DetailsData.url" mode="aspectFill" class="img-rink"></image>
 			<view class="tui-pro-tit">
 				<text class="tag-tit">采手精选</text> <text class="tag-tit-text">{{DetailsData.name}}</text>
 				<view class="tag-tit2">
-					<view class="">
+					<view class=" ">
 						<view class="tag-tit2-price">
 							{{DetailsData.specification}}×{{DetailsData.goods_number}}
 						</view>
-						<view class="tag-tit2-text">
-							 <text class="price1">￥{{DetailsData.platform_price}}元</text><text class="price2">/件</text>
+						<view class="flex-tui">
+							<view class="tag-tit2-text">
+								 <text class="iconyuan">￥</text>  <text class="price1">{{DetailsData.platform_price}} </text><text class="price2">元</text>
+							</view>
+							<view class="price-title">实付:<text class="priceText">{{DetailsData.order_total_price}}</text>(含运费)</view>
 						</view>
+						
 					</view>
 					<!-- <image src="../../static/images/zan.png" mode="aspectFill" class="tui-shop-car"></image> -->
-					<view class="price-title">实付{{DetailsData.market_price}}（含运费）</view>
+					
 				</view>
 				
 			</view>
@@ -26,34 +32,40 @@
 			<view class="tui-item-box">
 				
 				<text class="tui-list-cell_name">收货状态</text>
-				<view class="tui-right">已确认收货</view>
+				<view class="tui-right" v-if="DetailsData.delivery_status == 6">已确认收货</view>
+				<view class="tui-right" v-if="DetailsData.delivery_status == 0">未确认收货</view>
 			</view>
 		</tui-list-cell>
 		<tui-list-cell  :arrow="true" last="true">
 			<view class="tui-item-box">
 				
 				<text class="tui-list-cell_name">申请原因</text>
-				<view class="tui-right">{{DetailsData.cause}}</view>
+				<view class="tui-right maginRight">{{DetailsData.cause}}</view>
 			</view>
 		</tui-list-cell>
-		<view class="tui-title tui-top40">问题描述</view>
+		<view class="tui-title tui-top40">问题描述 <text class="start">*</text></view>
 			<view class="tui-textarea-box">
 				<textarea class="tui-textarea" name="desc" :placeholder="DetailsData.after_sale_describe"  readonly="readonly"   disabled="disabled"
 				 placeholder-class="tui-phcolor-color" />
 				<!-- <view class="tui-textarea-counter">最多500字</view> -->
 		</view>
 		<view class="tui-title tui-top40">上传凭证</view>
-		<!-- 上传 -->
+		<!-- 显示上传的图片 -->
 		<view class="tui-upload-box">
 		  <view class="tui-upload-item" v-for="(item,index) in files" :key="index">
-		    <image :src="item" class='tui-upload-img' @tap="previewImage" mode="aspectFill" :id="item"></image>
+		    <image class='tui-upload-img' :src="item"  @tap="previewImage" mode="aspectFill" :id="item"  v-if="item.indexOf('.mp4') == -1"></image>
+			<video class='tui-upload-img' :src="item"   v-if="item.indexOf('.mp4') != -1"   controls ></video>
 		  </view>
 		</view>
+		
+			
+			
 		
 	</view>
 </template>
 
 <script>
+	const thorui = require("@/common/tui-clipboard/tui-clipboard.js")
 	import {publicing} from '../../api/api.js'
 	import {posAfterDetails} from '../../api/request.js'
 	var {log} = console
@@ -62,11 +74,13 @@
 			return {
 				id:'',
 				DetailsData:{},//申请详情数据
-				files:[]
+				files:[],
+				
 				
 			}
 		},
 		methods: {
+			//图片预览
 			previewImage: function (e) {
 				log(e.currentTarget.id)
 				uni.previewImage({
@@ -74,7 +88,7 @@
 					urls: this.files
 				})
 			},
-			
+			//获取申请详情信息
 			postAfterDetails(){
 				var setdata = uni.getStorageSync('usermen')
 				let data = {
@@ -94,6 +108,21 @@
 					log(err)
 				})
 			},
+			//复制
+			//event 当需要异步请求返回数据再进行复制时，需要传入此参数，或者异步方法转为同步方法（H5端）
+			clipboard(event) {
+				console.log(event);
+				let data= event;
+				thorui.getClipboardData(data, (res) => {
+					// #ifdef H5 || MP-ALIPAY
+					if (res) {
+						this.tui.toast("复制成功")
+					} else {
+						this.tui.toast("复制失败")
+					}
+					// #endif
+					},event)
+				},
 		
 		
 			
@@ -109,23 +138,41 @@
 
 <style>
 	
+	
 	/* start */
 	.price1{
 		color: #FF5600;
-		font-size: 24rpx;
+		font-size: 16px;
 		font-weight: 600;
+	}
+	.iconyuan{
+		font-size: 8px;
+		color: rgba(255, 86, 0, 1);
 	}
 	.font-size-color{
 		color: rgba(85, 85, 85, 1);
-		font-size: 28rpx;
+		font-size: 24rpx;
+	}
+	.icon-lujing182{
+		font-size: 30rpx;
+		color: rgba(182, 182, 182, 1);
+		margin-left: 12rpx;
 	}
 	.price-title{
 		font-size: 24rpx;
-		margin-top: 30rpx;
+		color: #666666;
+		
+		
+	}
+	.priceText{
+		color: rgba(51, 51, 51, 1);
+		font-size: 28rpx;
+		font-weight: 500;
+		margin-left: 4rpx;
 	}
 	.price2{
-		color: #B6B6B6;
-		font-size: 24rpx;
+		color: rgba(255, 86, 0, 1);
+		font-size: 12px;
 	}
 	.tui-tab-rank{
 		background-color: #fff;
@@ -133,7 +180,7 @@
 		
 	}
 	.tui-time-title{
-		padding: 10rpx;
+		padding:   20rpx 10rpx;
 		height: 50rpx;
 		line-height: 50rpx;
 		border-bottom: 1rpx solid #F5F5F5;
@@ -141,7 +188,7 @@
 	}
 	.title-time-left{
 		margin-left: 20rpx;
-		color: #707070;
+		
 	}
 	.tui-tab-rank-cent{
 		display: flex;
@@ -149,8 +196,8 @@
 		
 	}
 	.img-rink{
-		width: 180rpx;
-		height: 180rpx;
+		width: 140rpx;
+		height: 140rpx;
 		display: block;
 		margin-right: 20rpx;
 	}
@@ -166,17 +213,22 @@
 		color: #fff;
 		font-size: 20rpx;
 	}
-	.tag-tit2{
+	/* .tag-tit2{
 		display: flex;
 		justify-content: space-between;
-	}
+	} */
 	.tag-tit2-price{
 		color: #555555;
 		font-size: 24rpx;
 	}
 	.tag-tit2-text{
 		color: ##FF5600;
-		font-size: 24rpx;
+		
+	}
+	.flex-tui{
+		display: flex;
+		justify-content: space-between;
+		width: 100%;
 	}
 	.tui-shop-car{
 		width: 45rpx;
@@ -185,7 +237,8 @@
 	}
 	.tag-tit-text{
 		font-size: 28rpx;
-		color: #333;
+		color: rgba(51, 51, 51, 1);
+		font-weight: 500;
 	}
 	/* end */
 	.tui-button-primary{
@@ -205,7 +258,7 @@
 	  padding: 55rpx 0 30rpx 0;
 	  font-size: 26rpx;
 	  color: #333;
-	  
+	  font-weight: 400;
 	  background-color: #fff;
 	}
 	.tui-upload-box {
@@ -213,7 +266,8 @@
 		margin-bottom: 30rpx;
 		padding-bottom: 30rpx;
 		display: flex;
-		justify-content: space-around;
+		
+		justify-content: start;
 		flex-wrap: wrap;
 		background-color: #fff;
 	}
@@ -222,6 +276,8 @@
 		width: 220rpx;
 		height: 220rpx;
 		position: relative;
+		margin-left: 20rpx;
+		margin-bottom: 20rpx;
 		
 	}
 	
@@ -230,8 +286,8 @@
 	}
 	
 	.tui-upload-img {
-		width: 220rpx;
-		height: 220rpx;
+		width: 178rpx;
+		height: 178rpx;
 		display: block;
 	}
 	
@@ -258,25 +314,26 @@
 	}
 	/* end */
 	.tui-top40 {
-	  margin-top: 40rpx;
+	  margin-top: 20rpx;
 	  padding-left: 40rpx;
 	}
 	/*textarea*/
 	
 	.tui-textarea-box {
 		border-radius: 4rpx;
-		height: 280rpx;
+		height: 240rpx;
 		box-sizing: border-box;
-		padding: 20rpx 20rpx 0 20rpx;
+		padding: 0rpx 0rpx 0 40rpx;
 		position: relative;
 		background-color: #fff;
 	}
 	.tui-textarea {
-		height: 210rpx;
+		height: 240rpx;
 		width: 100%;
-		color: #666;
-		font-size: 28rpx;
-		z-index: 2;
+		color: #333;
+		font-size: 32rpx;
+		/* z-index: 2; */
+		font-weight: 400;
 	}
 	.tui-phcolor-color {
 		color: #333 !important;
@@ -290,21 +347,32 @@
 		padding-top: 4rpx;
 	}
 	.tui-list-cell_name {
-		padding-left: 20rpx;
+		padding-left: 10rpx;
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		color: rgba(51, 51, 51, 1);
+		font-size: 28rpx;
+		font-weight: 400;
+	}
+	.start{
+		color: rgba(255, 0, 0, 1);
+		font-size: 14px;
 	}
 	.tui-item-box {
 		width: 100%;
 		display: flex;
 		align-items: center;
 	}
+	.maginRight{
+		margin-right: 30rpx;
+	}
 	.tui-right {
 		margin-left: auto;
-		margin-right: 34rpx;
-		font-size: 26rpx;
-		color: #999;
+		
+		font-size:28rpx;
+		font-weight: 400;
+		color: rgba(51, 51, 51, 1);
 	}
 	.tag-tit{
 		/* 渐变色 */

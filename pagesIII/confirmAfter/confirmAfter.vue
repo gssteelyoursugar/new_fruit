@@ -5,10 +5,10 @@
 		<view class="tui-content">
 			<view class="tui-title">反馈信息</view>
 			<view class="tui-text-line">
-				<text>反馈时间:</text><text>2020-9-23 14:42</text>
+				<text>反馈时间:</text><text class="maginLeft colorNum">{{DetailsData.feedback_time}}</text>
 			</view>
 			<view class="tui-text-line">
-				<text>反馈内容:</text><text>经核实协商，退回部分货款50元。</text>
+				<text>反馈内容:</text><text class="maginLeft">{{DetailsData.remarks}}</text>
 			</view>
 			
 		</view>
@@ -16,43 +16,62 @@
 		<view class="tui-content">
 			<view class="tui-title">申请信息</view>
 			<view class="tui-img-cent">
-				<image src="../../static/images/baixiangguo1.png" mode="aspectFit" class="img"></image>
+				<image :src="DetailsData.url" mode="aspectFit" class="img"></image>
 				<view class="tui-goods-center">
-					<view class="tui-goods-name"><text class="tag-tit">采手精选</text>葡萄大大大大大大</view>
-					<view class="tui-goods-attr">一斤60×2</view>
-					<view class="tui-goods-flex">
-						<view class="tui-goods-attr1">￥108元</view>
-						<view class="tui-goods-attr">实付98元(含运费)</view>
-					</view>
+					<view class="tui-goods-name"><text class="tag-tit">采手精选</text>{{DetailsData.name}}</view>
+					<view class="tui-goods-attr">{{DetailsData.specification}}×{{DetailsData.goods_number}}</view>
+					<!-- <view class="tui-goods-flex">
+						<view class="tui-goods-attr1">￥{{DetailsData.goods_price}}元</view>
+						<view class="tui-goods-attr">实付{{DetailsData.market_price}}元(含运费)</view>
+					</view> -->
 					
 				</view>
 			</view>
 		</view>
 		<view class="tui-content2">
 			<view class="tui-text-line">
-				<text>服务单号:</text><text>2465465465456456</text>
+				<text>订单号:</text><text class="maginLeft colorNum">{{DetailsData.order_number}}</text>
+				<text class="iconfont icon-lujing182" @click="clipboard(DetailsData.order_number)"></text>
 			</view>
 			<view class="tui-text-line">
-				<text>申请时间:</text><text>2020-9-23 14:42</text>
+				<text>服务单号:</text><text class="maginLeft colorNum">{{DetailsData.after_sale_number}}</text>
+				<text class="iconfont icon-lujing182" @click="clipboard(DetailsData.after_sale_number)"></text>
+			</view>
+			<view class="tui-text-line">
+				<text>申请时间:</text><text class="maginLeft colorNum">{{DetailsData.apply_time}}</text>
 			</view>
 			<view class="tui-text-line2">
-				<text>退款原因:</text><text>5商品与描述不符，发过来的货品比描述中的个头小很多</text>
+				<text>申请原因:</text><text class="maginLeft">{{DetailsData.after_sale_describe}}</text>
 			</view>
 			
 		</view>
 		<view class="tui-content3">
-			<image src="../../static/images/baixiangguo1.png" mode="aspectFit" class="img2"></image>
-			<image src="../../static/images/baixiangguo1.png" mode="aspectFit" class="img2"></image>
-			<image src="../../static/images/baixiangguo1.png" mode="aspectFit" class="img2"></image>
-			<image src="../../static/images/baixiangguo1.png" mode="aspectFit" class="img2"></image>
+			
+		</view>
+		<view class="tui-upload-box">
+		  <view class="tui-upload-item" v-for="(item,index) in files" :key="index">
+		    <image class='tui-upload-img' :src="item"  @tap="previewImage" mode="aspectFill" :id="item"  v-if="item.indexOf('.mp4') == -1"></image>
+		    <video class='tui-upload-img' :src="item"   v-if="item.indexOf('.mp4') != -1"   controls ></video>
+		  </view>
 		</view>
 		<view class="tab-bar">
 			<view class="tui-order-btn">
 				<view class="tui-btn-ml">
-					<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle"  @tap="goAfterCancel()">取消申请</tui-button>
+					<button type="primary"   class="icon-img4" @tap="goAfterCancel()">取消申请</button>
+					
 				</view>
 				<view class="tui-btn-ml" >
-					<button type="primary"   class="icon-img3" @tap="goAfterConfirm()">确认</button>
+					<button type="primary"   class="icon-img3" @tap="goAfterConfirm(DetailsData.order_item_id)">确认</button>
+				</view>
+			</view>
+		</view>
+		<view class="warp" v-if="modaishow">
+			<view class="warp-view">
+				<view class="warp-text1">温馨提示</view>
+				<view class="warp-text">确定要取消申请?</view>
+				<view class="warp-flex">
+					<button @click="goBack" plain="true" class="color-green"> 否</button>
+					<button @click="goAfterSale(DetailsData.id,DetailsData.order_item_id)" plain="true"  class="color-green">是</button>
 				</view>
 			</view>
 		</view>
@@ -60,22 +79,125 @@
 </template>
 
 <script>
+	const thorui = require("@/common/tui-clipboard/tui-clipboard.js")
+	import {publicing} from '../../api/api.js'
+	import {posAfterDetails,postAfterCen,postAfterConfirm} from '../../api/request.js'
+	var {log} = console
 	export default {
 		data() {
 			return {
+				id:'',
+				DetailsData:{},//申请详情数据
+				files:[],
+				modaishow:false,
+				
+				
 				
 			}
 		},
 		methods: {
-			//取消申请
+			//复制
+			//event 当需要异步请求返回数据再进行复制时，需要传入此参数，或者异步方法转为同步方法（H5端）
+			clipboard(event) {
+				console.log(event);
+				let data= event;
+				thorui.getClipboardData(data, (res) => {
+					// #ifdef H5 || MP-ALIPAY
+					if (res) {
+						this.tui.toast("复制成功")
+					} else {
+						this.tui.toast("复制失败")
+					}
+					// #endif
+					},event)
+				},
+			goBack(){
+				this.modaishow = false
+			},
 			goAfterCancel(){
+				this.modaishow = true
+			},
+			//取消申请
+			goAfterSale(id,order_item_id){
 				console.log('取消申请')
+				log(id)
+				var setdata = uni.getStorageSync('usermen')
+				let data ={
+					token:setdata,
+					id:id,
+					orderItemId:order_item_id
+					
+				}
+				publicing(postAfterCen,data)
+				.then((res)=>{
+					log(res)
+					
+					this.modaishow = false
+					uni.reLaunch({
+						url:'../../pagesII/afterSale/afterSale'
+					})
+				})
+				.catch((err)=>{
+					log(err)
+				})
 			},
 			//确认
-			goAfterConfirm(){
+			goAfterConfirm(id){
+				
 				console.log('确认')
-			}
+				log(id)
+				var setdata = uni.getStorageSync('usermen')
+				let data ={
+					token:setdata,
+					orderItemId:id
+				}
+				publicing(postAfterConfirm,data)
+				.then((res)=>{
+					log(res)
+					uni.reLaunch({
+						url:'../../pagesII/afterSale/afterSale'
+					})
+				})
+				.catch((err)=>{
+					log(err)
+				})
+			},
+			previewImage: function (e) {
+				log(e.currentTarget.id)
+				uni.previewImage({
+					current: e.currentTarget.id, 
+					urls: this.files
+				})
+			},
+			//获取申请详情信息
+			postAfterDetails(){
+				var setdata = uni.getStorageSync('usermen')
+				let data = {
+					token:setdata,
+					id:this.id
+				}
+				publicing(posAfterDetails,data)
+				.then((res)=>{
+					log(res)
+					this.DetailsData = res.data.data
+					// this.files = res.data.data.imgList
+					let new_arr = res.data.data.imgList.map(obj => {return obj.url})//把图片链接提取出来
+					this.files = new_arr
+					
+				})
+				.catch((err)=>{
+					log(err)
+				})
+			},
+					
 			
+			
+			
+		},
+		onLoad(options) {
+			console.log(options.id)
+			this.id = options.id
+			this.postAfterDetails()
 			
 		}
 	}
@@ -114,22 +236,34 @@
 		align-items: center;
 		justify-content: flex-end;
 		background: #fff;
-		padding:  23rpx 20rpx;
+		padding:  15rpx 40rpx;
 		box-sizing: border-box;
 	}
 
 	.tui-btn-ml {
-		margin-left: 20rpx;
+		margin-left: 40rpx;
 	}
 	.icon-img3{
 		background-image: linear-gradient(to right, rgba(0, 197, 42, 1) , rgba(0, 188, 69, 1));
 		color: #fff!important;
-		width: 152rpx!important;
-		height: 56rpx!important;
-		line-height: 56rpx;
+		width: 226rpx!important;
+		height: 76rpx!important;
+		line-height: 76rpx;
 		font-size: 26rpx!important;
 		border-radius: 50rpx!important;
 		/* border: 1rpx solid #929292!important; */
+		
+	
+	}
+	.icon-img4{
+		background-color: #fff!important;
+		color: rgba(85, 85, 85, 1)!important;
+		width: 226rpx!important;
+		height: 76rpx!important;
+		line-height: 76rpx;
+		font-size: 26rpx!important;
+		border-radius: 50rpx!important;
+		border: 1rpx solid #929292!important;
 		
 	
 	}
@@ -138,25 +272,37 @@
 	height: 80rpx;
 	line-height: 80rpx;
 	border-bottom: 1rpx solid rgba(245, 245, 245, 1);
-	font-size: 32rpx;
-	font-weight: 700;
+	font-size: 16px;
+	font-weight: bold;
 	padding:  0 30rpx;
 }
 .tui-text-line{
-	height: 60rpx;
+	
 	line-height: 60rpx;
-	font-size: 28rpx;
+	font-size: 14px;
 	color: rgba(57, 57, 57, 1);
 	padding:  0 30rpx;
+	
+}
+	.icon-lujing182{
+		font-size: 30rpx;
+		color: rgba(182, 182, 182, 1);
+		margin-left: 12rpx;
+	}
+.maginLeft{
+	margin-left: 10rpx;
+}
+.colorNum{
+	color: rgba(57, 57, 57, 1);
 	font-weight: 500;
 }
 .tui-text-line2{
 	
 	line-height: 40rpx;
-	font-size: 28rpx;
+	font-size: 14px;
 	color: rgba(57, 57, 57, 1);
 	padding:  0 30rpx;
-	font-weight: 500;
+	/* font-weight: 500; */
 }
 .tui-img-cent{
 	display: flex;
@@ -226,4 +372,84 @@
 	width: 220rpx;
 	height: 220rpx;
 }
+
+.tui-upload-box {
+		width: 100%;
+		margin-bottom: 30rpx;
+		padding-bottom: 100rpx;
+		display: flex;
+		justify-content: start;
+		flex-wrap: wrap;
+		background-color: #fff;
+	}
+	
+	.tui-upload-item {
+		width: 220rpx;
+		height: 220rpx;
+		position: relative;
+		margin-left: 20rpx;
+		margin-bottom: 20rpx;
+		
+	}
+	.tui-upload-img {
+		width: 178rpx;
+		height: 178rpx;
+		display: block;
+	}
+	
+	/* 模态弹窗布局 */
+		.warp{position: fixed;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		background: rgba(0,0,0,0.6);
+		z-index: 9999;}
+		.warp-view{width: 500upx;
+				height: 260upx;
+				background: #FFFFFF;
+				margin: auto;
+				position: absolute;
+				-webkit-position:absolute;
+				top: 0;
+				left: 0;
+				bottom: 0;
+				right: 0;
+				border-radius: 8upx;
+				overflow: hidden;
+				}
+		.warp-text{
+			text-align: center;
+			margin-top: 34upx;
+			font-size: 34upx;
+			color: #666666;
+				}
+		.warp-text1{
+			text-align: center;
+			height: 60rpx;
+			line-height: 60rpx;
+			font-size: 34upx;
+			color: #fff;
+			background-color: rgba(0, 197, 42, 1);
+				}		
+		.warp-flex{ display: flex;
+			justify-content: space-around;
+			border-top: 1upx solid #EEEEEE;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			height: 80upx;
+			line-height: 80upx;
+			}
+			.color-green{
+				color: rgba(0, 197, 42, 1);
+			}
+		.warp-flex button{border: none;
+		font-size: 30upx;
+		}
+			.warp-flex button:nth-child(2){
+				color: rgba(0, 197, 42, 1);
+			}
+		/*end  */
 </style>

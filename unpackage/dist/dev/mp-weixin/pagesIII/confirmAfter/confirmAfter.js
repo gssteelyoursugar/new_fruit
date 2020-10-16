@@ -92,15 +92,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
-var components = {
-  tuiButton: function() {
-    return __webpack_require__.e(/*! import() | components/tui-button/tui-button */ "components/tui-button/tui-button").then(__webpack_require__.bind(null, /*! @/components/tui-button/tui-button.vue */ 429))
-  }
-}
+var components
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var l0 = _vm.__map(_vm.files, function(item, index) {
+    var $orig = _vm.__get_orig(item)
+
+    var g0 = item.indexOf(".mp4")
+    var g1 = item.indexOf(".mp4")
+    return {
+      $orig: $orig,
+      g0: g0,
+      g1: g1
+    }
+  })
+
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        l0: l0
+      }
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -134,83 +150,209 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
-{
-  data: function data() {
-    return {};
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
-  },
-  methods: {
-    //取消申请
-    goAfterCancel: function goAfterCancel() {
-      console.log('取消申请');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _api = __webpack_require__(/*! ../../api/api.js */ 19);
+var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var thorui = __webpack_require__(/*! @/common/tui-clipboard/tui-clipboard.js */ 82);var _console = console,log = _console.log;var _default = { data: function data() {return { id: '', DetailsData: {}, //申请详情数据
+      files: [], modaishow: false };}, methods: { //复制
+    //event 当需要异步请求返回数据再进行复制时，需要传入此参数，或者异步方法转为同步方法（H5端）
+    clipboard: function clipboard(event) {console.log(event);var data = event;thorui.getClipboardData(data, function (res) {}, event);}, goBack: function goBack() {this.modaishow = false;}, goAfterCancel: function goAfterCancel() {this.modaishow = true;}, //取消申请
+    goAfterSale: function goAfterSale(id, order_item_id) {var _this = this;console.log('取消申请');log(id);var setdata = uni.getStorageSync('usermen');var data = { token: setdata, id: id, orderItemId: order_item_id };(0, _api.publicing)(_request.postAfterCen, data).then(function (res) {log(res);_this.modaishow = false;uni.reLaunch({ url: '../../pagesII/afterSale/afterSale' });}).catch(function (err) {log(err);});}, //确认
+    goAfterConfirm: function goAfterConfirm(id) {console.log('确认');log(id);var setdata = uni.getStorageSync('usermen');var data = { token: setdata, orderItemId: id };(0, _api.publicing)(_request.postAfterConfirm, data).then(function (res) {log(res);uni.reLaunch({ url: '../../pagesII/afterSale/afterSale' });}).catch(function (err) {log(err);});}, previewImage: function previewImage(e) {log(e.currentTarget.id);uni.previewImage({ current: e.currentTarget.id, urls: this.files });
+
     },
-    //确认
-    goAfterConfirm: function goAfterConfirm() {
-      console.log('确认');
-    } } };exports.default = _default;
+    //获取申请详情信息
+    postAfterDetails: function postAfterDetails() {var _this2 = this;
+      var setdata = uni.getStorageSync('usermen');
+      var data = {
+        token: setdata,
+        id: this.id };
+
+      (0, _api.publicing)(_request.posAfterDetails, data).
+      then(function (res) {
+        log(res);
+        _this2.DetailsData = res.data.data;
+        // this.files = res.data.data.imgList
+        var new_arr = res.data.data.imgList.map(function (obj) {return obj.url;}); //把图片链接提取出来
+        _this2.files = new_arr;
+
+      }).
+      catch(function (err) {
+        log(err);
+      });
+    } },
+
+
+
+
+
+  onLoad: function onLoad(options) {
+    console.log(options.id);
+    this.id = options.id;
+    this.postAfterDetails();
+
+  } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

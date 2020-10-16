@@ -94,10 +94,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiListCell: function() {
-    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 436))
+    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 446))
   },
   tuiIcon: function() {
-    return __webpack_require__.e(/*! import() | components/tui-icon/tui-icon */ "components/tui-icon/tui-icon").then(__webpack_require__.bind(null, /*! @/components/tui-icon/tui-icon.vue */ 373))
+    return __webpack_require__.e(/*! import() | components/tui-icon/tui-icon */ "components/tui-icon/tui-icon").then(__webpack_require__.bind(null, /*! @/components/tui-icon/tui-icon.vue */ 383))
+  },
+  easyUpload: function() {
+    return __webpack_require__.e(/*! import() | components/easy-upload/easy-upload */ "components/easy-upload/easy-upload").then(__webpack_require__.bind(null, /*! @/components/easy-upload/easy-upload.vue */ 552))
   }
 }
 var render = function() {
@@ -138,6 +141,21 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -295,66 +313,129 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 //
 //
 //
-//请求
-//请求地址
-var _console = console,log = _console.log;var _default = { data: function data() {return { modaishow: false, //隐藏弹窗
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var thorui = __webpack_require__(/*! @/common/tui-clipboard/tui-clipboard.js */ 82); //请求
+var _console = console,log = _console.log;var _default = { data: function data() {return { textTip: '请您在此描述详细问题(可输入100字)', imageList: [], category: 'video', modaishow: false, //隐藏弹窗
       files: [], //最多上传9张图片
-      id: '', goodsData: {}, array: ['中国', '美国', '巴西', '日本'], index: 0, ValueList: [], Describe: "", flag: false, //是否点击上传图片
-      labelList: [] };}, methods: { //返回
-    goBack: function goBack() {uni.navigateBack({});}, //去查看售后订单
-    goAfterSale: function goAfterSale() {uni.navigateTo({ url: '../../pagesII/afterSale/afterSale' });}, //上传图片
-    chooseImage: function chooseImage(e) {var that = this;if (that.files.length >= 9) {log("最多上传9张图片");return;}uni.chooseImage({ count: 9 - that.files.length, sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      id: '', goodsData: {}, array: ['中国', '美国', '巴西', '日本'], index: 0, ValueList: [], ValueText: '请选择申请原因', //默认值
+      Describe: "", flag: false, //是否点击上传图片
+      labelList: [], VideoDatas: '', //视频上传得到的地址
+      flagColor: false };}, methods: { //子组件数据
+    successVideo: function successVideo(e) {var videoData = JSON.parse(e.data);this.VideoDatas = videoData.data;log(this.VideoDatas); // this.uploadFileResData = JSON.parse(uploadFileRes.data)
+    }, //返回
+    goBack: function goBack() {uni.navigateBack({});}, //复制
+    //event 当需要异步请求返回数据再进行复制时，需要传入此参数，或者异步方法转为同步方法（H5端）
+    clipboard: function clipboard(event) {console.log(event);var data = event;thorui.getClipboardData(data, function (res) {}, event);}, //去查看售后订单
+    goAfterSale: function goAfterSale() {uni.redirectTo({ url: '../../pagesIII/navbar/navbar' });}, //上传图片
+    chooseImage: function chooseImage(e) {var that = this;if (that.files.length >= 5) {log("最多上传9张图片");return;}uni.chooseImage({ count: 5 - that.files.length, sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
         sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
         success: function success(res) {log(res); // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
           that.files = that.files.concat(res.tempFilePaths); //上传功能已移除
           //...
         } });}, //选择器
-    bindPickerChange: function bindPickerChange(e) {console.log('picker发送选择改变，携带值为', e.target.value);this.index = e.target.value;}, //获取商品售后
-    getGoods: function getGoods() {var _this = this;var setdata = uni.getStorageSync('usermen');var data = { id: this.id, token: setdata };(0, _api.listing)(_request.getDetails, data).then(function (res) {log(res);_this.goodsData = res.data.data[0];_this.labelList = res.data.data[0].labelList;log(_this.labelList);}).catch(function (err) {log(err);});}, //上传文件
-    uploadImages: function uploadImages(e) {log(e);this.flag = true;var that = this;if (that.files.length >= 9) {log("最多上传9张图片");return;} //如果用户不点击上传图片，不用传参fileUrls，
-      (0, _request.uploadFiles)(function (res) {console.log(res.data); //上传文件路径
-        that.files = that.files.concat(res.data); //that.files.url = res.data//替换路径
+    bindPickerChange: function bindPickerChange(e) {log(e); //  for ( var i = 0; i <this.ValueList.length; i++){
+      //     console.log(this.ValueList[i]);
+      // }
+      console.log('picker发送选择改变，携带值为', e.target.value);this.index = e.target.value;this.ValueText = this.ValueList[e.target.value];this.flagColor = true;}, //获取下拉申请原因
+    bindPicker: function bindPicker() {log('=====');}, //获取商品售后
+    getGoods: function getGoods() {var _this = this;var setdata = uni.getStorageSync('usermen');var data = { id: this.id, token: setdata };(0, _api.listing)(_request.getDetails, data).then(function (res) {log(res);_this.goodsData = res.data.data[0];_this.labelList = res.data.data[0].labelList;log(_this.labelList);}).catch(function (err) {log(err);});},
+
+    //上传文件
+    uploadImages: function uploadImages(e) {
+      log(e);
+      this.flag = true;
+      var that = this;
+      if (that.files.length >= 5) {
+        log("最多上传5张图片");
+        return;
+      }
+
+      //如果用户不点击上传图片，不用传参fileUrls，
+
+      (0, _request.uploadFiles)(function (res) {
+        console.log(res.data); //上传文件路径
+        that.files = that.files.concat(res.data);
+        //that.files.url = res.data//替换路径
         //设置对应的index为true
         // that.urlListFlag[index] = true
-      });}, //提交售后
-    submitSave: function submitSave() {var _this2 = this;var setdata = uni.getStorageSync('usermen');
-      var newArr = this.files.toString();
-      var data = {
-        orderItemId: this.id,
-        afterSaleDescribe: this.Describe, //售后描述
-        cause: this.index, //原因
-        fileUrls: newArr,
-        token: setdata };
-
-
-
-      //判断用户是否点击上传图片，是否要传fileUrls,flase不传值
-      if (this.flag == false) {
-        delete data.fileUrls;
-        log('没有上传图片');
-      } else if (this.flag == true) {
-        log('点击了上传图片');
-      }
-      log(data);
-
-      (0, _api.publicing)(_request.posAfterSale, data).
-      then(function (res) {
-        log(res);
-        var code = res.data.code;
-        if (code == 200) {
-          _this2.modaishow = true;
-        } else {
-          uni.showToast({
-            title: '申请失败',
-            icon: 'none',
-            duration: 2000 });
-
-        }
-
-      }).
-      catch(function (err) {
-        log(err);
       });
+    },
+
+    //提交售后
+    submitSave: function submitSave() {var _this2 = this;
+      if (this.flagColor == false) {
+        uni.showToast({
+          title: '请选择申请原因',
+          icon: 'none',
+          duration: 2000 });
+
+        return;
+      } else if (this.Describe == "") {
+        uni.showToast({
+          title: '填写描述',
+          icon: 'none',
+          duration: 2000 });
+
+        return;
+      } else {
+        log('成了');
+
+        var setdata = uni.getStorageSync('usermen');
+        var newArr = this.files.toString() + ',' + this.VideoDatas; //上传图片和视频
+        log(newArr);
+        var data = {
+          orderItemId: this.id,
+          afterSaleDescribe: this.Describe, //售后描述
+          cause: this.index, //原因
+          fileUrls: newArr,
+          token: setdata };
+
+
+
+        //判断用户是否点击上传图片，是否要传fileUrls,flase不传值
+        if (this.flag == false) {
+          delete data.fileUrls;
+          log('没有上传图片');
+        } else if (this.flag == true) {
+          log('点击了上传图片');
+        }
+        log(data);
+
+        (0, _api.publicing)(_request.posAfterSale, data).
+        then(function (res) {
+          log(res);
+          var code = res.data.code;
+          if (code == 200) {
+            _this2.Describe = "";
+            _this2.textTip = "";
+            _this2.modaishow = true;
+          } else {
+            uni.showToast({
+              title: '申请失败',
+              icon: 'none',
+              duration: 2000 });
+
+          }
+
+        }).
+        catch(function (err) {
+          log(err);
+        });
+      }
+
     },
     previewImage: function previewImage(e) {
       uni.previewImage({

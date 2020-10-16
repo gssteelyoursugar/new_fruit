@@ -10108,12 +10108,8 @@ exports.postUpOrder = postUpOrder;var postAgainOrder = "".concat(url, "api/wx/or
 //结算清单
 exports.postAgainOrder = postAgainOrder;var postDetailed = "".concat(url, "api/wx/order/detailed");
 
-//售后下拉数据
-var getAfterSaleData = "".concat(url, "api/wx/afterSale/getAfterSaleData");
-
-
 //文件上传
-exports.getAfterSaleData = getAfterSaleData;var uploading = "".concat(url, "api/wx/file/uploading");
+var uploading = "".concat(url, "api/wx/file/uploading");
 
 //收藏商品
 var postLike = "".concat(url, "api/wx/collection/save");
@@ -10165,16 +10161,27 @@ exports.postOrderPay = postOrderPay;var postAddressList = "".concat(url, "api/wx
 //提交售后
 exports.postAddressList = postAddressList;var posAfterSale = "".concat(url, "api/wx/wxOrderItemAfterSale/save");
 
+
 //售后列表
 exports.posAfterSale = posAfterSale;var posAfterSaleList = "".concat(url, "api/wx/wxOrderItemAfterSale/list");
-
 
 //售后详情
 exports.posAfterSaleList = posAfterSaleList;var posAfterDetails = "".concat(url, "api/wx/wxOrderItemAfterSale/details");
 
-
-//取消申请
+//取消申请售后
 exports.posAfterDetails = posAfterDetails;var postAfterCen = "".concat(url, "api/wx/wxOrderItemAfterSale/cancelAfter");
+
+//确认售后
+exports.postAfterCen = postAfterCen;var postAfterConfirm = "".concat(url, "api/wx/wxOrderItemAfterSale/confirm");
+
+//待确认售后
+var getBeConfirmed = "".concat(url, "api/wx/wxOrderItemAfterSale/toBeConfirmed");
+
+//售后下拉数据
+var getAfterSaleData = "".concat(url, "api/wx/afterSale/getAfterSaleData");
+
+// //取消申请
+// let postAfterCen = `${url}api/wx/wxOrderItemAfterSale/cancelAfter`
 
 
 
@@ -10186,7 +10193,7 @@ exports.posAfterDetails = posAfterDetails;var postAfterCen = "".concat(url, "api
 
 
 //导出请求地址
-exports.postAfterCen = postAfterCen;
+exports.getAfterSaleData = getAfterSaleData;
 
 
 
@@ -10281,7 +10288,7 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 523:
+/***/ 533:
 /*!************************************************************************************!*\
   !*** /Users/gsheng/Downloads/new_fruit/components/jyf-parser/libs/MpHtmlParser.js ***!
   \************************************************************************************/
@@ -10295,9 +10302,9 @@ module.exports = g;
  * @author JinYufeng
  * @listens MIT
  */
-var cfg = __webpack_require__(/*! ./config.js */ 524),
+var cfg = __webpack_require__(/*! ./config.js */ 534),
 blankChar = cfg.blankChar,
-CssHandler = __webpack_require__(/*! ./CssHandler.js */ 525),
+CssHandler = __webpack_require__(/*! ./CssHandler.js */ 535),
 windowWidth = uni.getSystemInfoSync().windowWidth;
 var emoji;
 
@@ -10827,7 +10834,7 @@ module.exports = MpHtmlParser;
 
 /***/ }),
 
-/***/ 524:
+/***/ 534:
 /*!******************************************************************************!*\
   !*** /Users/gsheng/Downloads/new_fruit/components/jyf-parser/libs/config.js ***!
   \******************************************************************************/
@@ -10917,14 +10924,14 @@ module.exports = cfg;
 
 /***/ }),
 
-/***/ 525:
+/***/ 535:
 /*!**********************************************************************************!*\
   !*** /Users/gsheng/Downloads/new_fruit/components/jyf-parser/libs/CssHandler.js ***!
   \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var cfg = __webpack_require__(/*! ./config.js */ 524),
+var cfg = __webpack_require__(/*! ./config.js */ 534),
 isLetter = function isLetter(c) {return c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z';};
 
 function CssHandler(tagStyle) {

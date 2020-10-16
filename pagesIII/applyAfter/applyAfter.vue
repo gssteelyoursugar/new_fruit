@@ -1,25 +1,27 @@
 <template>
 	<view >
-		<view class=""style="height: 10rpx;">
+		<view class=""style="height: 10px;">
 			
 		</view>
+		<view class="tui-time-title"><text class="title-time-left font-size-color">订单号: {{goodsData.order_number}}</text>
+		 <text class="iconfont icon-lujing182" @click="clipboard(goodsData.order_number)"></text>
+		 </view>
 		<tui-list-cell  @click="detail" >
 			<view class="tui-goods-item">
 				<image :src="goodsData.url" class="tui-goods-img"></image>
 				<view class="tui-goods-center">
-					<view class="tui-goods-name">
-						
+						<view class="tui-goods-name">
 						<text class="tag-tit" v-for="(item,index) in labelList" :key="index">{{item.name}}</text>
-						
-						{{goodsData.name}}
+						<text class="tag-tit2">{{goodsData.name}}</text>
+						</view>
+						<view class="lineH">
+							<text class="speci">{{goodsData.specification}}</text><text>×</text><text class="goodsnum">{{goodsData.goods_number}}</text>
+							
 						</view>
 						<view class="tui-goods-flex">
-							<view class="tui-goods-attr">{{goodsData.specification}}×{{goodsData.goods_number}}</view>
-							<view class="tui-goods-attr">实付{{goodsData.order_total_price}}元(含运费)</view>
+							<view class="tui-goods-attr1"> <text class="yuanicon">￥</text> <text class="yuanPrice">{{goodsData.goods_price}} </text> <text class="yuanText">元</text> </view>
+							<view class="tui-goods-attr">实付:<text class="fontTotal">{{goodsData.order_total_price}}</text> (含运费)</view>
 						</view>
-					
-					
-					
 				</view>
 				
 			</view>
@@ -28,20 +30,22 @@
 			<view class="tui-item-box">
 				
 				<text class="tui-list-cell_name">收货状态</text>
-				<view class="tui-right">已确认收货</view>
+				<view class="tui-right" v-if="goodsData.delivery_status == 6">已确认收货</view>
+				<view class="tui-right" v-if="goodsData.delivery_status == 0">未确认收货</view>
 			</view>
 		</tui-list-cell>
-		<picker @change="bindPickerChange" :value="index" :range="ValueList">
-		<tui-list-cell  :arrow="true" last="true">
+		<picker @change="bindPickerChange" :value="index" :range="ValueList" >
+		<tui-list-cell  :arrow="true" last="true" @tap="bindPicker">
 			<view class="tui-item-box">
 				<text class="tui-list-cell_name">申请原因</text>
-				<view class="tui-right">{{ValueList[index]}}</view>
+				<input type="text" :value="ValueText"   class="tui-input" disabled="flase" :class="{ activeColor: flagColor }"/>
+				<!-- <view class="tui-right2" >{{ValueList[index]}}</view> -->
 			</view>
 		</tui-list-cell>
 		</picker>
-		<view class="tui-title tui-top40">问题描述</view>
+		<view class="tui-title tui-top40">问题描述 <text class="redicon">*</text> </view>
 			<view class="tui-textarea-box">
-				<textarea class="tui-textarea" name="desc" placeholder="请您在此描述详细问题(可输入100字)" maxlength="100"
+				<textarea class="tui-textarea" name="desc" :placeholder="textTip" maxlength="100"
 				 v-model="Describe" 
 				 placeholder-class="tui-phcolor-color" />
 				<!-- <view class="tui-textarea-counter">最多500字</view> -->
@@ -49,16 +53,26 @@
 		<view class="tui-title tui-top40">上传凭证</view>
 		<!-- 上传 -->
 		<view class="tui-upload-box">
+			
 		  <view class="tui-upload-item" v-for="(item,index) in files" :key="index">
 		    <image :src="item" class='tui-upload-img' @tap="previewImage" mode="aspectFill" :id="item"></image>
 		    <view class="tui-upload-del">
 				<tui-icon color="#ed3f14" :size="18" name="close-fill"  :index="index" @click="deleteImage"></tui-icon>
 			</view>
 		  </view>
-		  <view class="tui-upload-item tui-upload-add" v-if="files.length < 9" hover-class="tui-opcity" :hover-stay-time="150" @tap="uploadImages">
-		    <tui-icon name="plus"></tui-icon>
+		  
+		 
+		  <view class="tui-upload-item tui-upload-add" v-if="files.length < 5" hover-class="tui-opcity" :hover-stay-time="150" @tap="uploadImages">
+			  <image src="../../static/images/upImg.png" mode="aspectFill" class="imgup"></image>
+		    <!-- <tui-icon name="plus"></tui-icon> -->
 		  </view>
+		  <easy-upload
+		     :dataList="imageList" uploadUrl="url" :types="category"
+		     deleteUrl='url' :uploadCount="1"
+		     @successImage="successImage" @successVideo="successVideo"
+		     ></easy-upload> 
 		</view>
+		
 		<view class="tui-btn-box">
 			<button class="tui-button-primary"  @tap="submitSave">提交</button>
 		</view>
@@ -76,6 +90,7 @@
 </template>
 
 <script>
+	const thorui = require("@/common/tui-clipboard/tui-clipboard.js")
 	//请求
 	import {listing,publicing,listing2} from '../../api/api.js'
 	//请求地址
@@ -84,6 +99,9 @@
 	export default {
 		data() {
 			return {
+				textTip:'请您在此描述详细问题(可输入100字)',
+				imageList: [],
+				category: 'video',
 				modaishow:false,//隐藏弹窗
 				files: [], //最多上传9张图片
 				id:'',
@@ -91,35 +109,62 @@
 				 array: ['中国', '美国', '巴西', '日本'],
 				 index: 0,
 				 ValueList:[],
+				 ValueText:'请选择申请原因',//默认值
 				 Describe:"",
 				 flag:false,//是否点击上传图片
 				 labelList:[],
+				 VideoDatas:'',//视频上传得到的地址
+				 flagColor:false
 				
 			}
 		},
 		methods: {
+			
+			//子组件数据
+			successVideo(e){
+				
+				let videoData = JSON.parse(e.data)
+				this.VideoDatas = videoData.data
+				log(this.VideoDatas)
+				// this.uploadFileResData = JSON.parse(uploadFileRes.data)
+			},
 			//返回
 			goBack(){
 				uni.navigateBack({
 					
 				})
 			},
+			//复制
+			//event 当需要异步请求返回数据再进行复制时，需要传入此参数，或者异步方法转为同步方法（H5端）
+			clipboard(event) {
+				console.log(event);
+				let data= event;
+				thorui.getClipboardData(data, (res) => {
+					// #ifdef H5 || MP-ALIPAY
+					if (res) {
+						this.tui.toast("复制成功")
+					} else {
+						this.tui.toast("复制失败")
+					}
+					// #endif
+					},event)
+				},
 			//去查看售后订单
 			goAfterSale(){
-				uni.navigateTo({
-					url:'../../pagesII/afterSale/afterSale'
+				uni.redirectTo({
+					url:'../../pagesIII/navbar/navbar'
 				})
 			},
 			//上传图片
 			chooseImage (e) {
 				let that = this;
-				if (that.files.length >= 9) {
+				if (that.files.length >= 5) {
 					log("最多上传9张图片");
 					return
 				}
 				
 				uni.chooseImage({
-					count: 9 - that.files.length,
+					count: 5 - that.files.length,
 					sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
 					sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
 					success: function (res) {
@@ -133,9 +178,19 @@
 			},
 			//选择器
 			bindPickerChange: function(e) {
+				log(e)
+				//  for ( var i = 0; i <this.ValueList.length; i++){
+				//     console.log(this.ValueList[i]);
+				// }
 					console.log('picker发送选择改变，携带值为', e.target.value)
 					this.index = e.target.value
+					this.ValueText = this.ValueList[e.target.value]
+					this.flagColor = true
 					
+				},
+				//获取下拉申请原因
+				bindPicker(){
+					log('=====')
 				},
 				//获取商品售后
 			getGoods(){
@@ -161,8 +216,8 @@
 				log(e)
 				this.flag = true
 				let that = this;
-				if (that.files.length >= 9) {
-					log("最多上传9张图片");
+				if (that.files.length >= 5) {
+					log("最多上传5张图片");
 					return
 				}
 				
@@ -176,46 +231,69 @@
 					// that.urlListFlag[index] = true
 				});
 			},
+			
 			//提交售后
 			submitSave(){
-				let setdata = uni.getStorageSync('usermen')
-				let newArr = this.files.toString()
-				let data ={
-					orderItemId:this.id,
-					afterSaleDescribe:this.Describe,  //售后描述
-					cause:this.index,//原因
-					fileUrls:newArr,
-					token:setdata
-				}
-				
-				
-				//判断用户是否点击上传图片，是否要传fileUrls,flase不传值
-				if(this.flag == false){
-					delete data.fileUrls
-					log('没有上传图片')
-				}else if(this.flag == true){
-					log('点击了上传图片')
-				}
-				log(data)
-				
-				publicing(posAfterSale,data)
-				.then((res)=>{
-					log(res)
-					let code = res.data.code
-					if(code ==200){
-						this.modaishow = true
-					}else{
-						uni.showToast({
-							title:'申请失败',
-							icon:'none',
-							duration:2000
-						})
+				if( this.flagColor == false){
+					uni.showToast({
+						title:'请选择申请原因',
+						icon:'none',
+						duration:2000
+					})
+					return
+				}else if(this.Describe == ""){
+					uni.showToast({
+						title:'填写描述',
+						icon:'none',
+						duration:2000
+					})
+					return
+				}else{
+					log('成了')
+					
+					let setdata = uni.getStorageSync('usermen')
+					let newArr = this.files.toString()+','+ this.VideoDatas //上传图片和视频
+					log(newArr)
+					let data ={
+						orderItemId:this.id,
+						afterSaleDescribe:this.Describe,  //售后描述
+						cause:this.index,//原因
+						fileUrls:newArr,
+						token:setdata
 					}
 					
-				})
-				.catch((err)=>{
-					log(err)
-				})
+					
+					//判断用户是否点击上传图片，是否要传fileUrls,flase不传值
+					if(this.flag == false){
+						delete data.fileUrls
+						log('没有上传图片')
+					}else if(this.flag == true){
+						log('点击了上传图片')
+					}
+					log(data)
+					
+					publicing(posAfterSale,data)
+					.then((res)=>{
+						log(res)
+						let code = res.data.code
+						if(code ==200){
+							 this.Describe = ""
+							 this.textTip = ""
+							 this.modaishow = true
+						}else{
+							uni.showToast({
+								title:'申请失败',
+								icon:'none',
+								duration:2000
+							})
+						}
+						
+					})
+					.catch((err)=>{
+						log(err)
+					})
+				}
+			
 			},
 			previewImage: function (e) {
 				uni.previewImage({
@@ -260,6 +338,18 @@
 </script>
 
 <style>
+	.activeColor{
+		color: rgba(51, 51, 51, 1)!important;
+	}
+	.tui-input {
+		font-size: 28rpx;
+		color: rgba(182, 182, 182, 1);
+		margin-right: 20rpx;
+		font-weight: 400;
+		flex: 1;
+		overflow: visible;
+		text-align: right;
+	}
 	.tui-button-primary{
 		border-radius: 60rpx;
 		/* 渐变色 */
@@ -269,20 +359,27 @@
 	}
 	
 	.tui-btn-box {
-		padding: 40rpx 50rpx;
+		position: fixed;
+		width: 100%;
+		bottom: 0;
+		padding: 20rpx;
 		box-sizing: border-box;
 		background-color: #fff;
 	}
+	.tui-btn-box button {
+		height: 55px;
+		line-height: 3.55;
+	}
 	.tui-title {
-	  padding: 55rpx 0 30rpx 0;
-	  font-size: 26rpx;
-	  color: #333;
-	  
+	  padding: 20rpx 0 20rpx 0;
+	  font-size: 28rpx;
+	  color: rgba(51, 51, 51, 1);
+	  font-weight: 400;
 	  background-color: #fff;
 	}
 	.tui-upload-box {
 		width: 100%;
-		padding-bottom: 30rpx;
+		padding-bottom: 130rpx;
 		display: flex;
 		
 		flex-wrap: wrap;
@@ -290,9 +387,9 @@
 	}
 	
 	.tui-upload-item {
-		margin-left: 20rpx;
-		width: 220rpx;
-		height: 220rpx;
+		margin: 0 0 20rpx 20rpx;
+		width: 168rpx;
+		height: 168rpx;
 		position: relative;
 		
 		
@@ -303,8 +400,8 @@
 	}
 	
 	.tui-upload-img {
-		width: 220rpx;
-		height: 220rpx;
+		width: 168rpx;
+		height: 168rpx;
 		display: block;
 	}
 	
@@ -318,12 +415,12 @@
 	}
 	
 	.tui-upload-add {
-		width: 220rpx;
-		height: 220rpx;
+		width: 168rpx;
+		height: 168rpx;
 		font-size: 68rpx;
 		font-weight: 100;
 		color: #888;
-		background-color: #F7F7F7;
+		background-color: #fff;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -331,25 +428,34 @@
 	}
 	/* end */
 	.tui-top40 {
-	  margin-top: 40rpx;
+	  margin-top: 10px;
 	  padding-left: 40rpx;
+	}
+	.imgup{
+		width: 100%;
+		height: 100%;
+	}
+	.redicon{
+		color: rgba(255, 0, 0, 1);
+		font-size: 28rpx;
 	}
 	/*textarea*/
 	
 	.tui-textarea-box {
 		border-radius: 4rpx;
-		height: 280rpx;
+		height: 180rpx;
 		box-sizing: border-box;
-		padding: 20rpx 20rpx 0 20rpx;
+		padding: 0rpx 20rpx 0 40rpx;
 		position: relative;
 		background-color: #fff;
 	}
 	.tui-textarea {
-		height: 210rpx;
+		height: 180rpx;
 		width: 100%;
-		color: #666;
+		color: rgba(182, 182, 182, 1);
 		font-size: 28rpx;
-		z-index: 2;
+		font-weight: 400;
+		
 	}
 	.tui-phcolor-color {
 		color: #ccc !important;
@@ -363,7 +469,10 @@
 		padding-top: 4rpx;
 	}
 	.tui-list-cell_name {
-		padding-left: 20rpx;
+		color: rgba(51, 51, 51, 1);
+		font-size: 28rpx;
+		font-weight: 400;
+		padding-left: 10rpx;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -375,9 +484,17 @@
 	}
 	.tui-right {
 		margin-left: auto;
+		
+		font-size: 28rpx;
+		color:rgba(51, 51, 51, 1);
+		font-weight: 400;
+	}
+	.tui-right2{
+		margin-left: auto;
 		margin-right: 34rpx;
-		font-size: 26rpx;
-		color: #999;
+		font-size: 14px;
+		color:rgba(51, 51, 51, 1);
+		font-weight: 400;
 	}
 	.tag-tit{
 		/* 渐变色 */
@@ -388,23 +505,49 @@
 		color: #fff;
 		font-size: 20rpx;
 	}
+	.tag-tit2{
+		color: rgba(51, 51, 51, 1);
+		font-size: 16px;
+	}
 .tui-goods-item {
 		width: 100%;
-		padding: 20rpx 30rpx;
+		padding: 20rpx 0rpx;
 		box-sizing: border-box;
 		display: flex;
 		justify-content: space-between;
 	}
 	.tui-goods-img {
-		width: 180rpx;
-		height: 180rpx;
+		width: 140rpx;
+		height: 140rpx;
 		display: block;
 		flex-shrink: 0;
 	}
 	
+	.tui-time-title{
+		padding: 10rpx;
+		height: 50rpx;
+		line-height: 50rpx;
+		border-bottom: 1rpx solid #F5F5F5;
+		background-color: #fff;
+		
+	}
+	.title-time-left{
+		margin-left: 10rpx;
+		color: #707070;
+	}
+	.font-size-color{
+		color: rgba(85, 85, 85, 1);
+		font-size: 24rpx;
+	}
+	.icon-lujing182{
+		font-size: 24rpx;
+		color: rgba(182, 182, 182, 1);
+		margin-left: 12rpx;
+	}
+	
 	.tui-goods-center {
 		flex: 1;
-		padding: 20rpx 8rpx;
+		padding: 0rpx 8rpx;
 		box-sizing: border-box;
 	}
 	
@@ -419,10 +562,21 @@
 		font-size: 26rpx;
 		line-height: 32rpx;
 	}
+	.lineH{
+		line-height: 24px;
+	}
+	.speci{
+		color: rgba(51, 51, 51, 1);
+		font-size: 12px;
+	}
+	.goodsnum{
+		font-size: 14px;
+		color: rgba(51, 51, 51, 1);
+	}
 	
 	.tui-goods-attr {
-		font-size: 22rpx;
-		color: #888888;
+		font-size: 12px;
+		color: rgba(102, 102, 102, 1);
 		line-height: 32rpx;
 		padding-top: 20rpx;
 		word-break: break-all;
@@ -431,6 +585,34 @@
 		display: -webkit-box;
 		-webkit-box-orient: vertical;
 		-webkit-line-clamp: 2;
+	}
+	.fontTotal{
+		color: rgba(51, 51, 51, 1);
+		font-size: 14px;
+		font-weight: 500;
+		margin-left: 4rpx;
+	}
+	.tui-goods-attr1{
+		
+		color: rgba(255, 86, 0, 1);
+		line-height: 32rpx;
+		padding-top: 20rpx;
+		word-break: break-all;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 2;
+	}
+	.yuanicon{
+		font-size: 8px;
+	}
+	.yuanPrice{
+		font-size: 16px;
+		font-weight: bold;
+	}
+	.yuanText{
+		font-size: 12px;
 	}
 	.tui-goods-flex{
 		display: flex;

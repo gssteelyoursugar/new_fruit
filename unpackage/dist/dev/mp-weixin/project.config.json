@@ -13,8 +13,6 @@
 	"libVersion": "",
 	"appid": "wxb820c791e554616c",
 	"projectname": "fruit-test",
-	"simulatorType": "wechat",
-	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,
@@ -61,8 +59,7 @@
 					"id": 3,
 					"name": "详情",
 					"pathName": "pagesIII/productDetail/productDetail",
-					"query": "id=1314864767386910720&__id__=4",
-					"scene": null
+					"query": "id=1299160628273971200&__id__=2"
 				},
 				{
 					"id": 4,
@@ -75,6 +72,20 @@
 					"name": "支付成功",
 					"pathName": "pagesIII/PayOK/PayOK",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "找水果",
+					"pathName": "pages/search/search",
+					"query": "id=1314864767386910720&__id__=4",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "搜索",
+					"pathName": "pagesII/searchGoods/searchGoods",
+					"query": "id=1314864767386910720&__id__=4",
+					"scene": null
 				}
 			]
 		}

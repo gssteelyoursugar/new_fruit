@@ -94,10 +94,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiIcon: function() {
-    return __webpack_require__.e(/*! import() | components/tui-icon/tui-icon */ "components/tui-icon/tui-icon").then(__webpack_require__.bind(null, /*! @/components/tui-icon/tui-icon.vue */ 373))
+    return __webpack_require__.e(/*! import() | components/tui-icon/tui-icon */ "components/tui-icon/tui-icon").then(__webpack_require__.bind(null, /*! @/components/tui-icon/tui-icon.vue */ 383))
   },
   tuiSwipeAction: function() {
-    return __webpack_require__.e(/*! import() | components/tui-swipe-action/tui-swipe-action */ "components/tui-swipe-action/tui-swipe-action").then(__webpack_require__.bind(null, /*! @/components/tui-swipe-action/tui-swipe-action.vue */ 415))
+    return __webpack_require__.e(/*! import() | components/tui-swipe-action/tui-swipe-action */ "components/tui-swipe-action/tui-swipe-action").then(__webpack_require__.bind(null, /*! @/components/tui-swipe-action/tui-swipe-action.vue */ 425))
   }
 }
 var render = function() {

@@ -26,7 +26,7 @@
 		<!-- 搜索框 -->
 		<view class="search-bar" @click="goToSearchGoods">
 			<image src="../../static/images/search-icon.png" mode=""></image>
-			<view class="search-text">芒果</view>
+			<view class="search-text">搜索您要购买的商品或类型</view>
 		</view>
 		<!-- 搜索框 -->
 		<!--顶部筛选-->

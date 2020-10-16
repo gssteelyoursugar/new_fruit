@@ -591,7 +591,7 @@
 			},
 			gotoAfter() {
 				uni.navigateTo({
-					url: '../../pagesII/afterSale/afterSale'
+					url: '../../pagesIII/navbar/navbar'
 				})
 			},
 

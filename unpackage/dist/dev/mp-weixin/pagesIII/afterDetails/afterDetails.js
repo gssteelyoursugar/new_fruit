@@ -94,13 +94,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiListCell: function() {
-    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 436))
+    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 446))
   }
 }
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var l0 = _vm.__map(_vm.files, function(item, index) {
+    var $orig = _vm.__get_orig(item)
+
+    var g0 = item.indexOf(".mp4")
+    var g1 = item.indexOf(".mp4")
+    return {
+      $orig: $orig,
+      g0: g0,
+      g1: g1
+    }
+  })
+
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        l0: l0
+      }
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -135,6 +155,18 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -246,10 +278,25 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 //
 //
 //
-var _console = console,log = _console.log;var _default = { data: function data() {return { id: '', DetailsData: {}, //申请详情数据
-      files: [] };}, methods: { previewImage: function previewImage(e) {log(e.currentTarget.id);uni.previewImage({ current: e.currentTarget.id, urls: this.files });}, postAfterDetails: function postAfterDetails() {var _this = this;var setdata = uni.getStorageSync('usermen');var data = { token: setdata, id: this.id };(0, _api.publicing)(_request.posAfterDetails, data).then(function (res) {log(res);_this.DetailsData = res.data.data; // this.files = res.data.data.imgList
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var thorui = __webpack_require__(/*! @/common/tui-clipboard/tui-clipboard.js */ 82);var _console = console,log = _console.log;var _default = { data: function data() {return { id: '', DetailsData: {}, //申请详情数据
+      files: [] };}, methods: { //图片预览
+    previewImage: function previewImage(e) {log(e.currentTarget.id);uni.previewImage({ current: e.currentTarget.id, urls: this.files });}, //获取申请详情信息
+    postAfterDetails: function postAfterDetails() {var _this = this;var setdata = uni.getStorageSync('usermen');var data = { token: setdata, id: this.id };(0, _api.publicing)(_request.posAfterDetails, data).then(function (res) {log(res);_this.DetailsData = res.data.data; // this.files = res.data.data.imgList
         var new_arr = res.data.data.imgList.map(function (obj) {return obj.url;}); //把图片链接提取出来
-        _this.files = new_arr;}).catch(function (err) {log(err);});} }, onLoad: function onLoad(options) {console.log(options.id);this.id = options.id;this.postAfterDetails();} };exports.default = _default;
+        _this.files = new_arr;}).catch(function (err) {log(err);});}, //复制
+    //event 当需要异步请求返回数据再进行复制时，需要传入此参数，或者异步方法转为同步方法（H5端）
+    clipboard: function clipboard(event) {console.log(event);var data = event;thorui.getClipboardData(data, function (res) {}, event);} }, onLoad: function onLoad(options) {console.log(options.id);this.id = options.id;this.postAfterDetails();} };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

@@ -36,6 +36,7 @@ page {
 	        align-items: center;
 	-webkit-flex-wrap: nowrap;
 	        flex-wrap: nowrap;
+	background: #F5F5F5;
 }
 .tui-input {
 	-webkit-box-flex: 1;
@@ -50,9 +51,9 @@ page {
 	color: #b2b2b2;
 }
 .tui-cancle {
-	color: #888;
+	color: #333;
 	font-size: 28rpx;
-	padding-left: 30rpx;
+	padding-left: 10rpx;
 	-webkit-flex-shrink: 0;
 	        flex-shrink: 0;
 }

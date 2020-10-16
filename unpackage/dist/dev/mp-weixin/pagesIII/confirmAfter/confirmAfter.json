@@ -1,6 +1,4 @@
 {
   "navigationBarTitleText": "售后反馈",
-  "usingComponents": {
-    "tui-button": "/components/tui-button/tui-button"
-  }
+  "usingComponents": {}
 }

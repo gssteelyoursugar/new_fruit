@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiListCell: function() {
-    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 436))
+    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 446))
   }
 }
 var render = function() {
@@ -727,7 +727,7 @@ var _console = console,log = _console.log;var logins = __webpack_require__(/*! .
     },
     gotoAfter: function gotoAfter() {
       uni.navigateTo({
-        url: '../../pagesII/afterSale/afterSale' });
+        url: '../../pagesIII/navbar/navbar' });
 
     },
 

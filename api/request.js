@@ -117,10 +117,6 @@ let postAgainOrder = `${url}api/wx/order/againOrder`
 //结算清单
 let postDetailed = `${url}api/wx/order/detailed`
 
-//售后下拉数据
-let getAfterSaleData = `${url}api/wx/afterSale/getAfterSaleData`
-
-
 //文件上传
 let uploading = `${url}api/wx/file/uploading`
 
@@ -174,16 +170,27 @@ let postAddressList = `${url}api/wx/area/treeDatClinet`
 //提交售后
 let posAfterSale = `${url}api/wx/wxOrderItemAfterSale/save`
 
+
 //售后列表
 let posAfterSaleList = `${url}api/wx/wxOrderItemAfterSale/list`
-
 
 //售后详情
 let posAfterDetails = `${url}api/wx/wxOrderItemAfterSale/details`
 
-
-//取消申请
+//取消申请售后
 let postAfterCen = `${url}api/wx/wxOrderItemAfterSale/cancelAfter`
+
+//确认售后
+let postAfterConfirm = `${url}api/wx/wxOrderItemAfterSale/confirm`
+
+//待确认售后
+let getBeConfirmed = `${url}api/wx/wxOrderItemAfterSale/toBeConfirmed`
+
+//售后下拉数据
+let getAfterSaleData = `${url}api/wx/afterSale/getAfterSaleData`
+
+// //取消申请
+// let postAfterCen = `${url}api/wx/wxOrderItemAfterSale/cancelAfter`
 
 
 
