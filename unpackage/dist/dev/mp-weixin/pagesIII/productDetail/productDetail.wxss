@@ -2,6 +2,9 @@
 page {
 	background-color: #f7f7f7;
 }
+[v-cloak] {
+	display: none;
+}
 
 /* 弹层 */
 .tui-list-title {
@@ -285,14 +288,16 @@ page {
 .net-tip {
 	color: #fff;
 	position: absolute;
-	left: 16rpx;
-	bottom: 30rpx;
+	/* left: 16rpx; */
+	bottom: 30%;
 	background: rgba(0, 0, 0, .5);
 	font-size: 28rpx;
 	padding: 20rpx;
 	-webkit-border-radius: 14rpx;
-	        border-radius: 14rpx;
+	border-radius: 14rpx;
 	text-align: center;
+	width: 70%;
+	margin: 0 15%;
 }
 .tui-slide-image {
 	width: 100%;

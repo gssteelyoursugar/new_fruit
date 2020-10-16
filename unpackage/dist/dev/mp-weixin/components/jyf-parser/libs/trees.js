@@ -1,9 +1,9 @@
 (global["webpackJsonp"] = global["webpackJsonp"] || []).push([["components/jyf-parser/libs/trees"],{
 
 /***/ 542:
-/*!***************************************************************************!*\
-  !*** /Users/Ning/Downloads/my_fruit/components/jyf-parser/libs/trees.vue ***!
-  \***************************************************************************/
+/*!******************************************************************************!*\
+  !*** /Users/gsheng/Downloads/new_fruit/components/jyf-parser/libs/trees.vue ***!
+  \******************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -14,7 +14,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _trees_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _trees_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var _trees_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./trees.vue?vue&type=style&index=0&lang=css& */ 547);
 /* harmony import */ var _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js */ 10);
-/* harmony import */ var _handler_wxs_vue_type_custom_index_0_blockType_script_issuerPath_2FUsers_2FNing_2FDownloads_2Fmy_fruit_2Fcomponents_2Fjyf_parser_2Flibs_2Ftrees_vue_module_handler_lang_wxs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./handler.wxs?vue&type=custom&index=0&blockType=script&issuerPath=%2FUsers%2FNing%2FDownloads%2Fmy_fruit%2Fcomponents%2Fjyf-parser%2Flibs%2Ftrees.vue&module=handler&lang=wxs */ 549);
+/* harmony import */ var _handler_wxs_vue_type_custom_index_0_blockType_script_issuerPath_2FUsers_2Fgsheng_2FDownloads_2Fnew_fruit_2Fcomponents_2Fjyf_parser_2Flibs_2Ftrees_vue_module_handler_lang_wxs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./handler.wxs?vue&type=custom&index=0&blockType=script&issuerPath=%2FUsers%2Fgsheng%2FDownloads%2Fnew_fruit%2Fcomponents%2Fjyf-parser%2Flibs%2Ftrees.vue&module=handler&lang=wxs */ 549);
 
 var renderjs
 
@@ -39,7 +39,7 @@ var component = Object(_Applications_HBuilderX_app_Contents_HBuilderX_plugins_un
 
 /* custom blocks */
 
-if (typeof _handler_wxs_vue_type_custom_index_0_blockType_script_issuerPath_2FUsers_2FNing_2FDownloads_2Fmy_fruit_2Fcomponents_2Fjyf_parser_2Flibs_2Ftrees_vue_module_handler_lang_wxs__WEBPACK_IMPORTED_MODULE_4__["default"] === 'function') Object(_handler_wxs_vue_type_custom_index_0_blockType_script_issuerPath_2FUsers_2FNing_2FDownloads_2Fmy_fruit_2Fcomponents_2Fjyf_parser_2Flibs_2Ftrees_vue_module_handler_lang_wxs__WEBPACK_IMPORTED_MODULE_4__["default"])(component)
+if (typeof _handler_wxs_vue_type_custom_index_0_blockType_script_issuerPath_2FUsers_2Fgsheng_2FDownloads_2Fnew_fruit_2Fcomponents_2Fjyf_parser_2Flibs_2Ftrees_vue_module_handler_lang_wxs__WEBPACK_IMPORTED_MODULE_4__["default"] === 'function') Object(_handler_wxs_vue_type_custom_index_0_blockType_script_issuerPath_2FUsers_2Fgsheng_2FDownloads_2Fnew_fruit_2Fcomponents_2Fjyf_parser_2Flibs_2Ftrees_vue_module_handler_lang_wxs__WEBPACK_IMPORTED_MODULE_4__["default"])(component)
 
 component.options.__file = "components/jyf-parser/libs/trees.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
@@ -47,9 +47,9 @@ component.options.__file = "components/jyf-parser/libs/trees.vue"
 /***/ }),
 
 /***/ 543:
-/*!**************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** /Users/Ning/Downloads/my_fruit/components/jyf-parser/libs/trees.vue?vue&type=template&id=13da2543&filter-modules=eyJoYW5kbGVyIjp7InR5cGUiOiJzY3JpcHQiLCJjb250ZW50IjoiIiwic3RhcnQiOjUwNzgsImF0dHJzIjp7Im1vZHVsZSI6ImhhbmRsZXIiLCJsYW5nIjoid3hzIiwic3JjIjoiLi9oYW5kbGVyLnd4cyJ9LCJlbmQiOjUwNzh9fQ%3D%3D& ***!
-  \**************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** /Users/gsheng/Downloads/new_fruit/components/jyf-parser/libs/trees.vue?vue&type=template&id=13da2543&filter-modules=eyJoYW5kbGVyIjp7InR5cGUiOiJzY3JpcHQiLCJjb250ZW50IjoiIiwic3RhcnQiOjUwNzgsImF0dHJzIjp7Im1vZHVsZSI6ImhhbmRsZXIiLCJsYW5nIjoid3hzIiwic3JjIjoiLi9oYW5kbGVyLnd4cyJ9LCJlbmQiOjUwNzh9fQ%3D%3D& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns, recyclableRender, components */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -69,9 +69,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 544:
-/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--16-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-app-loader/page-meta.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/Ning/Downloads/my_fruit/components/jyf-parser/libs/trees.vue?vue&type=template&id=13da2543&filter-modules=eyJoYW5kbGVyIjp7InR5cGUiOiJzY3JpcHQiLCJjb250ZW50IjoiIiwic3RhcnQiOjUwNzgsImF0dHJzIjp7Im1vZHVsZSI6ImhhbmRsZXIiLCJsYW5nIjoid3hzIiwic3JjIjoiLi9oYW5kbGVyLnd4cyJ9LCJlbmQiOjUwNzh9fQ%3D%3D& ***!
-  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--16-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-app-loader/page-meta.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/gsheng/Downloads/new_fruit/components/jyf-parser/libs/trees.vue?vue&type=template&id=13da2543&filter-modules=eyJoYW5kbGVyIjp7InR5cGUiOiJzY3JpcHQiLCJjb250ZW50IjoiIiwic3RhcnQiOjUwNzgsImF0dHJzIjp7Im1vZHVsZSI6ImhhbmRsZXIiLCJsYW5nIjoid3hzIiwic3JjIjoiLi9oYW5kbGVyLnd4cyJ9LCJlbmQiOjUwNzh9fQ%3D%3D& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns, recyclableRender, components */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -96,9 +96,9 @@ render._withStripped = true
 /***/ }),
 
 /***/ 545:
-/*!****************************************************************************************************!*\
-  !*** /Users/Ning/Downloads/my_fruit/components/jyf-parser/libs/trees.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************/
+/*!*******************************************************************************************************!*\
+  !*** /Users/gsheng/Downloads/new_fruit/components/jyf-parser/libs/trees.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -112,9 +112,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 546:
-/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/Ning/Downloads/my_fruit/components/jyf-parser/libs/trees.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/gsheng/Downloads/new_fruit/components/jyf-parser/libs/trees.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -402,9 +402,9 @@ var errorImg = __webpack_require__(/*! ../libs/config.js */ 524).errorImg;var _d
 /***/ }),
 
 /***/ 547:
-/*!************************************************************************************************************!*\
-  !*** /Users/Ning/Downloads/my_fruit/components/jyf-parser/libs/trees.vue?vue&type=style&index=0&lang=css& ***!
-  \************************************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** /Users/gsheng/Downloads/new_fruit/components/jyf-parser/libs/trees.vue?vue&type=style&index=0&lang=css& ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -418,9 +418,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 548:
-/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--6-oneOf-1-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-2!./node_modules/postcss-loader/src??ref--6-oneOf-1-3!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/Ning/Downloads/my_fruit/components/jyf-parser/libs/trees.vue?vue&type=style&index=0&lang=css& ***!
-  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--6-oneOf-1-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-2!./node_modules/postcss-loader/src??ref--6-oneOf-1-3!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/gsheng/Downloads/new_fruit/components/jyf-parser/libs/trees.vue?vue&type=style&index=0&lang=css& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -431,23 +431,23 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 549:
-/*!*********************************************************************************************************************************************************************************************************************************************!*\
-  !*** /Users/Ning/Downloads/my_fruit/components/jyf-parser/libs/handler.wxs?vue&type=custom&index=0&blockType=script&issuerPath=%2FUsers%2FNing%2FDownloads%2Fmy_fruit%2Fcomponents%2Fjyf-parser%2Flibs%2Ftrees.vue&module=handler&lang=wxs ***!
-  \*********************************************************************************************************************************************************************************************************************************************/
+/*!***************************************************************************************************************************************************************************************************************************************************!*\
+  !*** /Users/gsheng/Downloads/new_fruit/components/jyf-parser/libs/handler.wxs?vue&type=custom&index=0&blockType=script&issuerPath=%2FUsers%2Fgsheng%2FDownloads%2Fnew_fruit%2Fcomponents%2Fjyf-parser%2Flibs%2Ftrees.vue&module=handler&lang=wxs ***!
+  \***************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_uni_filter_loader_index_js_handler_wxs_vue_type_custom_index_0_blockType_script_issuerPath_2FUsers_2FNing_2FDownloads_2Fmy_fruit_2Fcomponents_2Fjyf_parser_2Flibs_2Ftrees_vue_module_handler_lang_wxs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-filter-loader!./handler.wxs?vue&type=custom&index=0&blockType=script&issuerPath=%2FUsers%2FNing%2FDownloads%2Fmy_fruit%2Fcomponents%2Fjyf-parser%2Flibs%2Ftrees.vue&module=handler&lang=wxs */ 550);
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_uni_filter_loader_index_js_handler_wxs_vue_type_custom_index_0_blockType_script_issuerPath_2FUsers_2FNing_2FDownloads_2Fmy_fruit_2Fcomponents_2Fjyf_parser_2Flibs_2Ftrees_vue_module_handler_lang_wxs__WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_uni_filter_loader_index_js_handler_wxs_vue_type_custom_index_0_blockType_script_issuerPath_2FUsers_2Fgsheng_2FDownloads_2Fnew_fruit_2Fcomponents_2Fjyf_parser_2Flibs_2Ftrees_vue_module_handler_lang_wxs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-filter-loader!./handler.wxs?vue&type=custom&index=0&blockType=script&issuerPath=%2FUsers%2Fgsheng%2FDownloads%2Fnew_fruit%2Fcomponents%2Fjyf-parser%2Flibs%2Ftrees.vue&module=handler&lang=wxs */ 550);
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_uni_filter_loader_index_js_handler_wxs_vue_type_custom_index_0_blockType_script_issuerPath_2FUsers_2Fgsheng_2FDownloads_2Fnew_fruit_2Fcomponents_2Fjyf_parser_2Flibs_2Ftrees_vue_module_handler_lang_wxs__WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
 /***/ 550:
-/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-filter-loader!/Users/Ning/Downloads/my_fruit/components/jyf-parser/libs/handler.wxs?vue&type=custom&index=0&blockType=script&issuerPath=%2FUsers%2FNing%2FDownloads%2Fmy_fruit%2Fcomponents%2Fjyf-parser%2Flibs%2Ftrees.vue&module=handler&lang=wxs ***!
-  \****************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-filter-loader!/Users/gsheng/Downloads/new_fruit/components/jyf-parser/libs/handler.wxs?vue&type=custom&index=0&blockType=script&issuerPath=%2FUsers%2Fgsheng%2FDownloads%2Fnew_fruit%2Fcomponents%2Fjyf-parser%2Flibs%2Ftrees.vue&module=handler&lang=wxs ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 

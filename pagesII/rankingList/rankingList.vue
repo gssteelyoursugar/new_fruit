@@ -58,7 +58,7 @@
 											累计成交
 											<text class="tag-tit3-text">
 												<!-- {{item.totalPrice |filterNum}} -->
-												{{12322.9 | filterNum }}
+												{{item.totalPrice| filterNum }}
 											</text> 元
 										</view>
 									</view>
@@ -75,63 +75,63 @@
 				<view class="tui-tab-rank" :class="[num === 1 ? 'actineclass' : 'errorclass']">
 					<block v-for="(item,index) in goodList" :key="index">
 						<view class="tui-tab-rank-cent" @tap="gotoList(item.id)">
-								<view class="rank-box" :style="{borderColor: rankColor[index]}">
-									<text v-if="index<10" :style="{backgroundColor: rankColor[index]}">{{"0"+(index+1)}}</text>
-									<image :src="item.url" mode="aspectFill" class="img-rink"></image>
-								</view>
-								<view class="tui-pro-tit">
-									<text class="tag-tit">{{item.lableName}}</text> <text class="tag-tit-text">{{item.name}}</text>
-									<view class="tag-tit2">
-										<view class="">
-											<view class="tag-tit2-price">
-												<!-- <text style="font-size: 24rpx;color: #555;margin-right: 12rpx;">限量价</text> -->
-												<text style="font-size: 16rpx;">¥</text>
-												<text style="font-size: 40rpx;font-weight: bold;margin: 0 4rpx;">{{item.platformPrice ||0.00}}</text>
-												<text style="font-size: 24rpx;font-weight: 400;">元</text>
-												<text style="font-size: 20rpx;color: #b6b6b6;">/件</text>
-											</view>
-											<view class="tag-tit2-text">
-												{{item.evaluateNumber || 0}}人点了赞
-											</view>
-										</view>
-										<image src="../../static/images/shopcar@2x.png" mode="aspectFill" class="tui-shop-car"></image>
-										<!-- <view>购物车</view> -->
-									</view>
-
-								</view>
+							<view class="rank-box" :style="{borderColor: rankColor[index]}">
+								<text v-if="index<10" :style="{backgroundColor: rankColor[index]}">{{"0"+(index+1)}}</text>
+								<image :src="item.url" mode="aspectFill" class="img-rink"></image>
 							</view>
+							<view class="tui-pro-tit">
+								<text class="tag-tit">{{item.lableName}}</text> <text class="tag-tit-text">{{item.name}}</text>
+								<view class="tag-tit2">
+									<view class="">
+										<view class="tag-tit2-price">
+											<!-- <text style="font-size: 24rpx;color: #555;margin-right: 12rpx;">限量价</text> -->
+											<text style="font-size: 16rpx;">¥</text>
+											<text style="font-size: 40rpx;font-weight: bold;margin: 0 4rpx;">{{item.platformPrice ||0.00}}</text>
+											<text style="font-size: 24rpx;font-weight: 400;">元</text>
+											<text style="font-size: 20rpx;color: #b6b6b6;">/件</text>
+										</view>
+										<view class="tag-tit2-text">
+											{{item.evaluateNumber || 0}}人点了赞
+										</view>
+									</view>
+									<image src="../../static/images/shopcar@2x.png" mode="aspectFill" class="tui-shop-car"></image>
+									<!-- <view>购物车</view> -->
+								</view>
+
+							</view>
+						</view>
 					</block>
 				</view>
 				<!-- 关注 -->
 				<view class="tui-tab-rank" :class="[num === 2 ? 'actineclass' : 'errorclass']">
 					<block v-for="(item,index) in goodList" :key="index">
 						<view class="tui-tab-rank-cent" @tap="gotoList(item.id)">
-								<view class="rank-box" :style="{borderColor: rankColor[index]}">
-									<text v-if="index<10" :style="{backgroundColor: rankColor[index]}">{{"0"+(index+1)}}</text>
-									
-									<image :src="item.url" mode="aspectFill" class="img-rink"></image>
-								</view>
-								<view class="tui-pro-tit">
-									<text class="tag-tit">{{item.lableName}}</text> <text class="tag-tit-text">{{item.name}}</text>
-									<view class="tag-tit2">
-										<view class="">
-											<view class="tag-tit2-price">
-												<!-- <text style="font-size: 24rpx;color: #555;margin-right: 12rpx;">限量价</text> -->
-												<text style="font-size: 16rpx;">¥</text>
-												<text style="font-size: 40rpx;font-weight: bold;margin: 0 4rpx;">{{item.platformPrice}}</text>
-												<text style="font-size: 24rpx;font-weight: 400;">元</text>
-												<text style="font-size: 20rpx;color: #b6b6b6;">/件</text>
-											</view>
-											<view class="tag-tit2-text">
-												{{item.followNumber ||0}}人关注收藏了
-											</view>
-										</view>
-										<image src="../../static/images/shopcar@2x.png" mode="aspectFill" class="tui-shop-car"></image>
-										<!-- <view>购物车</view> -->
-									</view>
+							<view class="rank-box" :style="{borderColor: rankColor[index]}">
+								<text v-if="index<10" :style="{backgroundColor: rankColor[index]}">{{"0"+(index+1)}}</text>
 
-								</view>
+								<image :src="item.url" mode="aspectFill" class="img-rink"></image>
 							</view>
+							<view class="tui-pro-tit">
+								<text class="tag-tit">{{item.lableName}}</text> <text class="tag-tit-text">{{item.name}}</text>
+								<view class="tag-tit2">
+									<view class="">
+										<view class="tag-tit2-price">
+											<!-- <text style="font-size: 24rpx;color: #555;margin-right: 12rpx;">限量价</text> -->
+											<text style="font-size: 16rpx;">¥</text>
+											<text style="font-size: 40rpx;font-weight: bold;margin: 0 4rpx;">{{item.platformPrice}}</text>
+											<text style="font-size: 24rpx;font-weight: 400;">元</text>
+											<text style="font-size: 20rpx;color: #b6b6b6;">/件</text>
+										</view>
+										<view class="tag-tit2-text">
+											{{item.followNumber ||0}}人关注收藏了
+										</view>
+									</view>
+									<image src="../../static/images/shopcar@2x.png" mode="aspectFill" class="tui-shop-car"></image>
+									<!-- <view>购物车</view> -->
+								</view>
+
+							</view>
+						</view>
 					</block>
 
 				</view>
@@ -139,31 +139,31 @@
 				<view class="tui-tab-rank" :class="[num === 3 ? 'actineclass' : 'errorclass']">
 					<block v-for="(item,index) in goodList" :key="index">
 						<view class="tui-tab-rank-cent" @tap="gotoList(item.id)">
-								<view class="rank-box" :style="{borderColor: rankColor[index]}">
-									<text v-if="index<10" :style="{backgroundColor: rankColor[index]}">{{"0"+(index+1)}}</text>
-									<image :src="item.url" mode="aspectFill" class="img-rink"></image>
-								</view>
-								<view class="tui-pro-tit">
-									<text class="tag-tit">{{item.lableName}}</text> <text class="tag-tit-text">{{item.name}}</text>
-									<view class="tag-tit2">
-										<view class="">
-											<view class="tag-tit2-price">
-												<!-- <text style="font-size: 24rpx;color: #555;margin-right: 12rpx;">限量价</text> -->
-												<text style="font-size: 16rpx;">¥</text>
-												<text style="font-size: 40rpx;font-weight: bold;margin: 0 4rpx;">{{item.platformPrice}}</text>
-												<text style="font-size: 24rpx;font-weight: 400;">元</text>
-												<text style="font-size: 20rpx;color: #b6b6b6;">/件</text>
-											</view>
-											<view class="tag-tit2-text">
-												{{item.backNumber || 0}}人买了之后又买
-											</view>
-										</view>
-										<image src="../../static/images/shopcar@2x.png" mode="aspectFill" class="tui-shop-car"></image>
-										<!-- <view>购物车</view> -->
-									</view>
-
-								</view>
+							<view class="rank-box" :style="{borderColor: rankColor[index]}">
+								<text v-if="index<10" :style="{backgroundColor: rankColor[index]}">{{"0"+(index+1)}}</text>
+								<image :src="item.url" mode="aspectFill" class="img-rink"></image>
 							</view>
+							<view class="tui-pro-tit">
+								<text class="tag-tit">{{item.lableName}}</text> <text class="tag-tit-text">{{item.name}}</text>
+								<view class="tag-tit2">
+									<view class="">
+										<view class="tag-tit2-price">
+											<!-- <text style="font-size: 24rpx;color: #555;margin-right: 12rpx;">限量价</text> -->
+											<text style="font-size: 16rpx;">¥</text>
+											<text style="font-size: 40rpx;font-weight: bold;margin: 0 4rpx;">{{item.platformPrice}}</text>
+											<text style="font-size: 24rpx;font-weight: 400;">元</text>
+											<text style="font-size: 20rpx;color: #b6b6b6;">/件</text>
+										</view>
+										<view class="tag-tit2-text">
+											{{item.backNumber || 0}}人买了之后又买
+										</view>
+									</view>
+									<image src="../../static/images/shopcar@2x.png" mode="aspectFill" class="tui-shop-car"></image>
+									<!-- <view>购物车</view> -->
+								</view>
+
+							</view>
+						</view>
 					</block>
 				</view>
 			</view>
@@ -190,7 +190,9 @@
 	export default {
 		data() {
 			return {
-				rankColor: ['#FF5C00', '#9AA8BB', '#C8AA8D', '#E3E3E3','#47323c','#47323c','#47323c','#47323c','#47323c','#47323c'],
+				rankColor: ['#FF5C00', '#9AA8BB', '#C8AA8D', '#E3E3E3', '#47323c', '#47323c', '#47323c', '#47323c', '#47323c',
+					'#47323c'
+				],
 				url: '',
 				goodList: [],
 				hideing: 0,
@@ -262,29 +264,54 @@
 			}, 0);
 		},
 		computed: {
-			currMonth(){
-				return new Date().getMonth()+1
+			currMonth() {
+				return new Date().getMonth() + 1
 			},
-			currDay(){
+			currDay() {
 				return new Date().getDate()
 			},
-		
+
 		},
+
 		filters: {
 			filterNum(val) {
-				let data = Math.floor(val)+''
+				let data = Math.floor(val) + ''
 				let res = data.split("")
-				const unit = ['','','','千','万','万','万','万','亿']
-				if (res.length < 4) {
+				const unit = ['','个', '十', '百', '千', '万', '万', '万', '万', '亿']
+				if (res.length <= 4) {
 					return data
-				}else {
-					if (res[1]!== 0) {
-						return res[0]+""+res[1]+unit[res.length]
+				} else if (res.length === 5) { // 1w √
+					if (res[1] !== '0') {
+						return res[0] + "." + res[1] + unit[res.length]
 					} else {
-						return res[0]+""+unit[res.length]
+						return res[0] + "" + unit[res.length]
+					}
+				} else if (res.length === 6) {  // 10w √
+					if (res[2] !== '0') {
+						return res[0] + res[1]+ "." + res[2]+ unit[res.length]
+					} else {
+						return res[0] + res[1]+ "" + unit[res.length]
+					}
+				} else if (res.length === 7) { // 100w √
+					if (res[3] !== '0') {
+						return res[0] + res[1] + res[2]+ "." +res[3]+ unit[res.length]
+					} else {
+						return res[0] + res[1] + res[2]+ "" + unit[res.length]
+					}
+				} else if (res.length === 8) { // 1000w√
+					if (res[4] !== '0') {
+						return res[0] + res[1] + res[2]+ res[3]+ "." +res[4]+ unit[res.length]
+					} else {
+						return res[0] + res[1] + res[2]+ res[3] + "" + unit[res.length]
+					}
+				}  else if (res.length === 9) { // 1e
+					if (res[1] !== '0') {
+						return res[0] + "." + res[1] + unit[res.length]
+					} else {
+						return res[0] + "" + unit[res.length]
 					}
 				}
-				
+
 			}
 		},
 		methods: {
@@ -463,6 +490,8 @@
 		position: relative;
 		top: -42rpx;
 		padding: 0 30rpx;
+		margin-bottom: 50rpx;
+
 
 	}
 
@@ -471,6 +500,9 @@
 		padding: 20rpx 0;
 		border-bottom: 1rpx solid rgba(238, 238, 238, 1);
 
+	}
+	.tui-tab-rank-cent:last-child {
+		border-bottom:none
 	}
 
 	.rank-box {

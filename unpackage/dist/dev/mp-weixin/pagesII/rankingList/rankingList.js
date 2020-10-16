@@ -1,9 +1,9 @@
 (global["webpackJsonp"] = global["webpackJsonp"] || []).push([["pagesII/rankingList/rankingList"],{
 
 /***/ 68:
-/*!*********************************************************************************************!*\
-  !*** /Users/Ning/Downloads/my_fruit/main.js?{"page":"pagesII%2FrankingList%2FrankingList"} ***!
-  \*********************************************************************************************/
+/*!************************************************************************************************!*\
+  !*** /Users/gsheng/Downloads/new_fruit/main.js?{"page":"pagesII%2FrankingList%2FrankingList"} ***!
+  \************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17,9 +17,9 @@ createPage(_rankingList.default);
 /***/ }),
 
 /***/ 69:
-/*!**************************************************************************!*\
-  !*** /Users/Ning/Downloads/my_fruit/pagesII/rankingList/rankingList.vue ***!
-  \**************************************************************************/
+/*!*****************************************************************************!*\
+  !*** /Users/gsheng/Downloads/new_fruit/pagesII/rankingList/rankingList.vue ***!
+  \*****************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -58,9 +58,9 @@ component.options.__file = "pagesII/rankingList/rankingList.vue"
 /***/ }),
 
 /***/ 70:
-/*!*********************************************************************************************************!*\
-  !*** /Users/Ning/Downloads/my_fruit/pagesII/rankingList/rankingList.vue?vue&type=template&id=7037ed10& ***!
-  \*********************************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /Users/gsheng/Downloads/new_fruit/pagesII/rankingList/rankingList.vue?vue&type=template&id=7037ed10& ***!
+  \************************************************************************************************************/
 /*! exports provided: render, staticRenderFns, recyclableRender, components */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -80,9 +80,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 71:
-/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--16-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-app-loader/page-meta.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/Ning/Downloads/my_fruit/pagesII/rankingList/rankingList.vue?vue&type=template&id=7037ed10& ***!
-  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--16-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-app-loader/page-meta.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/gsheng/Downloads/new_fruit/pagesII/rankingList/rankingList.vue?vue&type=template&id=7037ed10& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns, recyclableRender, components */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -101,13 +101,22 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  var f0 = _vm._f("filterNum")(12322.9)
+  var l0 = _vm.__map(_vm.goodList, function(item, index) {
+    var $orig = _vm.__get_orig(item)
+
+    var f0 = _vm._f("filterNum")(item.totalPrice)
+
+    return {
+      $orig: $orig,
+      f0: f0
+    }
+  })
 
   _vm.$mp.data = Object.assign(
     {},
     {
       $root: {
-        f0: f0
+        l0: l0
       }
     }
   )
@@ -121,9 +130,9 @@ render._withStripped = true
 /***/ }),
 
 /***/ 72:
-/*!***************************************************************************************************!*\
-  !*** /Users/Ning/Downloads/my_fruit/pagesII/rankingList/rankingList.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************/
+/*!******************************************************************************************************!*\
+  !*** /Users/gsheng/Downloads/new_fruit/pagesII/rankingList/rankingList.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -137,9 +146,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 73:
-/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/Ning/Downloads/my_fruit/pagesII/rankingList/rankingList.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/gsheng/Downloads/new_fruit/pagesII/rankingList/rankingList.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -509,14 +518,41 @@ var _console = console,log = _console.log;var _default = { data: function data()
       scrollH: 0, //滚动总高度
       opcity: 0, iconOpcity: 0.5, bannerIndex: 0, menuShow: false, popupShow: false, value: 1, collected: false, valueText: '' };}, onLoad: function onLoad(options) {var _this = this;this.url = _request.imgurl;var obj = { options: options }; //指定跳转
     this.menubtn(parseInt(options.index), options.value); //this.postRanking()
-    obj = wx.getMenuButtonBoundingClientRect();setTimeout(function () {uni.getSystemInfo({ success: function success(res) {_this.width = obj.left || res.windowWidth;_this.height = obj.top ? obj.top + obj.height + 8 : res.statusBarHeight + 44;_this.top = obj.top ? obj.top + (obj.height - 32) / 2 : res.statusBarHeight + 6;_this.scrollH = res.windowWidth;} });}, 0);}, computed: { currMonth: function currMonth() {return new Date().getMonth() + 1;}, currDay: function currDay() {return new Date().getDate();} }, filters: { filterNum: function filterNum(val) {var data = Math.floor(val) + '';var res = data.split("");var unit = ['', '', '', '千', '万', '万', '万', '万', '亿'];if (res.length < 4) {return data;} else {if (res[1] !== 0) {return res[0] + "" + res[1] + unit[res.length];} else {return res[0] + "" + unit[res.length];}}} }, methods: { onPullDownRefresh: function onPullDownRefresh() {this.postRanking();console.log('refresh');setTimeout(function () {uni.stopPullDownRefresh();}, 1000);}, //商品详情页
+    obj = wx.getMenuButtonBoundingClientRect();setTimeout(function () {uni.getSystemInfo({ success: function success(res) {_this.width = obj.left || res.windowWidth;_this.height = obj.top ? obj.top + obj.height + 8 : res.statusBarHeight + 44;_this.top = obj.top ? obj.top + (obj.height - 32) / 2 : res.statusBarHeight + 6;_this.scrollH = res.windowWidth;} });}, 0);}, computed: { currMonth: function currMonth() {return new Date().getMonth() + 1;}, currDay: function currDay() {return new Date().getDate();} }, filters: { filterNum: function filterNum(val) {var data = Math.floor(val) + '';var res = data.split("");var unit = ['', '个', '十', '百', '千', '万', '万', '万', '万', '亿'];if (res.length <= 4) {return data;} else if (res.length === 5) {// 1w √
+        if (res[1] !== '0') {return res[0] + "." + res[1] + unit[res.length];} else {return res[0] + "" + unit[res.length];}} else if (res.length === 6) {// 10w √
+        if (res[2] !== '0') {return res[0] + res[1] + "." + res[2] + unit[res.length];} else {return res[0] + res[1] + "" + unit[res.length];}} else if (res.length === 7) {// 100w √
+        if (res[3] !== '0') {return res[0] + res[1] + res[2] + "." + res[3] + unit[res.length];} else {return res[0] + res[1] + res[2] + "" + unit[res.length];}} else if (res.length === 8) {// 1000w√
+        if (res[4] !== '0') {return res[0] + res[1] + res[2] + res[3] + "." + res[4] + unit[res.length];} else {return res[0] + res[1] + res[2] + res[3] + "" + unit[res.length];}} else if (res.length === 9) {// 1e
+        if (res[1] !== '0') {return res[0] + "." + res[1] + unit[res.length];} else {return res[0] + "" + unit[res.length];}}} }, methods: { onPullDownRefresh: function onPullDownRefresh() {this.postRanking();console.log('refresh');setTimeout(function () {uni.stopPullDownRefresh();}, 1000);}, //商品详情页
     gotoList: function gotoList(id) {//log(name)
       uni.navigateTo({ url: '../../pagesIII/productDetail/productDetail?id=' + id });}, //请求数据
     postRanking: function postRanking() {var _this2 = this;uni.showLoading({});var val = this.valueText;var data = { value: val, pageNo: 1, pageSize: 10 };(0, _api.publicing)(_request.postOrder, data).then(function (res) {log(res);_this2.goodList = res.data.data;}).catch(function (err) {});uni.hideLoading();}, menubtn: function menubtn(index, value) {this.valueText = value; //这个地方你都注释掉了，没有赋值，
       this.num = index;this.postRanking(); //那这个方法里面的this.valueText怎么会能拿到嘛
       // 子组件调试父组件方法 ：parent
       // this.$parent.fatherMethod(index)
-    }, previewImage: function previewImage(e) {var index = e.currentTarget.dataset.index;uni.previewImage({ current: this.banner[index], urls: this.banner });}, back: function back() {uni.navigateBack();}, openMenu: function openMenu() {this.menuShow = true;}, closeMenu: function closeMenu() {this.menuShow = false;}, showPopup: function showPopup() {this.popupShow = true;}, hidePopup: function hidePopup() {this.popupShow = false;}, change: function change(e) {this.value = e.value;}, collecting: function collecting() {this.collected = !this.collected;}, common: function common() {this.tui.toast('功能开发中~');}, btnTopMenu: function btnTopMenu(index) {this.closeMenu();if (index == 4) {
+    }, previewImage: function previewImage(e) {var index = e.currentTarget.dataset.index;uni.previewImage({ current: this.banner[index], urls: this.banner });}, back: function back() {uni.navigateBack();}, openMenu: function openMenu() {this.menuShow = true;
+    },
+    closeMenu: function closeMenu() {
+      this.menuShow = false;
+    },
+    showPopup: function showPopup() {
+      this.popupShow = true;
+    },
+    hidePopup: function hidePopup() {
+      this.popupShow = false;
+    },
+    change: function change(e) {
+      this.value = e.value;
+    },
+    collecting: function collecting() {
+      this.collected = !this.collected;
+    },
+    common: function common() {
+      this.tui.toast('功能开发中~');
+    },
+    btnTopMenu: function btnTopMenu(index) {
+      this.closeMenu();
+      if (index == 4) {
         uni.makePhoneCall({
           phoneNumber: "10086" });
 
@@ -576,9 +612,9 @@ var _console = console,log = _console.log;var _default = { data: function data()
 /***/ }),
 
 /***/ 74:
-/*!***********************************************************************************************************!*\
-  !*** /Users/Ning/Downloads/my_fruit/pagesII/rankingList/rankingList.vue?vue&type=style&index=0&lang=css& ***!
-  \***********************************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** /Users/gsheng/Downloads/new_fruit/pagesII/rankingList/rankingList.vue?vue&type=style&index=0&lang=css& ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -592,9 +628,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 75:
-/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--6-oneOf-1-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-2!./node_modules/postcss-loader/src??ref--6-oneOf-1-3!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/Ning/Downloads/my_fruit/pagesII/rankingList/rankingList.vue?vue&type=style&index=0&lang=css& ***!
-  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--6-oneOf-1-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-2!./node_modules/postcss-loader/src??ref--6-oneOf-1-3!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/gsheng/Downloads/new_fruit/pagesII/rankingList/rankingList.vue?vue&type=style&index=0&lang=css& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

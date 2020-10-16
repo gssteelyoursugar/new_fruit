@@ -22,24 +22,25 @@
 				<swiper :autoplay="false" :interval="5000" :duration="150" :circular="true" :style="{ height: 520 + 'rpx' }"
 				 @change="bannerChange">
 					<!-- https://qg-qr.oss-cn-shenzhen.aliyuncs.com/test/1602326575865.mp4?Expires=1917686575&OSSAccessKeyId=LTAI4G74cnhsbDWNkfvuNew3&Signature=D3SFuMpki6hbX6iNKTPXQQ%2BcgpM%3 -->
-					<swiper-item v-if="shopListdata.urlVideo!==''">
-						<video id="myVideo" v-if="shopListdata.urlVideo!==''"  :src="shopListdata.urlVideo" :show-fullscreen-btn="false" style="width:100%;height:100%;"></video>
-					</swiper-item> 
-					<block v-for="(item, index) in swiperList" :key="index" v-if="shopListdata.urlVideo!=='' && index>0">
-						<swiper-item :data-index="index">
-							<image :src="item" class="tui-slide-image" :style="{ height: scrollH + 'px' }" />
-						</swiper-item>
-					</block>
 					<block v-for="(item, index) in swiperList" :key="index" v-if="shopListdata.urlVideo==='' ">
 						<swiper-item :data-index="index">
 							<image :src="item" class="tui-slide-image" :style="{ height: scrollH + 'px' }" />
 						</swiper-item>
 					</block>
+					<block v-for="(item, index) in swiperList" :key="index" v-if="shopListdata.urlVideo!==''">
+						<swiper-item :data-index="index" v-if="index===0">
+							<video v-cloak id="myVideo"  :src="shopListdata.urlVideo" :show-fullscreen-btn="false" style="width:100%;height:100%;"></video>
+						</swiper-item>
+						<swiper-item :data-index="index" v-else>
+							<image :src="item" class="tui-slide-image" :style="{ height: scrollH + 'px' }" />
+						</swiper-item> 
+					</block>
+					
 				</swiper>
 				<view class="tui-banner-tag">
 					{{ bannerIndex + 1 || 0}}/{{ swiperList.length ||0}}
 				</view>
-				<view class="net-tip" v-if="!netStatus&& shopListdata.urlVideo!==''">当前为非wifi环境，使用流量播放视频</view>
+				<view class="net-tip" v-if="netStatus&& shopListdata.urlVideo!==''">当前为非wifi环境，使用流量播放视频</view>
 			</view>
 
 
@@ -942,7 +943,6 @@
 							icon: 'none',
 							duration: 3000
 						});
-						uni.hideLoading();
 						return;
 					} else if (this.shopListdata.isCart == false) {
 						publicing(postmyOrder, data)
@@ -961,7 +961,6 @@
 										icon: 'none',
 										duration: 3000
 									});
-									uni.hideLoading();
 								}
 							})
 							.catch(err => {
@@ -1080,6 +1079,10 @@
 <style>
 	page {
 		background-color: #f7f7f7;
+	}
+	
+	[v-cloak] {
+		display: none;
 	}
 
 	/* 弹层 */
@@ -1335,13 +1338,17 @@
 	.net-tip {
 		color: #fff;
 		position: absolute;
-		left: 16rpx;
-		bottom: 30rpx;
+		/* left: 16rpx; */
+		bottom: 30%;
 		background: rgba(0, 0, 0, .5);
 		font-size: 28rpx;
 		padding: 20rpx;
+		-webkit-border-radius: 14rpx;
 		border-radius: 14rpx;
 		text-align: center;
+		width: 70%;
+		margin: 0 15%;
+
 	}
 
 	.tui-slide-image {
