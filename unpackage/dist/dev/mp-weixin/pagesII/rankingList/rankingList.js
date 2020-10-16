@@ -331,6 +331,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
 var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
@@ -512,8 +514,10 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 //
 //
 //
+//
+//
 //请求地址
-var _console = console,log = _console.log;var _default = { data: function data() {return { rankColor: ['#FF5C00', '#9AA8BB', '#C8AA8D', '#E3E3E3', '#47323c', '#47323c', '#47323c', '#47323c', '#47323c', '#47323c'], url: '', goodList: [], hideing: 0, num: 0, ranking: [{ value: 'order_total', name: '销量榜' }, { value: 'evaluate', name: '评价榜' }, { value: 'follow', name: '关注榜' }, { value: 'back', name: '复购榜' }], imageUrl: "/static/images/paihang@2x.png", rankBgUrl: "/static/images/paihangbang@2x.png", height: 64, //header高度
+var _console = console,log = _console.log;var _default = { data: function data() {return { rankColor: ['#FF5C00', '#9AA8BB', '#C8AA8D', '#E3E3E3', '#E3E3E3', '#E3E3E3', '#E3E3E3', '#E3E3E3', '#E3E3E3', '#E3E3E3'], url: '', goodList: [], hideing: 0, num: 0, ranking: [{ value: 'order_total', name: '销量榜' }, { value: 'evaluate', name: '评价榜' }, { value: 'follow', name: '关注榜' }, { value: 'back', name: '复购榜' }], imageUrl: "/static/images/paihang@2x.png", rankBgUrl: "/static/images/paihangbang@2x.png", height: 64, //header高度
       top: 26, //标题图标距离顶部距离
       scrollH: 0, //滚动总高度
       opcity: 0, iconOpcity: 0.5, bannerIndex: 0, menuShow: false, popupShow: false, value: 1, collected: false, valueText: '' };}, onLoad: function onLoad(options) {var _this = this;this.url = _request.imgurl;var obj = { options: options }; //指定跳转
@@ -530,13 +534,7 @@ var _console = console,log = _console.log;var _default = { data: function data()
       this.num = index;this.postRanking(); //那这个方法里面的this.valueText怎么会能拿到嘛
       // 子组件调试父组件方法 ：parent
       // this.$parent.fatherMethod(index)
-    }, previewImage: function previewImage(e) {var index = e.currentTarget.dataset.index;uni.previewImage({ current: this.banner[index], urls: this.banner });}, back: function back() {uni.navigateBack();}, openMenu: function openMenu() {this.menuShow = true;
-    },
-    closeMenu: function closeMenu() {
-      this.menuShow = false;
-    },
-    showPopup: function showPopup() {
-      this.popupShow = true;
+    }, previewImage: function previewImage(e) {var index = e.currentTarget.dataset.index;uni.previewImage({ current: this.banner[index], urls: this.banner });}, back: function back() {uni.navigateBack();}, openMenu: function openMenu() {this.menuShow = true;}, closeMenu: function closeMenu() {this.menuShow = false;}, showPopup: function showPopup() {this.popupShow = true;
     },
     hidePopup: function hidePopup() {
       this.popupShow = false;

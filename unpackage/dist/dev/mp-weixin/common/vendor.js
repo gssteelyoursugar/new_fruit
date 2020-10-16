@@ -10160,7 +10160,7 @@ exports.postConfirmOrder = postConfirmOrder;var postDelOrders = "".concat(url, "
 exports.postDelOrders = postDelOrders;var postOrderPay = "".concat(url, "api/wx/order/orderPay");
 
 //获取选择地址数据
-exports.postOrderPay = postOrderPay;var postAddressList = "".concat(url, "api/wx/area/treeData");
+exports.postOrderPay = postOrderPay;var postAddressList = "".concat(url, "api/wx/area/treeDatClinet");
 
 //提交售后
 exports.postAddressList = postAddressList;var posAfterSale = "".concat(url, "api/wx/wxOrderItemAfterSale/save");

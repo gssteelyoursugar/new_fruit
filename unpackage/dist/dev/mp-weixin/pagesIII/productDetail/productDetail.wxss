@@ -1,6 +1,6 @@
 
 page {
-	background-color: #f7f7f7;
+	background-color: #fff;
 }
 [v-cloak] {
 	display: none;
@@ -460,13 +460,14 @@ page {
 .tui-product-title {
 	background: #fff;
 	padding: 30rpx 0;
+	border-bottom: 20rpx solid #f5f5f5
 }
 
 /* 2020/8/29 */
 .tui-height-full {
 	background-color: #fff;
-	padding: 30rpx 30rpx;
-	margin-top: 20rpx;
+	padding: 24rpx 30rpx;
+	border-bottom: 20rpx solid #f5f5f5;
 }
 .shuoming {
 	line-height: 60rpx;
@@ -482,12 +483,20 @@ page {
 	font-weight: 400;
 	font-size: 36rpx;
 	padding-bottom: 14rpx;
-	border-bottom: 1px solid #f5f5f5;
+	/* border-bottom: 1px solid #f5f5f5; */
 }
 .tui-height-flex {
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
+}
+.deliver-info {
+	font-size: 28rpx;
+	padding: 20rpx 0;
+	color: #333;
+}
+.deliver-info text {
+	margin-right: 20rpx;
 }
 .tui-height-flex-top {
 	margin: 28rpx 0;
@@ -502,6 +511,9 @@ page {
 	border-bottom: 1rpx solid rgba(245, 245, 245, 1);
 	padding-bottom: 10rpx;
 	color: rgba(51, 51, 51, 1);
+}
+.pay-time {
+	padding-top: 30rpx;
 }
 .tui-pay-color {
 	color: rgba(146, 147, 151, 1);
@@ -563,6 +575,9 @@ page {
 	-webkit-box-flex: 4;
 	-webkit-flex: 4;
 	        flex: 4;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
 }
 .tui-left-one2 {
 	-webkit-box-flex: 4;
@@ -573,6 +588,8 @@ page {
 .tui-title-class {
 	font-size: 24rpx;
 	color: rgba(146, 147, 151, 1);
+	min-width: 100rpx;
+	display: inline-block;
 }
 .tui-name-class {
 	font-size: 32rpx;

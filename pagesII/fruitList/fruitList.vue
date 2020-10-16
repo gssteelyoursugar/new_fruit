@@ -121,7 +121,7 @@
 				num: 0,
 				ranking: ['销量榜', '评价榜', '关注榜', '回购榜'],
 				// imageUrl: "../../static/images/new_fruit.png",
-				imageUrl: "/static/images/shangshi@3x.png",
+				imageUrl: "/static/images/shangxin@3x.png",
 				height: 64, //header高度
 				top: 26, //标题图标距离顶部距离
 				scrollH: 0, //滚动总高度

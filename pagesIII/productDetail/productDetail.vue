@@ -29,18 +29,18 @@
 					</block>
 					<block v-for="(item, index) in swiperList" :key="index" v-if="shopListdata.urlVideo!==''">
 						<swiper-item :data-index="index" v-if="index===0">
-							<video v-cloak id="myVideo"  :src="shopListdata.urlVideo" :show-fullscreen-btn="false" style="width:100%;height:100%;"></video>
+							<video v-cloak id="myVideo" :src="shopListdata.urlVideo" :show-fullscreen-btn="false" style="width:100%;height:100%;"></video>
 						</swiper-item>
 						<swiper-item :data-index="index" v-else>
 							<image :src="item" class="tui-slide-image" :style="{ height: scrollH + 'px' }" />
-						</swiper-item> 
+						</swiper-item>
 					</block>
-					
+
 				</swiper>
 				<view class="tui-banner-tag">
 					{{ bannerIndex + 1 || 0}}/{{ swiperList.length ||0}}
 				</view>
-				<view class="net-tip" v-if="netStatus&& shopListdata.urlVideo!==''">当前为非wifi环境，使用流量播放视频</view>
+				<view class="net-tip" v-if="!netStatus&& shopListdata.urlVideo!==''">当前为非wifi环境，使用流量播放视频</view>
 			</view>
 
 
@@ -54,17 +54,22 @@
 
 						<text class="tag-tit-text">{{ shopListdata.name ||''}}</text>
 
-						<view class="tag-tit-pra">
-							<tui-icon name="agree" color="#999" :size="15" v-if="canPraise" @tap="praiseLike(shopListdata.id)"></tui-icon>
-							<tui-icon name="agree-fill" color="#ff0000" :size="15" v-if="!canPraise" @tap="praiseLikeTwo"></tui-icon>
+						<view class="tag-tit-pra" v-if="!canPraise" @tap="praiseLike(shopListdata.id)">
+							<tui-icon name="agree" color="#999" :size="15"></tui-icon>
 							<text>点赞{{ shopListdata.praiseNumber ||0}}</text>
 						</view>
+						<view class="tag-tit-pra" v-if="canPraise" @tap="praiseLikeTwo">
+							<tui-icon name="agree-fill" color="#ff0000" :size="15"></tui-icon>
+							<text>点赞{{ shopListdata.praiseNumber ||0}}</text>
+						</view>
+
 					</view>
 					<view class="tui-original-price tui-gray">{{ shopListdata.describe ||0}}</view>
 
 					<view class="tui-pro-titbox">
 						<view class="tui-pro-title">
 							<text class="tui-pro-title-tag" v-if="shopListdata.number">仅剩{{ shopListdata.number || 0 }}件</text>
+							<!--    -->
 							<text class="tui-pro-title-tag" v-if="shopListdata.totalPirce!== undefined">成交{{ shopListdata.totalPirce | filterNum }}元</text>
 							<text class="tui-pro-title-tag" v-if="shopListdata.viewNumber!== undefined">{{ shopListdata.viewNumber | filterNum }}人看</text>
 						</view>
@@ -95,33 +100,30 @@
 					<view class="tui-title-line"><text>水果身份</text></view>
 					<view class="tui-height-flex">
 						<view class="tui-left-one1">
-							<text class="tui-title-class">品&nbsp; &nbsp;种：</text>
+							<text class="tui-title-class">种&nbsp;类：</text>
 							<text class="tui-name-class" style="font-size: 24rpx;">{{ shopListdata.classify }}</text>
 						</view>
-						<!-- <view class="tui-right-one">
-							<text class="tui-title-class">批&nbsp;次&nbsp;号 ：</text>
-							<text class="tui-name-class" style="font-size: 24rpx;">{{ shopListdata.officeId }}</text>
-						</view> -->
+						<view class="tui-right-one">
+							<text class="tui-title-class">品&nbsp;种 ：</text>
+							<text class="tui-name-class" style="font-size: 24rpx;">{{ shopListdata.variety }}</text>
+						</view>
 					</view>
 					<view class="tui-height-flex">
 						<view class="tui-left-one1">
-							<text class="tui-title-class">原产地：</text>
-							<text class="tui-name-class" style="font-size: 24rpx;">{{ shopListdata.originAddress }}</text>
+							<text class="tui-title-class">产&nbsp;地：</text>
+							<text class="tui-name-class" style="font-size: 24rpx;width: 244rpx;display: inline-block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{ shopListdata.originAddress }}</text>
 						</view>
 						<view class="tui-right-one">
-							<text class="tui-title-class">发&nbsp;货&nbsp;地 ：</text>
-							<text class="tui-name-class" style="font-size: 24rpx;">{{ shopListdata.shipmentsAddress }}</text>
+							<text class="tui-title-class">储藏条件：</text>
+							<text class="tui-name-class" style="font-size: 24rpx;">{{ shopListdata.storageMode || '常规' }}</text>
 						</view>
 					</view>
 					<view class="tui-height-flex">
 						<view class="tui-left-one1">
-							<text class="tui-title-class">包&nbsp; &nbsp;装：</text>
+							<text class="tui-title-class">包&nbsp;装：</text>
 							<text class="tui-name-class" style="font-size: 24rpx;">{{ shopListdata.packaging }}</text>
 						</view>
-						<view class="tui-right-one">
-							<text class="tui-title-class">储藏方式：</text>
-							<text class="tui-name-class" style="font-size: 24rpx;">{{ shopListdata.storageMode }}</text>
-						</view>
+
 					</view>
 				</view>
 				<!-- 水果标准 -->
@@ -154,27 +156,27 @@
 						</view>
 						<view class="tui-right-one" style="flex: 4;">
 							<text class=" tui-text-left tui-title-class ">不良率</text>
-							<text class=" tui-text-left tui-title-class">{{ shopListdata.rejectRatio }}</text>
+							<text class=" tui-text-left tui-title-class">{{ shopListdata.rejectRatio }}%</text>
 						</view>
 					</view>
 					<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
 						<view class="tui-left-one2">
 							<text class="tui-text-left tui-title-class">糖分</text>
-							<text class=" tui-text-left tui-title-class">{{ shopListdata.sugar }}</text>
+							<text class=" tui-text-left tui-title-class">{{ shopListdata.sugar }}%</text>
 						</view>
 						<view class="tui-right-one" style="flex: 4;">
 							<text class="tui-text-left tui-title-class">酸度</text>
-							<text class="tui-text-left tui-title-class">{{ shopListdata.acidity }}</text>
+							<text class="tui-text-left tui-title-class">{{ shopListdata.acidity }}%</text>
 						</view>
 					</view>
 					<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
 						<view class="tui-left-one2">
 							<text class="tui-text-left tui-title-class">水分</text>
-							<text class="tui-text-left tui-title-class">{{ shopListdata.moisture }}</text>
+							<text class="tui-text-left tui-title-class">{{ shopListdata.moisture }}%</text>
 						</view>
 						<view class="tui-right-one" style="flex: 4;">
 							<text class="tui-text-left tui-title-class">硬度</text>
-							<text class="tui-text-left tui-title-class">{{ shopListdata.hardness }}</text>
+							<text class="tui-text-left tui-title-class">{{ shopListdata.hardness }}kg/.co</text>
 						</view>
 					</view>
 					<!-- 	<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
@@ -219,14 +221,15 @@
 				<view class="tui-height-full">
 					<view class="tui-title-line"><text>物流配送</text></view>
 					<view class="tui-height-flex tui-bottom-border">
-						<text class="" style="font-size: 28rpx;padding: 20rpx 0;color: #333;" v-if="userInfoData.address && userInfoData.addressDetails">配送至
-							{{ userInfoData.address}} {{ userInfoData.addressDetails }}</text>
-						<text class="" v-else style="font-size: 28rpx;padding: 20rpx 0;color: #333;">
+						<view class="deliver-info" v-if="shopListdata.address && shopListdata.addressDetails">
+							<text>配送至</text>{{ shopListdata.address}} {{ shopListdata.addressDetails }}
+						</view>
+						<view class="" v-else style="font-size: 28rpx;padding: 20rpx 0;color: #333;">
 							暂无地址信息
-						</text>
+						</view>
 					</view>
-					<view class="">
-						<text class="tui-pay-color">16:00前完成支付，{{ shopListdata.shipmentsDay }}天送达</text>
+					<view class="pay-time">
+						<text class="tui-pay-color">{{payTime <= 16 ? '16:00前':'现在'}}完成支付，预计{{ shopListdata.deliveryTime|| nowTime | deliverTime }}送达</text>
 					</view>
 				</view>
 				<!-- 水果描述 -->
@@ -305,7 +308,7 @@
 						<text>《退换货规则》</text>
 						，具体规则内容可到
 						<text>“我的”-“我的服务”-“规则说明”</text>
-						查阅全部内容。`,
+						查阅全部内容。
 					</view>
 				</view>
 			</view>
@@ -348,7 +351,7 @@
 				<view class="tui-rank-list">
 					<view class="tui-tab-rank">
 						<view class="tui-tab-rank-cent">
-							<image :src="urlList[0]" mode="aspectFill" class="img-rink"></image>
+							<image :src="shopListdata.urlVideo!==''? urlList[1]:urlList[0]" mode="aspectFill" class="img-rink"></image>
 							<view class="tui-pro-tit" style="padding: 0 30rpx 0 0;">
 								<text class="tag-tit">{{ item.name }}</text>
 								<text class="tag-tit-text" style="font-size:28rpx">{{ shopListdata.name }}</text>
@@ -406,6 +409,16 @@
 				</view>
 			</view>
 		</view>
+		<view class="warp" v-if="isVerify">
+			<view class="warp-view">
+				<view class="warp-text1">温馨提示</view>
+				<view class="warp-text">前往验证店铺？</view>
+				<view class="warp-flex">
+					<button @click="toggleVerify()" plain="true">取消</button>
+					<button plain="true" @click="clickToVerify" class="color-green">前往</button>
+				</view>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -439,6 +452,7 @@
 				isLogin: false,
 				current: 0, //星星
 				modaishow: false,
+				isVerify: false,
 				saveLike: true, //已收藏
 				praLike: true, //已点赞
 				ordrIng: true, //已加进货
@@ -523,6 +537,7 @@
 				tabsTop: 64,
 				canPraise: true,
 				netStatus: true,
+				nowTime: '2020-10-20'
 			};
 		},
 		onLoad(options) {
@@ -610,49 +625,65 @@
 			swiperList() {
 				let vList = this.shopListdata
 				let uList = this.urlList
-				if (vList && vList.urlVideo !== ''){
+				if (vList && vList.urlVideo !== '') {
 					uList.unshift(vList.urlVideo)
-					console.log("uList","you",uList,uList.length,)
+					// console.log("uList", "you", uList, uList.length, )
 					return uList
 				} else {
-					console.log("uList","meiyou",uList,uList.length)
+					// console.log("uList", "meiyou", uList, uList.length)
 					return uList
-				}				
-			}
-			
+				}
+			},
+			payTime() {
+				let time = new Date().getHours()
+				return time
+			},
+
+
 		},
 		filters: {
 			filterNum(val) {
 
 				if (val) {
-					let words = (val + '').split('');
-
+					let words = (Math.floor(val) + '').split('');
 					let res = '';
-					if (words.length === 1) {
+					if (words.length <= 4) {
 						res = val;
 					}
-					if (words.length === 2) {
-						res = words[0] + '0多';
-					}
-					if (words.length === 3) {
-						res = words[0] + '00多';
-					}
-					if (words.length === 4) {
-						res = words[0] + '千多';
-					}
 					if (words.length === 5) {
-						res = words[0] + '万多';
+						res = words[0] + "." + words[1] + '万';
 					}
 					if (words.length === 6) {
-						res = words[0] + words[1] + '万多';
+						res = words[0] + words[1] + "." + words[2] + '万';
 					}
 					if (words.length === 7) {
-						res = words[0] + '百万多';
+						res = words[0] + words[1] + words[2] + "." + words[3] + '万';
+					}
+					if (words.length === 8) {
+						res = words[0] + words[1] + words[2] + words[3] + "." + words[4] + '万';
+					}
+					if (words.length === 9) {
+						res = words[0] + "." + words[1] + '亿';
+					}
+					if (words.length === 10) {
+						res = words[0] + words[1] + "." + words[2] + '亿';
 					}
 					return res;
 				} else {
 					return val;
 				}
+			},
+			deliverTime(val) {
+				let res = val.split("")
+				let data = res.splice(5, 5)
+				let time = new Date().getHours()
+				let result = ''
+				if (time <= 16) {
+					result = data[0] + data[1] + "月" + data[3] + data[4] + "日"
+				} else {
+					result = data[0] + data[1] + "月" + data[3] + (data[4] * 1 + 1) + "日"
+				}
+				return result
 			}
 		},
 
@@ -763,7 +794,7 @@
 						});
 						return;
 					}
-					if (this.canPraise === false) {
+					if (this.canPraise === true) {
 						uni.showToast({
 							title: '重复点赞',
 							icon: 'none'
@@ -771,14 +802,14 @@
 						return;
 					}
 					if (this.shopListdata.isPraise === false) {
-						this.canPraise = false
+						this.canPraise = true
 						publicing(postPraise, data)
 							.then(res => {
 								log(res);
 								// this.postDetails();
 								this.shopListdata.praiseNumber++
 								uni.showToast({
-									title: '成功',
+									title: '点赞成功',
 									icon: 'none'
 								});
 							})
@@ -802,21 +833,33 @@
 			},
 			//弹出立即购买
 			showPopup() {
-
 				let setdata = uni.getStorageSync('usermen');
 				if (!setdata) {
 					this.modaishow = true;
-				} else {
-					this.modaishow = false;
+					return
+				} else if (this.ApproveStatus != 1) {
+					// uni.showToast({
+					// 	title: '您还没有验证店铺',
+					// 	icon: 'none'
+					// });
+					// return;
+					this.toggleVerify()
+					return
+				}
+				if (setdata && this.ApproveStatus === 1) {
 					this.$refs.popup.show();
 				}
-				if (this.ApproveStatus != 1) {
-					uni.showToast({
-						title: '您还没有验证店铺',
-						icon: 'none'
-					});
-					return;
-				}
+			},
+
+			toggleVerify() {
+				this.isVerify = !this.isVerify
+			},
+			clickToVerify() {
+				uni.navigateTo({
+					url: '../../pagesII/tendShop/tendShop'
+				})
+				this.toggleVerify()
+				console.log("前往验证")
 			},
 
 			//获取微信昵称
@@ -916,6 +959,7 @@
 						this.shopListdata = res.data.data;
 						this.labelList = res.data.data.labelList;
 						this.urlList = res.data.data.urlList;
+						this.canPraise = res.data.data.isPraise
 						// console.log(this.labelList);
 					})
 					.catch(err => {
@@ -1078,9 +1122,9 @@
 
 <style>
 	page {
-		background-color: #f7f7f7;
+		background-color: #fff;
 	}
-	
+
 	[v-cloak] {
 		display: none;
 	}
@@ -1512,13 +1556,14 @@
 	.tui-product-title {
 		background: #fff;
 		padding: 30rpx 0;
+		border-bottom: 20rpx solid #f5f5f5
 	}
 
 	/* 2020/8/29 */
 	.tui-height-full {
 		background-color: #fff;
-		padding: 30rpx 30rpx;
-		margin-top: 20rpx;
+		padding: 24rpx 30rpx;
+		border-bottom: 20rpx solid #f5f5f5;
 	}
 
 	.shuoming {
@@ -1537,11 +1582,21 @@
 		font-weight: 400;
 		font-size: 36rpx;
 		padding-bottom: 14rpx;
-		border-bottom: 1px solid #f5f5f5;
+		/* border-bottom: 1px solid #f5f5f5; */
 	}
 
 	.tui-height-flex {
 		display: flex;
+	}
+
+	.deliver-info {
+		font-size: 28rpx;
+		padding: 20rpx 0;
+		color: #333;
+	}
+
+	.deliver-info text {
+		margin-right: 20rpx;
 	}
 
 	.tui-height-flex-top {
@@ -1554,6 +1609,10 @@
 		border-bottom: 1rpx solid rgba(245, 245, 245, 1);
 		padding-bottom: 10rpx;
 		color: rgba(51, 51, 51, 1);
+	}
+
+	.pay-time {
+		padding-top: 30rpx;
 	}
 
 	.tui-pay-color {
@@ -1614,6 +1673,8 @@
 
 	.tui-left-one1 {
 		flex: 4;
+		display: flex;
+
 	}
 
 	.tui-left-one2 {
@@ -1624,6 +1685,9 @@
 	.tui-title-class {
 		font-size: 24rpx;
 		color: rgba(146, 147, 151, 1);
+		min-width: 100rpx;
+		display: inline-block;
+
 	}
 
 	.tui-name-class {

@@ -169,7 +169,7 @@ let postDelOrders = `${url}api/wx/order/del`
 let postOrderPay = `${url}api/wx/order/orderPay`
 
 //获取选择地址数据
-let postAddressList = `${url}api/wx/area/treeData`
+let postAddressList = `${url}api/wx/area/treeDatClinet`
 
 //提交售后
 let posAfterSale = `${url}api/wx/wxOrderItemAfterSale/save`

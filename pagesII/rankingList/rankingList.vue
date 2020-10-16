@@ -40,7 +40,8 @@
 					<block v-for="(item,index) in goodList" :key="index">
 						<view class="tui-tab-rank-cent" @tap="gotoList(item.id)">
 							<view class="rank-box" :style="{borderColor: rankColor[index]}">
-								<text v-if="index<10" :style="{backgroundColor: rankColor[index]}">{{"0"+(index+1)}}</text>
+								<text v-if="index<9" :style="{backgroundColor: rankColor[index]}">{{"0"+(index+1)}}</text>
+								<text v-if="index===9" :style="{backgroundColor: rankColor[9]}">{{(index+1)}}</text>
 								<image :src="item.url" mode="aspectFill" class="img-rink"></image>
 							</view>
 							<view class="tui-pro-tit">
@@ -70,13 +71,13 @@
 						</view>
 					</block>
 				</view>
-
 				<!-- 评价 -->
 				<view class="tui-tab-rank" :class="[num === 1 ? 'actineclass' : 'errorclass']">
 					<block v-for="(item,index) in goodList" :key="index">
 						<view class="tui-tab-rank-cent" @tap="gotoList(item.id)">
 							<view class="rank-box" :style="{borderColor: rankColor[index]}">
-								<text v-if="index<10" :style="{backgroundColor: rankColor[index]}">{{"0"+(index+1)}}</text>
+								<text v-if="index<9" :style="{backgroundColor: rankColor[index]}">{{"0"+(index+1)}}</text>
+								<text v-if="index===9" :style="{backgroundColor: rankColor[9]}">{{(index+1)}}</text>
 								<image :src="item.url" mode="aspectFill" class="img-rink"></image>
 							</view>
 							<view class="tui-pro-tit">
@@ -107,8 +108,8 @@
 					<block v-for="(item,index) in goodList" :key="index">
 						<view class="tui-tab-rank-cent" @tap="gotoList(item.id)">
 							<view class="rank-box" :style="{borderColor: rankColor[index]}">
-								<text v-if="index<10" :style="{backgroundColor: rankColor[index]}">{{"0"+(index+1)}}</text>
-
+								<text v-if="index<9" :style="{backgroundColor: rankColor[index]}">{{"0"+(index+1)}}</text>
+								<text v-if="index===9" :style="{backgroundColor: rankColor[9]}">{{(index+1)}}</text>
 								<image :src="item.url" mode="aspectFill" class="img-rink"></image>
 							</view>
 							<view class="tui-pro-tit">
@@ -140,7 +141,8 @@
 					<block v-for="(item,index) in goodList" :key="index">
 						<view class="tui-tab-rank-cent" @tap="gotoList(item.id)">
 							<view class="rank-box" :style="{borderColor: rankColor[index]}">
-								<text v-if="index<10" :style="{backgroundColor: rankColor[index]}">{{"0"+(index+1)}}</text>
+								<text v-if="index<9" :style="{backgroundColor: rankColor[index]}">{{"0"+(index+1)}}</text>
+								<text v-if="index===9" :style="{backgroundColor: rankColor[9]}">{{(index+1)}}</text>
 								<image :src="item.url" mode="aspectFill" class="img-rink"></image>
 							</view>
 							<view class="tui-pro-tit">
@@ -190,8 +192,8 @@
 	export default {
 		data() {
 			return {
-				rankColor: ['#FF5C00', '#9AA8BB', '#C8AA8D', '#E3E3E3', '#47323c', '#47323c', '#47323c', '#47323c', '#47323c',
-					'#47323c'
+				rankColor: ['#FF5C00', '#9AA8BB', '#C8AA8D', '#E3E3E3', '#E3E3E3', '#E3E3E3', '#E3E3E3', '#E3E3E3', '#E3E3E3',
+					'#E3E3E3'
 				],
 				url: '',
 				goodList: [],
@@ -311,7 +313,6 @@
 						return res[0] + "" + unit[res.length]
 					}
 				}
-
 			}
 		},
 		methods: {
@@ -320,9 +321,6 @@
 				console.log('refresh');
 				setTimeout(function() {
 					uni.stopPullDownRefresh();
-
-
-
 				}, 1000);
 			},
 			//商品详情页

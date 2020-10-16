@@ -676,7 +676,7 @@ var _console = console,log = _console.log;var logins = __webpack_require__(/*! .
     ifLogin: function ifLogin() {var value = this.ApproveStatus;if (!setdata) {//判断有无token，没有就显示去认证店铺
         log('没有token信息请点击登录'); // log(this.logMsg)
       } else if (value == 0) {this.Goauth2 = true; //状态为0时证明已经认证
-        this.logMsg = '审核中待通过';} else if (value == 1) {this.logMsg = '我的店铺已认证';this.Goauth3 = true;} else if (value == 2) {this.logMsg = '未通过';this.Goauth4 = true;} else if (value == undefined) {this.Goauth = false;this.Goauth2 = false;this.this.logMsg = '去认证我的店铺';}}, //获取申请店铺状态信息
+        this.logMsg = '审核中待通过';} else if (value == 1) {this.logMsg = '我的店铺已认证';this.Goauth3 = true;} else if (value == 2) {this.logMsg = '未认证';this.Goauth4 = true;} else if (value == undefined) {this.Goauth = false;this.Goauth2 = false;this.Goauth3 = false;this.logMsg = '去认证我的店铺';}}, //获取申请店铺状态信息
     getMerchants: function getMerchants() {var _this4 = this;var setdata = uni.getStorageSync('usermen'); //Token
       var data = { token: setdata };(0, _api.listing)(_request.getClient, data).then(function (res) {///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
         _this4.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
@@ -685,7 +685,7 @@ var _console = console,log = _console.log;var logins = __webpack_require__(/*! .
           //显示去认证店铺的按钮
           _this4.Goauth = true;_this4.Goauth2 = false;_this4.logMsg = '去认证我的店铺';} else if (valu2 == 0) {_this4.Goauth2 = true;_this4.Goauth = flase; //状态为0时证明已经认证
           _this4.logMsg = '审核中待通过'; //
-        } else if (valu2 == 1) {_this4.logMsg = '我的店铺已认证';_this4.Goauth3 = true;} else if (valu2 == 2) {_this4.logMsg = '未通过';_this4.Goauth4 = true;}}).catch(function (err) {log(err);});}, // getUserInfo(event){
+        } else if (valu2 == 1) {_this4.logMsg = '我的店铺已认证';_this4.Goauth3 = true;} else if (valu2 == 2) {_this4.logMsg = '未认证';_this4.Goauth4 = true;}}).catch(function (err) {log(err);});}, // getUserInfo(event){
     // 	log(event)
     // 	let wxing = event.detail.userInfo
     // 	// 实例化类

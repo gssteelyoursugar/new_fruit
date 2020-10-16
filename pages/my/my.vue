@@ -439,12 +439,12 @@
 					this.logMsg = '我的店铺已认证'
 					this.Goauth3 = true
 				} else if (value == 2) {
-					this.logMsg = '未通过'
+					this.logMsg = '未认证'
 					this.Goauth4 = true
 				} else if (value == undefined) {
 					this.Goauth = false
 					this.Goauth2 = false
-					this.
+					this.Goauth3 = false
 					this.logMsg = '去认证我的店铺'
 				}
 			},
@@ -477,7 +477,7 @@
 							this.logMsg = '我的店铺已认证'
 							this.Goauth3 = true
 						} else if (valu2 == 2) {
-							this.logMsg = '未通过'
+							this.logMsg = '未认证'
 							this.Goauth4 = true
 						}
 					})
