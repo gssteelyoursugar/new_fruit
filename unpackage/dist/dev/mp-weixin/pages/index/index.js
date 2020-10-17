@@ -119,6 +119,41 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var l0 = _vm.__map(_vm.IndexGoods, function(item, index) {
+    var $orig = _vm.__get_orig(item)
+
+    var f0 =
+      (index + 1) % 2 != 0 ? _vm._f("filterNum")(item.praiseNumber) : null
+    var f1 = (index + 1) % 2 != 0 ? _vm._f("filterNum")(item.total) : null
+    return {
+      $orig: $orig,
+      f0: f0,
+      f1: f1
+    }
+  })
+
+  var l1 = _vm.__map(_vm.IndexGoods, function(item, index) {
+    var $orig = _vm.__get_orig(item)
+
+    var f2 =
+      (index + 1) % 2 == 0 ? _vm._f("filterNum")(item.praiseNumber) : null
+    var f3 = (index + 1) % 2 == 0 ? _vm._f("filterNum")(item.total) : null
+    return {
+      $orig: $orig,
+      f2: f2,
+      f3: f3
+    }
+  })
+
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        l0: l0,
+        l1: l1
+      }
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -1166,6 +1201,38 @@ var isFirst1 = true;var _default =
   // 监听页面滚动距离
 
   mounted: function mounted() {},
+  filters: {
+    filterNum: function filterNum(val) {
+      if (val) {
+        var words = (Math.floor(val) + '').split('');
+        var res = '';
+        if (words.length <= 4) {
+          res = val;
+        }
+        if (words.length === 5) {
+          res = words[0] + "." + words[1] + '万';
+        }
+        if (words.length === 6) {
+          res = words[0] + words[1] + "." + words[2] + '万';
+        }
+        if (words.length === 7) {
+          res = words[0] + words[1] + words[2] + "." + words[3] + '万';
+        }
+        if (words.length === 8) {
+          res = words[0] + words[1] + words[2] + words[3] + "." + words[4] + '万';
+        }
+        if (words.length === 9) {
+          res = words[0] + "." + words[1] + '亿';
+        }
+        if (words.length === 10) {
+          res = words[0] + words[1] + "." + words[2] + '亿';
+        }
+        return res;
+      } else {
+        return val;
+      }
+    } },
+
 
   computed: _objectSpread(_objectSpread({},
   (0, _vuex.mapState)(['screendata'])), {}, {

@@ -446,7 +446,7 @@ var MAX_CACHE_PAGEINDEX = 3; // 缓存页签数量
 var MAX_CACHE_PAGE = 3;var newsData = [];var setdata = uni.getStorageSync('usermen');var _console = console,log = _console.log;var thorui = __webpack_require__(/*! @/common/tui-clipboard/tui-clipboard.js */ 82);var _default = { data: function data() {return { isIos: false, newsList: [], cacheTab: [], tabIndex: 0, tabBars: [{ name: '全部' }, { name: '待确认' }], count: 0, currentTab: 0, pageIndex: 1, loadding: false, pullUpOn: true, scrollTop: 0, AfterSaleData: [], //列表数据
       modaishow: false, flag: false, itemid: '', idNum: '', scrollInto: '', showTips: false, pulling: false };}, onLoad: function onLoad(options) {var _this = this;this.id = options.id;this.postAfterSalelist();this.getBeConfirmedData();setTimeout(function () {_this.newsList = _this.randomfn();uni.getSystemInfo({ success: function success(res) {_this.isIos = 'ios' == res.platform.toLocaleLowerCase();} });}, 200);}, methods: { //确定取消
     Goyes: function Goyes() {var _this2 = this;var setdata = uni.getStorageSync('usermen');var data = { token: setdata, orderItemId: this.itemid, id: this.idNum };log(data);(0, _api.publicing)(_request.postAfterCen, data).then(function (res) {log(res);_this2.postAfterSalelist();_this2.getBeConfirmedData();_this2.messcancel();}).catch(function (err) {log(err);});}, //获取待确认
-    getBeConfirmedData: function getBeConfirmedData() {var _this3 = this;var setdata = uni.getStorageSync('usermen');var data = { token: setdata };console.log("data", data);(0, _api.listing)(_request.getBeConfirmed, data).then(function (res) {log(res);_this3.count = res.data.data.count;log(_this3.count);_this3.$set(_this3.tabBars, 1, { name: "\u5F85\u786E\u8BA4(".concat(_this3.count, ")") });}).catch(function (err) {log(err);});}, //点击取消
+    getBeConfirmedData: function getBeConfirmedData() {var _this3 = this;var setdata = uni.getStorageSync('usermen');var data = { token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzZXNzaW9uS2V5IjoiVVgwSEtIRC8yVUJnYm4ya0tGVSt3QT09Iiwiand0LWlkIjoiNGNhMzNkZGQtMjU1MC00M2IyLTkzZDAtNzE3MWNiOTA3ODNlIiwid3hPcGVuSWQiOiJvb0MwNDQxc0JvOTN1ODV0ZFVxSC1iY1Z0NXNVIn0.IEabjDYhD6_crxCFyc1L5LsJUOZTaCYgVHfw1mgjFwU" };(0, _api.listing)(_request.getBeConfirmed, data).then(function (res) {log("res", res);_this3.count = res.data.data.count;log(_this3.count);_this3.$set(_this3.tabBars, 1, { name: "\u5F85\u786E\u8BA4(".concat(_this3.count, ")") });}).catch(function (err) {log(err);});}, //点击取消
     goBack: function goBack() {this.messcancel();}, //售后列表请求
     postAfterSalelist: function postAfterSalelist() {var _this4 = this;var setdata = uni.getStorageSync('usermen');var data = { token: setdata, afterSaleStatus: 3 };if (this.tabIndex === 0) {//如果是默认全部不传afterSaleStatus参数
         delete data.afterSaleStatus;}(0, _api.publicing)(_request.posAfterSaleList, data).then(function (res) {log(res);_this4.AfterSaleData = res.data.data;}).catch(function (err) {log(err);});}, //重新申请售后
@@ -456,8 +456,7 @@ var MAX_CACHE_PAGE = 3;var newsData = [];var setdata = uni.getStorageSync('userm
     init: function init() {this.modaishow = true;}, // 取消
     messcancel: function messcancel() {this.modaishow = false;}, //申请详情
     goAfterDetail: function goAfterDetail(id) {uni.navigateTo({ url: '../../pagesIII/afterDetails/afterDetails?id=' + id });}, //售后详情
-    goAfterSaleDetail: function goAfterSaleDetail(id) {uni.navigateTo({ url: '../../pagesIII/AfterSaleDetails/AfterSaleDetails?id=' + id });},
-    //取消申请
+    goAfterSaleDetail: function goAfterSaleDetail(id) {uni.navigateTo({ url: '../../pagesIII/AfterSaleDetails/AfterSaleDetails?id=' + id });}, //取消申请
     goAfterCancel: function goAfterCancel(order_id, id) {
       this.init();
       this.itemid = order_id;

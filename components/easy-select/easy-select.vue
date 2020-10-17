@@ -129,6 +129,15 @@
 				} else {
 					return {}
 				}
+			},
+			showValue () {
+				let word = this.value
+				let list = this.options
+				let index = list.findIndex(function(item){
+					return item.id === word
+				})
+				console.log("word",word,"list","index",index)
+				return list[index].label
 			}
 		},
 		mounted() {
@@ -150,6 +159,8 @@
 			} catch (e) {
 			    // error
 			}
+			
+			console.log(this.options)
 		},
 		methods: {
 			trigger(e) {
@@ -179,6 +190,8 @@
 				this.showOptions = false
 				this.currentSelect = options
 				options.s_name = name
+				console.log("options",options)
+				console.log("this.options",this.options)
 				// console.log(options)
 				this.$emit('selectOne', options)
 			},

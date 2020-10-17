@@ -125,16 +125,22 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  var f0 =
+  var f0 = !_vm.canPraise
+    ? _vm._f("filterNum")(_vm.shopListdata.praiseNumber || 0)
+    : null
+  var f1 = _vm.canPraise
+    ? _vm._f("filterNum")(_vm.shopListdata.praiseNumber || 0)
+    : null
+  var f2 =
     _vm.shopListdata.totalPirce !== undefined
       ? _vm._f("filterNum")(_vm.shopListdata.totalPirce)
       : null
-  var f1 =
+  var f3 =
     _vm.shopListdata.viewNumber !== undefined
       ? _vm._f("filterNum")(_vm.shopListdata.viewNumber)
       : null
 
-  var f2 = _vm._f("deliverTime")(_vm.shopListdata.deliveryTime || _vm.nowTime)
+  var f4 = _vm._f("deliverTime")(_vm.shopListdata.deliveryTime || _vm.nowTime)
 
   _vm.$mp.data = Object.assign(
     {},
@@ -142,7 +148,9 @@ var render = function() {
       $root: {
         f0: f0,
         f1: f1,
-        f2: f2
+        f2: f2,
+        f3: f3,
+        f4: f4
       }
     }
   )

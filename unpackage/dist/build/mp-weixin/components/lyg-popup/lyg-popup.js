@@ -1,0 +1,10 @@
+(global["webpackJsonp"]=global["webpackJsonp"]||[]).push([["components/lyg-popup/lyg-popup"],{"3b09":function(t,e,n){"use strict";n.r(e);var a=n("c050"),o=n.n(a);for(var u in a)"default"!==u&&function(t){n.d(e,t,(function(){return a[t]}))}(u);e["default"]=o.a},"65fb":function(t,e,n){"use strict";var a;n.d(e,"b",(function(){return o})),n.d(e,"c",(function(){return u})),n.d(e,"a",(function(){return a}));var o=function(){var t=this,e=t.$createElement;t._self._c},u=[]},ab96:function(t,e,n){"use strict";n.r(e);var a=n("65fb"),o=n("3b09");for(var u in o)"default"!==u&&function(t){n.d(e,t,(function(){return o[t]}))}(u);n("e71a");var r,c=n("f0c5"),i=Object(c["a"])(o["default"],a["b"],a["c"],!1,null,null,null,!1,a["a"],r);e["default"]=i.exports},c050:function(t,e,n){"use strict";(function(t){Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0;var n={name:"lyg-popup",props:{title:{type:String,default:"服务协议和隐私政策"},protocolPath:{type:String},policyPath:{type:String},policyStorageKey:{type:String,default:"has_read_privacy"}},data:function(){return{showPopup:!1}},created:function(){var e=this;t.getStorage({key:this.policyStorageKey,success:function(n){n.data&&(e.showPopup=!1,t.showTabBar({}))},fail:function(n){e.showPopup=!0,t.hideTabBar({})}})},methods:{clear:function(){},back:function(){this.$emit("popupState",!1)},confirm:function(){this.showPopup=!1,this.$emit("popupState",!0),t.setStorage({key:this.policyStorageKey,data:!0}),t.showTabBar({})}}};e.default=n}).call(this,n("543d")["default"])},c643:function(t,e,n){},e71a:function(t,e,n){"use strict";var a=n("c643"),o=n.n(a);o.a}}]);
+;(global["webpackJsonp"] = global["webpackJsonp"] || []).push([
+    'components/lyg-popup/lyg-popup-create-component',
+    {
+        'components/lyg-popup/lyg-popup-create-component':(function(module, exports, __webpack_require__){
+            __webpack_require__('543d')['createComponent'](__webpack_require__("ab96"))
+        })
+    },
+    [['components/lyg-popup/lyg-popup-create-component']]
+]);

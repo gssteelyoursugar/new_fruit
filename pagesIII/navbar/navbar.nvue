@@ -204,12 +204,11 @@ export default {
 			
 			var setdata = uni.getStorageSync('usermen')
 			let data ={
-				token:setdata
+				token:"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzZXNzaW9uS2V5IjoiVVgwSEtIRC8yVUJnYm4ya0tGVSt3QT09Iiwiand0LWlkIjoiNGNhMzNkZGQtMjU1MC00M2IyLTkzZDAtNzE3MWNiOTA3ODNlIiwid3hPcGVuSWQiOiJvb0MwNDQxc0JvOTN1ODV0ZFVxSC1iY1Z0NXNVIn0.IEabjDYhD6_crxCFyc1L5LsJUOZTaCYgVHfw1mgjFwU"
 			}
-			console.log("data",data)
 			listing(getBeConfirmed,data)
 			.then((res)=>{
-				log(res)
+				log("res",res)
 				this.count = res.data.data.count
 				log(this.count)
 				

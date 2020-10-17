@@ -170,7 +170,6 @@ let postAddressList = `${url}api/wx/area/treeDatClinet`
 //提交售后
 let posAfterSale = `${url}api/wx/wxOrderItemAfterSale/save`
 
-
 //售后列表
 let posAfterSaleList = `${url}api/wx/wxOrderItemAfterSale/list`
 
@@ -181,7 +180,7 @@ let posAfterDetails = `${url}api/wx/wxOrderItemAfterSale/details`
 let postAfterCen = `${url}api/wx/wxOrderItemAfterSale/cancelAfter`
 
 //确认售后
-let postAfterConfirm = `${url}api/wx/wxOrderItemAfterSale/confirm`
+let PostDataById = `${url}api/wx/wxOrderItemAfterSale/confirm`
 
 //待确认售后
 let getBeConfirmed = `${url}api/wx/wxOrderItemAfterSale/toBeConfirmed`
@@ -194,20 +193,60 @@ let getAfterSaleData = `${url}api/wx/afterSale/getAfterSaleData`
 
 
 
-
-
-
-
-
-
-
 //导出请求地址
-export{getIndex,loginis,getsearch,postActivity,getClassify, postdelist ,getGoodsall,getAttribute,url,postOrder,imgurl,wxloginurl,
-getActivity,postSaveStore,postmyOrder,getCart,postDelOrder,postUpOrder,postLike,getLike,postDelLike,postPraise,getRecently,postOrderPay,
-getMyOrder,getselectImport,getselectHot,getselectSeasonal,getselectSuper,postRecentlyDel,getNewsAll,getClient,postupdateClient,postAddressList,
-getSubmitOrder,postCancelPraise,getMsg,postSettle,postAgainOrder,getDetails,postCancelOrder,postDelOrders,postConfirmOrder,getAfterSaleData,posAfterSale,
-postCancelPay,posAfterSaleList,posAfterDetails,postAfterCen
-} 
+export {
+	getIndex,
+	loginis,
+	getsearch,
+	postActivity,
+	getClassify,
+	postdelist,
+	getGoodsall,
+	getAttribute,
+	url,
+	postOrder,
+	imgurl,
+	wxloginurl,
+	getActivity,
+	postSaveStore,
+	postmyOrder,
+	getCart,
+	postDelOrder,
+	postUpOrder,
+	postLike,
+	getLike,
+	postDelLike,
+	postPraise,
+	getRecently,
+	postOrderPay,
+	getMyOrder,
+	getselectImport,
+	getselectHot,
+	getselectSeasonal,
+	getselectSuper,
+	postRecentlyDel,
+	getNewsAll,
+	getClient,
+	postupdateClient,
+	postAddressList,
+	getSubmitOrder,
+	postCancelPraise,
+	getMsg,
+	postSettle,
+	postAgainOrder,
+	getDetails,
+	postCancelOrder,
+	postDelOrders,
+	postConfirmOrder,
+	getAfterSaleData,
+	posAfterSale,
+	postCancelPay,
+	posAfterSaleList,
+	posAfterDetails,
+	postAfterCen,
+	PostDataById,
+	getBeConfirmed
+}
 
 
 
@@ -222,7 +261,7 @@ export const uploadFiles = (callback) => {
 			});
 			const tempFilePaths = chooseImageRes.tempFilePaths;
 			const uploadTask = uni.uploadFile({
-				url:  uploading, //上传地址api
+				url: uploading, //上传地址api
 				filePath: tempFilePaths[0],
 				fileType: 'image',
 				name: 'file',
@@ -251,4 +290,3 @@ export const uploadFiles = (callback) => {
 		}
 	});
 }
-

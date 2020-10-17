@@ -1,0 +1,5 @@
+<view data-event-opts="{{[['touchmove',[['clear',['$event']]]]]}}" hidden="{{!(showPopup)}}" catchtouchmove="__e"><view data-event-opts="{{[['touchmove',[['clear',['$event']]]]]}}" class="popup_mask" catchtouchmove="__e"></view><view class="popup_content"><view class="title">{{title}}</view><view class="explain_text">亲爱的用户，感谢您信任并使用圈果！我们依据相关法律法规制定了《用户服务协议》、《隐私政策》和《退换货规则》，请您在同意之前仔细阅读并充分解相关条款，其中的重点条款已为您标注，方便您了解自己的权利。
+			我们将通过《隐私政策》向您说明：
+			1.向您提供更个性化、更便捷的服务，我们会根据您的授权，收集和使用对应的必要信息（例如您的联系电话、位置信息、配送地址等）。
+			2.您可以对以上信息进行访问、修改、删除以及注销账户，我们也将提供专门的个人信息保护联系方式。
+			3.未经您的授权同意，我们不会将以上信息共享给第三方或您未授权的其他用途。</view><view class="button"><navigator class="close" target="miniProgram" open-type="exit">暂不使用</navigator><view data-event-opts="{{[['tap',[['confirm',['$event']]]]]}}" bindtap="__e">同意</view></view></view></view>

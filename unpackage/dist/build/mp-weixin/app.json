@@ -1,0 +1,111 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/search/search",
+    "pages/selection/selection",
+    "pages/order/order",
+    "pages/my/my"
+  ],
+  "subPackages": [
+    {
+      "root": "pagesII",
+      "pages": [
+        "productList/productList",
+        "rankingList/rankingList",
+        "myOrder/myOrder",
+        "Limit/Limit",
+        "searchGoods/searchGoods",
+        "afterSale/afterSale",
+        "fruitList/fruitList",
+        "tendShop/tendShop",
+        "message/message",
+        "kingarea/kingarea",
+        "ImportedFruit/ImportedFruit",
+        "hotFruit/hotFruit",
+        "seasonal/seasonal",
+        "superValue/superValue",
+        "OrderStatistics/OrderStatistics",
+        "Evaluate/Evaluate",
+        "myCollection/myCollection",
+        "customerService/customerService",
+        "ruleDescription/ruleDescription",
+        "SetUp/SetUp",
+        "cooperation/cooperation",
+        "Recently/Recently",
+        "timeInfo/timeInfo",
+        "StoreInformation/StoreInformation",
+        "editStore/editStore",
+        "updataStore/updataStore",
+        "msg/msg"
+      ]
+    },
+    {
+      "root": "pagesIII",
+      "pages": [
+        "productDetail/productDetail",
+        "submitOrder/submitOrder",
+        "demo/demo",
+        "videos/videos",
+        "applyAfter/applyAfter",
+        "paySuccess/paySuccess",
+        "afterDetails/afterDetails",
+        "PayOK/PayOK",
+        "confirmAfter/confirmAfter",
+        "AfterSaleDetails/AfterSaleDetails",
+        "orderDetail/orderDetail",
+        "navbar/navbar"
+      ]
+    }
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "圈圈点点",
+    "navigationBarBackgroundColor": "#fff",
+    "backgroundColor": "#f8f8f8"
+  },
+  "tabBar": {
+    "color": "#666666",
+    "selectedColor": "##00C94A",
+    "borderStyle": "white",
+    "backgroundColor": "#fff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/images/index0.png",
+        "selectedIconPath": "static/images/index1.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/search/search",
+        "iconPath": "static/images/search0.png",
+        "selectedIconPath": "static/images/search1.png",
+        "text": "找水果"
+      },
+      {
+        "pagePath": "pages/selection/selection",
+        "iconPath": "static/images/selection0.png",
+        "selectedIconPath": "static/images/selection1.png",
+        "text": "选果标准"
+      },
+      {
+        "pagePath": "pages/order/order",
+        "iconPath": "static/images/order0.png",
+        "selectedIconPath": "static/images/order1.png",
+        "text": "进货单"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "iconPath": "static/images/my0.png",
+        "selectedIconPath": "static/images/my1.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "已为您提供最近的服务信息"
+    }
+  },
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
+}

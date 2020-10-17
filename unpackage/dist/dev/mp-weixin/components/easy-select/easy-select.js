@@ -261,6 +261,15 @@ var SIZE = {
       } else {
         return {};
       }
+    },
+    showValue: function showValue() {
+      var word = this.value;
+      var list = this.options;
+      var index = list.findIndex(function (item) {
+        return item.id === word;
+      });
+      console.log("word", word, "list", "index", index);
+      return list[index].label;
     } },
 
   mounted: function mounted() {var _this = this;
@@ -282,6 +291,8 @@ var SIZE = {
     } catch (e) {
       // error
     }
+
+    console.log(this.options);
   },
   methods: {
     trigger: function trigger(e) {var _this2 = this;
@@ -311,6 +322,8 @@ var SIZE = {
       this.showOptions = false;
       this.currentSelect = options;
       options.s_name = name;
+      console.log("options", options);
+      console.log("this.options", this.options);
       // console.log(options)
       this.$emit('selectOne', options);
     },

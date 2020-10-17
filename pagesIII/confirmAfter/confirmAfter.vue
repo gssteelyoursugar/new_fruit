@@ -61,7 +61,7 @@
 					
 				</view>
 				<view class="tui-btn-ml" >
-					<button type="primary"   class="icon-img3" @tap="goAfterConfirm(DetailsData.order_item_id)">确认</button>
+					<button type="primary"  class="icon-img3" @tap="goAfterConfirm(DetailsData.order_item_id)">确认</button>
 				</view>
 			</view>
 		</view>
@@ -81,7 +81,7 @@
 <script>
 	const thorui = require("@/common/tui-clipboard/tui-clipboard.js")
 	import {publicing} from '../../api/api.js'
-	import {posAfterDetails,postAfterCen,postAfterConfirm} from '../../api/request.js'
+	import {posAfterDetails,postAfterCen,PostDataById} from '../../api/request.js'
 	var {log} = console
 	export default {
 		data() {
@@ -90,9 +90,6 @@
 				DetailsData:{},//申请详情数据
 				files:[],
 				modaishow:false,
-				
-				
-				
 			}
 		},
 		methods: {
@@ -134,7 +131,7 @@
 					
 					this.modaishow = false
 					uni.reLaunch({
-						url:'../../pagesII/afterSale/afterSale'
+						url:'../../pagesIII/navbar/navbar'
 					})
 				})
 				.catch((err)=>{
@@ -143,19 +140,23 @@
 			},
 			//确认
 			goAfterConfirm(id){
-				
 				console.log('确认')
-				log(id)
-				var setdata = uni.getStorageSync('usermen')
-				let data ={
+				log("id是",id)
+				let setdata = uni.getStorageSync('usermen')
+				let datas ={
 					token:setdata,
 					orderItemId:id
 				}
-				publicing(postAfterConfirm,data)
+				console.log(datas)
+				publicing(PostDataById,datas)
 				.then((res)=>{
 					log(res)
+					uni.showToast({
+						title:`${res.data.msg}`,
+						duration:2000
+					})
 					uni.reLaunch({
-						url:'../../pagesII/afterSale/afterSale'
+						url:'../../pagesIII/navbar/navbar'
 					})
 				})
 				.catch((err)=>{

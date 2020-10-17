@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "订单统计",
+  "usingComponents": {
+    "tui-icon": "/components/tui-icon/tui-icon",
+    "tui-datetime": "/components/tui-datetime/tui-datetime"
+  }
+}

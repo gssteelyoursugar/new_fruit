@@ -307,6 +307,7 @@
 }
 .tui-pro-price.data-v-57280228 {
 	/* padding-top: 18rpx; */
+	line-height: 30rpx;
 }
 .tui-sale-price.data-v-57280228 {
 	font-size: 22rpx;
@@ -360,6 +361,7 @@
 .tui-rate.data-v-57280228 {
 	color: #FF4300;
 	font-size: 28rpx;
+	font-weight: 500;
 }
 .tui-rate text.data-v-57280228 {
 	font-size: 16rpx;
@@ -552,6 +554,7 @@
 	-webkit-box-align: baseline;
 	        align-items: baseline;
 	color: #FF6500;
+	margin-top: 14rpx;
 }
 .tui-first-price.data-v-57280228 {
 	display: -webkit-box;

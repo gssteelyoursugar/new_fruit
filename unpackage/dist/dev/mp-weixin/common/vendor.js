@@ -9989,7 +9989,7 @@ var errdata = {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.uploadFiles = exports.postAfterCen = exports.posAfterDetails = exports.posAfterSaleList = exports.postCancelPay = exports.posAfterSale = exports.getAfterSaleData = exports.postConfirmOrder = exports.postDelOrders = exports.postCancelOrder = exports.getDetails = exports.postAgainOrder = exports.postSettle = exports.getMsg = exports.postCancelPraise = exports.getSubmitOrder = exports.postAddressList = exports.postupdateClient = exports.getClient = exports.getNewsAll = exports.postRecentlyDel = exports.getselectSuper = exports.getselectSeasonal = exports.getselectHot = exports.getselectImport = exports.getMyOrder = exports.postOrderPay = exports.getRecently = exports.postPraise = exports.postDelLike = exports.getLike = exports.postLike = exports.postUpOrder = exports.postDelOrder = exports.getCart = exports.postmyOrder = exports.postSaveStore = exports.getActivity = exports.wxloginurl = exports.imgurl = exports.postOrder = exports.url = exports.getAttribute = exports.getGoodsall = exports.postdelist = exports.getClassify = exports.postActivity = exports.getsearch = exports.loginis = exports.getIndex = void 0; // 公用地址
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.uploadFiles = exports.getBeConfirmed = exports.PostDataById = exports.postAfterCen = exports.posAfterDetails = exports.posAfterSaleList = exports.postCancelPay = exports.posAfterSale = exports.getAfterSaleData = exports.postConfirmOrder = exports.postDelOrders = exports.postCancelOrder = exports.getDetails = exports.postAgainOrder = exports.postSettle = exports.getMsg = exports.postCancelPraise = exports.getSubmitOrder = exports.postAddressList = exports.postupdateClient = exports.getClient = exports.getNewsAll = exports.postRecentlyDel = exports.getselectSuper = exports.getselectSeasonal = exports.getselectHot = exports.getselectImport = exports.getMyOrder = exports.postOrderPay = exports.getRecently = exports.postPraise = exports.postDelLike = exports.getLike = exports.postLike = exports.postUpOrder = exports.postDelOrder = exports.getCart = exports.postmyOrder = exports.postSaveStore = exports.getActivity = exports.wxloginurl = exports.imgurl = exports.postOrder = exports.url = exports.getAttribute = exports.getGoodsall = exports.postdelist = exports.getClassify = exports.postActivity = exports.getsearch = exports.loginis = exports.getIndex = void 0; // 公用地址
 
 
 //测试用
@@ -10161,7 +10161,6 @@ exports.postOrderPay = postOrderPay;var postAddressList = "".concat(url, "api/wx
 //提交售后
 exports.postAddressList = postAddressList;var posAfterSale = "".concat(url, "api/wx/wxOrderItemAfterSale/save");
 
-
 //售后列表
 exports.posAfterSale = posAfterSale;var posAfterSaleList = "".concat(url, "api/wx/wxOrderItemAfterSale/list");
 
@@ -10172,28 +10171,68 @@ exports.posAfterSaleList = posAfterSaleList;var posAfterDetails = "".concat(url,
 exports.posAfterDetails = posAfterDetails;var postAfterCen = "".concat(url, "api/wx/wxOrderItemAfterSale/cancelAfter");
 
 //确认售后
-exports.postAfterCen = postAfterCen;var postAfterConfirm = "".concat(url, "api/wx/wxOrderItemAfterSale/confirm");
+exports.postAfterCen = postAfterCen;var PostDataById = "".concat(url, "api/wx/wxOrderItemAfterSale/confirm");
 
 //待确认售后
-var getBeConfirmed = "".concat(url, "api/wx/wxOrderItemAfterSale/toBeConfirmed");
+exports.PostDataById = PostDataById;var getBeConfirmed = "".concat(url, "api/wx/wxOrderItemAfterSale/toBeConfirmed");
 
 //售后下拉数据
-var getAfterSaleData = "".concat(url, "api/wx/afterSale/getAfterSaleData");
+exports.getBeConfirmed = getBeConfirmed;var getAfterSaleData = "".concat(url, "api/wx/afterSale/getAfterSaleData");
 
 // //取消申请
 // let postAfterCen = `${url}api/wx/wxOrderItemAfterSale/cancelAfter`
 
 
 
-
-
-
-
-
-
-
 //导出请求地址
 exports.getAfterSaleData = getAfterSaleData;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -96,16 +96,22 @@
 									</block>
 								</view>
 								<view class="tui-pro-pic">
-									<text class="tui-rate">&yen;{{item.platformPrice}}/件</text>
-									<text class="tui-rate-price"> &yen;{{item.marketPrice}}</text>
+									<view style="color: #FF7709; display: flex;align-items: baseline;">
+										<text style="font-size: 16rpx;">¥</text>
+										<text style="font-size: 28rpx; font-weight: 500">{{item.platformPrice}}</text>
+										<text style="font-size: 20rpx;color: #B6B6B6;">/件</text>
+										<view style="color: #B6B6B6;text-decoration: line-through; margin-left:10rpx;">
+											<text style="font-size: 16rpx;"> ¥</text>
+											<text style="font-size: 24rpx;font-weight: 500;">{{item.marketPrice}}</text>
+										</view>
+									</view>
 									<text class="tui-praise  ">
-
-										<text class="tui-praise iconfont icon-dianzan "></text>500
+										<text class="tui-praise iconfont icon-dianzan "></text>{{item.praiseNumber| filterNum}}
 									</text>
 								</view>
 								<view class="tui-pro-dea">
 									<text class="tui-jin">{{item.specification}}</text>
-									<text class="tui-jin">成交<text class="tui-dea-color">{{item.totalPirce}}</text>万元</text>
+									<text class="tui-jin">成交<text class="tui-dea-color">{{item.totalPirce | filterNum}}</text>元</text>
 
 								</view>
 							</view>
@@ -136,16 +142,22 @@
 									</block>
 								</view>
 								<view class="tui-pro-pic">
-									<text class="tui-rate">&yen;{{item.platformPrice}}/件</text>
-									<text class="tui-rate-price">&yen;{{item.marketPrice}}</text>
-									<text class="tui-praise  ">
-
-										<text class="tui-praise iconfont icon-dianzan "></text>500
+									<view style="color: #FF7709; display: flex;align-items: baseline;">
+										<text style="font-size: 16rpx;">¥</text>
+										<text style="font-size: 28rpx; font-weight: 500">{{item.platformPrice}}</text>
+										<text style="font-size: 20rpx;color: #B6B6B6;">/件</text>
+										<view style="color: #B6B6B6;text-decoration: line-through;margin-left:10rpx;">
+											<text style="font-size: 16rpx;"> ¥</text>
+											<text style="font-size: 24rpx;font-weight: 500">{{item.marketPrice}}</text>
+										</view>
+									</view>
+									<text class="tui-praise">
+										<text class="tui-praise iconfont icon-dianzan "></text>{{item.praiseNumber | filterNum}}
 									</text>
 								</view>
 								<view class="tui-pro-dea">
 									<text class="tui-jin">{{item.specification}}</text>
-									<text class="tui-jin">成交<text class="tui-dea-color">{{item.totalPirce}}</text>万元</text>
+									<text class="tui-jin">成交<text class="tui-dea-color">{{item.totalPirce | filterNum}}</text>元</text>
 
 								</view>
 							</view>
@@ -206,7 +218,7 @@
 					</view>
 					<view class="tui-drawer-content tui-flex-attr">
 						<block v-for="(item,index) in fruit_level" :key="index">
-							<view class="tui-attr-item" :class="{activeItem:index == num}" @click="activeGo('level',item.id,index)">
+							<view class="tui-attr-item" :class="{activeItem:index == num}" @click="activeGo('fruitLevel',item.id,index)">
 								<view class="tui-attr-ellipsis">{{item.title}}</view>
 							</view>
 						</block>
@@ -215,33 +227,33 @@
 						<text class="tui-title-bold">单果重量</text>
 					</view>
 					<view class="tui-drawer-content">
-						<input placeholder-class="tui-phcolor" v-model="optionList.ltWeight" class="tui-input" placeholder="不限" maxlength="11"
-						 type="number" />
+						<input placeholder-class="tui-phcolor" v-model="optionList.weight_parameter_1" class="tui-input" placeholder="不限"
+						 maxlength="11" type="number" />
 						<tui-icon name="reduce" color="#333" :size="14"></tui-icon>
-						<input placeholder-class="tui-phcolor" v-model="optionList.rtWeight" class="tui-input" placeholder="不限" maxlength="11"
-						 type="number" /><text class="content-text">克</text>
+						<input placeholder-class="tui-phcolor" v-model="optionList.weight_parameter_2" class="tui-input" placeholder="不限"
+						 maxlength="11" type="number" /><text class="content-text">克</text>
 					</view>
 					<view class="tui-drawer-title">
 						<text class="tui-title-bold">果径大小</text>
 					</view>
 					<view class="tui-drawer-content">
-						<input placeholder-class="tui-phcolor" v-model="optionList.ltWidth" class="tui-input" placeholder="不限" maxlength="11"
-						 type="number" />
+						<input placeholder-class="tui-phcolor" v-model="optionList.size_parameter_1" class="tui-input" placeholder="不限"
+						 maxlength="11" type="number" />
 						<tui-icon name="reduce" color="#333" :size="14"></tui-icon>
-						<input placeholder-class="tui-phcolor" v-model="optionList.rtWidth" class="tui-input" placeholder="不限" maxlength="11"
-						 type="number" /><text class="content-text">毫米</text>
+						<input placeholder-class="tui-phcolor" v-model="optionList.size_parameter_2" class="tui-input" placeholder="不限"
+						 maxlength="11" type="number" /><text class="content-text">毫米</text>
 					</view>
 					<view class="tui-drawer-title">
 						<text class="tui-title-bold">口感等级</text>
 					</view>
 					<view class="tui-drawer-content">
 						<view class="content" @click="useOutClickSide">
-							<easy-select :options="tasteBox" ref="easySelect" size="mini" :selectName="'ltTaste'" :value="optionList.ltTaste"
+							<easy-select :options="tasteBox" ref="easySelect" size="mini" :selectName="'tasteLevel_parameter_1'"  :value="optionList.tasteLevel_parameter_1"
 							 @selectOne="selectItem"></easy-select>
 						</view>
 						<tui-icon name="reduce" color="#333" :size="14"></tui-icon>
 						<view class="content" @click="useOutClickSide">
-							<easy-select :options="tasteBox" ref="easySelect" size="mini" :selectName="'rtTaste'" :value="optionList.rtTaste"
+							<easy-select :options="tasteBox" ref="easySelect" size="mini" :selectName="'tasteLevel_parameter_2'" :value="optionList.tasteLevel_parameter_2"
 							 :valueNum="optionList.ltTaste" @selectOne="selectItem"></easy-select>
 						</view><text class="content-text" style="color: #fff;">星</text>
 					</view>
@@ -250,12 +262,12 @@
 					</view>
 					<view class="tui-drawer-content">
 						<view class="content" @click="useOutClickSide">
-							<easy-select :options="colorBox" ref="easySelect" :selectName="'ltColor'" size="mini" :value="optionList.ltColor"
+							<easy-select :options="colorBox" ref="easySelect" :selectName="'colorLevel_parameter_1'" size="mini" :value="optionList.colorLevel_parameter_1"
 							 @selectOne="selectItem"></easy-select>
 						</view>
 						<tui-icon name="reduce" color="#333" :size="14"></tui-icon>
 						<view class="content" @click="useOutClickSide">
-							<easy-select :options="colorBox" ref="easySelect" :selectName="'rtColor'" size="mini" :value="optionList.rtColor"
+							<easy-select :options="colorBox" ref="easySelect" :selectName="'colorLevel_parameter_2'" size="mini" :value="optionList.colorLevel_parameter_2"
 							 @selectOne="selectItem"></easy-select>
 						</view><text class="content-text" style="color: #fff;">星</text>
 					</view>
@@ -264,12 +276,12 @@
 					</view>
 					<view class="tui-drawer-content">
 						<view class="content" @click="useOutClickSide">
-							<easy-select :options="facadeBox" ref="easySelect" :selectName="'ltShape'" size="mini" :value="optionList.ltShape"
+							<easy-select :options="shapeBox" ref="easySelect" :selectName="'shapeLevel_parameter_1'" size="mini" :value="optionList.shapeLevel_parameter_1"
 							 @selectOne="selectItem"></easy-select>
 						</view>
 						<tui-icon name="reduce" color="#333" :size="14"></tui-icon>
 						<view class="content" @click="useOutClickSide">
-							<easy-select :options="facadeBox" ref="easySelect" :selectName="'rtShape'" size="mini" :value="optionList.rtShape"
+							<easy-select :options="shapeBox" ref="easySelect" :selectName="'shapeLevel_parameter_2'" size="mini" :value="optionList.shapeLevel_parameter_2"
 							 @selectOne="selectItem"></easy-select>
 						</view>
 						<text class="content-text" style="color: #fff;">星</text>
@@ -278,21 +290,21 @@
 						<text class="tui-title-bold">不良率</text>
 					</view>
 					<view class="tui-drawer-content">
-						<input placeholder-class="tui-phcolor" v-model="optionList.ltRight" class="tui-input" placeholder="不限" maxlength="11"
-						 type="number" />
+						<input placeholder-class="tui-phcolor" v-model="optionList.rejectRatio_parameter_1" class="tui-input" placeholder="不限"
+						 maxlength="11" type="number" />
 						<tui-icon name="reduce" color="#333" :size="14"></tui-icon>
-						<input placeholder-class="tui-phcolor" v-model="optionList.rtRight" class="tui-input" placeholder="不限" maxlength="11"
-						 type="number" /><text class="content-text">%</text>
+						<input placeholder-class="tui-phcolor" v-model="optionList.rejectRatio_parameter_2" class="tui-input" placeholder="不限"
+						 maxlength="11" type="number" /><text class="content-text">%</text>
 					</view>
 					<view class="tui-drawer-title">
 						<text class="tui-title-bold">价格区间</text>
 					</view>
 					<view class="tui-drawer-content">
-						<input placeholder-class="tui-phcolor" v-model="optionList.ltPrice" class="tui-input" placeholder="不限" maxlength="11"
-						 type="number" />
+						<input placeholder-class="tui-phcolor" v-model="optionList.price_parameter_1" class="tui-input" placeholder="不限"
+						 maxlength="11" type="number" />
 						<tui-icon name="reduce" color="#333" :size="14"></tui-icon>
-						<input placeholder-class="tui-phcolor" v-model="optionList.rtPrice" class="tui-input" placeholder="不限" maxlength="11"
-						 type="number" /><text class="content-text">元</text>
+						<input placeholder-class="tui-phcolor" v-model="optionList.price_parameter_2" class="tui-input" placeholder="不限"
+						 maxlength="11" type="number" /><text class="content-text">元</text>
 					</view>
 					<view class="tui-safearea-bottom"></view>
 				</scroll-view>
@@ -353,7 +365,7 @@
 				dropdownShow2: false,
 				seleVarieties: [], //全部品种
 				color_level: [], //颜色等级
-				facade_level: [], //外观等级
+				// facade_level: [], //外观等级
 				fruit_level: [], //果品等级
 				shape_level: [], //果形等级
 				goods: [], //商品
@@ -378,7 +390,7 @@
 				slPinzhong: '品种',
 				slGuobiao: '水果标准',
 				slYanzheng: '验证保障',
-				mangguoID: 0,
+				varietyId: 0,
 				ciData: [{
 						name: "芒果",
 						bOn: false
@@ -502,21 +514,38 @@
 				loadding: false,
 				pullUpOn: true,
 				optionList: {
-					level: '1295251270639849472', //等级
-					ltWeight: '', //单果左
-					rtWeight: '', //单果左
-					ltWidth: '', //果径左
-					rtWidth: '', //果径右
-					ltTaste: '', //口感左
-					rtTaste: '', //口感右
-					ltColor: '', //颜色左
-					rtColor: '', //颜色右
-					ltShape: '', //形状左
-					rtShape: '', //形状右
-					ltRight: '', //不良左
-					rtRight: '', //不良右
-					ltPrice: '', //价格左
-					rtPrice: '', //价格右边
+					fruitLevel: '1295251270639849472', //等级
+					weight_parameter_1: '', //单果左
+					weight_parameter_2: '', //单果右
+					size_parameter_1: '', //果径左
+					size_parameter_2: '', //果径右
+					tasteLevel_parameter_1: '', //口感左
+					tasteLevel_parameter_2: '', //口感右
+					colorLevel_parameter_1: '', //颜色左
+					colorLevel_parameter_2: '', //颜色右
+					shapeLevel_parameter_1: '', //形状左
+					shapeLevel_parameter_2: '', //形状右
+					rejectRatio_parameter_1: '', //不良左
+					rejectRatio_parameter_2: '', //不良右
+					price_parameter_1: '', //价格左
+					price_parameter_2: '', //价格右边
+				},
+				postList: {
+					fruitLevel: '1295251270639849472', //等级
+					weight_parameter_1: '', //单果左
+					weight_parameter_2: '', //单果右
+					size_parameter_1: '', //果径左
+					size_parameter_2: '', //果径右
+					tasteLevel_parameter_1: '', //口感左
+					tasteLevel_parameter_2: '', //口感右
+					colorLevel_parameter_1: '', //颜色左
+					colorLevel_parameter_2: '', //颜色右
+					shapeLevel_parameter_1: '', //形状左
+					shapeLevel_parameter_2: '', //形状右
+					rejectRatio_parameter_1: '', //不良左
+					rejectRatio_parameter_2: '', //不良右
+					price_parameter_1: '', //价格左
+					price_parameter_2: '', //价格右边
 				},
 				statusHeight: 20,
 				boxHeight: 44
@@ -535,8 +564,8 @@
 				// console.log(options)
 				this.serrchGoods = options.name
 				this.slMangguo = options.name
-				this.mangguoID = options.id
-				log(this.mangguoID)
+				this.varietyId = options.id
+				log(this.varietyId)
 				this.ShopIng()
 			}
 
@@ -564,6 +593,38 @@
 				}
 			});
 		},
+		filters: {
+			filterNum(val) {
+				if (val) {
+					let words = (Math.floor(val) + '').split('');
+					let res = '';
+					if (words.length <= 4) {
+						res = val;
+					}
+					if (words.length === 5) {
+						res = words[0] + "." + words[1] + '万';
+					}
+					if (words.length === 6) {
+						res = words[0] + words[1] + "." + words[2] + '万';
+					}
+					if (words.length === 7) {
+						res = words[0] + words[1] + words[2] + "." + words[3] + '万';
+					}
+					if (words.length === 8) {
+						res = words[0] + words[1] + words[2] + words[3] + "." + words[4] + '万';
+					}
+					if (words.length === 9) {
+						res = words[0] + "." + words[1] + '亿';
+					}
+					if (words.length === 10) {
+						res = words[0] + words[1] + "." + words[2] + '亿';
+					}
+					return res;
+				} else {
+					return val;
+				}
+			}
+		},
 		computed: {
 			tasteBox() {
 				let arr = []
@@ -573,7 +634,8 @@
 						num: index,
 						star: index + 1,
 						label: item.title,
-						value: item.title
+						value: item.title,
+						id:item.id
 					}
 					arr.push(tmp)
 				})
@@ -587,21 +649,23 @@
 						num: index,
 						star: index + 1,
 						label: item.title,
-						value: item.title
+						value: item.title,
+						id:item.id
 					}
 					arr.push(tmp)
 				})
 				return arr
 			},
-			facadeBox() {
+			shapeBox() {
 				let arr = []
-				let data = this.facade_level
+				let data = this.shape_level
 				data.forEach((item, index) => {
 					let tmp = {
 						num: index,
 						star: index + 1,
 						label: item.title,
-						value: item.title
+						value: item.title,
+						id:item.id
 					}
 					arr.push(tmp)
 				})
@@ -710,7 +774,6 @@
 				// }
 				// this.isActives1 = !this.isActives1
 				this.isActives1 = this.dropScreenShow
-				// log('颜色事件isActives1=' + this.isActives1, '弹层事件=' + this.dropScreenShow)
 				// 	this.dropScreenShow = !this.dropScreenShow
 				// this.dropScreenShow2 = false
 				// log(this.dropNum)
@@ -752,14 +815,14 @@
 			checkDing(index, id, title) {
 				this.numNull = index
 				this.slMangguo = title
-				this.mangguoID = id
+				this.varietyId = id
 				this.ShopIng()
 				this.dropScreenShow = !this.dropScreenShow
 			},
 			checkVariety(index, id, title) {
 				this.numNull2 = index
 				this.slPinzhong = title
-				this.mangguoID = id
+				this.varietyId = id
 				this.dropScreenShow2 = !this.dropScreenShow2
 				this.ShopIng()
 			},
@@ -790,12 +853,13 @@
 			selectItem(e) {
 				console.log(e)
 				let {
-					s_name,
 					id,
+					s_name,
 					label
 				} = e
 				this.optionList[s_name] = label
-				console.log("optionList:", this.optionList)
+				this.postList[s_name] = id
+				console.log("postList:", this.postList)
 
 			},
 			//关闭
@@ -890,7 +954,7 @@
 					pageSize: 10
 				}
 				let data2 = {
-					id: this.mangguoID
+					id: this.varietyId
 				}
 				Promise.all([listing(getGoodsall, data), listing(getAttribute, data2)])
 					// listing(getGoodsall,data)
@@ -961,7 +1025,7 @@
 			dropdownItem() {
 				log('2')
 			},
-			//筛选事件汇总
+			//筛选汇总
 			screen(e) {
 
 				let index = e.currentTarget.dataset.index ? e.currentTarget.dataset.index : e;
@@ -1828,6 +1892,7 @@
 
 	.tui-pro-price {
 		padding-top: 18rpx;
+		line-height: 20rpx;
 	}
 
 	.tui-sale-price {

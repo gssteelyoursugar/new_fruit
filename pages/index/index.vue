@@ -121,7 +121,7 @@
 						<image :src="item.url" mode="aspectFit" class="tabimg"></image>
 						<view class="tui-price">
 							<view class="tui-first-price">&yen;<text class="tui-price-color">{{item.platformPrice}}</text><text class="price-label">/件</text></view>
-							<view class="tui-last-price">&yen;<text class="tui-cribing">{{item.marketPrice}}</text><text class="price-label">/件</text></view>
+							<view class="tui-last-price">&yen;<text class="tui-cribing">{{item.marketPrice}}</text></view>
 						</view>
 						<text class="tui-weight">{{item.specification}}</text>
 					</view>
@@ -150,7 +150,7 @@
 						<image :src="item.url" mode="aspectFit" class="tabimg"></image>
 						<view class="tui-price">
 							<view class="tui-first-price">&yen;<text class="tui-price-color">{{item.platformPrice}}</text><text class="price-label">/件</text></view>
-							<view class="tui-last-price">&yen;<text class="tui-cribing">{{item.marketPrice}}</text><text class="price-label">/件</text></view>
+							<view class="tui-last-price">&yen;<text class="tui-cribing">{{item.marketPrice}}</text></view>
 						</view>
 						<text class="tui-weight">{{item.specification}}</text>
 					</view>
@@ -227,12 +227,12 @@
 										<view class="tui-rate-price"><text>&yen;</text>{{item.marketPrice}}</view>
 										<text class="tui-praise  " @tap="praise(index)">
 											<text class="tui-praise iconfont icon-like  " v-if="!item.showSearch1"></text>
-											<text class="tui-praise iconfont icon-dianzan " v-if="item.showSearch1"></text>{{item.praiseNumber}}
+											<text class="tui-praise iconfont icon-dianzan " v-if="item.showSearch1"></text>{{item.praiseNumber |filterNum}}
 										</text>
 									</view>
 									<view class="tui-pro-dea">
 										<text class="tui-jin1">{{item.specification}}</text>
-										<text class="tui-jin">成交<text class="tui-dea-color">{{item.total}}</text>元</text>
+										<text class="tui-jin">成交<text class="tui-dea-color">{{item.total | filterNum}}</text>元</text>
 
 
 
@@ -271,12 +271,12 @@
 										<view class="tui-rate-price"> <text>&yen;</text>{{item.marketPrice}}</view>
 										<text class="tui-praise  " @tap="praise(index)">
 											<text class="tui-praise iconfont icon-like  " v-if="!item.showSearch1"></text>
-											<text class="tui-praise iconfont icon-dianzan " v-if="item.showSearch1"></text>{{item.praiseNumber}}
+											<text class="tui-praise iconfont icon-dianzan " v-if="item.showSearch1"></text>{{item.praiseNumber |filterNum}}
 										</text>
 									</view>
 									<view class="tui-pro-dea">
 										<text class="tui-jin1">{{item.specification}}</text>
-										<text class="tui-jin">成交<text class="tui-dea-color">{{item.total}}</text>元</text>
+										<text class="tui-jin">成交<text class="tui-dea-color">{{item.total | filterNum}}</text>元</text>
 
 									</view>
 								</view>
@@ -1014,6 +1014,38 @@
 		// 监听页面滚动距离
 
 		mounted() {},
+		filters: {
+			filterNum(val) {
+				if (val) {
+					let words = (Math.floor(val) + '').split('');
+					let res = '';
+					if (words.length <= 4) {
+						res = val;
+					}
+					if (words.length === 5) {
+						res = words[0] + "." + words[1] + '万';
+					}
+					if (words.length === 6) {
+						res = words[0] + words[1] + "." + words[2] + '万';
+					}
+					if (words.length === 7) {
+						res = words[0] + words[1] + words[2] + "." + words[3] + '万';
+					}
+					if (words.length === 8) {
+						res = words[0] + words[1] + words[2] + words[3] + "." + words[4] + '万';
+					}
+					if (words.length === 9) {
+						res = words[0] + "." + words[1] + '亿';
+					}
+					if (words.length === 10) {
+						res = words[0] + words[1] + "." + words[2] + '亿';
+					}
+					return res;
+				} else {
+					return val;
+				}
+			}
+		},
 
 		computed: {
 			...mapState(['screendata']),
@@ -1180,6 +1212,7 @@
 
 	.tui-pro-price {
 		/* padding-top: 18rpx; */
+		line-height: 30rpx;
 	}
 
 	.tui-sale-price {
@@ -1232,6 +1265,8 @@
 	.tui-rate {
 		color: #FF4300;
 		font-size: 28rpx;
+		font-weight: 500;
+
 	}
 
 	.tui-rate text {
@@ -1441,6 +1476,7 @@
 		-webkit-align-items: baseline;
 		align-items: baseline;
 		color: #FF6500;
+		margin-top: 14rpx;
 
 	}
 

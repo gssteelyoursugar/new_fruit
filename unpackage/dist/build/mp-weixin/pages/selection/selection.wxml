@@ -1,0 +1,1 @@
+<view><view class="centen"><view class="imgWidth"><image src="{{img1}}" mode="widthFix"></image></view><view class="imgWidth"><image src="{{img2}}" mode="widthFix"></image></view><view class="imgWidth"><image src="{{img3}}" mode="widthFix"></image></view></view></view>

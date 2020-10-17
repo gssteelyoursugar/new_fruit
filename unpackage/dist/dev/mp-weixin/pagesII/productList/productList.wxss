@@ -842,6 +842,7 @@ page {
 }
 .tui-pro-price {
 	padding-top: 18rpx;
+	line-height: 20rpx;
 }
 .tui-sale-price {
 	font-size: 22rpx;

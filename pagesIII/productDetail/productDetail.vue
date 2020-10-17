@@ -29,10 +29,10 @@
 					</block>
 					<block v-for="(item, index) in swiperList" :key="index" v-if="shopListdata.urlVideo!==''">
 						<swiper-item :data-index="index" v-if="index===0">
-							<video v-cloak id="myVideo" :src="shopListdata.urlVideo" :show-fullscreen-btn="false" style="width:100%;height:100%;"></video>
+							<video v-cloak id="myVideo"  :src="shopListdata.urlVideo" :show-fullscreen-btn="true" style="width:100%;height:100%;"></video>
 						</swiper-item>
 						<swiper-item :data-index="index" v-else>
-							<image :src="item" class="tui-slide-image" :style="{ height: scrollH + 'px' }" />
+							<image :src="item" class="tui-slide-image"  />
 						</swiper-item>
 					</block>
 
@@ -56,11 +56,11 @@
 
 						<view class="tag-tit-pra" v-if="!canPraise" @tap="praiseLike(shopListdata.id)">
 							<tui-icon name="agree" color="#999" :size="15"></tui-icon>
-							<text>点赞{{ shopListdata.praiseNumber ||0}}</text>
+							<text>点赞{{ shopListdata.praiseNumber||0 |filterNum}}</text>
 						</view>
 						<view class="tag-tit-pra" v-if="canPraise" @tap="praiseLikeTwo">
 							<tui-icon name="agree-fill" color="#ff0000" :size="15"></tui-icon>
-							<text>点赞{{ shopListdata.praiseNumber ||0}}</text>
+							<text>点赞{{ shopListdata.praiseNumber||0  |filterNum}}</text>
 						</view>
 
 					</view>

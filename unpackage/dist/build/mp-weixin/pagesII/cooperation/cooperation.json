@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "商务合作",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "tui-icon": "/components/tui-icon/tui-icon"
+  }
+}
