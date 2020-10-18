@@ -6,7 +6,7 @@
 		 class="wyb-popup-mask"
 		 :style="{
 			 backgroundColor: 'rgba(0, 0, 0, ' + maskAlpha + ')',
-			 zIndex: zIndex - 1}" />
+			 zIndex: 9999,top: navHeight+'px'}" />
 			 
 		<view 
 		 class="wyb-popup-box"
@@ -73,7 +73,10 @@
 				maskAnim: {},
 				winReBottom: '',
 				winReTop: '',
-				sizeChange: false
+				sizeChange: false,
+				statusHeight:20,
+				boxHeight: 64,
+				navHeight: 44,
 			}
 		},
 		computed: {
@@ -226,7 +229,7 @@
 			},
 			duration: {
 				type: Number,
-				default: 400
+				default: 200
 			},
 			showCloseIcon: {
 				type: Boolean,
@@ -297,6 +300,24 @@
 				}
 			})
 			// #endif
+			
+			// #ifndef H5 || APP-PLUS || MP-ALIPAY
+			const res = uni.getSystemInfoSync();
+			let {
+				statusBarHeight
+			} = res
+			let info = uni.getMenuButtonBoundingClientRect()
+			let {
+				top,
+				bottom
+			} = info
+			this.statusHeight = statusBarHeight
+			let buttonHeight = (bottom - statusBarHeight) + (top - statusBarHeight)
+			let navHeight = statusBarHeight + buttonHeight + top - statusBarHeight //状态栏+导航栏的高度（页面初始高度）
+			this.boxHeight = navHeight - statusBarHeight //导航栏高度
+			this.navHeight = navHeight
+			console.log("statusBarHeight,",statusBarHeight,"navHeight",navHeight,"boxHeight",this.boxHeight, "buttonHeight",buttonHeight)
+			// #endif
 		},
 		methods: {
 			close() {
@@ -334,7 +355,7 @@
 			contentIn() {
 				this.animation = uni.createAnimation({
 					duration: this.duration,
-					timingFunction: 'ease-out'
+					timingFunction: 'linear'
 				})
 				switch (this.type) {
 					case 'center':
@@ -434,12 +455,12 @@
 	
 	.wyb-popup-mask {
 		position: fixed;
-		top: 0;
+		/* top: 70px; */
 		left: 0;
 		bottom: 0;
 		right: 0;
 		opacity: 0;
-		transform: scale(20);
+		/* transform: scale(20); */
 	}
 	
 	.wyb-popup-close {

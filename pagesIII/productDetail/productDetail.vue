@@ -367,7 +367,7 @@
 												</view>
 												/件
 											</view>
-											<view class="tui-huaxian">￥{{ shopListdata.totalPirce }}</view>
+											<view class="tui-huaxian">￥{{ shopListdata.marketPrice }}</view>
 										</view>
 									</view>
 
@@ -1268,6 +1268,10 @@
 		background-color: rgba(228, 228, 228, 1);
 		font-size: 32rpx;
 		color: #ff5600;
+		display: flex;
+		align-items: baseline;
+		justify-content: center;
+
 	}
 
 	.tui-pay2-flex {
@@ -1783,9 +1787,15 @@
 	.tui-original-price {
 		font-size: 28rpx;
 		line-height: 28rpx;
-		padding: 10rpx 30rpx;
+		padding: 10rpx 0rpx 10rpx 30rpx;
+		-webkit-box-sizing: border-box;
 		box-sizing: border-box;
 		margin-top: 8rpx;
+		width: 80%;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+
 	}
 
 	.tui-line-through {

@@ -400,7 +400,7 @@
 			{
 				"name": "详情", //模式名称
 				"path": "pagesIII/productDetail/productDetail", //启动页面，必选
-				"query": "id=1299160628273971200&__id__=2" //启动参数，在页面的onLoad函数里面得到
+				"query": "id=1314864767386910720&__id__=1" //启动参数，在页面的onLoad函数里面得到
 			},
 			{
 				"name": "确认订单", //模式名称

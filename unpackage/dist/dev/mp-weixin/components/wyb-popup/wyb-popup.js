@@ -189,7 +189,10 @@ var _default =
       maskAnim: {},
       winReBottom: '',
       winReTop: '',
-      sizeChange: false };
+      sizeChange: false,
+      statusHeight: 20,
+      boxHeight: 64,
+      navHeight: 44 };
 
   },
   computed: {
@@ -342,7 +345,7 @@ var _default =
 
     duration: {
       type: Number,
-      default: 400 },
+      default: 200 },
 
     showCloseIcon: {
       type: Boolean,
@@ -413,6 +416,24 @@ var _default =
 
 
 
+
+
+    var res = uni.getSystemInfoSync();var
+
+    statusBarHeight =
+    res.statusBarHeight;
+    var info = uni.getMenuButtonBoundingClientRect();var
+
+    top =
+
+    info.top,bottom = info.bottom;
+    this.statusHeight = statusBarHeight;
+    var buttonHeight = bottom - statusBarHeight + (top - statusBarHeight);
+    var navHeight = statusBarHeight + buttonHeight + top - statusBarHeight; //状态栏+导航栏的高度（页面初始高度）
+    this.boxHeight = navHeight - statusBarHeight; //导航栏高度
+    this.navHeight = navHeight;
+    console.log("statusBarHeight,", statusBarHeight, "navHeight", navHeight, "boxHeight", this.boxHeight, "buttonHeight", buttonHeight);
+
   },
   methods: {
     close: function close() {
@@ -450,7 +471,7 @@ var _default =
     contentIn: function contentIn() {var _this3 = this;
       this.animation = uni.createAnimation({
         duration: this.duration,
-        timingFunction: 'ease-out' });
+        timingFunction: 'linear' });
 
       switch (this.type) {
         case 'center':

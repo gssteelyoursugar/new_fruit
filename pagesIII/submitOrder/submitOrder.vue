@@ -70,7 +70,7 @@
 				<view class="tui-black">实付金额: </view>
 				<view class="tui-size-24">￥</view>
 				<view class="tui-price-large">{{extraData.orderAmount}}</view>
-				<view class="tui-size-24">.00</view>
+				<view class="tui-size-24"></view>
 				<view class="tui-black">含运费 </view>
 			</view>
 			<view class="tui-pr25">

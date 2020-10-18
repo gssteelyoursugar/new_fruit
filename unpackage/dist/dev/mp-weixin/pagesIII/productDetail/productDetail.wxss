@@ -165,6 +165,15 @@ page {
 	background-color: rgba(228, 228, 228, 1);
 	font-size: 32rpx;
 	color: #ff5600;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-align: baseline;
+	-webkit-align-items: baseline;
+	        align-items: baseline;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
 }
 .tui-pay2-flex {
 	text-align: center;
@@ -690,10 +699,14 @@ page {
 .tui-original-price {
 	font-size: 28rpx;
 	line-height: 28rpx;
-	padding: 10rpx 30rpx;
+	padding: 10rpx 0rpx 10rpx 30rpx;
 	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 	margin-top: 8rpx;
+	width: 80%;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 .tui-line-through {
 	text-decoration: line-through;
