@@ -1,89 +1,78 @@
 <template>
-	<view class="container">
-		<!-- <view style="height: 500rpx;background-color: #0062CC;"></view> -->
-
-		<view class="tui-header-box" :style="{ height: heightg + 'px', background: 'rgba(0,197,42,' + opcity + ')' }">
-			<view class="tui-header">
-				<view class="tui-mid   ">
-					<image src="../../static/images/logo.png" mode="aspectFit" class="tui-logo"></image>
-				</view>
-			</view>
-			<view class="tui-header-icon" :style="{ marginTop: top + 'rpx' }" @click="scanCode">
-				<view class="tui-left  ">
+	<view class="container" :style="{paddingTop: navHeight + 'px'}">
+		<view class="index-bg">
+			<image src="../../static/images/bage@3x.png" :style="{height: statusHeight <= 20 ?'318rpx' : '338rpx'}" mode="aspectFill"></image>
+		</view>
+		<view class="tui-header-box" :style="{ height: navHeight + 'px', background: 'rgba(0,197,42,' + opcity + ')' }">
+			<view class="tui-header" :style="{ marginTop: statusHeight + 'px',height: boxHeight + 'px' }">
+				<!-- -->
+				<view class="tui-left" @click="scanCode">
 					<image src="../../static/images/sceen.png" mode="aspectFit" class="tui-left-saoma"></image>
 				</view>
+				<view class="tui-mid">
+					<image src="../../static/images/logo.png" mode="aspectFit" class="tui-logo"></image>
+				</view>
+				<view class="tui-left"></view>
 			</view>
-			<Weather ref="mychild" :city="city" :citys="citys" :address="address" :weath="temperature" :ApproveStatus="ApproveStatus"
-			 v-if="WeatherHide"></Weather>
 		</view>
+		<Weather ref="mychild" :city="city" :citys="citys" :address="address" :weath="temperature" :ApproveStatus="ApproveStatus"
+		 v-if="WeatherHide"></Weather>
+		<view class="index-content">
+			<Banner :banner="WxIndexViewpager"></Banner>
 
+			<view class="bac">
+				<view class="tui-tag">
+					<block v-for="(item,index) in WxPostersBottomAdve" :key="index">
+						<view class="tui-row">
+							<image :src="item.url" mode="aspectFit" class="iconImg icon-right"></image> {{item.title}}
+						</view>
+					</block>
 
-
-		<!-- <image src="../../static/images/ding@2x.png" class="tui-my-bg bgimg1" mode="aspectFill"></image> -->
-		<view class="tui-header">
-
-			<!-- <view class="tui-flex ">
-				<view class="tui-left  "> <image src="../../static/images/saoma1.png" mode="aspectFit" class="tui-left-saoma" @click="scanCode"></image> </view>
-				<view class="tui-mid   "> <image src="../../static/images/logo.png" mode="aspectFit" class="tui-logo"></image></view>
-				<view class="tui-right "></view>
-			</view> -->
-
-		</view>
-		<!--banner-->
-		<Banner :banner="WxIndexViewpager"></Banner>
-		<view class="bac">
-			<view class="tui-tag">
-				<block v-for="(item,index) in WxPostersBottomAdve" :key="index">
-					<view class="tui-row">
-						<image :src="item.url" mode="aspectFit" class="iconImg icon-right"></image> {{item.title}}
+				</view>
+			</view>
+			<!-- 金刚区 -->
+			<view class=" swiper-item-top">
+				<block v-for=" (item,index) in WxTopNavigationBar" :key="index">
+					<view class="conteng-img" @tap="hrefKing(index)">
+						<image :src="item.url" mode="widthFix" class="uploadimg1"></image>
+						<text>{{item.title}}</text>
 					</view>
 				</block>
-
-			</view>
-		</view>
-		<!-- 金刚区 -->
-		<view class=" swiper-item-top">
-			<block v-for=" (item,index) in WxTopNavigationBar" :key="index">
-				<view class="conteng-img" @tap="hrefKing(index)">
-					<image :src="item.url" mode="widthFix" class="uploadimg1"></image>
-					<text>{{item.title}}</text>
-				</view>
-			</block>
-			<!-- <view class="conteng-img"  @tap="golook()">
+				<!-- <view class="conteng-img"  @tap="golook()">
 				<image src="../../static/images/look.png" mode="widthFix" class="uploadimg1"></image>
 				<text>最近看过</text>
 			</view> -->
 
-		</view>
-		<!-- <tui-button width="240rpx" height="80rpx" :size="30" @click="rtBubble">打开菜单</tui-button>
+			</view>
+			<!-- <tui-button width="240rpx" height="80rpx" :size="30" @click="rtBubble">打开菜单</tui-button>
 		<t-rt-popup :itemList="itemList" ref="rtBubble" @click="itemClick"></t-rt-popup> -->
-		<!-- 品种区 -->
-		<view class="swiper-item ">
-			<block v-for=" (item,index) in HotVarieties" :key="index">
-				<view class="conteng-img contentitem" @tap="gotoBreed(item.name,item.id)">
-					<image :src="item.url" mode="widthFix" class="uploadimg"></image>
-					<text>{{item.name}}</text>
+			<!-- 品种区 -->
+			<view class="swiper-item ">
+				<block v-for=" (item,index) in HotVarieties" :key="index">
+					<view class="conteng-img contentitem" @tap="gotoBreed(item.name,item.id)">
+						<image :src="item.url" mode="widthFix" class="uploadimg"></image>
+						<text>{{item.name}}</text>
+					</view>
+				</block>
+				<view class="conteng-img contentitem" @tap="gotoGun">
+					<image src="../../static/images/gengduo@3x.png" mode="widthFix" class="uploadimg"></image>
+					<text>查看更多</text>
 				</view>
-			</block>
-			<view class="conteng-img contentitem" @tap="gotoGun">
-				<image src="../../static/images/gengduo@3x.png" mode="widthFix" class="uploadimg"></image>
-				<text>查看更多</text>
 			</view>
-		</view>
-		<!-- 温馨提示 -->
+			<!-- 温馨提示 -->
 
-		<view class="tui-reminder">
-			<view class="tui-rolling-news">
-				<tui-icon style="margin-top: 4rpx;" name="news-fill" :size='28' color='#00BF3D'></tui-icon>
-				<swiper vertical autoplay circular interval="3000" class="tui-swiper">
-					<swiper-item v-for="(item,index) in WxPublicMsg" :key="index" class="tui-swiper-item">
-						<view class="tui-news-item">{{item.title}} </view>
-						<text class="tui-see" @tap="goTimeInfo(item.id,item.content,item.title,item.createDate)">查看<text class="iconfont icon-weibiaoti34"></text></text>
-					</swiper-item>
-				</swiper>
-			</view>
-			<!--  -->
-			<!-- <view class="tui-left tui-magin-left" @click="goMessage">
+			<view class="tui-reminder">
+				<view class="tui-rolling-news">
+					<tui-icon style="margin-top: 4rpx;" name="news-fill" :size='28' color='#00BF3D'></tui-icon>
+					<swiper vertical autoplay circular interval="3000" class="tui-swiper">
+						<swiper-item v-for="(item,index) in WxPublicMsg" :key="index" class="tui-swiper-item">
+							<view class="tui-news-item">{{item.title}} </view>
+							<text class="tui-see" @tap="goTimeInfo(item.id,item.content,item.title,item.createDate)">查看<text class="iconfont icon-weibiaoti34"></text></text>
+						</swiper-item>
+					</swiper>
+				</view>
+				<!--  -->
+				<!-- <view class="tui-left tui-magin-left" @click="goMessage">
 				<image src="../../static/images/dalaba.png" mode="aspectFit" class="dalaba-icon"></image>
 			</view>
 			<view class="tui-middle">
@@ -96,39 +85,39 @@
 				
 				<text class="tui-see">查看<text class="iconfont icon-weibiaoti34"></text></text>
 			</view> -->
-		</view>
-		<!-- 限量批 -->
-		<view class="tui-count-down">
-			<view class="tui-col-2">
-				<text class="tui-font">限量批</text>
 			</view>
-			<!-- 倒计时 -->
-			<view class="tui-col-5 tui-line-hight">
-				<tui-countdown :time="ts" color="#fff" borderColor="rgba(70, 66, 70, 1)" backgroundColor="rgba(70, 66, 70, 1)"
-				 colonColor="rgba(70, 66, 70, 1)" @end="endOfTime">
-				</tui-countdown>
+			<!-- 限量批 -->
+			<view class="tui-count-down">
+				<view class="tui-col-2">
+					<text class="tui-font">限量批</text>
+				</view>
+				<!-- 倒计时 -->
+				<view class="tui-col-5 tui-line-hight">
+					<tui-countdown :time="ts" color="#fff" borderColor="rgba(70, 66, 70, 1)" backgroundColor="rgba(70, 66, 70, 1)"
+					 colonColor="rgba(70, 66, 70, 1)" @end="endOfTime">
+					</tui-countdown>
+				</view>
+				<view class="tui-col-6">
+					<text class="tui-font">新果上市</text>
+					<text class="tui-barcolor">抢鲜市场 <text class="iconfont icon-weibiaoti34"></text> </text>
+				</view>
 			</view>
-			<view class="tui-col-6">
-				<text class="tui-font">新果上市</text>
-				<text class="tui-barcolor">抢鲜市场 <text class="iconfont icon-weibiaoti34"></text> </text>
-			</view>
-		</view>
-		<!-- 限量批 -->
-		<view class="tui-center-Time-New" style="display: flex;">
-			<view class="tui-Fruits" style="width: 50%;text-align: center;" @click="goLimit()">
-				<block v-for="(item,index) in WxActivityList" :key="index">
-					<view class="tui-Fruits-table">
-						<image :src="item.url" mode="aspectFit" class="tabimg"></image>
-						<view class="tui-price">
-							<view class="tui-first-price">&yen;<text class="tui-price-color">{{item.platformPrice}}</text><text class="price-label">/件</text></view>
-							<view class="tui-last-price">&yen;<text class="tui-cribing">{{item.marketPrice}}</text></view>
+			<!-- 限量批 -->
+			<view class="tui-center-Time-New" style="display: flex;">
+				<view class="tui-Fruits" style="width: 50%;text-align: center;" @click="goLimit()">
+					<block v-for="(item,index) in WxActivityList" :key="index">
+						<view class="tui-Fruits-table">
+							<image :src="item.url" mode="aspectFit" class="tabimg"></image>
+							<view class="tui-price">
+								<view class="tui-first-price">&yen;<text class="tui-price-color">{{item.platformPrice}}</text><text class="price-label">/件</text></view>
+								<view class="tui-last-price">&yen;<text class="tui-cribing">{{item.marketPrice}}</text></view>
+							</view>
+							<text class="tui-weight">{{item.specification}}</text>
 						</view>
-						<text class="tui-weight">{{item.specification}}</text>
-					</view>
-				</block>
-			</view>
-			<!-- 限量批注释 -->
-			<!-- <view class="tui-Fruits" style="width: 50%;text-align: center;">
+					</block>
+				</view>
+				<!-- 限量批注释 -->
+				<!-- <view class="tui-Fruits" style="width: 50%;text-align: center;">
 			<swiper style="width: 100%; height: 250rpx;" :autoplay="true" :display-multiple-items="2">
 				<block v-for="(item,index) in WxActivity" :key="index">
 				<swiper-item>
@@ -143,157 +132,157 @@
 				</block>
 			</swiper>
 		</view> -->
-			<!-- 鲜果上市 -->
-			<view class="tui-Fruits" style="width: 50%;text-align: center;">
-				<block v-for="(item,index) in NewGoods" :key="index">
-					<view class="tui-Fruits-table" @click="fruitGo(item.id)">
-						<image :src="item.url" mode="aspectFit" class="tabimg"></image>
-						<view class="tui-price">
-							<view class="tui-first-price">&yen;<text class="tui-price-color">{{item.platformPrice}}</text><text class="price-label">/件</text></view>
-							<view class="tui-last-price">&yen;<text class="tui-cribing">{{item.marketPrice}}</text></view>
+				<!-- 鲜果上市 -->
+				<view class="tui-Fruits" style="width: 50%;text-align: center;">
+					<block v-for="(item,index) in NewGoods" :key="index">
+						<view class="tui-Fruits-table" @click="fruitGo(item.id)">
+							<image :src="item.url" mode="aspectFit" class="tabimg"></image>
+							<view class="tui-price">
+								<view class="tui-first-price">&yen;<text class="tui-price-color">{{item.platformPrice}}</text><text class="price-label">/件</text></view>
+								<view class="tui-last-price">&yen;<text class="tui-cribing">{{item.marketPrice}}</text></view>
+							</view>
+							<text class="tui-weight">{{item.specification}}</text>
 						</view>
-						<text class="tui-weight">{{item.specification}}</text>
-					</view>
-				</block>
-			</view>
-		</view>
-		<!-- 1像素边框 -->
-		<view class="tui-border-top">
-			<view class="tui-border-bottom"></view>
-		</view>
-		<!-- 水果排行榜 -->
-		<view class="tui-Fruits-ranking">
-			<block v-for="(item,index) in dataList" :key="index">
-				<view class="tui-Fruits-ranking-tab" @tap="goToRank(index,item.value)">
-					<text class="tui-Fruits-ranking-font-wei">{{item.name}}</text>
-					<view class="tui-Fruits-ranking-lien">
-						<text class="tui-Fruits-ranking-tab-font">{{item.title}}</text>
-					</view>
-					<image :src=item.imgsrc mode="widthFix" class="tabimg"></image>
+					</block>
 				</view>
-			</block>
-		</view>
-		<!-- 推荐好货 -->
-		<view class="xiding">
-			<view class="tui-recommend">
-				<block v-for="(item,index) in flexing" :key="index">
-					<view class="tui-fixed-3 " @click="flexClick(index)">
-						<view class="borderRight" v-if="index == 1 || index == 2"></view>
-						<view class="fixed-3-font-wei" :class="{fixedweight:index == num}">{{item.title}}</view>
-						<view class="fixed-3-font-weitwo" :class="{fixed3fontweione:index == num}">{{item.name}}</view>
+			</view>
+			<!-- 1像素边框 -->
+			<view class="tui-border-top">
+				<view class="tui-border-bottom"></view>
+			</view>
+			<!-- 水果排行榜 -->
+			<view class="tui-Fruits-ranking">
+				<block v-for="(item,index) in dataList" :key="index">
+					<view class="tui-Fruits-ranking-tab" @tap="goToRank(index,item.value)">
+						<text class="tui-Fruits-ranking-font-wei">{{item.name}}</text>
+						<view class="tui-Fruits-ranking-lien">
+							<text class="tui-Fruits-ranking-tab-font">{{item.title}}</text>
+						</view>
+						<image :src=item.imgsrc mode="widthFix" class="tabimg"></image>
 					</view>
 				</block>
-
-
 			</view>
-		</view>
+			<!-- 推荐好货 -->
+			<view class="xiding">
+				<view class="tui-recommend">
+					<block v-for="(item,index) in flexing" :key="index">
+						<view class="tui-fixed-3 " @click="flexClick(index)">
+							<view class="borderRight" v-if="index == 1 || index == 2"></view>
+							<view class="fixed-3-font-wei" :class="{fixedweight:index == num}">{{item.title}}</view>
+							<view class="fixed-3-font-weitwo" :class="{fixed3fontweione:index == num}">{{item.name}}</view>
+						</view>
+					</block>
 
-		<!-- 分割线 -->
-		<!-- 分割线 -->
-		<!-- 分割线 -->
-		<!-- 分割线 -->
-		<!-- <view style="height: 100px; width: 100%;background-color: #fff;">
+
+				</view>
+			</view>
+
+			<!-- 分割线 -->
+			<!-- 分割线 -->
+			<!-- 分割线 -->
+			<!-- 分割线 -->
+			<!-- <view style="height: 100px; width: 100%;background-color: #fff;">
 			
 		</view> -->
-		<!-- 水果列表页 -->
-		<view class="tui-product-box">
-			<view class="tui-product-list">
-				<view class="tui-product-container">
-					<!--商品列表1-->
-					<block v-for="(item, index) in IndexGoods" :key="index" v-if="(index + 1) % 2 != 0">
-						<view class="tui-pro-item" hover-class="hover" :hover-start-time="150">
-							<image :src="item.url" class="tui-pro-img" mode="widthFix" @tap="gotoList(item.id)" />
-							<view class="tui-pro-content">
-								<view class="tui-pro-tit">
-									<text class="tag-tit">{{item.lableName}}</text>
-									<text class="tag-tit-text">{{item.name}}</text>
-								</view>
-								<view>
-									<view class="tui-pro-price">
-										<text class="tui-sale-price">{{item.describe}}</text>
-										<!-- <text class="tui-factory-price">￥20</text> -->
+			<!-- 水果列表页 -->
+			<view class="tui-product-box">
+				<view class="tui-product-list">
+					<view class="tui-product-container">
+						<!--商品列表1-->
+						<block v-for="(item, index) in IndexGoods" :key="index" v-if="(index + 1) % 2 != 0">
+							<view class="tui-pro-item" hover-class="hover" :hover-start-time="150">
+								<image :src="item.url" class="tui-pro-img" mode="widthFix" @tap="gotoList(item.id)" />
+								<view class="tui-pro-content">
+									<view class="tui-pro-tit">
+										<text class="tag-tit">{{item.lableName}}</text>
+										<text class="tag-tit-text">{{item.name}}</text>
 									</view>
-									<view class="tui-pro-pay">
-										<block v-for="(itemTwo,indexs) in item.goodsType" :key="indexs">
-											<text class="tag-tit-border">{{itemTwo.name}}</text>
-										</block>
-									</view>
-									<view class="tui-pro-pic">
-										<view class="tui-rate">
-											<text>&yen;</text>
-											{{item.platformPrice}}
+									<view>
+										<view class="tui-pro-price">
+											<text class="tui-sale-price">{{item.describe}}</text>
+											<!-- <text class="tui-factory-price">￥20</text> -->
 										</view>
-										<text class="tui-rate-text "> /件</text>
-										<view class="tui-rate-price"><text>&yen;</text>{{item.marketPrice}}</view>
-										<text class="tui-praise  " @tap="praise(index)">
-											<text class="tui-praise iconfont icon-like  " v-if="!item.showSearch1"></text>
-											<text class="tui-praise iconfont icon-dianzan " v-if="item.showSearch1"></text>{{item.praiseNumber |filterNum}}
-										</text>
-									</view>
-									<view class="tui-pro-dea">
-										<text class="tui-jin1">{{item.specification}}</text>
-										<text class="tui-jin">成交<text class="tui-dea-color">{{item.total | filterNum}}</text>元</text>
+										<view class="tui-pro-pay">
+											<block v-for="(itemTwo,indexs) in item.goodsType" :key="indexs">
+												<text class="tag-tit-border">{{itemTwo.name}}</text>
+											</block>
+										</view>
+										<view class="tui-pro-pic">
+											<view class="tui-rate">
+												<text>&yen;</text>
+												{{item.platformPrice}}
+											</view>
+											<text class="tui-rate-text "> /件</text>
+											<view class="tui-rate-price"><text>&yen;</text>{{item.marketPrice}}</view>
+											<text class="tui-praise  " @tap="praise(index)">
+												<text class="tui-praise iconfont icon-like  " v-if="!item.showSearch1"></text>
+												<text class="tui-praise iconfont icon-dianzan " v-if="item.showSearch1"></text>{{item.praiseNumber |filterNum}}
+											</text>
+										</view>
+										<view class="tui-pro-dea">
+											<text class="tui-jin1">{{item.specification}}</text>
+											<text class="tui-jin">成交<text class="tui-dea-color">{{item.total | filterNum}}</text>元</text>
 
 
 
+										</view>
 									</view>
 								</view>
 							</view>
-						</view>
-					</block>
-				</view>
-				<view class="tui-product-container2">
-					<!--商品列表2-->
-					<block v-for="(item, index) in IndexGoods" :key="index" v-if="(index + 1) % 2 == 0">
-						<view class="tui-pro-item" hover-class="hover" :hover-start-time="150">
-							<image :src="item.url" class="tui-pro-img" mode="widthFix" @tap="gotoList(item.id)" />
-							<view class="tui-pro-content">
-								<view class="tui-pro-tit">
-									<text class="tag-tit">{{item.lableName}}</text>
-									<text class="tag-tit-text">{{item.name}}</text>
-								</view>
-								<view>
-									<view class="tui-pro-price">
-										<text class="tui-sale-price">{{item.describe}}</text>
-										<!-- <text class="tui-factory-price">￥20</text> -->
+						</block>
+					</view>
+					<view class="tui-product-container2">
+						<!--商品列表2-->
+						<block v-for="(item, index) in IndexGoods" :key="index" v-if="(index + 1) % 2 == 0">
+							<view class="tui-pro-item" hover-class="hover" :hover-start-time="150">
+								<image :src="item.url" class="tui-pro-img" mode="widthFix" @tap="gotoList(item.id)" />
+								<view class="tui-pro-content">
+									<view class="tui-pro-tit">
+										<text class="tag-tit">{{item.lableName}}</text>
+										<text class="tag-tit-text">{{item.name}}</text>
 									</view>
-									<view class="tui-pro-pay">
-										<block v-for="(itemTwo,indexs) in item.goodsType" :key="indexs">
-											<text class="tag-tit-border">{{itemTwo.name}}</text>
-										</block>
-									</view>
-									<view class="tui-pro-pic">
-										<view class="tui-rate">
-											<text>&yen;</text>
-											{{item.platformPrice}}
+									<view>
+										<view class="tui-pro-price">
+											<text class="tui-sale-price">{{item.describe}}</text>
+											<!-- <text class="tui-factory-price">￥20</text> -->
 										</view>
-										<text class="tui-rate-text "> /件</text>
-										<view class="tui-rate-price"> <text>&yen;</text>{{item.marketPrice}}</view>
-										<text class="tui-praise  " @tap="praise(index)">
-											<text class="tui-praise iconfont icon-like  " v-if="!item.showSearch1"></text>
-											<text class="tui-praise iconfont icon-dianzan " v-if="item.showSearch1"></text>{{item.praiseNumber |filterNum}}
-										</text>
-									</view>
-									<view class="tui-pro-dea">
-										<text class="tui-jin1">{{item.specification}}</text>
-										<text class="tui-jin">成交<text class="tui-dea-color">{{item.total | filterNum}}</text>元</text>
+										<view class="tui-pro-pay">
+											<block v-for="(itemTwo,indexs) in item.goodsType" :key="indexs">
+												<text class="tag-tit-border">{{itemTwo.name}}</text>
+											</block>
+										</view>
+										<view class="tui-pro-pic">
+											<view class="tui-rate">
+												<text>&yen;</text>
+												{{item.platformPrice}}
+											</view>
+											<text class="tui-rate-text "> /件</text>
+											<view class="tui-rate-price"> <text>&yen;</text>{{item.marketPrice}}</view>
+											<text class="tui-praise  " @tap="praise(index)">
+												<text class="tui-praise iconfont icon-like  " v-if="!item.showSearch1"></text>
+												<text class="tui-praise iconfont icon-dianzan " v-if="item.showSearch1"></text>{{item.praiseNumber |filterNum}}
+											</text>
+										</view>
+										<view class="tui-pro-dea">
+											<text class="tui-jin1">{{item.specification}}</text>
+											<text class="tui-jin">成交<text class="tui-dea-color">{{item.total | filterNum}}</text>元</text>
 
+										</view>
 									</view>
 								</view>
 							</view>
-						</view>
-					</block>
+						</block>
+					</view>
 				</view>
 			</view>
-		</view>
 
-		<tui-nomore v-if="!pullUpOn"></tui-nomore>
-		<view class="tui-safearea-bottom"></view>
+			<tui-nomore v-if="!pullUpOn"></tui-nomore>
+			<view class="tui-safearea-bottom"></view>
 
-
-		<view class="agreement">
-			<lyg-popup @popupState="popupState" title="服务协议" protocolPath='../webview/webview?can_share=false&url=/hybrid/html/protocol.html'
-			 policyPath='../webview/webview?can_share=false&url=/hybrid/html/policy.html' policyStorageKey="has_read_privacy"></lyg-popup>
+			<view class="agreement">
+				<lyg-popup @popupState="popupState" title="服务协议" protocolPath='../webview/webview?can_share=false&url=/hybrid/html/protocol.html'
+				 policyPath='../webview/webview?can_share=false&url=/hybrid/html/policy.html' policyStorageKey="has_read_privacy"></lyg-popup>
+			</view>
 		</view>
 	</view>
 </template>
@@ -417,7 +406,6 @@
 				city: '', //城市
 				citys: '', //
 				temperature: '', //气温
-
 				banner: ['6.jpg', '6.jpg', '6.jpg', '6.jpg', '6.jpg'],
 				flexing: [{
 						title: '推荐好货',
@@ -460,7 +448,9 @@
 					}
 
 				],
-
+				statusHeight: 20,
+				boxHeight: 44,
+				navHeight: 64
 
 
 			}
@@ -730,23 +720,6 @@
 
 
 
-			//请求实时鲜果
-			// postactivity(){
-			// 	let data = {
-			// 		pageNo:'1',
-			// 		pageSize:'30',
-			// 		indexClassify:'2'
-			// 	}
-			// 	publicing(activity,data)
-			// 	.then((res)=>{
-
-			// 	})
-			// 	.catch((err)=>{
-			// 		log(err)
-			// 	})
-
-			// },
-
 			//推荐好货请求
 			flexClick(e) {
 				this.num = e
@@ -770,14 +743,7 @@
 					url: '../../pagesII/Limit/Limit?id=' + id
 				})
 			},
-			//限量批
-			// limitGo(id){
-			// 	log(id)
 
-			// 	uni.navigateTo({
-			// 		url:'../../pagesII/Limit/Limit?id='+id
-			// 	})
-			// },
 			//新果上市
 			fruitGo() {
 				uni.navigateTo({
@@ -823,19 +789,7 @@
 				}, 1000);
 			},
 
-			// onPullDownRefresh: function() {
-			// 	//延时为了看效果
-			// 	setTimeout(() => {
-			// 		this.productList = this.loadData;
-			// 		this.pageIndex = 1;
-			// 		this.pullUpOn = true;
-			// 		this.loadding = false;
-			// 		uni.stopPullDownRefresh();
-			// 		uni.showLoading({
-			// 		     title: '刷新中'
-			// 		 });
-			// 	}, 200)
-			// },
+
 			onReachBottom: function() {
 				//下拉加载
 				if (!this.pullUpOn) return;
@@ -969,30 +923,25 @@
 			const data = JSON.parse(text);
 			// this.postactivity()
 			//新版头部
-			let obj = {};
-			// #ifdef MP-WEIXIN
-			obj = wx.getMenuButtonBoundingClientRect();
-			// #endif
-			// #ifdef MP-BAIDU
-			obj = swan.getMenuButtonBoundingClientRect();
-			// #endif
-			// #ifdef MP-ALIPAY
-			my.hideAddToDesktopMenu();
-			// #endif
 
-			setTimeout(() => {
-				// this.$refs.mychild.Handleclick();
-				// log('我执行了倒计时')
-				// uni.getSystemInfo({
-				// 	success: res => {
-				// 		log(res)
-				// 		this.width = obj.left || res.windowWidth;
-				// 		this.height = obj.top ? obj.top + obj.height + 8 : res.statusBarHeight + 44;
-				// 		this.top = obj.top ? obj.top + (obj.height - 32) / 2 : res.statusBarHeight + 6;
-				// 		this.scrollH = res.windowWidth;
-				// 	}
-				// });
-			}, 5000);
+			// #ifndef H5 || APP-PLUS || MP-ALIPAY
+			const res = uni.getSystemInfoSync();
+			let {
+				statusBarHeight
+			} = res
+			let info = uni.getMenuButtonBoundingClientRect()
+			let {
+				top,
+				bottom
+			} = info
+			this.statusHeight = statusBarHeight
+			let buttonHeight = (bottom - statusBarHeight) + (top - statusBarHeight)
+			let navHeight = statusBarHeight + buttonHeight + top - statusBarHeight //状态栏+导航栏的高度（页面初始高度）
+			this.boxHeight = navHeight - statusBarHeight //导航栏高度
+			this.navHeight = navHeight
+			console.log("statusBarHeight,", statusBarHeight, "navHeight", navHeight, "boxHeight", this.boxHeight, "buttonHeight",
+				buttonHeight)
+			// #endif
 			// this.postAct()
 			// this.postactivity()
 			// this.amapPlugin = new amap.AMapWX({
@@ -1067,6 +1016,23 @@
 
 	/* 头部 */
 
+	.index-bg {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: -1
+	}
+
+	.index-bg image {
+		width: 100%;
+		height: 318rpx;
+		z-index: -1;
+	}
+
+	.index-content {
+		z-index: 999
+	}
 
 	.tui-header-icon {
 		position: fixed;
@@ -1673,19 +1639,17 @@
 
 	/* 标签栏 */
 	.bac {
-		height: 290rpx;
+		/* height: 290rpx; */
 		margin: 0 14rpx;
 		background-color: #f7f7f7;
 		color: #00AC3F;
-
 		position: relative;
 	}
 
 	.tui-tag {
 		width: 100%;
-
-		position: absolute;
-		bottom: 16rpx;
+		/* position: absolute; */
+		/* bottom: 16rpx; */
 		display: flex;
 		justify-content: space-between;
 	}
@@ -1745,19 +1709,7 @@
 		height: env(safe-area-inset-bottom);
 	}
 
-	/* 头部 */
-	.tui-header {
-		width: 100%;
-		height: 200rpx;
-		padding: 80rpx 30rpx 0 20rpx;
-		box-sizing: border-box;
-		/* background: url(../../static/images/6.jpg ) repeat-y 0px 0px; */
-		height: 56rpx;
-		position: fixed;
-		left: 0;
-		top: 0;
-		z-index: 999;
-	}
+
 
 	.bgimg1 {
 		position: fixed;
@@ -1922,11 +1874,26 @@
 		font-size: 18px;
 		line-height: 18px;
 		font-weight: 600;
-
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		padding: 0 20rpx;
+		box-sizing: border-box;
+
 	}
+
+	/* 头部 */
+	/* .tui-header {
+		height: 200rpx;
+		padding: 80rpx 30rpx 0 20rpx;
+		box-sizing: border-box;
+		background: url(../../static/images/6.jpg ) repeat-y 0px 0px;
+		height: 56rpx;
+		position: fixed;
+		left: 0;
+		top: 0;
+		z-index: 999;
+	} */
 
 	.tui-header-icon {
 		position: fixed;

@@ -311,7 +311,7 @@ page {
 .tui-slide-image {
 	width: 100%;
 	display: block;
-	height: 520rpx !important;
+	height: 750rpx !important;
 }
 
 /*顶部菜单*/

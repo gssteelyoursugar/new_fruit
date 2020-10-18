@@ -24,7 +24,7 @@
 		<!--header-->
 
 		<!-- 搜索框 -->
-		<view class="search-bar" @click="goToSearchGoods">
+		<view class="search-bar" @click="goToSearchGoods" :style="{top: navHeight+ 'px'}">
 			<image src="../../static/images/search-icon.png" mode=""></image>
 			<view class="search-text">搜索您要购买的商品或类型</view>
 		</view>
@@ -385,8 +385,7 @@
 				goodsList: [],
 				fileUploadList: '',
 				mouthfeelLevelList: [],
-				slMangguo: '芒果',
-				serrchGoods: '',
+				slMangguo: '全部',
 				slPinzhong: '品种',
 				slGuobiao: '水果标准',
 				slYanzheng: '验证保障',
@@ -548,7 +547,8 @@
 					price_parameter_2: '', //价格右边
 				},
 				statusHeight: 20,
-				boxHeight: 44
+				boxHeight: 44,
+				navHeight: 64,
 			};
 		},
 		onLoad(options) {
@@ -562,7 +562,7 @@
 				this.getSearch(options.name)
 			} else {
 				// console.log(options)
-				this.serrchGoods = options.name
+				console.log("没错我走到了这里")
 				this.slMangguo = options.name
 				this.varietyId = options.id
 				log(this.varietyId)
@@ -592,6 +592,25 @@
 					this.drawerH = res.windowHeight - uni.upx2px(100) - this.height;
 				}
 			});
+			
+			// #ifndef H5 || APP-PLUS || MP-ALIPAY
+			const res = uni.getSystemInfoSync();
+			let {
+				statusBarHeight
+			} = res
+			let info = uni.getMenuButtonBoundingClientRect()
+			let {
+				top,
+				bottom
+			} = info
+			this.statusHeight = statusBarHeight
+			let buttonHeight = (bottom - statusBarHeight) + (top - statusBarHeight)
+			let navHeight = statusBarHeight + buttonHeight + top - statusBarHeight //状态栏+导航栏的高度（页面初始高度）
+			this.boxHeight = navHeight - statusBarHeight //导航栏高度
+			this.navHeight = navHeight
+			console.log("statusBarHeight,",statusBarHeight,"navHeight",navHeight,"boxHeight",this.boxHeight, "buttonHeight",buttonHeight)
+			// #endif
+			
 		},
 		filters: {
 			filterNum(val) {
@@ -709,9 +728,25 @@
 				}
 				listing(getGoodsall, data)
 					.then((res) => {
-						log(res)
+						log("搜索结果",res)
 						this.goods = res.data.data.goods
-						log(this.goods)
+						this.seleVarieties = res.data.data
+						if (this.seleVarieties === undefined) {
+							this.seleVarieties = this.seleVarieties
+						} else if (this.seleVarieties != undefined) {}
+						this.color_level = res.data.data.color_level
+						this.facade_level = res.data.data.facade_level
+						this.fruit_level = res.data.data.fruit_level
+						this.shape_level = res.data.data.shape_level
+						this.goods = res.data.data.goods
+						this.packaging = res.data.data.packaging
+						this.species = res.data.data.species
+						// for (var i = 0; i < this.species.length; i++) {
+						// 	this.species[i].isActives = this.activeA
+						// }
+						this.storage_mode = res.data.data.storage_mode
+						this.taste_level = res.data.data.taste_level
+						this.variety = res.data.data.variety
 					})
 					.catch((err) => {
 						log(err)
@@ -982,8 +1017,8 @@
 					.catch((err) => {
 						log(err)
 					})
-
 			},
+			
 			px(num) {
 				return uni.upx2px(num) + 'px';
 			},
@@ -1272,7 +1307,7 @@
 		background: #fff;
 		border-radius: 40rpx;
 		position: fixed;
-		top: 140rpx;
+		/* top: 140rpx; */
 		z-index: 99999;
 		left: 0;
 		display: flex;

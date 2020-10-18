@@ -1,7 +1,7 @@
 <template>
-	<view class="container">
+	<view class="container" style="margin: 10rpx 0 20rpx;">
 		<view class="tui-flex ">
-			<view class="tui-left  ">
+			<view class="tui-left ">
 				<image src="../../../static/images/dingwei@2x.png" mode="aspectFit" class="dingwei"></image>
 				<text class="city" style="font-size: 24rpx;" v-if="address&& ApproveStatus === 1">配送至{{address}}</text>
 				<text class="city" v-if="ApproveStatus !== 1">配送至</text>
@@ -78,13 +78,12 @@
 	}
 
 	.container {
-		margin-top: 50rpx;
+		/* margin-top: 50rpx; */
 	}
 
 	.tui-flex {
 		position: relative;
-		top: 46px;
-
+		/* top: 46px; */
 		margin: 0 20rpx;
 		display: flex;
 		font-size: 28rpx;

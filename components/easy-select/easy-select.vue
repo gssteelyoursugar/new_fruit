@@ -130,15 +130,7 @@
 					return {}
 				}
 			},
-			showValue () {
-				let word = this.value
-				let list = this.options
-				let index = list.findIndex(function(item){
-					return item.id === word
-				})
-				console.log("word",word,"list","index",index)
-				return list[index].label
-			}
+		
 		},
 		mounted() {
 			const elQuery = uni.createSelectorQuery().in(this)

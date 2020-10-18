@@ -261,16 +261,8 @@ var SIZE = {
       } else {
         return {};
       }
-    },
-    showValue: function showValue() {
-      var word = this.value;
-      var list = this.options;
-      var index = list.findIndex(function (item) {
-        return item.id === word;
-      });
-      console.log("word", word, "list", "index", index);
-      return list[index].label;
     } },
+
 
   mounted: function mounted() {var _this = this;
     var elQuery = uni.createSelectorQuery().in(this);

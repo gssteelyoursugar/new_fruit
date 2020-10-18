@@ -163,7 +163,7 @@ page {
 	-webkit-border-radius: 40rpx;
 	        border-radius: 40rpx;
 	position: fixed;
-	top: 140rpx;
+	/* top: 140rpx; */
 	z-index: 99999;
 	left: 0;
 	display: -webkit-box;

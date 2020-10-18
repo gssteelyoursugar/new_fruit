@@ -414,11 +414,13 @@
 	/* 排行榜 */
 	.tui-cent-box {
 		border-radius: 60rpx 60rpx 0 0;
-		height: 140rpx;
-		background-color: #E0F8E5;
+		height: 90rpx;
+		background-color: #fff;
 		position: relative;
 		top: 400rpx;
 		z-index: 99999;
+		border-bottom: 1px solid #f5f5f5;
+
 
 	}
 

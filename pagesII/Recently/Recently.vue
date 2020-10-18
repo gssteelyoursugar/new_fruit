@@ -17,47 +17,49 @@
 			<!-- <text class="color-text">{{tips}}</text> -->
 			<view class="btnbox"><button class="btn" type="default" open-type="getUserInfo" @getuserinfo="getUserInfo">去登陆</button></view>
 		</view>
+		<view :style="{marginTop: statusHeight + boxHeight + 'px'}">
+			<checkbox-group @change="buyChange">
+				<view class="tui-cart-cell  tui-mtop" v-for="(item, index) in lookDatas" :key="index">
 
-		<checkbox-group @change="buyChange">
-			<view class="tui-cart-cell  tui-mtop" :style="{marginTop: statusHeight + boxHeight + 'px'}" v-for="(item, index) in lookDatas">
-
-				<view class="item-time" v-if="item.list.length !== 0">{{ item.createDate }}</view>
-				<tui-swipe-action :actions="actions" @click="handlerButton(item.id)" :params="item" :key="index">
-					<template v-slot:content>
-						<block v-if="item.list.length !== 0">
-							<view class="tui-goods-item" v-for="dt of item.list" :key="idx">
-								<image :src="dt.url" class="tui-goods-img" @tap="gotoList(dt.id)" />
-								<view class="tui-goods-info">
-									<view class="tui-goods-title">
-										<text class="tag-tit">{{ dt.lableName || '' }}</text>
-										{{ dt.name || '' }}
-									</view>
-									<view class="tui-goods-model">
-										<view class="tui-model-text">{{ dt.kg1 || 0 }}斤装 x 1</view>
-									</view>
-									<view class="tui-price-box">
-										<view class="tui-goods-price">
-											<text class="text-color2">￥</text>
-											{{ dt.platformPrice || 0 }}
-											<text style="font-size: 20rpx;font-weight: 400;margin-left: 4rpx;">元</text>
-											<text class="price2">/件</text>
+					<view class="item-time" v-if="item.list.length !== 0">{{ item.createDate }}</view>
+					<tui-swipe-action :actions="actions" @click="handlerButton(dt.id)" :params="item" v-for="(dt,idx) of item.list" :key="idx">
+						<template v-slot:content>
+							<block v-if="item.list.length !== 0">
+								<view class="tui-goods-item" @tap="gotoList(dt.id)">
+									<!-- //v-for="dt of item.list" :key="idx" -->
+									<image :src="dt.url" class="tui-goods-img"  />
+									<view class="tui-goods-info">
+										<view class="tui-goods-title">
+											<text class="tag-tit">{{ dt.lableName || '' }}</text>
+											{{ dt.name || '' }}
 										</view>
-										<view class="">
-											<image src="../../static/images/like1.png" mode="aspectFill" class="tui-shop-car" v-if="dt.isCollection"
-											 @tap="delLike(dt.id)"></image>
-											<image src="../../static/images/like2.png" mode="aspectFill" class="tui-shop-car" v-if="!dt.isCollection"
-											 @tap="likeOrder(dt.id)"></image>
+										<view class="tui-goods-model">
+											<view class="tui-model-text">{{ dt.kg1 || 0 }}斤装 x 1</view>
+										</view>
+										<view class="tui-price-box">
+											<view class="tui-goods-price">
+												<text class="text-color2">￥</text>
+												{{ dt.platformPrice || 0 }}
+												<text style="font-size: 20rpx;font-weight: 400;margin-left: 4rpx;">元</text>
+												<text class="price2">/件</text>
+											</view>
+											<view class="">
+												<image src="../../static/images/like1.png" mode="aspectFill" class="tui-shop-car" v-if="dt.isCollection"
+												 @tap.stop="delLike(dt.id)"></image>
+												<image src="../../static/images/like2.png" mode="aspectFill" class="tui-shop-car" v-if="!dt.isCollection"
+												 @tap.stop="likeOrder(dt.id)"></image>
+											</view>
 										</view>
 									</view>
 								</view>
-							</view>
-						</block>
+							</block>
 
-					</template>
-				</tui-swipe-action>
-			</view>
-		</checkbox-group>
-
+						</template>
+					</tui-swipe-action>
+				</view>
+			</checkbox-group>
+			
+		</view>
 		<!--加载loadding-->
 		<tui-loadmore v-if="loadding" :index="3" type="red"></tui-loadmore>
 		<!-- 提示 -->
@@ -287,7 +289,7 @@
 			},
 			//请求最近看过
 			getRecentlyData() {
-				uni.showLoading({});
+				// uni.showLoading({});
 				let data = {
 					token: setdata,
 					pageNo: 1,
@@ -295,13 +297,12 @@
 				};
 				listing(getRecently, data)
 					.then(res => {
-						log('res:', res);
 						this.lookDatas = res.data.data;
 					})
 					.catch(err => {
 						log(err);
 					});
-				uni.hideLoading();
+				// uni.hideLoading();
 			},
 			//收藏
 			likeOrder(id) {
@@ -319,12 +320,13 @@
 					publicing(postLike, data)
 						.then(res => {
 							log(res);
-							uni.showToast({
-								title: `${res.data.msg}`,
-								icon: 'none',
-								duration: 1000
-							});
+							
 							this.getRecentlyData();
+							uni.showToast({
+								title: "已收藏",
+								icon: 'none',
+								duration: 2000
+							});
 						})
 						.catch(err => {
 							log(err);
@@ -347,18 +349,19 @@
 						if (res.confirm) {
 							publicing(postDelLike, data)
 								.then(res => {
-									log(res.data.msg);
 									uni.showToast({
-										title: `删除${res.data.msg}`
+										title: `已取消收藏`
 									});
 									this.getRecentlyData();
 								})
 								.catch(err => {
 									log(err);
 								});
-							console.log('用户点击确定');
 						} else if (res.cancel) {
-							console.log('用户点击取消');
+							uni.showToast({
+								title: "已取消",
+								icon: 'none'
+							});
 						}
 					}
 				});
@@ -366,7 +369,7 @@
 
 			//商品详情页
 			gotoList(id) {
-				log(id);
+				log("id",id);
 				// 	return
 				uni.navigateTo({
 					url: '../../pagesIII/productDetail/productDetail?id=' + id
@@ -468,6 +471,7 @@
 		width: 100%;
 		z-index: 999;
 		top: 0;
+		padding-left: 16rpx;
 	}
 
 	/* 隐藏 */
@@ -503,6 +507,7 @@
 
 	.tui-mtop {
 		/* margin: 20rpx 0; */
+		border-top: 20rpx solid #f7f7f7;
 	}
 
 	/* 头像 */
@@ -545,13 +550,15 @@
 		font-size: 28rpx;
 		font-weight: 500;
 		border-bottom: 1px solid #f5f5f5;
+		background: #fff;
+
 	}
 
 	.tui-goods-item {
 		display: flex;
 		padding: 30rpx;
 		box-sizing: border-box;
-		border-bottom: 20rpx solid #f7f7f7;
+		border-bottom: 1px solid #f7f7f7;
 	}
 
 	.tui-checkbox {

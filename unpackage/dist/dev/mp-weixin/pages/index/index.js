@@ -475,17 +475,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 var _vuex = __webpack_require__(/*! vuex */ 12);
 
 
@@ -604,7 +593,6 @@ var isFirst1 = true;var _default =
     ''), _defineProperty(_ref, "citys",
     ''), _defineProperty(_ref, "temperature",
     ''), _defineProperty(_ref, "banner",
-
     ['6.jpg', '6.jpg', '6.jpg', '6.jpg', '6.jpg']), _defineProperty(_ref, "flexing",
     [{
       title: '推荐好货',
@@ -643,11 +631,13 @@ var isFirst1 = true;var _default =
       name: '复购排行',
       value: 'back',
       title: '买了又买',
-      imgsrc: '../../static/images/pingguo1.png' }]), _ref;
+      imgsrc: '../../static/images/pingguo1.png' }]), _defineProperty(_ref, "statusHeight",
 
 
 
-
+    20), _defineProperty(_ref, "boxHeight",
+    44), _defineProperty(_ref, "navHeight",
+    64), _ref;
 
 
 
@@ -918,23 +908,6 @@ var isFirst1 = true;var _default =
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   e) {
     this.num = e;
     if (this.num === 0) {
@@ -957,13 +930,6 @@ var isFirst1 = true;var _default =
       url: '../../pagesII/Limit/Limit?id=' + id });
 
   }), _defineProperty(_methods, "fruitGo", function fruitGo()
-
-
-
-
-
-
-
 
 
   {
@@ -1009,18 +975,6 @@ var isFirst1 = true;var _default =
       uni.hideLoading();
     }, 1000);
   }), _defineProperty(_methods, "onReachBottom",
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   function onReachBottom() {
@@ -1156,30 +1110,25 @@ var isFirst1 = true;var _default =
     var data = JSON.parse(text);
     // this.postactivity()
     //新版头部
-    var obj = {};
-
-    obj = wx.getMenuButtonBoundingClientRect();
 
 
+    var res = uni.getSystemInfoSync();var
 
+    statusBarHeight =
+    res.statusBarHeight;
+    var info = uni.getMenuButtonBoundingClientRect();var
 
+    top =
 
+    info.top,bottom = info.bottom;
+    this.statusHeight = statusBarHeight;
+    var buttonHeight = bottom - statusBarHeight + (top - statusBarHeight);
+    var navHeight = statusBarHeight + buttonHeight + top - statusBarHeight; //状态栏+导航栏的高度（页面初始高度）
+    this.boxHeight = navHeight - statusBarHeight; //导航栏高度
+    this.navHeight = navHeight;
+    console.log("statusBarHeight,", statusBarHeight, "navHeight", navHeight, "boxHeight", this.boxHeight, "buttonHeight",
+    buttonHeight);
 
-
-
-    setTimeout(function () {
-      // this.$refs.mychild.Handleclick();
-      // log('我执行了倒计时')
-      // uni.getSystemInfo({
-      // 	success: res => {
-      // 		log(res)
-      // 		this.width = obj.left || res.windowWidth;
-      // 		this.height = obj.top ? obj.top + obj.height + 8 : res.statusBarHeight + 44;
-      // 		this.top = obj.top ? obj.top + (obj.height - 32) / 2 : res.statusBarHeight + 6;
-      // 		this.scrollH = res.windowWidth;
-      // 	}
-      // });
-    }, 5000);
     // this.postAct()
     // this.postactivity()
     // this.amapPlugin = new amap.AMapWX({

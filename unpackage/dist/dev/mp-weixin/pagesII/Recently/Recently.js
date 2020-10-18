@@ -206,6 +206,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
 var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
@@ -426,7 +428,7 @@ console,log = _console.log;var _default = (_data$filters$onPullD = {
     },
     //请求最近看过
     getRecentlyData: function getRecentlyData() {var _this3 = this;
-      uni.showLoading({});
+      // uni.showLoading({});
       var data = {
         token: setdata,
         pageNo: 1,
@@ -434,13 +436,12 @@ console,log = _console.log;var _default = (_data$filters$onPullD = {
 
       (0, _api.listing)(_request.getRecently, data).
       then(function (res) {
-        log('res:', res);
         _this3.lookDatas = res.data.data;
       }).
       catch(function (err) {
         log(err);
       });
-      uni.hideLoading();
+      // uni.hideLoading();
     },
     //收藏
     likeOrder: function likeOrder(id) {var _this4 = this;
@@ -458,12 +459,13 @@ console,log = _console.log;var _default = (_data$filters$onPullD = {
         (0, _api.publicing)(_request.postLike, data).
         then(function (res) {
           log(res);
-          uni.showToast({
-            title: "".concat(res.data.msg),
-            icon: 'none',
-            duration: 1000 });
 
           _this4.getRecentlyData();
+          uni.showToast({
+            title: "已收藏",
+            icon: 'none',
+            duration: 2000 });
+
         }).
         catch(function (err) {
           log(err);
@@ -486,18 +488,19 @@ console,log = _console.log;var _default = (_data$filters$onPullD = {
           if (res.confirm) {
             (0, _api.publicing)(_request.postDelLike, data).
             then(function (res) {
-              log(res.data.msg);
               uni.showToast({
-                title: "\u5220\u9664".concat(res.data.msg) });
+                title: "\u5DF2\u53D6\u6D88\u6536\u85CF" });
 
               _this5.getRecentlyData();
             }).
             catch(function (err) {
               log(err);
             });
-            console.log('用户点击确定');
           } else if (res.cancel) {
-            console.log('用户点击取消');
+            uni.showToast({
+              title: "已取消",
+              icon: 'none' });
+
           }
         } });
 
@@ -505,7 +508,7 @@ console,log = _console.log;var _default = (_data$filters$onPullD = {
 
     //商品详情页
     gotoList: function gotoList(id) {
-      log(id);
+      log("id", id);
       // 	return
       uni.navigateTo({
         url: '../../pagesIII/productDetail/productDetail?id=' + id });

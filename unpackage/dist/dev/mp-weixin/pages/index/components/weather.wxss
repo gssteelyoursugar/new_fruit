@@ -29,12 +29,11 @@
 	display: block;
 }
 .container.data-v-87e6745e {
-	margin-top: 50rpx;
+	/* margin-top: 50rpx; */
 }
 .tui-flex.data-v-87e6745e {
 	position: relative;
-	top: 46px;
-
+	/* top: 46px; */
 	margin: 0 20rpx;
 	display: -webkit-box;
 	display: -webkit-flex;

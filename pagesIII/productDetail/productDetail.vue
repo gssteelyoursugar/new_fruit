@@ -19,7 +19,7 @@
 		<!--选项卡一-->
 		<view :class="[currentTab === 0 ? 'actineclass' : 'errorclass']">
 			<view class="tui-banner-swiper">
-				<swiper :autoplay="false" :interval="5000" :duration="150" :circular="true" :style="{ height: 520 + 'rpx' }"
+				<swiper :autoplay="false" :interval="5000" :duration="150" :circular="true" :style="{ height: 750 + 'rpx' }"
 				 @change="bannerChange">
 					<!-- https://qg-qr.oss-cn-shenzhen.aliyuncs.com/test/1602326575865.mp4?Expires=1917686575&OSSAccessKeyId=LTAI4G74cnhsbDWNkfvuNew3&Signature=D3SFuMpki6hbX6iNKTPXQQ%2BcgpM%3 -->
 					<block v-for="(item, index) in swiperList" :key="index" v-if="shopListdata.urlVideo==='' ">
@@ -1402,7 +1402,7 @@
 	.tui-slide-image {
 		width: 100%;
 		display: block;
-		height: 520rpx !important;
+		height: 750rpx !important;
 	}
 
 	/*顶部菜单*/

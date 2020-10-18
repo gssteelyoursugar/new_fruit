@@ -13,6 +13,7 @@
 	width: 100%;
 	z-index: 999;
 	top: 0;
+	padding-left: 16rpx;
 }
 
 /* 隐藏 */
@@ -52,6 +53,7 @@
 }
 .tui-mtop {
 	/* margin: 20rpx 0; */
+	border-top: 20rpx solid #f7f7f7;
 }
 
 /* 头像 */
@@ -98,6 +100,7 @@
 	font-size: 28rpx;
 	font-weight: 500;
 	border-bottom: 1px solid #f5f5f5;
+	background: #fff;
 }
 .tui-goods-item {
 	display: -webkit-box;
@@ -106,7 +109,7 @@
 	padding: 30rpx;
 	-webkit-box-sizing: border-box;
 	        box-sizing: border-box;
-	border-bottom: 20rpx solid #f7f7f7;
+	border-bottom: 1px solid #f7f7f7;
 }
 .tui-checkbox {
 	min-width: 70rpx;

@@ -10,7 +10,7 @@
 			<view class="tui-cancle" @tap="inputKey">搜索</view>
 		</view>
 
-		<view class="tui-search-history" v-show="history.length>0 && !key">
+		<view class="tui-search-history" v-show="history.length>0">
 			<view class="tui-history-header">
 				<view class="tui-search-title">搜索历史</view>
 			</view>
@@ -20,7 +20,7 @@
 				</block>
 			</view>
 			<!-- <tui-icon name="delete" :size='14' color='#333'  class="tui-icon-delete"></tui-icon> -->
-			<view class="clear-all" v-if="history.length !== 0 && !key" @tap="openActionSheet">
+			<view class="clear-all" v-if="history.length !== 0" @tap="openActionSheet">
 				<image src="../../static/images/clean.png" mode=""></image>
 				<text>清空历史记录</text>
 			</view>

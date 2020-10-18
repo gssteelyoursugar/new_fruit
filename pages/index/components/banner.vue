@@ -4,7 +4,6 @@
 			<view class="tui-banner-bg">
 				<!-- <view class="tui-primary-bg tui-route-left"></view>
 				<view class="tui-primary-bg tui-route-right"></view> -->
-				<image src="../../../static/images/bage@3x.png" class="tui-my-bg bgimg1" mode="aspectFill"></image>
 				<view class="tui-banner-box">
 					<swiper :indicator-dots="true" :autoplay="false" :interval="5000" :duration="150" class="tui-banner-swiper"
 					 :circular="true" indicator-color="rgba(255, 255, 255, 0.8)" indicator-active-color="#ff7129">
@@ -56,7 +55,7 @@
 		display: flex;
 		left: 0;
 		width: 100%;
-		height: 300rpx;
+		height: 318rpx;
 		zoom: 1;
 		background-color: #f7f7f7;
 		background-size: cover;
@@ -87,11 +86,8 @@
 		width: 100%;
 		padding: 0;
 		box-sizing: border-box;
-		position: absolute;
-		/* overflow: hidden; */
+		
 		z-index: 99;
-		bottom: -220rpx;
-		left: 0;
 	}
 
 	.tui-banner-swiper {

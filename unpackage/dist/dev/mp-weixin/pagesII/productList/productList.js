@@ -855,7 +855,7 @@ var _console = console,log = _console.log;var _default = { data: function data()
       storage_mode: [], //储存方式
       taste_level: [], //口感等级
       variety: [], //品种
-      numNull: 0, numNull2: 0, numName: 0, url: 'http://192.168.1.10:8980', isActives1: false, isActives2: false, imgUrl: "http://192.168.1.10:8980/js/userfiles/fileupload/202008/1298932901905809410.png", colorLevelList: [], goodsList: [], fileUploadList: '', mouthfeelLevelList: [], slMangguo: '芒果', serrchGoods: '', slPinzhong: '品种', slGuobiao: '水果标准', slYanzheng: '验证保障', varietyId: 0, ciData: [{ name: "芒果", bOn: false }, { name: "西瓜", bOn: false }, { name: "香蕉", bOn: false }, { name: "橘子", bOn: false }, { name: "猕猴桃", bOn: false }], dictDataList: [{ name: '芒果', isActive: false }, { name: '西瓜', isActive: false }, { name: '哈密瓜', isActive: false }], fruitLevelList: [], facadeLevelList: [], dictTypeList: [], dengji: [{ name: '特级' }, { name: 'A级' }, { name: 'B级' }], activeA: false, selecValue: '不限', selecTwoValue: '不限', searchKey: '', //搜索关键词
+      numNull: 0, numNull2: 0, numName: 0, url: 'http://192.168.1.10:8980', isActives1: false, isActives2: false, imgUrl: "http://192.168.1.10:8980/js/userfiles/fileupload/202008/1298932901905809410.png", colorLevelList: [], goodsList: [], fileUploadList: '', mouthfeelLevelList: [], slMangguo: '全部', slPinzhong: '品种', slGuobiao: '水果标准', slYanzheng: '验证保障', varietyId: 0, ciData: [{ name: "芒果", bOn: false }, { name: "西瓜", bOn: false }, { name: "香蕉", bOn: false }, { name: "橘子", bOn: false }, { name: "猕猴桃", bOn: false }], dictDataList: [{ name: '芒果', isActive: false }, { name: '西瓜', isActive: false }, { name: '哈密瓜', isActive: false }], fruitLevelList: [], facadeLevelList: [], dictTypeList: [], dengji: [{ name: '特级' }, { name: 'A级' }, { name: 'B级' }], activeA: false, selecValue: '不限', selecTwoValue: '不限', searchKey: '', //搜索关键词
       width: 200, //header宽度
       height: 64, //header高度
       inputTop: 0, //搜索框距离顶部距离
@@ -901,17 +901,52 @@ var _console = console,log = _console.log;var _default = { data: function data()
         rejectRatio_parameter_2: '', //不良右
         price_parameter_1: '', //价格左
         price_parameter_2: '' //价格右边
-      }, statusHeight: 20, boxHeight: 44 };}, onLoad: function onLoad(options) {var _this = this;var pages = getCurrentPages();var curPage = pages[pages.length - 1]; // 当前页面路径
+      }, statusHeight: 20, boxHeight: 44, navHeight: 64 };}, onLoad: function onLoad(options) {var _this = this;var pages = getCurrentPages();var curPage = pages[pages.length - 1]; // 当前页面路径
     var beforePage = pages[pages.length - 2]; // 前一个页面路径
     log(beforePage.$page.fullPath);if (beforePage.$page.fullPath === '/pagesII/searchGoods/searchGoods') {log('我执行了搜索'); //搜索	
       this.getSearch(options.name);} else {// console.log(options)
-      this.serrchGoods = options.name;this.slMangguo = options.name;this.varietyId = options.id;log(this.varietyId);this.ShopIng();} //this.searchKey = options.name
+      console.log("没错我走到了这里");this.slMangguo = options.name;this.varietyId = options.id;log(this.varietyId);this.ShopIng();} //this.searchKey = options.name
     var obj = {};obj = wx.getMenuButtonBoundingClientRect();uni.getSystemInfo({ success: function success(res) {_this.width = obj.left || res.windowWidth;_this.height = obj.top ? obj.top + obj.height + 8 : res.statusBarHeight + 44;_this.inputTop = obj.top ? obj.top + (obj.height - 30) / 2 : res.statusBarHeight + 7;_this.arrowTop = obj.top ? obj.top + (obj.height - 32) / 2 : res.statusBarHeight + 6;_this.searchKey = options.name || ''; //传递的搜索关键字
         //略小，避免误差带来的影响
-        _this.dropScreenH = _this.height * 750 / res.windowWidth + 186;_this.drawerH = res.windowHeight - uni.upx2px(100) - _this.height;} });}, filters: { filterNum: function filterNum(val) {if (val) {var words = (Math.floor(val) + '').split('');var res = '';if (words.length <= 4) {res = val;}if (words.length === 5) {res = words[0] + "." + words[1] + '万';}if (words.length === 6) {res = words[0] + words[1] + "." + words[2] + '万';}if (words.length === 7) {res = words[0] + words[1] + words[2] + "." + words[3] + '万';}if (words.length === 8) {res = words[0] + words[1] + words[2] + words[3] + "." + words[4] + '万';}if (words.length === 9) {res = words[0] + "." + words[1] + '亿';}if (words.length === 10) {res = words[0] + words[1] + "." + words[2] + '亿';}return res;} else {return val;}} }, computed: { tasteBox: function tasteBox() {var arr = [];var data = this.taste_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;}, colorBox: function colorBox() {var arr = [];var data = this.color_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;}, shapeBox: function shapeBox() {var arr = [];var data = this.shape_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;} }, methods: { //点击搜索
+        _this.dropScreenH = _this.height * 750 / res.windowWidth + 186;_this.drawerH = res.windowHeight - uni.upx2px(100) - _this.height;} });var res = uni.getSystemInfoSync();var statusBarHeight = res.statusBarHeight;var info = uni.getMenuButtonBoundingClientRect();var top = info.top,bottom = info.bottom;this.statusHeight = statusBarHeight;var buttonHeight = bottom - statusBarHeight + (top - statusBarHeight);var navHeight = statusBarHeight + buttonHeight + top - statusBarHeight; //状态栏+导航栏的高度（页面初始高度）
+    this.boxHeight = navHeight - statusBarHeight; //导航栏高度
+    this.navHeight = navHeight;console.log("statusBarHeight,", statusBarHeight, "navHeight", navHeight, "boxHeight", this.boxHeight, "buttonHeight", buttonHeight);}, filters: { filterNum: function filterNum(val) {if (val) {var words = (Math.floor(val) + '').split('');var res = '';if (words.length <= 4) {res = val;}if (words.length === 5) {res = words[0] + "." + words[1] + '万';}if (words.length === 6) {res = words[0] + words[1] + "." + words[2] + '万';}if (words.length === 7) {res = words[0] + words[1] + words[2] + "." + words[3] + '万';}if (words.length === 8) {res = words[0] + words[1] + words[2] + words[3] + "." + words[4] + '万';}if (words.length === 9) {res = words[0] + "." + words[1] + '亿';}if (words.length === 10) {res = words[0] + words[1] + "." + words[2] + '亿';}return res;} else {return val;}} }, computed: { tasteBox: function tasteBox() {var arr = [];var data = this.taste_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;}, colorBox: function colorBox() {var arr = [];var data = this.color_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;}, shapeBox: function shapeBox() {var arr = [];var data = this.shape_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;} }, methods: { //点击搜索
     goToSearchGoods: function goToSearchGoods() {uni.navigateTo({ url: '../../pagesII/searchGoods/searchGoods' });}, //商品详情页
     gotoList: function gotoList(id) {log(id);uni.navigateTo({ url: '../../pagesIII/productDetail/productDetail?id=' + id });}, //下拉选
-    dropDownList: function dropDownList(index, name) {if (index !== -1) {console.log("index：" + index, name);}this.title = name;this.dropdownShow = !this.dropdownShow;}, dropDownList2: function dropDownList2(index, name) {if (index !== -1) {console.log("index：" + index, name);}this.title = name;this.dropdownShow2 = !this.dropdownShow2;}, getSearch: function getSearch(serrchName) {var _this2 = this;var data = { pageNo: 1, pageSize: 10, name: serrchName };(0, _api.listing)(_request.getGoodsall, data).then(function (res) {log(res);_this2.goods = res.data.data.goods;log(_this2.goods);}).catch(function (err) {log(err);});}, /* 第一个筛选 */Total: function Total(index) {this.num = index;log(this.num);if (this.num == 0) {this.ShopIng();log('综合');
+    dropDownList: function dropDownList(index, name) {if (index !== -1) {console.log("index：" + index, name);}this.title = name;this.dropdownShow = !this.dropdownShow;}, dropDownList2: function dropDownList2(index, name) {if (index !== -1) {console.log("index：" + index, name);}this.title = name;this.dropdownShow2 = !this.dropdownShow2;}, getSearch: function getSearch(serrchName) {var _this2 = this;var data = { pageNo: 1, pageSize: 10, name: serrchName };(0, _api.listing)(_request.getGoodsall, data).then(function (res) {
+        log("搜索结果", res);
+        _this2.goods = res.data.data.goods;
+        _this2.seleVarieties = res.data.data;
+        if (_this2.seleVarieties === undefined) {
+          _this2.seleVarieties = _this2.seleVarieties;
+        } else if (_this2.seleVarieties != undefined) {}
+        _this2.color_level = res.data.data.color_level;
+        _this2.facade_level = res.data.data.facade_level;
+        _this2.fruit_level = res.data.data.fruit_level;
+        _this2.shape_level = res.data.data.shape_level;
+        _this2.goods = res.data.data.goods;
+        _this2.packaging = res.data.data.packaging;
+        _this2.species = res.data.data.species;
+        // for (var i = 0; i < this.species.length; i++) {
+        // 	this.species[i].isActives = this.activeA
+        // }
+        _this2.storage_mode = res.data.data.storage_mode;
+        _this2.taste_level = res.data.data.taste_level;
+        _this2.variety = res.data.data.variety;
+      }).
+      catch(function (err) {
+        log(err);
+      });
+
+    },
+
+    /* 第一个筛选 */
+    Total: function Total(index) {
+      this.num = index;
+      log(this.num);
+      if (this.num == 0) {
+        this.ShopIng();
+        log('综合');
       } else if (this.num == 1) {
         if (this.sleter) {
           log('销量升序');
@@ -1168,8 +1203,8 @@ var _console = console,log = _console.log;var _default = { data: function data()
       catch(function (err) {
         log(err);
       });
-
     },
+
     px: function px(num) {
       return uni.upx2px(num) + 'px';
     },
