@@ -24,73 +24,77 @@
 		<view class="tui-banner-swiper" :style="{top: navHeight + 'px'}">
 			<image :src="imageUrl" class="tui-my-bg" mode="aspectFill"></image>
 		</view>
-		<view class="tui-cent-box">
-			<view class="tui-cent-box-felx1">
-				<view class="class-name-left">
-					<image src="../../static/images/time1.png" mode="aspectFit" class="imgtime"></image>
-				</view>
 
-				<view class="class-name-left">
-					<text class="tite-color-time">距离结束时间</text>
-				</view>
-				<view class="class-name-left tui-line-hight">
-					<tui-countdown :time="ts" width="26" height="30" color="#fff" borderColor="#000" backgroundColor="#000" colonColor="#000"
-					 @end="endOfTime"></tui-countdown>
-				</view>
-			</view>
-			<!-- <view class="tui-cent-box-felx1">
-				<view class="class-name-left">
-					<image src="../../static/images/gengduo@3x.png" mode="aspectFit" class="imgtime2"></image>
-				</view>
+		<view class="scroll-goods" :style="{top: statusHeight<=20 ? '430rpx': (430+statusHeight) + 'rpx'}">
+			<view class="tui-cent-box">
+				<view class="tui-cent-box-felx1">
+					<view class="class-name-left">
+						<image src="../../static/images/time1.png" mode="aspectFit" class="imgtime"></image>
+					</view>
 
-				<view class="class-name-left">
-					<text class="tite-color-time">宁*果巨峰葡萄A级33斤果径20-35 鲜度5星</text>
+					<view class="class-name-left">
+						<text class="tite-color-time">距离结束时间</text>
+					</view>
+					<view class="class-name-left tui-line-hight">
+						<tui-countdown :time="ts" width="26" height="30" color="#fff" borderColor="#000" backgroundColor="#000"
+						 colonColor="#000" @end="endOfTime"></tui-countdown>
+					</view>
 				</view>
+				<!-- <view class="tui-cent-box-felx1">
+					<view class="class-name-left">
+						<image src="../../static/images/gengduo@3x.png" mode="aspectFit" class="imgtime2"></image>
+					</view>
+
+					<view class="class-name-left">
+						<text class="tite-color-time">宁*果巨峰葡萄A级33斤果径20-35 鲜度5星</text>
+					</view>
+				</view>
+			-->
 			</view>
- -->
-		</view>
-		<view class="tui-rink-sceate">
-			<view class="tui-rank-list">
-				<view class="tui-tab-rank" v-for="(item,index) in LimitDataList" :key="index">
-					<view class="tui-tab-rank-cent" @tap="gotoList(item.id)">
-						<image :src="item.url" mode="aspectFill" class="img-rink"></image>
-						<view class="tui-pro-tit">
-							<text class="tag-tit">{{item.lableName}}</text> <text class="tag-tit-text">{{item.title}}</text>
-							<view class="tag-tit2">
-								<view class="">
-									<view class="tag-tit2-text">
-										<view style="width: 200rpx;">
-											<view class="cu-progress round sm " :class="active?'active':''">
-												<view class="bg-green round" :style="[{ width:loading?'60%':''}]"><text class="fonsize">仅剩60件</text></view>
+			<view>
+				<scroll-view :scroll-top="scrollTop" scroll-y="true" class="scroll-Y" 
+				                @scroll="scroll">
+				<view class="tui-rink-sceate" v-for="ll of 10" :key="ll">
+					<view class="tui-rank-list">
+						<view class="tui-tab-rank" v-for="(item,index) in LimitDataList" :key="index">
+							<view class="tui-tab-rank-cent" @tap="gotoList(item.id)">
+								<image :src="item.url" mode="aspectFill" class="img-rink"></image>
+								<view class="tui-pro-tit">
+									<text class="tag-tit">{{item.lableName}}</text> <text class="tag-tit-text">{{item.title}}</text>
+									<view class="tag-tit2">
+										<view class="">
+											<view class="tag-tit2-text">
+												<view style="width: 200rpx;">
+													<view class="cu-progress round sm " :class="active?'active':''">
+														<view class="bg-green round" :style="[{ width:loading?'60%':''}]"><text class="fonsize">仅剩60件</text></view>
+													</view>
+												</view>
 											</view>
-										</view>
-									</view>
-									<view class="tag-tit2-price">
-										<text style="color:#555;margin-right: 6rpx;font-size: 24rpx;">限量价</text>
-										<text style="font-size: 20rpx;">¥</text>
-										<text style="font-size: 40rpx;font-weight: bold;margin: 6rpx 0;">{{item.marketPrice}}</text>
-										<text style="font-size: 24rpx;font-weight: 400;">元</text>
-										<text style="color: #b6b6b6;font-size: 20rpx;">/件</text>
-									</view>
-									<!-- <view class="tag-tit2-text">
+											<view class="tag-tit2-price">
+												<text style="color:#555;margin-right: 6rpx;font-size: 24rpx;">限量价</text>
+												<text style="font-size: 20rpx;">¥</text>
+												<text style="font-size: 40rpx;font-weight: bold;margin: 6rpx 0;">{{item.marketPrice}}</text>
+												<text style="font-size: 24rpx;font-weight: 400;">元</text>
+												<text style="color: #b6b6b6;font-size: 20rpx;">/件</text>
+											</view>
+											<!-- <view class="tag-tit2-text">
 										{{item.platformPrice}}点赞
 									</view> -->
-								</view>
-								<!-- <image src="../../static/images/shopcar@2x.png" mode="aspectFill" class="tui-shop-car"></image> -->
-								<view class="robb-item">抢购</view>
-								<!-- <view>购物车</view> -->
-							</view>
+										</view>
+										<!-- <image src="../../static/images/shopcar@2x.png" mode="aspectFill" class="tui-shop-car"></image> -->
+										<view class="robb-item">抢购</view>
+										<!-- <view>购物车</view> -->
+									</view>
 
+								</view>
+							</view>
 						</view>
 					</view>
 				</view>
+				</scroll-view>
 			</view>
-
-
-
+			<!-- <Progress></Progress> -->
 		</view>
-		<!-- <Progress></Progress> -->
-
 		<!--底部选择层-->
 	</view>
 </template>
@@ -139,7 +143,8 @@
 				te: 3,
 				boxHeight: 44,
 				statusHeight: 20,
-				navHeight: 64
+				navHeight: 64,
+				scrollTop :0
 			};
 		},
 		onLoad: function(options) {
@@ -174,7 +179,10 @@
 		},
 
 		methods: {
-
+				
+			scroll(e) {
+				console.log(e)
+			},
 			//商品详情页
 			gotoList(id) {
 				log(id)
@@ -341,7 +349,7 @@
 	@import '/common/css/main.css';
 
 	page {
-		background-color: rgba(255, 255, 255, 1);
+		background-color: #1dc236;
 	}
 
 	.tui-cent-box-felx1 {
@@ -388,16 +396,14 @@
 
 	.tui-my-bg {
 		width: 100%;
-		height: 100%;
+		height: 1334rpx;
 		display: block;
 	}
 
 	.tui-rink-sceate {
 		z-index: 99999;
 		background: #fff;
-		top: 390rpx;
-		position: relative;
-
+		/* top: 390rpx; */
 	}
 
 	.tui-rank-bg {
@@ -412,17 +418,25 @@
 		align-items: center;
 	}
 
+	.scroll-goods {
+		border-radius: 60rpx 60rpx 0 0;
+		position: fixed;
+		/* top: 430rpx; */
+		bottom: 0;
+		left: 0;
+		background: #fff;
+		right: 0;
+		/* overflow: hidden; */
+	}
+
 	/* 排行榜 */
 	.tui-cent-box {
-		border-radius: 60rpx 60rpx 0 0;
 		height: 90rpx;
 		background-color: #fff;
 		position: relative;
-		top: 400rpx;
+		/* top: 400rpx; */
 		z-index: 99999;
 		border-bottom: 1px solid #f5f5f5;
-
-
 	}
 
 
@@ -505,7 +519,7 @@
 	}
 
 	.tui-tab-rank {
-		margin: 10rpx 0;
+		/* margin: 10rpx 0; */
 		border-bottom: 1rpx solid rgba(245, 245, 245, 1);
 	}
 

@@ -911,8 +911,8 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
         rejectRatio_parameter_1: '', //不良左
         rejectRatio_parameter_2: '', //不良右
         price_parameter_1: '', //价格左
-        price_parameter_2: '' //价格右边
-      }, statusHeight: 20, boxHeight: 44, navHeight: 64, idList: [] //品种多选存放id
+        price_parameter_2: '', //价格右边
+        pageNo: 1, pageSize: 10 }, statusHeight: 20, boxHeight: 44, navHeight: 64, idList: [] //品种多选存放id
     };}, onLoad: function onLoad(options) {var _this = this;var pages = getCurrentPages();var beforePage = pages[pages.length - 2]; // 前一个页面路径
     // log(beforePage.$page.fullPath)
     if (beforePage.$page.fullPath === '/pagesII/searchGoods/searchGoods') {// log('我执行了搜索')
@@ -926,7 +926,9 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
     goToSearchGoods: function goToSearchGoods() {uni.navigateTo({ url: '../../pagesII/searchGoods/searchGoods' });}, //商品详情页
     gotoList: function gotoList(id) {log(id);uni.navigateTo({ url: '../../pagesIII/productDetail/productDetail?id=' + id });}, //下拉选
     dropDownList: function dropDownList(index, name) {if (index !== -1) {console.log("index：" + index, name);}this.title = name;this.dropdownShow = !this.dropdownShow;}, dropDownList2: function dropDownList2(index, name) {if (index !== -1) {console.log("index：" + index, name);}this.title = name;this.dropdownShow2 = !this.dropdownShow2;}, // 搜索请求数据
-    getSearch: function getSearch(serrchName) {var _this2 = this;var data = { pageNo: 1, pageSize: 10, name: serrchName };
+    getSearch: function getSearch(serrchName) {var _this2 = this;var data = { pageNo: 1, pageSize: 10,
+        name: serrchName };
+
       (0, _api.listing)(_request.getGoodsall, data).
       then(function (res) {
         log("搜索结果", res);
@@ -1104,6 +1106,7 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
     },
     activeGo: function activeGo(name, id, idx) {
       this.optionList[name] = id;
+      this.postList[name] = id;
       this.num = idx;
       console.log(this.optionList);
     },
@@ -1306,11 +1309,31 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       }
     },
     clickToConfirm: function clickToConfirm() {
-      console.log(this.optionList);
+      console.log(this.postList);
+      (0, _api.listing)(_request.getGoodsall, this.postList).then(function (res) {
+        console.log(res);
+      });
       this.closeDrawer();
     },
     clickToReset: function clickToReset() {
       this.num = 0;
+      this.optionList = {
+        level: '', //等级
+        ltWeight: '', //单果左
+        rtWeight: '', //单果左
+        ltWidth: '', //果径左
+        rtWidth: '', //果径右
+        ltTaste: '', //口感左
+        rtTaste: '', //口感右
+        ltColor: '', //颜色左
+        rtColor: '', //颜色右
+        ltShape: '', //形状左
+        rtShape: '', //形状右
+        ltRight: '', //不良左
+        rtRight: '', //不良右
+        ltPrice: '', //价格左
+        rtPrice: '' //价格右边
+      };
       this.optionList = {
         level: '', //等级
         ltWeight: '', //单果左

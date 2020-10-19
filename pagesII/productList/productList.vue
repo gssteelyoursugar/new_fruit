@@ -225,20 +225,20 @@
 						<text class="tui-title-bold">单果重量</text>
 					</view>
 					<view class="tui-drawer-content">
-						<input placeholder-class="tui-phcolor" v-model="optionList.weight_parameter_1" class="tui-input" placeholder="不限"
+						<input placeholder-class="tui-phcolor" v-model="postList.weight_parameter_1" class="tui-input" placeholder="不限"
 						 maxlength="11" type="number" />
 						<tui-icon name="reduce" color="#333" :size="14"></tui-icon>
-						<input placeholder-class="tui-phcolor" v-model="optionList.weight_parameter_2" class="tui-input" placeholder="不限"
+						<input placeholder-class="tui-phcolor" v-model="postList.weight_parameter_2" class="tui-input" placeholder="不限"
 						 maxlength="11" type="number" /><text class="content-text">克</text>
 					</view>
 					<view class="tui-drawer-title">
 						<text class="tui-title-bold">果径大小</text>
 					</view>
 					<view class="tui-drawer-content">
-						<input placeholder-class="tui-phcolor" v-model="optionList.size_parameter_1" class="tui-input" placeholder="不限"
+						<input placeholder-class="tui-phcolor" v-model="postList.size_parameter_1" class="tui-input" placeholder="不限"
 						 maxlength="11" type="number" />
 						<tui-icon name="reduce" color="#333" :size="14"></tui-icon>
-						<input placeholder-class="tui-phcolor" v-model="optionList.size_parameter_2" class="tui-input" placeholder="不限"
+						<input placeholder-class="tui-phcolor" v-model="postList.size_parameter_2" class="tui-input" placeholder="不限"
 						 maxlength="11" type="number" /><text class="content-text">毫米</text>
 					</view>
 					<view class="tui-drawer-title">
@@ -298,10 +298,10 @@
 						<text class="tui-title-bold">价格区间</text>
 					</view>
 					<view class="tui-drawer-content">
-						<input placeholder-class="tui-phcolor" v-model="optionList.price_parameter_1" class="tui-input" placeholder="不限"
+						<input placeholder-class="tui-phcolor" v-model="postList.price_parameter_1" class="tui-input" placeholder="不限"
 						 maxlength="11" type="number" />
 						<tui-icon name="reduce" color="#333" :size="14"></tui-icon>
-						<input placeholder-class="tui-phcolor" v-model="optionList.price_parameter_2" class="tui-input" placeholder="不限"
+						<input placeholder-class="tui-phcolor" v-model="postList.price_parameter_2" class="tui-input" placeholder="不限"
 						 maxlength="11" type="number" /><text class="content-text">元</text>
 					</view>
 					<view class="tui-safearea-bottom"></view>
@@ -546,6 +546,8 @@
 					rejectRatio_parameter_2: '', //不良右
 					price_parameter_1: '', //价格左
 					price_parameter_2: '', //价格右边
+					pageNo: 1,
+					pageSize: 10,
 				},
 				statusHeight: 20,
 				boxHeight: 44,
@@ -905,6 +907,7 @@
 			},
 			activeGo(name, id, idx) {
 				this.optionList[name] = id
+				this.postList[name] = id
 				this.num = idx
 				console.log(this.optionList)
 			},
@@ -1107,11 +1110,31 @@
 				}
 			},
 			clickToConfirm() {
-				console.log(this.optionList)
+				console.log(this.postList)
+				listing(getGoodsall, this.postList).then(res=>{
+					console.log(res)
+				})
 				this.closeDrawer()
 			},
 			clickToReset() {
 				this.num = 0
+				this.optionList = {
+					level: '', //等级
+					ltWeight: '', //单果左
+					rtWeight: '', //单果左
+					ltWidth: '', //果径左
+					rtWidth: '', //果径右
+					ltTaste: '', //口感左
+					rtTaste: '', //口感右
+					ltColor: '', //颜色左
+					rtColor: '', //颜色右
+					ltShape: '', //形状左
+					rtShape: '', //形状右
+					ltRight: '', //不良左
+					rtRight: '', //不良右
+					ltPrice: '', //价格左
+					rtPrice: '', //价格右边
+				}
 				this.optionList = {
 					level: '', //等级
 					ltWeight: '', //单果左
