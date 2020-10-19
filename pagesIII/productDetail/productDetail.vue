@@ -29,10 +29,10 @@
 					</block>
 					<block v-for="(item, index) in swiperList" :key="index" v-if="shopListdata.urlVideo!==''">
 						<swiper-item :data-index="index" v-if="index===0">
-							<video v-cloak id="myVideo"  :src="shopListdata.urlVideo" :show-fullscreen-btn="true" style="width:100%;height:100%;"></video>
+							<video v-cloak id="myVideo" :src="shopListdata.urlVideo" :show-fullscreen-btn="true" style="width:100%;height:100%;"></video>
 						</swiper-item>
 						<swiper-item :data-index="index" v-else>
-							<image :src="item" class="tui-slide-image"  />
+							<image :src="item" class="tui-slide-image" />
 						</swiper-item>
 					</block>
 
@@ -320,13 +320,13 @@
 		<view class="tui-operation">
 			<view class="tui-operation-left tui-col-5">
 				<view class="tui-operation-item" hover-class="tui-opcity" :hover-stay-time="150" @tap="likeOrder(shopListdata.id)">
-					<tui-icon name="like" :size="22" color="#333" v-if="!shopListdata.isCollection"></tui-icon>
-					<tui-icon name="like-fill" :size="22" color="#ff0000" v-if="shopListdata.isCollection"></tui-icon>
+					<tui-icon name="like" :size="22" color="#333" v-if="!canCollect"></tui-icon>
+					<tui-icon name="like-fill" :size="22" color="#ff0000" v-if="canCollect"></tui-icon>
 					<view class="tui-operation-text tui-scale-small">收藏</view>
 				</view>
 				<view class="tui-operation-item" hover-class="tui-opcity" :hover-stay-time="150" @tap="postShopping(shopListdata.id)">
-					<tui-icon name="order" :size="22" color="#333" v-if="!shopListdata.isCart"></tui-icon>
-					<tui-icon name="order" :size="22" color="#ff0000" v-if="shopListdata.isCart"></tui-icon>
+					<tui-icon name="order" :size="22" color="#333" v-if="!canCart"></tui-icon>
+					<tui-icon name="order" :size="22" color="#ff0000" v-if="canCart"></tui-icon>
 					<view class="tui-operation-text tui-scale-small">加入进货单</view>
 				</view>
 				<!-- <view class="tui-operation-item" hover-class="tui-opcity" :hover-stay-time="150">
@@ -536,8 +536,11 @@
 				iconTop: 24,
 				tabsTop: 64,
 				canPraise: true,
+				canCollect: true,
+				canCart: true,
 				netStatus: true,
-				nowTime: '2020-10-20'
+				nowTime: '2020-10-20',
+
 			};
 		},
 		onLoad(options) {
@@ -915,7 +918,6 @@
 					this.modaishow = true;
 				} else {
 					this.modaishow = false;
-
 					let data = {
 						goodsId: id,
 						token: setdata
@@ -926,10 +928,19 @@
 							icon: 'none'
 						});
 						return;
-					} else if (this.shopListdata.isCollection == false) {
+					}
+					if (this.canCollect === true) {
+						uni.showToast({
+							title: '重复收藏',
+							icon: 'none'
+						});
+						return;
+					}
+					if (this.shopListdata.isCollection == false) {
+						this.canCollect = true
 						publicing(postLike, data)
 							.then(res => {
-								this.postDetails();
+								// this.postDetails();
 								uni.showToast({
 									title: '收藏成功',
 									icon: 'none'
@@ -960,6 +971,8 @@
 						this.labelList = res.data.data.labelList;
 						this.urlList = res.data.data.urlList;
 						this.canPraise = res.data.data.isPraise
+						this.canCollect = res.data.data.isCollection
+						this.canCart = res.data.data.isCart
 						// console.log(this.labelList);
 					})
 					.catch(err => {
@@ -975,7 +988,6 @@
 				} else {
 					// this.modaishow = false
 					this.modaishow = false;
-
 					let data = {
 						goodsId: id,
 						token: setdata,
@@ -988,7 +1000,17 @@
 							duration: 3000
 						});
 						return;
-					} else if (this.shopListdata.isCart == false) {
+					}
+					if(this.canCart === true) {
+						uni.showToast({
+							title: '重复加入进货单',
+							icon: 'none',
+							duration: 3000
+						});
+						return;
+					}
+
+					if (this.shopListdata.isCart == false) {
 						publicing(postmyOrder, data)
 							.then(res => {
 								let code = res.data.code;
@@ -999,7 +1021,8 @@
 										duration: 3000
 									});
 								} else if (code == 200) {
-									this.postDetails();
+									// this.postDetails();
+									this.canCart = true
 									uni.showToast({
 										title: '加入进货单成功',
 										icon: 'none',
@@ -1017,7 +1040,6 @@
 			bannerChange(e) {
 				this.bannerIndex = e.detail.current;
 			},
-
 			//轮播图点击事件 @tap.stop="previewImage"
 			previewImage(e) {
 				let index = e.currentTarget.dataset.index;

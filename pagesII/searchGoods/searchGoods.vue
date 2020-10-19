@@ -10,7 +10,7 @@
 			<view class="tui-cancle" @tap="inputKey">搜索</view>
 		</view>
 
-		<view class="tui-search-history" v-show="history.length>0">
+		<view class="tui-search-history" v-if="history.length!==0">
 			<view class="tui-history-header">
 				<view class="tui-search-title">搜索历史</view>
 			</view>

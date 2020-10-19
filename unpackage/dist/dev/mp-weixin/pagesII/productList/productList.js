@@ -871,7 +871,8 @@ var _console = console,log = _console.log;var _default = { data: function data()
       isList: false, //切换列表展示效果
       drawer: false, //显示选果标准抽屉
       drawerH: 0, //抽屉内部scrollview高度
-      selectedName: '综合', selectH: 0, num: 0, seleTopList: [{ name: '综合', selected: false }, { name: '销量', selected: false }, { name: '价格', selected: false }, { name: '视频选果', selected: false }], seleBottom: [{ name: '芒果', selected: false }, { name: '品种', selected: true }, { name: '水果标准', selected: false }, { name: '验证保障', selected: false }], dropdownList: [{ name: '综合', selected: true }, { name: '价格升序', selected: false }, { name: '价格降序', selected: false }], pageIndex: 1, loadding: false, pullUpOn: true, optionList: { fruitLevel: '1295251270639849472', //等级
+      selectedName: '综合', selectH: 0, num: 0, seleTopList: [{ name: '综合', selected: false }, { name: '销量', selected: false }, { name: '价格', selected: false }, { name: '视频选果', selected: false }], seleBottom: [{ name: '芒果', selected: false }, { name: '品种', selected: true }, { name: '水果标准', selected: false }, { name: '验证保障', selected: false }], dropdownList: [{ name: '综合', selected: true }, { name: '价格升序', selected: false }, { name: '价格降序', selected: false }], pageIndex: 1, loadding: false, pullUpOn: true, // 渲染展示的数据，存的是label名
+      optionList: { fruitLevel: '1295251270639849472', //等级
         weight_parameter_1: '', //单果左
         weight_parameter_2: '', //单果右
         size_parameter_1: '', //果径左
@@ -886,7 +887,8 @@ var _console = console,log = _console.log;var _default = { data: function data()
         rejectRatio_parameter_2: '', //不良右
         price_parameter_1: '', //价格左
         price_parameter_2: '' //价格右边
-      }, postList: { fruitLevel: '1295251270639849472', //等级
+      }, // 提交申请的数据，存的是id
+      postList: { fruitLevel: '1295251270639849472', //等级
         weight_parameter_1: '', //单果左
         weight_parameter_2: '', //单果右
         size_parameter_1: '', //果径左
@@ -901,11 +903,11 @@ var _console = console,log = _console.log;var _default = { data: function data()
         rejectRatio_parameter_2: '', //不良右
         price_parameter_1: '', //价格左
         price_parameter_2: '' //价格右边
-      }, statusHeight: 20, boxHeight: 44, navHeight: 64 };}, onLoad: function onLoad(options) {var _this = this;var pages = getCurrentPages();var curPage = pages[pages.length - 1]; // 当前页面路径
-    var beforePage = pages[pages.length - 2]; // 前一个页面路径
-    log(beforePage.$page.fullPath);if (beforePage.$page.fullPath === '/pagesII/searchGoods/searchGoods') {log('我执行了搜索'); //搜索	
-      this.getSearch(options.name);} else {// console.log(options)
-      console.log("没错我走到了这里");this.slMangguo = options.name;this.varietyId = options.id;log(this.varietyId);this.ShopIng();} //this.searchKey = options.name
+      }, statusHeight: 20, boxHeight: 44, navHeight: 64 };}, onLoad: function onLoad(options) {var _this = this;var pages = getCurrentPages();var beforePage = pages[pages.length - 2]; // 前一个页面路径
+    // log(beforePage.$page.fullPath)
+    if (beforePage.$page.fullPath === '/pagesII/searchGoods/searchGoods') {// log('我执行了搜索')
+      //搜索	
+      this.getSearch(options.name);} else {console.log("没错我走到了这里");this.slMangguo = options.name;this.varietyId = options.id;log(this.varietyId);this.ShopIng();} //this.searchKey = options.name
     var obj = {};obj = wx.getMenuButtonBoundingClientRect();uni.getSystemInfo({ success: function success(res) {_this.width = obj.left || res.windowWidth;_this.height = obj.top ? obj.top + obj.height + 8 : res.statusBarHeight + 44;_this.inputTop = obj.top ? obj.top + (obj.height - 30) / 2 : res.statusBarHeight + 7;_this.arrowTop = obj.top ? obj.top + (obj.height - 32) / 2 : res.statusBarHeight + 6;_this.searchKey = options.name || ''; //传递的搜索关键字
         //略小，避免误差带来的影响
         _this.dropScreenH = _this.height * 750 / res.windowWidth + 186;_this.drawerH = res.windowHeight - uni.upx2px(100) - _this.height;} });var res = uni.getSystemInfoSync();var statusBarHeight = res.statusBarHeight;var info = uni.getMenuButtonBoundingClientRect();var top = info.top,bottom = info.bottom;this.statusHeight = statusBarHeight;var buttonHeight = bottom - statusBarHeight + (top - statusBarHeight);var navHeight = statusBarHeight + buttonHeight + top - statusBarHeight; //状态栏+导航栏的高度（页面初始高度）
@@ -913,9 +915,7 @@ var _console = console,log = _console.log;var _default = { data: function data()
     this.navHeight = navHeight;console.log("statusBarHeight,", statusBarHeight, "navHeight", navHeight, "boxHeight", this.boxHeight, "buttonHeight", buttonHeight);}, filters: { filterNum: function filterNum(val) {if (val) {var words = (Math.floor(val) + '').split('');var res = '';if (words.length <= 4) {res = val;}if (words.length === 5) {res = words[0] + "." + words[1] + '万';}if (words.length === 6) {res = words[0] + words[1] + "." + words[2] + '万';}if (words.length === 7) {res = words[0] + words[1] + words[2] + "." + words[3] + '万';}if (words.length === 8) {res = words[0] + words[1] + words[2] + words[3] + "." + words[4] + '万';}if (words.length === 9) {res = words[0] + "." + words[1] + '亿';}if (words.length === 10) {res = words[0] + words[1] + "." + words[2] + '亿';}return res;} else {return val;}} }, computed: { tasteBox: function tasteBox() {var arr = [];var data = this.taste_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;}, colorBox: function colorBox() {var arr = [];var data = this.color_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;}, shapeBox: function shapeBox() {var arr = [];var data = this.shape_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;} }, methods: { //点击搜索
     goToSearchGoods: function goToSearchGoods() {uni.navigateTo({ url: '../../pagesII/searchGoods/searchGoods' });}, //商品详情页
     gotoList: function gotoList(id) {log(id);uni.navigateTo({ url: '../../pagesIII/productDetail/productDetail?id=' + id });}, //下拉选
-    dropDownList: function dropDownList(index, name) {if (index !== -1) {console.log("index：" + index, name);}this.title = name;this.dropdownShow = !this.dropdownShow;}, dropDownList2: function dropDownList2(index, name) {if (index !== -1) {console.log("index：" + index, name);}this.title = name;this.dropdownShow2 = !this.dropdownShow2;}, getSearch: function getSearch(serrchName) {var _this2 = this;var data = { pageNo: 1, pageSize: 10, name: serrchName };(0, _api.listing)(_request.getGoodsall, data).then(function (res) {
-        log("搜索结果", res);
-        _this2.goods = res.data.data.goods;
+    dropDownList: function dropDownList(index, name) {if (index !== -1) {console.log("index：" + index, name);}this.title = name;this.dropdownShow = !this.dropdownShow;}, dropDownList2: function dropDownList2(index, name) {if (index !== -1) {console.log("index：" + index, name);}this.title = name;this.dropdownShow2 = !this.dropdownShow2;}, getSearch: function getSearch(serrchName) {var _this2 = this;var data = { pageNo: 1, pageSize: 10, name: serrchName };(0, _api.listing)(_request.getGoodsall, data).then(function (res) {log("搜索结果", res);_this2.goods = res.data.data.goods;
         _this2.seleVarieties = res.data.data;
         if (_this2.seleVarieties === undefined) {
           _this2.seleVarieties = _this2.seleVarieties;
@@ -1171,6 +1171,7 @@ var _console = console,log = _console.log;var _default = { data: function data()
     //请求数据
     ShopIng: function ShopIng() {var _this7 = this;
       var data = {
+        id: this.varietyId,
         pageNo: 1,
         pageSize: 10 };
 
@@ -1180,7 +1181,7 @@ var _console = console,log = _console.log;var _default = { data: function data()
       Promise.all([(0, _api.listing)(_request.getGoodsall, data), (0, _api.listing)(_request.getAttribute, data2)])
       // listing(getGoodsall,data)
       .then(function (res) {
-
+        console.log(res);
         _this7.seleVarieties = res[1].data.data;
         if (_this7.seleVarieties === undefined) {
           _this7.seleVarieties = _this7.seleVarieties;

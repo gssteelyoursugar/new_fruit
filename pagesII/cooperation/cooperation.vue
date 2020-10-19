@@ -31,7 +31,7 @@
 				<image src="../../static/images/phone.png" mode="" class="phone"></image>
 
 				<text class="title-em">果叔电话</text>
-				<text class="title">13978860880</text>
+				<text class="title">0771-5633659</text>
 			</view>
 		</view>
 	</view>

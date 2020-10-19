@@ -61,7 +61,8 @@
 					"id": 3,
 					"name": "详情",
 					"pathName": "pagesIII/productDetail/productDetail",
-					"query": "id=1314864767386910720&__id__=1"
+					"query": "id=1314874387086049280&__id__=9",
+					"scene": null
 				},
 				{
 					"id": 4,
@@ -77,16 +78,16 @@
 				},
 				{
 					"id": -1,
-					"name": "最近看过",
-					"pathName": "pagesII/Recently/Recently",
-					"query": "id=1314864767386910720&__id__=1",
+					"name": "订单统计",
+					"pathName": "pagesII/OrderStatistics/OrderStatistics",
+					"query": "",
 					"scene": null
 				},
 				{
 					"id": -1,
-					"name": "限量批",
-					"pathName": "pagesII/Limit/Limit",
-					"query": "id=1316323110923444224&__id__=1",
+					"name": "评价管理",
+					"pathName": "pagesII/Evaluate/Evaluate",
+					"query": "",
 					"scene": null
 				}
 			]

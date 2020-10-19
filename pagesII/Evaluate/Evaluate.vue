@@ -1,27 +1,41 @@
 <template>
 	<view>
-		<view class="tui-tab-rank">
-			<view class="tui-time-title"><text class="title-time-left">2020年9月6日</text> </view>
-			<view class="tui-tab-rank-cent">
-				<image src="../../static/images/pingguo1.png" mode="aspectFill" class="img-rink"></image>
+		<view class="container-img " v-if="evaList.length === 0" :class="{ active: isActive, 'text-danger': hasError }">
+			<image src="../../static/images/orderBMG.png" mode="widthFix"></image>
+			<text class="color-text">最近没有点赞过商品~</text>
+		</view>
+		<view class="tui-tab-rank" v-for="(item,index) of evaList" :key="index">
+			<view class="tui-time-title"><text class="title-time-left">{{item.time}}</text> </view>
+			<view class="tui-tab-rank-cent" v-for="(itm,idx) of item.list" :key="idx">
+				<image :src="itm.url" mode="aspectFill" class="img-rink"></image>
 				<view class="tui-pro-tit">
-					<text class="tag-tit">采手精选</text> <text class="tag-tit-text">葡萄回复的伤口缝合公司的讲课风格</text>
+					<text class="tag-tit">{{itm.labelName}}</text> <text class="tag-tit-text">{{itm.name}}</text>
 					<view class="tag-tit2">
 						<view class="">
 							<view class="tag-tit2-price">
-								5斤装 × 1
+								{{itm.specification}}
 							</view>
 							<view class="tag-tit2-text">
 								<text class="price1">
-									<text style="font-size: 20rpx;margin-right:4rpx;">¥</text>108<text style="font-size: 20rpx;margin-left:4rpx;">元</text>
+									<text style="font-size: 20rpx;margin-right:4rpx;">¥</text>{{itm.platform_price}}<text style="font-size: 20rpx;margin-left:4rpx;">元</text>
 									<text class="price2">/件</text>
 								</text>
 							</view>
 						</view>
-						<image src="../../static/images/zan.png" mode="aspectFill" class="tui-shop-car"></image>
+						<image src="../../static/images/zan.png" mode="aspectFill" class="tui-shop-car" @click="toggleTips(itm.id)"></image>
 						<!-- <view>购物车</view> -->
 					</view>
+				</view>
+			</view>
+		</view>
 
+		<view class="warp" v-if="showTips">
+			<view class="warp-view">
+				<view class="warp-text1">温馨提示</view>
+				<view class="warp-text">取消对该水果点赞？</view>
+				<view class="warp-flex">
+					<view @click="unShowTips" plain="true">取消</view>
+					<view @click="cancelPraise" :data-id="11" class="color-green">确认</view>
 				</view>
 			</view>
 		</view>
@@ -36,32 +50,83 @@
 	} from '../../api/api.js'
 	//请求地址
 	import {
-		getLike,
+		getEvaluateList,
 		postCancelPraise
 	} from '../../api/request.js'
-	var setdata = uni.getStorageSync('usermen')
-	var {
-		log
-	} = console
+	let setdata = uni.getStorageSync('usermen')
+
 	export default {
 		data() {
 			return {
-
+				showTips: false,
+				curIds: undefined,
+				evaList: []
 			}
 		},
+
+		onLoad() {
+			this.getList()
+		},
 		methods: {
+			getList() {
+				let data = {
+					token: setdata,
+					pageNo: 1,
+					pageSize: 10
+				}
+				publicing(getEvaluateList, data).then(res => {
+					console.log(res)
+					this.evaList =  res.data.data
+				
+				})
+			},
+
+			toggleTips(id) {
+				this.curIds = id
+				this.showTips = !this.showTips
+			},
+			
+			unShowTips () {
+				this.showTips = false
+			},
+
+			cancelPraise(e) {
+				console.log("我要取消点赞")
+				
+				let data = {
+					goodsId: this.curIds,
+					token: setdata
+				}
+				console.log(data)
+				// return
+				publicing(postCancelPraise, data).then(res => {
+					console.log(res)
+					uni.showToast({
+						title: '已取消点赞',
+					
+					})
+					this.unShowTips()
+					this.getList()
+				})
+			}
 		},
 		onPullDownRefresh() {
-			this.getImportData()
-			console.log('refresh');
-			setTimeout(function() {
-				uni.stopPullDownRefresh();
-			}, 1000);
+
 		},
 	}
 </script>
 
 <style>
+	.container-img{
+		margin-top: 150rpx;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+	.color-text{
+		color: rgba(112, 112, 112, 1);
+	}
 	.price1 {
 		color: #FF5600;
 		font-size: 36rpx;
@@ -154,4 +219,73 @@
 		font-size: 28rpx;
 		color: #333;
 	}
+
+	/* 模态弹窗布局 */
+	.warp {
+		position: fixed;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		background: rgba(0, 0, 0, 0.6);
+		z-index: 9999;
+	}
+
+	.warp-view {
+		width: 500upx;
+		height: 260upx;
+		background: #ffffff;
+		margin: auto;
+		position: absolute;
+		-webkit-position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 20%;
+		right: 0;
+		border-radius: 8upx;
+		overflow: hidden;
+	}
+
+	.warp-text {
+		text-align: center;
+		margin-top: 34upx;
+		font-size: 34upx;
+		color: #666666;
+	}
+
+	.warp-text1 {
+		text-align: center;
+		height: 60rpx;
+		line-height: 60rpx;
+		font-size: 34upx;
+		color: #fff;
+		background-color: rgba(0, 197, 42, 1);
+	}
+
+	.warp-flex {
+		display: flex;
+		justify-content: space-around;
+		border-top: 1upx solid #eeeeee;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: 80upx;
+		line-height: 80upx;
+	}
+
+	.color-green {
+		color: rgba(0, 197, 42, 1);
+	}
+
+	.warp-flex view {
+		border: none;
+		font-size: 30upx;
+	}
+
+	.warp-flex view:nth-child(2) {
+		color: rgba(0, 197, 42, 1);
+	}
+
+	/*end  */
 </style>

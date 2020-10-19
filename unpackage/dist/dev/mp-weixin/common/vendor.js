@@ -1956,7 +1956,8 @@ var screendata = {
 var state = {
   screendata: screendata,
   history: uni.getStorageSync('history') ? uni.getStorageSync('history') : [],
-  orderTime: uni.getStorageSync('orderTime') ? uni.getStorageSync('orderTime') : '' };var _default =
+  orderTime: uni.getStorageSync('orderTime') ? uni.getStorageSync('orderTime') : '',
+  paramTime: uni.getStorageSync('paramTime') ? uni.getStorageSync('paramTime') : '' };var _default =
 
 
 new _vuex.default.Store({
@@ -1992,7 +1993,9 @@ new _vuex.default.Store({
     setOrderTime: function setOrderTime(state, data) {
       console.log(data);
       state.orderTime = data.data;
+      state.paramTime = data.paramTime;
       uni.setStorageSync('orderTime', data.data);
+      uni.setStorageSync('paramTime', data.paramTime);
     } } });exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
@@ -9989,7 +9992,7 @@ var errdata = {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.uploadFiles = exports.getBeConfirmed = exports.PostDataById = exports.postAfterCen = exports.posAfterDetails = exports.posAfterSaleList = exports.postCancelPay = exports.posAfterSale = exports.getAfterSaleData = exports.postConfirmOrder = exports.postDelOrders = exports.postCancelOrder = exports.getDetails = exports.postAgainOrder = exports.postSettle = exports.getMsg = exports.postCancelPraise = exports.getSubmitOrder = exports.postAddressList = exports.postupdateClient = exports.getClient = exports.getNewsAll = exports.postRecentlyDel = exports.getselectSuper = exports.getselectSeasonal = exports.getselectHot = exports.getselectImport = exports.getMyOrder = exports.postOrderPay = exports.getRecently = exports.postPraise = exports.postDelLike = exports.getLike = exports.postLike = exports.postUpOrder = exports.postDelOrder = exports.getCart = exports.postmyOrder = exports.postSaveStore = exports.getActivity = exports.wxloginurl = exports.imgurl = exports.postOrder = exports.url = exports.getAttribute = exports.getGoodsall = exports.postdelist = exports.getClassify = exports.postActivity = exports.getsearch = exports.loginis = exports.getIndex = void 0; // 公用地址
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.uploadFiles = exports.getEvaluateList = exports.orderCount = exports.getBeConfirmed = exports.PostDataById = exports.postAfterCen = exports.posAfterDetails = exports.posAfterSaleList = exports.postCancelPay = exports.posAfterSale = exports.getAfterSaleData = exports.postConfirmOrder = exports.postDelOrders = exports.postCancelOrder = exports.getDetails = exports.postAgainOrder = exports.postSettle = exports.getMsg = exports.postCancelPraise = exports.getSubmitOrder = exports.postAddressList = exports.postupdateClient = exports.getClient = exports.getNewsAll = exports.postRecentlyDel = exports.getselectSuper = exports.getselectSeasonal = exports.getselectHot = exports.getselectImport = exports.getMyOrder = exports.postOrderPay = exports.getRecently = exports.postPraise = exports.postDelLike = exports.getLike = exports.postLike = exports.postUpOrder = exports.postDelOrder = exports.getCart = exports.postmyOrder = exports.postSaveStore = exports.getActivity = exports.wxloginurl = exports.imgurl = exports.postOrder = exports.url = exports.getAttribute = exports.getGoodsall = exports.postdelist = exports.getClassify = exports.postActivity = exports.getsearch = exports.loginis = exports.getIndex = void 0; // 公用地址
 
 
 //测试用
@@ -10182,10 +10185,16 @@ exports.getBeConfirmed = getBeConfirmed;var getAfterSaleData = "".concat(url, "a
 // //取消申请
 // let postAfterCen = `${url}api/wx/wxOrderItemAfterSale/cancelAfter`
 
+// 订单统计
+exports.getAfterSaleData = getAfterSaleData;var orderCount = "".concat(url, "api/wx/goods/totalGoods");
 
+// 评价管理
+exports.orderCount = orderCount;var getEvaluateList = "".concat(url, "api/wx/evaluate/list");
 
 //导出请求地址
-exports.getAfterSaleData = getAfterSaleData;
+exports.getEvaluateList = getEvaluateList;
+
+
 
 
 

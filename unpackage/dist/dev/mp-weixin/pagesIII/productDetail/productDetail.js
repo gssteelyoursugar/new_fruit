@@ -1057,7 +1057,7 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
       posters: 'https://www.thorui.cn/img/product/4.png', //视频封面
       //videos:'https://6e6f-normal-env-ta6pc-1300924598.tcb.qcloud.la/video-swiper/1589851354869410.mp4?sign=1f636557effa496e074332e3f4b9b8aa&t=1589851461',
       bannerIndex: 0, userInfoData: {}, //物流信息
-      topMenu: [{ icon: 'message', text: '消息', size: 26, badge: 3 }, { icon: 'home', text: '首页', size: 23, badge: 0 }, { icon: 'people', text: '我的', size: 26, badge: 0 }, { icon: 'cart', text: '购物车', size: 23, badge: 2 }, { icon: 'kefu', text: '客服小蜜', size: 26, badge: 0 }, { icon: 'feedback', text: '我要反馈', size: 23, badge: 0 }, { icon: 'share', text: '分享', size: 26, badge: 0 }], productID: 0, menuShow: false, popupShow: false, value: 1, collected: false, Sumify: '', token: '', navHeight: 64, iconTop: 24, tabsTop: 64, canPraise: true, netStatus: true, nowTime: '2020-10-20' };}, onLoad: function onLoad(options) {// 导航栏高度 = 状态栏高度 + 胶囊高度 + 胶囊上下边距
+      topMenu: [{ icon: 'message', text: '消息', size: 26, badge: 3 }, { icon: 'home', text: '首页', size: 23, badge: 0 }, { icon: 'people', text: '我的', size: 26, badge: 0 }, { icon: 'cart', text: '购物车', size: 23, badge: 2 }, { icon: 'kefu', text: '客服小蜜', size: 26, badge: 0 }, { icon: 'feedback', text: '我要反馈', size: 23, badge: 0 }, { icon: 'share', text: '分享', size: 26, badge: 0 }], productID: 0, menuShow: false, popupShow: false, value: 1, collected: false, Sumify: '', token: '', navHeight: 64, iconTop: 24, tabsTop: 64, canPraise: true, canCollect: true, canCart: true, netStatus: true, nowTime: '2020-10-20' };}, onLoad: function onLoad(options) {// 导航栏高度 = 状态栏高度 + 胶囊高度 + 胶囊上下边距
     var that = this;try {var res = uni.getSystemInfoSync();var statusBarHeight = res.statusBarHeight;uni.getNetworkType({ success: function success(res) {console.log(res.networkType);if (res.networkType === 'wifi') {that.netStatus = true;}if (res.networkType !== 'wifi') {that.netStatus = false;setTimeout(function () {that.netStatus = true;}, 3000);}} });uni.onNetworkStatusChange(function (res) {console.log(res.isConnected);console.log(res.networkType);if (res.isConnected && res.networkType !== 'wifi') {that.netStatus = false;setTimeout(function () {that.netStatus = true;}, 3000);}if (res.isConnected && res.networkType === 'wifi') {that.netStatus = true;}});var info = uni.getMenuButtonBoundingClientRect();var top = info.top,bottom = info.bottom;var buttonHeight = bottom - statusBarHeight + (top - statusBarHeight);that.navHeight = statusBarHeight + buttonHeight + top - statusBarHeight;that.iconTop = statusBarHeight + (top - statusBarHeight);that.tabsTop = statusBarHeight + buttonHeight + top - statusBarHeight;console.log(that.navHeight, buttonHeight);} catch (err) {console.log(err);} // this.getHomelist()
     var setdata = uni.getStorageSync('usermen');this.token = setdata;this.productID = options.id;this.postDetails();this.postSettle();this.getMerchants();var obj = {};obj = wx.getMenuButtonBoundingClientRect(); // 	setTimeout(() => {
     // 		uni.getSystemInfo({
@@ -1104,8 +1104,10 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
       var data = { code: code };(0, _api.publicing2)(_request.loginis, data) //发送请求携带参数
       .then(function (res) {uni.setStorageSync('usermen', res.data.token); //把token存在本地，小程序提供如同浏览器cookie
         var setdata = uni.getStorageSync('usermen');uni.showToast({ title: '登陆成功' });_this5.getMerchants();uni.hideLoading();}).catch(function (err) {log(err);});}, //收藏订单
-    likeOrder: function likeOrder(id) {var _this6 = this;var setdata = uni.getStorageSync('usermen'); //判断是否登录才能收藏
-      if (!setdata) {this.modaishow = true;} else {this.modaishow = false;var data = {
+    likeOrder: function likeOrder(id) {var setdata = uni.getStorageSync('usermen'); //判断是否登录才能收藏
+      if (!setdata) {this.modaishow = true;} else {
+        this.modaishow = false;
+        var data = {
           goodsId: id,
           token: setdata };
 
@@ -1115,10 +1117,19 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
             icon: 'none' });
 
           return;
-        } else if (this.shopListdata.isCollection == false) {
+        }
+        if (this.canCollect === true) {
+          uni.showToast({
+            title: '重复收藏',
+            icon: 'none' });
+
+          return;
+        }
+        if (this.shopListdata.isCollection == false) {
+          this.canCollect = true;
           (0, _api.publicing)(_request.postLike, data).
           then(function (res) {
-            _this6.postDetails();
+            // this.postDetails();
             uni.showToast({
               title: '收藏成功',
               icon: 'none' });
@@ -1132,7 +1143,7 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
     },
     //请求商品详情
 
-    postDetails: function postDetails() {var _this7 = this;
+    postDetails: function postDetails() {var _this6 = this;
       uni.showLoading({
         title: '加载中' });
 
@@ -1145,10 +1156,12 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
       (0, _api.publicing)(_request.postdelist, data).
       then(function (res) {
         console.log("res123", res);
-        _this7.shopListdata = res.data.data;
-        _this7.labelList = res.data.data.labelList;
-        _this7.urlList = res.data.data.urlList;
-        _this7.canPraise = res.data.data.isPraise;
+        _this6.shopListdata = res.data.data;
+        _this6.labelList = res.data.data.labelList;
+        _this6.urlList = res.data.data.urlList;
+        _this6.canPraise = res.data.data.isPraise;
+        _this6.canCollect = res.data.data.isCollection;
+        _this6.canCart = res.data.data.isCart;
         // console.log(this.labelList);
       }).
       catch(function (err) {
@@ -1157,14 +1170,13 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
       uni.hideLoading();
     },
     //立即购买/加进货单
-    postShopping: function postShopping(id) {var _this8 = this;
+    postShopping: function postShopping(id) {var _this7 = this;
       var setdata = uni.getStorageSync('usermen');
       if (!setdata) {
         this.modaishow = true;
       } else {
         // this.modaishow = false
         this.modaishow = false;
-
         var data = {
           goodsId: id,
           token: setdata,
@@ -1177,7 +1189,17 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
             duration: 3000 });
 
           return;
-        } else if (this.shopListdata.isCart == false) {
+        }
+        if (this.canCart === true) {
+          uni.showToast({
+            title: '重复加入进货单',
+            icon: 'none',
+            duration: 3000 });
+
+          return;
+        }
+
+        if (this.shopListdata.isCart == false) {
           (0, _api.publicing)(_request.postmyOrder, data).
           then(function (res) {
             var code = res.data.code;
@@ -1188,7 +1210,8 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
                 duration: 3000 });
 
             } else if (code == 200) {
-              _this8.postDetails();
+              // this.postDetails();
+              _this7.canCart = true;
               uni.showToast({
                 title: '加入进货单成功',
                 icon: 'none',
@@ -1206,7 +1229,6 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
     bannerChange: function bannerChange(e) {
       this.bannerIndex = e.detail.current;
     },
-
     //轮播图点击事件 @tap.stop="previewImage"
     previewImage: function previewImage(e) {
       var index = e.currentTarget.dataset.index;

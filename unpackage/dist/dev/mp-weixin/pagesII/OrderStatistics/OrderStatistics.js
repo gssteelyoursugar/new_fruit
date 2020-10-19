@@ -137,7 +137,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
 
@@ -188,7 +188,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
-var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
+
+
+
+
+
+
+var _vuex = __webpack_require__(/*! vuex */ 12);
+
+
+
+var _request = __webpack_require__(/*! ../../api/request.js */ 21);
+
+
+var _api = __webpack_require__(/*! ../../api/api.js */ 19);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
+
+
 {
   data: function data() {
     return {
@@ -198,14 +213,38 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumera
       radius: true,
       startYear: 2000,
       endYear: 2020,
-      dateTime: '2020-10-02 12:00',
+      dateTime: '',
       result: '',
       iconSize: '28',
-      iconUnit: 'rpx' };
+      iconUnit: 'rpx',
+      orderList: [],
+      totalGoodsNumber: 0,
+      totalGoodsPirce: 0 };
+
 
   },
+  onLoad: function onLoad(options) {
+    var userToken = uni.getStorageSync('usermen');
+    // 初始化时间选择器默认时间
+    if (this.orderTime) {
+      var arr = this.orderTime.split();
+      arr.push("01日");
+      console.log();
+      console.log(this.dataTime, this.orderTime);
+      this.dataTime = arr.join('');
+    } else {
+      var curDate = new Date();
+      var year = curDate.getFullYear();
+      var month = curDate.getMonth() + 1;
+      var day = curDate.getDay();
+      this.dataTime = "".concat(year, "\u5E74").concat(month, "\u6708").concat(day, "\u65E5");
+      console.log(this.dataTime);
+    }
+    console.log(userToken);
+    this.getOrderCount();
+  },
   computed: _objectSpread({},
-  (0, _vuex.mapState)(['orderTime'])),
+  (0, _vuex.mapState)(['orderTime', 'paramTime'])),
 
   methods: _objectSpread(_objectSpread({},
   (0, _vuex.mapMutations)(['setOrderTime'])), {}, {
@@ -217,12 +256,40 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumera
     },
     bindChange: function bindChange(e) {
       console.log(e);
-      this.setOrderTime({ data: e.result });
+      var date = e.year + '-' + e.month;
+      console.log(date);
+      // return
+      this.setOrderTime({
+        data: e.result, //渲染数据的日期格式
+        paramTime: date //发送请求的日期格式
+      });
+
+      this.getOrderCount();
+      console.log("看看我的订单呗");
     },
-    bindCancel: function bindCancel(e) {
-      console.log(e);
+    bindCancel: function bindCancel() {
       this.isShow = !this.isShow;
+    },
+    getOrderCount: function getOrderCount() {var _this2 = this;
+      if (!this.orderTime) {
+        return;
+      }
+      var userToken = uni.getStorageSync('usermen');
+      var data = {
+        time: this.paramTime,
+        token: userToken,
+        pageNo: 1,
+        pageSize: 10 };
+
+      (0, _api.listing)(_request.orderCount, data).then(function (res) {
+        console.log(res);
+        _this2.orderList = res.data.data.list;
+        _this2.totalGoodsNumber = res.data.data.totalGoodsNumber;
+        _this2.totalGoodsPirce = res.data.data.totalGoodsPirce;
+
+      });
     } }) };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

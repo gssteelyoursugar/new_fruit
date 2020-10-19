@@ -2,7 +2,7 @@
 	<view>
 		<view class="container-img " v-if="likeDatas.length == 0" :class="{ active: isActive, 'text-danger': hasError }">
 			<image src="../../static/images/orderBMG.png" mode="widthFix"></image>
-			<text class="color-text">最近没有收藏过商品先去逛逛</text>
+			<text class="color-text">最近没有收藏过商品~</text>
 		</view>
 		<view class="container-img" v-if="modaishow">
 				<image src="../../static/images/quanguo.png" mode="widthFix" class="img-quanguo"></image>
@@ -290,8 +290,8 @@
 	}
 	.tui-tab-rank-cent{
 		display: flex;
-		padding: 20rpx ;
-		
+		padding: 20rpx;
+		align-items: center;
 	}
 	.img-rink{
 		width: 180rpx;

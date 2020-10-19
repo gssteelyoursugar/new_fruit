@@ -512,6 +512,7 @@
 				pageIndex: 1,
 				loadding: false,
 				pullUpOn: true,
+				// 渲染展示的数据，存的是label名
 				optionList: {
 					fruitLevel: '1295251270639849472', //等级
 					weight_parameter_1: '', //单果左
@@ -529,6 +530,7 @@
 					price_parameter_1: '', //价格左
 					price_parameter_2: '', //价格右边
 				},
+				// 提交申请的数据，存的是id
 				postList: {
 					fruitLevel: '1295251270639849472', //等级
 					weight_parameter_1: '', //单果左
@@ -553,15 +555,13 @@
 		},
 		onLoad(options) {
 			var pages = getCurrentPages();
-			var curPage = pages[pages.length - 1]; // 当前页面路径
 			var beforePage = pages[pages.length - 2]; // 前一个页面路径
-			log(beforePage.$page.fullPath)
+			// log(beforePage.$page.fullPath)
 			if (beforePage.$page.fullPath === '/pagesII/searchGoods/searchGoods') {
-				log('我执行了搜索')
+				// log('我执行了搜索')
 				//搜索	
 				this.getSearch(options.name)
 			} else {
-				// console.log(options)
 				console.log("没错我走到了这里")
 				this.slMangguo = options.name
 				this.varietyId = options.id
@@ -985,6 +985,7 @@
 			//请求数据
 			ShopIng() {
 				let data = {
+					id: this.varietyId,
 					pageNo: 1,
 					pageSize: 10
 				}
@@ -994,7 +995,7 @@
 				Promise.all([listing(getGoodsall, data), listing(getAttribute, data2)])
 					// listing(getGoodsall,data)
 					.then((res) => {
-
+						console.log(res)
 						this.seleVarieties = res[1].data.data
 						if (this.seleVarieties === undefined) {
 							this.seleVarieties = this.seleVarieties

@@ -11,7 +11,8 @@ const screendata = {
 const state = {
 	screendata,
 	history: uni.getStorageSync('history') ? uni.getStorageSync('history') : [],
-	orderTime: uni.getStorageSync('orderTime') ? uni.getStorageSync('orderTime') : ''
+	orderTime: uni.getStorageSync('orderTime') ? uni.getStorageSync('orderTime') : '',
+	paramTime: uni.getStorageSync('paramTime') ? uni.getStorageSync('paramTime') : ''
 }
 
 export default new Vuex.Store({
@@ -47,7 +48,9 @@ export default new Vuex.Store({
 		setOrderTime(state, data) {
 			console.log(data)
 			state.orderTime = data.data
+			state.paramTime = data.paramTime
 			uni.setStorageSync('orderTime', data.data)
+			uni.setStorageSync('paramTime', data.paramTime)
 		}
 	}
 })

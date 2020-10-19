@@ -155,7 +155,7 @@
 						title:`${res.data.msg}`,
 						duration:2000
 					})
-					uni.reLaunch({
+					uni.redirectTo({
 						url:'../../pagesIII/navbar/navbar'
 					})
 				})

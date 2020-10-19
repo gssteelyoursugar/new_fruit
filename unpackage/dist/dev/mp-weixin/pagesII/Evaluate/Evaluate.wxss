@@ -1,4 +1,23 @@
 
+.container-img{
+	margin-top: 150rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	        flex-direction: column;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+}
+.color-text{
+	color: rgba(112, 112, 112, 1);
+}
 .price1 {
 	color: #FF5600;
 	font-size: 36rpx;
@@ -85,4 +104,68 @@
 	font-size: 28rpx;
 	color: #333;
 }
+/* 模态弹窗布局 */
+.warp {
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.6);
+	z-index: 9999;
+}
+.warp-view {
+	width: 500rpx;
+	height: 260rpx;
+	background: #ffffff;
+	margin: auto;
+	position: absolute;
+	-webkit-position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 20%;
+	right: 0;
+	-webkit-border-radius: 8rpx;
+	        border-radius: 8rpx;
+	overflow: hidden;
+}
+.warp-text {
+	text-align: center;
+	margin-top: 34rpx;
+	font-size: 34rpx;
+	color: #666666;
+}
+.warp-text1 {
+	text-align: center;
+	height: 60rpx;
+	line-height: 60rpx;
+	font-size: 34rpx;
+	color: #fff;
+	background-color: rgba(0, 197, 42, 1);
+}
+.warp-flex {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-justify-content: space-around;
+	        justify-content: space-around;
+	border-top: 1rpx solid #eeeeee;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 80rpx;
+	line-height: 80rpx;
+}
+.color-green {
+	color: rgba(0, 197, 42, 1);
+}
+.warp-flex view {
+	border: none;
+	font-size: 30rpx;
+}
+.warp-flex view:nth-child(2) {
+	color: rgba(0, 197, 42, 1);
+}
+/*end  */
 

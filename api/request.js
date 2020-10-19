@@ -191,7 +191,11 @@ let getAfterSaleData = `${url}api/wx/afterSale/getAfterSaleData`
 // //取消申请
 // let postAfterCen = `${url}api/wx/wxOrderItemAfterSale/cancelAfter`
 
+// 订单统计
+let orderCount = `${url}api/wx/goods/totalGoods`
 
+// 评价管理
+let getEvaluateList = `${url}api/wx/evaluate/list`
 
 //导出请求地址
 export {
@@ -245,7 +249,9 @@ export {
 	posAfterDetails,
 	postAfterCen,
 	PostDataById,
-	getBeConfirmed
+	getBeConfirmed,
+	orderCount,
+	getEvaluateList
 }
 
 

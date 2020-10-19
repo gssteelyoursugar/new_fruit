@@ -1371,6 +1371,7 @@
 		background-color: #fff;
 		margin: 0 20rpx;
 		border-top: 1rpx solid rgba(245, 245, 245, 1);
+		overflow: hidden;
 	}
 
 	.tui-Fruits-ranking-lien {

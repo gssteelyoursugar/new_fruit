@@ -290,7 +290,10 @@
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
-	padding: 20rpx ;
+	padding: 20rpx;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
 }
 .img-rink{
 	width: 180rpx;

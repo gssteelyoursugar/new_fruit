@@ -21,7 +21,7 @@
 		<!--header-->
 		<!--header-->
 		<!--banner-->
-		<view class="tui-banner-swiper" :style="">
+		<view class="tui-banner-swiper" :style="{top: navHeight + 'px'}">
 			<image :src="imageUrl" class="tui-my-bg" mode="aspectFill"></image>
 		</view>
 		<view class="tui-cent-box">
@@ -46,7 +46,6 @@
 				<view class="class-name-left">
 					<text class="tite-color-time">宁*果巨峰葡萄A级33斤果径20-35 鲜度5星</text>
 				</view>
-
 			</view>
  -->
 		</view>
@@ -120,7 +119,7 @@
 				hideing: 0,
 				num: 0,
 				ranking: ['销量榜', '评价榜', '关注榜', '回购榜'],
-				imageUrl: "/static/images/limit@2x.png",
+				imageUrl: "/static/images/limit.png",
 				rankBgUrl: "/static/images/paihangbang@2x.png",
 				height: 64, //header高度
 				top: 26, //标题图标距离顶部距离
@@ -138,8 +137,9 @@
 				createTime: 0,
 				ts: 0,
 				te: 3,
-				boxHeight: '',
-				statusHeight: ""
+				boxHeight: 44,
+				statusHeight: 20,
+				navHeight: 64
 			};
 		},
 		onLoad: function(options) {
@@ -166,6 +166,7 @@
 			let buttonHeight = (bottom - statusBarHeight) + (top - statusBarHeight)
 			let navHeight = statusBarHeight + buttonHeight + top - statusBarHeight
 			this.boxHeight = navHeight - statusBarHeight
+			this.navHeight = navHeight
 
 			console.log(statusBarHeight, navHeight, buttonHeight)
 			// #endif
@@ -387,7 +388,7 @@
 
 	.tui-my-bg {
 		width: 100%;
-		height: 446rpx;
+		height: 100%;
 		display: block;
 	}
 
@@ -605,11 +606,14 @@
 	}
 
 	.tui-banner-swiper {
-		position: absolute;
-		top: 0;
+		position: fixed;
 		width: 100%;
 		z-index: -1;
-		height: 446rpx;
+		/* height: 1334rpx; */
+		bottom: 0;
+		left: 0;
+		right: 0;
+		overflow: hidden;
 	}
 
 	/* 地区 */
