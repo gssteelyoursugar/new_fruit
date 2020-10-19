@@ -177,9 +177,9 @@
 					热门水果
 				</view>
 				<view class="hot-wrap" style="display: flex; flex-wrap: wrap;">
-					<view class="tui-drop-item" :class="{'tui-drop-active':index == numNull}" v-for="(item, index) in species" :key="index"
+					<view class="tui-drop-item" :class="{'tui-drop-active': varietyId == item.id}" v-for="(item, index) in species" :key="index"
 					 :style="">
-						<text class="" :class="{activetext:index == numNull}" @click="checkDing(index,item.id,item.title)">{{ item.title }}</text>
+						<text class="" :class="{activetext:varietyId == item.id}" @click="checkDing(index,item.id,item.title)">{{ item.title }}</text>
 					</view>
 					<view class="tui-drop-item ">
 						<text class="" @click="checkgeng()">更多></text>
@@ -189,23 +189,21 @@
 					<text class="tui-ml tui-middle " :class="{checked: item.isActives}" @click="checkDing2(index,item.title,item.isActives)">{{ item.title }}</text>
 				</view> -->
 			</scroll-view>
-			<!-- <view class="tui-drop-btnbox">
-				<view class="tui-drop-btn tui-btn-white" hover-class="tui-white-hover" :hover-stay-time="150" @tap="reset">重置</view>
-				<view class="tui-drop-btn tui-btn-red" hover-class="tui-red-hover" :hover-stay-time="150" @tap="btnSure">确定</view>
-			</view> -->
+			
 		</tui-top-dropdown>
 		<!-- 品种 -->
 		<tui-top-dropdown backgroundColor="#f7f7f7" :show="dropScreenShow2" :paddingbtm="110" :translatey="dropScreenH"
 		 @close="btnCloseDrop">
 			<scroll-view class="tui-scroll-box" scroll-y :scroll-top="scrollTop">
-				<view class="hot-wrap"></view>
-				<view class="tui-drop-item" :class="{'tui-drop-active':index == numNull2}" v-for="(item,index) of variety" :key="index">
-					<text class="tui-ml tui-middle" :class="{activetext:index == numNull2 }" @click="checkVariety(index,item.id,item.title)">{{item.title}}</text>
+				<view class="hot-wrap">
+					<view class="tui-drop-item" :class="{'tui-drop-active':idList.indexOf(item.id)!==-1}" v-for="(item,index) of seleVarieties" :key="index">
+						<text class="tui-ml tui-middle" :class="{activetext:idList.indexOf(item.id) !==-1 }" @click="checkVariety(index,item.id,item.title)">{{item.title}}</text>
+					</view>
 				</view>
 			</scroll-view>
 			<view class="tui-drop-btnbox">
-				<view class="tui-drop-btn tui-btn-white" hover-class="tui-white-hover" :hover-stay-time="150" @tap="reset">重置</view>
-				<view class="tui-drop-btn tui-btn-red" hover-class="tui-red-hover" :hover-stay-time="150" @click="clickToSure(1)">确定</view>
+				<view class="tui-drop-btn tui-btn-white" hover-class="tui-white-hover" :hover-stay-time="150" @tap="reset(seleVarieties[0].id)">重置</view>
+				<view class="tui-drop-btn tui-btn-red" hover-class="tui-red-hover" :hover-stay-time="150" @click="getTypeData">确定</view>
 			</view>
 		</tui-top-dropdown>
 		<!---顶部下拉筛选弹层 属性-->
@@ -337,6 +335,7 @@
 	var {
 		log
 	} = console
+	let setdata = uni.getStorageSync('usermen')
 
 	export default {
 		data() {
@@ -551,6 +550,7 @@
 				statusHeight: 20,
 				boxHeight: 44,
 				navHeight: 64,
+				idList: [], //品种多选存放id
 			};
 		},
 		onLoad(options) {
@@ -720,6 +720,8 @@
 				this.title = name
 				this.dropdownShow2 = !this.dropdownShow2
 			},
+			
+			// 搜索请求数据
 			getSearch(serrchName) {
 				let data = {
 					pageNo: 1,
@@ -794,8 +796,6 @@
 				}
 			},
 
-
-
 			/* 筛选果 */
 			btnDropChange(name) {
 				this.isActives1 = !this.isActives1
@@ -855,11 +855,34 @@
 				this.dropScreenShow = !this.dropScreenShow
 			},
 			checkVariety(index, id, title) {
-				this.numNull2 = index
-				this.slPinzhong = title
-				this.varietyId = id
+				let list = this.idList
+				let idx = list.indexOf(id)
+				if (idx !== -1) {
+					list.splice(idx,1)
+				}else {
+					list.push(id)
+				}
+				this.idList = list
+			},
+			// 品种多选请求
+			getTypeData(){
+				if (this.idList.length === 0) {
+					this.dropScreenShow2 = !this.dropScreenShow2
+					return
+				}
+				let ids = this.idList.join(',')
+				let data = {
+					token: setdata,
+					varietyId: ids,
+					pageNo:1 ,
+					pageSize: 10
+				}
+				listing(getGoodsall,data).then(res=>{
+					console.log(res)
+					this.goods= res.data.data.goods
+				})
 				this.dropScreenShow2 = !this.dropScreenShow2
-				this.ShopIng()
+				this.isActives2 = false
 			},
 			checkDing2(index, title, id) {
 				this.numNull2 = index
@@ -997,9 +1020,6 @@
 					.then((res) => {
 						console.log(res)
 						this.seleVarieties = res[1].data.data
-						if (this.seleVarieties === undefined) {
-							this.seleVarieties = this.seleVarieties
-						} else if (this.seleVarieties != undefined) {}
 						this.color_level = res[0].data.data.color_level
 						this.facade_level = res[0].data.data.facade_level
 						this.fruit_level = res[0].data.data.fruit_level
@@ -1024,10 +1044,12 @@
 				return uni.upx2px(num) + 'px';
 			},
 			//重置
-			reset() {
+			reset(id) {
 				this.isActives2 = false
 				this.isActives = false
 				this.slPinzhong = "品种"
+				this.idList = [id]
+				
 				// let arr = this.attrData;
 				// for (let item of arr) {
 				// 	item.selected = false;

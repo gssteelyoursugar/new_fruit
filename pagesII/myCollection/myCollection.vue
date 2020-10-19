@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="container-img " v-if="likeDatas.length == 0" :class="{ active: isActive, 'text-danger': hasError }">
+		<view class="container-img " v-if="likeDatas.length == 0">
 			<image src="../../static/images/orderBMG.png" mode="widthFix"></image>
 			<text class="color-text">最近没有收藏过商品~</text>
 		</view>
