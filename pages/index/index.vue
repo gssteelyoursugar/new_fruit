@@ -571,7 +571,7 @@
 			},
 			// 头部
 			onPageScroll(e) {
-				console.log(e)
+				// console.log(e)
 				
 				if (this.statusHeight > 20) {
 

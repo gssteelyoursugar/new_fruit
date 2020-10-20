@@ -3,7 +3,7 @@
 	margin-bottom: 100rpx;
 }
 .container {
-	padding: 0rpx 0 50rpx 0;
+	padding: 70rpx 0 50rpx 0;
 }
 .tui-list-title1 {
 	height: 50rpx;
@@ -11,6 +11,15 @@
 	font-size: 24rpx;
 	color: #707070;
 	padding: 10rpx 30rpx;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+}
+.no-pass {
+	color: #fff;
+	background-color: red;
+	z-index: 99;
 }
 .tui-list-title2 {
 	-webkit-box-pack: justify;

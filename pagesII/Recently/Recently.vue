@@ -20,7 +20,6 @@
 		<view :style="{marginTop: statusHeight + boxHeight + 'px'}">
 			<checkbox-group @change="buyChange">
 				<view class="tui-cart-cell  tui-mtop" v-for="(item, index) in lookDatas" :key="index">
-
 					<view class="item-time" v-if="item.list.length !== 0">{{ item.createDate }}</view>
 					<tui-swipe-action :actions="actions" @click="handlerButton(dt.id)" :params="item" v-for="(dt,idx) of item.list" :key="idx">
 						<template v-slot:content>
@@ -298,6 +297,7 @@
 				listing(getRecently, data)
 					.then(res => {
 						this.lookDatas = res.data.data;
+						console.log(res.data.data)
 					})
 					.catch(err => {
 						log(err);

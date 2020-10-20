@@ -19,10 +19,7 @@
 				</view>
 			</view> -->
 		</view>
-
-
 		<!--header-->
-
 		<!-- 搜索框 -->
 		<view class="search-bar" @click="goToSearchGoods" :style="{top: navHeight+ 'px'}">
 			<image src="../../static/images/search-icon.png" mode=""></image>
@@ -203,7 +200,7 @@
 				</view>
 			</scroll-view>
 			<view class="tui-drop-btnbox">
-				<view class="tui-drop-btn tui-btn-white" hover-class="tui-white-hover" :hover-stay-time="150" @tap="reset(seleVarieties[0].id)">重置</view>
+				<view class="tui-drop-btn tui-btn-white" hover-class="tui-white-hover" :hover-stay-time="150" @tap="reset">重置</view>
 				<view class="tui-drop-btn tui-btn-red" hover-class="tui-red-hover" :hover-stay-time="150" @click="getTypeData">确定</view>
 			</view>
 		</tui-top-dropdown>
@@ -226,20 +223,20 @@
 						<text class="tui-title-bold">单果重量</text>
 					</view>
 					<view class="tui-drawer-content">
-						<input placeholder-class="tui-phcolor" v-model="postList.weight_parameter_1" class="tui-input" placeholder="不限"
+						<input placeholder-class="tui-phcolor" v-model="tempData.weight_parameter_1" class="tui-input" placeholder="不限"
 						 maxlength="11" type="number" />
 						<tui-icon name="reduce" color="#333" :size="14"></tui-icon>
-						<input placeholder-class="tui-phcolor" v-model="postList.weight_parameter_2" class="tui-input" placeholder="不限"
+						<input placeholder-class="tui-phcolor" v-model="tempData.weight_parameter_2" class="tui-input" placeholder="不限"
 						 maxlength="11" type="number" /><text class="content-text">克</text>
 					</view>
 					<view class="tui-drawer-title">
 						<text class="tui-title-bold">果径大小</text>
 					</view>
 					<view class="tui-drawer-content">
-						<input placeholder-class="tui-phcolor" v-model="postList.size_parameter_1" class="tui-input" placeholder="不限"
+						<input placeholder-class="tui-phcolor" v-model="tempData.size_parameter_1" class="tui-input" placeholder="不限"
 						 maxlength="11" type="number" />
 						<tui-icon name="reduce" color="#333" :size="14"></tui-icon>
-						<input placeholder-class="tui-phcolor" v-model="postList.size_parameter_2" class="tui-input" placeholder="不限"
+						<input placeholder-class="tui-phcolor" v-model="tempData.size_parameter_2" class="tui-input" placeholder="不限"
 						 maxlength="11" type="number" /><text class="content-text">毫米</text>
 					</view>
 					<view class="tui-drawer-title">
@@ -289,20 +286,20 @@
 						<text class="tui-title-bold">不良率</text>
 					</view>
 					<view class="tui-drawer-content">
-						<input placeholder-class="tui-phcolor" v-model="optionList.rejectRatio_parameter_1" class="tui-input" placeholder="不限"
+						<input placeholder-class="tui-phcolor" v-model="tempData.rejectRatio_parameter_1" class="tui-input" placeholder="不限"
 						 maxlength="11" type="number" />
 						<tui-icon name="reduce" color="#333" :size="14"></tui-icon>
-						<input placeholder-class="tui-phcolor" v-model="optionList.rejectRatio_parameter_2" class="tui-input" placeholder="不限"
+						<input placeholder-class="tui-phcolor" v-model="tempData.rejectRatio_parameter_2" class="tui-input" placeholder="不限"
 						 maxlength="11" type="number" /><text class="content-text">%</text>
 					</view>
 					<view class="tui-drawer-title">
 						<text class="tui-title-bold">价格区间</text>
 					</view>
 					<view class="tui-drawer-content">
-						<input placeholder-class="tui-phcolor" v-model="postList.price_parameter_1" class="tui-input" placeholder="不限"
+						<input placeholder-class="tui-phcolor" v-model="tempData.price_parameter_1" class="tui-input" placeholder="不限"
 						 maxlength="11" type="number" />
 						<tui-icon name="reduce" color="#333" :size="14"></tui-icon>
-						<input placeholder-class="tui-phcolor" v-model="postList.price_parameter_2" class="tui-input" placeholder="不限"
+						<input placeholder-class="tui-phcolor" v-model="tempData.price_parameter_2" class="tui-input" placeholder="不限"
 						 maxlength="11" type="number" /><text class="content-text">元</text>
 					</view>
 					<view class="tui-safearea-bottom"></view>
@@ -461,7 +458,7 @@
 				drawerH: 0, //抽屉内部scrollview高度
 				selectedName: '综合',
 				selectH: 0,
-				num: 0,
+				num: -1,
 				seleTopList: [{
 						name: '综合',
 						selected: false
@@ -514,25 +511,25 @@
 				pullUpOn: true,
 				// 渲染展示的数据，存的是label名
 				optionList: {
-					fruitLevel: '1295251270639849472', //等级
-					weight_parameter_1: '', //单果左
-					weight_parameter_2: '', //单果右
-					size_parameter_1: '', //果径左
-					size_parameter_2: '', //果径右
 					tasteLevel_parameter_1: '', //口感左
 					tasteLevel_parameter_2: '', //口感右
 					colorLevel_parameter_1: '', //颜色左
 					colorLevel_parameter_2: '', //颜色右
 					shapeLevel_parameter_1: '', //形状左
 					shapeLevel_parameter_2: '', //形状右
-					rejectRatio_parameter_1: '', //不良左
-					rejectRatio_parameter_2: '', //不良右
-					price_parameter_1: '', //价格左
-					price_parameter_2: '', //价格右边
+
 				},
 				// 提交申请的数据，存的是id
-				postList: {
-					fruitLevel: '1295251270639849472', //等级
+				postList: {},
+				statusHeight: 20,
+				boxHeight: 44,
+				navHeight: 64,
+				idList: [], //品种多选存放id
+				tempData: {
+					id: '',
+					token: setdata,
+					varietyId: '',
+					fruitLevel: '', //等级
 					weight_parameter_1: '', //单果左
 					weight_parameter_2: '', //单果右
 					size_parameter_1: '', //果径左
@@ -548,12 +545,8 @@
 					price_parameter_1: '', //价格左
 					price_parameter_2: '', //价格右边
 					pageNo: 1,
-					pageSize: 10,
-				},
-				statusHeight: 20,
-				boxHeight: 44,
-				navHeight: 64,
-				idList: [], //品种多选存放id
+					pageSize: 10
+				}
 			};
 		},
 		onLoad(options) {
@@ -790,7 +783,7 @@
 					// uni.navigateTo({
 					// 	url: '../../pagesIII/videos/videos'
 					// })
-					
+
 					uni.showToast({
 						title: "功能内测中，敬请期待",
 						icon: "none",
@@ -874,28 +867,7 @@
 				}
 				this.idList = list
 			},
-			// 品种多选请求
-			getTypeData() {
-				let list = this.idList
-				let lData = this.seleVarieties
-				if (list.length === 0) {
-					this.dropScreenShow2 = !this.dropScreenShow2
-					return
-				}
-				let ids = list.join(',')
-				let data = {
-					token: setdata,
-					varietyId: ids,
-					pageNo: 1,
-					pageSize: 10
-				}
-				listing(getGoodsall, data).then(res => {
-					console.log(res)
-					this.goods = res.data.data.goods
-				})
-				this.dropScreenShow2 = !this.dropScreenShow2
-				this.isActives2 = false
-			},
+
 			checkDing2(index, title, id) {
 				this.numNull2 = index
 				this.slPinzhong = title
@@ -917,20 +889,20 @@
 			},
 			activeGo(name, id, idx) {
 				this.optionList[name] = id
-				this.postList[name] = id
+				this.tempData[name] = id
 				this.num = idx
 				console.log(this.optionList)
 			},
 			selectItem(e) {
-				console.log(e)
+				// console.log(e)
 				let {
 					id,
 					s_name,
 					label
 				} = e
 				this.optionList[s_name] = label
-				this.postList[s_name] = id
-				console.log("postList:", this.postList)
+				this.tempData[s_name] = id
+				console.log("tempData:", this.tempData)
 
 			},
 			//关闭
@@ -1018,17 +990,42 @@
 						log(err)
 					})
 			},
+			// 品种多选请求
+			getTypeData() {
+				let list = this.idList
+				let lData = this.seleVarieties
+				if (list.length === 0) {
+					listing(getGoodsall, this.tempData).then(res => {
+						console.log(res)
+						this.goods = res.data.data.goods
+					})
+				}else {
+					let ids = list.join(',')
+					this.tempData.varietyId = ids
+					listing(getGoodsall, this.tempData).then(res => {
+						this.goods = res.data.data.goods
+					})
+				}
+	
+				this.dropScreenShow2 = !this.dropScreenShow2
+				this.isActives2 = false
+			},
+			// 点击
+			clickToConfirm() {
+				console.log(this.tempData)
+				listing(getGoodsall, this.tempData).then(res => {
+					console.log(res)
+					this.goods = res.data.data.goods
+				})
+				this.closeDrawer()
+			},
 			//请求数据
 			ShopIng() {
-				let data = {
-					id: this.varietyId,
-					pageNo: 1,
-					pageSize: 10
-				}
+				this.tempData.id = this.varietyId
 				let data2 = {
 					id: this.varietyId
 				}
-				Promise.all([listing(getGoodsall, data), listing(getAttribute, data2)])
+				Promise.all([listing(getGoodsall, this.tempData), listing(getAttribute, data2)])
 					// listing(getGoodsall,data)
 					.then((res) => {
 						console.log(res)
@@ -1057,11 +1054,12 @@
 				return uni.upx2px(num) + 'px';
 			},
 			//重置
-			reset(id) {
+			reset() {
 				this.isActives2 = false
 				this.isActives = false
 				this.slPinzhong = "品种"
-				this.idList = [id]
+				this.idList = []
+				this.tempData.varietyId = ''
 				// let arr = this.attrData;
 				// for (let item of arr) {
 				// 	item.selected = false;
@@ -1097,7 +1095,6 @@
 			},
 			//筛选汇总
 			screen(e) {
-
 				let index = e.currentTarget.dataset.index ? e.currentTarget.dataset.index : e;
 				console.log(index)
 				this.hideDropdownList();
@@ -1118,49 +1115,30 @@
 					})
 				}
 			},
-			clickToConfirm() {
-				console.log(this.postList)
-				listing(getGoodsall, this.postList).then(res => {
-					console.log(res)
-					this.goods = res.data.data.goods
-				})
-				this.closeDrawer()
-			},
 			clickToReset() {
-				this.num = 0
+				this.num = -1
+				this.tempData.fruitLevel= ''
+				this.tempData.weight_parameter_1 = ''
+				this.tempData.weight_parameter_2 = ''
+				this.tempData.size_parameter_1 = ''
+				this.tempData.size_parameter_2 = ''
+				this.tempData.price_parameter_1 = ''
+				this.tempData.price_parameter_2 = ''
+				this.tempData.rejectRatio_parameter_1 = '' //不良左
+				this.tempData.rejectRatio_parameter_2 = '' //不良右
+				this.tempData.tasteLevel_parameter_1 = ''
+				this.tempData.tasteLevel_parameter_2 = ''
+				this.tempData.colorLevel_parameter_1 = ''
+				this.tempData.colorLevel_parameter_2 = ''
+				this.tempData.shapeLevel_parameter_1 = ''
+				this.tempData.shapeLevel_parameter_2 = ''
 				this.optionList = {
-					level: '', //等级
-					ltWeight: '', //单果左
-					rtWeight: '', //单果左
-					ltWidth: '', //果径左
-					rtWidth: '', //果径右
-					ltTaste: '', //口感左
-					rtTaste: '', //口感右
-					ltColor: '', //颜色左
-					rtColor: '', //颜色右
-					ltShape: '', //形状左
-					rtShape: '', //形状右
-					ltRight: '', //不良左
-					rtRight: '', //不良右
-					ltPrice: '', //价格左
-					rtPrice: '', //价格右边
-				}
-				this.optionList = {
-					level: '', //等级
-					ltWeight: '', //单果左
-					rtWeight: '', //单果左
-					ltWidth: '', //果径左
-					rtWidth: '', //果径右
-					ltTaste: '', //口感左
-					rtTaste: '', //口感右
-					ltColor: '', //颜色左
-					rtColor: '', //颜色右
-					ltShape: '', //形状左
-					rtShape: '', //形状右
-					ltRight: '', //不良左
-					rtRight: '', //不良右
-					ltPrice: '', //价格左
-					rtPrice: '', //价格右边
+					tasteLevel_parameter_1: '', //口感左
+					tasteLevel_parameter_2: '', //口感右
+					colorLevel_parameter_1: '', //颜色左
+					colorLevel_parameter_2: '', //颜色右
+					shapeLevel_parameter_1: '', //形状左
+					shapeLevel_parameter_2: '', //形状右
 				}
 			},
 			closeDrawer: function() {

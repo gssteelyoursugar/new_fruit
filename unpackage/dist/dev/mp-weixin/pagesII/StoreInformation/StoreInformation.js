@@ -243,12 +243,22 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
 var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
 
 
 var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
+//
+//
+//
+//
+//
 //
 //
 //
@@ -365,7 +375,7 @@ var _console = console,log = _console.log;var form = __webpack_require__(/*! @/c
       addressTwo: [], //二级
       addressThree: [], //三级
       textAddress: '', //end
-      approveStatus: 0, //店铺状态标识
+      approveStatus: undefined, //店铺状态标识
       StoreInfo: {}, //店铺信息
       imagesList: [{ url: '../../static/images/B@2x.png' }, { url: '../../static/images/B@2x.png' }, { url: '../../static/images/B@2x.png' }, { url: '../../static/images/B@2x.png' }], urlList: [], storeName: '请填写店铺名', merchantsName: '填写姓名', phone: '1111', address: '南宁', //地址
       serviceNumber: '', //客服专员
@@ -402,26 +412,8 @@ var _console = console,log = _console.log;var form = __webpack_require__(/*! @/c
         _this.addressOne = _this.getAddressByPId("0"); //一级地址
         _this.addressTwo = _this.getAddressByPId(_this.addressOne[0].id); //默认显示一级的第一个地址的二级地址
         _this.addressThree = _this.getAddressByPId(_this.addressTwo[0].id); //默认显示二级的第一个地址的三级地址
-
-
-        _this.multiArray = [
-        _this.toArr(_this.addressOne),
-        _this.toArr(_this.addressTwo),
-        _this.toArr(_this.addressThree)];
-
-        /* console.log("获取全国一级地址===",this.addressOne)
-                                          console.log("获取全国二级地址===",this.addressTwo)
-                                          console.log("获取全国三级地址===",this.addressThree) */
-
-        that.getMerchants();
-      }).
-      catch(function (err) {
-        log(err);
-      });
-    },
-    //根据pid获取后台的三级联动地址
+        _this.multiArray = [_this.toArr(_this.addressOne), _this.toArr(_this.addressTwo), _this.toArr(_this.addressThree)];that.getMerchants();}).catch(function (err) {log(err);});}, //根据pid获取后台的三级联动地址
     getAddressByPId: function getAddressByPId(pid) {
-      log(pid);
       var data = new Array();
       for (var i = 0; i < this.addressAllData.length; i++) {
         var dd = this.addressAllData[i];
@@ -433,21 +425,14 @@ var _console = console,log = _console.log;var form = __webpack_require__(/*! @/c
     },
     //根据id获取后台id 的三级联动地址
     getAddressById: function getAddressById(id) {
-      log(id);
       for (var i = 0; i < this.addressAllData.length; i++) {
         var dd = this.addressAllData[i];
         if (dd.id === id) {
-          log(dd);
           return dd;
         }
       }
       return null;
     },
-
-
-
-
-
     //编辑店铺信息
     sEdit: function sEdit() {
       uni.showModal({
@@ -480,9 +465,6 @@ var _console = console,log = _console.log;var form = __webpack_require__(/*! @/c
       console.log('refresh');
       setTimeout(function () {
         uni.stopPullDownRefresh();
-
-
-
       }, 1000);
     },
 
@@ -495,27 +477,23 @@ var _console = console,log = _console.log;var form = __webpack_require__(/*! @/c
       (0, _api.listing)(_request.getClient, data).
       then(function (res) {
         log(res);
-
-
         //这里查询
-        _this2.ApproveStatus = res.data.data.approveStatus;
-        log(_this2.ApproveStatus);
+        _this2.approveStatus = res.data.data.approveStatus;
+        // log(this.ApproveStatus)
         _this2.StoreInfo = res.data.data;
         _this2.urlList = res.data.data.urlList;
-        log(_this2.StoreInfo);
-
+        // log(this.StoreInfo)
         //根据id获取地址，地址已经获取到
         var addThree = _this2.getAddressById(_this2.StoreInfo.address);
-        log(addThree);
+        // log(addThree)
         //拿到第三级，根据第三级的pid就是第二级的id，根据第二级的pid就是第一级的id
         var addTwo = _this2.getAddressById(addThree.pId);
         var addOne = _this2.getAddressById(addTwo.pId);
-
-        console.log("addThree===", addThree.name);
-        console.log("addTwo===", addTwo.name);
-        console.log("addOne===", addOne.name);
+        // console.log("addThree===", addThree.name)
+        // console.log("addTwo===", addTwo.name)
+        // console.log("addOne===", addOne.name)
         _this2.textAddress = addOne.name + "/" + addTwo.name + "/" + addThree.name;
-        log(_this2.textAddress);
+        // log(this.textAddress)
         _this2.StoreInfo.address = _this2.textAddress;
         //this.text1 = addInfo.name
 
@@ -531,7 +509,7 @@ var _console = console,log = _console.log;var form = __webpack_require__(/*! @/c
     postsaveStores: function postsaveStores(e) {
       log(e);
       var setdata = uni.getStorageSync('usermen');
-      log(setdata);
+      // log(setdata)
       var data = {
         storeName: e.detail.value.storeName,
         merchantsName: e.detail.value.merchantsName,
@@ -540,12 +518,10 @@ var _console = console,log = _console.log;var form = __webpack_require__(/*! @/c
         serviceNumber: e.detail.value.serviceNumber,
         token: setdata };
 
-      log(data);
-
+      // log(data)
       (0, _api.publicing)(postSaveStore, data).
       then(function (res) {
         log(res);
-
         // log(res.data.msg)
         uni.showToast({
           title: "".concat(res.data.msg),
@@ -563,7 +539,7 @@ var _console = console,log = _console.log;var form = __webpack_require__(/*! @/c
     //获取token
     getToken: function getToken() {
       var setdata = uni.getStorageSync('usermen');
-      log(setdata);
+      // log(setdata)
     },
     //上传图片
     chooseImage: function chooseImage(e) {
@@ -629,7 +605,7 @@ var _console = console,log = _console.log;var form = __webpack_require__(/*! @/c
       console.log("清空数据");
     } },
 
-  onLoad: function onLoad() {
+  onShow: function onShow() {
     this.postAddressDatas();
     //获取店铺信息
     this.getMerchants();

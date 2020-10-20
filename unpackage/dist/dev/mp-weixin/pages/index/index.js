@@ -758,7 +758,7 @@ var isFirst1 = true;var _default =
     },
     // 头部
     onPageScroll: function onPageScroll(e) {
-      console.log(e);
+      // console.log(e)
 
       if (this.statusHeight > 20) {
 

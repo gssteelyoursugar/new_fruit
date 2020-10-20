@@ -207,7 +207,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
@@ -437,6 +436,7 @@ console,log = _console.log;var _default = (_data$filters$onPullD = {
       (0, _api.listing)(_request.getRecently, data).
       then(function (res) {
         _this3.lookDatas = res.data.data;
+        console.log(res.data.data);
       }).
       catch(function (err) {
         log(err);

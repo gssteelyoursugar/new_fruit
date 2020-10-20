@@ -1,7 +1,12 @@
 <template>
 	<view class="container">
-		<view class="tui-list-title1">
+		<view class="tui-list-title1"  v-if="approveStatus !== 2">
 			<text>为了给您提供更好的服务，请填写真实的店铺信息</text>
+		</view>
+		
+		<!-- 前期为了优化用户的体验以及好感。没有通过审核的情况下，应该由客服专员打电话提供帮助。 -->
+		<view class="tui-list-title1 no-pass"  v-if="approveStatus === 2">
+			<text>很抱歉！您没有通过审核。详情原因客服专员会通过电话联系您</text>
 		</view>
 		<view class="tui-list-title2">
 			<text>店铺信息</text><text class="edit-btn" @click="sEdit">编辑</text>
@@ -139,12 +144,8 @@
 				addressTwo: [], //二级
 				addressThree: [], //三级
 				textAddress: '',
-
-
-
-
 				//end
-				approveStatus: 0, //店铺状态标识
+				approveStatus: undefined, //店铺状态标识
 				StoreInfo: {}, //店铺信息
 
 
@@ -260,23 +261,15 @@
 				publicing(postAddressList)
 					.then((res) => {
 						this.addressAllData = res.data
-
 						//初始化三级信息
 						this.addressOne = this.getAddressByPId("0") //一级地址
 						this.addressTwo = this.getAddressByPId(this.addressOne[0].id) //默认显示一级的第一个地址的二级地址
 						this.addressThree = this.getAddressByPId(this.addressTwo[0].id) //默认显示二级的第一个地址的三级地址
-
-
-
 						this.multiArray = [
 							this.toArr(this.addressOne),
 							this.toArr(this.addressTwo),
 							this.toArr(this.addressThree)
 						]
-						/* console.log("获取全国一级地址===",this.addressOne)
-						console.log("获取全国二级地址===",this.addressTwo)
-						console.log("获取全国三级地址===",this.addressThree) */
-
 						that.getMerchants()
 					})
 					.catch((err) => {
@@ -285,7 +278,6 @@
 			},
 			//根据pid获取后台的三级联动地址
 			getAddressByPId(pid) {
-				log(pid)
 				let data = new Array();
 				for (let i = 0; i < this.addressAllData.length; i++) {
 					let dd = this.addressAllData[i];
@@ -297,21 +289,14 @@
 			},
 			//根据id获取后台id 的三级联动地址
 			getAddressById(id) {
-				log(id)
 				for (let i = 0; i < this.addressAllData.length; i++) {
 					let dd = this.addressAllData[i];
 					if (dd.id === id) {
-						log(dd)
 						return dd
 					}
 				}
 				return null
 			},
-
-
-
-
-
 			//编辑店铺信息
 			sEdit() {
 				uni.showModal({
@@ -344,9 +329,6 @@
 				console.log('refresh');
 				setTimeout(function() {
 					uni.stopPullDownRefresh();
-
-
-
 				}, 1000);
 			},
 
@@ -359,27 +341,23 @@
 				listing(getClient, data)
 					.then((res) => {
 						log(res)
-
-
 						//这里查询
-						this.ApproveStatus = res.data.data.approveStatus
-						log(this.ApproveStatus)
+						this.approveStatus = res.data.data.approveStatus
+						// log(this.ApproveStatus)
 						this.StoreInfo = res.data.data
 						this.urlList = res.data.data.urlList
-						log(this.StoreInfo)
-
+						// log(this.StoreInfo)
 						//根据id获取地址，地址已经获取到
 						let addThree = this.getAddressById(this.StoreInfo.address)
-						log(addThree)
+						// log(addThree)
 						//拿到第三级，根据第三级的pid就是第二级的id，根据第二级的pid就是第一级的id
 						let addTwo = this.getAddressById(addThree.pId)
 						let addOne = this.getAddressById(addTwo.pId)
-
-						console.log("addThree===", addThree.name)
-						console.log("addTwo===", addTwo.name)
-						console.log("addOne===", addOne.name)
+						// console.log("addThree===", addThree.name)
+						// console.log("addTwo===", addTwo.name)
+						// console.log("addOne===", addOne.name)
 						this.textAddress = addOne.name + "/" + addTwo.name + "/" + addThree.name;
-						log(this.textAddress)
+						// log(this.textAddress)
 						this.StoreInfo.address = this.textAddress
 						//this.text1 = addInfo.name
 
@@ -395,7 +373,7 @@
 			postsaveStores(e) {
 				log(e)
 				let setdata = uni.getStorageSync('usermen')
-				log(setdata)
+				// log(setdata)
 				let data = {
 					storeName: e.detail.value.storeName,
 					merchantsName: e.detail.value.merchantsName,
@@ -404,12 +382,10 @@
 					serviceNumber: e.detail.value.serviceNumber,
 					token: setdata
 				}
-				log(data)
-
+				// log(data)
 				publicing(postSaveStore, data)
 					.then((res) => {
 						log(res)
-
 						// log(res.data.msg)
 						uni.showToast({
 							title: `${res.data.msg}`,
@@ -427,7 +403,7 @@
 			//获取token
 			getToken() {
 				let setdata = uni.getStorageSync('usermen')
-				log(setdata)
+				// log(setdata)
 			},
 			//上传图片
 			chooseImage(e) {
@@ -493,12 +469,13 @@
 				console.log("清空数据")
 			}
 		},
-		onLoad() {
+		onShow() {
 			this.postAddressDatas()
 			//获取店铺信息
 			this.getMerchants()
 			// this.getToken()
 		}
+		
 	}
 </script>
 
@@ -508,7 +485,7 @@
 	}
 
 	.container {
-		padding: 0rpx 0 50rpx 0;
+		padding: 70rpx 0 50rpx 0;
 	}
 
 	.tui-list-title1 {
@@ -517,6 +494,17 @@
 		font-size: 24rpx;
 		color: #707070;
 		padding: 10rpx 30rpx;
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+
+	}
+	
+	.no-pass {
+		color: #fff;
+		background-color: red;
+		z-index: 99;
 	}
 
 	.tui-list-title2 {
