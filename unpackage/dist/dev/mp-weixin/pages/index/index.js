@@ -475,6 +475,26 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var _vuex = __webpack_require__(/*! vuex */ 12);
 
 
@@ -513,8 +533,8 @@ var isFirst1 = true;var _default =
     Banner: Banner },
 
 
-  data: function data() {var _ref;
-    return _ref = {
+  data: function data() {
+    return {
       address: '', //地址
       ApproveStatus: 0,
       itemList: [{
@@ -543,19 +563,11 @@ var isFirst1 = true;var _default =
       endTime: 0,
       createTime: 0,
       ts: 0,
-      dd1: 0,
-      hh1: 23,
       mm: 0,
       ss1: 59,
-      hideing: 0,
-      num: 0,
       ranking: ['销量榜', '评价榜', '关注榜', '回购榜'],
       imageUrl: "/static/images/paihang@2x.png",
       rankBgUrl: "/static/images/paihangbang@2x.png",
-      height: 84, //header高度
-      scrollH: 0, //滚动总高度
-      opcity: 0,
-      iconOpcity: 0.5,
       bannerIndex: 0,
       menuShow: false,
       popupShow: false,
@@ -570,76 +582,73 @@ var isFirst1 = true;var _default =
       WxPublicMsgID: '', //公告ID
       WxIndexViewpager: [], //轮播
       HotVarieties: [], //分类列表区
-      url: 'http://192.168.1.10:8980/' }, _defineProperty(_ref, "opcity",
+      url: 'http://192.168.1.10:8980/',
+      // url:'http://120.25.195.214:8980/js',
+      opcity: 0, //渐变
+      bgOpcity: 1,
+      scrollH: 0, //滚动总高度
+      height: 84, //header高度
+      heightg: 84,
+      top: 60, //标题图标距离顶部距离
+      canSee: 1,
+      num: 0,
+      Sumify: '1', //推荐好货请求页码
+      pullUpOn: true, //加载完了
+      loadding: false,
+      pageIndex: 1,
+      praiseNum: 0,
+      praiseNum1: 0,
+      showSearch: false,
+      showSearch1: false,
+      key: '0619951c6f113f019b42f0bdc2a0e580', //小程序定位key
+      webkey: '0b327e5c35240fd476d7b728bf6c825f', //获取天气key，key的服务不同所以用两个
+      city: '', //城市
+      citys: '', //
+      temperature: '', //气温
+      banner: ['6.jpg', '6.jpg', '6.jpg', '6.jpg', '6.jpg'],
+      flexing: [{
+        title: '推荐好货',
+        name: '猜你喜欢' },
 
-    0), _defineProperty(_ref, "scrollH",
-    0), _defineProperty(_ref, "height",
-    84), _defineProperty(_ref, "heightg",
-    84), _defineProperty(_ref, "top",
-    60), _defineProperty(_ref, "iconOpcity",
-    0.5), _defineProperty(_ref, "hideing",
-    0), _defineProperty(_ref, "num",
-    0), _defineProperty(_ref, "Sumify",
-    '1'), _defineProperty(_ref, "pullUpOn",
-    true), _defineProperty(_ref, "loadding",
-    false), _defineProperty(_ref, "pageIndex",
-    1), _defineProperty(_ref, "praiseNum",
-    0), _defineProperty(_ref, "praiseNum1",
-    0), _defineProperty(_ref, "showSearch",
-    false), _defineProperty(_ref, "showSearch1",
-    false), _defineProperty(_ref, "key",
-    '0619951c6f113f019b42f0bdc2a0e580'), _defineProperty(_ref, "webkey",
-    '0b327e5c35240fd476d7b728bf6c825f'), _defineProperty(_ref, "city",
-    ''), _defineProperty(_ref, "citys",
-    ''), _defineProperty(_ref, "temperature",
-    ''), _defineProperty(_ref, "banner",
-    ['6.jpg', '6.jpg', '6.jpg', '6.jpg', '6.jpg']), _defineProperty(_ref, "flexing",
-    [{
-      title: '推荐好货',
-      name: '猜你喜欢' },
+      {
+        title: '实时鲜果',
+        name: '今天辛苦了' },
 
-    {
-      title: '实时鲜果',
-      name: '今天辛苦了' },
-
-    {
-      title: '产地直供',
-      name: '一手货源' }]), _defineProperty(_ref, "dataList",
-
-
-
-
-    [{
-      name: '销量排行',
-      value: 'order_total',
-      title: '跟榜买 不愁卖',
-      imgsrc: '../../static/images/baixiangguo1.png' },
-
-    {
-      name: '评价排行',
-      value: 'evaluate',
-      title: '好货靠口碑',
-      imgsrc: '../../static/images/niuyouguo1.png' },
-
-    {
-      name: '关注排行',
-      value: 'follow',
-      title: '大家都关注',
-      imgsrc: '../../static/images/putao1.png' },
-
-    {
-      name: '复购排行',
-      value: 'back',
-      title: '买了又买',
-      imgsrc: '../../static/images/pingguo1.png' }]), _defineProperty(_ref, "statusHeight",
+      {
+        title: '产地直供',
+        name: '一手货源' }],
 
 
 
-    20), _defineProperty(_ref, "boxHeight",
-    44), _defineProperty(_ref, "navHeight",
-    64), _ref;
+      dataList: [{
+        name: '销量排行',
+        value: 'order_total',
+        title: '跟榜买 不愁卖',
+        imgsrc: '../../static/images/baixiangguo1.png' },
+
+      {
+        name: '评价排行',
+        value: 'evaluate',
+        title: '好货靠口碑',
+        imgsrc: '../../static/images/niuyouguo1.png' },
+
+      {
+        name: '关注排行',
+        value: 'follow',
+        title: '大家都关注',
+        imgsrc: '../../static/images/putao1.png' },
+
+      {
+        name: '复购排行',
+        value: 'back',
+        title: '买了又买',
+        imgsrc: '../../static/images/pingguo1.png' }],
 
 
+
+      statusHeight: 20,
+      boxHeight: 44,
+      navHeight: 64 };
 
   },
   methods: (_methods = {
@@ -749,18 +758,47 @@ var isFirst1 = true;var _default =
     },
     // 头部
     onPageScroll: function onPageScroll(e) {
-      this.opcity = 1;
-      this.WeatherHide = false;
-      // this.heightg = 64
-      // let scroll = e.scrollTop <= 0 ? 0 : e.scrollTop;
-      // let opcity = scroll / this.scrollH;
-      if (e.scrollTop === 0) {
-        this.opcity = 0;
-        this.WeatherHide = true;
+      console.log(e);
+
+      if (this.statusHeight > 20) {
+
+        if (e.scrollTop < 20) {
+          this.canSee = 1 - e.scrollTop / 10;
+        }
+        if (e.scrollTop < 70) {
+          this.opcity = 0 + e.scrollTop / 100;
+          this.bgOpcity = 1 + e.scrollTop / 100;
+        }
+        if (e.scrollTop >= 70) {
+          this.opcity = 1;
+          this.canSee = 0;
+        }
+        if (e.scrollTop > 70) {
+          this.bgOpcity = 0;
+        }
+      } else {
+        if (e.scrollTop < 14) {
+          this.canSee = 1 - e.scrollTop / 10;
+        }
+        if (e.scrollTop < 40) {
+          this.opcity = 0 + e.scrollTop / 100;
+          this.bgOpcity = 1 + e.scrollTop / 100;
+        }
+        if (e.scrollTop >= 40) {
+          this.opcity = 1;
+          this.canSee = 0;
+        }
+        if (e.scrollTop > 40) {
+          this.bgOpcity = 0;
+        }
       }
 
-      // this.opcity = opcity;
-      // this.iconOpcity = 0.5 * (1 - opcity < 0 ? 0 : 1 - opcity);
+      if (e.scrollTop === 0) {
+        // this.WeatherHide = true
+        this.opcity = 0;
+        this.canSee = 1;
+      }
+
     },
 
 

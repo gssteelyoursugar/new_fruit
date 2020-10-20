@@ -1,9 +1,10 @@
 <template>
 	<view class="container" :style="{paddingTop: navHeight + 'px'}">
-		<view class="index-bg">
+		<view class="index-bg" :style="{opacity: bgOpcity}">
 			<image src="../../static/images/bage@3x.png" :style="{height: statusHeight <= 20 ?'318rpx' : '338rpx'}" mode="aspectFill"></image>
 		</view>
 		<view class="tui-header-box" :style="{ height: navHeight + 'px', background: 'rgba(0,197,42,' + opcity + ')' }">
+			<!--  -->
 			<view class="tui-header" :style="{ marginTop: statusHeight + 'px',height: boxHeight + 'px' }">
 				<!-- -->
 				<view class="tui-left" @click="scanCode">
@@ -15,8 +16,27 @@
 				<view class="tui-left"></view>
 			</view>
 		</view>
-		<Weather ref="mychild" :city="city" :citys="citys" :address="address" :weath="temperature" :ApproveStatus="ApproveStatus"
-		 v-if="WeatherHide"></Weather>
+		<!-- <Weather ref="mychild" :canSee="canSee" :city="city" :citys="citys" :address="address" :weath="temperature" :ApproveStatus="ApproveStatus"
+		 ></Weather> -->
+		<view class="weather-container" style="margin: 10rpx 0 20rpx;" :style="{opacity: canSee}">
+			<view class="weather-tui-flex ">
+				<view class="weather-tui-left ">
+					<image src="../../static/images/dingwei@2x.png" mode="aspectFit" class="weather-dingwei"></image>
+					<text class="weather-city" style="font-size: 24rpx;" v-if="address&& ApproveStatus === 1">配送至{{address}}</text>
+					<text class="weather-city" v-if="ApproveStatus !== 1">配送至</text>
+					<view class="weather-tui-class" v-if="ApproveStatus !== 1">
+					</view>
+					<view class="weather-tui-class2" v-if="ApproveStatus !== 1">
+						请认证店铺信息
+					</view>
+				</view>
+				<view class="weather-tui-right ">
+					<image src="../../static/images/tianqi@2x.png" mode="aspectFit" class="weather-yun-icon"></image>
+					<!-- <text class="iconfont icon-yun city"></text> -->
+					<text>30℃</text>
+				</view>
+			</view>
+		</view>
 		<view class="index-content">
 			<Banner :banner="WxIndexViewpager"></Banner>
 
@@ -356,19 +376,11 @@
 				endTime: 0,
 				createTime: 0,
 				ts: 0,
-				dd1: 0,
-				hh1: 23,
 				mm: 0,
 				ss1: 59,
-				hideing: 0,
-				num: 0,
 				ranking: ['销量榜', '评价榜', '关注榜', '回购榜'],
 				imageUrl: "/static/images/paihang@2x.png",
 				rankBgUrl: "/static/images/paihangbang@2x.png",
-				height: 84, //header高度
-				scrollH: 0, //滚动总高度
-				opcity: 0,
-				iconOpcity: 0.5,
 				bannerIndex: 0,
 				menuShow: false,
 				popupShow: false,
@@ -386,12 +398,12 @@
 				url: 'http://192.168.1.10:8980/',
 				// url:'http://120.25.195.214:8980/js',
 				opcity: 0, //渐变
+				bgOpcity: 1,
 				scrollH: 0, //滚动总高度
 				height: 84, //header高度
 				heightg: 84,
 				top: 60, //标题图标距离顶部距离
-				iconOpcity: 0.5,
-				hideing: 0,
+				canSee: 1,
 				num: 0,
 				Sumify: '1', //推荐好货请求页码
 				pullUpOn: true, //加载完了
@@ -421,7 +433,6 @@
 
 					}
 				],
-
 				dataList: [{
 						name: '销量排行',
 						value: 'order_total',
@@ -451,8 +462,6 @@
 				statusHeight: 20,
 				boxHeight: 44,
 				navHeight: 64
-
-
 			}
 		},
 		methods: {
@@ -562,18 +571,47 @@
 			},
 			// 头部
 			onPageScroll(e) {
-				this.opcity = 1
-				this.WeatherHide = false
-				// this.heightg = 64
-				// let scroll = e.scrollTop <= 0 ? 0 : e.scrollTop;
-				// let opcity = scroll / this.scrollH;
+				console.log(e)
+				
+				if (this.statusHeight > 20) {
+
+					if (e.scrollTop < 20) {
+						this.canSee = 1 - (e.scrollTop / 10)
+					}
+					if (e.scrollTop < 70) {
+						this.opcity = 0 + (e.scrollTop / 100)
+						this.bgOpcity = 1 + (e.scrollTop / 100)
+					}
+					if (e.scrollTop >= 70) {
+						this.opcity = 1
+						this.canSee = 0
+					}
+					if (e.scrollTop > 70) {
+						this.bgOpcity = 0
+					}
+				} else {
+					if (e.scrollTop < 14) {
+						this.canSee = 1 - (e.scrollTop / 10)
+					}
+					if (e.scrollTop < 40) {
+						this.opcity = 0 + (e.scrollTop / 100)
+						this.bgOpcity = 1 + (e.scrollTop / 100)
+					}
+					if (e.scrollTop >= 40) {
+						this.opcity = 1
+						this.canSee = 0
+					}
+					if (e.scrollTop > 40) {
+						this.bgOpcity = 0
+					}
+				}
+				
 				if (e.scrollTop === 0) {
+					// this.WeatherHide = true
 					this.opcity = 0
-					this.WeatherHide = true
+					this.canSee = 1
 				}
 
-				// this.opcity = opcity;
-				// this.iconOpcity = 0.5 * (1 - opcity < 0 ? 0 : 1 - opcity);
 			},
 
 
@@ -1010,6 +1048,93 @@
 	@import '../../common/css/tui.css';
 	@import '../../common/iconfont/iconfont.css';
 
+	.weather-tui-class {
+		position: absolute;
+		width: 20rpx;
+		height: 20rpx;
+		left: 60rpx;
+		top: 36rpx;
+		transform: rotate(40deg);
+		-o-transform: rotate(40deg);
+		-webkit-transform: rotate(40deg);
+		-moz-transform: rotate(40deg);
+		background-color: rgba(0, 0, 0, 0.9);
+
+	}
+
+	.weather-tui-class2 {
+		position: absolute;
+		left: 30rpx;
+		top: 44rpx;
+		background-color: rgba(0, 0, 0, 0.9);
+		font-size: 24rpx;
+		color: #fff;
+		border-radius: 24rpx;
+		padding: 10rpx 20rpx;
+
+	}
+
+	.weather-active {
+		display: none;
+	}
+
+	.weather-text-danger {
+		display: block;
+	}
+
+	.weather-container {
+		transition: all .3s;
+	}
+
+	.weather-tui-flex {
+		position: relative;
+		/* top: 46px; */
+		margin: 0 20rpx;
+		display: flex;
+		font-size: 28rpx;
+		color: #fff;
+	}
+
+	.weather-tui-left {
+		flex: 3;
+		display: flex;
+		align-items: center;
+
+	}
+
+	.weather-tui-right {
+		display: flex;
+		position: relative;
+		flex: 1;
+		text-align: right;
+		justify-content: flex-end;
+	}
+
+	.weather-city {
+		margin-right: 10rpx;
+		margin-left: 10rpx;
+		font-size: 32rpx;
+	}
+
+	.weather-yun-icon {
+		position: absolute;
+		right: 76rpx;
+		top: -2rpx;
+		width: 52rpx;
+		height: 40rpx;
+		display: block;
+	}
+
+	.weather-dingwei {
+		width: 30rpx;
+		height: 40rpx;
+		display: block;
+		top: -6rpx;
+	}
+
+	.weather-tui-right text {
+		font-size: 32rpx;
+	}
 
 	/* 协议 */
 	.agreement {}
@@ -1021,7 +1146,8 @@
 		top: 0;
 		left: 0;
 		right: 0;
-		z-index: -1
+		z-index: -1;
+		transition: all .2s;
 	}
 
 	.index-bg image {
@@ -1868,6 +1994,8 @@
 		left: 0;
 		top: 0;
 		z-index: 995;
+		transition: all 400;
+		transition: all .3s;
 	}
 
 	.tui-header {

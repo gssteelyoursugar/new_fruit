@@ -140,18 +140,47 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 //高德SDKjs
 var _default =
 {
-  props: ["city", "citys", "weath", "address", "ApproveStatus"],
+  // props: ["city", "citys", "weath", "address", "ApproveStatus"],
+  props: {
+    city: {
+      type: String },
+
+    citys: {
+      type: String },
+
+    weath: {
+      type: String },
+
+    address: {
+      type: String },
+
+    ApproveStatus: {
+      type: Number },
+
+    canSee: {
+      type: Number } },
+
+
   data: function data() {
     return {
       isActive: false,
       hasError: true };
 
   },
+  mounted: function mounted() {
+    console.log("进来了", this.canSee);
+  },
   methods: {
     Handleclick: function Handleclick() {
       this.isActive = true;
       this.hasError = false;
 
+    } },
+
+
+  watch: {
+    canSee: function canSee(o, n) {
+      console.log(o, n);
     } } };exports.default = _default;
 
 /***/ }),

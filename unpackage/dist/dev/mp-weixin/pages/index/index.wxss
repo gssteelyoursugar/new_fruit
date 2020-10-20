@@ -132,6 +132,95 @@
 .icon-saoma.data-v-57280228:before {
   content: "\e677";
 }
+.weather-tui-class.data-v-57280228 {
+	position: absolute;
+	width: 20rpx;
+	height: 20rpx;
+	left: 60rpx;
+	top: 36rpx;
+	transform: rotate(40deg);
+	-o-transform: rotate(40deg);
+	-webkit-transform: rotate(40deg);
+	-moz-transform: rotate(40deg);
+	background-color: rgba(0, 0, 0, 0.9);
+}
+.weather-tui-class2.data-v-57280228 {
+	position: absolute;
+	left: 30rpx;
+	top: 44rpx;
+	background-color: rgba(0, 0, 0, 0.9);
+	font-size: 24rpx;
+	color: #fff;
+	-webkit-border-radius: 24rpx;
+	        border-radius: 24rpx;
+	padding: 10rpx 20rpx;
+}
+.weather-active.data-v-57280228 {
+	display: none;
+}
+.weather-text-danger.data-v-57280228 {
+	display: block;
+}
+.weather-container.data-v-57280228 {
+	-webkit-transition: all .3s;
+	transition: all .3s;
+}
+.weather-tui-flex.data-v-57280228 {
+	position: relative;
+	/* top: 46px; */
+	margin: 0 20rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	font-size: 28rpx;
+	color: #fff;
+}
+.weather-tui-left.data-v-57280228 {
+	-webkit-box-flex: 3;
+	-webkit-flex: 3;
+	        flex: 3;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+.weather-tui-right.data-v-57280228 {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	position: relative;
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	        flex: 1;
+	text-align: right;
+	-webkit-box-pack: end;
+	-webkit-justify-content: flex-end;
+	        justify-content: flex-end;
+}
+.weather-city.data-v-57280228 {
+	margin-right: 10rpx;
+	margin-left: 10rpx;
+	font-size: 32rpx;
+}
+.weather-yun-icon.data-v-57280228 {
+	position: absolute;
+	right: 76rpx;
+	top: -2rpx;
+	width: 52rpx;
+	height: 40rpx;
+	display: block;
+}
+.weather-dingwei.data-v-57280228 {
+	width: 30rpx;
+	height: 40rpx;
+	display: block;
+	top: -6rpx;
+}
+.weather-tui-right text.data-v-57280228 {
+	font-size: 32rpx;
+}
 
 /* 协议 */
 .agreement.data-v-57280228 {}
@@ -142,7 +231,9 @@
 	top: 0;
 	left: 0;
 	right: 0;
-	z-index: -1
+	z-index: -1;
+	-webkit-transition: all .2s;
+	transition: all .2s;
 }
 .index-bg image.data-v-57280228 {
 	width: 100%;
@@ -1007,6 +1098,10 @@
 	left: 0;
 	top: 0;
 	z-index: 995;
+	-webkit-transition: all 400;
+	transition: all 400;
+	-webkit-transition: all .3s;
+	transition: all .3s;
 }
 .tui-header.data-v-57280228 {
 	width: 100%;
