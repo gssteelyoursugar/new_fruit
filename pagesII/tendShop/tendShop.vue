@@ -256,26 +256,17 @@
 			 postAddressDatas(){
 				publicing(postAddressList)
 				.then((res)=>{
-					log(res.data)
-					log(res)
 					this.addressAllData = res.data
-					
 					//初始化三级信息
 					this.addressOne = this.getAddressByPId("0")//一级地址
 					this.addressTwo = this.getAddressByPId(this.addressOne[0].id)//默认显示一级的第一个地址的二级地址
 					this.addressThree = this.getAddressByPId(this.addressTwo[0].id)//默认显示二级的第一个地址的三级地址
-					console.log(this.addressTwo[0].id)
-					
-					
-					
+					// console.log(this.addressTwo[0].id)
 					this.multiArray = [
 						this.toArr(this.addressOne),
 						this.toArr(this.addressTwo),
 						this.toArr(this.addressThree)
 					] 
-					/* console.log("获取全国一级地址===",this.addressOne)
-					console.log("获取全国二级地址===",this.addressTwo)
-					console.log("获取全国三级地址===",this.addressThree) */
 				})
 				.catch((err)=>{
 					log(err)
@@ -393,7 +384,7 @@
 					// })
 					log(res)
 					this.ApproveStatus =  res.data.data.approveStatus
-					log(this.ApproveStatus)
+					// log(this.ApproveStatus)
 					this.StoreInfo = res.data.data
 					// log(this.StoreInfo)
 				})
@@ -530,7 +521,7 @@
 			//获取token
 			getToken(){
 				let setdata = uni.getStorageSync('usermen')
-				log(setdata)
+				// log(setdata)
 			},
 			//上传图片
 					//进来先判断登录了没

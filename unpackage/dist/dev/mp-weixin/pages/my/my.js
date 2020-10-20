@@ -341,94 +341,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
 
 
 var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -648,7 +566,7 @@ var _console = console,log = _console.log;var logins = __webpack_require__(/*! .
     // } else if (!setdata) {
     // 	this.logMsg = "去认证我的店铺"
     // }
-    return { lists: [], modaishow: false, show: true, wxlogin: true, usering: {}, imageUrl: "/static/images/wode.png", kefuID: '', loadding: false, pullUpOn: true, ApproveStatus: 0, loginText: '', logMsg: this.logMsg, //店铺状态信息展示
+    return { lists: [], modaishow: false, show: true, wxlogin: true, usering: {}, imageUrl: "/static/images/wode.png", kefuID: '', loadding: false, pullUpOn: true, ApproveStatus: undefined, loginText: '', logMsg: "去认证我的店铺", //店铺状态信息展示
       showBtn: false, //已登录未认证
       Goauth: true, //未认证
       Goauth2: false, //以申请待审核
@@ -661,31 +579,40 @@ var _console = console,log = _console.log;var logins = __webpack_require__(/*! .
       this.ifUser();}, //获取code
     wxCode: function wxCode(avatarUrl, nickName) {var _this2 = this;wx.login({ success: function success(res) {// log(res)
           var code = res.code;_this2.wxLoging(code);}, fail: function fail(err) {log(err);} });}, //发code给后台换取token
-    wxLoging: function wxLoging(code) {var _this3 = this;log(code); // let appid = wx.getAccountInfoSync().miniProgram.appId
-      // let secret = "956f8c9345cbe06a42c6494f7bb53f7f"
-      var data = { code: code };uni.showLoading({ title: '加载中', icon: 'none', duration: 2000 // mask:true
+    wxLoging: function wxLoging(code) {var _this3 = this;log(code);var data = { code: code };uni.showLoading({ title: '加载中', icon: 'none', duration: 2000 // mask:true
       });(0, _api.publicing2)(_request.loginis, data) //发送请求携带参数
-      .then(function (res) {if (res.statusCode == 500) {uni.showModal({ title: '提示', content: '服务器错误，请重新登录获取信息', success: function success(res) {if (res.confirm) {console.log('用户点击确定');uni.hideLoading();} else if (res.cancel) {console.log('用户点击取消');uni.hideLoading();}} });return;} else if (res.statusCode == 200) {setTimeout(function () {_this3.getOrderData();}, 100);log(res);} // log(res) //获得token
+      .then(function (res) {if (res.statusCode == 500) {uni.showModal({ title: '提示', content: '登录出错，请重新登录获取信息', success: function success(res) {if (res.confirm) {uni.hideLoading();} else if (res.cancel) {uni.hideLoading();}} });return;} else if (res.statusCode == 200) {_this3.getOrderData();} // log(res) //获得token
         uni.setStorageSync('usermen', res.data.token); //把token存在本地，小程序提供如同浏览器cookie
-        uni.hideLoading();_this3.getMerchants(); // this.ifUser()
-        // if(res.data.msg == 'success'){
-        // 	//存入本地
-        // this.ifUser()
-        // }
-      }).catch(function (err) {uni.showToast({ title: "".concat(err) });log(err);});}, //一、认证店铺首先判断是否登录
-    ifLogin: function ifLogin() {var value = this.ApproveStatus;if (!setdata) {//判断有无token，没有就显示去认证店铺
-        log('没有token信息请点击登录'); // log(this.logMsg)
-      } else if (value == 0) {this.Goauth2 = true; //状态为0时证明已经认证
-        this.logMsg = '审核中待通过';} else if (value == 1) {this.logMsg = '我的店铺已认证';this.Goauth3 = true;} else if (value == 2) {this.logMsg = '未认证';this.Goauth4 = true;} else if (value == undefined) {this.Goauth = false;this.Goauth2 = false;this.Goauth3 = false;this.logMsg = '去认证我的店铺';}}, //获取申请店铺状态信息
+        uni.hideLoading();_this3.getMerchants();}).catch(function (err) {uni.showToast({ title: "".concat(err) });log(err);});}, //一、认证店铺首先判断是否登录
+    // ifLogin() {
+    // 	var value = this.ApproveStatus
+    // 	if (!setdata) { //判断有无token，没有就显示去认证店铺
+    // 		log('没有token信息请点击登录')
+    // 		// log(this.logMsg)
+    // 	} else if (value == 0) {
+    // 		this.Goauth2 = true
+    // 		//状态为0时证明已经认证
+    // 		// this.logMsg = '审核中待通过'
+    // 	} else if (value == 1) {
+    // 		// this.logMsg = '我的店铺已认证'
+    // 		this.Goauth3 = true
+    // 	} else if (value == 2) {
+    // 		// this.logMsg = '未认证'
+    // 		// this.Goauth4 = true
+    // 	} else if (value == undefined) {
+    // 		this.Goauth = false
+    // 		this.Goauth2 = false
+    // 		this.Goauth3 = false
+    // 		this.logMsg = '去认证我的店铺'
+    // 	}
+    // },
+    //获取申请店铺状态信息
     getMerchants: function getMerchants() {var _this4 = this;var setdata = uni.getStorageSync('usermen'); //Token
-      var data = { token: setdata };(0, _api.listing)(_request.getClient, data).then(function (res) {///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
+      var data = { token: setdata };if (!setdata) {return;}(0, _api.listing)(_request.getClient, data).then(function (res) {console.log(res.data.data); ///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
         _this4.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
         uni.setStorageSync('StoreStatus', res.data.data.approveStatus);var setStore = uni.getStorageSync('StoreStatus'); //状态码
-        _this4.user_phone = res.data.data.phone;var valu2 = _this4.ApproveStatus;if (valu2 == undefined) {//判断如果请求返回为空说明未申请过店铺认证
-          //显示去认证店铺的按钮
-          _this4.Goauth = true;_this4.Goauth2 = false;_this4.logMsg = '去认证我的店铺';} else if (valu2 == 0) {_this4.Goauth2 = true;_this4.Goauth = flase; //状态为0时证明已经认证
-          _this4.logMsg = '审核中待通过'; //
-        } else if (valu2 == 1) {_this4.logMsg = '我的店铺已认证';_this4.Goauth3 = true;} else if (valu2 == 2) {_this4.logMsg = '未认证';_this4.Goauth4 = true;}}).catch(function (err) {log(err);});}, // getUserInfo(event){
+        _this4.user_phone = res.data.data.phone;var valu2 = _this4.ApproveStatus;if (valu2 === undefined || valu2 === null || valu2 === '') {//判断如果请求返回为空说明未申请过店铺认证
+          _this4.logMsg = '去认证我的店铺';} else if (valu2 === 0) {_this4.logMsg = '审核中待通过';} else if (valu2 === 1) {_this4.logMsg = '我的店铺已认证';} else if (valu2 === 2) {_this4.logMsg = '未通过,请重新提交';}}).catch(function (err) {log(err);});}, // getUserInfo(event){
     // 	log(event)
     // 	let wxing = event.detail.userInfo
     // 	// 实例化类
@@ -701,43 +628,41 @@ var _console = console,log = _console.log;var logins = __webpack_require__(/*! .
     // 	})
     // },
     // 获取订单
-    getOrderData: function getOrderData() {var _this5 = this;var setdata = uni.getStorageSync('usermen');var data = { token: setdata, pageNo: 1, pageSize: 100 };(0, _api.listing)(_request.getMyOrder, data).then(function (res) {var list = res.data.data;console.log(list);var fukuanList = [];var fahuoList = [];var shouhuoList = [];var tuikuanList = [];if (list.length === 0) return;list.forEach(function (item) {if (item.payStatus == 0) {fukuanList.push(item);}if (item.tradeStatus == 1 || item.tradeStatus == 3) {fahuoList.push(item);}if (item.tradeStatus == 4) {shouhuoList.push(item);}if (item.tradeStatus == 7) {tuikuanList.push(item);}});_this5.fukuanList = fukuanList.length;_this5.fahuoList = fahuoList.length;_this5.shouhuoList = shouhuoList.length;_this5.tuikuanList = tuikuanList.length;_this5.$forceUpdate();}).catch(function (err) {log(err);});}, ifUser: function ifUser() {var setuserdata = uni.getStorageSync('userIN');if (!setuserdata) {this.wxlogin = false;} else {this.wxlogin = true;this.usering = setuserdata;}}, //认证店铺
-    tendShop: function tendShop() {var setdata = uni.getStorageSync('usermen');if (!setdata) {uni.showToast({ title: '请先登录', icon: 'none' }); // log(setdata)
-        this.modaishow = true;} else {// this.modaishow = false
-        uni.navigateTo({ url: '../../pagesII/tendShop/tendShop' });
+    getOrderData: function getOrderData() {var _this5 = this;var setdata = uni.getStorageSync('usermen');if (!setdata) {return;}var data = { token: setdata, pageNo: 1, pageSize: 100 };(0, _api.listing)(_request.getMyOrder, data).then(function (res) {var list = res.data.data; // console.log(list)
+        var fukuanList = [];var fahuoList = [];var shouhuoList = [];var tuikuanList = [];if (list.length === 0) return;list.forEach(function (item) {if (item.payStatus == 0) {fukuanList.push(item);}if (item.tradeStatus == 1 || item.tradeStatus == 3) {fahuoList.push(item);}if (item.tradeStatus == 4) {shouhuoList.push(item);}if (item.tradeStatus == 7) {tuikuanList.push(item);}});_this5.fukuanList = fukuanList.length;_this5.fahuoList = fahuoList.length;_this5.shouhuoList = shouhuoList.length;_this5.tuikuanList = tuikuanList.length;_this5.$forceUpdate();}).catch(function (err) {log(err);});}, ifUser: function ifUser() {var setuserdata = uni.getStorageSync('userIN');if (!setuserdata) {this.wxlogin = false;} else {this.wxlogin = true;this.usering = setuserdata;}}, //去认证店铺
+    tendShop: function tendShop() {var setdata = uni.getStorageSync('usermen');if (!setdata) {uni.showToast({
+          title: '请先登录',
+          icon: 'none' });
+
+        this.modaishow = true;
+      } else {
+        uni.navigateTo({
+          url: '../../pagesII/tendShop/tendShop' });
+
       }
-
     },
-    tendShop2: function tendShop2() {
-      uni.navigateTo({
-        url: '../../pagesII/StoreInformation/StoreInformation' });
-
-    },
-
-    tendShop3: function tendShop3() {
-      uni.navigateTo({
-        url: '../../pagesII/StoreInformation/StoreInformation' });
-
-
-    },
+    // 已经申请了/审核中 （无论通不通过）查看提交的店铺资料
     tendShop1: function tendShop1() {
       uni.navigateTo({
         url: '../../pagesII/StoreInformation/StoreInformation' });
 
     },
     gotoAfter: function gotoAfter() {
-      uni.navigateTo({
-        url: '../../pagesIII/navbar/navbar' });
+      if (!this.wxlogin) {
+        uni.showToast({
+          title: '请先登录',
+          icon: 'none' });
+
+      } else {
+        uni.navigateTo({
+          url: '../../pagesIII/navbar/navbar' });
+
+      }
 
     },
-
     //获取微信code
-
     //发送给后台
-
     ifUser2: function ifUser2() {
-
-
       // log(setdata)
       if (!setdata) {
         uni.showToast({
@@ -767,28 +692,61 @@ var _console = console,log = _console.log;var logins = __webpack_require__(/*! .
     },
     //跳转到待付款
     ToBePaid: function ToBePaid() {
-      uni.navigateTo({
-        url: '../../pagesII/myOrder/myOrder?index=1' });
+      if (!this.wxlogin) {
+        uni.showToast({
+          title: "请先登录",
+          icon: 'none' });
+
+
+      } else {
+        uni.navigateTo({
+          url: '../../pagesII/myOrder/myOrder?index=1' });
+
+      }
 
     },
     //跳转到待发货
     ToBeDelivered: function ToBeDelivered() {
-      uni.navigateTo({
-        url: '../../pagesII/myOrder/myOrder?index=2' });
+      if (!this.wxlogin) {
+        uni.showToast({
+          title: "请先登录",
+          icon: 'none' });
 
+
+      } else {
+        uni.navigateTo({
+          url: '../../pagesII/myOrder/myOrder?index=2' });
+
+      }
     },
     //跳转到待收货
     ToBeReceived: function ToBeReceived() {
-      uni.navigateTo({
-        url: '../../pagesII/myOrder/myOrder?index=3' });
+      if (!this.wxlogin) {
+        uni.showToast({
+          title: "请先登录",
+          icon: 'none' });
 
+
+      } else {
+        uni.navigateTo({
+          url: '../../pagesII/myOrder/myOrder?index=3' });
+
+      }
     },
 
     //我的全部订单
     myOrder: function myOrder() {
-      uni.navigateTo({
-        url: '../../pagesII/myOrder/myOrder' });
+      if (!this.wxlogin) {
+        uni.showToast({
+          title: "请先登录",
+          icon: 'none' });
 
+
+      } else {
+        uni.navigateTo({
+          url: '../../pagesII/myOrder/myOrder' });
+
+      }
     },
     // getWxdata(){
     // 	uni.request({
@@ -803,41 +761,32 @@ var _console = console,log = _console.log;var logins = __webpack_require__(/*! .
 
     // },
     href: function href(page) {
-      var url = "";
-      switch (page) {
-        case 1:
-          url = "../../pagesII/OrderStatistics/OrderStatistics";
-          break;
-        case 2:
-          url = "../../pagesII/Evaluate/Evaluate";
-          break;
-        case 3:
-          url = "../../pagesII/myCollection/myCollection";
-          break;
-        case 4:
-          url = "../../pagesII/customerService/customerService";
-          break;
-        case 5:
-          url = "../../pagesII/ruleDescription/ruleDescription";
-          break;
-        case 6:
-          url = "../../pagesII/cooperation/cooperation";
-          break;
-        case 7:
-          url = "../../pagesII/SetUp/SetUp";
-          break;
-        case 8:
-          url = "../../pagesII/message/message";
-          break;
-        default:
-          break;}
+      var urlList = {
+        0: "",
+        1: "../../pagesII/OrderStatistics/OrderStatistics",
+        2: "../../pagesII/Evaluate/Evaluate",
+        3: "../../pagesII/myCollection/myCollection",
+        4: "../../pagesII/customerService/customerService",
+        5: "../../pagesII/message/message",
+        6: "../../pagesII/ruleDescription/ruleDescription",
+        7: "../../pagesII/cooperation/cooperation",
+        8: "../../pagesII/SetUp/SetUp" };
 
-      if (url) {
+      if (page == 5 || page == 6 || page == 7) {
         uni.navigateTo({
-          url: url });
+          url: urlList[page] });
+
+        return;
+      }
+      if (!this.wxlogin) {
+        uni.showToast({
+          title: '请先登录',
+          icon: "none" });
 
       } else {
-        this.tui.toast("功能尚未完善~");
+        uni.navigateTo({
+          url: urlList[page] });
+
       }
     },
     detail: function detail() {
@@ -857,10 +806,11 @@ var _console = console,log = _console.log;var logins = __webpack_require__(/*! .
     } },
 
   onShow: function onShow() {
+
     this.getMerchants();
     this.getOrderData();
     this.ifUser();
-    this.ifLogin();
+    // this.ifLogin()
     console.log("这里是onshow");
   },
   onPageScroll: function onPageScroll(e) {

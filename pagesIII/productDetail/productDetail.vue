@@ -42,9 +42,6 @@
 				</view>
 				<view class="net-tip" v-if="!netStatus&& shopListdata.urlVideo!==''">当前为非wifi环境，使用流量播放视频</view>
 			</view>
-
-
-
 			<view class="tui-pro-detail">
 				<view class="tui-product-title tui-border-radius">
 					<view class="tui-pro-tit">
@@ -62,10 +59,8 @@
 							<tui-icon name="agree-fill" color="#ff0000" :size="15"></tui-icon>
 							<text>点赞{{ shopListdata.praiseNumber||0  |filterNum}}</text>
 						</view>
-
 					</view>
 					<view class="tui-original-price tui-gray">{{ shopListdata.describe ||0}}</view>
-
 					<view class="tui-pro-titbox">
 						<view class="tui-pro-title">
 							<text class="tui-pro-title-tag" v-if="shopListdata.number">仅剩{{ shopListdata.number || 0 }}件</text>

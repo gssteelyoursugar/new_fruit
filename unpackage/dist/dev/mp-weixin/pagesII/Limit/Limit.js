@@ -238,6 +238,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
 var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
@@ -342,12 +344,14 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 //
 //
 //
+//
+//
 //请求地址
 var _console = console,log = _console.log;var _default = { data: function data() {return { loading: false, active: true, url: '', LimitData: {}, LimitDataList: [], hideing: 0, num: 0, ranking: ['销量榜', '评价榜', '关注榜', '回购榜'], imageUrl: "/static/images/limit.png", rankBgUrl: "/static/images/paihangbang@2x.png", height: 64, //header高度
       top: 26, //标题图标距离顶部距离
       scrollH: 0, //滚动总高度
       opcity: 0, iconOpcity: 0.5, bannerIndex: 0, menuShow: false, popupShow: false, value: 1, collected: false, WxActivityID: '', //首页传的id
-      startTime: 0, endTime: 0, createTime: 0, ts: 0, te: 3, boxHeight: 44, statusHeight: 20, navHeight: 64, scrollTop: 0 };}, onLoad: function onLoad(options) {this.WxActivityID = options.id;this.getLimit();this.url = _request.imgurl;this.getLimit();var obj = {};var that = this;setTimeout(function () {that.loading = true;}, 500);var res = uni.getSystemInfoSync();var statusBarHeight = res.statusBarHeight;var info = uni.getMenuButtonBoundingClientRect();var top = info.top,bottom = info.bottom;this.statusHeight = statusBarHeight;var buttonHeight = bottom - statusBarHeight + (top - statusBarHeight);var navHeight = statusBarHeight + buttonHeight + top - statusBarHeight;this.boxHeight = navHeight - statusBarHeight;this.navHeight = navHeight;console.log(statusBarHeight, navHeight, buttonHeight);}, methods: { scroll: function scroll(e) {console.log(e);}, //商品详情页
+      startTime: 0, endTime: 0, createTime: 0, ts: 0, te: 3, boxHeight: 44, statusHeight: 20, navHeight: 64, scrollTop: 0 };}, onLoad: function onLoad(options) {this.WxActivityID = options.id;this.getLimit();this.url = _request.imgurl;this.getLimit();var obj = {};var that = this;setTimeout(function () {that.loading = true;}, 500);var res = uni.getSystemInfoSync();var statusBarHeight = res.statusBarHeight;var info = uni.getMenuButtonBoundingClientRect();var top = info.top,bottom = info.bottom;this.statusHeight = statusBarHeight;var buttonHeight = bottom - statusBarHeight + (top - statusBarHeight);var navHeight = statusBarHeight + buttonHeight + top - statusBarHeight;this.boxHeight = navHeight - statusBarHeight;this.navHeight = navHeight;console.log(statusBarHeight, navHeight, buttonHeight);}, computed: {}, methods: { scroll: function scroll(e) {console.log(e);}, //商品详情页
     gotoList: function gotoList(id) {log(id);uni.navigateTo({ url: '../../pagesIII/productDetail/productDetail?id=' + id });}, //倒计时
     endOfTime: function endOfTime() {console.log('倒计时结束');}, //下拉刷新
     onPullDownRefresh: function onPullDownRefresh() {this.getLimit();console.log('refresh');setTimeout(function () {uni.stopPullDownRefresh();}, 1000);}, //请求限量区列表

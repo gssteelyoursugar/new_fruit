@@ -54,17 +54,17 @@
 					<view class="tui-order-item">
 						<view class="tui-icon-box">
 
-							<image :src="urlList[0].url" mode="aspectFit" class="imgUplod"></image>
+							<image :src="urlList[0].url || ''" mode="aspectFit" class="imgUplod"></image>
 							<!-- <view>点击上传图片</view> -->
 						</view>
 						<view class="tui-order-text">{{urlList[0].title}}</view>
 					</view>
 					<view class="tui-order-item">
 						<view class="tui-icon-box">
-							<image :src="urlList[1].url" mode="aspectFit" class="imgUplod"></image>
+							<image :src="urlList[1].url || ''" mode="aspectFit" class="imgUplod"></image>
 							<!-- <view>点击上传图片</view> -->
 						</view>
-						<view class="tui-order-text">{{urlList[1].title}}</view>
+						<view class="tui-order-text">{{urlList[1].title ||"水果陈列照片"}}</view>
 					</view>
 				</view>
 
@@ -72,17 +72,17 @@
 
 					<view class="tui-order-item">
 						<view class="tui-icon-box">
-							<image :src="urlList[2].url" mode="aspectFit" class="imgUplod"></image>
+							<image :src="urlList[2].url || ''" mode="aspectFit" class="imgUplod"></image>
 							<!-- <view class="">点击上传图片</view> -->
 						</view>
-						<view class="tui-order-text">{{urlList[2].title}}</view>
+						<view class="tui-order-text">{{urlList[2].title || '卸货区'}}</view>
 					</view>
 					<view class="tui-order-item">
 						<view class="tui-icon-box">
-							<image :src="urlList[3].url" mode="aspectFit" class="imgUplod"></image>
+							<image :src="urlList[3].url || ''" mode="aspectFit" class="imgUplod"></image>
 							<!-- <view>点击上传图片</view> -->
 						</view>
-						<view class="tui-order-text">{{urlList[3].title}}</view>
+						<view class="tui-order-text">{{urlList[3].title || '工商营业执照'}}</view>
 					</view>
 				</view>
 			</view>

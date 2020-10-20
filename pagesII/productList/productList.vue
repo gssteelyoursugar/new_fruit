@@ -34,7 +34,7 @@
 			<view class="tui-screen-top">
 				<!-- 综合筛选 -->
 				<block v-for="(item,index) in seleTopList" :key="index">
-					<view class="tui-top-item tui-icon-ml" :class="[index == num ? 'tui-active tui-bold' : '']" @tap="Total(index)"
+					<view class="tui-top-item tui-icon-ml" :class="[index == num &&num !==3 ? 'tui-active tui-bold' : '']" @tap="Total(index)"
 					 data-index=" ">
 						<view>{{item.name}}</view>
 						<text class="iconfont icon-shangxiajiantou" :color="index == num ? '#00BC45' : '#444' " v-if="index == 1 || index == 2"></text>
@@ -787,8 +787,14 @@
 					this.sleter2 = !this.sleter2
 
 				} else if (this.num == 3) {
-					uni.navigateTo({
-						url: '../../pagesIII/videos/videos'
+					// uni.navigateTo({
+					// 	url: '../../pagesIII/videos/videos'
+					// })
+					
+					uni.showToast({
+						title: "功能内测中，敬请期待",
+						icon: "none",
+						duration: 2000
 					})
 					log('视频选果')
 
@@ -1116,6 +1122,7 @@
 				console.log(this.postList)
 				listing(getGoodsall, this.postList).then(res => {
 					console.log(res)
+					this.goods = res.data.data.goods
 				})
 				this.closeDrawer()
 			},

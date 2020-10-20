@@ -222,20 +222,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-
 var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
 
 
 var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
-//
-//
-//
-//
 //
 //
 //
@@ -340,7 +332,11 @@ var _console = console,log = _console.log;var cityData = __webpack_require__(/*!
       cartIds: [], imgUrlData: '', addressDetails: '请填写详细地址', flag: false };}, methods: { //地址选择弹出
     picker: function picker(e) {console.log("pick=============", e); //获取选中的三级信息
       var value = e.detail.value; //这个是三级的picker分别选中的下标，value=[].length = 3,第一个是一级，第二个是二级。。。
-      var one = this.addressOne[value[0]];var two = this.addressTwo[value[1]];var three = this.addressThree[value[2]];this.text1 = one.name + " " + two.name + " " + three.name;var addThree = this.getAddressById(three.id);
+      var one = this.addressOne[value[0]];var two = this.addressTwo[value[1]];
+      var three = this.addressThree[value[2]];
+      this.text1 = one.name + " " + two.name + " " + three.name;
+
+      var addThree = this.getAddressById(three.id);
       log(three);
       //拿到第三级，根据第三级的pid就是第二级的id，根据第二级的pid就是第一级的id
       var addTwo = this.getAddressById(addThree.pId);
@@ -663,9 +659,33 @@ var _console = console,log = _console.log;var cityData = __webpack_require__(/*!
         _this2.ApproveStatus = res.data.data.approveStatus;
         log(_this2.ApproveStatus);
         _this2.StoreInfo = res.data.data;
-        _this2.urlList = res.data.data.urlList;
-        _this2.Address1 = res.data.data.address;
+        var dataList = res.data.data.urlList;
+        var temp_1 = {
+          name: "me_2",
+          title: "水果陈列照片",
+          url: '' };
 
+        var temp_2 = {
+          name: "me_3",
+          title: "卸货区",
+          url: '' };
+
+        var temp_3 = {
+          name: "me_4",
+          title: "工商营业执照",
+          url: '' };
+
+        if (dataList.length === 1) {
+          dataList.push(temp_1, temp_2, temp_3);
+        }
+        if (dataList.length === 2) {
+          dataList.push(temp_2, temp_3);
+        }
+        if (dataList.length === 3) {
+          dataList.push(temp_3);
+        }
+        _this2.urlList = dataList;
+        _this2.Address1 = res.data.data.address;
         log(res.data.data);
 
         //根据id获取地址，地址已经获取到

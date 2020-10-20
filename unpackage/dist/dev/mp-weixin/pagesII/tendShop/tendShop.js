@@ -392,26 +392,17 @@ var _console = console,log = _console.log;var form = __webpack_require__(/*! @/c
     postAddressDatas: function postAddressDatas() {var _this = this;
       (0, _api.publicing)(_request.postAddressList).
       then(function (res) {
-        log(res.data);
-        log(res);
         _this.addressAllData = res.data;
-
         //初始化三级信息
         _this.addressOne = _this.getAddressByPId("0"); //一级地址
         _this.addressTwo = _this.getAddressByPId(_this.addressOne[0].id); //默认显示一级的第一个地址的二级地址
         _this.addressThree = _this.getAddressByPId(_this.addressTwo[0].id); //默认显示二级的第一个地址的三级地址
-        console.log(_this.addressTwo[0].id);
-
-
-
+        // console.log(this.addressTwo[0].id)
         _this.multiArray = [
         _this.toArr(_this.addressOne),
         _this.toArr(_this.addressTwo),
         _this.toArr(_this.addressThree)];
 
-        /* console.log("获取全国一级地址===",this.addressOne)
-                                          console.log("获取全国二级地址===",this.addressTwo)
-                                          console.log("获取全国三级地址===",this.addressThree) */
       }).
       catch(function (err) {
         log(err);
@@ -529,7 +520,7 @@ var _console = console,log = _console.log;var form = __webpack_require__(/*! @/c
         // })
         log(res);
         _this4.ApproveStatus = res.data.data.approveStatus;
-        log(_this4.ApproveStatus);
+        // log(this.ApproveStatus)
         _this4.StoreInfo = res.data.data;
         // log(this.StoreInfo)
       }).
@@ -666,7 +657,7 @@ var _console = console,log = _console.log;var form = __webpack_require__(/*! @/c
     //获取token
     getToken: function getToken() {
       var setdata = uni.getStorageSync('usermen');
-      log(setdata);
+      // log(setdata)
     },
     //上传图片
     //进来先判断登录了没

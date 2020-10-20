@@ -607,11 +607,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-
-
 var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
@@ -619,11 +614,6 @@ var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
 var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
-//
-//
-//
-//
-//
 //
 //
 //
@@ -1103,9 +1093,14 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
     wxLoging: function wxLoging(code) {var _this5 = this;uni.showLoading({}); // log(code);
       var data = { code: code };(0, _api.publicing2)(_request.loginis, data) //发送请求携带参数
       .then(function (res) {uni.setStorageSync('usermen', res.data.token); //把token存在本地，小程序提供如同浏览器cookie
-        var setdata = uni.getStorageSync('usermen');uni.showToast({ title: '登陆成功' });_this5.getMerchants();uni.hideLoading();}).catch(function (err) {log(err);});}, //收藏订单
-    likeOrder: function likeOrder(id) {var setdata = uni.getStorageSync('usermen'); //判断是否登录才能收藏
-      if (!setdata) {this.modaishow = true;} else {
+        var setdata = uni.getStorageSync('usermen');uni.showToast({ title: '登陆成功' });_this5.getMerchants();uni.hideLoading();}).catch(function (err) {log(err);});},
+    //收藏订单
+    likeOrder: function likeOrder(id) {
+      var setdata = uni.getStorageSync('usermen');
+      //判断是否登录才能收藏
+      if (!setdata) {
+        this.modaishow = true;
+      } else {
         this.modaishow = false;
         var data = {
           goodsId: id,

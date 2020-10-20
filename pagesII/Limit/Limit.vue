@@ -62,10 +62,12 @@
 										<text class="tag-tit">{{item.lableName}}</text> <text class="tag-tit-text">{{item.title}}</text>
 										<view class="tag-tit2">
 											<view class="">
-												<view class="tag-tit2-text">
-													<view style="width: 200rpx;">
-														<view class="cu-progress round sm " :class="active?'active':''">
-															<view class="bg-green round" :style="[{ width:loading?'60%':''}]"><text class="fonsize">仅剩60件</text></view>
+												<view class="tag-tit2-text" >
+													<view style="width: 200rpx; position: relative;">
+														<view class="cu-progress round sm " :class="active?'active':''" style="position: relative;">
+															<view class="fonsize">仅剩{{item.number}}件</view>
+															<view class="bg-green round" :style="[{ width:loading? (item.number/item.initNumber)*100 + '%':''}]">
+															</view>
 														</view>
 													</view>
 												</view>
@@ -176,7 +178,9 @@
 			// #endif
 
 		},
-
+		computed:{
+			
+		},
 		methods: {
 
 			scroll(e) {
@@ -496,7 +500,11 @@
 	}
 
 	.fonsize {
-		font-size: 16rpx;
+		position: absolute;
+		top: 0;
+		left: 0;
+		font-size: 16rpx !important;
+		width: 50% !important;
 	}
 
 	.tag-tit2-price {

@@ -11,12 +11,12 @@
 				<!-- 已登录个人信息状态wxlogin -->
 				<view class="tui-info" v-if="wxlogin">
 					<view class="tui-explain">{{usering.nickName}}</view>
-
 					<view class="tui-user-phone" v-if="wxlogin && ApproveStatus === 1">
 						<image src="../../static/images/cellphone.png" mode="aspectFill"></image>
 						<text>{{user_phone}}</text>
 					</view>
 				</view>
+
 				<!-- 未登录个人信息状态!wxlogin-->
 				<view class="tui-info2" v-if="!wxlogin">
 					<view class="tui-nickname">
@@ -26,46 +26,28 @@
 					</view>
 				</view>
 				
-				<!-- #ifdef MP -->
-				<!-- 未登录店铺按钮 -->
-				<!-- <view class="tui-set-box3" v-if="!wxlogin">
-					<view class="tui-icon-box " @tap="tendShop">
-						去登录
-					</view> -->
-				<!-- <view class="tui-icon-box " >
-						<button plain="true" type="primary" :text="loginText" open-type="getUserInfo" @getuserinfo="getUserInfo">去认证我的店铺</button>
-					</view>
-					 -->
-				<!-- <view class="tui-icon-box " @tap="tendShop">
-						<text class="tui-icon-text3">{{logMsg}}</text>
-					</view> -->
-				<!-- </view> -->
-				<!-- <view class="tui-set-box3" v-if="wxlogin" @tap="tendShop">
-					<view class="tui-icon-box">
-						<text class="tui-icon-text3">{{logMsg}}</text>
-					</view>
-				</view> -->
-				
-				<!-- 未提交审核 -->
-				<view class="tui-set-box3" v-if="wxlogin && Goauth && ApproveStatus === 0">
+				<!-- 未提交审核 => 去认证店铺-->
+				<view class="tui-set-box3" v-if="wxlogin && ApproveStatus === undefined ||ApproveStatus ==='' ||ApproveStatus === null">
 					<view class="tui-icon-box ">
 						<view class="tui-icon-box " @tap="tendShop">
 							<text class="tui-icon-text3">{{logMsg}}</text>
 						</view>
 					</view>
 				</view>
-				<!-- 未提交审核 -->
-				<!-- 提交审核并等待通过-->
-				<view class="tui-set-box3" v-if="wxlogin && Goauth2">
+				<!-- 未提交审核 => 去认证店铺 -->
+				
+				<!-- 提交审核并等待通过 => 查看店铺信息-->
+				<view class="tui-set-box3" v-if="wxlogin && ApproveStatus === 0">
 					<view class="tui-icon-box">
-						<view class="tui-icon-box " @tap="tendShop2">
+						<view class="tui-icon-box " @tap="tendShop1">
 							<text class="tui-icon-text3">{{logMsg}}<text style="margin-left: 6rpx;"> ></text></text>
 						</view>
 					</view>
 				</view>
-				<!-- 提交审核并等待通过-->
+				<!-- 提交审核并等待通过 => 查看店铺信息-->
+				
 				<!-- 提交审核并通过 -->
-				<view class="tui-set-box" v-if="wxlogin && Goauth3 && ApproveStatus === 1">
+				<view class="tui-set-box" v-if="wxlogin && ApproveStatus === 1">
 					<view class="tui-icon-box ">
 						<image src="../../static/images/dianpu@2x.png" mode="aspectFill" class="tui-icon-shop"></image>
 					</view>
@@ -75,33 +57,24 @@
 				</view>
 				<!-- 提交审核并通过 -->
 				
-				
-				
-				<!-- 未认证/拒绝 -->
-				<!-- <view class="tui-set-box2" v-if="ApproveStatus === 2 ">
-					<view class="tui-icon-box " >
+				<!-- 拒绝 -->
+				<view class="tui-set-box3" v-if="wxlogin && ApproveStatus === 2">
+					<view class="tui-icon-box ">
+						<view class="tui-icon-box " @tap="tendShop1">
+							<text class="tui-icon-text3">{{logMsg}}</text>
+						</view>
 					</view>
-					<view class="tui-icon-box " @tap="tendShop" >
-						<text class="tui-icon-text2">去认证我的店铺 ></text>
-					</view>
-				</view> -->
+				</view>
+				<!-- 拒绝 -->
+				
+		
 
-				<!-- #endif -->
 			</view>
-			<!-- <view class="tui-header-btm" @tap="href(5)">
-			
-				
-				<view class="tui-btm-item">
-					<view class="tui-btm-num">0</view>
-					<view class="tui-btm-text">余额</view>
-				</view>
-				<view class="tui-btm-item">
-					<view class="tui-btm-num">0</view>
-					<view class="tui-btm-text">优惠券</view>
-				</view>
-			</view> -->
+
 		</view>
+
 		<view class="tui-content-box">
+			<!-- 订单 -->
 			<view class="tui-box tui-order-box">
 				<tui-list-cell padding="0" :unlined="true" :arrow="true" :lineLeft="false" @click="myOrder">
 					<view class="tui-cell-header">
@@ -116,33 +89,32 @@
 							<image src="/static/images/daifukuan@3x.png" class="tui-order-icon"></image>
 							<!-- <view class="tui-badge tui-badge-red">1</view> -->
 						</view>
-						<view class="tui-order-text">待付款<text v-if="fukuanList !== ''">{{fukuanList}}</text></view>
+						<view class="tui-order-text">待付款<text v-if="fukuanList !== ''&&fukuanList == 0">{{fukuanList}}</text></view>
 					</view>
 					<view class="tui-order-item" @tap="ToBeDelivered">
 						<view class="tui-icon-box">
 							<image src="/static/images/daifahuo@3x.png" class="tui-order-icon"></image>
 						</view>
-						<view class="tui-order-text">待发货<text v-if="fahuoList !== ''">{{fahuoList}}</text></view>
+						<view class="tui-order-text">待发货<text v-if="fahuoList !== ''&&fahuoList!== 0">{{fahuoList}}</text></view>
 					</view>
 					<view class="tui-order-item" @tap="ToBeReceived">
 						<view class="tui-icon-box">
 							<image src="/static/images/daishouhuo@3x.png" class="tui-order-icon"></image>
 							<view class="tui-badge tui-badge-red" v-if="false">12</view>
 						</view>
-						<view class="tui-order-text">待收货<text v-if="shouhuoList !== ''">{{shouhuoList}}</text></view>
+						<view class="tui-order-text">待收货<text v-if="shouhuoList !== ''&&shouhuoList!==0">{{shouhuoList}}</text></view>
 					</view>
 					<view class="tui-order-item" @tap="gotoAfter">
 						<view class="tui-icon-box">
 							<image src="/static/images/shouhou@3x.png" class="tui-order-icon"></image>
 							<!-- <view class="tui-badge tui-badge-red">2</view> -->
 						</view>
-						<view class="tui-order-text">退款/售后<text v-if="tuikuanList !== ''">{{tuikuanList}}</text></view>
+						<view class="tui-order-text">退款/售后<text v-if="tuikuanList !== ''&&tuikuanList!==0">{{tuikuanList}}</text></view>
 					</view>
 				</view>
 			</view>
 
 			<!-- 常用工具 -->
-
 			<view class="tui-box tui-tool-box">
 				<tui-list-cell :unlined="true" padding="0" :lineLeft="false">
 					<view class="tui-cell-header">
@@ -176,25 +148,25 @@
 						<view class="tui-tool-text">联系客服
 						</view>
 					</view>
-					<view class="tui-tool-item" @tap="href(8)">
+					<view class="tui-tool-item" @tap="href(5)">
 						<view class="tui-icon-box">
 							<image src="/static/images/msg.png" class="tui-tool-icon"></image>
 						</view>
 						<view class="tui-tool-text">资讯信息</view>
 					</view>
-					<view class="tui-tool-item" @tap="href(5)">
+					<view class="tui-tool-item" @tap="href(6)">
 						<view class="tui-icon-box">
 							<image src="/static/images/guize@3x.png" class="tui-tool-icon"></image>
 						</view>
 						<view class="tui-tool-text">规则说明</view>
 					</view>
-					<view class="tui-tool-item" @tap="href(6)">
+					<view class="tui-tool-item" @tap="href(7)">
 						<view class="tui-icon-box">
 							<image src="/static/images/hezuo@3x.png" class="tui-tool-icon"></image>
 						</view>
 						<view class="tui-tool-text">商务合作</view>
 					</view>
-					<view class="tui-tool-item" @tap="href(7)">
+					<view class="tui-tool-item" @tap="href(8)">
 						<view class="tui-icon-box">
 							<image src="/static/images/shezhi@3x.png" class="tui-tool-icon"></image>
 						</view>
@@ -217,24 +189,11 @@
 			</view> -->
 			<!-- <button type='default' session-from='{"kefu":["kefuID"]}' open-type="contact"> 指定客服</button> -->
 
-
 			<view class="divider-text">
-
 				<image src="../../static/images/qaunlog@3x.png" mode="aspectFill" class="tui-log-div"></image>
-
 			</view>
-
-
 		</view>
-		<!-- <view class="warp" v-if="modaishow">
-			<view class="warp-view">
-				<view class="warp-text">请登陆后再操作</view>
-				<view class="warp-flex">
-					<button @click="messcancel()" plain="true">取消</button>
-					<button plain="true" open-type="getUserInfo" @getuserinfo="getUserInfo">登录</button>
-				</view>
-			</view>
-		</view> -->
+
 	</view>
 </template>
 
@@ -310,9 +269,9 @@
 				kefuID: '',
 				loadding: false,
 				pullUpOn: true,
-				ApproveStatus: 0,
+				ApproveStatus: undefined,
 				loginText: '',
-				logMsg: this.logMsg, //店铺状态信息展示
+				logMsg: "去认证我的店铺", //店铺状态信息展示
 				showBtn: false, //已登录未认证
 				Goauth: true, //未认证
 				Goauth2: false, //以申请待审核
@@ -361,15 +320,12 @@
 						log(err)
 					}
 				})
-
 			},
 			//发code给后台换取token
 			wxLoging(code) {
 				log(code)
-				// let appid = wx.getAccountInfoSync().miniProgram.appId
-				// let secret = "956f8c9345cbe06a42c6494f7bb53f7f"
 				let data = {
-					code,
+					code
 				}
 				uni.showLoading({
 					title: '加载中',
@@ -382,103 +338,81 @@
 						if (res.statusCode == 500) {
 							uni.showModal({
 								title: '提示',
-								content: '服务器错误，请重新登录获取信息',
+								content: '登录出错，请重新登录获取信息',
 								success: function(res) {
 									if (res.confirm) {
-										console.log('用户点击确定');
 										uni.hideLoading();
 									} else if (res.cancel) {
-										console.log('用户点击取消');
 										uni.hideLoading();
 									}
 								}
 							});
 							return
-
 						} else if (res.statusCode == 200) {
-							setTimeout(()=>{
-								this.getOrderData()
-							},100)
-							log(res)
+							this.getOrderData()
 						}
-
 						// log(res) //获得token
 						uni.setStorageSync('usermen', res.data.token) //把token存在本地，小程序提供如同浏览器cookie
 						uni.hideLoading();
 						this.getMerchants()
-
-
-						// this.ifUser()
-
-						// if(res.data.msg == 'success'){
-						// 	//存入本地
-
-						// this.ifUser()
-						// }
 					})
 					.catch((err) => {
 						uni.showToast({
 							title: `${err}`
 						})
-
 						log(err)
 					})
 
 			},
 			//一、认证店铺首先判断是否登录
-			ifLogin() {
-				var value = this.ApproveStatus
-				if (!setdata) { //判断有无token，没有就显示去认证店铺
-					log('没有token信息请点击登录')
-					// log(this.logMsg)
-				} else if (value == 0) {
-					this.Goauth2 = true
-					//状态为0时证明已经认证
-					this.logMsg = '审核中待通过'
-				} else if (value == 1) {
-					this.logMsg = '我的店铺已认证'
-					this.Goauth3 = true
-				} else if (value == 2) {
-					this.logMsg = '未认证'
-					this.Goauth4 = true
-				} else if (value == undefined) {
-					this.Goauth = false
-					this.Goauth2 = false
-					this.Goauth3 = false
-					this.logMsg = '去认证我的店铺'
-				}
-			},
+			// ifLogin() {
+			// 	var value = this.ApproveStatus
+			// 	if (!setdata) { //判断有无token，没有就显示去认证店铺
+			// 		log('没有token信息请点击登录')
+			// 		// log(this.logMsg)
+			// 	} else if (value == 0) {
+			// 		this.Goauth2 = true
+			// 		//状态为0时证明已经认证
+			// 		// this.logMsg = '审核中待通过'
+			// 	} else if (value == 1) {
+			// 		// this.logMsg = '我的店铺已认证'
+			// 		this.Goauth3 = true
+			// 	} else if (value == 2) {
+			// 		// this.logMsg = '未认证'
+			// 		// this.Goauth4 = true
+			// 	} else if (value == undefined) {
+			// 		this.Goauth = false
+			// 		this.Goauth2 = false
+			// 		this.Goauth3 = false
+			// 		this.logMsg = '去认证我的店铺'
+			// 	}
+			// },
 			//获取申请店铺状态信息
 			getMerchants() {
 				let setdata = uni.getStorageSync('usermen') //Token
 				let data = {
 					token: setdata
 				}
+				if (!setdata) {
+					return
+				}
 				listing(getClient, data)
 					.then((res) => {
+						console.log(res.data.data)
 						///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
 						this.ApproveStatus = res.data.data.approveStatus //获取状态码，0未认证，1已认证，2拒绝
 						uni.setStorageSync('StoreStatus', res.data.data.approveStatus)
 						let setStore = uni.getStorageSync('StoreStatus') //状态码
 						this.user_phone = res.data.data.phone
-						var valu2 = this.ApproveStatus
-						if (valu2 == undefined) { //判断如果请求返回为空说明未申请过店铺认证
-							//显示去认证店铺的按钮
-							this.Goauth = true
-							this.Goauth2 = false
+						let valu2 = this.ApproveStatus
+						if (valu2 === undefined || valu2 === null ||  valu2 === '') { //判断如果请求返回为空说明未申请过店铺认证
 							this.logMsg = '去认证我的店铺'
-						} else if (valu2 == 0) {
-							this.Goauth2 = true
-							this.Goauth = flase
-							//状态为0时证明已经认证
+						} else if (valu2 === 0) {
 							this.logMsg = '审核中待通过'
-							//
-						} else if (valu2 == 1) {
+						} else if (valu2 === 1) {
 							this.logMsg = '我的店铺已认证'
-							this.Goauth3 = true
-						} else if (valu2 == 2) {
-							this.logMsg = '未认证'
-							this.Goauth4 = true
+						} else if (valu2 === 2) {
+							this.logMsg = '未通过,请重新提交'
 						}
 					})
 					.catch((err) => {
@@ -505,6 +439,9 @@
 			// 获取订单
 			getOrderData() {
 				let setdata = uni.getStorageSync('usermen')
+				if (!setdata) {
+					return
+				}
 				let data = {
 					token: setdata,
 					pageNo: 1,
@@ -513,7 +450,7 @@
 				listing(getMyOrder, data)
 					.then((res) => {
 						let list = res.data.data
-						console.log(list)
+						// console.log(list)
 						let fukuanList = []
 						let fahuoList = []
 						let shouhuoList = []
@@ -553,7 +490,7 @@
 				}
 			},
 
-			//认证店铺
+			//去认证店铺
 			tendShop() {
 				let setdata = uni.getStorageSync('usermen')
 				if (!setdata) {
@@ -561,47 +498,35 @@
 						title: '请先登录',
 						icon: 'none'
 					})
-					// log(setdata)
 					this.modaishow = true
 				} else {
-					// this.modaishow = false
-
 					uni.navigateTo({
 						url: '../../pagesII/tendShop/tendShop'
 					})
 				}
-
 			},
-			tendShop2() {
-				uni.navigateTo({
-					url: '../../pagesII/StoreInformation/StoreInformation'
-				})
-			},
-
-			tendShop3() {
-				uni.navigateTo({
-					url: '../../pagesII/StoreInformation/StoreInformation'
-				})
-
-			},
+			// 已经申请了/审核中 （无论通不通过）查看提交的店铺资料
 			tendShop1() {
 				uni.navigateTo({
 					url: '../../pagesII/StoreInformation/StoreInformation'
 				})
 			},
 			gotoAfter() {
-				uni.navigateTo({
-					url: '../../pagesIII/navbar/navbar'
-				})
+				if (!this.wxlogin) {
+					uni.showToast({
+						title: '请先登录',
+						icon: 'none'
+					})
+				} else {
+					uni.navigateTo({
+						url: '../../pagesIII/navbar/navbar'
+					})
+				}
+
 			},
-
 			//获取微信code
-
 			//发送给后台
-
 			ifUser2() {
-
-
 				// log(setdata)
 				if (!setdata) {
 					uni.showToast({
@@ -631,28 +556,61 @@
 			},
 			//跳转到待付款
 			ToBePaid() {
-				uni.navigateTo({
-					url: '../../pagesII/myOrder/myOrder?index=1'
-				})
+				if (!this.wxlogin) {
+					uni.showToast({
+						title: "请先登录",
+						icon: 'none'
+					})
+
+				} else {
+					uni.navigateTo({
+						url: '../../pagesII/myOrder/myOrder?index=1'
+					})
+				}
+
 			},
 			//跳转到待发货
 			ToBeDelivered() {
-				uni.navigateTo({
-					url: '../../pagesII/myOrder/myOrder?index=2'
-				})
+				if (!this.wxlogin) {
+					uni.showToast({
+						title: "请先登录",
+						icon: 'none'
+					})
+
+				} else {
+					uni.navigateTo({
+						url: '../../pagesII/myOrder/myOrder?index=2'
+					})
+				}
 			},
 			//跳转到待收货
 			ToBeReceived() {
-				uni.navigateTo({
-					url: '../../pagesII/myOrder/myOrder?index=3'
-				})
+				if (!this.wxlogin) {
+					uni.showToast({
+						title: "请先登录",
+						icon: 'none'
+					})
+
+				} else {
+					uni.navigateTo({
+						url: '../../pagesII/myOrder/myOrder?index=3'
+					})
+				}
 			},
 
 			//我的全部订单
 			myOrder() {
-				uni.navigateTo({
-					url: '../../pagesII/myOrder/myOrder'
-				})
+				if (!this.wxlogin) {
+					uni.showToast({
+						title: "请先登录",
+						icon: 'none'
+					})
+
+				} else {
+					uni.navigateTo({
+						url: '../../pagesII/myOrder/myOrder'
+					})
+				}
 			},
 			// getWxdata(){
 			// 	uni.request({
@@ -667,41 +625,32 @@
 
 			// },
 			href(page) {
-				let url = "";
-				switch (page) {
-					case 1:
-						url = "../../pagesII/OrderStatistics/OrderStatistics"
-						break;
-					case 2:
-						url = "../../pagesII/Evaluate/Evaluate"
-						break;
-					case 3:
-						url = "../../pagesII/myCollection/myCollection"
-						break;
-					case 4:
-						url = "../../pagesII/customerService/customerService"
-						break;
-					case 5:
-						url = "../../pagesII/ruleDescription/ruleDescription"
-						break;
-					case 6:
-						url = "../../pagesII/cooperation/cooperation"
-						break;
-					case 7:
-						url = "../../pagesII/SetUp/SetUp"
-						break;
-					case 8:
-						url = "../../pagesII/message/message"
-						break;
-					default:
-						break;
+				const urlList = {
+					0: "",
+					1: "../../pagesII/OrderStatistics/OrderStatistics",
+					2: "../../pagesII/Evaluate/Evaluate",
+					3: "../../pagesII/myCollection/myCollection",
+					4: "../../pagesII/customerService/customerService",
+					5: "../../pagesII/message/message",
+					6: "../../pagesII/ruleDescription/ruleDescription",
+					7: "../../pagesII/cooperation/cooperation",
+					8: "../../pagesII/SetUp/SetUp"
 				}
-				if (url) {
+				if (page == 5 || page == 6 || page == 7) {
 					uni.navigateTo({
-						url: url
+						url: urlList[page]
+					})
+					return
+				}
+				if (!this.wxlogin) {
+					uni.showToast({
+						title: '请先登录',
+						icon: "none"
 					})
 				} else {
-					this.tui.toast("功能尚未完善~")
+					uni.navigateTo({
+						url: urlList[page]
+					})
 				}
 			},
 			detail: function() {
@@ -721,10 +670,11 @@
 			}
 		},
 		onShow() {
+			
 			this.getMerchants()
 			this.getOrderData()
 			this.ifUser()
-			this.ifLogin()
+			// this.ifLogin()
 			console.log("这里是onshow")
 		},
 		onPageScroll(e) {

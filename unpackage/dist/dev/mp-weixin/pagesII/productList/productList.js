@@ -986,8 +986,14 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
         this.sleter2 = !this.sleter2;
 
       } else if (this.num == 3) {
-        uni.navigateTo({
-          url: '../../pagesIII/videos/videos' });
+        // uni.navigateTo({
+        // 	url: '../../pagesIII/videos/videos'
+        // })
+
+        uni.showToast({
+          title: "功能内测中，敬请期待",
+          icon: "none",
+          duration: 2000 });
 
         log('视频选果');
 
@@ -1311,10 +1317,11 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
 
       }
     },
-    clickToConfirm: function clickToConfirm() {
+    clickToConfirm: function clickToConfirm() {var _this10 = this;
       console.log(this.postList);
       (0, _api.listing)(_request.getGoodsall, this.postList).then(function (res) {
         console.log(res);
+        _this10.goods = res.data.data.goods;
       });
       this.closeDrawer();
     },

@@ -246,7 +246,11 @@ page {
 		        align-items: center;
 }
 .fonsize {
-		font-size: 16rpx;
+		position: absolute;
+		top: 0;
+		left: 0;
+		font-size: 16rpx !important;
+		width: 50% !important;
 }
 .tag-tit2-price {
 		color: #FF5600;

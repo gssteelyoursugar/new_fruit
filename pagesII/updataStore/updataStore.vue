@@ -54,13 +54,11 @@
 			</view>
 			<view class="tui-box tui-order-box">
 
-
 				<view class="tui-order-list">
 					<view class="tui-order-list">
 						<view class="tui-order-item" v-for="(item,index) in urlList" :key="index" @click="uploadImages(index,item.id)">
 							<view class="tui-icon-box">
 								<image :src="item.url" mode="aspectFit" class="imgUplod"></image>
-
 							</view>
 							<view class="tui-order-text">{{item.title}}</view>
 						</view>
@@ -69,8 +67,6 @@
 				</view>
 
 			</view>
-
-
 
 			<tui-list-cell :hover="false"> <text class="colot-text-1">注: 如无办理工商营业执照，请联系客服专员</text>
 			</tui-list-cell>
@@ -527,9 +523,33 @@
 						this.ApproveStatus = res.data.data.approveStatus
 						log(this.ApproveStatus)
 						this.StoreInfo = res.data.data
-						this.urlList = res.data.data.urlList
+						let dataList = res.data.data.urlList
+						let temp_1 = {
+							name: "me_2",
+							title: "水果陈列照片",
+							url: ''
+						}
+						let temp_2 = {
+							name: "me_3",
+							title: "卸货区",
+							url: ''
+						}
+						let temp_3 = {
+							name: "me_4",
+							title: "工商营业执照",
+							url: ''
+						}
+						if (dataList.length===1) {
+							dataList.push(temp_1,temp_2,temp_3)
+						}
+						if (dataList.length===2) {
+							dataList.push(temp_2,temp_3)
+						}
+						if (dataList.length===3) {
+							dataList.push(temp_3)
+						}
+						this.urlList = dataList
 						this.Address1 = res.data.data.address
-
 						log(res.data.data)
 
 						//根据id获取地址，地址已经获取到
