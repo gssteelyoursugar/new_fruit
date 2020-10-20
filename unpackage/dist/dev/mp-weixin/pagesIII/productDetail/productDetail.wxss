@@ -2,9 +2,7 @@
 page {
 	background-color: #fff;
 }
-[v-cloak] {
-	display: none;
-}
+
 
 /* 弹层 */
 .tui-list-title {
@@ -25,6 +23,7 @@ page {
 	-webkit-border-radius: 20rpx;
 	        border-radius: 20rpx;
 }
+
 
 /* 弹出列表 */
 .tui-rank-list {
@@ -192,10 +191,12 @@ page {
 	display: block;
 }
 
+
 /* end */
 .container {
 	padding-bottom: 110rpx;
 }
+
 
 /* 显示隐藏 */
 .actineclass {
@@ -314,6 +315,7 @@ page {
 	height: 750rpx !important;
 }
 
+
 /*顶部菜单*/
 .tui-menu-box {
 	-webkit-box-sizing: border-box;
@@ -400,7 +402,9 @@ page {
 	transition: opacity 0.2s ease-in-out;
 }
 
+
 /*顶部菜单*/
+
 
 /*内容 部分*/
 .tui-padding {
@@ -471,6 +475,7 @@ page {
 	padding: 30rpx 0;
 	border-bottom: 20rpx solid #f5f5f5
 }
+
 
 /* 2020/8/29 */
 .tui-height-full {
@@ -965,6 +970,7 @@ page {
 	display: block;
 }
 
+
 /*底部操作栏*/
 .tui-col-7 {
 	width: 58.33333333%;
@@ -1066,7 +1072,9 @@ page {
 	padding: 16rpx;
 }
 
+
 /*底部操作栏*/
+
 
 /*底部选择弹层*/
 .tui-popup-class {
@@ -1087,11 +1095,13 @@ page {
 	bottom: 0;
 }
 
+
 /* .tui-popup-btn .tui-btn-class {
 	width: 90% !important;
 	display: block !important;
 	font-size: 28rpx !important;
 } */
+
 
 /* .tui-icon-close {
 	position: absolute;
@@ -1201,7 +1211,9 @@ page {
 	        box-sizing: border-box;
 }
 
+
 /*底部选择弹层*/
+
 
 /* 模态弹窗布局 */
 .warp {
@@ -1266,6 +1278,7 @@ page {
 .warp-flex button:nth-child(2) {
 	color: rgba(0, 197, 42, 1);
 }
+
 
 /*end  */
 

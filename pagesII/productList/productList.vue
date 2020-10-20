@@ -177,8 +177,8 @@
 					热门水果
 				</view>
 				<view class="hot-wrap" style="display: flex; flex-wrap: wrap;">
-					<view class="tui-drop-item" :class="{'tui-drop-active': varietyId == item.id}" v-for="(item, index) in species" :key="index"
-					 :style="">
+					<view class="tui-drop-item" :class="{'tui-drop-active': varietyId == item.id}" v-for="(item, index) in species"
+					 :key="index" :style="">
 						<text class="" :class="{activetext:varietyId == item.id}" @click="checkDing(index,item.id,item.title)">{{ item.title }}</text>
 					</view>
 					<view class="tui-drop-item ">
@@ -189,14 +189,15 @@
 					<text class="tui-ml tui-middle " :class="{checked: item.isActives}" @click="checkDing2(index,item.title,item.isActives)">{{ item.title }}</text>
 				</view> -->
 			</scroll-view>
-			
+
 		</tui-top-dropdown>
 		<!-- 品种 -->
 		<tui-top-dropdown backgroundColor="#f7f7f7" :show="dropScreenShow2" :paddingbtm="110" :translatey="dropScreenH"
 		 @close="btnCloseDrop">
 			<scroll-view class="tui-scroll-box" scroll-y :scroll-top="scrollTop">
 				<view class="hot-wrap">
-					<view class="tui-drop-item" :class="{'tui-drop-active':idList.indexOf(item.id)!==-1}" v-for="(item,index) of seleVarieties" :key="index">
+					<view class="tui-drop-item" :class="{'tui-drop-active':idList.indexOf(item.id)!==-1}" v-for="(item,index) of seleVarieties"
+					 :key="index">
 						<text class="tui-ml tui-middle" :class="{activetext:idList.indexOf(item.id) !==-1 }" @click="checkVariety(index,item.id,item.title)">{{item.title}}</text>
 					</view>
 				</view>
@@ -246,7 +247,7 @@
 					</view>
 					<view class="tui-drawer-content">
 						<view class="content" @click="useOutClickSide">
-							<easy-select :options="tasteBox" ref="easySelect" size="mini" :selectName="'tasteLevel_parameter_1'"  :value="optionList.tasteLevel_parameter_1"
+							<easy-select :options="tasteBox" ref="easySelect" size="mini" :selectName="'tasteLevel_parameter_1'" :value="optionList.tasteLevel_parameter_1"
 							 @selectOne="selectItem"></easy-select>
 						</view>
 						<tui-icon name="reduce" color="#333" :size="14"></tui-icon>
@@ -594,7 +595,7 @@
 					this.drawerH = res.windowHeight - uni.upx2px(100) - this.height;
 				}
 			});
-			
+
 			// #ifndef H5 || APP-PLUS || MP-ALIPAY
 			const res = uni.getSystemInfoSync();
 			let {
@@ -610,9 +611,10 @@
 			let navHeight = statusBarHeight + buttonHeight + top - statusBarHeight //状态栏+导航栏的高度（页面初始高度）
 			this.boxHeight = navHeight - statusBarHeight //导航栏高度
 			this.navHeight = navHeight
-			console.log("statusBarHeight,",statusBarHeight,"navHeight",navHeight,"boxHeight",this.boxHeight, "buttonHeight",buttonHeight)
+			console.log("statusBarHeight,", statusBarHeight, "navHeight", navHeight, "boxHeight", this.boxHeight, "buttonHeight",
+				buttonHeight)
 			// #endif
-			
+
 		},
 		filters: {
 			filterNum(val) {
@@ -656,7 +658,7 @@
 						star: index + 1,
 						label: item.title,
 						value: item.title,
-						id:item.id
+						id: item.id
 					}
 					arr.push(tmp)
 				})
@@ -671,7 +673,7 @@
 						star: index + 1,
 						label: item.title,
 						value: item.title,
-						id:item.id
+						id: item.id
 					}
 					arr.push(tmp)
 				})
@@ -686,7 +688,7 @@
 						star: index + 1,
 						label: item.title,
 						value: item.title,
-						id:item.id
+						id: item.id
 					}
 					arr.push(tmp)
 				})
@@ -722,7 +724,7 @@
 				this.title = name
 				this.dropdownShow2 = !this.dropdownShow2
 			},
-			
+
 			// 搜索请求数据
 			getSearch(serrchName) {
 				let data = {
@@ -732,7 +734,7 @@
 				}
 				listing(getGoodsall, data)
 					.then((res) => {
-						log("搜索结果",res)
+						log("搜索结果", res)
 						this.goods = res.data.data.goods
 						this.seleVarieties = res.data.data
 						if (this.seleVarieties === undefined) {
@@ -860,28 +862,30 @@
 				let list = this.idList
 				let idx = list.indexOf(id)
 				if (idx !== -1) {
-					list.splice(idx,1)
-				}else {
+					list.splice(idx, 1)
+				} else {
 					list.push(id)
 				}
 				this.idList = list
 			},
 			// 品种多选请求
-			getTypeData(){
-				if (this.idList.length === 0) {
+			getTypeData() {
+				let list = this.idList
+				let lData = this.seleVarieties
+				if (list.length === 0) {
 					this.dropScreenShow2 = !this.dropScreenShow2
 					return
 				}
-				let ids = this.idList.join(',')
+				let ids = list.join(',')
 				let data = {
 					token: setdata,
 					varietyId: ids,
-					pageNo:1 ,
+					pageNo: 1,
 					pageSize: 10
 				}
-				listing(getGoodsall,data).then(res=>{
+				listing(getGoodsall, data).then(res => {
 					console.log(res)
-					this.goods= res.data.data.goods
+					this.goods = res.data.data.goods
 				})
 				this.dropScreenShow2 = !this.dropScreenShow2
 				this.isActives2 = false
@@ -1042,7 +1046,7 @@
 						log(err)
 					})
 			},
-			
+
 			px(num) {
 				return uni.upx2px(num) + 'px';
 			},
@@ -1052,7 +1056,6 @@
 				this.isActives = false
 				this.slPinzhong = "品种"
 				this.idList = [id]
-				
 				// let arr = this.attrData;
 				// for (let item of arr) {
 				// 	item.selected = false;
@@ -1111,7 +1114,7 @@
 			},
 			clickToConfirm() {
 				console.log(this.postList)
-				listing(getGoodsall, this.postList).then(res=>{
+				listing(getGoodsall, this.postList).then(res => {
 					console.log(res)
 				})
 				this.closeDrawer()

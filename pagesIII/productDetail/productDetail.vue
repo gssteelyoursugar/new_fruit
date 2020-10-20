@@ -29,7 +29,7 @@
 					</block>
 					<block v-for="(item, index) in swiperList" :key="index" v-if="shopListdata.urlVideo!==''">
 						<swiper-item :data-index="index" v-if="index===0">
-							<video v-cloak id="myVideo" :src="shopListdata.urlVideo" :show-fullscreen-btn="true" style="width:100%;height:100%;"></video>
+							<video id="myVideo" :src="shopListdata.urlVideo" :show-fullscreen-btn="true" style="width:100%;height:100%;"></video>
 						</swiper-item>
 						<swiper-item :data-index="index" v-else>
 							<image :src="item" class="tui-slide-image" />
@@ -1147,9 +1147,6 @@
 		background-color: #fff;
 	}
 
-	[v-cloak] {
-		display: none;
-	}
 
 	/* 弹层 */
 	.tui-list-title {

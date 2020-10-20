@@ -524,10 +524,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
 var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
+//
 //
 //
 //
@@ -1067,11 +1069,13 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
     },
     // 品种多选请求
     getTypeData: function getTypeData() {var _this3 = this;
-      if (this.idList.length === 0) {
+      var list = this.idList;
+      var lData = this.seleVarieties;
+      if (list.length === 0) {
         this.dropScreenShow2 = !this.dropScreenShow2;
         return;
       }
-      var ids = this.idList.join(',');
+      var ids = list.join(',');
       var data = {
         token: setdata,
         varietyId: ids,
@@ -1251,7 +1255,6 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       this.isActives = false;
       this.slPinzhong = "品种";
       this.idList = [id];
-
       // let arr = this.attrData;
       // for (let item of arr) {
       // 	item.selected = false;

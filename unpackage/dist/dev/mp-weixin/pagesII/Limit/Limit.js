@@ -238,13 +238,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
 
 var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
-//
 //
 //
 //
@@ -353,7 +351,8 @@ var _console = console,log = _console.log;var _default = { data: function data()
     gotoList: function gotoList(id) {log(id);uni.navigateTo({ url: '../../pagesIII/productDetail/productDetail?id=' + id });}, //倒计时
     endOfTime: function endOfTime() {console.log('倒计时结束');}, //下拉刷新
     onPullDownRefresh: function onPullDownRefresh() {this.getLimit();console.log('refresh');setTimeout(function () {uni.stopPullDownRefresh();}, 1000);}, //请求限量区列表
-    getLimit: function getLimit() {var _this = this;var data = { pageNo: 1, pageSize: 10, id: this.WxActivityID };(0, _api.listing2)(_request.getActivity, data).
+    getLimit: function getLimit() {var _this = this;var data = { pageNo: 1, pageSize: 10, id: this.WxActivityID };
+      (0, _api.listing2)(_request.getActivity, data).
       then(function (res) {
         log(res);
         _this.LimitData = res.data.data;
