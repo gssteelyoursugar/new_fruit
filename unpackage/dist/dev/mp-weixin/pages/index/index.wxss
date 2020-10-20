@@ -232,8 +232,8 @@
 	left: 0;
 	right: 0;
 	z-index: -1;
-	-webkit-transition: all .2s;
-	transition: all .2s;
+	-webkit-transition: all .1s;
+	transition: all .1s;
 }
 .index-bg image.data-v-57280228 {
 	width: 100%;

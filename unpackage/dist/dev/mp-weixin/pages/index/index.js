@@ -584,7 +584,7 @@ var isFirst1 = true;var _default =
       HotVarieties: [], //分类列表区
       url: 'http://192.168.1.10:8980/',
       // url:'http://120.25.195.214:8980/js',
-      opcity: 0, //渐变
+      opcity: 0.3, //渐变
       bgOpcity: 1,
       scrollH: 0, //滚动总高度
       height: 84, //header高度
@@ -764,9 +764,9 @@ var isFirst1 = true;var _default =
 
         if (e.scrollTop < 20) {
           this.canSee = 1 - e.scrollTop / 10;
+          this.opcity = 0.3 + e.scrollTop / 50;
         }
         if (e.scrollTop < 70) {
-          this.opcity = 0 + e.scrollTop / 100;
           this.bgOpcity = 1 + e.scrollTop / 100;
         }
         if (e.scrollTop >= 70) {
@@ -779,9 +779,9 @@ var isFirst1 = true;var _default =
       } else {
         if (e.scrollTop < 14) {
           this.canSee = 1 - e.scrollTop / 10;
+          this.opcity = 0.3 + e.scrollTop / 50;
         }
         if (e.scrollTop < 40) {
-          this.opcity = 0 + e.scrollTop / 100;
           this.bgOpcity = 1 + e.scrollTop / 100;
         }
         if (e.scrollTop >= 40) {
