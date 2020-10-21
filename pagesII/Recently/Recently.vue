@@ -38,7 +38,7 @@
 										<view class="tui-price-box">
 											<view class="tui-goods-price">
 												<text class="text-color2">￥</text>
-												{{ dt.platformClientPrice || 0 }}
+												{{ dt.platformClinetPrice || 0 }}
 												<text style="font-size: 20rpx;font-weight: 400;margin-left: 4rpx;">元</text>
 												<text class="price2">/件</text>
 											</view>

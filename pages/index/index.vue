@@ -129,7 +129,7 @@
 						<view class="tui-Fruits-table">
 							<image :src="item.url" mode="aspectFit" class="tabimg"></image>
 							<view class="tui-price">
-								<view class="tui-first-price">&yen;<text class="tui-price-color">{{item.platformClientPrice}}</text><text class="price-label">/件</text></view>
+								<view class="tui-first-price">&yen;<text class="tui-price-color">{{item.platformClinetPrice}}</text><text class="price-label">/件</text></view>
 								<view class="tui-last-price">&yen;<text class="tui-cribing">{{item.marketPrice}}</text></view>
 							</view>
 							<text class="tui-weight">{{item.specification}}</text>
@@ -144,7 +144,7 @@
 					<view class="tui-Fruits-table" @click="limitGo(index)">
 						<image :src="url+item.url" mode="widthFix" class="tabimg"></image>
 						<view class="tui-price">
-							<text class="tui-price-color">&yen;{{item.platformClientPrice}}/件</text><text class="tui-cribing">&yen;{{item.marketPrice}}/件</text>
+							<text class="tui-price-color">&yen;{{item.platformClinetPrice}}/件</text><text class="tui-cribing">&yen;{{item.marketPrice}}/件</text>
 						</view>
 						<text class="tui-weight">{{item.title}}</text>
 					</view>
@@ -158,7 +158,7 @@
 						<view class="tui-Fruits-table" @click="fruitGo(item.id)">
 							<image :src="item.url" mode="aspectFit" class="tabimg"></image>
 							<view class="tui-price">
-								<view class="tui-first-price">&yen;<text class="tui-price-color">{{item.platformClientPrice}}</text><text class="price-label">/件</text></view>
+								<view class="tui-first-price">&yen;<text class="tui-price-color">{{item.platformClinetPrice}}</text><text class="price-label">/件</text></view>
 								<view class="tui-last-price">&yen;<text class="tui-cribing">{{item.marketPrice}}</text></view>
 							</view>
 							<text class="tui-weight">{{item.specification}}</text>
@@ -228,7 +228,7 @@
 										<view class="tui-pro-pic">
 											<view class="tui-rate">
 												<text>&yen;</text>
-												{{item.platformClientPrice}}
+												{{item.platformClinetPrice}}
 											</view>
 											<text class="tui-rate-text "> /件</text>
 											<view class="tui-rate-price"><text>&yen;</text>{{item.marketPrice}}</view>
@@ -272,7 +272,7 @@
 										<view class="tui-pro-pic">
 											<view class="tui-rate">
 												<text>&yen;</text>
-												{{item.platformClientPrice}}
+												{{item.platformClinetPrice}}
 											</view>
 											<text class="tui-rate-text "> /件</text>
 											<view class="tui-rate-price"> <text>&yen;</text>{{item.marketPrice}}</view>
@@ -560,11 +560,9 @@
 					url: '../../pagesII/message/message'
 				})
 			},
-
-
 			gotoGun() {
-				uni.navigateTo({
-					url: '../../pagesII/productList/productList'
+				uni.switchTab({
+					url: '../../pages/search/search'
 				})
 			},
 			// 头部
@@ -1069,7 +1067,7 @@
 		color: #fff;
 		border-radius: 24rpx;
 		padding: 10rpx 20rpx;
-
+		z-index: 999;
 	}
 
 	.weather-active {

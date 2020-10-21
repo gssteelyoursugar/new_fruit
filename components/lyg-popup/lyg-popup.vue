@@ -10,11 +10,6 @@
 				2.您可以对以上信息进行访问、修改、删除以及注销账户，我们也将提供专门的个人信息保护联系方式。
 				3.未经您的授权同意，我们不会将以上信息共享给第三方或您未授权的其他用途。
 
-				<!-- <view class="line">
-					你可以阅读
-					<navigator :url="protocolPath" class="path" hover-class="navigator-hover">《服务协议》</navigator>和<navigator :url="policyPath"
-					 class="path" hover-class="navigator-hover">《隐私政策》</navigator>了解详细信息。如您同意，请点击"同意"开始接受我们的服务。
-				</view> -->
 			</view>
 
 			<view class="button">

@@ -11,8 +11,7 @@
 	background: #f5f5f5;
 	max-width: 300rpx;
 	max-height: 200rpx;
-	-webkit-border-radius: 4rpx;
-	        border-radius: 4rpx;
+	border-radius: 4rpx;
 }
 .tui-list-title1 {
 	height: 50rpx;
@@ -96,8 +95,7 @@
 }
 .tui-line-cell {
 	width: 100%;
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
@@ -117,8 +115,7 @@
 }
 .tui-line-cell2 {
 	width: 100%;
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 
 	-webkit-box-align: center;
 
@@ -164,8 +161,7 @@
 	bottom: 0rpx;
 	width: 100%;
 	padding: 40rpx 50rpx;
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 	background-color: #fff;
 	z-index: 999;
 }
@@ -182,8 +178,7 @@
 .tui-content-box {
 	width: 100%;
 	padding: 0 30rpx;
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 	position: relative;
 	top: -172rpx;
 	z-index: 10;
@@ -191,10 +186,8 @@
 .tui-box {
 	width: 100%;
 	background: #fff;
-	-webkit-box-shadow: 0 3rpx 20rpx rgba(183, 183, 183, 0.1);
-	        box-shadow: 0 3rpx 20rpx rgba(183, 183, 183, 0.1);
-	-webkit-border-radius: 10rpx;
-	        border-radius: 10rpx;
+	box-shadow: 0 3rpx 20rpx rgba(183, 183, 183, 0.1);
+	border-radius: 10rpx;
 	overflow: hidden;
 }
 .tui-order-box {
@@ -204,8 +197,7 @@
 	width: 100%;
 
 	padding: 0 26rpx;
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;

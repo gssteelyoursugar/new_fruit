@@ -308,13 +308,11 @@
 }
 .tag-tit{
 	/* 渐变色 */
-	background-image: -webkit-gradient(linear, left top, right top, from(#00C94A) , to(#00AC3F));
 	background-image: -webkit-linear-gradient(left, #00C94A , #00AC3F);
 	background-image: linear-gradient(to right, #00C94A , #00AC3F);
 	margin-right: 10rpx;
 	padding: 0 10rpx;
-	-webkit-border-radius: 15rpx 0 15rpx 0;
-	        border-radius: 15rpx 0 15rpx 0;
+	border-radius: 15rpx 0 15rpx 0;
 	color: #fff;
 	font-size: 20rpx;
 }
@@ -398,13 +396,10 @@ line-height:inherit;
 }
 button {
 
--webkit-border-radius:0;
-
-        border-radius:0;
+border-radius:0;
 }
 .btn{
-	-webkit-border-radius: 100rpx;
-	        border-radius: 100rpx;
+	border-radius: 100rpx;
 	height: 60rpx;
 	width: 30%;
 	background-color: #FFFFFF;

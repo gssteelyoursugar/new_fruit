@@ -2,8 +2,7 @@
 .tui-list-title.data-v-2eae3864 {
 	width: 100%;
 	padding: 10rpx;
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 	font-size: 24rpx;
 	line-height: 10rpx;
 	color: #666;

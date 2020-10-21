@@ -60,13 +60,10 @@ line-height:inherit;
 }
 button {
 
--webkit-border-radius:0;
-
-        border-radius:0;
+border-radius:0;
 }
 .btn{
-	-webkit-border-radius: 100rpx;
-	        border-radius: 100rpx;
+	border-radius: 100rpx;
 	height: 100rpx;
 	width: 80%;
 	background-color: rgba(0, 197, 42, 1);

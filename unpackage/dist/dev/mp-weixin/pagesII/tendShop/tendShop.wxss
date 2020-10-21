@@ -54,13 +54,10 @@ button.data-v-7706e779 {
 }
 button.data-v-7706e779 {
 
-	-webkit-border-radius: 0;
-
-	        border-radius: 0;
+	border-radius: 0;
 }
 .btn.data-v-7706e779 {
-	-webkit-border-radius: 100rpx;
-	        border-radius: 100rpx;
+	border-radius: 100rpx;
 	height: 50rpx;
 	width: 30%;
 	background-color: #FFFFFF;
@@ -169,8 +166,7 @@ margin: 0 30rpx;
 }
 .tui-line-cell.data-v-9a9cee74 {
 		width: 100%;
-		-webkit-box-sizing: border-box;
-		        box-sizing: border-box;
+		box-sizing: border-box;
 		display: -webkit-box;
 		display: -webkit-flex;
 		display: flex;
@@ -180,8 +176,7 @@ margin: 0 30rpx;
 }
 .tui-line-cell2.data-v-9a9cee74 {
 		width: 100%;
-		-webkit-box-sizing: border-box;
-		        box-sizing: border-box;
+		box-sizing: border-box;
 		
 		-webkit-box-align: center;
 		
@@ -234,15 +229,13 @@ margin: 0 30rpx;
 		bottom: 0rpx;
 		width: 100%;
 		padding: 40rpx 50rpx;
-		-webkit-box-sizing: border-box;
-		        box-sizing: border-box;
+		box-sizing: border-box;
 		background-color: #fff;
 		z-index: 999;
 		border-top: 1px solid #e5e5e5;
 }
 .tui-btn-box .tui-button-primary.data-v-9a9cee74 {
-		-webkit-border-radius: 40rpx;
-		        border-radius: 40rpx;
+		border-radius: 40rpx;
 }
 .tui-button-gray.data-v-9a9cee74 {
 		margin-top: 30rpx;
@@ -256,8 +249,7 @@ margin: 0 30rpx;
 .tui-content-box.data-v-9a9cee74 {
 		width: 100%;
 		padding: 0 30rpx;
-		-webkit-box-sizing: border-box;
-		        box-sizing: border-box;
+		box-sizing: border-box;
 		position: relative;
 		top: -172rpx;
 		z-index: 10;
@@ -265,10 +257,8 @@ margin: 0 30rpx;
 .tui-box.data-v-9a9cee74 {
 		width: 100%;
 		background: #fff;
-		-webkit-box-shadow: 0 3rpx 20rpx rgba(183, 183, 183, 0.1);
-		        box-shadow: 0 3rpx 20rpx rgba(183, 183, 183, 0.1);
-		-webkit-border-radius: 10rpx;
-		        border-radius: 10rpx;
+		box-shadow: 0 3rpx 20rpx rgba(183, 183, 183, 0.1);
+		border-radius: 10rpx;
 		overflow: hidden;
 }
 .tui-order-box.data-v-9a9cee74 {
@@ -279,8 +269,7 @@ margin: 0 30rpx;
 		width: 100%;
 		
 		padding: 0 26rpx;
-		-webkit-box-sizing: border-box;
-		        box-sizing: border-box;
+		box-sizing: border-box;
 		display: -webkit-box;
 		display: -webkit-flex;
 		display: flex;
@@ -426,8 +415,7 @@ margin: 0 30rpx;
 			left: 0;
 			bottom: 0;
 			right: 0;
-			-webkit-border-radius: 8rpx;
-			        border-radius: 8rpx;
+			border-radius: 8rpx;
 			overflow: hidden;
 }
 .warp-text.data-v-9a9cee74{text-align: center;

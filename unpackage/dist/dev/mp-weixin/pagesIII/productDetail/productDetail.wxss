@@ -20,8 +20,7 @@ page {
 	position: absolute;
 	right: 33%;
 	top: 60rpx;
-	-webkit-border-radius: 20rpx;
-	        border-radius: 20rpx;
+	border-radius: 20rpx;
 }
 
 
@@ -45,8 +44,7 @@ page {
 	display: block;
 	margin-right: 10rpx;
 	background: #eee;
-	-webkit-border-radius: 6rpx;
-	        border-radius: 6rpx;
+	border-radius: 6rpx;
 }
 .tui-pro-tit {
 	-webkit-box-flex: 5;
@@ -55,13 +53,11 @@ page {
 }
 .tag-tit {
 	/* 渐变色 */
-	background-image: -webkit-gradient(linear, left top, right top, from(#00c94a), to(#00ac3f));
 	background-image: -webkit-linear-gradient(left, #00c94a, #00ac3f);
 	background-image: linear-gradient(to right, #00c94a, #00ac3f);
 	margin-right: 10rpx;
 	padding: 0 10rpx;
-	-webkit-border-radius: 15rpx 0 15rpx 0;
-	        border-radius: 15rpx 0 15rpx 0;
+	border-radius: 15rpx 0 15rpx 0;
 	color: #fff;
 	font-size: 24rpx;
 }
@@ -89,8 +85,7 @@ page {
 	text-align: center;
 	font-size: 24rpx;
 	padding: 10rpx 0;
-	-webkit-border-radius: 6rpx;
-	        border-radius: 6rpx;
+	border-radius: 6rpx;
 	margin: 10rpx 0;
 }
 .tag-tit2-num {
@@ -156,8 +151,7 @@ page {
 }
 .tui-pay1-flex {
 	text-align: center;
-	-webkit-border-radius: 80rpx 0 0 80rpx;
-	        border-radius: 80rpx 0 0 80rpx;
+	border-radius: 80rpx 0 0 80rpx;
 	line-height: 100rpx;
 	width: 60%;
 	height: 100rpx;
@@ -176,8 +170,7 @@ page {
 }
 .tui-pay2-flex {
 	text-align: center;
-	-webkit-border-radius: 0 80rpx 80rpx 0;
-	        border-radius: 0 80rpx 80rpx 0;
+	border-radius: 0 80rpx 80rpx 0;
 	color: #fff;
 	line-height: 100rpx;
 	width: 40%;
@@ -256,8 +249,7 @@ page {
 	height: 64rpx !important;
 	width: 64rpx !important;
 	padding: 6px !important;
-	-webkit-border-radius: 50%;
-	        border-radius: 50%;
+	border-radius: 50%;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
@@ -290,8 +282,7 @@ page {
 	background: #b6b6b6;
 	font-size: 32rpx;
 	padding: 4rpx 0;
-	-webkit-border-radius: 40rpx;
-	        border-radius: 40rpx;
+	border-radius: 40rpx;
 	width: 100rpx;
 	text-align: center;
 }
@@ -303,7 +294,6 @@ page {
 	background: rgba(0, 0, 0, .5);
 	font-size: 28rpx;
 	padding: 20rpx;
-	-webkit-border-radius: 14rpx;
 	border-radius: 14rpx;
 	text-align: center;
 	width: 70%;
@@ -318,8 +308,7 @@ page {
 
 /*顶部菜单*/
 .tui-menu-box {
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 }
 .tui-menu-header {
 	font-size: 34rpx;
@@ -335,8 +324,7 @@ page {
 .tui-menu-itembox {
 	color: #fff;
 	padding: 40rpx 10rpx 0 10rpx;
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
@@ -347,8 +335,7 @@ page {
 .tui-menu-item {
 	width: 22%;
 	height: 160rpx;
-	-webkit-border-radius: 24rpx;
-	        border-radius: 24rpx;
+	border-radius: 24rpx;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
@@ -409,8 +396,7 @@ page {
 /*内容 部分*/
 .tui-padding {
 	padding: 0 30rpx;
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 }
 .tui-ml-auto {
 	margin-left: auto;
@@ -466,8 +452,7 @@ page {
 	margin-top: 26rpx;
 }
 .tui-pro-detail {
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 	color: #333;
 }
 .tui-product-title {
@@ -547,8 +532,7 @@ page {
 }
 .heigth-tui {
 	background-color: #fff;
-	-webkit-border-radius: 50rpx;
-	        border-radius: 50rpx;
+	border-radius: 50rpx;
 	height: 518rpx;
 }
 .text-indent {
@@ -649,13 +633,11 @@ page {
 }
 .tag-tit {
 	/* 渐变色 */
-	background-image: -webkit-gradient(linear, left top, right top, from(#00c94a), to(#00ac3f));
 	background-image: -webkit-linear-gradient(left, #00c94a, #00ac3f);
 	background-image: linear-gradient(to right, #00c94a, #00ac3f);
 	margin-right: 10rpx;
 	padding: 0 10rpx;
-	-webkit-border-radius: 15rpx 0 15rpx 0;
-	        border-radius: 15rpx 0 15rpx 0;
+	border-radius: 15rpx 0 15rpx 0;
 	color: #fff;
 	font-size: 24rpx;
 }
@@ -670,8 +652,7 @@ page {
 	right: 0;
 	background-color: rgba(244, 244, 244, 1);
 	padding: 5rpx 20rpx 5rpx 20rpx;
-	-webkit-border-radius: 10px 0 0 10px;
-	        border-radius: 10px 0 0 10px;
+	border-radius: 10px 0 0 10px;
 	color: rgba(182, 182, 182, 1);
 	font-size: 24rpx;
 }
@@ -705,7 +686,6 @@ page {
 	font-size: 28rpx;
 	line-height: 28rpx;
 	padding: 10rpx 0rpx 10rpx 30rpx;
-	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	margin-top: 8rpx;
 	width: 80%;
@@ -747,8 +727,7 @@ page {
 	font-weight: 500;
 	position: relative;
 	padding: 0 150rpx 0 30rpx;
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 }
 .tui-pro-title {
 	padding-top: 20rpx;
@@ -756,8 +735,7 @@ page {
 .tui-pro-title-tag {
 	background-color: rgba(245, 245, 245, 1);
 	color: rgba(255, 101, 0, 1);
-	-webkit-border-radius: 10px;
-	        border-radius: 10px;
+	border-radius: 10px;
 	margin: 0 10rpx;
 	font-size: 24rpx;
 	padding: 5rpx 20rpx;
@@ -767,8 +745,7 @@ page {
 	background: transparent;
 	margin: 0;
 	padding: 0;
-	-webkit-border-radius: 0;
-	        border-radius: 0;
+	border-radius: 0;
 	border: 0;
 }
 .tui-share-btn::after {
@@ -923,8 +900,7 @@ page {
 .tui-acatar {
 	width: 60rpx;
 	height: 60rpx;
-	-webkit-border-radius: 30rpx;
-	        border-radius: 30rpx;
+	border-radius: 30rpx;
 	display: block;
 	margin-right: 16rpx;
 }
@@ -938,8 +914,7 @@ page {
 }
 .tui-cmt-btn {
 	padding: 50rpx 0 30rpx 0;
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
@@ -1078,10 +1053,8 @@ page {
 
 /*底部选择弹层*/
 .tui-popup-class {
-	-webkit-border-top-left-radius: 24rpx;
-	        border-top-left-radius: 24rpx;
-	-webkit-border-top-right-radius: 24rpx;
-	        border-top-right-radius: 24rpx;
+	border-top-left-radius: 24rpx;
+	border-top-right-radius: 24rpx;
 	padding-bottom: env(safe-area-inset-bottom);
 }
 .tui-popup-box {
@@ -1121,8 +1094,7 @@ page {
 .tui-popup-img {
 	height: 200rpx;
 	width: 200rpx;
-	-webkit-border-radius: 24rpx;
-	        border-radius: 24rpx;
+	border-radius: 24rpx;
 	display: block;
 }
 .tui-popup-price {
@@ -1145,8 +1117,7 @@ page {
 }
 .tui-scrollview-box {
 	padding: 0 30rpx 60rpx 30rpx;
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 }
 .tui-attr-title {
 	padding: 10rpx 0;
@@ -1171,10 +1142,8 @@ page {
 	        justify-content: center;
 	background: #f7f7f7;
 	padding: 0 26rpx;
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
-	-webkit-border-radius: 32rpx;
-	        border-radius: 32rpx;
+	box-sizing: border-box;
+	border-radius: 32rpx;
 	margin-right: 20rpx;
 	margin-bottom: 20rpx;
 	font-size: 26rpx;
@@ -1191,8 +1160,7 @@ page {
 	border: 1rpx solid #e41f19;
 	width: 100%;
 	height: 100%;
-	-webkit-border-radius: 40rpx;
-	        border-radius: 40rpx;
+	border-radius: 40rpx;
 	left: 0;
 	top: 0;
 }
@@ -1207,8 +1175,7 @@ page {
 	-webkit-justify-content: space-between;
 	        justify-content: space-between;
 	padding: 20rpx 0 30rpx 0;
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 
@@ -1236,8 +1203,7 @@ page {
 	left: 0;
 	bottom: 0;
 	right: 0;
-	-webkit-border-radius: 8rpx;
-	        border-radius: 8rpx;
+	border-radius: 8rpx;
 	overflow: hidden;
 }
 .warp-text {

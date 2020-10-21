@@ -59,7 +59,7 @@
 									<view class="tag-tit2-price">
 										<text style="font-size: 24rpx;color: #555;margin-right: 12rpx;">限量价</text>
 										<text style="font-size: 16rpx;">¥</text>
-										<text style="font-size: 40rpx;font-weight: bold;margin: 0 4rpx;">{{item.platformClientPrice}}</text>
+										<text style="font-size: 40rpx;font-weight: bold;margin: 0 4rpx;">{{item.platformClinetPrice}}</text>
 										<text style="font-size: 24rpx;font-weight: 400;">元</text>
 										<text style="font-size: 20rpx;color: #b6b6b6;">/件</text>
 									</view>

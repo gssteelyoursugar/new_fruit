@@ -59,7 +59,6 @@
   ],
   "window": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "圈圈点点",
     "navigationBarBackgroundColor": "#fff",
     "backgroundColor": "#f8f8f8"
   },
@@ -107,5 +106,5 @@
     }
   },
   "usingComponents": {},
-  "sitemapLocation": "sitemap52.json"
+  "sitemapLocation": "sitemap11.json"
 }

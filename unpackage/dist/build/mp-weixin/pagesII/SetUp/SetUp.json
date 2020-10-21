@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "设置",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "tui-icon": "/components/tui-icon/tui-icon",
+    "tui-list-cell": "/components/tui-list-cell/tui-list-cell",
+    "ss-switch": "/components/ss-switch/ss-switch"
+  }
+}

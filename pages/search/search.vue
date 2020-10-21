@@ -236,7 +236,7 @@
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
-		color: #666666;
+		color: #b6b6b6;
 		margin-left: 20rpx;
 	}
 

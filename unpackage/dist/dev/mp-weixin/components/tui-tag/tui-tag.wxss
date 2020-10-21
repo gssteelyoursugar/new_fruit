@@ -255,8 +255,7 @@
 	-webkit-box-pack: center;
 	-webkit-justify-content: center;
 	        justify-content: center;
-	-webkit-border-radius: 6rpx;
-	        border-radius: 6rpx;
+	border-radius: 6rpx;
 	-webkit-flex-shrink: 0;
 	        flex-shrink: 0;
 }
@@ -274,40 +273,31 @@
 	transform-origin: 0 0;
 	-webkit-transform: scale(0.5, 0.5);
 	transform: scale(0.5, 0.5);
-	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	left: 0;
 	top: 0;
-	-webkit-border-radius: 12rpx;
-	        border-radius: 12rpx;
+	border-radius: 12rpx;
 }
 .tui-tag-fillet.data-v-2a5ecaa0 {
-	-webkit-border-radius: 50rpx;
-	        border-radius: 50rpx;
+	border-radius: 50rpx;
 }
 .tui-white.tui-tag-fillet.data-v-2a5ecaa0::after {
-	-webkit-border-radius: 80rpx;
-	        border-radius: 80rpx;
+	border-radius: 80rpx;
 }
 .tui-tag-outline-fillet.data-v-2a5ecaa0::after {
-	-webkit-border-radius: 80rpx;
-	        border-radius: 80rpx;
+	border-radius: 80rpx;
 }
 .tui-tag-fillet-left.data-v-2a5ecaa0 {
-	-webkit-border-radius: 50rpx 0 0 50rpx;
-	        border-radius: 50rpx 0 0 50rpx;
+	border-radius: 50rpx 0 0 50rpx;
 }
 .tui-tag-fillet-right.data-v-2a5ecaa0 {
-	-webkit-border-radius: 0 50rpx 50rpx 0;
-	        border-radius: 0 50rpx 50rpx 0;
+	border-radius: 0 50rpx 50rpx 0;
 }
 .tui-tag-fillet-left.tui-tag-outline.data-v-2a5ecaa0::after {
-	-webkit-border-radius: 100rpx 0 0 100rpx;
-	        border-radius: 100rpx 0 0 100rpx;
+	border-radius: 100rpx 0 0 100rpx;
 }
 .tui-tag-fillet-right.tui-tag-outline.data-v-2a5ecaa0::after {
-	-webkit-border-radius: 0 100rpx 100rpx 0;
-	        border-radius: 0 100rpx 100rpx 0;
+	border-radius: 0 100rpx 100rpx 0;
 }
 
 /* tag end*/

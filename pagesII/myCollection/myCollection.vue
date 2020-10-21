@@ -26,7 +26,7 @@
 							{{item.kg1}}斤装
 						</view>
 						<view class="tag-tit2-text">
-							 <text class="price1">￥{{item.platformClientPrice}}元</text><text class="price2">/件</text>
+							 <text class="price1">￥{{item.platformClinetPrice}}元</text><text class="price2">/件</text>
 						</view>
 					</view>
 					<image  src="../../static/images/like1.png"  mode="aspectFill" class="tui-shop-car" v-if="showLike" @tap="delLike(item.goodsId)"></image>

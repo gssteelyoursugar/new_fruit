@@ -1,0 +1,7 @@
+{
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "更新店铺",
+  "usingComponents": {
+    "tui-list-cell": "/components/tui-list-cell/tui-list-cell"
+  }
+}

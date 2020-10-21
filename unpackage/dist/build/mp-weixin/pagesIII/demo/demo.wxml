@@ -1,0 +1,1 @@
+<view style="padding:0 100rpx;background-color:#fff;"><goods-swiper vue-id="3b775c1a-1" datas="{{detail}}" config="{{config}}" data-event-opts="{{[['^change',[['swiperChange']]],['^tapFun',[['tapFun']]]]}}" bind:change="__e" bind:tapFun="__e" bind:__l="__l"></goods-swiper></view>

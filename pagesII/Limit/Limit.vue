@@ -54,7 +54,7 @@
 			<view class="flex-column-box">
 				<scroll-view :scroll-top="scrollTop" scroll-y="true" class="scroll-Y" @scroll="scroll">
 					<view class="tui-rink-sceate" >
-						<view class="tui-rank-list" v-for="ll of 20" :key="ll">
+						<view class="tui-rank-list"><!-- v-for="ll of 20" :key="ll" -->
 							<view class="tui-tab-rank" v-for="(item,index) in LimitDataList" :key="index">
 								<view class="tui-tab-rank-cent" @tap="gotoList(item.id)">
 									<image :src="item.url" mode="aspectFill" class="img-rink"></image>
@@ -79,7 +79,7 @@
 													<text style="color: #b6b6b6;font-size: 20rpx;">/件</text>
 												</view>
 												<!-- <view class="tag-tit2-text">
-										{{item.platformClientPrice}}点赞
+										{{item.platformClinetPrice}}点赞
 									</view> -->
 											</view>
 											<!-- <image src="../../static/images/shopcar@2x.png" mode="aspectFill" class="tui-shop-car"></image> -->

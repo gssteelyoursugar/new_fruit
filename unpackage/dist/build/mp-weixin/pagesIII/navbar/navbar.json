@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "售后订单",
+  "disableScroll": true,
+  "usingComponents": {
+    "tui-list-cell": "/components/tui-list-cell/tui-list-cell"
+  }
+}

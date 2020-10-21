@@ -12,7 +12,7 @@
 
 		<view class="tui-search-history" v-if="history.length!==0">
 			<view class="tui-history-header">
-				<view class="tui-search-title">搜索历史</view>
+				<view class="tui-search-title">历史搜索</view>
 			</view>
 			<view class="tui-history-content">
 				<block v-for="(item,index) in history" :key="index">

@@ -747,11 +747,9 @@ var isFirst1 = true;var _default =
         url: '../../pagesII/message/message' });
 
     },
-
-
     gotoGun: function gotoGun() {
-      uni.navigateTo({
-        url: '../../pagesII/productList/productList' });
+      uni.switchTab({
+        url: '../../pages/search/search' });
 
     },
     // 头部

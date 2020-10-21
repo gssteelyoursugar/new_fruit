@@ -5,8 +5,7 @@
 }
 .tui-picker-view.data-v-b1d51cf8 {
 	height: 100%;
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 }
 .tui-mask.data-v-b1d51cf8 {
 	position: fixed;
@@ -53,9 +52,7 @@
 	line-height: 26rpx;
 	color: #555;
 
-	-webkit-box-shadow: 0 15rpx 10rpx -15rpx #efefef;
-	        box-shadow: 0 15rpx 10rpx -15rpx #efefef;
-
+	box-shadow: 0 15rpx 10rpx -15rpx #efefef;
 
 
 
@@ -86,17 +83,14 @@
 	-webkit-box-align: center;
 	-webkit-align-items: center;
 	        align-items: center;
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 	font-size: 32rpx;
 	background-color: #fff;
 	position: relative;
 }
 .tui-date-radius.data-v-b1d51cf8 {
-	-webkit-border-top-left-radius: 20rpx;
-	        border-top-left-radius: 20rpx;
-	-webkit-border-top-right-radius: 20rpx;
-	        border-top-right-radius: 20rpx;
+	border-top-left-radius: 20rpx;
+	border-top-right-radius: 20rpx;
 	overflow: hidden;
 }
 .tui-picker-header.data-v-b1d51cf8::after {
@@ -137,8 +131,7 @@
 }
 .tui-btn-picker.data-v-b1d51cf8 {
 	padding: 16rpx;
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 	text-align: center;
 	text-decoration: none;
 }

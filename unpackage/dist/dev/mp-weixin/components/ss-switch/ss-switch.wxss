@@ -31,13 +31,11 @@
 .ss-switch {
   width: 100rpx !important;
   height: 48rpx;
-  -webkit-border-radius: 50rpx;
-          border-radius: 50rpx;
+  border-radius: 50rpx;
   display: inline-block;
   vertical-align: middle;
   background-color: #fff;
-  -webkit-box-shadow: 0 0rpx 4rpx 0 #CFCFCF;
-          box-shadow: 0 0rpx 4rpx 0 #CFCFCF;
+  box-shadow: 0 0rpx 4rpx 0 #CFCFCF;
   position: relative;
   opacity: 0;
   -webkit-transition: opacity .2s linear;
@@ -60,11 +58,9 @@
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
   color: #444;
-  -webkit-border-radius: 100%;
-          border-radius: 100%;
+  border-radius: 100%;
   /* 圆角 */
-  -webkit-box-shadow: 14rpx -10rpx 0 0.5px currentColor, 0 16rpx currentColor, -14rpx -10rpx 0 0.5px currentColor, 0 -16rpx 0 1px currentColor, 14rpx 10rpx currentColor, -14rpx 10rpx currentColor;
-          box-shadow: 14rpx -10rpx 0 0.5px currentColor, 0 16rpx currentColor, -14rpx -10rpx 0 0.5px currentColor, 0 -16rpx 0 1px currentColor, 14rpx 10rpx currentColor, -14rpx 10rpx currentColor;
+  box-shadow: 14rpx -10rpx 0 0.5px currentColor, 0 16rpx currentColor, -14rpx -10rpx 0 0.5px currentColor, 0 -16rpx 0 1px currentColor, 14rpx 10rpx currentColor, -14rpx 10rpx currentColor;
   /* 左下 */
 }
 .ss-switch .spin {
@@ -95,8 +91,7 @@ to {
   width: 54rpx;
   height: 54rpx;
   background-color: #ffffff;
-  -webkit-border-radius: 100%;
-          border-radius: 100%;
+  border-radius: 100%;
   position: absolute;
   top: -4rpx;
   left: 0rpx;
@@ -106,8 +101,7 @@ to {
   transition: -webkit-transform .2s linear;
   transition: transform .2s linear;
   transition: transform .2s linear, -webkit-transform .2s linear;
-  -webkit-box-shadow: 0 6rpx 12rpx rgba(0, 0, 0, 0.16);
-          box-shadow: 0 6rpx 12rpx rgba(0, 0, 0, 0.16);
+  box-shadow: 0 6rpx 12rpx rgba(0, 0, 0, 0.16);
 }
 .ss-switch .ss-switch__text {
   position: absolute;

@@ -113,7 +113,7 @@ var render = function() {
     var l0 = _vm.__map(item.list, function(itemTwo, indexs) {
       var $orig = _vm.__get_orig(itemTwo)
 
-      var f0 = _vm._f("getPrice")(itemTwo.platformClientPrice)
+      var f0 = _vm._f("getPrice")(itemTwo.platformClinetPrice)
 
       return {
         $orig: $orig,
@@ -492,7 +492,7 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
             //获取单价
             //获取数量
             //两个相乘
-            allPrice = allPrice + goodsData.number * goodsData.platformClientPrice;
+            allPrice = allPrice + goodsData.number * goodsData.platformClinetPrice;
           }
         }
       }
