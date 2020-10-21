@@ -16,7 +16,6 @@
 						<text>{{user_phone}}</text>
 					</view>
 				</view>
-
 				<!-- 未登录个人信息状态!wxlogin-->
 				<view class="tui-info2" v-if="!wxlogin">
 					<view class="tui-nickname">
@@ -25,7 +24,6 @@
 					<view class="tui-explain">
 					</view>
 				</view>
-				
 				<!-- 未提交审核 => 去认证店铺-->
 				<view class="tui-set-box3" v-if="wxlogin && ApproveStatus === undefined ||ApproveStatus ==='' ||ApproveStatus === null">
 					<view class="tui-icon-box ">
@@ -35,7 +33,6 @@
 					</view>
 				</view>
 				<!-- 未提交审核 => 去认证店铺 -->
-				
 				<!-- 提交审核并等待通过 => 查看店铺信息-->
 				<view class="tui-set-box3" v-if="wxlogin && ApproveStatus === 0">
 					<view class="tui-icon-box">
@@ -45,7 +42,6 @@
 					</view>
 				</view>
 				<!-- 提交审核并等待通过 => 查看店铺信息-->
-				
 				<!-- 提交审核并通过 -->
 				<view class="tui-set-box" v-if="wxlogin && ApproveStatus === 1">
 					<view class="tui-icon-box ">
@@ -56,7 +52,6 @@
 					</view>
 				</view>
 				<!-- 提交审核并通过 -->
-				
 				<!-- 拒绝 -->
 				<view class="tui-set-box3" v-if="wxlogin && ApproveStatus === 2">
 					<view class="tui-icon-box ">
@@ -66,13 +61,8 @@
 					</view>
 				</view>
 				<!-- 拒绝 -->
-				
-		
-
 			</view>
-
 		</view>
-
 		<view class="tui-content-box">
 			<!-- 订单 -->
 			<view class="tui-box tui-order-box">
@@ -83,7 +73,6 @@
 					</view>
 				</tui-list-cell>
 				<view class="tui-order-list tui-order-list-wrap">
-
 					<view class="tui-order-item" @tap="ToBePaid">
 						<view class="tui-icon-box">
 							<image src="/static/images/daifukuan@3x.png" class="tui-order-icon"></image>
@@ -218,8 +207,6 @@
 
 	export default {
 		onLoad: function(options) {
-			this.getOrderData()
-			this.$forceUpdate()
 			console.log("这里是onload")
 			// this.getMerchants()
 			// this.getWxdata()
@@ -449,6 +436,7 @@
 				}
 				listing(getMyOrder, data)
 					.then((res) => {
+						console.log(res)
 						let list = res.data.data
 						// console.log(list)
 						let fukuanList = []
@@ -460,16 +448,17 @@
 							if (item.payStatus == 0) {
 								fukuanList.push(item)
 							}
-							if (item.tradeStatus == 1 || item.tradeStatus == 3) {
+							if (item.tradeStatus == 1) {
 								fahuoList.push(item)
 							}
-							if (item.tradeStatus == 4) {
+							if (item.tradeStatus == 2) {
 								shouhuoList.push(item)
 							}
 							if (item.tradeStatus == 7) {
 								tuikuanList.push(item)
 							}
 						})
+						console.log('shouhuoList,',shouhuoList)
 						this.fukuanList = fukuanList.length
 						this.fahuoList = fahuoList.length
 						this.shouhuoList = shouhuoList.length
@@ -554,6 +543,19 @@
 			messcancel() {
 				this.modaishow = false
 			},
+			//我的全部订单
+			myOrder() {
+				if (!this.wxlogin) {
+					uni.showToast({
+						title: "请先登录",
+						icon: 'none'
+					})
+				} else {
+					uni.navigateTo({
+						url: '../../pagesII/myOrder/myOrder?index=0'
+					})
+				}
+			},
 			//跳转到待付款
 			ToBePaid() {
 				if (!this.wxlogin) {
@@ -598,20 +600,7 @@
 				}
 			},
 
-			//我的全部订单
-			myOrder() {
-				if (!this.wxlogin) {
-					uni.showToast({
-						title: "请先登录",
-						icon: 'none'
-					})
-
-				} else {
-					uni.navigateTo({
-						url: '../../pagesII/myOrder/myOrder'
-					})
-				}
-			},
+			
 			// getWxdata(){
 			// 	uni.request({
 			// 	    url: 'https://api.weixin.qq.com/cgi-bin/customservice/getkflist?access_token=36_S2bdqu6Yy3WdGlcPmw0UH9fMGV6H0SjujlM0t6R7rVkn2ESWoiQ346FUz0mEI2GsDKOoAzUwnQNah7G5dzANuNzuXnudm0S-JONDlp6kn58nnqNKA-apYL1vcz7nwR_l5Ubn6HqnOLUAY0brVRQgAIAZVU', //仅为示例，并非真实接口地址。

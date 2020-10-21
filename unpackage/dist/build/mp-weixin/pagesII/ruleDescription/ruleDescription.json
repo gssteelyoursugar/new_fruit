@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "规则说明",
-  "usingComponents": {
-    "tui-list-cell": "/components/tui-list-cell/tui-list-cell"
-  }
-}

@@ -79,7 +79,7 @@
 													<text style="color: #b6b6b6;font-size: 20rpx;">/件</text>
 												</view>
 												<!-- <view class="tag-tit2-text">
-										{{item.platformPrice}}点赞
+										{{item.platformClientPrice}}点赞
 									</view> -->
 											</view>
 											<!-- <image src="../../static/images/shopcar@2x.png" mode="aspectFill" class="tui-shop-car"></image> -->

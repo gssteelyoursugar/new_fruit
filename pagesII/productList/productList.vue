@@ -95,7 +95,7 @@
 								<view class="tui-pro-pic">
 									<view style="color: #FF7709; display: flex;align-items: baseline;">
 										<text style="font-size: 16rpx;">¥</text>
-										<text style="font-size: 28rpx; font-weight: 500">{{item.platformPrice}}</text>
+										<text style="font-size: 28rpx; font-weight: 500">{{item.platformClientPrice}}</text>
 										<text style="font-size: 20rpx;color: #B6B6B6;">/件</text>
 										<view style="color: #B6B6B6;text-decoration: line-through; margin-left:10rpx;">
 											<text style="font-size: 16rpx;"> ¥</text>
@@ -141,7 +141,7 @@
 								<view class="tui-pro-pic">
 									<view style="color: #FF7709; display: flex;align-items: baseline;">
 										<text style="font-size: 16rpx;">¥</text>
-										<text style="font-size: 28rpx; font-weight: 500">{{item.platformPrice}}</text>
+										<text style="font-size: 28rpx; font-weight: 500">{{item.platformClientPrice}}</text>
 										<text style="font-size: 20rpx;color: #B6B6B6;">/件</text>
 										<view style="color: #B6B6B6;text-decoration: line-through;margin-left:10rpx;">
 											<text style="font-size: 16rpx;"> ¥</text>

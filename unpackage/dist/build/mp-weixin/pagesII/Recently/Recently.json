@@ -1,9 +1,0 @@
-{
-  "enablePullDownRefresh": true,
-  "navigationBarTitleText": "最近看过",
-  "navigationStyle": "custom",
-  "usingComponents": {
-    "tui-icon": "/components/tui-icon/tui-icon",
-    "tui-swipe-action": "/components/tui-swipe-action/tui-swipe-action"
-  }
-}

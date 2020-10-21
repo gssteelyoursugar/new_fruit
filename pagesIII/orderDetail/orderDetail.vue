@@ -159,7 +159,7 @@
 				<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
 					<view class="tui-left-one2">
 						<text class="tui-text-left tui-title-class">果径大小</text>
-						<text class=" tui-text-left tui-title-class">{{shopListdata.data.platformPrice || 0}}mm</text>
+						<text class=" tui-text-left tui-title-class">{{shopListdata.data.platformClientPrice || 0}}mm</text>
 					</view>
 					<view class="tui-right-one" style="flex: 4;">
 						<text class=" tui-text-left tui-title-class ">不良率</text>

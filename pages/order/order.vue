@@ -50,7 +50,7 @@
 								<view class="tui-price-box">
 									<view class="tui-goods-price">
 										<text class="goods-price-tag">￥</text>
-										<text class="goods-price-num">{{ itemTwo.platformPrice | getPrice }}</text>
+										<text class="goods-price-num">{{ itemTwo.platformClientPrice | getPrice }}</text>
 										<text>/件</text>
 									</view>
 									<!-- :custom="index" :index="indexs" 
@@ -322,7 +322,7 @@
 							//获取单价
 							//获取数量
 							//两个相乘
-							allPrice = allPrice + goodsData.number * goodsData.platformPrice;
+							allPrice = allPrice + goodsData.number * goodsData.platformClientPrice;
 						}
 					}
 				}

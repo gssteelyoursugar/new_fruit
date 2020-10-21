@@ -13,6 +13,7 @@
 				"enablePullDownRefresh": true,
 				"onReachBottomDistance": 50,
 				"backgroundTextStyle": "dark"
+				
 			}
 		}, {
 			"path": "pages/search/search",
@@ -91,12 +92,7 @@
 				"iconPath": "static/images/my0.png",
 				"selectedIconPath": "static/images/my1.png",
 				"text": "我的"
-			}
-
-
-
-
-
+			},
 		]
 	},
 	//分包结构

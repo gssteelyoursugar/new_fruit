@@ -28,7 +28,7 @@
 							<view class="tag-tit2">
 								<view class="">
 									<view class="tag-tit2-price">
-										{{item.platformPrice}}元/件
+										{{item.platformClientPrice}}元/件
 									</view>
 									<view class="tag-tit2-text">
 										{{item.number}}点赞

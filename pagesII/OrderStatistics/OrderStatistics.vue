@@ -36,13 +36,13 @@
 							<view class="tag-tit2-price"></view>
 							<view class="tag-tit2-text">
 								<text style="font-size: 20rpx;margin-right:4rpx;">¥</text>
-								{{item.platformPrice}}
+								{{item.platformClientPrice}}
 								<text style="font-size: 20rpx;margin-left:4rpx;">元</text>
 								<text class="price2">/件</text>
 							</view>
 							<view style="font-size: 24rpx;color: #666;">
 								实付:
-								<text style="font-size: 28rpx;color: #333;">{{item.platformPrice}}</text>
+								<text style="font-size: 28rpx;color: #333;">{{item.platformClientPrice}}</text>
 								（含运费）
 							</view>
 						</view>

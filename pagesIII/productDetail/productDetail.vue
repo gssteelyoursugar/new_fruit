@@ -81,7 +81,7 @@
 						<view class="tui-sale-info tui-size tui-gray">
 							<view class="tui-magin">
 								<text class="tui-code">￥</text>
-								<text class="tui-price-one">{{ shopListdata.platformPrice }}</text>
+								<text class="tui-price-one">{{ shopListdata.platformClientPrice }}</text>
 								<text style="font-size:28rpx;color: #FF6500;">元</text>
 								<text>/件</text>
 							</view>
@@ -147,7 +147,7 @@
 					<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
 						<view class="tui-left-one2">
 							<text class="tui-text-left tui-title-class">果径大小</text>
-							<text class=" tui-text-left tui-title-class">{{ shopListdata.platformPrice }}mm</text>
+							<text class=" tui-text-left tui-title-class">{{ shopListdata.platformClientPrice }}mm</text>
 						</view>
 						<view class="tui-right-one" style="flex: 4;">
 							<text class=" tui-text-left tui-title-class ">不良率</text>
@@ -357,7 +357,7 @@
 											<view class="shabi">
 												<text class="tui-price-one" style="font-size: 20rpx;">￥</text>
 												<view class="tui-price-one">
-													{{ shopListdata.platformPrice }}
+													{{ shopListdata.platformClientPrice }}
 													<text style="font-size: 24rpx;">元</text>
 												</view>
 												/件
@@ -381,10 +381,10 @@
 				<view class="tui-pay-flex-box">
 					<view class="tui-pay-flex">
 						<view class="tui-pay1-flex">
-							<!-- <text>合计{{shopListdata.platformPrice * value2}}含运费</text> -->
+							<!-- <text>合计{{shopListdata.platformClientPrice * value2}}含运费</text> -->
 							<text style="color: #333333;font-size: 24rpx;margin-right:4rpx">合计:</text>
 							<text style="color: #FF5600;font-size: 20rpx;">¥</text>
-							<text style="font-weight: bold;">{{ shopListdata.platformPrice * value2 }}</text>
+							<text style="font-weight: bold;">{{ shopListdata.platformClientPrice * value2 }}</text>
 							<text style="color: #FF5600;font-size: 22rpx;margin-right:8rpx">元</text>
 							<text style="color: #888888;font-size: 22rpx;">含运费</text>
 						</view>

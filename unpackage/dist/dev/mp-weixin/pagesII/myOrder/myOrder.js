@@ -530,441 +530,433 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
 
-var _request = __webpack_require__(/*! ../../api/request.js */ 21);function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}
-
-
-
-
-
-
-
-
-
-var setdata = uni.getStorageSync('usermen');var _console =
-
-
-console,log = _console.log;
-var thorui = __webpack_require__(/*! @/common/tui-clipboard/tui-clipboard.js */ 82);var _default =
-{
-  data: function data() {
-    return {
-      loadStatus: "loading",
-      payStatus: 0, //付款状态
-      tradeStatus: 0, //收货状态
-      timeList: 300,
-      tabs: [{
-        name: "全部" },
-      {
-        name: "待付款" },
-      {
-        name: "待发货" },
-      {
-        name: "待收货" },
-      {
-        name: "已完成" }],
-
-      currentTab: 0,
-      pageIndex: 1,
-      loadding: false,
-      pullUpOn: true,
-      scrollTop: 0,
-      myOrderData: [],
-      url: '',
-      countDown: 0 };
-
-  },
-  computed: {
-    // 全部数据
-    allData: function allData() {
-      var data = this.myOrderData;
-      return data;
-    },
-    // 待付款
-    waitPay: function waitPay() {
-      var data = this.myOrderData;
-      var arr = [];
-      data.map(function (item) {
-        if (item.payStatus == 0) {
-          arr.push(item);
-        }
-      });
-      return arr;
-    },
-    // 待发货
-    waitDeliver: function waitDeliver() {
-      var data = this.myOrderData;
-      var arr = [];
-      data.map(function (item) {
-        if (item.tradeStatus == "1" || item.tradeStatus == "3") {
-          arr.push(item);
-        }
-      });
-      return arr;
-    },
-    waitConfirm: function waitConfirm() {
-      var data = this.myOrderData;
-      var arr = [];
-      data.map(function (item) {
-        if (item.payStatus == 1 && item.tradeStatus == 4) {
-          arr.push(item);
-        }
-      });
-      return arr;
-    },
-    done: function done() {
-      var data = this.myOrderData;
-      var arr = [];
-      data.map(function (item) {
-        if (item.payStatus === 1 && item.tradeStatus === 6) {
-          arr.push(item);
-        }
-      });
-      return arr;
-    } },
-
-
-  methods: {
-    //手势
-    onSlide: function onSlide(e) {
-      var type = e.type;
-      console.log(e);
-      switch (type) {
-        case 'slideUp':
-          log('我上滑了~');
-
-          break;
-        case 'slideDown':
-          // if (this.pageIndex > 1) {
-          // 	this.pageIndex--
-          // }
-          // uni.showLoading({
-          // 	title: '加载中',
-          // 	duration: 2000
-          // })
-          // this.getOrderData()
-          // uni.hideLoading()
-          // log('我下滑了~')
-          break;
-        case 'slideLeft':
-          log('我左滑了~');
-          break;
-        case 'slideRight':
-          log('我右滑了~');
-          break;}
-
-    },
+var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var setdata = uni.getStorageSync('usermen');var _console = console,log = _console.log;var thorui = __webpack_require__(/*! @/common/tui-clipboard/tui-clipboard.js */ 82);var _default = { data: function data() {return { loadStatus: "loading", payStatus: '', //付款状态
+      tradeStatus: '', //收货状态
+      timeList: 300, tabs: [{ name: "全部" }, { name: "待付款" }, { name: "待发货" }, { name: "待收货" }, { name: "已完成" }], currentTab: null, pageIndex: 1, loadding: false, pullUpOn: true, scrollTop: 0, myOrderData: [], url: '', countDown: 0 };}, computed: { // 全部数据
+    allData: function allData() {var data = this.myOrderData;return data;}, // 待付款
+    waitPay: function waitPay() {var data = this.myOrderData;var arr = [];data.map(function (item) {if (item.payStatus == '0') {arr.push(item);}});return arr;}, // 待发货
+    waitDeliver: function waitDeliver() {var data = this.myOrderData;var arr = [];data.map(function (item) {if (item.tradeStatus == "1") {arr.push(item);}});return arr;}, waitConfirm: function waitConfirm() {var data = this.myOrderData;var arr = [];data.map(function (item) {if (item.payStatus == '1' && item.tradeStatus == '2') {arr.push(item);}});return arr;}, done: function done() {var data = this.myOrderData;var arr = [];data.map(function (item) {if (item.payStatus == '1' && item.tradeStatus == '6') {arr.push(item);}});return arr;} }, methods: { //手势
     //支付倒计时
-    endOfTime: function endOfTime(id) {
-      this.goCancel(id);
-    },
-    //删除订单
-    goDel: function goDel(id) {var _this = this;
-      log(id);
-      var data = {
-        id: id,
-        token: setdata };
-
-      (0, _api.publicing)(_request.postDelOrders, data).
-      then(function (res) {
-        log(res);
-        _this.getOrderData();
-        _this.$forceUpdate();
-      }).
-      catch(function (err) {
-        log(err);
-      });
-    },
-
-    //取消支付
-    goCancel: function goCancel(id) {var _this2 = this;
-      log(id);
-
-      var data = {
-        id: id,
-        token: setdata };
-
-      (0, _api.publicing)(_request.postCancelPay, data).
-      then(function (res) {
-        log(res);
-        _this2.getOrderData();
-        _this2.$forceUpdate();
-      }).
-      catch(function (err) {
-        log(err);
-      });
-    },
-
-    //去付款
-    payGo: function payGo(orderNumber) {var _this3 = this;
-      uni.showModal({
-        title: '提示',
-        content: '确认支付',
-        success: function success(res) {
-          if (res.confirm) {
-            console.log('用户点击确定');
-            var data = {
-              orderNumber: orderNumber };
-
-
-            (0, _api.publicing)(_request.postOrderPay, data).
-            then(function (res) {
-              log(res);
-              uni.showToast({
-                title: "".concat(res.data.msg),
-                icon: 'none',
-                duration: 2000 });
-
-
-              _this3.getOrderData();
-              _this3.$forceUpdate();
-            }).
-            catch(function (err) {
-              log(err);
-            });
-          } else if (res.cancel) {
-            uni.showToast({
-              title: '已取消支付',
-              icon: 'none',
-              duration: 2000 });
-
-
-            return;
-          }
-        } });
-
-    },
-
-    //确认收货
-    goConfirm: function goConfirm(id) {var _this4 = this;
-      log(id);
-
-      var data = {
-        id: id,
-        token: setdata };
-
-      (0, _api.publicing)(_request.postConfirmOrder, data).
-      then(function (res) {
-        log(res);
-        _this4.getOrderData();
-        _this4.$forceUpdate();
-      }).
-      catch(function (err) {
-        log(err);
-      });
-    },
-
-    //再次下单
-    buyAgain: function buyAgain(id) {
-      log(id);
-      uni.navigateTo({
-        url: '../../pagesIII/productDetail/productDetail?id=' + id });
-
-      // return
-      // let data ={
-      // 	token:setdata,
-      // 	id:id
-
-      // }
-      // publicing(postAgainOrder,data)
-      // .then((res)=>{
-      // 	log(res)
-      // 	let ids = res.data.data
-      // 	uni.showToast({
-      // 		title:`${res.data.msg}`,
-      // 		icon:'none',
-      // 		duration:2000
-      // 	})
-      // 	uni.navigateTo({
-      // 		url: '../../pagesIII/submitOrder/submitOrder?ids='+ids
-      // 	})
-      // })
-      // .catch((err)=>{
-      // 	log(err)
-      // })
-    },
-    //请求订单数据
-    getOrderData: function getOrderData() {var _this5 = this;
-      var data = {
-        token: setdata,
-        pageNo: this.pageIndex,
-        pageSize: 10
-        // payStatus: this.payStatus,
-        // tradeStatus: this.tradeStatus
-      };
-      // log(data)
-      if (this.currentTab === 0) {//如果是默认全部不传payStatus参数
-      }
-      if (this.currentTab === 1) {
-        data.payStatus = 0;
-        data.tradeStatus = 0;
-      }
-      if (this.currentTab === 2) {
-        data.payStatus = 1;
-        data.tradeStatus = 2;
-      }
-      if (this.currentTab === 3) {
-        data.payStatus = 1;
-        data.tradeStatus = 4;
-      }
-      if (this.currentTab === 4) {
-        data.payStatus = 1;
-        data.tradeStatus = 6;
-      }
-      console.log(data);
-      (0, _api.listing)(_request.getMyOrder, data).
-      then(function (res) {
-        log(res.data.data);
-        if (res.data.data.length === 0) {
-          // let dataLoad = "noMore"
-          _this5.loadStatus = "noMore";
-          // this.$set(this.loadStatus,dataLoad)
-          _this5.$forceUpdate();
-          return;
-        }
-        _this5.countDown = res.data.data.time - res.data.data.createDate;
-        var newData = res.data.data;
-        // this.myOrderData = newData
-        // newData.map(item=>{
-        // 	console.log(item.tradeStatus ==1)
-        // })
-        console.log(newData);
-        // this.myOrderData.push(...newData)
-        var arr = _this5.myOrderData || [];
-        arr.push.apply(arr, _toConsumableArray(newData));
-        _this5.$set(_this5.myOrderData, arr);
-        // this.myOrderData = [...this.myOrderData,...newData]
-        _this5.$forceUpdate();
-      }).
-      catch(function (err) {
-        log(err);
-      });
-    },
-    //复制
+    endOfTime: function endOfTime(id) {this.goCancel(id);}, //删除订单
+    goDel: function goDel(id) {var _this = this;log(id);var data = { id: id, token: setdata };(0, _api.publicing)(_request.postDelOrders, data).then(function (res) {log(res);_this.getOrderData();_this.$forceUpdate();}).catch(function (err) {log(err);});}, //取消支付
+    goCancel: function goCancel(id) {var _this2 = this;log(id);var data = { id: id, token: setdata };(0, _api.publicing)(_request.postCancelPay, data).then(function (res) {log(res);_this2.getOrderData();_this2.$forceUpdate();}).catch(function (err) {log(err);});}, //去付款
+    payGo: function payGo(orderNumber) {var _this3 = this;uni.showModal({ title: '提示', content: '确认支付', success: function success(res) {if (res.confirm) {console.log('用户点击确定');var data = { orderNumber: orderNumber };(0, _api.publicing)(_request.postOrderPay, data).then(function (res) {log(res);uni.showToast({ title: "".concat(res.data.msg), icon: 'none', duration: 2000 });_this3.getOrderData();_this3.$forceUpdate();}).catch(function (err) {log(err);});} else if (res.cancel) {uni.showToast({ title: '已取消支付', icon: 'none', duration: 2000 });return;}} });}, //确认收货
+    goConfirm: function goConfirm(id) {var _this4 = this;log(id);var data = { id: id, token: setdata };(0, _api.publicing)(_request.postConfirmOrder, data).then(function (res) {log(res);_this4.getOrderData();_this4.$forceUpdate();}).catch(function (err) {log(err);});}, //再次下单
+    buyAgain: function buyAgain(id) {log(id);uni.navigateTo({ url: '../../pagesIII/productDetail/productDetail?id=' + id });}, //请求订单数据
+    getOrderData: function getOrderData() {var _this5 = this;var data = { token: setdata, pageNo: this.pageIndex, pageSize: 10, payStatus: this.payStatus, tradeStatus: this.tradeStatus };(0, _api.listing)(_request.getMyOrder, data).then(function (res) {log(res.data.data);if (res.data.data.length === 0) {setTimeout(function () {_this5.loadStatus = "noMore";}, 1000); // this.$set(this.loadStatus,dataLoad)
+          _this5.$forceUpdate();return;} else {_this5.myOrderData = res.data.data;_this5.loadStatus = "noMore";} // this.countDown = (res.data.data.time - res.data.data.createDate)
+        // let newData = res.data.data
+        // console.log(newData)
+        // let arr = this.myOrderData || []
+        // arr.push(...newData)
+        // this.$set(this.myOrderData, arr)
+        _this5.$forceUpdate();}).catch(function (err) {log(err);});}, //复制
     //event 当需要异步请求返回数据再进行复制时，需要传入此参数，或者异步方法转为同步方法（H5端）
-    clipboard: function clipboard(event) {
-      console.log(event);
-      var data = event;
-      thorui.getClipboardData(data, function (res) {
-
-
-
-
-
-
-
-      }, event);
-    },
-    //申请售后
-    goAfter: function goAfter(id) {
-      uni.navigateTo({
-        url: '../../pagesIII/applyAfter/applyAfter?id=' + id });
-
-    },
-    //售后详情
-    goAfterDetails: function goAfterDetails(id) {
-      uni.navigateTo({
-        url: '../../pagesIII/afterDetails/afterDetails?id=' + id });
-
-    },
-    change: function change(e) {
-      this.currentTab = e.index;
-      console.log("这列是currentTab：" + this.currentTab);
-      if (this.currentTab === 0) {//全部默认0
-        this.payStatus = 0;
-        this.getOrderData();
-      } else if (this.currentTab === 1) {//待付款
-        this.payStatus = 0;
-        this.getOrderData();
-      } else if (this.currentTab === 2) {//待发货
-        var stateCode = '1,2,3';
-        this.payStatus = 1;
-        this.tradeStatus = stateCode;
-
-        this.getOrderData();
-      } else if (this.currentTab === 3) {//待收货
-        var _stateCode = '4,8';
-        this.payStatus = 1;
-        this.tradeStatus = _stateCode;
-        this.getOrderData();
-      } else if (this.currentTab === 4) {//已完成
-        this.payStatus = 1;
-        this.tradeStatus = 6;
-        this.getOrderData();
-      }
-
-      log(this.payStatus);
-    },
-    detail: function detail() {
-      uni.navigateTo({
-        url: '../orderDetail/orderDetail' });
-
-    } },
-
-  onShow: function onShow() {
-    this.url = _request.imgurl;
-    // this.getOrderData()
-  },
-  //
-  onLoad: function onLoad(options) {
-    console.log(options);
-    if (options.index == 1) {//待付款
-      this.currentTab = parseInt(options.index);
-    } else if (options.index == 2) {//待发货
-      this.currentTab = parseInt(options.index);
-    } else if (options.index == 3) {//待收货
-      this.currentTab = parseInt(options.index);
-    } else if (options.index == 4) {//已完成
-      this.currentTab = parseInt(options.index);
-    }
-    console.log(this.currentTab);
-    this.getOrderData();
-  },
-  // onPullDownRefresh() {
+    clipboard: function clipboard(event) {console.log(event);var data = event;thorui.getClipboardData(data, function (res) {}, event);}, //申请售后
+    goAfter: function goAfter(id) {uni.navigateTo({ url: '../../pagesIII/applyAfter/applyAfter?id=' + id });}, //售后详情
+    goAfterDetails: function goAfterDetails(id) {uni.navigateTo({ url: '../../pagesIII/afterDetails/afterDetails?id=' + id });}, change: function change(e) {this.currentTab = e.index;console.log("这列是currentTab：" + this.currentTab);if (this.currentTab === 0) {//全部默认0
+        this.payStatus = '';this.tradeStatus = '';console.log("进来了第一个，pt");this.getOrderData();} else if (this.currentTab === 1) {//待付款
+        console.log("进来了第二个，p0t");this.payStatus = 0;this.tradeStatus = '';this.getOrderData();} else if (this.currentTab === 2) {//待发货
+        console.log("进来了第三个，p1t1");this.payStatus = 1;this.tradeStatus = 1;this.getOrderData();} else if (this.currentTab === 3) {//待收货
+        console.log("进来了第si个，p1t2");this.payStatus = 1;this.tradeStatus = 2;this.getOrderData();} else if (this.currentTab === 4) {//已完成
+        console.log("进来了第wu个，p1t6");this.payStatus = 1;this.tradeStatus = 6;this.getOrderData();}}, detail: function detail() {uni.navigateTo({ url: '../orderDetail/orderDetail' });} }, onShow: function onShow() {this.url = _request.imgurl; // this.getOrderData()
+  }, //
+  onLoad: function onLoad(options) {console.log(options);if (options.index == 0) {//全部 pt
+      this.currentTab = parseInt(options.index);this.payStatus = '';this.tradeStatus = '';} else if (options.index == 1) {//待付款p0t
+      this.currentTab = parseInt(options.index);this.payStatus = 0;this.tradeStatus = '';} else if (options.index == 2) {//待发货p1t1
+      this.currentTab = parseInt(options.index);this.payStatus = 1;this.tradeStatus = 1;} else if (options.index == 3) {//待收货p1t2
+      this.currentTab = parseInt(options.index);this.payStatus = 1;this.tradeStatus = 2;} else if (options.index == 4) {//已完成p1t8
+      this.currentTab = parseInt(options.index);this.payStatus = '';this.tradeStatus = 8;}console.log(this.currentTab);this.getOrderData();}, // onPullDownRefresh() {
   // 	log("触发加载")
-
-
   // 	setTimeout(() => {
   // 		uni.stopPullDownRefresh()
-
   // 	}, 200);
   // },
-  onReachBottom: function onReachBottom() {var _this6 = this;
-    if (this.loadStatus === "noMore") {
-      return;
-    }
-    log('我真的触发了下拉加载');
-    this.pageIndex++;
-    this.getOrderData();
-    this.loadding = true;
-    this.pullUpOn = true;
-    uni.hideLoading();
-    setTimeout(function () {
-      _this6.loadding = false;
-      _this6.pullUpOn = false;
-    }, 1000);
-  },
-  onPageScroll: function onPageScroll(e) {
-    this.scrollTop = e.scrollTop;
-  } };exports.default = _default;
+  onReachBottom: function onReachBottom() {var _this6 = this;if (this.loadStatus === "noMore") {return;}log('我真的触发了下拉加载');this.pageIndex++;this.getOrderData();this.loadding = true;this.pullUpOn = true;uni.hideLoading();setTimeout(function () {_this6.loadding = false;_this6.pullUpOn = false;}, 1000);}, onPageScroll: function onPageScroll(e) {this.scrollTop = e.scrollTop;} };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

@@ -31,7 +31,7 @@
 									<view class="tag-tit2-price">
 										<text class="text-color1">限量价</text>
 										<text class="text-color2">￥</text>
-										{{item.platformPrice}} <text style="color: #FF5600;font-size: 24rpx;font-weight: 400;">元</text><text class="text-color">/件</text>
+										{{item.platformClientPrice}} <text style="color: #FF5600;font-size: 24rpx;font-weight: 400;">元</text><text class="text-color">/件</text>
 									</view>
 									<!-- <view class="tag-tit2-text">
 										{{item.number}}点赞

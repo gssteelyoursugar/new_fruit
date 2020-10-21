@@ -553,7 +553,6 @@
 .xiding.data-v-57280228 {
 	position: -webkit-sticky;
 	position: sticky;
-	top: 84px
 }
 .tui-recommend.data-v-57280228 {
 	margin: 10rpx 0;
