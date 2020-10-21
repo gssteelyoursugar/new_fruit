@@ -174,9 +174,8 @@ var _default =
   methods: {
     goTell: function goTell() {
       uni.makePhoneCall({
-
         // 手机号
-        phoneNumber: '17777908352',
+        phoneNumber: '0771-5633659',
         // 成功回调
         success: function success(res) {
           console.log('调用成功!');

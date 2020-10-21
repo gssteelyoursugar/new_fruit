@@ -227,7 +227,11 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 //
 //请求方式
 //请求地址
-var setdata = uni.getStorageSync('usermen');var _default = { data: function data() {return { showTips: false, curIds: undefined, evaList: [] };}, onLoad: function onLoad() {this.getList();}, methods: { getList: function getList() {var _this = this;var data = { token: setdata, pageNo: 1, pageSize: 10 };(0, _api.publicing)(_request.getEvaluateList, data).then(function (res) {console.log(res);_this.evaList = res.data.data;});}, toggleTips: function toggleTips(id) {this.curIds = id;this.showTips = !this.showTips;}, unShowTips: function unShowTips() {this.showTips = false;}, cancelPraise: function cancelPraise(e) {var _this2 = this;console.log("我要取消点赞");var data = { goodsId: this.curIds, token: setdata };
+var setdata = uni.getStorageSync('usermen');var _default = { data: function data() {return { showTips: false, curIds: undefined, evaList: [] };}, onLoad: function onLoad() {this.getList();}, methods: { getList: function getList() {var _this = this;var data = { token: setdata, pageNo: 1, pageSize: 10 };(0, _api.publicing)(_request.getEvaluateList, data).then(function (res) {console.log(res);_this.evaList = res.data.data;});}, clickToDetail: function clickToDetail(id) {uni.navigateTo({ url: '../../pagesIII/productDetail/productDetail?id=' + id });}, toggleTips: function toggleTips(id) {this.curIds = id;this.showTips = !this.showTips;}, unShowTips: function unShowTips() {this.showTips = false;}, cancelPraise: function cancelPraise(e) {var _this2 = this;console.log("我要取消点赞");
+
+      var data = {
+        goodsId: this.curIds,
+        token: setdata };
 
       console.log(data);
       // return

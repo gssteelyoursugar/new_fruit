@@ -6,7 +6,7 @@
 		 class="wyb-popup-mask"
 		 :style="{
 			 backgroundColor: 'rgba(0, 0, 0, ' + maskAlpha + ')',
-			 zIndex: 9999,top: navHeight+'px'}" />
+			 zIndex: 9999,top: isTop? 0 :navHeight +'px',}"  />
 			 
 		<view 
 		 class="wyb-popup-box"
@@ -195,6 +195,10 @@
 			}
 		},
 		props: {
+			isTop: {
+					type: Boolean,
+					default: false
+			},
 			type: {
 				type: String,
 				default: 'bottom'

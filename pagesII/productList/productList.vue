@@ -23,7 +23,7 @@
 		<!-- 搜索框 -->
 		<view class="search-bar" @click="goToSearchGoods" :style="{top: navHeight+ 'px'}">
 			<image src="../../static/images/search-icon.png" mode=""></image>
-			<view class="search-text">搜索您要购买的商品或类型</view>
+			<view class="search-text">{{searchName||"搜索您要购买的商品或类型"}}</view>
 		</view>
 		<!-- 搜索框 -->
 		<!--顶部筛选-->
@@ -170,7 +170,7 @@
 		<!--果类弹层 -->
 		<tui-top-dropdown backgroundColor="#f7f7f7" :show="dropScreenShow" :paddingbtm="110" :translatey="dropScreenH" @close="btnCloseDrop">
 			<scroll-view class="tui-scroll-box" scroll-y :scroll-top="scrollTop">
-				<view class="tui-hot-title" style="color: #000000;">
+				<view class="tui-hot-title">
 					热门水果
 				</view>
 				<view class="hot-wrap" style="display: flex; flex-wrap: wrap;">
@@ -192,6 +192,9 @@
 		<tui-top-dropdown backgroundColor="#f7f7f7" :show="dropScreenShow2" :paddingbtm="110" :translatey="dropScreenH"
 		 @close="btnCloseDrop">
 			<scroll-view class="tui-scroll-box" scroll-y :scroll-top="scrollTop">
+				<view class="tui-drop-item">
+					<text class="tui-ml tui-middle" @click="checkVariety">全部品种</text>
+				</view>
 				<view class="hot-wrap">
 					<view class="tui-drop-item" :class="{'tui-drop-active':idList.indexOf(item.id)!==-1}" v-for="(item,index) of seleVarieties"
 					 :key="index">
@@ -210,7 +213,7 @@
 			<view class="tui-drawer-box" :style="{ paddingTop: height + 'px' }">
 				<scroll-view class="tui-drawer-scroll" scroll-y :style="{ height: drawerH + 'px'}">
 					<view class="tui-drawer-title">
-						<text class="tui-title-bold">果品等级</text>
+						<text class="tui-title-bold">果品星级</text>
 					</view>
 					<view class="tui-drawer-content tui-flex-attr">
 						<block v-for="(item,index) in fruit_level" :key="index">
@@ -218,6 +221,49 @@
 								<view class="tui-attr-ellipsis">{{item.title}}</view>
 							</view>
 						</block>
+					</view>
+					<view class="tui-drawer-title">
+						<text class="tui-title-bold">口感星级</text>
+					</view>
+					<view class="tui-drawer-content">
+						<view class="content" @click="useOutClickSide">
+							<easy-select :options="tasteBox" ref="easySelect" size="mini" :selectName="'tasteLevel_parameter_1'" :value="optionList.tasteLevel_parameter_1"
+							 @selectOne="selectItem"></easy-select>
+						</view>
+						<tui-icon name="reduce" color="#333" :size="14"></tui-icon>
+						<view class="content" @click="useOutClickSide">
+							<easy-select :options="tasteBox" ref="easySelect" size="mini" :selectName="'tasteLevel_parameter_2'" :value="optionList.tasteLevel_parameter_2"
+							 :valueNum="optionList.ltTaste" @selectOne="selectItem"></easy-select>
+						</view><text class="content-text" style="color: #fff;">星</text>
+					</view>
+					<view class="tui-drawer-title">
+						<text class="tui-title-bold">果色星级</text>
+					</view>
+					<view class="tui-drawer-content">
+						<view class="content" @click="useOutClickSide">
+							<easy-select :options="colorBox" ref="easySelect" :selectName="'colorLevel_parameter_1'" size="mini" :value="optionList.colorLevel_parameter_1"
+							 @selectOne="selectItem"></easy-select>
+						</view>
+						<tui-icon name="reduce" color="#333" :size="14"></tui-icon>
+						<view class="content" @click="useOutClickSide">
+							<easy-select :options="colorBox" ref="easySelect" :selectName="'colorLevel_parameter_2'" size="mini" :value="optionList.colorLevel_parameter_2"
+							 @selectOne="selectItem"></easy-select>
+						</view><text class="content-text" style="color: #fff;">星</text>
+					</view>
+					<view class="tui-drawer-title">
+						<text class="tui-title-bold">外观星级</text>
+					</view>
+					<view class="tui-drawer-content">
+						<view class="content" @click="useOutClickSide">
+							<easy-select :options="shapeBox" ref="easySelect" :selectName="'shapeLevel_parameter_1'" size="mini" :value="optionList.shapeLevel_parameter_1"
+							 @selectOne="selectItem"></easy-select>
+						</view>
+						<tui-icon name="reduce" color="#333" :size="14"></tui-icon>
+						<view class="content" @click="useOutClickSide">
+							<easy-select :options="shapeBox" ref="easySelect" :selectName="'shapeLevel_parameter_2'" size="mini" :value="optionList.shapeLevel_parameter_2"
+							 @selectOne="selectItem"></easy-select>
+						</view>
+						<text class="content-text" style="color: #fff;">星</text>
 					</view>
 					<view class="tui-drawer-title">
 						<text class="tui-title-bold">单果重量</text>
@@ -238,49 +284,6 @@
 						<tui-icon name="reduce" color="#333" :size="14"></tui-icon>
 						<input placeholder-class="tui-phcolor" v-model="tempData.size_parameter_2" class="tui-input" placeholder="不限"
 						 maxlength="11" type="number" /><text class="content-text">毫米</text>
-					</view>
-					<view class="tui-drawer-title">
-						<text class="tui-title-bold">口感等级</text>
-					</view>
-					<view class="tui-drawer-content">
-						<view class="content" @click="useOutClickSide">
-							<easy-select :options="tasteBox" ref="easySelect" size="mini" :selectName="'tasteLevel_parameter_1'" :value="optionList.tasteLevel_parameter_1"
-							 @selectOne="selectItem"></easy-select>
-						</view>
-						<tui-icon name="reduce" color="#333" :size="14"></tui-icon>
-						<view class="content" @click="useOutClickSide">
-							<easy-select :options="tasteBox" ref="easySelect" size="mini" :selectName="'tasteLevel_parameter_2'" :value="optionList.tasteLevel_parameter_2"
-							 :valueNum="optionList.ltTaste" @selectOne="selectItem"></easy-select>
-						</view><text class="content-text" style="color: #fff;">星</text>
-					</view>
-					<view class="tui-drawer-title">
-						<text class="tui-title-bold">颜色等级</text>
-					</view>
-					<view class="tui-drawer-content">
-						<view class="content" @click="useOutClickSide">
-							<easy-select :options="colorBox" ref="easySelect" :selectName="'colorLevel_parameter_1'" size="mini" :value="optionList.colorLevel_parameter_1"
-							 @selectOne="selectItem"></easy-select>
-						</view>
-						<tui-icon name="reduce" color="#333" :size="14"></tui-icon>
-						<view class="content" @click="useOutClickSide">
-							<easy-select :options="colorBox" ref="easySelect" :selectName="'colorLevel_parameter_2'" size="mini" :value="optionList.colorLevel_parameter_2"
-							 @selectOne="selectItem"></easy-select>
-						</view><text class="content-text" style="color: #fff;">星</text>
-					</view>
-					<view class="tui-drawer-title">
-						<text class="tui-title-bold">果形等级</text>
-					</view>
-					<view class="tui-drawer-content">
-						<view class="content" @click="useOutClickSide">
-							<easy-select :options="shapeBox" ref="easySelect" :selectName="'shapeLevel_parameter_1'" size="mini" :value="optionList.shapeLevel_parameter_1"
-							 @selectOne="selectItem"></easy-select>
-						</view>
-						<tui-icon name="reduce" color="#333" :size="14"></tui-icon>
-						<view class="content" @click="useOutClickSide">
-							<easy-select :options="shapeBox" ref="easySelect" :selectName="'shapeLevel_parameter_2'" size="mini" :value="optionList.shapeLevel_parameter_2"
-							 @selectOne="selectItem"></easy-select>
-						</view>
-						<text class="content-text" style="color: #fff;">星</text>
 					</view>
 					<view class="tui-drawer-title">
 						<text class="tui-title-bold">不良率</text>
@@ -385,7 +388,7 @@
 				slMangguo: '全部',
 				slPinzhong: '品种',
 				slGuobiao: '水果标准',
-				slYanzheng: '验证保障',
+				slYanzheng: '验货保障',
 				varietyId: 0,
 				ciData: [{
 						name: "芒果",
@@ -457,8 +460,9 @@
 				drawer: false, //显示选果标准抽屉
 				drawerH: 0, //抽屉内部scrollview高度
 				selectedName: '综合',
+				searchName: '',
 				selectH: 0,
-				num: -1,
+				num: 0,
 				seleTopList: [{
 						name: '综合',
 						selected: false
@@ -557,10 +561,13 @@
 				// log('我执行了搜索')
 				//搜索	
 				this.getSearch(options.name)
+				this.searchName = options.name
+				this.slMangguo = options.name
 			} else {
 				console.log("没错我走到了这里")
 				this.slMangguo = options.name
 				this.varietyId = options.id
+				this.searchName = options.name
 				log(this.varietyId)
 				this.ShopIng()
 			}
@@ -1381,7 +1388,7 @@
 	}
 
 	.tui-screen-top {
-		height: 88rpx;
+		height: 70rpx;
 		position: relative;
 		background: #fff;
 	}
@@ -1401,7 +1408,7 @@
 
 	.tui-screen-bottom {
 		height: 100rpx;
-		padding: 0 30rpx;
+		padding: 0 20rpx 20rpx;
 		box-sizing: border-box;
 		font-size: 24rpx;
 		align-items: center;
@@ -1521,6 +1528,7 @@
 	.tui-hot-title {
 		margin: 24rpx 40rpx;
 		color: #333;
+		font-weight: bold;
 	}
 
 	.hot-wrap {
@@ -1531,12 +1539,16 @@
 	.tui-drop-item {
 		padding: 10rpx 0;
 		width: 19%;
-		margin: 20rpx;
+		margin: 0 20rpx 20rpx;
 		text-align: center;
-		border: 1px solid #eee;
+		border: 1px solid #dcdcdc;
 		border-radius: 40rpx;
 		font-size: 24rpx;
 		color: #333;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+
 	}
 
 	.tui-drop-active {
@@ -1811,7 +1823,7 @@
 	/* 商品列表*/
 
 	.tui-product-list {
-		padding: 100rpx 10rpx 30rpx;
+		padding: 100rpx 20rpx 30rpx;
 		display: flex;
 		justify-content: space-between;
 		flex-direction: row;

@@ -1,7 +1,7 @@
 <template>
 	<view class="container">
 		<view class="tui-box">
-			<tui-list-cell :arrow="true" unlined :radius="true" @click="chooseAddr">
+			<tui-list-cell :arrow="false" unlined :radius="true" @click="chooseAddr">
 				<view class="tui-address">
 					<view v-if="true">
 						<view class="tui-userinfo">
@@ -43,7 +43,7 @@
 
 				<tui-list-cell :arrow="true" :hover="false">
 					<view class="tui-padding tui-flex tui-total-flex">
-						<view style="font-size: 28rpx;color: #666666;margin-right: 12rpx;">共{{extraData.totalSize}}件</view>
+						<view style="font-size: 28rpx;color: #666666;margin-right: 12rpx;">共{{allGoodsNum}}件</view>
 						<view style="color: #B6B6B6;font-size: 28rpx;padding-right:20rpx" @click="open">查看清单</view>
 					</view>
 				</tui-list-cell>
@@ -67,11 +67,11 @@
 		<view class="tui-safe-area"></view>
 		<view class="tui-tabbar">
 			<view class="tui-flex-end tui-color-red tui-pr-20">
-				<view class="tui-black">实付金额: </view>
+				<view class="tui-black">实付: </view>
 				<view class="tui-size-24">￥</view>
 				<view class="tui-price-large">{{extraData.orderAmount}}</view>
 				<view class="tui-size-24"></view>
-				<view class="tui-black">含运费 </view>
+				<view class="tui-black">(含运费) </view>
 			</view>
 			<view class="tui-pr25">
 				<tui-button width="200rpx" height="70rpx" :size="28" type="danger" shape="circle" @click="SubmitOrder">提交订单</tui-button>
@@ -79,10 +79,10 @@
 		</view>
 		<!-- 弹出清单 -->
 		<wyb-popup ref="popup" type="bottom" height="700" width="500" radius="6" mode="size-fixed" :showCloseIcon="true"
-		 :scrollY="true" :showScrollbar="true">
+		 :scrollY="true" :showScrollbar="true" :isTop="isTop">
 			<!-- 清单列表 -->
 			<view class="tui-list-title">
-				<text class="border-green">购买清单（共{{goodsData.length}}件）</text>
+				<text class="border-green">购买清单（共{{allGoodsNum}}件）</text>
 				<view class="borderBottom"></view>
 			</view>
 			<view class="tui-rank-list">
@@ -135,6 +135,7 @@
 		components: {},
 		data() {
 			return {
+				isTop: true,
 				ids: '', //order里面的ids
 				goodsData: [], //结算的商品信息
 				// imgUrl:'http://192.168.1.10:8980/js/userfiles/fileupload/202008/1295611300690604034.png',
@@ -155,6 +156,16 @@
 				margin: '0'
 				
 
+			}
+		},
+		computed: {
+			allGoodsNum () {
+				let list = this.goodsData
+				let num = 0
+				list.forEach(item=> {
+					num += item.number
+				})
+				return num
 			}
 		},
 		methods: {
@@ -456,7 +467,7 @@
 	.tui-img {
 		width: 120rpx;
 		height: 120rpx;
-		;
+		border: 1px solid #f5f5f5;
 		display: inline-block;
 		margin: 0 8rpx;
 		min-width: 120rpx;
@@ -620,7 +631,7 @@
 	}
 
 	.tui-black {
-		color: #222;
+		color: #666;
 		line-height: 30rpx;
 	}
 

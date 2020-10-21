@@ -311,6 +311,10 @@ var _default =
     } },
 
   props: {
+    isTop: {
+      type: Boolean,
+      default: false },
+
     type: {
       type: String,
       default: 'bottom' },

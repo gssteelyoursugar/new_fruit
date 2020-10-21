@@ -50,7 +50,7 @@
 								<view class="tui-price-box">
 									<view class="tui-goods-price">
 										<text class="goods-price-tag">￥</text>
-										<text class="goods-price-num">{{ itemTwo.platformClinetPrice | getPrice }}</text>
+										<text class="goods-price-num">{{ itemTwo.platformClientPrice | getPrice }}</text>
 										<text>/件</text>
 									</view>
 									<!-- :custom="index" :index="indexs" 
@@ -322,7 +322,7 @@
 							//获取单价
 							//获取数量
 							//两个相乘
-							allPrice = allPrice + goodsData.number * goodsData.platformClinetPrice;
+							allPrice = allPrice + goodsData.number * goodsData.platformClientPrice;
 						}
 					}
 				}
@@ -755,6 +755,8 @@
 		text-align: center;
 		color: rgba(0, 197, 42, 1);
 		margin-top: 60rpx;
+		box-shadow: 0 0 6rpx -1rpx;
+		-webkit-box-shadow: 0 0 6rpx -1rpx;
 	}
 
 	.tui-edit-goods {
@@ -1218,11 +1220,10 @@
 		height: 80rpx;
 		width: 300rpx;
 		background-color: #ffffff;
-
 		border: 1px solid rgba(0, 197, 42, 1);
 		color: rgba(0, 197, 42, 1) !important;
 		padding: 16rpx 0;
 		font-size: 32rpx;
-		box-shadow: 0 0 10rpx -2rpx;
+		box-shadow: 0 0 6rpx -1rpx;
 	}
 </style>

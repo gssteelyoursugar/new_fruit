@@ -227,12 +227,14 @@ var _api = __webpack_require__(/*! ../../api/api.js */ 19);function ownKeys(obje
     var userToken = uni.getStorageSync('usermen');
     // 初始化时间选择器默认时间
     if (this.orderTime) {
+      console.log('有时间');
       var arr = this.orderTime.split();
       arr.push("01日");
       console.log();
       console.log(this.dataTime, this.orderTime);
       this.dataTime = arr.join('');
     } else {
+      console.log('没有时间');
       var curDate = new Date();
       var year = curDate.getFullYear();
       var month = curDate.getMonth() + 1;
@@ -271,23 +273,48 @@ var _api = __webpack_require__(/*! ../../api/api.js */ 19);function ownKeys(obje
       this.isShow = !this.isShow;
     },
     getOrderCount: function getOrderCount() {var _this2 = this;
-      if (!this.orderTime) {
-        return;
-      }
       var userToken = uni.getStorageSync('usermen');
-      var data = {
-        time: this.paramTime,
-        token: userToken,
-        pageNo: 1,
-        pageSize: 10 };
+      if (!this.orderTime) {
+        var curDate = new Date();
+        var year = curDate.getFullYear();
+        var month = curDate.getMonth() + 1;
+        var day = curDate.getDay();
+        var date = year + '-' + month;
+        this.setOrderTime({
+          data: year + '年' + month + '月', //渲染数据的日期格式
+          paramTime: date //发送请求的日期格式
+        });
 
-      (0, _api.listing)(_request.orderCount, data).then(function (res) {
-        console.log(res);
-        _this2.orderList = res.data.data.list;
-        _this2.totalGoodsNumber = res.data.data.totalGoodsNumber;
-        _this2.totalGoodsPirce = res.data.data.totalGoodsPirce;
+        this.dataTime = "".concat(year, "\u5E74").concat(month, "\u6708").concat(day, "\u65E5");
+        var data = {
+          time: this.paramTime,
+          token: userToken,
+          pageNo: 1,
+          pageSize: 10 };
 
-      });
+        (0, _api.listing)(_request.orderCount, data).then(function (res) {
+          console.log(res);
+          _this2.orderList = res.data.data.list;
+          _this2.totalGoodsNumber = res.data.data.totalGoodsNumber;
+          _this2.totalGoodsPirce = res.data.data.totalGoodsPirce;
+
+        });
+      } else {
+        var _data = {
+          time: this.paramTime,
+          token: userToken,
+          pageNo: 1,
+          pageSize: 10 };
+
+        (0, _api.listing)(_request.orderCount, _data).then(function (res) {
+          console.log(res);
+          _this2.orderList = res.data.data.list;
+          _this2.totalGoodsNumber = res.data.data.totalGoodsNumber;
+          _this2.totalGoodsPirce = res.data.data.totalGoodsPirce;
+
+        });
+      }
+
     } }) };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

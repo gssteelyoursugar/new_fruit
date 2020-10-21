@@ -172,8 +172,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 var _default =
 {
   data: function data() {
@@ -206,6 +204,21 @@ var _default =
   methods: {
     back: function back() {
       uni.navigateBack();
+    },
+    goTel: function goTel() {
+      uni.makePhoneCall({
+        // 手机号
+        phoneNumber: '0771-5633659',
+        // 成功回调
+        success: function success(res) {
+          console.log('调用成功!');
+        },
+        // 失败回调
+        fail: function fail(res) {
+          console.log('调用失败!');
+        } });
+
+
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

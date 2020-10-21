@@ -522,10 +522,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
 var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
 var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
+//
+//
+//
 //
 //
 //
@@ -860,7 +866,7 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       storage_mode: [], //储存方式
       taste_level: [], //口感等级
       variety: [], //品种
-      numNull: 0, numNull2: 0, numName: 0, url: 'http://192.168.1.10:8980', isActives1: false, isActives2: false, imgUrl: "http://192.168.1.10:8980/js/userfiles/fileupload/202008/1298932901905809410.png", colorLevelList: [], goodsList: [], fileUploadList: '', mouthfeelLevelList: [], slMangguo: '全部', slPinzhong: '品种', slGuobiao: '水果标准', slYanzheng: '验证保障', varietyId: 0, ciData: [{ name: "芒果", bOn: false }, { name: "西瓜", bOn: false }, { name: "香蕉", bOn: false }, { name: "橘子", bOn: false }, { name: "猕猴桃", bOn: false }], dictDataList: [{ name: '芒果', isActive: false }, { name: '西瓜', isActive: false }, { name: '哈密瓜', isActive: false }], fruitLevelList: [], facadeLevelList: [], dictTypeList: [], dengji: [{ name: '特级' }, { name: 'A级' }, { name: 'B级' }], activeA: false, selecValue: '不限', selecTwoValue: '不限', searchKey: '', //搜索关键词
+      numNull: 0, numNull2: 0, numName: 0, url: 'http://192.168.1.10:8980', isActives1: false, isActives2: false, imgUrl: "http://192.168.1.10:8980/js/userfiles/fileupload/202008/1298932901905809410.png", colorLevelList: [], goodsList: [], fileUploadList: '', mouthfeelLevelList: [], slMangguo: '全部', slPinzhong: '品种', slGuobiao: '水果标准', slYanzheng: '验货保障', varietyId: 0, ciData: [{ name: "芒果", bOn: false }, { name: "西瓜", bOn: false }, { name: "香蕉", bOn: false }, { name: "橘子", bOn: false }, { name: "猕猴桃", bOn: false }], dictDataList: [{ name: '芒果', isActive: false }, { name: '西瓜', isActive: false }, { name: '哈密瓜', isActive: false }], fruitLevelList: [], facadeLevelList: [], dictTypeList: [], dengji: [{ name: '特级' }, { name: 'A级' }, { name: 'B级' }], activeA: false, selecValue: '不限', selecTwoValue: '不限', searchKey: '', //搜索关键词
       width: 200, //header宽度
       height: 64, //header高度
       inputTop: 0, //搜索框距离顶部距离
@@ -876,7 +882,7 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       isList: false, //切换列表展示效果
       drawer: false, //显示选果标准抽屉
       drawerH: 0, //抽屉内部scrollview高度
-      selectedName: '综合', selectH: 0, num: -1, seleTopList: [{ name: '综合', selected: false }, { name: '销量', selected: false }, { name: '价格', selected: false }, { name: '视频选果', selected: false }], seleBottom: [{ name: '芒果', selected: false }, { name: '品种', selected: true }, { name: '水果标准', selected: false }, { name: '验证保障', selected: false }], dropdownList: [{ name: '综合', selected: true }, { name: '价格升序', selected: false }, { name: '价格降序', selected: false }], pageIndex: 1, loadding: false, pullUpOn: true, // 渲染展示的数据，存的是label名
+      selectedName: '综合', searchName: '', selectH: 0, num: 0, seleTopList: [{ name: '综合', selected: false }, { name: '销量', selected: false }, { name: '价格', selected: false }, { name: '视频选果', selected: false }], seleBottom: [{ name: '芒果', selected: false }, { name: '品种', selected: true }, { name: '水果标准', selected: false }, { name: '验证保障', selected: false }], dropdownList: [{ name: '综合', selected: true }, { name: '价格升序', selected: false }, { name: '价格降序', selected: false }], pageIndex: 1, loadding: false, pullUpOn: true, // 渲染展示的数据，存的是label名
       optionList: { tasteLevel_parameter_1: '', //口感左
         tasteLevel_parameter_2: '', //口感右
         colorLevel_parameter_1: '', //颜色左
@@ -904,7 +910,7 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
     // log(beforePage.$page.fullPath)
     if (beforePage.$page.fullPath === '/pagesII/searchGoods/searchGoods') {// log('我执行了搜索')
       //搜索	
-      this.getSearch(options.name);} else {console.log("没错我走到了这里");this.slMangguo = options.name;this.varietyId = options.id;log(this.varietyId);this.ShopIng();} //this.searchKey = options.name
+      this.getSearch(options.name);this.searchName = options.name;this.slMangguo = options.name;} else {console.log("没错我走到了这里");this.slMangguo = options.name;this.varietyId = options.id;this.searchName = options.name;log(this.varietyId);this.ShopIng();} //this.searchKey = options.name
     var obj = {};obj = wx.getMenuButtonBoundingClientRect();uni.getSystemInfo({ success: function success(res) {_this.width = obj.left || res.windowWidth;_this.height = obj.top ? obj.top + obj.height + 8 : res.statusBarHeight + 44;_this.inputTop = obj.top ? obj.top + (obj.height - 30) / 2 : res.statusBarHeight + 7;_this.arrowTop = obj.top ? obj.top + (obj.height - 32) / 2 : res.statusBarHeight + 6;_this.searchKey = options.name || ''; //传递的搜索关键字
         //略小，避免误差带来的影响
         _this.dropScreenH = _this.height * 750 / res.windowWidth + 186;_this.drawerH = res.windowHeight - uni.upx2px(100) - _this.height;} });var res = uni.getSystemInfoSync();var statusBarHeight = res.statusBarHeight;var info = uni.getMenuButtonBoundingClientRect();var top = info.top,bottom = info.bottom;this.statusHeight = statusBarHeight;var buttonHeight = bottom - statusBarHeight + (top - statusBarHeight);var navHeight = statusBarHeight + buttonHeight + top - statusBarHeight; //状态栏+导航栏的高度（页面初始高度）
@@ -912,7 +918,8 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
     this.navHeight = navHeight;console.log("statusBarHeight,", statusBarHeight, "navHeight", navHeight, "boxHeight", this.boxHeight, "buttonHeight", buttonHeight);}, filters: { filterNum: function filterNum(val) {if (val) {var words = (Math.floor(val) + '').split('');var res = '';if (words.length <= 4) {res = val;}if (words.length === 5) {res = words[0] + "." + words[1] + '万';}if (words.length === 6) {res = words[0] + words[1] + "." + words[2] + '万';}if (words.length === 7) {res = words[0] + words[1] + words[2] + "." + words[3] + '万';}if (words.length === 8) {res = words[0] + words[1] + words[2] + words[3] + "." + words[4] + '万';}if (words.length === 9) {res = words[0] + "." + words[1] + '亿';}if (words.length === 10) {res = words[0] + words[1] + "." + words[2] + '亿';}return res;} else {return val;}} }, computed: { tasteBox: function tasteBox() {var arr = [];var data = this.taste_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;}, colorBox: function colorBox() {var arr = [];var data = this.color_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;}, shapeBox: function shapeBox() {var arr = [];var data = this.shape_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;} }, methods: { //点击搜索
     goToSearchGoods: function goToSearchGoods() {uni.navigateTo({ url: '../../pagesII/searchGoods/searchGoods' });}, //商品详情页
     gotoList: function gotoList(id) {log(id);uni.navigateTo({ url: '../../pagesIII/productDetail/productDetail?id=' + id });}, //下拉选
-    dropDownList: function dropDownList(index, name) {if (index !== -1) {console.log("index：" + index, name);}this.title = name;this.dropdownShow = !this.dropdownShow;}, dropDownList2: function dropDownList2(index, name) {if (index !== -1) {console.log("index：" + index, name);}
+    dropDownList: function dropDownList(index, name) {if (index !== -1) {console.log("index：" + index, name);}this.title = name;this.dropdownShow = !this.dropdownShow;}, dropDownList2: function dropDownList2(index, name) {if (index !== -1) {console.log("index：" + index, name);
+      }
       this.title = name;
       this.dropdownShow2 = !this.dropdownShow2;
     },

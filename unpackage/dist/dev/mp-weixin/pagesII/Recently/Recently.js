@@ -207,6 +207,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
@@ -444,8 +445,8 @@ console,log = _console.log;var _default = (_data$filters$onPullD = {
       // uni.hideLoading();
     },
     //收藏
-    likeOrder: function likeOrder(id) {var _this4 = this;
-      log(id);
+    likeOrder: function likeOrder(event) {var _this4 = this;
+      log(event);
       var setdata = uni.getStorageSync('usermen');
       //判断是否登录才能收藏
       if (!setdata) {
@@ -453,13 +454,11 @@ console,log = _console.log;var _default = (_data$filters$onPullD = {
       } else {
         this.modaishow = false;
         var data = {
-          goodsId: id,
+          goodsId: event.id,
           token: setdata };
 
         (0, _api.publicing)(_request.postLike, data).
         then(function (res) {
-          log(res);
-
           _this4.getRecentlyData();
           uni.showToast({
             title: "已收藏",
@@ -476,35 +475,25 @@ console,log = _console.log;var _default = (_data$filters$onPullD = {
       log(setdata);
     },
     //删除收藏
-    delLike: function delLike(id) {var _this5 = this;
+    delLike: function delLike(event) {var _this5 = this;
+
       var data = {
-        goodsId: id,
+        goodsId: event.id,
         token: setdata };
 
-      uni.showModal({
-        title: '提示',
-        content: '取消收藏这件宝贝，确定吗？',
-        success: function success(res) {
-          if (res.confirm) {
-            (0, _api.publicing)(_request.postDelLike, data).
-            then(function (res) {
-              uni.showToast({
-                title: "\u5DF2\u53D6\u6D88\u6536\u85CF" });
+      (0, _api.publicing)(_request.postDelLike, data).
+      then(function (res) {
+        uni.showToast({
+          title: "\u53D6\u6D88\u6536\u85CF" });
 
-              _this5.getRecentlyData();
-            }).
-            catch(function (err) {
-              log(err);
-            });
-          } else if (res.cancel) {
-            uni.showToast({
-              title: "已取消",
-              icon: 'none' });
-
-          }
-        } });
-
+        _this5.getRecentlyData();
+      }).
+      catch(function (err) {
+        log(err);
+      });
     },
+
+
 
     //商品详情页
     gotoList: function gotoList(id) {

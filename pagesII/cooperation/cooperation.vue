@@ -23,13 +23,11 @@
 		<view class="text-area-box">
 			<view class="text-area2">
 				<image src="../../static/images/email.png" mode="" class="email"></image>
-
 				<text class="title-em">圈果邮箱</text>
 				<text class="title">zgqgpt@163.com</text>
 			</view>
-			<view class="text-area2">
+			<view class="text-area2" @click="goTel">
 				<image src="../../static/images/phone.png" mode="" class="phone"></image>
-
 				<text class="title-em">果叔电话</text>
 				<text class="title">0771-5633659</text>
 			</view>
@@ -71,6 +69,21 @@
 			back: function() {
 				uni.navigateBack();
 			},
+			goTel() {
+				uni.makePhoneCall({
+					// 手机号
+					phoneNumber: '0771-5633659',
+					// 成功回调
+					success: (res) => {
+						console.log('调用成功!')
+					},
+					// 失败回调
+					fail: (res) => {
+						console.log('调用失败!')
+					}
+			
+				});
+			}
 		}
 	}
 </script>

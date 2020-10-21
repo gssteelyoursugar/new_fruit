@@ -228,7 +228,7 @@
 					</view>
 				</view>
 				<!-- 水果描述 -->
-				<view class="tui-height-full">
+				<view class="tui-height-full" style="border-bottom: none;">
 					<view class="tui-title-line"><text>水果描述</text></view>
 				</view>
 
@@ -357,7 +357,7 @@
 											<view class="shabi">
 												<text class="tui-price-one" style="font-size: 20rpx;">￥</text>
 												<view class="tui-price-one">
-													{{ shopListdata.platformClinetPrice }}
+													{{ shopListdata.platformClientPrice }}
 													<text style="font-size: 24rpx;">元</text>
 												</view>
 												/件
@@ -384,7 +384,7 @@
 							<!-- <text>合计{{shopListdata.platformClinetPrice * value2}}含运费</text> -->
 							<text style="color: #333333;font-size: 24rpx;margin-right:4rpx">合计:</text>
 							<text style="color: #FF5600;font-size: 20rpx;">¥</text>
-							<text style="font-weight: bold;">{{ shopListdata.platformClinetPrice * value2 }}</text>
+							<text style="font-weight: bold;">{{ shopListdata.platformClientPrice * value2 }}</text>
 							<text style="color: #FF5600;font-size: 22rpx;margin-right:8rpx">元</text>
 							<text style="color: #888888;font-size: 22rpx;">含运费</text>
 						</view>
@@ -407,10 +407,10 @@
 		<view class="warp" v-if="isVerify">
 			<view class="warp-view">
 				<view class="warp-text1">温馨提示</view>
-				<view class="warp-text">前往验证店铺？</view>
+				<view class="warp-text">未验证店铺信息</view>
 				<view class="warp-flex">
 					<button @click="toggleVerify()" plain="true">取消</button>
-					<button plain="true" @click="clickToVerify" class="color-green">前往</button>
+					<button plain="true" @click="clickToVerify" class="color-green">前往验证</button>
 				</view>
 			</view>
 		</view>

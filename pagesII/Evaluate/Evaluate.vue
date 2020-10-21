@@ -6,7 +6,7 @@
 		</view>
 		<view class="tui-tab-rank" v-for="(item,index) of evaList" :key="index">
 			<view class="tui-time-title"><text class="title-time-left">{{item.time}}</text> </view>
-			<view class="tui-tab-rank-cent" v-for="(itm,idx) of item.list" :key="idx">
+			<view class="tui-tab-rank-cent" @click="clickToDetail(itm.id)" v-for="(itm,idx) of item.list" :key="idx">
 				<image :src="itm.url" mode="aspectFill" class="img-rink"></image>
 				<view class="tui-pro-tit">
 					<text class="tag-tit">{{itm.labelName}}</text> <text class="tag-tit-text">{{itm.name}}</text>
@@ -22,7 +22,7 @@
 								</text>
 							</view>
 						</view>
-						<image src="../../static/images/zan.png" mode="aspectFill" class="tui-shop-car" @click="toggleTips(itm.id)"></image>
+						<image src="../../static/images/zan.png" mode="aspectFill" class="tui-shop-car" @click.stop="toggleTips(itm.id)"></image>
 						<!-- <view>购物车</view> -->
 					</view>
 				</view>
@@ -32,7 +32,7 @@
 		<view class="warp" v-if="showTips">
 			<view class="warp-view">
 				<view class="warp-text1">温馨提示</view>
-				<view class="warp-text">取消对该水果点赞？</view>
+				<view class="warp-text">取消点赞？</view>
 				<view class="warp-flex">
 					<view @click="unShowTips" plain="true">取消</view>
 					<view @click="cancelPraise" :data-id="11" class="color-green">确认</view>
@@ -80,7 +80,11 @@
 				
 				})
 			},
-
+			clickToDetail(id) {
+					uni.navigateTo({
+						url: '../../pagesIII/productDetail/productDetail?id='+id
+					})
+			},
 			toggleTips(id) {
 				this.curIds = id
 				this.showTips = !this.showTips
@@ -141,7 +145,6 @@
 	.tui-tab-rank {
 		background-color: #fff;
 		margin: 20rpx 0;
-
 	}
 
 	.tui-time-title {
@@ -163,7 +166,11 @@
 	.tui-tab-rank-cent {
 		display: flex;
 		padding: 20rpx;
+		border-bottom: 1px solid #f5f5f5;
+	}
 
+	.tui-tab-rank-cent:last-child {
+		border-bottom: none;
 	}
 
 	.img-rink {

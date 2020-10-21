@@ -21,12 +21,13 @@
 			<checkbox-group @change="buyChange">
 				<view class="tui-cart-cell  tui-mtop" v-for="(item, index) in lookDatas" :key="index">
 					<view class="item-time" v-if="item.list.length !== 0">{{ item.createDate }}</view>
-					<tui-swipe-action :actions="actions" @click="handlerButton(dt.id)" :params="item" v-for="(dt,idx) of item.list" :key="idx">
+					<tui-swipe-action :actions="actions" @click="handlerButton(dt.id)" :params="item" v-for="(dt,idx) of item.list"
+					 :key="idx">
 						<template v-slot:content>
 							<block v-if="item.list.length !== 0">
 								<view class="tui-goods-item" @tap="gotoList(dt.id)">
 									<!-- //v-for="dt of item.list" :key="idx" -->
-									<image :src="dt.url" class="tui-goods-img"  />
+									<image :src="dt.url" class="tui-goods-img" />
 									<view class="tui-goods-info">
 										<view class="tui-goods-title">
 											<text class="tag-tit">{{ dt.lableName || '' }}</text>
@@ -44,9 +45,9 @@
 											</view>
 											<view class="">
 												<image src="../../static/images/like1.png" mode="aspectFill" class="tui-shop-car" v-if="dt.isCollection"
-												 @tap.stop="delLike(dt.id)"></image>
+												 @tap.stop="delLike(dt)"></image>
 												<image src="../../static/images/like2.png" mode="aspectFill" class="tui-shop-car" v-if="!dt.isCollection"
-												 @tap.stop="likeOrder(dt.id)"></image>
+												 @tap.stop="likeOrder(dt)"></image>
 											</view>
 										</view>
 									</view>
@@ -57,7 +58,7 @@
 					</tui-swipe-action>
 				</view>
 			</checkbox-group>
-			
+
 		</view>
 		<!--加载loadding-->
 		<tui-loadmore v-if="loadding" :index="3" type="red"></tui-loadmore>
@@ -305,8 +306,8 @@
 				// uni.hideLoading();
 			},
 			//收藏
-			likeOrder(id) {
-				log(id);
+			likeOrder(event) {
+				log(event);
 				let setdata = uni.getStorageSync('usermen');
 				//判断是否登录才能收藏
 				if (!setdata) {
@@ -314,13 +315,11 @@
 				} else {
 					this.modaishow = false;
 					let data = {
-						goodsId: id,
+						goodsId: event.id,
 						token: setdata
 					};
 					publicing(postLike, data)
 						.then(res => {
-							log(res);
-							
 							this.getRecentlyData();
 							uni.showToast({
 								title: "已收藏",
@@ -337,39 +336,29 @@
 				log(setdata);
 			},
 			//删除收藏
-			delLike(id) {
+			delLike(event) {
+
 				let data = {
-					goodsId: id,
+					goodsId: event.id,
 					token: setdata
 				};
-				uni.showModal({
-					title: '提示',
-					content: '取消收藏这件宝贝，确定吗？',
-					success: res => {
-						if (res.confirm) {
-							publicing(postDelLike, data)
-								.then(res => {
-									uni.showToast({
-										title: `已取消收藏`
-									});
-									this.getRecentlyData();
-								})
-								.catch(err => {
-									log(err);
-								});
-						} else if (res.cancel) {
-							uni.showToast({
-								title: "已取消",
-								icon: 'none'
-							});
-						}
-					}
-				});
+				publicing(postDelLike, data)
+					.then(res => {
+						uni.showToast({
+							title: `取消收藏`
+						});
+						this.getRecentlyData();
+					})
+					.catch(err => {
+						log(err);
+					});
 			},
+
+
 
 			//商品详情页
 			gotoList(id) {
-				log("id",id);
+				log("id", id);
 				// 	return
 				uni.navigateTo({
 					url: '../../pagesIII/productDetail/productDetail?id=' + id

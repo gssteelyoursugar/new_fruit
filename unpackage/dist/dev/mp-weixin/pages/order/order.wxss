@@ -56,6 +56,8 @@
 	text-align: center;
 	color: rgba(0, 197, 42, 1);
 	margin-top: 60rpx;
+	box-shadow: 0 0 6rpx -1rpx;
+	-webkit-box-shadow: 0 0 6rpx -1rpx;
 }
 .tui-edit-goods {
 	width: 100%;
@@ -527,11 +529,10 @@ button {
 	height: 80rpx;
 	width: 300rpx;
 	background-color: #ffffff;
-
 	border: 1px solid rgba(0, 197, 42, 1);
 	color: rgba(0, 197, 42, 1) !important;
 	padding: 16rpx 0;
 	font-size: 32rpx;
-	box-shadow: 0 0 10rpx -2rpx;
+	box-shadow: 0 0 6rpx -1rpx;
 }
 
