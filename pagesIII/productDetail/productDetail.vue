@@ -81,11 +81,11 @@
 						<view class="tui-sale-info tui-size tui-gray">
 							<view class="tui-magin">
 								<text class="tui-code">￥</text>
-								<text class="tui-price-one">{{ shopListdata.platformClientPrice }}</text>
+								<text class="tui-price-one">{{ApproveStatus===1? shopListdata.platformClientPrice:'***' }}</text>
 								<text style="font-size:28rpx;color: #FF6500;">元</text>
 								<text>/件</text>
 							</view>
-							<view class="tui-huaxian"  v-if="shopListdata.marketPrice != 0">￥{{ shopListdata.marketPrice}}/件</view>
+							<view class="tui-huaxian"  v-if="shopListdata.marketPrice != 0">￥{{ApproveStatus===1? shopListdata.marketPrice:'***'}}/件</view>
 							<view class="tui-text-overflow">{{ shopListdata.specification ||''}}, 水果净重约{{ shopListdata.kg2 ||0}}斤</view>
 						</view>
 					</view>
@@ -332,7 +332,8 @@
 			</view>
 			<view class="tui-operation-right tui-right-flex tui-col-7 tui-btnbox-4">
 				<view class="tui-flex-1">
-					<tui-button height="68rpx" :size="26" type="danger" shape="circle" @click="showPopup">立即购买</tui-button>
+					<tui-button height="68rpx" :size="26" type="danger" shape="circle" @click="showPopup" v-if="shopListdata.number !== 0">立即购买</tui-button>
+					<tui-button height="68rpx" :size="26" type="info" shape="circle" @click="noGoods" v-if="shopListdata.number === 0">售罄</tui-button>
 				</view>
 				<!-- <view class="tui-flex-1">
 					<tui-button height="68rpx" :size="26" type="warning" shape="circle" @click="submit">立即购买</tui-button>
@@ -347,6 +348,7 @@
 					<view class="tui-tab-rank">
 						<view class="tui-tab-rank-cent">
 							<image :src="shopListdata.urlVideo!==''? urlList[1]:urlList[0]" mode="aspectFill" class="img-rink"></image>
+							
 							<view class="tui-pro-tit" style="padding: 0 30rpx 0 0;">
 								<text class="tag-tit">{{ item.name }}</text>
 								<text class="tag-tit-text" style="font-size:28rpx">{{ shopListdata.name }}</text>
@@ -357,12 +359,12 @@
 											<view class="shabi">
 												<text class="tui-price-one" style="font-size: 20rpx;">￥</text>
 												<view class="tui-price-one">
-													{{ shopListdata.platformClientPrice }}
+													{{ApproveStatus===1 ?shopListdata.platformClientPrice:'***' }}
 													<text style="font-size: 24rpx;">元</text>
 												</view>
 												/件
 											</view>
-											<view class="tui-huaxian"  v-if="shopListdata.marketPrice != 0">￥{{ shopListdata.marketPrice }}</view>
+											<view class="tui-huaxian"  v-if="shopListdata.marketPrice != 0">￥{{ApproveStatus===1? shopListdata.marketPrice:'***' }}</view>
 										</view>
 									</view>
 
@@ -829,6 +831,12 @@
 			messcancel() {
 				this.modaishow = false;
 			},
+			noGoods () {
+				uni.showToast({
+					title: "正在补货中～",
+					icon: 'none'
+				})
+			},
 			//弹出立即购买
 			showPopup() {
 				let setdata = uni.getStorageSync('usermen');
@@ -1178,7 +1186,8 @@
 		display: flex;
 		padding: 20rpx 0 0;
 	}
-
+	
+	
 	.img-rink {
 		width: 220rpx;
 		height: 220rpx;

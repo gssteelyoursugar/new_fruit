@@ -24,11 +24,11 @@ page {
 	font-size: 50rpx;
 	padding: 0 0 30rpx;
 }
-.tui-cent--title text{
+.tui-cent--title text {
 	position: relative;
 	z-index: 3;
 }
-.tui-cent--title text::before{
+.tui-cent--title text::before {
 	content: "";
 	position: absolute;
 	bottom: 10rpx;
@@ -40,6 +40,10 @@ page {
 }
 .tui-tag-mag {
 	margin-left: 20rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	padding: 10rpx 0;
 }
 .tui-tag-name {
 	margin: 0 10rpx;
@@ -48,15 +52,30 @@ page {
 	font-size: 24rpx;
 	border-radius: 20rpx;
 	padding: 2rpx 16rpx;
+	width: 100rpx;
+	display: inline-block;
+	max-height: 20px;
+	text-align: center;
+	max-width: 100rpx;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 .tui-tag-name2 {
 	color: #555555;
 	font-size: 32rpx;
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	        flex: 1;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 450rpx;
+	white-space: nowrap;
 }
 .tui-tag-time {
 	font-size: 28rpx;
 	color: #707070;
-	margin-left: 100rpx;
+	/* margin-left: 30rpx; */
 }
 .prefer-dis {
 	display: -webkit-box;
@@ -68,18 +87,18 @@ page {
 }
 .prefer-view {
 	height: 300rpx;
-	width: 650rpx;
+	width: 660rpx;
 	padding: 0 20rpx;
 }
 .tui-img {
-	width: 650rpx;
+	width: 660rpx;
 	height: 173rpx;
 	border-radius: 20rpx;
 	display: block;
 }
 .tui-img-text {
-	width: 650rpx;
-	height: 262rpx;
+	width: 660rpx;
+	/* height: 312rpx; */
 	border-radius: 20rpx;
 	display: block;
 	background-color: #fff;

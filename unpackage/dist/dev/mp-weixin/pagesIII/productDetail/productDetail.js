@@ -607,6 +607,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
 var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
@@ -614,6 +616,8 @@ var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
 var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
+//
+//
 //
 //
 //
@@ -1077,7 +1081,7 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
     praiseLike: function praiseLike(id) {var _this3 = this;var setdata = uni.getStorageSync('usermen');if (!setdata) {this.modaishow = true;} else {this.modaishow = false;var data = { goodsId: id, token: setdata };if (this.shopListdata.isPraise == true) {uni.showToast({ title: '重复点赞', icon: 'none' });return;}if (this.canPraise === true) {uni.showToast({ title: '重复点赞', icon: 'none' });return;}if (this.shopListdata.isPraise === false) {this.canPraise = true;(0, _api.publicing)(_request.postPraise, data).then(function (res) {log(res); // this.postDetails();
             _this3.shopListdata.praiseNumber++;uni.showToast({ title: '点赞成功', icon: 'none' });}).catch(function (err) {log(err);});}}}, change2: function change2(e) {this.value2 = e.value;}, // 显示
     init: function init() {this.modaishow = true;}, // 取消
-    messcancel: function messcancel() {this.modaishow = false;}, //弹出立即购买
+    messcancel: function messcancel() {this.modaishow = false;}, noGoods: function noGoods() {uni.showToast({ title: "正在补货中～", icon: 'none' });}, //弹出立即购买
     showPopup: function showPopup() {var setdata = uni.getStorageSync('usermen');if (!setdata) {this.modaishow = true;return;} else if (this.ApproveStatus != 1) {// uni.showToast({
         // 	title: '您还没有验证店铺',
         // 	icon: 'none'
@@ -1093,7 +1097,11 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
     wxLoging: function wxLoging(code) {var _this5 = this;uni.showLoading({}); // log(code);
       var data = { code: code };(0, _api.publicing2)(_request.loginis, data) //发送请求携带参数
       .then(function (res) {uni.setStorageSync('usermen', res.data.token); //把token存在本地，小程序提供如同浏览器cookie
-        var setdata = uni.getStorageSync('usermen');uni.showToast({ title: '登陆成功' });_this5.getMerchants();uni.hideLoading();}).catch(function (err) {log(err);});},
+        var setdata = uni.getStorageSync('usermen');uni.showToast({ title: '登陆成功' });_this5.getMerchants();uni.hideLoading();}).
+      catch(function (err) {
+        log(err);
+      });
+    },
     //收藏订单
     likeOrder: function likeOrder(id) {
       var setdata = uni.getStorageSync('usermen');

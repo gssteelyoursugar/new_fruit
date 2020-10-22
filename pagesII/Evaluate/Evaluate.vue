@@ -17,7 +17,7 @@
 							</view>
 							<view class="tag-tit2-text">
 								<text class="price1">
-									<text style="font-size: 20rpx;margin-right:4rpx;">¥</text>{{itm.platform_price}}<text style="font-size: 20rpx;margin-left:4rpx;">元</text>
+									<text style="font-size: 20rpx;margin-right:4rpx;">¥</text>{{ApproveStatus === 1 ?itm.platform_price : '***'}}<text style="font-size: 20rpx;margin-left:4rpx;">元</text>
 									<text class="price2">/件</text>
 								</text>
 							</view>
@@ -50,6 +50,7 @@
 	} from '../../api/api.js'
 	//请求地址
 	import {
+		getClient,
 		getEvaluateList,
 		postCancelPraise
 	} from '../../api/request.js'
@@ -60,14 +61,32 @@
 			return {
 				showTips: false,
 				curIds: undefined,
-				evaList: []
+				evaList: [],
+				ApproveStatus: 0
 			}
 		},
 
 		onLoad() {
 			this.getList()
+			this.getMerchants()
 		},
 		methods: {
+			getMerchants() {
+				let data = {
+					token: setdata
+				};
+				// log(data)
+				listing(getClient, data)
+					.then(res => {
+						// log(res)
+						///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
+						this.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
+						// log(this.ApproveStatus)
+					})
+					.catch(err => {
+						log(err);
+					});
+			},
 			getList() {
 				let data = {
 					token: setdata,

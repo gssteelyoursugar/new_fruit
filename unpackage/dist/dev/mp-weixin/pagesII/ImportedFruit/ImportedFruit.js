@@ -250,18 +250,35 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 //
 //请求
 //请求地址
-var _console = console,log = _console.log;var _default = { data: function data() {return { url: '', title: '进口水果', hideing: 0, num: 0, imageUrl: "http://qg-qr.oss-cn-shenzhen.aliyuncs.com/test/1599787305445.png?Expires=1915147298&OSSAccessKeyId=LTAI4G74cnhsbDWNkfvuNew3&Signature=BvRoSHSXKpQrTAgEtaTTtkJLTdA%3D", rankBgUrl: "/static/images/paihangbang@2x.png", height: 64, //header高度
+var _console = console,log = _console.log;var _default = { data: function data() {return { url: '', title: '进口水果', hideing: 0, num: 0, ApproveStatus: 0, imageUrl: "http://qg-qr.oss-cn-shenzhen.aliyuncs.com/test/1599787305445.png?Expires=1915147298&OSSAccessKeyId=LTAI4G74cnhsbDWNkfvuNew3&Signature=BvRoSHSXKpQrTAgEtaTTtkJLTdA%3D", rankBgUrl: "/static/images/paihangbang@2x.png", height: 64, //header高度
       top: 26, //标题图标距离顶部距离
       scrollH: 0, //滚动总高度
       opcity: 0, iconOpcity: 0.5, bannerIndex: 0, menuShow: false, popupShow: false, value: 1, collected: false, importData: [] //请求的数据
-    };}, onLoad: function onLoad(options) {var _this = this;this.title = options.title;this.getImportData();this.url = _request.imgurl;var obj = {};obj = wx.getMenuButtonBoundingClientRect();setTimeout(function () {uni.getSystemInfo({ success: function success(res) {_this.width = obj.left || res.windowWidth;_this.height = obj.top ? obj.top + obj.height + 8 : res.statusBarHeight + 44;_this.top = obj.top ? obj.top + (obj.height - 32) / 2 : res.statusBarHeight + 6;_this.scrollH = res.windowWidth;} });}, 0);}, //下拉刷新
-  onPullDownRefresh: function onPullDownRefresh() {this.getImportData();console.log('refresh');setTimeout(function () {uni.stopPullDownRefresh();}, 1000);}, methods: {
+    };}, onLoad: function onLoad(options) {var _this = this;this.getMerchants();this.title = options.title;this.getImportData();this.url = _request.imgurl;var obj = {};obj = wx.getMenuButtonBoundingClientRect();setTimeout(function () {uni.getSystemInfo({ success: function success(res) {_this.width = obj.left || res.windowWidth;_this.height = obj.top ? obj.top + obj.height + 8 : res.statusBarHeight + 44;_this.top = obj.top ? obj.top + (obj.height - 32) / 2 : res.statusBarHeight + 6;_this.scrollH = res.windowWidth;} });}, 0);}, //下拉刷新
+  onPullDownRefresh: function onPullDownRefresh() {this.getImportData();console.log('refresh');setTimeout(function () {uni.stopPullDownRefresh();}, 1000);},
+  methods: {
+    getMerchants: function getMerchants() {var _this2 = this;
+      var data = {
+        token: setdata };
+
+      // log(data)
+      listing(_request.getClient, data).
+      then(function (res) {
+        // log(res)
+        ///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
+        _this2.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
+        // log(this.ApproveStatus)
+      }).
+      catch(function (err) {
+        log(err);
+      });
+    },
     //获取进口水果
-    getImportData: function getImportData() {var _this2 = this;
+    getImportData: function getImportData() {var _this3 = this;
       (0, _api.listing2)(_request.getselectImport).
       then(function (res) {
         console.log(res);
-        _this2.importData = res.data.data;
+        _this3.importData = res.data.data;
       }).
       catch(function (err) {
         console.log(err);

@@ -51,7 +51,7 @@
 										<view class="tag-tit2-price">
 											<!-- <text style="font-size: 24rpx;color: #555;margin-right: 12rpx;">限量价</text> -->
 											<text style="font-size: 16rpx;">¥</text>
-											<text style="font-size: 40rpx;font-weight: bold;margin: 0 4rpx;">{{item.platformClientPrice}}</text>
+											<text style="font-size: 40rpx;font-weight: bold;margin: 0 4rpx;">{{ApproveStatus===1?item.platformClientPrice:'***'}}</text>
 											<text style="font-size: 24rpx;font-weight: 400;">元</text>
 											<text style="font-size: 20rpx;color: #b6b6b6;">/件</text>
 										</view>
@@ -87,7 +87,7 @@
 										<view class="tag-tit2-price">
 											<!-- <text style="font-size: 24rpx;color: #555;margin-right: 12rpx;">限量价</text> -->
 											<text style="font-size: 16rpx;">¥</text>
-											<text style="font-size: 40rpx;font-weight: bold;margin: 0 4rpx;">{{item.platformClientPrice ||0.00}}</text>
+											<text style="font-size: 40rpx;font-weight: bold;margin: 0 4rpx;">{{ApproveStatus === 1?item.platformClientPrice:'***'}}</text>
 											<text style="font-size: 24rpx;font-weight: 400;">元</text>
 											<text style="font-size: 20rpx;color: #b6b6b6;">/件</text>
 										</view>
@@ -119,7 +119,7 @@
 										<view class="tag-tit2-price">
 											<!-- <text style="font-size: 24rpx;color: #555;margin-right: 12rpx;">限量价</text> -->
 											<text style="font-size: 16rpx;">¥</text>
-											<text style="font-size: 40rpx;font-weight: bold;margin: 0 4rpx;">{{item.platformClientPrice}}</text>
+											<text style="font-size: 40rpx;font-weight: bold;margin: 0 4rpx;">{{ApproveStatus ===1?item.platformClientPrice:'***'}}</text>
 											<text style="font-size: 24rpx;font-weight: 400;">元</text>
 											<text style="font-size: 20rpx;color: #b6b6b6;">/件</text>
 										</view>
@@ -152,7 +152,7 @@
 										<view class="tag-tit2-price">
 											<!-- <text style="font-size: 24rpx;color: #555;margin-right: 12rpx;">限量价</text> -->
 											<text style="font-size: 16rpx;">¥</text>
-											<text style="font-size: 40rpx;font-weight: bold;margin: 0 4rpx;">{{item.platformClientPrice}}</text>
+											<text style="font-size: 40rpx;font-weight: bold;margin: 0 4rpx;">{{ApproveStatus===1?item.platformClientPrice:'***'}}</text>
 											<text style="font-size: 24rpx;font-weight: 400;">元</text>
 											<text style="font-size: 20rpx;color: #b6b6b6;">/件</text>
 										</view>
@@ -184,7 +184,8 @@
 	//请求地址
 	import {
 		postOrder,
-		imgurl
+		imgurl,
+		getClient,
 	} from '../../api/request.js'
 	const {
 		log
@@ -229,10 +230,12 @@
 				popupShow: false,
 				value: 1,
 				collected: false,
-				valueText: ''
+				valueText: '',
+				ApproveStatus: 0,
 			};
 		},
 		onLoad: function(options) {
+			this.getMerchants()
 			this.url = imgurl
 
 
@@ -316,6 +319,22 @@
 			}
 		},
 		methods: {
+			getMerchants() {
+				let data = {
+					token: setdata
+				};
+				// log(data)
+				listing(getClient, data)
+					.then(res => {
+						// log(res)
+						///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
+						this.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
+						// log(this.ApproveStatus)
+					})
+					.catch(err => {
+						log(err);
+					});
+			},
 			onPullDownRefresh() {
 				this.postRanking()
 				console.log('refresh');

@@ -1,11 +1,11 @@
 {
   "enablePullDownRefresh": true,
-  "navigationStyle": "custom",
+  "navigationBarTitleText": "找水果",
   "usingComponents": {
-    "tui-icon": "/components/tui-icon/tui-icon",
     "tui-top-dropdown": "/components/tui-top-dropdown/tui-top-dropdown",
     "tui-drawer": "/components/tui-drawer/tui-drawer",
     "easy-select": "/components/easy-select/easy-select",
+    "tui-icon": "/components/tui-icon/tui-icon",
     "tui-nomore": "/components/tui-nomore/tui-nomore"
   }
 }

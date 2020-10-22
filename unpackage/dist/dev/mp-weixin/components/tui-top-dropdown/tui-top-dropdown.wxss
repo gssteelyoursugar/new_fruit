@@ -12,7 +12,7 @@
 	-webkit-transition: all 0.3s ease-in-out;
 	transition: all 0.3s ease-in-out;
 	z-index: 996;
-	top: 0;
+	top: -60px;
 }
 .tui-dropdown-show.data-v-8e7a1a78 {
 	/* visibility: visible; */

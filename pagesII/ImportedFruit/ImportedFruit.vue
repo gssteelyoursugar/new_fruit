@@ -31,7 +31,7 @@
 									<view class="tag-tit2-price">
 										<text class="text-color1">限量价</text>
 										<text class="text-color2">￥</text>
-										{{item.platformClientPrice}} <text style="color: #FF5600;font-size: 24rpx;font-weight: 400;">元</text><text class="text-color">/件</text>
+										{{ApproveStatus===1?item.platformClientPrice:'***'}} <text style="color: #FF5600;font-size: 24rpx;font-weight: 400;">元</text><text class="text-color">/件</text>
 									</view>
 									<!-- <view class="tag-tit2-text">
 										{{item.number}}点赞
@@ -59,7 +59,7 @@
 	//请求
 	import {listing2,publicing} from '../../api/api.js'
 	//请求地址
-	import {getselectImport,imgurl} from '../../api/request.js'
+	import {getselectImport,imgurl,getClient} from '../../api/request.js'
 	var {log} = console
 	export default {
 	
@@ -69,7 +69,7 @@
 				title:'进口水果',
 				hideing: 0,
 				num:0,
-				
+				ApproveStatus :0,
 				imageUrl:"http://qg-qr.oss-cn-shenzhen.aliyuncs.com/test/1599787305445.png?Expires=1915147298&OSSAccessKeyId=LTAI4G74cnhsbDWNkfvuNew3&Signature=BvRoSHSXKpQrTAgEtaTTtkJLTdA%3D",
 				rankBgUrl:"/static/images/paihangbang@2x.png",
 				height: 64, //header高度
@@ -86,6 +86,7 @@
 			};
 		},
 		onLoad: function(options) {
+			this.getMerchants()
 			this.title = options.title
 			this.getImportData()
 			this.url = imgurl
@@ -124,6 +125,22 @@
 		    },
 		
 		methods: {
+			getMerchants() {
+				let data = {
+					token: setdata
+				};
+				// log(data)
+				listing(getClient, data)
+					.then(res => {
+						// log(res)
+						///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
+						this.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
+						// log(this.ApproveStatus)
+					})
+					.catch(err => {
+						log(err);
+					});
+			},
 			//获取进口水果
 			getImportData(){
 				listing2(getselectImport)

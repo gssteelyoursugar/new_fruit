@@ -205,6 +205,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
@@ -212,6 +213,7 @@ var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
 var _request = __webpack_require__(/*! ../../api/request.js */ 21);var _data$filters$onPullD;function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+
 
 
 
@@ -233,7 +235,7 @@ console,log = _console.log;var _default = (_data$filters$onPullD = {
       showLike: true,
       url: 'http://192.168.1.10:8980/',
       lookDatas: [],
-
+      ApproveStatus: 0,
       flag: false,
       checkFlag: false, //默认选中
       allFlag: '', //全选
@@ -321,6 +323,7 @@ console,log = _console.log;var _default = (_data$filters$onPullD = {
     }, 1000);
   },
   onLoad: function onLoad() {
+    this.getMerchants();
     var res = uni.getSystemInfoSync();var
 
     statusBarHeight =
@@ -340,6 +343,22 @@ console,log = _console.log;var _default = (_data$filters$onPullD = {
 
   },
   methods: {
+    getMerchants: function getMerchants() {var _this = this;
+      var data = {
+        token: setdata };
+
+      // log(data)
+      (0, _api.listing)(_request.getClient, data).
+      then(function (res) {
+        // log(res)
+        ///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
+        _this.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
+        // log(this.ApproveStatus)
+      }).
+      catch(function (err) {
+        log(err);
+      });
+    },
     back: function back() {
       uni.navigateBack();
     },
@@ -362,12 +381,12 @@ console,log = _console.log;var _default = (_data$filters$onPullD = {
       log('dddddddddd');
     },
     //获取code
-    wxCode: function wxCode(avatarUrl, nickName) {var _this = this;
+    wxCode: function wxCode(avatarUrl, nickName) {var _this2 = this;
       wx.login({
         success: function success(res) {
           log(res);
           var code = res.code;
-          _this.wxLoging(code);
+          _this2.wxLoging(code);
         },
         fail: function fail(err) {
           log(err);
@@ -375,7 +394,7 @@ console,log = _console.log;var _default = (_data$filters$onPullD = {
 
     },
     //发code给后台换取token
-    wxLoging: function wxLoging(code) {var _this2 = this;
+    wxLoging: function wxLoging(code) {var _this3 = this;
       log(code);
 
       // let appid = wx.getAccountInfoSync().miniProgram.appId
@@ -412,8 +431,8 @@ console,log = _console.log;var _default = (_data$filters$onPullD = {
         log(res); //获得token
         uni.setStorageSync('usermen', res.data.token); //把token存在本地，小程序提供如同浏览器cookie
         uni.hideLoading();
-        _this2.modaishow = false;
-        _this2.getRecentlyData();
+        _this3.modaishow = false;
+        _this3.getRecentlyData();
       }).
       catch(function (err) {
         uni.showToast({
@@ -424,7 +443,7 @@ console,log = _console.log;var _default = (_data$filters$onPullD = {
       });
     },
     //请求最近看过
-    getRecentlyData: function getRecentlyData() {var _this3 = this;
+    getRecentlyData: function getRecentlyData() {var _this4 = this;
       // uni.showLoading({});
       var data = {
         token: setdata,
@@ -433,7 +452,7 @@ console,log = _console.log;var _default = (_data$filters$onPullD = {
 
       (0, _api.listing)(_request.getRecently, data).
       then(function (res) {
-        _this3.lookDatas = res.data.data;
+        _this4.lookDatas = res.data.data;
         console.log(res.data.data);
       }).
       catch(function (err) {
@@ -442,7 +461,7 @@ console,log = _console.log;var _default = (_data$filters$onPullD = {
       // uni.hideLoading();
     },
     //收藏
-    likeOrder: function likeOrder(event) {var _this4 = this;
+    likeOrder: function likeOrder(event) {var _this5 = this;
       log(event);
       var setdata = uni.getStorageSync('usermen');
       //判断是否登录才能收藏
@@ -456,7 +475,7 @@ console,log = _console.log;var _default = (_data$filters$onPullD = {
 
         (0, _api.publicing)(_request.postLike, data).
         then(function (res) {
-          _this4.getRecentlyData();
+          _this5.getRecentlyData();
           uni.showToast({
             title: "已收藏",
             icon: 'none',
@@ -472,7 +491,7 @@ console,log = _console.log;var _default = (_data$filters$onPullD = {
       log(setdata);
     },
     //删除收藏
-    delLike: function delLike(event) {var _this5 = this;
+    delLike: function delLike(event) {var _this6 = this;
 
       var data = {
         goodsId: event.id,
@@ -483,7 +502,7 @@ console,log = _console.log;var _default = (_data$filters$onPullD = {
         uni.showToast({
           title: "\u53D6\u6D88\u6536\u85CF" });
 
-        _this5.getRecentlyData();
+        _this6.getRecentlyData();
       }).
       catch(function (err) {
         log(err);
@@ -504,7 +523,7 @@ console,log = _console.log;var _default = (_data$filters$onPullD = {
     //更新进货单数量
 
     //删除商品
-    handlerButton: function handlerButton(id) {var _this6 = this;
+    handlerButton: function handlerButton(id) {var _this7 = this;
       log(id);
       var setdata = uni.getStorageSync('usermen');
       var data = {
@@ -519,7 +538,7 @@ console,log = _console.log;var _default = (_data$filters$onPullD = {
         uni.showToast({
           title: "".concat(res.data.msg) });
 
-        _this6.getRecentlyData();
+        _this7.getRecentlyData();
 
         // this.$forceUpdate();
       }).

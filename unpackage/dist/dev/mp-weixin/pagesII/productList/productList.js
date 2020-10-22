@@ -93,9 +93,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
-  tuiIcon: function() {
-    return __webpack_require__.e(/*! import() | components/tui-icon/tui-icon */ "components/tui-icon/tui-icon").then(__webpack_require__.bind(null, /*! @/components/tui-icon/tui-icon.vue */ 389))
-  },
   tuiTopDropdown: function() {
     return __webpack_require__.e(/*! import() | components/tui-top-dropdown/tui-top-dropdown */ "components/tui-top-dropdown/tui-top-dropdown").then(__webpack_require__.bind(null, /*! @/components/tui-top-dropdown/tui-top-dropdown.vue */ 459))
   },
@@ -105,6 +102,9 @@ var components = {
   easySelect: function() {
     return __webpack_require__.e(/*! import() | components/easy-select/easy-select */ "components/easy-select/easy-select").then(__webpack_require__.bind(null, /*! @/components/easy-select/easy-select.vue */ 473))
   },
+  tuiIcon: function() {
+    return __webpack_require__.e(/*! import() | components/tui-icon/tui-icon */ "components/tui-icon/tui-icon").then(__webpack_require__.bind(null, /*! @/components/tui-icon/tui-icon.vue */ 389))
+  },
   tuiNomore: function() {
     return __webpack_require__.e(/*! import() | components/tui-nomore/tui-nomore */ "components/tui-nomore/tui-nomore").then(__webpack_require__.bind(null, /*! @/components/tui-nomore/tui-nomore.vue */ 403))
   }
@@ -113,8 +113,6 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  var m0 = _vm.px(_vm.dropScreenH + 18)
-
   var l0 = _vm.__map(_vm.goods, function(item, index) {
     var $orig = _vm.__get_orig(item)
 
@@ -157,7 +155,6 @@ var render = function() {
     {},
     {
       $root: {
-        m0: m0,
         l0: l0,
         l1: l1,
         l2: l2
@@ -198,6 +195,18 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -855,7 +864,19 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 //
 //
 //
-var _console = console,log = _console.log;var setdata = uni.getStorageSync('usermen');var _default = { data: function data() {return { title: '选中', sleter: false, sleter2: false, dropdownlistData: [{ name: "微信支付" }, { name: "支付宝支付" }, { name: "银行卡支付" }, { name: "微信支付" }, { name: "支付宝支付" }, { name: "银行卡支付" }], dropdownShow: false, dropdownShow2: false, seleVarieties: [], //全部品种
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _console = console,log = _console.log;var setdata = uni.getStorageSync('usermen');var _default = { data: function data() {return { title: '选中', sleter: false, sleter2: false, ApproveStatus: 0, dropdownlistData: [{ name: "微信支付" }, { name: "支付宝支付" }, { name: "银行卡支付" }, { name: "微信支付" }, { name: "支付宝支付" }, { name: "银行卡支付" }], dropdownShow: false, dropdownShow2: false, seleVarieties: [], //全部品种
       color_level: [], //颜色等级
       // facade_level: [], //外观等级
       fruit_level: [], //果品等级
@@ -906,7 +927,7 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
         rejectRatio_parameter_2: '', //不良右
         price_parameter_1: '', //价格左
         price_parameter_2: '', //价格右边
-        pageNo: 1, pageSize: 10 } };}, onLoad: function onLoad(options) {var _this = this;var pages = getCurrentPages();var beforePage = pages[pages.length - 2]; // 前一个页面路径
+        pageNo: 1, pageSize: 10 } };}, onLoad: function onLoad(options) {var _this = this;this.getMerchants();var pages = getCurrentPages();var beforePage = pages[pages.length - 2]; // 前一个页面路径
     // log(beforePage.$page.fullPath)
     if (beforePage.$page.fullPath === '/pagesII/searchGoods/searchGoods') {// log('我执行了搜索')
       //搜索	
@@ -915,17 +936,24 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
         //略小，避免误差带来的影响
         _this.dropScreenH = _this.height * 750 / res.windowWidth + 186;_this.drawerH = res.windowHeight - uni.upx2px(100) - _this.height;} });var res = uni.getSystemInfoSync();var statusBarHeight = res.statusBarHeight;var info = uni.getMenuButtonBoundingClientRect();var top = info.top,bottom = info.bottom;this.statusHeight = statusBarHeight;var buttonHeight = bottom - statusBarHeight + (top - statusBarHeight);var navHeight = statusBarHeight + buttonHeight + top - statusBarHeight; //状态栏+导航栏的高度（页面初始高度）
     this.boxHeight = navHeight - statusBarHeight; //导航栏高度
-    this.navHeight = navHeight;console.log("statusBarHeight,", statusBarHeight, "navHeight", navHeight, "boxHeight", this.boxHeight, "buttonHeight", buttonHeight);}, filters: { filterNum: function filterNum(val) {if (val) {var words = (Math.floor(val) + '').split('');var res = '';if (words.length <= 4) {res = val;}if (words.length === 5) {res = words[0] + "." + words[1] + '万';}if (words.length === 6) {res = words[0] + words[1] + "." + words[2] + '万';}if (words.length === 7) {res = words[0] + words[1] + words[2] + "." + words[3] + '万';}if (words.length === 8) {res = words[0] + words[1] + words[2] + words[3] + "." + words[4] + '万';}if (words.length === 9) {res = words[0] + "." + words[1] + '亿';}if (words.length === 10) {res = words[0] + words[1] + "." + words[2] + '亿';}return res;} else {return val;}} }, computed: { tasteBox: function tasteBox() {var arr = [];var data = this.taste_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;}, colorBox: function colorBox() {var arr = [];var data = this.color_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;}, shapeBox: function shapeBox() {var arr = [];var data = this.shape_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;} }, methods: { //点击搜索
+    this.navHeight = navHeight;console.log("statusBarHeight,", statusBarHeight, "navHeight", navHeight, "boxHeight", this.boxHeight, "buttonHeight", buttonHeight);}, filters: { filterNum: function filterNum(val) {if (val) {var words = (Math.floor(val) + '').split('');var res = '';if (words.length <= 4) {res = val;}if (words.length === 5) {res = words[0] + "." + words[1] + '万';}if (words.length === 6) {res = words[0] + words[1] + "." + words[2] + '万';}if (words.length === 7) {res = words[0] + words[1] + words[2] + "." + words[3] + '万';}if (words.length === 8) {res = words[0] + words[1] + words[2] + words[3] + "." + words[4] + '万';}if (words.length === 9) {res = words[0] + "." + words[1] + '亿';}if (words.length === 10) {res = words[0] + words[1] + "." + words[2] + '亿';}return res;} else {return val;}} }, computed: { tasteBox: function tasteBox() {var arr = [];var data = this.taste_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;}, colorBox: function colorBox() {var arr = [];var data = this.color_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;}, shapeBox: function shapeBox() {var arr = [];var data = this.shape_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;} }, methods: { getMerchants: function getMerchants() {var _this2 = this;var data = { token: setdata }; // log(data)
+      (0, _api.listing)(_request.getClient, data).then(function (res) {// log(res)
+        ///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
+        _this2.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
+        // log(this.ApproveStatus)
+      }).catch(function (err) {log(err);});}, //点击搜索
     goToSearchGoods: function goToSearchGoods() {uni.navigateTo({ url: '../../pagesII/searchGoods/searchGoods' });}, //商品详情页
     gotoList: function gotoList(id) {log(id);uni.navigateTo({ url: '../../pagesIII/productDetail/productDetail?id=' + id });}, //下拉选
-    dropDownList: function dropDownList(index, name) {if (index !== -1) {console.log("index：" + index, name);}this.title = name;this.dropdownShow = !this.dropdownShow;}, dropDownList2: function dropDownList2(index, name) {if (index !== -1) {console.log("index：" + index, name);
+    dropDownList: function dropDownList(index, name) {if (index !== -1) {console.log("index：" + index, name);}this.title = name;this.dropdownShow = !this.dropdownShow;}, dropDownList2: function dropDownList2(index, name) {
+      if (index !== -1) {
+        console.log("index：" + index, name);
       }
       this.title = name;
       this.dropdownShow2 = !this.dropdownShow2;
     },
 
     // 搜索请求数据
-    getSearch: function getSearch(serrchName) {var _this2 = this;
+    getSearch: function getSearch(serrchName) {var _this3 = this;
       var data = {
         pageNo: 1,
         pageSize: 10,
@@ -934,24 +962,24 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       (0, _api.listing)(_request.getGoodsall, data).
       then(function (res) {
         log("搜索结果", res);
-        _this2.goods = res.data.data.goods;
-        _this2.seleVarieties = res.data.data;
-        if (_this2.seleVarieties === undefined) {
-          _this2.seleVarieties = _this2.seleVarieties;
-        } else if (_this2.seleVarieties != undefined) {}
-        _this2.color_level = res.data.data.color_level;
-        _this2.facade_level = res.data.data.facade_level;
-        _this2.fruit_level = res.data.data.fruit_level;
-        _this2.shape_level = res.data.data.shape_level;
-        _this2.goods = res.data.data.goods;
-        _this2.packaging = res.data.data.packaging;
-        _this2.species = res.data.data.species;
+        _this3.goods = res.data.data.goods;
+        _this3.seleVarieties = res.data.data;
+        if (_this3.seleVarieties === undefined) {
+          _this3.seleVarieties = _this3.seleVarieties;
+        } else if (_this3.seleVarieties != undefined) {}
+        _this3.color_level = res.data.data.color_level;
+        _this3.facade_level = res.data.data.facade_level;
+        _this3.fruit_level = res.data.data.fruit_level;
+        _this3.shape_level = res.data.data.shape_level;
+        _this3.goods = res.data.data.goods;
+        _this3.packaging = res.data.data.packaging;
+        _this3.species = res.data.data.species;
         // for (var i = 0; i < this.species.length; i++) {
         // 	this.species[i].isActives = this.activeA
         // }
-        _this2.storage_mode = res.data.data.storage_mode;
-        _this2.taste_level = res.data.data.taste_level;
-        _this2.variety = res.data.data.variety;
+        _this3.storage_mode = res.data.data.storage_mode;
+        _this3.taste_level = res.data.data.taste_level;
+        _this3.variety = res.data.data.variety;
       }).
       catch(function (err) {
         log(err);
@@ -1130,7 +1158,7 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       this.$refs.easySelect.hideOptions && this.$refs.easySelect.hideOptions();
     },
     //销量升序
-    getshopDESC: function getshopDESC() {var _this3 = this;
+    getshopDESC: function getshopDESC() {var _this4 = this;
       var data = {
         pageNo: 1,
         pageSize: 10,
@@ -1139,7 +1167,7 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       (0, _api.listing)(_request.getGoodsall, data).
       then(function (res) {
         log(res);
-        _this3.goods = res.data.data.goods;
+        _this4.goods = res.data.data.goods;
       }).
       catch(function (err) {
         log(err);
@@ -1147,7 +1175,7 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
 
     },
     //销量降序
-    getshopASC: function getshopASC() {var _this4 = this;
+    getshopASC: function getshopASC() {var _this5 = this;
 
       var data = {
         pageNo: 1,
@@ -1158,7 +1186,7 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       then(function (res) {
 
         log(res);
-        _this4.goods = res.data.data.goods;
+        _this5.goods = res.data.data.goods;
       }).
       catch(function (err) {
         log(err);
@@ -1166,7 +1194,7 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
 
     },
     //价格升序
-    getpriceDESC: function getpriceDESC() {var _this5 = this;
+    getpriceDESC: function getpriceDESC() {var _this6 = this;
       var data = {
         pageNo: 1,
         pageSize: 10,
@@ -1175,14 +1203,14 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       (0, _api.listing)(_request.getGoodsall, data).
       then(function (res) {
         log(res);
-        _this5.goods = res.data.data.goods;
+        _this6.goods = res.data.data.goods;
       }).
       catch(function (err) {
         log(err);
       });
     },
     //价格降序
-    getpriceASC: function getpriceASC() {var _this6 = this;
+    getpriceASC: function getpriceASC() {var _this7 = this;
       var data = {
         pageNo: 1,
         pageSize: 10,
@@ -1190,26 +1218,26 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
 
       (0, _api.listing)(_request.getGoodsall, data).
       then(function (res) {
-        _this6.goods = res.data.data.goods;
+        _this7.goods = res.data.data.goods;
       }).
       catch(function (err) {
         log(err);
       });
     },
     // 品种多选请求
-    getTypeData: function getTypeData() {var _this7 = this;
+    getTypeData: function getTypeData() {var _this8 = this;
       var list = this.idList;
       var lData = this.seleVarieties;
       if (list.length === 0) {
         (0, _api.listing)(_request.getGoodsall, this.tempData).then(function (res) {
           console.log(res);
-          _this7.goods = res.data.data.goods;
+          _this8.goods = res.data.data.goods;
         });
       } else {
         var ids = list.join(',');
         this.tempData.varietyId = ids;
         (0, _api.listing)(_request.getGoodsall, this.tempData).then(function (res) {
-          _this7.goods = res.data.data.goods;
+          _this8.goods = res.data.data.goods;
         });
       }
 
@@ -1217,16 +1245,16 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       this.isActives2 = false;
     },
     // 点击
-    clickToConfirm: function clickToConfirm() {var _this8 = this;
+    clickToConfirm: function clickToConfirm() {var _this9 = this;
       console.log(this.tempData);
       (0, _api.listing)(_request.getGoodsall, this.tempData).then(function (res) {
         console.log(res);
-        _this8.goods = res.data.data.goods;
+        _this9.goods = res.data.data.goods;
       });
       this.closeDrawer();
     },
     //请求数据
-    ShopIng: function ShopIng() {var _this9 = this;
+    ShopIng: function ShopIng() {var _this10 = this;
       this.tempData.id = this.varietyId;
       var data2 = {
         id: this.varietyId };
@@ -1235,20 +1263,20 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       // listing(getGoodsall,data)
       .then(function (res) {
         console.log(res);
-        _this9.seleVarieties = res[1].data.data;
-        _this9.color_level = res[0].data.data.color_level;
-        _this9.facade_level = res[0].data.data.facade_level;
-        _this9.fruit_level = res[0].data.data.fruit_level;
-        _this9.shape_level = res[0].data.data.shape_level;
-        _this9.goods = res[0].data.data.goods;
-        _this9.packaging = res[0].data.data.packaging;
-        _this9.species = res[0].data.data.species;
-        for (var i = 0; i < _this9.species.length; i++) {
-          _this9.species[i].isActives = _this9.activeA;
+        _this10.seleVarieties = res[1].data.data;
+        _this10.color_level = res[0].data.data.color_level;
+        _this10.facade_level = res[0].data.data.facade_level;
+        _this10.fruit_level = res[0].data.data.fruit_level;
+        _this10.shape_level = res[0].data.data.shape_level;
+        _this10.goods = res[0].data.data.goods;
+        _this10.packaging = res[0].data.data.packaging;
+        _this10.species = res[0].data.data.species;
+        for (var i = 0; i < _this10.species.length; i++) {
+          _this10.species[i].isActives = _this10.activeA;
         }
-        _this9.storage_mode = res[0].data.data.storage_mode;
-        _this9.taste_level = res[0].data.data.taste_level;
-        _this9.variety = res[0].data.data.variety;
+        _this10.storage_mode = res[0].data.data.storage_mode;
+        _this10.taste_level = res[0].data.data.taste_level;
+        _this10.variety = res[0].data.data.variety;
 
       }).
       catch(function (err) {
@@ -1272,10 +1300,10 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       // }
       // this.attrData = arr;
     },
-    btnCloseDrop: function btnCloseDrop() {var _this10 = this;
+    btnCloseDrop: function btnCloseDrop() {var _this11 = this;
       this.scrollTop = 1;
       this.$nextTick(function () {
-        _this10.scrollTop = 0;
+        _this11.scrollTop = 0;
       });
 
       this.dropScreenShow = false;

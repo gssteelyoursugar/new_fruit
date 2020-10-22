@@ -259,6 +259,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
@@ -381,12 +382,13 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 //
 //
 //
+//
 var setdata = uni.getStorageSync('usermen');var _console = console,log = _console.log; // var data ={id:this.ids,token:setdata}
 var _default = { components: {}, data: function data() {return { payUrl: '', isTop: true, ids: '', //order里面的ids
       goodsData: [], //结算的商品信息
       // imgUrl:'http://192.168.1.10:8980/js/userfiles/fileupload/202008/1295611300690604034.png',
       hasCoupon: true, insufficient: false, show: false, extraUserInfo: {}, totalPrice: {}, ids2: '', //order结算后的ids2
-      orderNumber: '', extraData: {}, idList: '', url: '', name: 'arrowright', unit: 'rpx', size: 32, color: '#000', margin: '0' };}, computed: { allGoodsNum: function allGoodsNum() {var list = this.goodsData;var num = 0;list.forEach(function (item) {num += item.number;});return num;} }, methods: { //立即购买
+      orderNumber: '', extraData: {}, idList: '', url: '', name: 'arrowright', unit: 'rpx', size: 32, color: '#000', margin: '0' };}, computed: { allGoodsNum: function allGoodsNum() {var list = this.goodsData;var num = 0;list.forEach(function (item) {num += item.number;});return num;} }, methods: { clip: function clip() {uni.setClipboardData({ data: this.payUrl, success: function success() {console.log('success');} });}, //立即购买
     gtePayORderTel: function gtePayORderTel() {var _this = this;var setdata = uni.getStorageSync('usermen');var data = { id: this.ids, token: setdata }; // Promise.all([publicing(postSettle,data),publicing(postSubmitOrder,data2)])
       (0, _api.publicing)(_request.postSettle, data).then(function (res) {console.log(res);_this.extraUserInfo = res.data.data.extraData.userInfo;_this.goodsData = res.data.data.data;_this.extraData = res.data.data.extraData;}).catch(function (err) {console.log(err);});}, //进来页面请求结算获得一串id
     gtePayORder: function gtePayORder() {var _this2 = this;var setdata = uni.getStorageSync('usermen');var data = { id: this.ids, token: setdata }; // Promise.all([publicing(postSettle,data),publicing(postSubmitOrder,data2)])
@@ -398,24 +400,32 @@ var _default = { components: {}, data: function data() {return { payUrl: '', isT
         idList = idList.substring(0, idList.length - 1);console.log("idList去除逗号后====", idList);log(idList);_this2.ids = idList; // this.ids2 = idList
         // log(this.ids2)
         // this.SubmitOrder(idList)
-      }).catch(function (err) {console.log(err);});}, getQueryString: function getQueryString(str, key) {if (str) {var queryString = str.split('?')[1] || '';var arr = queryString.split('&') || [];for (var i = 0; i < arr.length; i++) {var keyString = decodeURIComponent(arr[i].split('=')[0]);var valueString = decodeURIComponent(arr[i].split('=')[1]);if (key === keyString) {return valueString;}}return;} else {return;}}, //获得订单号，才能支付
-    SubmitOrder: function SubmitOrder() {var that = this;var setdata = uni.getStorageSync('usermen');var data2 = { id: that.ids,
+      }).catch(function (err) {console.log(err);});}, getQueryString: function getQueryString(str, key) {if (str) {var queryString = str.split('?')[1] || '';var arr = queryString.split('&') || [];for (var i = 0; i < arr.length; i++) {var keyString = decodeURIComponent(arr[i].split('=')[0]);var valueString = decodeURIComponent(arr[i].split('=')[1]);if (key === keyString) {return valueString;}}return;} else {return;
+      }
+    },
+
+    //获得订单号，才能支付
+    SubmitOrder: function SubmitOrder() {var _this3 = this;
+      var that = this;
+      var setdata = uni.getStorageSync('usermen');
+      var data2 = {
+        id: that.ids,
         token: setdata };
 
       (0, _api.listing)(_request.getSubmitOrder, data2).
       then(function (res) {
         log(res);
         var orderNumber = res.data.data.orderNumber;
+        _this3.payUrl = res.data.data.payUrl;
+
         uni.showModal({
           title: '提示',
           content: '确认支付',
           success: function success(res) {
             if (res.confirm) {
-              uni.reLaunch({
-                url: '../../pagesIII/pay/pay?url=' + code });
-
-              // console.log('用户点击确定');
-              // this.btnPay(orderNumber)
+              console.log('用户点击确定');
+              that.clip();
+              that.btnPay(orderNumber);
             } else if (res.cancel) {
               uni.showToast({
                 title: '订单已取消',

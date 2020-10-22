@@ -129,8 +129,8 @@
 						<view class="tui-Fruits-table">
 							<image :src="item.url" mode="aspectFit" class="tabimg"></image>
 							<view class="tui-price">
-								<view class="tui-first-price">&yen;<text class="tui-price-color">{{item.platformClinetPrice}}</text><text class="price-label">/件</text></view>
-								<view class="tui-last-price" v-if="item.marketPrice != 0">&yen;<text class="tui-cribing">{{item.marketPrice}}</text></view>
+								<view class="tui-first-price">&yen;<text class="tui-price-color">{{ ApproveStatus === 1 ?item.platformClinetPrice: '***'}}</text><text class="price-label">/件</text></view>
+								<view class="tui-last-price" v-if="item.marketPrice != 0">&yen;<text class="tui-cribing">{{ApproveStatus === 1 ?item.marketPrice:'***'}}</text></view>
 							</view>
 							<text class="tui-weight">{{item.specification}}</text>
 						</view>
@@ -158,8 +158,8 @@
 						<view class="tui-Fruits-table" @click="fruitGo">
 							<image :src="item.url" mode="aspectFit" class="tabimg"></image>
 							<view class="tui-price">
-								<view class="tui-first-price">&yen;<text class="tui-price-color">{{item.platformClinetPrice}}</text><text class="price-label">/件</text></view>
-								<view class="tui-last-price"  v-if="item.marketPrice != 0">&yen;<text class="tui-cribing">{{item.marketPrice}}</text></view>
+								<view class="tui-first-price">&yen;<text class="tui-price-color">{{ApproveStatus === 1 ?item.platformClinetPrice:'***'}}</text><text class="price-label">/件</text></view>
+								<view class="tui-last-price"  v-if="item.marketPrice != 0">&yen;<text class="tui-cribing">{{ApproveStatus === 1 ?item.marketPrice:'***'}}</text></view>
 							</view>
 							<text class="tui-weight">{{item.specification}}</text>
 						</view>
@@ -209,7 +209,12 @@
 						<!--商品列表1-->
 						<block v-for="(item, index) in IndexGoods" :key="index" v-if="(index + 1) % 2 != 0">
 							<view class="tui-pro-item" hover-class="hover" :hover-start-time="150">
-								<image :src="item.url" class="tui-pro-img" mode="widthFix" @tap="gotoList(item.id)" />
+								<view class="img-mask">
+									<image :src="item.url" class="tui-pro-img" mode="widthFix" @tap="gotoList(item.id)" />
+									<view class="img-mask-item" v-if="item.number === 0">
+										<view class="item-text">抢光了</view>
+									</view>
+								</view>
 								<view class="tui-pro-content">
 									<view class="tui-pro-tit">
 										<text class="tag-tit">{{item.lableName}}</text>
@@ -252,7 +257,12 @@
 						<!--商品列表2-->
 						<block v-for="(item, index) in IndexGoods" :key="index" v-if="(index + 1) % 2 == 0">
 							<view class="tui-pro-item" hover-class="hover" :hover-start-time="150">
-								<image :src="item.url" class="tui-pro-img" mode="widthFix" @tap="gotoList(item.id)" />
+								<view class="img-mask">
+									<image :src="item.url" class="tui-pro-img" mode="widthFix" @tap="gotoList(item.id)" />
+									<view class="img-mask-item" v-if="item.number === 0">
+										<view class="item-text">抢光了</view>
+									</view>
+								</view>
 								<view class="tui-pro-content">
 									<view class="tui-pro-tit">
 										<text class="tag-tit">{{item.lableName}}</text>
@@ -1264,8 +1274,33 @@
 		margin-bottom: 4%;
 		background: #fff;
 		box-sizing: border-box;
-		border-radius: 12rpx;
+		border-radius: 6rpx;
 		overflow: hidden;
+	}
+	
+	.img-mask {
+		position: relative;
+	}
+	.img-mask-item { 
+		position: absolute;
+		top: 0;
+		right: 0;
+		left: 0;
+		bottom: 0;
+		background: rgba(0,0,0,.4);
+		display: flex;
+		align-items: center;
+		text-align: center;
+		justify-content: center;
+
+	}
+	
+	.item-text {
+		background: rgba(0,0,0,.3);
+		color: #fff;
+		font-size: 28rpx;
+		padding: 6rpx 16rpx;
+		border-radius: 40rpx;
 	}
 
 	.tui-pro-img {
@@ -1446,6 +1481,8 @@
 
 	.xiding {
 		position: sticky;
+		z-index: 999;
+
 	}
 
 	.tui-recommend {

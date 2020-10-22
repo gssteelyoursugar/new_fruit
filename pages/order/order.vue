@@ -50,7 +50,7 @@
 								<view class="tui-price-box">
 									<view class="tui-goods-price">
 										<text class="goods-price-tag">￥</text>
-										<text class="goods-price-num">{{ itemTwo.platformClientPrice | getPrice }}</text>
+										<text class="goods-price-num">{{ ApproveStatus === 1 ? itemTwo.platformClientPrice :'***' | getPrice }}</text>
 										<text>/件</text>
 									</view>
 									<!-- :custom="index" :index="indexs" 
@@ -202,6 +202,9 @@
 		},
 		filters: {
 			getPrice(price) {
+				if (price === '***') {
+					return price
+				}
 				price = price || 0;
 				return price.toFixed(2);
 			}

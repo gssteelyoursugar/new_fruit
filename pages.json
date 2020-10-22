@@ -101,7 +101,8 @@
 					"path": "productList/productList", //分包路径
 					"style": {
 						"enablePullDownRefresh": true,
-						"navigationStyle": "custom"
+						"navigationBarTitleText": "找水果"
+						// "navigationStyle": "custom"
 					}
 				},
 				{
@@ -109,6 +110,7 @@
 					"style": {
 						"enablePullDownRefresh": true,
 						"navigationBarTextStyle": "white", //透明胶囊
+						// "navigationBarTitleText": "排行榜"
 						"navigationStyle": "custom"
 					}
 				},

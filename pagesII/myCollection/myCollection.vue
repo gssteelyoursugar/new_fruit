@@ -26,7 +26,7 @@
 							{{item.kg1}}斤装
 						</view>
 						<view class="tag-tit2-text">
-							 <text class="price1">￥{{item.platformClientPrice}}元</text><text class="price2">/件</text>
+							 <text class="price1">￥{{ApproveStatus===1?item.platformClientPrice:'***'}}元</text><text class="price2">/件</text>
 						</view>
 					</view>
 					<image  src="../../static/images/like1.png"  mode="aspectFill" class="tui-shop-car" v-if="showLike" @tap="delLike(item.goodsId)"></image>
@@ -71,7 +71,7 @@
 	//请求方式
 	import {listing,publicing,publicing2} from '../../api/api.js'
 	//请求地址
-	import {getLike,postDelLike,loginis} from '../../api/request.js'
+	import {getLike,postDelLike,loginis,getClient} from '../../api/request.js'
 	var setdata = uni.getStorageSync('usermen')
 	var {log} = console
 	export default {
@@ -84,11 +84,28 @@
 				hasError: false,//隐藏
 				showLike:true,
 				url:'http://192.168.1.10:8980/',
-				likeDatas:[]
+				likeDatas:[],
+				ApproveStatus: 0
 				
 			}
 		},
 		methods: {
+			getMerchants() {
+				let data = {
+					token: setdata
+				};
+				// log(data)
+				listing(getClient, data)
+					.then(res => {
+						// log(res)
+						///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
+						this.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
+						// log(this.ApproveStatus)
+					})
+					.catch(err => {
+						log(err);
+					});
+			},
 			//反馈提示
 			tising(bull,tips){
 				this.init(bull,tips)
@@ -233,7 +250,7 @@
 			
 		},
 		onShow() {
-			
+			this.getMerchants()
 			let setdata = uni.getStorageSync('usermen')
 			log(setdata)
 			if(!setdata){

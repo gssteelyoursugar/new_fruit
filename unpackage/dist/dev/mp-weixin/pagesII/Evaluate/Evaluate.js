@@ -227,7 +227,26 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 //
 //请求方式
 //请求地址
-var setdata = uni.getStorageSync('usermen');var _default = { data: function data() {return { showTips: false, curIds: undefined, evaList: [] };}, onLoad: function onLoad() {this.getList();}, methods: { getList: function getList() {var _this = this;var data = { token: setdata, pageNo: 1, pageSize: 10 };(0, _api.publicing)(_request.getEvaluateList, data).then(function (res) {console.log(res);_this.evaList = res.data.data;});}, clickToDetail: function clickToDetail(id) {uni.navigateTo({ url: '../../pagesIII/productDetail/productDetail?id=' + id });}, toggleTips: function toggleTips(id) {this.curIds = id;this.showTips = !this.showTips;}, unShowTips: function unShowTips() {this.showTips = false;}, cancelPraise: function cancelPraise(e) {var _this2 = this;console.log("我要取消点赞");
+var setdata = uni.getStorageSync('usermen');var _default = { data: function data() {return { showTips: false, curIds: undefined, evaList: [], ApproveStatus: 0 };}, onLoad: function onLoad() {this.getList();this.getMerchants();}, methods: { getMerchants: function getMerchants() {var _this = this;var data = { token: setdata }; // log(data)
+      (0, _api.listing)(_request.getClient, data).then(function (res) {// log(res)
+        ///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
+        _this.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
+        // log(this.ApproveStatus)
+      }).catch(function (err) {log(err);});}, getList: function getList() {var _this2 = this;var data = { token: setdata, pageNo: 1, pageSize: 10 };(0, _api.publicing)(_request.getEvaluateList, data).then(function (res) {console.log(res);_this2.evaList = res.data.data;});}, clickToDetail: function clickToDetail(id) {uni.navigateTo({
+        url: '../../pagesIII/productDetail/productDetail?id=' + id });
+
+    },
+    toggleTips: function toggleTips(id) {
+      this.curIds = id;
+      this.showTips = !this.showTips;
+    },
+
+    unShowTips: function unShowTips() {
+      this.showTips = false;
+    },
+
+    cancelPraise: function cancelPraise(e) {var _this3 = this;
+      console.log("我要取消点赞");
 
       var data = {
         goodsId: this.curIds,
@@ -241,8 +260,8 @@ var setdata = uni.getStorageSync('usermen');var _default = { data: function data
           title: '已取消点赞' });
 
 
-        _this2.unShowTips();
-        _this2.getList();
+        _this3.unShowTips();
+        _this3.getList();
       });
     } },
 

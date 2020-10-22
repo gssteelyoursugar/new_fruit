@@ -113,7 +113,9 @@ var render = function() {
     var l0 = _vm.__map(item.list, function(itemTwo, indexs) {
       var $orig = _vm.__get_orig(itemTwo)
 
-      var f0 = _vm._f("getPrice")(itemTwo.platformClientPrice)
+      var f0 = _vm._f("getPrice")(
+        _vm.ApproveStatus === 1 ? itemTwo.platformClientPrice : "***"
+      )
 
       return {
         $orig: $orig,
@@ -395,11 +397,14 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       checkedArr: [], //存放选中的数据
       valueNum: 0, url: 'http://192.168.1.10:8980', orderObj: [], openid: '', neworder: [], isCheck: false, dataList: [{ id: 'q2020811', buyNum: 1, price: 299.5, selected: false, imgsrc: '../../static/images/putao1.png', shopName: '大葡萄' }, { id: 'q2020812', buyNum: 2, price: 499, selected: false, imgsrc: '../../static/images/niuyouguo1.png', shopName: '大哈密瓜' }, { id: 'q2020813', buyNum: 3, price: 199, selected: false, imgsrc: '../../static/images/putao1.png', shopName: '大紫葡萄' }], isAll: false, totalPrice: 0, buyNum: 0, cartIds: [], //购物车id
       actions: [{ name: '删除', color: '#fff', fontsize: 28, width: 64, background: '#F82400' }], actions2: [{ name: '看相似', color: '#fff', fontsize: 28, width: 64, background: '#FF7035' }, { name: '删除', color: '#fff', fontsize: 28, width: 64, background: '#F82400' }], isEdit: false, pageIndex: 1, loadding: false, pullUpOn: true, allPrice: 0, //总价
-      curId: 0 };}, filters: { getPrice: function getPrice(price) {price = price || 0;return price.toFixed(2);} }, methods: { goIndex: function goIndex() {uni.switchTab({ url: '../index/index' });}, init: function init(bull, tips) {this.modaishow = bull;this.tips = tips;}, //获取头像昵称
+      curId: 0 };}, filters: { getPrice: function getPrice(price) {if (price === '***') {return price;}price = price || 0;return price.toFixed(2);} }, methods: { goIndex: function goIndex() {uni.switchTab({ url: '../index/index' });}, init: function init(bull, tips) {this.modaishow = bull;this.tips = tips;}, //获取头像昵称
     getUserInfo: function getUserInfo(event) {// log(event)
       this.usering = event.detail.userInfo;uni.setStorageSync('userIN', event.detail.userInfo); //把头像存在本地，小程序提供如同浏览器cookie
-      var userING = uni.setStorageSync('userIN', event.detail.userInfo);if (event.detail.userInfo) {var wxing = event.detail.userInfo;this.wxCode(wxing.avatarUrl, wxing.nickName);} // wx.startPullDownRefresh()
-    }, //获取code
+      var userING = uni.setStorageSync('userIN', event.detail.userInfo);if (event.detail.userInfo) {var wxing = event.detail.userInfo;this.wxCode(wxing.avatarUrl, wxing.nickName);
+      }
+      // wx.startPullDownRefresh()
+    },
+    //获取code
     wxCode: function wxCode(avatarUrl, nickName) {var _this = this;
       wx.login({
         success: function success(res) {

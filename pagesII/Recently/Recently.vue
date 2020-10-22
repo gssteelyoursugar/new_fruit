@@ -17,7 +17,8 @@
 			<!-- <text class="color-text">{{tips}}</text> -->
 			<view class="btnbox"><button class="btn" type="default" open-type="getUserInfo" @getuserinfo="getUserInfo">去登陆</button></view>
 		</view>
-		<view>  <!-- :style="{marginTop: statusHeight + boxHeight + 'px'}" -->
+		<view>
+			<!-- :style="{marginTop: statusHeight + boxHeight + 'px'}" -->
 			<checkbox-group @change="buyChange">
 				<view class="tui-cart-cell  tui-mtop" v-for="(item, index) in lookDatas" :key="index">
 					<view class="item-time" v-if="item.list.length !== 0">{{ item.createDate }}</view>
@@ -39,7 +40,7 @@
 										<view class="tui-price-box">
 											<view class="tui-goods-price">
 												<text class="text-color2">￥</text>
-												{{ dt.platformClinetPrice || 0 }}
+												{{ApproveStatus ===1? dt.platformClinetPrice:'***' }}
 												<text style="font-size: 20rpx;font-weight: 400;margin-left: 4rpx;">元</text>
 												<text class="price2">/件</text>
 											</view>
@@ -80,7 +81,8 @@
 		postRecentlyDel,
 		postLike,
 		postDelLike,
-		loginis
+		loginis,
+		getClient,
 	} from '../../api/request.js';
 	var setdata = uni.getStorageSync('usermen');
 	var {
@@ -97,7 +99,7 @@
 				showLike: true,
 				url: 'http://192.168.1.10:8980/',
 				lookDatas: [],
-
+				ApproveStatus: 0,
 				flag: false,
 				checkFlag: false, //默认选中
 				allFlag: '', //全选
@@ -185,6 +187,7 @@
 			}, 1000);
 		},
 		onLoad() {
+			this.getMerchants()
 			const res = uni.getSystemInfoSync();
 			let {
 				statusBarHeight
@@ -204,6 +207,22 @@
 			// #endif
 		},
 		methods: {
+			getMerchants() {
+				let data = {
+					token: setdata
+				};
+				// log(data)
+				listing(getClient, data)
+					.then(res => {
+						// log(res)
+						///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
+						this.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
+						// log(this.ApproveStatus)
+					})
+					.catch(err => {
+						log(err);
+					});
+			},
 			back: function() {
 				uni.navigateBack();
 			},

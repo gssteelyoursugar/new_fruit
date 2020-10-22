@@ -14,7 +14,7 @@
 			<image :src="imageUrl" class="tui-my-bg" mode="aspectFill"></image>
 		</view>
 
-		<view class="scroll-goods" :style="{top: statusHeight<=20 ? '430rpx': (430+statusHeight) + 'rpx'}">
+		<view class="scroll-goods" ><!-- :style="{top: statusHeight<=20 ? '430rpx': (430+statusHeight) + 'rpx'}" -->
 			<view class="tui-cent-box">
 				<view class="tui-cent-box-felx1">
 					<view class="class-name-left">
@@ -63,7 +63,7 @@
 												<view class="tag-tit2-price">
 													<text style="color:#555;margin-right: 6rpx;font-size: 24rpx;">限量价</text>
 													<text style="font-size: 20rpx;">¥</text>
-													<text style="font-size: 40rpx;font-weight: bold;margin: 6rpx 0;">{{item.marketPrice}}</text>
+													<text style="font-size: 40rpx;font-weight: bold;margin: 6rpx 0;">{{ApproveStatus===1?item.marketPrice:'***'}}</text>
 													<text style="font-size: 24rpx;font-weight: 400;">元</text>
 													<text style="color: #b6b6b6;font-size: 20rpx;">/件</text>
 												</view>
@@ -96,7 +96,8 @@
 	//请求地址
 	import {
 		getActivity,
-		imgurl
+		imgurl,
+		getClient
 	} from '../../api/request.js'
 	const {
 		log
@@ -112,6 +113,7 @@
 				LimitDataList: [],
 				hideing: 0,
 				num: 0,
+				ApproveStatus: 0,
 				ranking: ['销量榜', '评价榜', '关注榜', '回购榜'],
 				imageUrl: "/static/images/limit-1.png",
 				rankBgUrl: "/static/images/paihangbang@2x.png",
@@ -138,6 +140,7 @@
 			};
 		},
 		onLoad: function(options) {
+			this.getMerchants()
 			this.WxActivityID = options.id
 			this.getLimit()
 			this.url = imgurl
@@ -171,7 +174,22 @@
 			
 		},
 		methods: {
-
+			getMerchants() {
+				let data = {
+					token: setdata
+				};
+				// log(data)
+				listing(getClient, data)
+					.then(res => {
+						// log(res)
+						///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
+						this.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
+						// log(this.ApproveStatus)
+					})
+					.catch(err => {
+						log(err);
+					});
+			},
 			scroll(e) {
 				console.log(e)
 			},
@@ -341,7 +359,7 @@
 	@import '/common/css/main.css';
 
 	page {
-		background-color: #1dc236;
+		background-color: #fff;
 	}
 
 	.tui-cent-box-felx1 {
@@ -388,7 +406,7 @@
 
 	.tui-my-bg {
 		width: 100%;
-		height: 1334rpx;
+		height: 334rpx;
 		display: block;
 	}
 
@@ -414,6 +432,7 @@
 		border-radius: 60rpx 60rpx 0 0;
 		position: fixed;
 		bottom: 0;
+		top: 283rpx;
 		left: 0;
 		background: #fff;
 		right: 0;

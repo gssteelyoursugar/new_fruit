@@ -28,9 +28,11 @@
 									<view class="tui-img-text">
 										<image :src="item.url" mode="aspectFill" class="tui-img"></image>
 										<view class="tui-tag-mag">
-											<text class="tui-tag-name">{{item.labelName}}</text>
-											<text class="tui-tag-name2">{{item.title}}</text>
-											<view class="tui-tag-time">预计上市时间{{item.time}}</view>
+											<view style="padding-top: 6rpx;"><text class="tui-tag-name">{{item.labelName}}</text></view>
+											<view>
+												<view class="tui-tag-name2">{{item.title}}</view>
+												<view class="tui-tag-time">预计上市时间{{item.time}}</view>
+											</view>
 										</view>
 									</view>
 								</view>
@@ -59,7 +61,7 @@
 									<view class="tag-tit2-price">
 										<text style="font-size: 24rpx;color: #555;margin-right: 12rpx;">限量价</text>
 										<text style="font-size: 16rpx;">¥</text>
-										<text style="font-size: 40rpx;font-weight: bold;margin: 0 4rpx;">{{item.platformClinetPrice}}</text>
+										<text style="font-size: 40rpx;font-weight: bold;margin: 0 4rpx;">{{ApproveStatus===1? item.platformClinetPrice:'***'}}</text>
 										<text style="font-size: 24rpx;font-weight: 400;">元</text>
 										<text style="font-size: 20rpx;color: #b6b6b6;">/件</text>
 									</view>
@@ -90,20 +92,22 @@
 	} from '../../api/api.js'
 	//请求地址
 	import {
+		getClient,
 		getNewsAll,
 		imgurl
 	} from '../../api/request.js'
 	var {
 		log
 	} = console
-
+	
 	export default {
-
+		
 		data() {
 			return {
 				infoList: [],
 				GoodsData: [],
 				url: '',
+				ApproveStatus: 0,
 				preferdata: [{
 						image: '/static/images/youzi@3x.png'
 					},
@@ -170,6 +174,22 @@
 
 
 		methods: {
+			getMerchants() {
+				let data = {
+					token: setdata
+				};
+				// log(data)
+				listing(getClient, data)
+					.then(res => {
+						// log(res)
+						///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
+						this.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
+						// log(this.ApproveStatus)
+					})
+					.catch(err => {
+						log(err);
+					});
+			},
 			//请求鲜果上市所有水果
 			getGoodsAll() {
 				let data = {
@@ -332,14 +352,15 @@
 		font-weight: 700;
 		font-size: 50rpx;
 		padding: 0 0 30rpx;
-		
+
 	}
-	
-	.tui-cent--title text{
+
+	.tui-cent--title text {
 		position: relative;
 		z-index: 3;
 	}
-	.tui-cent--title text::before{
+
+	.tui-cent--title text::before {
 		content: "";
 		position: absolute;
 		bottom: 10rpx;
@@ -349,10 +370,13 @@
 		background: #FF6500;
 		z-index: -1;
 	}
-	
+
 
 	.tui-tag-mag {
 		margin-left: 20rpx;
+		display: flex;
+		padding: 10rpx 0;
+
 	}
 
 	.tui-tag-name {
@@ -362,19 +386,30 @@
 		font-size: 24rpx;
 		border-radius: 20rpx;
 		padding: 2rpx 16rpx;
-
+		width: 100rpx;
+		display: inline-block;
+		max-height: 20px;
+		text-align: center;
+		max-width: 100rpx;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 
 	.tui-tag-name2 {
 		color: #555555;
 		font-size: 32rpx;
-		
+		flex: 1;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		width: 450rpx;
+		white-space: nowrap;
 	}
 
 	.tui-tag-time {
 		font-size: 28rpx;
 		color: #707070;
-		margin-left: 100rpx;
+		/* margin-left: 30rpx; */
 	}
 
 	.prefer-dis {
@@ -384,21 +419,21 @@
 
 	.prefer-view {
 		height: 300rpx;
-		width: 650rpx;
+		width: 660rpx;
 		padding: 0 20upx;
 
 	}
 
 	.tui-img {
-		width: 650rpx;
+		width: 660rpx;
 		height: 173rpx;
 		border-radius: 20rpx;
 		display: block;
 	}
 
 	.tui-img-text {
-		width: 650rpx;
-		height: 262rpx;
+		width: 660rpx;
+		/* height: 312rpx; */
 		border-radius: 20rpx;
 		display: block;
 		background-color: #fff;

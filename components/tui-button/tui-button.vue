@@ -173,6 +173,11 @@
 		color: #fff;
 	}
 
+	.tui-btn-info {
+		background: #A6A6A6 !important;
+		color: #fff;
+	}
+	
 	.tui-shadow-danger {
 		box-shadow: 0 10rpx 14rpx 0 rgba(235, 9, 9, 0.2);
 	}

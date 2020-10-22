@@ -322,21 +322,39 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 //
 //
 //请求地址
-var _console = console,log = _console.log;var _default = { data: function data() {return { loading: false, active: true, url: '', LimitData: {}, LimitDataList: [], hideing: 0, num: 0, ranking: ['销量榜', '评价榜', '关注榜', '回购榜'], imageUrl: "/static/images/limit-1.png", rankBgUrl: "/static/images/paihangbang@2x.png", height: 64, //header高度
+var _console = console,log = _console.log;var _default = { data: function data() {return { loading: false, active: true, url: '', LimitData: {}, LimitDataList: [], hideing: 0, num: 0, ApproveStatus: 0, ranking: ['销量榜', '评价榜', '关注榜', '回购榜'], imageUrl: "/static/images/limit-1.png", rankBgUrl: "/static/images/paihangbang@2x.png", height: 64, //header高度
       top: 26, //标题图标距离顶部距离
       scrollH: 0, //滚动总高度
       opcity: 0, iconOpcity: 0.5, bannerIndex: 0, menuShow: false, popupShow: false, value: 1, collected: false, WxActivityID: '', //首页传的id
-      startTime: 0, endTime: 0, createTime: 0, ts: 0, te: 3, boxHeight: 44, statusHeight: 20, navHeight: 64, scrollTop: 0 };}, onLoad: function onLoad(options) {this.WxActivityID = options.id;this.getLimit();this.url = _request.imgurl;this.getLimit();var obj = {};var that = this;setTimeout(function () {that.loading = true;}, 500);var res = uni.getSystemInfoSync();var statusBarHeight = res.statusBarHeight;var info = uni.getMenuButtonBoundingClientRect();var top = info.top,bottom = info.bottom;this.statusHeight = statusBarHeight;var buttonHeight = bottom - statusBarHeight + (top - statusBarHeight);var navHeight = statusBarHeight + buttonHeight + top - statusBarHeight;this.boxHeight = navHeight - statusBarHeight;this.navHeight = navHeight;console.log(statusBarHeight, navHeight, buttonHeight);}, computed: {}, methods: { scroll: function scroll(e) {console.log(e);}, //商品详情页
-    gotoList: function gotoList(id) {log(id);uni.navigateTo({ url: '../../pagesIII/productDetail/productDetail?id=' + id });}, //倒计时
-    endOfTime: function endOfTime() {console.log('倒计时结束');}, //下拉刷新
-    onPullDownRefresh: function onPullDownRefresh() {this.getLimit();console.log('refresh');setTimeout(function () {uni.stopPullDownRefresh();
+      startTime: 0, endTime: 0, createTime: 0, ts: 0, te: 3, boxHeight: 44, statusHeight: 20, navHeight: 64, scrollTop: 0 };}, onLoad: function onLoad(options) {this.getMerchants();this.WxActivityID = options.id;this.getLimit();this.url = _request.imgurl;this.getLimit();var obj = {};var that = this;setTimeout(function () {that.loading = true;}, 500);var res = uni.getSystemInfoSync();var statusBarHeight = res.statusBarHeight;var info = uni.getMenuButtonBoundingClientRect();var top = info.top,bottom = info.bottom;this.statusHeight = statusBarHeight;var buttonHeight = bottom - statusBarHeight + (top - statusBarHeight);var navHeight = statusBarHeight + buttonHeight + top - statusBarHeight;this.boxHeight = navHeight - statusBarHeight;this.navHeight = navHeight;console.log(statusBarHeight, navHeight, buttonHeight);}, computed: {}, methods: { getMerchants: function getMerchants() {var _this = this;var data = { token: setdata }; // log(data)
+      listing(_request.getClient, data).then(function (res) {// log(res)
+        ///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
+        _this.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
+        // log(this.ApproveStatus)
+      }).catch(function (err) {log(err);});}, scroll: function scroll(e) {console.log(e);}, //商品详情页
+    gotoList: function gotoList(id) {log(id);uni.navigateTo({
+        url: '../../pagesIII/productDetail/productDetail?id=' + id });
+
+    },
+
+    //倒计时
+    endOfTime: function endOfTime() {
+      console.log('倒计时结束');
+    },
+    //下拉刷新
+    onPullDownRefresh: function onPullDownRefresh() {
+      this.getLimit();
+
+      console.log('refresh');
+      setTimeout(function () {
+        uni.stopPullDownRefresh();
 
 
 
       }, 1000);
     },
     //请求限量区列表
-    getLimit: function getLimit() {var _this = this;
+    getLimit: function getLimit() {var _this2 = this;
       var data = {
         pageNo: 1,
         pageSize: 10,
@@ -345,17 +363,17 @@ var _console = console,log = _console.log;var _default = { data: function data()
       (0, _api.listing2)(_request.getActivity, data).
       then(function (res) {
         log(res);
-        _this.LimitData = res.data.data;
-        _this.LimitDataList = res.data.data.list;
-        _this.startTime = res.data.data.startTime;
-        _this.endTime = res.data.data.endTime;
-        _this.createTime = res.data.data.createTime;
-        _this.ts = (_this.endTime - _this.createTime) / 1000;
-        _this.dd = parseInt(_this.ts / 60 / 60 / 24, 10); //计算剩余的天数
-        _this.hh = parseInt(_this.ts / 60 / 60 % 24, 10); //计算剩余的小时数
-        _this.mm = parseInt(_this.ts / 60 % 60); //计算剩余的分钟数
-        _this.ss = parseInt(_this.ts % 60, 10); //计算剩余的秒数
-        log(_this.dd + "天" + _this.hh + "时" + _this.mm + "分" + _this.ss + "秒");
+        _this2.LimitData = res.data.data;
+        _this2.LimitDataList = res.data.data.list;
+        _this2.startTime = res.data.data.startTime;
+        _this2.endTime = res.data.data.endTime;
+        _this2.createTime = res.data.data.createTime;
+        _this2.ts = (_this2.endTime - _this2.createTime) / 1000;
+        _this2.dd = parseInt(_this2.ts / 60 / 60 / 24, 10); //计算剩余的天数
+        _this2.hh = parseInt(_this2.ts / 60 / 60 % 24, 10); //计算剩余的小时数
+        _this2.mm = parseInt(_this2.ts / 60 % 60); //计算剩余的分钟数
+        _this2.ss = parseInt(_this2.ts % 60, 10); //计算剩余的秒数
+        log(_this2.dd + "天" + _this2.hh + "时" + _this2.mm + "分" + _this2.ss + "秒");
       }).
       catch(function (err) {
         log(err);

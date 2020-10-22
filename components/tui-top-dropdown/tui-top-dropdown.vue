@@ -77,7 +77,7 @@ export default {
 	/* visibility: hidden; */
 	transition: all 0.3s ease-in-out;
 	z-index: 996;
-	top: 0;
+	top: -60px;
 }
 
 .tui-dropdown-show {

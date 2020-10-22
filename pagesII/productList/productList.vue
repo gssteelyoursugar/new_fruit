@@ -5,29 +5,29 @@
 			<image src="../../static/images/orderBMG.png" mode="widthFix"></image>
 			<text class="color-text">当前水果没有货，再看看别的吧</text>
 		</view>
-		<view class="tui-header-box" :style="{paddingTop: statusHeight+ 'px',height: boxHeight+ 'px'}">
+		<!-- <view class="tui-header-box" :style="{paddingTop: statusHeight+ 'px',height: boxHeight+ 'px'}">
 			<view class="tui-icon-box" @tap="back">
 				<tui-icon name="arrowleft" :size="30" color="#333"></tui-icon>
 			</view>
 			<view class="tui-header">找水果</view>
-			<!-- <view class="tui-searchbox tui-search-mr" :style="{ marginTop: inputTop + 'px' }" @tap="search">
+			<view class="tui-searchbox tui-search-mr" :style="{ marginTop: inputTop + 'px' }" @tap="search">
 				<icon type="search" :size="13" color="#999"></icon>
 				<text class="tui-search-text" v-if="!searchKey">搜索圈果商品</text>
 				<view class="tui-search-key" v-if="searchKey">
 					<view class="tui-key-text">{{ searchKey }}</view>
 					<tui-icon name="shut" :size="12" color="#fff"></tui-icon>
 				</view>
-			</view> -->
-		</view>
+			</view>
+		</view> -->
 		<!--header-->
 		<!-- 搜索框 -->
-		<view class="search-bar" @click="goToSearchGoods" :style="{top: navHeight+ 'px'}">
+		<view class="search-bar" @click="goToSearchGoods" style="top: 0px"> <!--:style="{top: navHeight+ 'px'}"  -->
 			<image src="../../static/images/search-icon.png" mode=""></image>
 			<view class="search-text">{{searchName||"搜索您要购买的商品或类型"}}</view>
 		</view>
 		<!-- 搜索框 -->
 		<!--顶部筛选-->
-		<view class="tui-header-screen" :style="{ top: height + 'px' }">
+		<view class="tui-header-screen" style="top:0">
 			<view class="tui-screen-top">
 				<!-- 综合筛选 -->
 				<block v-for="(item,index) in seleTopList" :key="index">
@@ -70,13 +70,19 @@
 		<!--screen-->
 
 		<!--商品列表list-->
-		<view class="tui-product-list" :style="{ marginTop: px(dropScreenH + 18) }">
+		<view class="tui-product-list" :style="{marginTop: statusHeight <= 20 ? '130px' : '150px'}" ><!--  -->
 			<view class="tui-product-container">
 				<block v-for="(item, index) in goods" :key="index" v-if="(index + 1) % 2 != 0">
 					<!-- <template is="productItem" data="{{item,index:index,isList:isList}}" /> -->
 					<!--商品列表1-->
 					<view class="tui-pro-item" @tap="gotoList(item.id)">
-						<image :src="item.url" class="tui-pro-img" mode="widthFix" />
+						<view class="img-mask">
+							<image :src="item.url" class="tui-pro-img" mode="widthFix"/>
+							<view class="img-mask-item" v-if="item.number === 0">
+								<view class="item-text">抢光了</view>
+							</view>
+						</view>
+						<!-- <image :src="item.url" class="tui-pro-img" mode="widthFix" /> -->
 						<view class="tui-pro-content">
 							<view class="tui-pro-tit">
 								<text class="tag-tit">{{item.lableName}}</text>
@@ -95,11 +101,11 @@
 								<view class="tui-pro-pic">
 									<view style="color: #FF7709; display: flex;align-items: baseline;">
 										<text style="font-size: 16rpx;">¥</text>
-										<text style="font-size: 28rpx; font-weight: 500">{{item.platformClientPrice}}</text>
+										<text style="font-size: 28rpx; font-weight: 500">{{ApproveStatus===1?item.platformClientPrice:'***'}}</text>
 										<text style="font-size: 20rpx;color: #B6B6B6;">/件</text>
 										<view style="color: #B6B6B6;text-decoration: line-through; margin-left:10rpx;"  v-if="item.marketPrice != 0">
 											<text style="font-size: 16rpx;"> ¥</text>
-											<text style="font-size: 24rpx;font-weight: 500;">{{item.marketPrice}}</text>
+											<text style="font-size: 24rpx;font-weight: 500;">{{ApproveStatus === 1? item.marketPrice:'***'}}</text>
 										</view>
 									</view>
 									<text class="tui-praise">
@@ -122,7 +128,13 @@
 					<!-- <template is="productItem" data="{{item,index:index}}" /> -->
 					<!--商品列表2-->
 					<view class="tui-pro-item" @tap="gotoList(item.id)">
-						<image :src="item.url" class="tui-pro-img" mode="widthFix" />
+						<!-- <image :src="item.url" class="tui-pro-img" mode="widthFix" /> -->
+						<view class="img-mask">
+							<image :src="item.url" class="tui-pro-img" mode="widthFix" @tap="gotoList(item.id)" />
+							<view class="img-mask-item" v-if="item.number === 0">
+								<view class="item-text">抢光了</view>
+							</view>
+						</view>
 						<view class="tui-pro-content">
 							<view class="tui-pro-tit">
 								<text class="tag-tit">{{item.lableName}}</text>
@@ -141,11 +153,11 @@
 								<view class="tui-pro-pic">
 									<view style="color: #FF7709; display: flex;align-items: baseline;">
 										<text style="font-size: 16rpx;">¥</text>
-										<text style="font-size: 28rpx; font-weight: 500">{{item.platformClinetPrice}}</text>
+										<text style="font-size: 28rpx; font-weight: 500">{{ApproveStatus===1?item.platformClinetPrice:'***'}}</text>
 										<text style="font-size: 20rpx;color: #B6B6B6;">/件</text>
 										<view style="color: #B6B6B6;text-decoration: line-through;margin-left:10rpx;"  v-if="item.marketPrice != 0">
 											<text style="font-size: 16rpx;"> ¥</text>
-											<text style="font-size: 24rpx;font-weight: 500">{{item.marketPrice}}</text>
+											<text style="font-size: 24rpx;font-weight: 500">{{ApproveStatus===1?item.marketPrice:'***'}}</text>
 										</view>
 									</view>
 									<text class="tui-praise">
@@ -331,7 +343,8 @@
 	} from '../../api/api.js'
 	import {
 		getGoodsall,
-		getAttribute
+		getAttribute,
+		getClient,
 	} from '../../api/request.js'
 	var {
 		log
@@ -344,6 +357,7 @@
 				title: '选中',
 				sleter: false,
 				sleter2: false,
+				ApproveStatus: 0,
 				dropdownlistData: [{
 					name: "微信支付",
 				}, {
@@ -554,6 +568,7 @@
 			};
 		},
 		onLoad(options) {
+			this.getMerchants()
 			var pages = getCurrentPages();
 			var beforePage = pages[pages.length - 2]; // 前一个页面路径
 			// log(beforePage.$page.fullPath)
@@ -696,6 +711,22 @@
 			}
 		},
 		methods: {
+			getMerchants() {
+				let data = {
+					token: setdata
+				};
+				// log(data)
+				listing(getClient, data)
+					.then(res => {
+						// log(res)
+						///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
+						this.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
+						// log(this.ApproveStatus)
+					})
+					.catch(err => {
+						log(err);
+					});
+			},
 			//点击搜索
 			goToSearchGoods() {
 				uni.navigateTo({
@@ -1823,7 +1854,7 @@
 	/* 商品列表*/
 
 	.tui-product-list {
-		padding: 100rpx 20rpx 30rpx;
+		padding: 30rpx 20rpx;
 		display: flex;
 		justify-content: space-between;
 		flex-direction: row;
@@ -1845,9 +1876,33 @@
 		margin-bottom: 10rpx;
 		background: #fff;
 		box-sizing: border-box;
-		border-radius: 12rpx;
+		border-radius: 6rpx;
 		overflow: hidden;
 		transition: all 0.15s ease-in-out;
+	}
+	.img-mask {
+		position: relative;
+	}
+	.img-mask-item { 
+		position: absolute;
+		top: 0;
+		right: 0;
+		left: 0;
+		bottom: 0;
+		background: rgba(0,0,0,.4);
+		display: flex;
+		align-items: center;
+		text-align: center;
+		justify-content: center;
+	
+	}
+	
+	.item-text {
+		background: rgba(0,0,0,.3);
+		color: #fff;
+		font-size: 28rpx;
+		padding: 6rpx 16rpx;
+		border-radius: 40rpx;
 	}
 
 	.tui-flex-list {

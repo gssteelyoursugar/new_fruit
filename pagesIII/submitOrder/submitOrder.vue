@@ -66,7 +66,8 @@
 		</view>
 		<view class="tui-safe-area"></view>
 
-
+		
+		
 		<view class="tui-tabbar">
 			<view class="tui-flex-end tui-color-red tui-pr-20">
 				<view class="tui-black">实付: </view>
@@ -172,6 +173,15 @@
 			}
 		},
 		methods: {
+			
+			clip() {
+				uni.setClipboardData({
+				    data: this.payUrl,
+				    success: function () {
+				        console.log('success');
+				    }
+				});
+			},
 			//立即购买
 			gtePayORderTel() {
 				var setdata = uni.getStorageSync('usermen')
@@ -264,16 +274,16 @@
 					.then((res) => {
 						log(res)
 						let orderNumber = res.data.data.orderNumber
+						this.payUrl = res.data.data.payUrl
+						
 						uni.showModal({
 							title: '提示',
 							content: '确认支付',
 							success: (res) => {
 								if (res.confirm) {
-									uni.reLaunch({
-										url: '../../pagesIII/pay/pay?url=' + code
-									})
-									// console.log('用户点击确定');
-									// this.btnPay(orderNumber)
+									console.log('用户点击确定');
+									that.clip() 
+									that.btnPay(orderNumber)
 								} else if (res.cancel) {
 									uni.showToast({
 										title: '订单已取消',
