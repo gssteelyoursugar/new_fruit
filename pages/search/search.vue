@@ -6,7 +6,7 @@
 			<view class="tui-rolling-search" @click="goToSearchGoods">
 				<tui-icon name="search-2" :size="36" unit="rpx"></tui-icon>
 				<!-- <icon type="search" :size="13" color="#999"></icon> -->
-				<view class="tui-hot-item">搜索新鲜水果...</view>
+				<view class="tui-hot-item">搜索新鲜水果</view>
 			</view>
 		</view>
 		<view class="VerticalBox">

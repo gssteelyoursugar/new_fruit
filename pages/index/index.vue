@@ -107,17 +107,17 @@
 			</view> -->
 			</view>
 			<!-- 限量批 -->
-			<view class="tui-count-down">
-				<view class="tui-col-2">
+			<view class="tui-count-down" >
+				<view class="tui-col-2"  @click="goLimit()">
 					<text class="tui-font">限量批</text>
 				</view>
 				<!-- 倒计时 -->
-				<view class="tui-col-5 tui-line-hight">
+				<view class="tui-col-5 tui-line-hight" >
 					<tui-countdown :time="ts" color="#fff" borderColor="rgba(70, 66, 70, 1)" backgroundColor="rgba(70, 66, 70, 1)"
 					 colonColor="rgba(70, 66, 70, 1)" @end="endOfTime">
 					</tui-countdown>
 				</view>
-				<view class="tui-col-6">
+				<view class="tui-col-6" @click="fruitGo" >
 					<text class="tui-font">新果上市</text>
 					<text class="tui-barcolor">抢鲜市场 <text class="iconfont icon-weibiaoti34"></text> </text>
 				</view>
@@ -130,7 +130,7 @@
 							<image :src="item.url" mode="aspectFit" class="tabimg"></image>
 							<view class="tui-price">
 								<view class="tui-first-price">&yen;<text class="tui-price-color">{{item.platformClinetPrice}}</text><text class="price-label">/件</text></view>
-								<view class="tui-last-price">&yen;<text class="tui-cribing">{{item.marketPrice}}</text></view>
+								<view class="tui-last-price" v-if="item.marketPrice != 0">&yen;<text class="tui-cribing">{{item.marketPrice}}</text></view>
 							</view>
 							<text class="tui-weight">{{item.specification}}</text>
 						</view>
@@ -155,11 +155,11 @@
 				<!-- 鲜果上市 -->
 				<view class="tui-Fruits" style="width: 50%;text-align: center;">
 					<block v-for="(item,index) in NewGoods" :key="index">
-						<view class="tui-Fruits-table" @click="fruitGo(item.id)">
+						<view class="tui-Fruits-table" @click="fruitGo">
 							<image :src="item.url" mode="aspectFit" class="tabimg"></image>
 							<view class="tui-price">
 								<view class="tui-first-price">&yen;<text class="tui-price-color">{{item.platformClinetPrice}}</text><text class="price-label">/件</text></view>
-								<view class="tui-last-price">&yen;<text class="tui-cribing">{{item.marketPrice}}</text></view>
+								<view class="tui-last-price"  v-if="item.marketPrice != 0">&yen;<text class="tui-cribing">{{item.marketPrice}}</text></view>
 							</view>
 							<text class="tui-weight">{{item.specification}}</text>
 						</view>
@@ -229,9 +229,9 @@
 											<view class="tui-rate">
 												<text>&yen;</text>
 												{{item.platformClinetPrice}}
+												<text class="tui-rate-text "> /件</text>
 											</view>
-											<text class="tui-rate-text "> /件</text>
-											<view class="tui-rate-price"><text>&yen;</text>{{item.marketPrice}}</view>
+											<view class="tui-rate-price"  v-if="item.marketPrice != 0"><text>&yen;</text>{{item.marketPrice}}</view>
 											<text class="tui-praise  " @tap="praise(index)">
 												<text class="tui-praise iconfont icon-like  " v-if="!item.showSearch1"></text>
 												<text class="tui-praise iconfont icon-dianzan " v-if="item.showSearch1"></text>{{item.praiseNumber |filterNum}}
@@ -240,7 +240,6 @@
 										<view class="tui-pro-dea">
 											<text class="tui-jin1">{{item.specification}}</text>
 											<text class="tui-jin">成交<text class="tui-dea-color">{{item.total | filterNum}}</text>元</text>
-
 
 
 										</view>
@@ -273,9 +272,9 @@
 											<view class="tui-rate">
 												<text>&yen;</text>
 												{{item.platformClinetPrice}}
+												<text class="tui-rate-text "> /件</text>
 											</view>
-											<text class="tui-rate-text "> /件</text>
-											<view class="tui-rate-price"> <text>&yen;</text>{{item.marketPrice}}</view>
+											<view class="tui-rate-price"  v-if="item.marketPrice != 0"> <text>&yen;</text>{{item.marketPrice}}</view>
 											<text class="tui-praise  " @tap="praise(index)">
 												<text class="tui-praise iconfont icon-like  " v-if="!item.showSearch1"></text>
 												<text class="tui-praise iconfont icon-dianzan " v-if="item.showSearch1"></text>{{item.praiseNumber |filterNum}}
@@ -721,12 +720,7 @@
 					.then((res) => {
 						//处理数据格式,praiseNumber
 						let goodsData = res.data.data.data;
-						for (let index in goodsData) {
-							goodsData[index].praiseNumber = this.numConvert(goodsData[index].praiseNumber)
-						}
-						for (let index in goodsData) {
-							goodsData[index].total = this.numConvert(goodsData[index].total)
-						}
+						
 						this.IndexGoods = goodsData //【1】首页分类数据
 					})
 					.catch((err) => {
@@ -1085,7 +1079,7 @@
 	.weather-tui-flex {
 		position: relative;
 		/* top: 46px; */
-		margin: 0 20rpx;
+		margin: 0 30rpx;
 		display: flex;
 		font-size: 28rpx;
 		color: #fff;
@@ -1571,6 +1565,9 @@
 	.tui-first-price {
 		display: flex;
 		align-items: baseline;
+		width: 100%;
+		justify-content: center;
+
 	}
 
 	.tui-last-price {
@@ -2001,7 +1998,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		padding: 0 20rpx;
+		padding: 0 30rpx;
 		box-sizing: border-box;
 
 	}

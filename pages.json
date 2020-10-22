@@ -155,8 +155,8 @@
 					"path": "message/message",
 					"style": {
 						"enablePullDownRefresh": true,
-						"navigationBarTitleText": "资讯消息",
-						"navigationStyle": "custom"
+						"navigationBarTitleText": "资讯消息"
+						// "navigationStyle": "custom"
 						
 					}
 				}, {
@@ -229,22 +229,22 @@
 				}, {
 					"path": "SetUp/SetUp",
 					"style": {
-						"navigationBarTitleText": "设置",
-						"navigationStyle": "custom"
+						"navigationBarTitleText": "设置"
+						// "navigationStyle": "custom" 
 					}
 				}, {
 					"path": "cooperation/cooperation",
 					"style": {
 						// "enablePullDownRefresh": true
-						"navigationBarTitleText": "商务合作",
-						"navigationStyle": "custom"
+						"navigationBarTitleText": "商务合作"
+						// "navigationStyle": "custom"
 					}
 				}, {
 					"path": "Recently/Recently",
 					"style": {
 						"enablePullDownRefresh": true,
-						"navigationBarTitleText": "最近看过",
-						"navigationStyle": "custom"
+						"navigationBarTitleText": "最近看过"
+						// "navigationStyle": "custom"
 					}
 				}, {
 					"path": "timeInfo/timeInfo",
@@ -372,6 +372,15 @@
 						}
 					}
 				}
+                ,{
+                    "path" : "pay/pay",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
             ]
 		}
 	],

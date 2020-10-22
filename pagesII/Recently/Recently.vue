@@ -1,12 +1,12 @@
 <template>
 	<view class="container">
 		<!--header-->
-		<view class="tui-header-box" :style="{paddingTop: statusHeight+ 'px',height: boxHeight+ 'px'}">
+		<!-- <view class="tui-header-box" :style="{paddingTop: statusHeight+ 'px',height: boxHeight+ 'px'}">
 			<view class="tui-icon-box" @tap="back">
 				<tui-icon name="arrowleft" :size="30" color="#333"></tui-icon>
 			</view>
 			<view class="tui-header">最近看过</view>
-		</view>
+		</view> -->
 		<!--header-->
 		<view class="container-img " v-if="lookDatas && lookDatas.length === 0" :class="{ active: isActive, 'text-danger': hasError }">
 			<image src="../../static/images/orderBMG.png" mode="widthFix"></image>
@@ -17,7 +17,7 @@
 			<!-- <text class="color-text">{{tips}}</text> -->
 			<view class="btnbox"><button class="btn" type="default" open-type="getUserInfo" @getuserinfo="getUserInfo">去登陆</button></view>
 		</view>
-		<view :style="{marginTop: statusHeight + boxHeight + 'px'}">
+		<view>  <!-- :style="{marginTop: statusHeight + boxHeight + 'px'}" -->
 			<checkbox-group @change="buyChange">
 				<view class="tui-cart-cell  tui-mtop" v-for="(item, index) in lookDatas" :key="index">
 					<view class="item-time" v-if="item.list.length !== 0">{{ item.createDate }}</view>

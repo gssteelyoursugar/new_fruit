@@ -1,21 +1,22 @@
 <template>
 	<view>
 		<!--header-->
-		<view class="tui-header-box" :style="{paddingTop: statusHeight+ 'px',height: boxHeight+ 'px'}">
+		<!-- <view class="tui-header-box" :style="{paddingTop: statusHeight+ 'px',height: boxHeight+ 'px'}">
 			<view class="tui-icon-box" @tap="back">
 				<tui-icon name="arrowleft" :size="30" color="#333"></tui-icon>
 			</view>
 			<view class="tui-header">资讯信息</view>
-		</view>
+		</view> -->
 		<!--header-->
 		<tui-list-view title=" ">
-			<tui-list-cell :lineLeft="false" @click="detail">
-				<view class="tui-item-box" @click="clickToItem">
+			<tui-list-cell :lineLeft="false"  v-for="(item,index) of msgList" :key="index" >
+				<view class="tui-item-box" @click="clickToItem(item.id)">
 					<view class="tui-msg-box">
-						<image src="/static/images/selection1.png" class="tui-msg-pic" mode="widthFix"></image>
+						<!-- /static/images/selection1.png -->
+						<image :src="item.url" class="tui-msg-pic" mode="widthFix"></image>
 						<view class="tui-msg-item">
-							<view class="tui-msg-name">圈果服务运营时间</view>
-							<view class="tui-msg-content">圈妹在线时间08:30-18:00！</view>
+							<view class="tui-msg-name">{{item.title}}</view>
+							<view class="tui-msg-content">{{item.describe}}</view>
 						</view>
 					</view>
 					<!-- <view class="tui-msg-right">
@@ -24,31 +25,24 @@
 					</view> -->
 				</view>
 			</tui-list-cell>
-			<tui-list-cell :lineLeft="false" @click="detail">
-				<view class="tui-item-box">
-					<view class="tui-msg-box">
-						<image src="/static/images/selection1.png" class="tui-msg-pic" mode="widthFix"></image>
-						<view class="tui-msg-item">
-							<view class="tui-msg-name">物流通知</view>
-							<view class="tui-msg-content">您的订单已配送完成，欢迎再次购买。</view>
-						</view>
-					</view>
-					<!-- <view class="tui-msg-right">
-						<view class="tui-msg-time">10:22</view>
-						<tui-badge type="danger" class="tui-badge">9</tui-badge>
-					</view> -->
-				</view>
-			</tui-list-cell>
+			
 		</tui-list-view>
 	</view>
 </template>
 
 <script>
+	import {
+		listing2
+	} from '../../api/api.js'
+	import {
+		getMsg
+	} from '../../api/request.js'
 	export default {
 		data() {
 			return {
 				statusHeight: 20,
-				boxHeight: 44
+				boxHeight: 44,
+				msgList: []
 			}
 		},
 		onLoad() {
@@ -66,20 +60,27 @@
 			let buttonHeight = (bottom - statusBarHeight) + (top - statusBarHeight)
 			let navHeight = statusBarHeight + buttonHeight + top - statusBarHeight
 			this.boxHeight = navHeight - statusBarHeight
-
 			console.log(statusBarHeight, navHeight, buttonHeight)
 			// #endif
-
+			listing2(getMsg).then(res=>{
+				console.log(res)
+				this.msgList = res.data.data
+			})
 		},
 		methods: {
 			back() {
 				uni.navigateBack();
 			},
-			clickToItem() {
-				console.log("欢迎你们来测试")
-				// uni.navigateTo({
-				// 	url: "../../pagesII/timeInfo/timeInfo?id="+ id
-				// })
+			detail () {
+				uni.navigateTo({
+					url: '../../pages/'
+				})
+			},
+			clickToItem(id) {
+				console.log(id)
+				uni.navigateTo({
+					url: "../../pagesII/timeInfo/timeInfo?id="+ id
+				})
 			}
 		}
 	};

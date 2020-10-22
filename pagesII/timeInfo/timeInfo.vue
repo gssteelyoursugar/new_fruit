@@ -16,7 +16,7 @@
 <script>
 	import {listing} from '../../api/api.js'
 	//请求地址
-	import {getMsg} from '../../api/request.js'
+	import {getMsgInfo} from '../../api/request.js'
 	var {log} = console
 	export default {
 		data() {
@@ -25,14 +25,12 @@
 				content:'',
 				createDate:'',
 				id:''
-				
-				
 			}
 		},
 		methods: {
-			getMsgData(){
-				let data = {id:this.id}
-				listing(getMsg,data)
+			getMsgData(id){
+				let data = {id}
+				listing(getMsgInfo,data)
 				.then((res)=>{
 					log(res)
 					let contents = res.data.data.data.content
@@ -50,9 +48,7 @@
 			
 		},
 		onLoad(options) {
-			this.id= options.id
-			console.log(this.id)
-			this.getMsgData()
+			this.getMsgData(options.id)
 			// this.content= options.content
 			// this.createDate= options.createDate
 			// this.title= options.title

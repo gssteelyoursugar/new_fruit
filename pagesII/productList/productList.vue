@@ -97,12 +97,12 @@
 										<text style="font-size: 16rpx;">¥</text>
 										<text style="font-size: 28rpx; font-weight: 500">{{item.platformClientPrice}}</text>
 										<text style="font-size: 20rpx;color: #B6B6B6;">/件</text>
-										<view style="color: #B6B6B6;text-decoration: line-through; margin-left:10rpx;">
+										<view style="color: #B6B6B6;text-decoration: line-through; margin-left:10rpx;"  v-if="item.marketPrice != 0">
 											<text style="font-size: 16rpx;"> ¥</text>
 											<text style="font-size: 24rpx;font-weight: 500;">{{item.marketPrice}}</text>
 										</view>
 									</view>
-									<text class="tui-praise  ">
+									<text class="tui-praise">
 										<text class="tui-praise iconfont icon-dianzan "></text>{{item.praiseNumber| filterNum}}
 									</text>
 								</view>
@@ -143,7 +143,7 @@
 										<text style="font-size: 16rpx;">¥</text>
 										<text style="font-size: 28rpx; font-weight: 500">{{item.platformClinetPrice}}</text>
 										<text style="font-size: 20rpx;color: #B6B6B6;">/件</text>
-										<view style="color: #B6B6B6;text-decoration: line-through;margin-left:10rpx;">
+										<view style="color: #B6B6B6;text-decoration: line-through;margin-left:10rpx;"  v-if="item.marketPrice != 0">
 											<text style="font-size: 16rpx;"> ¥</text>
 											<text style="font-size: 24rpx;font-weight: 500">{{item.marketPrice}}</text>
 										</view>
@@ -1229,7 +1229,7 @@
 	}
 
 	.container-img {
-		margin-top: 350rpx;
+		margin-top: 450rpx;
 		display: flex;
 		flex-direction: column;
 		align-items: center;

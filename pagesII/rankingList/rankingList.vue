@@ -18,7 +18,7 @@
 			<image :src="rankBgUrl" class="tui-rank-bg" mode="aspectFill"></image>
 			<view class="tui-info-center">
 				<view class="tui-info-quanguo">
-					南宁&nbsp;·&nbsp;圈果
+					圈果&nbsp;·&nbsp;南宁
 				</view>
 				<view class="tui-info-day">
 					按截至前一天的累计评价数量排序 {{currMonth}}月{{currDay}}日更新
@@ -51,7 +51,7 @@
 										<view class="tag-tit2-price">
 											<!-- <text style="font-size: 24rpx;color: #555;margin-right: 12rpx;">限量价</text> -->
 											<text style="font-size: 16rpx;">¥</text>
-											<text style="font-size: 40rpx;font-weight: bold;margin: 0 4rpx;">{{item.platformClinetPrice}}</text>
+											<text style="font-size: 40rpx;font-weight: bold;margin: 0 4rpx;">{{item.platformClientPrice}}</text>
 											<text style="font-size: 24rpx;font-weight: 400;">元</text>
 											<text style="font-size: 20rpx;color: #b6b6b6;">/件</text>
 										</view>
@@ -87,7 +87,7 @@
 										<view class="tag-tit2-price">
 											<!-- <text style="font-size: 24rpx;color: #555;margin-right: 12rpx;">限量价</text> -->
 											<text style="font-size: 16rpx;">¥</text>
-											<text style="font-size: 40rpx;font-weight: bold;margin: 0 4rpx;">{{item.platformClinetPrice ||0.00}}</text>
+											<text style="font-size: 40rpx;font-weight: bold;margin: 0 4rpx;">{{item.platformClientPrice ||0.00}}</text>
 											<text style="font-size: 24rpx;font-weight: 400;">元</text>
 											<text style="font-size: 20rpx;color: #b6b6b6;">/件</text>
 										</view>
@@ -119,7 +119,7 @@
 										<view class="tag-tit2-price">
 											<!-- <text style="font-size: 24rpx;color: #555;margin-right: 12rpx;">限量价</text> -->
 											<text style="font-size: 16rpx;">¥</text>
-											<text style="font-size: 40rpx;font-weight: bold;margin: 0 4rpx;">{{item.platformClinetPrice}}</text>
+											<text style="font-size: 40rpx;font-weight: bold;margin: 0 4rpx;">{{item.platformClientPrice}}</text>
 											<text style="font-size: 24rpx;font-weight: 400;">元</text>
 											<text style="font-size: 20rpx;color: #b6b6b6;">/件</text>
 										</view>
@@ -152,7 +152,7 @@
 										<view class="tag-tit2-price">
 											<!-- <text style="font-size: 24rpx;color: #555;margin-right: 12rpx;">限量价</text> -->
 											<text style="font-size: 16rpx;">¥</text>
-											<text style="font-size: 40rpx;font-weight: bold;margin: 0 4rpx;">{{item.platformClinetPrice}}</text>
+											<text style="font-size: 40rpx;font-weight: bold;margin: 0 4rpx;">{{item.platformClientPrice}}</text>
 											<text style="font-size: 24rpx;font-weight: 400;">元</text>
 											<text style="font-size: 20rpx;color: #b6b6b6;">/件</text>
 										</view>

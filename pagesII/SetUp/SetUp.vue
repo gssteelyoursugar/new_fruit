@@ -1,12 +1,12 @@
 <template>
 	<view>
 		<!--header-->
-		<view class="tui-header-box" :style="{paddingTop: statusHeight+ 'px',height: boxHeight+ 'px'}">
+		<!-- <view class="tui-header-box" :style="{paddingTop: statusHeight+ 'px',height: boxHeight+ 'px'}">
 			<view class="tui-icon-box" @tap="back">
 				<tui-icon name="arrowleft" :size="30" color="#333"></tui-icon>
 			</view>
 			<view class="tui-header">设置</view>
-		</view>
+		</view> -->
 		<!--header-->
 		<view class="tui-paddingTop">
 			<tui-list-cell unlined :hover="false">
@@ -64,6 +64,17 @@
 			},
 			logout() {
 				console.log('点击了退出登录')
+				uni.removeStorageSync('userIN')
+				uni.removeStorageSync('usermen')
+				uni.removeStorageSync('StoreStatus')
+				uni.removeStorageSync('userIN')
+				uni.switchTab({
+					url: '../../pages/my/my'
+				})
+				uni.showToast({
+					title: "退出成功",
+					icon: 'none'
+				})
 			}
 
 		}

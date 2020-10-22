@@ -1,8 +1,0 @@
-{
-  "enablePullDownRefresh": true,
-  "navigationStyle": "custom",
-  "navigationBarTitleText": "金刚区空页面",
-  "usingComponents": {
-    "tui-icon": "/components/tui-icon/tui-icon"
-  }
-}

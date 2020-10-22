@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "搜索",
-  "usingComponents": {
-    "tui-tag": "/components/tui-tag/tui-tag",
-    "tui-actionsheet": "/components/tui-actionsheet/tui-actionsheet"
-  }
-}

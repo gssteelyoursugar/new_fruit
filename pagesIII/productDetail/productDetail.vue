@@ -85,7 +85,7 @@
 								<text style="font-size:28rpx;color: #FF6500;">元</text>
 								<text>/件</text>
 							</view>
-							<view class="tui-huaxian">￥{{ shopListdata.marketPrice ||0}}/件</view>
+							<view class="tui-huaxian"  v-if="shopListdata.marketPrice != 0">￥{{ shopListdata.marketPrice}}/件</view>
 							<view class="tui-text-overflow">{{ shopListdata.specification ||''}}, 水果净重约{{ shopListdata.kg2 ||0}}斤</view>
 						</view>
 					</view>
@@ -147,7 +147,7 @@
 					<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
 						<view class="tui-left-one2">
 							<text class="tui-text-left tui-title-class">果径大小</text>
-							<text class=" tui-text-left tui-title-class">{{ shopListdata.platformClinetPrice }}mm</text>
+							<text class=" tui-text-left tui-title-class">{{ shopListdata.size }}mm</text>
 						</view>
 						<view class="tui-right-one" style="flex: 4;">
 							<text class=" tui-text-left tui-title-class ">不良率</text>
@@ -352,7 +352,7 @@
 								<text class="tag-tit-text" style="font-size:28rpx">{{ shopListdata.name }}</text>
 								<view class="tag-tit2">
 									<view class="">
-										<view class="tag-tit2-price list-desc">{{ shopListdata.specification }}</view>
+										<view class="tag-tit2-price list-desc">净重约{{ shopListdata.kg2 }}斤/件</view>
 										<view class="tag-tit2-num" style="align-items: baseline;">
 											<view class="shabi">
 												<text class="tui-price-one" style="font-size: 20rpx;">￥</text>
@@ -362,7 +362,7 @@
 												</view>
 												/件
 											</view>
-											<view class="tui-huaxian">￥{{ shopListdata.marketPrice }}</view>
+											<view class="tui-huaxian"  v-if="shopListdata.marketPrice != 0">￥{{ shopListdata.marketPrice }}</view>
 										</view>
 									</view>
 

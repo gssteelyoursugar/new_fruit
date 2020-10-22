@@ -45,7 +45,10 @@ let getselectSuper = `${url}api/wx/index/selectSuper`
 let getClassify = `${url}api/wx/index/indexClassify`
 
 //首页资讯
-let getMsg = `${url}api/wx/index/getMsg`
+let getMsg = `${url}api/wx/index/msgList`
+
+//资讯详情
+let getMsgInfo = `${url}api/wx/index/getMsg`
 
 //商品详情页
 let postdelist = `${url}api/wx/goods/getById`
@@ -251,7 +254,8 @@ export {
 	PostDataById,
 	getBeConfirmed,
 	orderCount,
-	getEvaluateList
+	getEvaluateList,
+	getMsgInfo
 }
 
 

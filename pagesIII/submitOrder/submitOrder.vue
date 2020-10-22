@@ -65,6 +65,8 @@
 			</view>
 		</view>
 		<view class="tui-safe-area"></view>
+
+
 		<view class="tui-tabbar">
 			<view class="tui-flex-end tui-color-red tui-pr-20">
 				<view class="tui-black">实付: </view>
@@ -135,6 +137,7 @@
 		components: {},
 		data() {
 			return {
+				payUrl: '',
 				isTop: true,
 				ids: '', //order里面的ids
 				goodsData: [], //结算的商品信息
@@ -152,17 +155,17 @@
 				name: 'arrowright',
 				unit: 'rpx',
 				size: 32,
-				color:  '#000',
+				color: '#000',
 				margin: '0'
-				
+
 
 			}
 		},
 		computed: {
-			allGoodsNum () {
+			allGoodsNum() {
 				let list = this.goodsData
 				let num = 0
-				list.forEach(item=> {
+				list.forEach(item => {
 					num += item.number
 				})
 				return num
@@ -198,7 +201,6 @@
 					id: this.ids,
 					token: setdata
 				}
-
 				// Promise.all([publicing(postSettle,data),publicing(postSubmitOrder,data2)])
 				publicing(postSettle, data)
 					.then((res) => {
@@ -206,7 +208,6 @@
 						this.extraUserInfo = res.data.data.extraData.userInfo
 						this.goodsData = res.data.data.data
 						this.extraData = res.data.data.extraData
-
 						let new_arr = this.goodsData.map(obj => {
 							return obj.id
 						}) //提取数组里面的每一项里面的id
@@ -233,48 +234,85 @@
 						console.log(err)
 					})
 			},
+
+			getQueryString(str, key) {
+				if (str) {
+					var queryString = str.split('?')[1] || '';
+					var arr = queryString.split('&') || [];
+					for (var i = 0; i < arr.length; i++) {
+						var keyString = decodeURIComponent(arr[i].split('=')[0]);
+						var valueString = decodeURIComponent(arr[i].split('=')[1]);
+						if (key === keyString) {
+							return valueString;
+						}
+					}
+					return;
+				} else {
+					return;
+				}
+			},
+
 			//获得订单号，才能支付
 			SubmitOrder() {
+				let that = this
 				var setdata = uni.getStorageSync('usermen')
 				let data2 = {
-					id: this.ids,
+					id: that.ids,
 					token: setdata
 				}
-				log(2)
 				listing(getSubmitOrder, data2)
 					.then((res) => {
 						log(res)
-
-						log(res.data.data.orderNumber)
 						let orderNumber = res.data.data.orderNumber
-
 						uni.showModal({
 							title: '提示',
 							content: '确认支付',
 							success: (res) => {
 								if (res.confirm) {
-									console.log('用户点击确定');
-									this.btnPay(orderNumber)
+									uni.reLaunch({
+										url: '../../pagesIII/pay/pay?url=' + code
+									})
+									// console.log('用户点击确定');
+									// this.btnPay(orderNumber)
 								} else if (res.cancel) {
 									uni.showToast({
 										title: '订单已取消',
 										icon: 'none',
 										duration: 2000
 									})
-									uni.reLaunch({
-										url: '../../pagesII/myOrder/myOrder'
-									})
+									// uni.reLaunch({
+									// 	url: '../../pagesII/myOrder/myOrder'
+									// })
 									return
 								}
 							}
 						});
+						// 	uni.requestPayment({
+						// 	        timeStamp: data.timeStamp,
+						// 	        nonceStr: data.nonceStr,
+						// 	        package: data.package,
+						// 	        signType: 'MD5',
+						// 	        paySign: data.paySign,
+						// 	        success(res) {
+						// 	          // var temp = {
+						// 	          //   id: data.order_id,
+						// 	          //   status: 2,
+						// 	          //   is_pay:1,
+						// 	          // }
 
+						// 	        },
+						// 	        fail(res) {
 
+						// 	        }
+						// 	      })
 					})
 					.catch((err) => {
 						log(err)
 					})
 
+			},
+			testPay() {
+				plus.runtime.openURL(this.payUrl)
 			},
 			open() {
 				console.log('dianji')
@@ -301,9 +339,7 @@
 							title: `${res.data.msg}`,
 							icon: 'none',
 							duration: 2000
-
 						});
-
 						uni.reLaunch({
 							url: '../PayOK/PayOK'
 						})
@@ -329,11 +365,9 @@
 			var pages = getCurrentPages();
 			console.log(pages, 1241212)
 			var curPage = pages[pages.length - 1]; // 当前页面路径
-
 			var beforePage = pages[pages.length - 2]; // 前一个页面路径
 			log(beforePage.$page.fullPath)
 			if (beforePage.$page.fullPath === '/pages/order/order') {
-
 				log('我执行了加购清单')
 				this.gtePayORder(); //请求结算
 			} else if (beforePage.$page.fullPath == '/pagesIII/productDetail/productDetail') {

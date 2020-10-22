@@ -2,12 +2,12 @@
 
 	<view class="">
 		<!--header-->
-		<view class="tui-header-box" :style="{paddingTop: statusHeight+ 'px',height: boxHeight+ 'px'}">
+		<!-- <view class="tui-header-box" :style="{paddingTop: statusHeight+ 'px',height: boxHeight+ 'px'}">
 			<view class="tui-icon-box" @tap="back">
 				<tui-icon name="arrowleft" :size="30" color="#333"></tui-icon>
 			</view>
 			<view class="tui-header">商务合作</view>
-		</view>
+		</view> -->
 		<!--header-->
 		<view class="content">
 			<image class="logo" src="../../static/images/selection2.png"></image>
