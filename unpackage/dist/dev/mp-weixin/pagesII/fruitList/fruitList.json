@@ -1,0 +1,8 @@
+{
+  "enablePullDownRefresh": true,
+  "navigationBarTextStyle": "white",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "tui-icon": "/components/tui-icon/tui-icon"
+  }
+}

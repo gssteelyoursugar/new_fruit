@@ -124,7 +124,8 @@
 					"style": {
 						//限量批
 						"enablePullDownRefresh": true,
-						"navigationStyle": "custom"
+						"navigationBarTitleText": "限量批"
+						// "navigationStyle": "custom"
 					}
 				}, {
 					"path": "searchGoods/searchGoods",

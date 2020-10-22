@@ -297,7 +297,7 @@
 			<view class="tui-safearea-bottom"></view>
 
 			<view class="agreement">
-				<lyg-popup @popupState="popupState" title="服务协议" protocolPath='../webview/webview?can_share=false&url=/hybrid/html/protocol.html'
+				<lyg-popup @popupState="popupState" title="温馨提醒" protocolPath='../webview/webview?can_share=false&url=/hybrid/html/protocol.html'
 				 policyPath='../webview/webview?can_share=false&url=/hybrid/html/policy.html' policyStorageKey="has_read_privacy"></lyg-popup>
 			</view>
 		</view>

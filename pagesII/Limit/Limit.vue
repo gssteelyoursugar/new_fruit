@@ -2,26 +2,15 @@
 	<!-- 限量批 -->
 	<view class="container">
 		<!--header-->
-		<!-- <view class="tui-header-box" :style="{ height: height + 'px', background: 'rgba(255,255,255,' + opcity + ')' }">
-			<view class="tui-header" :style="{ paddingTop: top + 'px', opacity: opcity }">限量批</view>
-			<view class="tui-header-icon" :style="{ marginTop: top + 'px' }">
-				<view class="tui-icon-box"  @tap="back">
-					<tui-icon name="arrowleft" :size="30" :color="opcity >= 1 ? '#000' : '#fff'"></tui-icon>
-				</view>
-			</view>
-		</view> -->
-		<!--header-->
-
-		<view class="tui-header-box" :style="{paddingTop: statusHeight+ 'px',height: boxHeight+ 'px'}">
+		<!-- <view class="tui-header-box" :style="{paddingTop: statusHeight+ 'px',height: boxHeight+ 'px'}">
 			<view class="tui-icon-box" @tap="back">
 				<tui-icon name="arrowleft" :size="30" color="#333"></tui-icon>
 			</view>
 			<view class="tui-header">限量批</view>
-		</view>
-		<!--header-->
+		</view> -->
 		<!--header-->
 		<!--banner-->
-		<view class="tui-banner-swiper" :style="{top: navHeight + 'px'}">
+		<view class="tui-banner-swiper" > <!-- :style="{top: navHeight + 'px'}" -->
 			<image :src="imageUrl" class="tui-my-bg" mode="aspectFill"></image>
 		</view>
 
@@ -124,7 +113,7 @@
 				hideing: 0,
 				num: 0,
 				ranking: ['销量榜', '评价榜', '关注榜', '回购榜'],
-				imageUrl: "/static/images/limit.png",
+				imageUrl: "/static/images/limit-1.png",
 				rankBgUrl: "/static/images/paihangbang@2x.png",
 				height: 64, //header高度
 				top: 26, //标题图标距离顶部距离
@@ -649,6 +638,7 @@
 		width: 100%;
 		z-index: -1;
 		/* height: 1334rpx; */
+		top: 0;
 		bottom: 0;
 		left: 0;
 		right: 0;
