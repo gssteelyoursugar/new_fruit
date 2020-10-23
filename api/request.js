@@ -265,6 +265,7 @@ export {
 // 导出文件上传
 export const uploadFiles = (callback) => {
 	uni.chooseImage({
+		count: 1,
 		success: (chooseImageRes) => {
 			uni.showLoading({
 				title: '上传中...'

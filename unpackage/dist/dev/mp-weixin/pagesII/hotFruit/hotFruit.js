@@ -195,6 +195,7 @@ var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
 
+
 var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 //
 //
@@ -255,13 +256,14 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 //
 //请求
 //请求地址
-var _console = console,log = _console.log;var _default = { data: function data() {return { url: '', title: '热门品种', hideing: 0, num: 0, ApproveStatus: 0, imageUrl: "http://qg-qr.oss-cn-shenzhen.aliyuncs.com/test/1599787275218.png?Expires=1915147267&OSSAccessKeyId=LTAI4G74cnhsbDWNkfvuNew3&Signature=qy5G7B2cGleaAAiI9I9YTcnNXhY%3D", rankBgUrl: "/static/images/paihangbang@2x.png", height: 64, //header高度
+var setdata = uni.getStorageSync('usermen');var _console = console,log = _console.log;var _default = { data: function data() {return { url: '', title: '热门品种', hideing: 0, num: 0, ApproveStatus: 0, imageUrl: "http://qg-qr.oss-cn-shenzhen.aliyuncs.com/test/1599787275218.png?Expires=1915147267&OSSAccessKeyId=LTAI4G74cnhsbDWNkfvuNew3&Signature=qy5G7B2cGleaAAiI9I9YTcnNXhY%3D", rankBgUrl: "/static/images/paihangbang@2x.png", height: 64, //header高度
       top: 26, //标题图标距离顶部距离
       scrollH: 0, //滚动总高度
       opcity: 0, iconOpcity: 0.5, bannerIndex: 0, menuShow: false, popupShow: false, value: 1, collected: false, importData: [] //请求的数据
     };}, onLoad: function onLoad(options) {var _this = this;this.getMerchants();this.title = options.title;this.getImportData();this.url = _request.imgurl;var obj = {};obj = wx.getMenuButtonBoundingClientRect();setTimeout(function () {uni.getSystemInfo({ success: function success(res) {_this.width = obj.left || res.windowWidth;_this.height = obj.top ? obj.top + obj.height + 8 : res.statusBarHeight + 44;_this.top = obj.top ? obj.top + (obj.height - 32) / 2 : res.statusBarHeight + 6;_this.scrollH = res.windowWidth;} });}, 0);}, methods: { getMerchants: function getMerchants() {var _this2 = this;var data = { token: setdata };
+
       // log(data)
-      listing(_request.getClient, data).
+      (0, _api.listing)(_request.getClient, data).
       then(function (res) {
         // log(res)
         ///登录成功后显示去认证店铺，如果已认证，显示已认证店铺

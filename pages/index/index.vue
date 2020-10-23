@@ -233,10 +233,10 @@
 										<view class="tui-pro-pic">
 											<view class="tui-rate">
 												<text>&yen;</text>
-												{{item.platformClinetPrice}}
+												{{ApproveStatus===1? item.platformClinetPrice:'***'}}
 												<text class="tui-rate-text "> /件</text>
 											</view>
-											<view class="tui-rate-price"  v-if="item.marketPrice != 0"><text>&yen;</text>{{item.marketPrice}}</view>
+											<view class="tui-rate-price"  v-if="item.marketPrice != 0"><text>&yen;</text>{{ApproveStatus===1? item.marketPrice:'***'}}</view>
 											<text class="tui-praise  " @tap="praise(index)">
 												<text class="tui-praise iconfont icon-like  " v-if="!item.showSearch1"></text>
 												<text class="tui-praise iconfont icon-dianzan " v-if="item.showSearch1"></text>{{item.praiseNumber |filterNum}}
@@ -281,10 +281,10 @@
 										<view class="tui-pro-pic">
 											<view class="tui-rate">
 												<text>&yen;</text>
-												{{item.platformClinetPrice}}
+												{{ApproveStatus===1? item.platformClinetPrice:'***'}}
 												<text class="tui-rate-text "> /件</text>
 											</view>
-											<view class="tui-rate-price"  v-if="item.marketPrice != 0"> <text>&yen;</text>{{item.marketPrice}}</view>
+											<view class="tui-rate-price"  v-if="item.marketPrice != 0"> <text>&yen;</text>{{ApproveStatus===1? item.marketPrice:'***'}}</view>
 											<text class="tui-praise  " @tap="praise(index)">
 												<text class="tui-praise iconfont icon-like  " v-if="!item.showSearch1"></text>
 												<text class="tui-praise iconfont icon-dianzan " v-if="item.showSearch1"></text>{{item.praiseNumber |filterNum}}
@@ -306,10 +306,10 @@
 			<tui-nomore v-if="!pullUpOn"></tui-nomore>
 			<view class="tui-safearea-bottom"></view>
 
-			<view class="agreement">
+			<!-- <view class="agreement">
 				<lyg-popup @popupState="popupState" title="温馨提醒" protocolPath='../webview/webview?can_share=false&url=/hybrid/html/protocol.html'
 				 policyPath='../webview/webview?can_share=false&url=/hybrid/html/policy.html' policyStorageKey="has_read_privacy"></lyg-popup>
-			</view>
+			</view> -->
 		</view>
 	</view>
 </template>

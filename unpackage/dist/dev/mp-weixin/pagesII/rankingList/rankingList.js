@@ -337,6 +337,7 @@ var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
 
+
 var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 //
 //
@@ -528,7 +529,7 @@ var _console = console,log = _console.log;var _default = { data: function data()
         if (res[3] !== '0') {return res[0] + res[1] + res[2] + "." + res[3] + unit[res.length];} else {return res[0] + res[1] + res[2] + "" + unit[res.length];}} else if (res.length === 8) {// 1000w√
         if (res[4] !== '0') {return res[0] + res[1] + res[2] + res[3] + "." + res[4] + unit[res.length];} else {return res[0] + res[1] + res[2] + res[3] + "" + unit[res.length];}} else if (res.length === 9) {// 1e
         if (res[1] !== '0') {return res[0] + "." + res[1] + unit[res.length];} else {return res[0] + "" + unit[res.length];}}} }, methods: { getMerchants: function getMerchants() {var _this2 = this;var data = { token: setdata }; // log(data)
-      listing(_request.getClient, data).then(function (res) {// log(res)
+      (0, _api.listing)(_request.getClient, data).then(function (res) {// log(res)
         ///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
         _this2.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
         // log(this.ApproveStatus)

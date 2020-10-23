@@ -5,7 +5,7 @@
 				<!-- <view class="tui-primary-bg tui-route-left"></view>
 				<view class="tui-primary-bg tui-route-right"></view> -->
 				<view class="tui-banner-box">
-					<swiper :indicator-dots="true" :autoplay="false" :interval="5000" :duration="150" class="tui-banner-swiper"
+					<swiper :indicator-dots="true" :autoplay="true" :interval="5000" :duration="150" class="tui-banner-swiper"
 					 :circular="true" indicator-color="rgba(255, 255, 255, 0.8)" indicator-active-color="#ff7129">
 						<swiper-item v-for="(item, index) in banner" :key="index" @tap.stop="detail">
 							<image :src="item.url" class="tui-slide-image" mode="scaleToFill" />

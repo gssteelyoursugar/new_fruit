@@ -60,6 +60,7 @@
 	//请求地址
 	import {getselectSeasonal,imgurl,getClient,} from '../../api/request.js'
 	var {log} = console
+	let setdata = uni.getStorageSync('usermen')//Token
 	export default {
 	
 		data() {

@@ -10262,6 +10262,7 @@ exports.getEvaluateList = getEvaluateList;
 // 导出文件上传
 var uploadFiles = function uploadFiles(callback) {
   uni.chooseImage({
+    count: 1,
     success: function success(chooseImageRes) {
       uni.showLoading({
         title: '上传中...' });

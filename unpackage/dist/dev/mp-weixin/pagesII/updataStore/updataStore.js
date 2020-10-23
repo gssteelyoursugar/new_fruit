@@ -95,6 +95,9 @@ __webpack_require__.r(__webpack_exports__);
 var components = {
   tuiListCell: function() {
     return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 452))
+  },
+  tuiIcon: function() {
+    return __webpack_require__.e(/*! import() | components/tui-icon/tui-icon */ "components/tui-icon/tui-icon").then(__webpack_require__.bind(null, /*! @/components/tui-icon/tui-icon.vue */ 389))
   }
 }
 var render = function() {
@@ -135,6 +138,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
 
 
 
@@ -314,6 +319,8 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 //
 //
 //
+//
+//
 var setdata = uni.getStorageSync('usermen'); //Token
 var _console = console,log = _console.log;var cityData = __webpack_require__(/*! @/utils/picker.city.js */ 132);var form = __webpack_require__(/*! @/common/tui-validation/tui-validation.js */ 131);var _default = { data: function data() {return { //地图信息
       selectList: cityData, //接口返回picker数据,此处就直接使用本地测试数据
@@ -324,17 +331,15 @@ var _console = console,log = _console.log;var cityData = __webpack_require__(/*!
       addressThree: [], //三级
       textAddress: '', Address1: '', //更新店铺地址
       //end
-      idArrList: '', urlListFlag: [false, false, false, false], //对应下面urlList的四张图片状态，修改下面那个index的图片就设置当前对应的index为true
-      urlList: [], arrId: [], imgName: ['门头照', '水果陈列照', '卸货区', '工商营业执照'], imgDataLi: [{ "title": "门头照片", "name": "me_1", "url": "" }, { "title": "水果陈列照片", "name": "me_2", "url": "" }, { "title": "卸货区", "name": "me_3", "url": "" }, { "title": "工商营业执照", "name": "me_4", "url": "" }], imgUrlData0: '../../static/images/B@2x.png', imgUrlData1: '../../static/images/B@2x.png', imgUrlData2: '../../static/images/B@2x.png', imgUrlData3: '../../static/images/B@2x.png', updataImg0: '', updataImg1: '', updataImg2: '', updataImg3: '', imagesList: [{ url: '../../static/images/B@2x.png' }, { url: '../../static/images/B@2x.png' }, { url: '../../static/images/B@2x.png' }, { url: '../../static/images/B@2x.png' }], storeName: '请填写店铺名', merchantsName: '填写姓名', phone: '请输入收货人手机号码', address: '南宁', //地址
+      urlListFlag: [false, false, false, false], //对应下面urlList的四张图片状态，修改下面那个index的图片就设置当前对应的index为true
+      urlList: [], imgName: ['门头照', '水果陈列照', '卸货区', '工商营业执照'], imgDataLi: [{ "title": "门头照片", "name": "me_1", "url": "" }, { "title": "水果陈列照片", "name": "me_2", "url": "" }, { "title": "卸货区", "name": "me_3", "url": "" }, { "title": "工商营业执照", "name": "me_4", "url": "" }], imgUrlData0: '../../static/images/B@2x.png', imgUrlData1: '../../static/images/B@2x.png', imgUrlData2: '../../static/images/B@2x.png', imgUrlData3: '../../static/images/B@2x.png', updataImg0: '', updataImg1: '', updataImg2: '', updataImg3: '', imagesList: [{ url: '../../static/images/B@2x.png' }, { url: '../../static/images/B@2x.png' }, { url: '../../static/images/B@2x.png' }, { url: '../../static/images/B@2x.png' }], storeName: '请填写店铺名', merchantsName: '填写姓名', phone: '请输入收货人手机号码', address: '南宁', //地址
       serviceNumber: '', //客服专员
       files: [], //最多上传9张图片
       imageList: [], category: 'image', ctx: {}, StoreInfo: {}, //店铺信息
-      cartIds: [], imgUrlData: '', addressDetails: '请填写详细地址', flag: false };}, methods: { //地址选择弹出
+      cartIds: [], imgUrlData: '', addressDetails: '请填写详细地址', flag: false, idList: '' };}, methods: { //地址选择弹出
     picker: function picker(e) {console.log("pick=============", e); //获取选中的三级信息
       var value = e.detail.value; //这个是三级的picker分别选中的下标，value=[].length = 3,第一个是一级，第二个是二级。。。
-      var one = this.addressOne[value[0]];var two = this.addressTwo[value[1]];
-      var three = this.addressThree[value[2]];
-      this.text1 = one.name + " " + two.name + " " + three.name;
+      var one = this.addressOne[value[0]];var two = this.addressTwo[value[1]];var three = this.addressThree[value[2]];this.text1 = one.name + " " + two.name + " " + three.name;
 
       var addThree = this.getAddressById(three.id);
       log(three);
@@ -428,27 +433,15 @@ var _console = console,log = _console.log;var cityData = __webpack_require__(/*!
       var that = this;
       (0, _api.publicing)(_request.postAddressList).
       then(function (res) {
-        log(res.data);
-        log(res);
-
         _this.addressAllData = res.data;
-
         //初始化三级信息
         _this.addressOne = _this.getAddressByPId("0"); //一级地址
         _this.addressTwo = _this.getAddressByPId(_this.addressOne[0].id); //默认显示一级的第一个地址的二级地址
         _this.addressThree = _this.getAddressByPId(_this.addressTwo[0].id); //默认显示二级的第一个地址的三级地址
-        console.log(_this.addressTwo[0].id);
-
-
-
         _this.multiArray = [
         _this.toArr(_this.addressOne),
         _this.toArr(_this.addressTwo),
         _this.toArr(_this.addressThree)];
-
-        console.log("获取全国一级地址===", _this.addressOne);
-        console.log("获取全国二级地址===", _this.addressTwo);
-        console.log("获取全国三级地址===", _this.addressThree);
 
         that.getMerchants();
       }).
@@ -472,7 +465,6 @@ var _console = console,log = _console.log;var cityData = __webpack_require__(/*!
       for (var i = 0; i < this.addressAllData.length; i++) {
         var dd = this.addressAllData[i];
         if (dd.id === id) {
-          log(dd);
           return dd;
         }
       }
@@ -480,29 +472,21 @@ var _console = console,log = _console.log;var cityData = __webpack_require__(/*!
     },
 
 
-
+    delImg: function delImg(index) {
+      var list = this.urlList;
+      var idList = [];
+      list[index].url = '';
+      idList.push(list[index].id);
+      this.urlList = list;
+      this.urlListFlag[index] = false;
+      this.idList = idList.join(",");
+    },
 
     //上传文件
     uploadImages: function uploadImages(index, id) {
-      this.flag = true;
       //如果用户不点击上传图片，不用传参fileUrls，delFileIds
-
       var that = this;
-      this.arrId.push(id);
-      log(index);
-      log(this.arrId);
-      //拼接字符串id
-      var ids = "";
-      for (var _index in this.arrId) {
-        ids = ids + this.arrId[_index] + ",";
-      }
-      // console.log("ids====",ids)
-      //去除ids最后一个逗号
-      ids = ids.substring(0, ids.length - 1);
-      // console.log("ids去除逗号后====",ids)
-      this.idArrList = ids;
-      console.log(this.idArrList);
-
+      that.flag = true;
 
       (0, _request.uploadFiles)(function (res) {
         console.log(res.data);
@@ -513,21 +497,27 @@ var _console = console,log = _console.log;var cityData = __webpack_require__(/*!
     },
 
     //更新店铺信息
+
+    /**
+     * 修改图片注意
+     * 如果用户修改信息时，没有删除图片或者（修改/添加）图片，
+     * 则不需要返回图片的对应信息；
+     * 如果删除了图片，则需要把 删除了的图片的ID传给delFileIds；
+     * 如果修改了图片，则只需要把修改了的图片的信息传到fileUrls
+     * 
+     */
     postUpdateStore: function postUpdateStore(e) {
       log(e);
-
-
-
       //表单规则
       var rules = [{
         name: "storeName",
         rule: ["required", "isChinese", "minLength:2", "maxLength:20"], //可使用区间，此处主要测试功能
-        msg: ["请输入店铺名称", "店铺名必须全部为中文", "姓名必须2个或以上字符", "不能超过20个字符"] },
+        msg: ["请输入店铺名称", "店铺名必须全部为中文", "请输入2个或以上字符", "不能超过20个字符"] },
 
       {
         name: "merchantsName",
         rule: ["required", "isChinese", "minLength:2", "maxLength:6"], //可使用区间，此处主要测试功能
-        msg: ["请输入真实性名", "姓名必须全部为中文", "姓名必须2个或以上字符", "不能超过6个字符"] },
+        msg: ["请输入真实姓名", "姓名必须全部为中文", "姓名必须2个或以上字符", "不能超过6个字符"] },
       {
         name: "phone",
         rule: ["required", "isMobile"],
@@ -549,40 +539,25 @@ var _console = console,log = _console.log;var cityData = __webpack_require__(/*!
       var formData = e.detail.value;
       var checkRes = form.validation(formData, rules);
       if (!checkRes) {
-
         //判断四张图片中哪几张是改变了的然后存储已改变的图片为一个list发送后台，没改动的就不传
-        var urlList = new Array();
+        var changeImg = [];
         for (var index in this.urlListFlag) {
           if (this.urlListFlag[index]) {//等于true则证明这个index下标对应的this.urlList图片有改动
             //就把这个this.urlList下标内容存储
-            urlList.push(this.urlList[index]);
+            changeImg.push(this.urlList[index]);
           }
         }
-        console.log("修改的图片去除没修改的====", urlList.length);
-        console.log("修改的图片去除没修改的====", urlList);
-        if (urlList.length < 1) {
-
-          uni.showToast({
-            title: '重新编辑至少需要上传1张图片！',
-            icon: 'none' });
-
-          return;
-
-        }
-
-
         var _setdata = uni.getStorageSync('usermen'); //Token
         var _data = {
           storeName: e.detail.value.storeName,
           merchantsName: e.detail.value.merchantsName,
           phone: e.detail.value.phone,
           address: this.Address1,
-
           token: _setdata,
           type: 1,
           addressDetails: e.detail.value.addressDetails,
-          fileUrls: JSON.stringify(urlList), //这个地方不要传json数组，要把json数组转字符串，用JSON.stringify能转为字符串json数组，这样后台才能接收
-          delFileIds: this.idArrList };
+          fileUrls: JSON.stringify(changeImg), //这个地方不要传json数组，要把json数组转字符串，用JSON.stringify能转为字符串json数组，这样后台才能接收
+          delFileIds: this.idList };
 
         //判断用户是否点击上传图片，是否要传fileUrls，delFileIds,flase不传值
         if (this.flag == false) {
@@ -594,40 +569,33 @@ var _console = console,log = _console.log;var cityData = __webpack_require__(/*!
         }
 
         log(_data);
-
         (0, _api.publicing)(_request.postupdateClient, _data).
         then(function (res) {
-          log(res);
-          uni.showModal({
-            title: '提示',
-            showCancel: false,
-            content: "".concat(res.data.msg),
-            success: function success(res) {
-              if (res.confirm) {
 
-                wx.switchTab({
-                  url: '../../pages/my/my',
-                  success: function success(e) {
-                    var page = getCurrentPages().pop(); //当前页面
-                    if (page == undefined || page == null) return;
-                    page.onLoad();
+          if (res.data.code === -1) {
+            uni.showToast({
+              title: "".concat(res.data.msg),
+              icon: "none",
+              duration: 3000 });
 
-                  } });
+            return;
+          }
+          if (res.data.code === 200) {
+            uni.showToast({
+              title: "".concat(res.data.msg),
+              icon: "none",
+              duration: 3000 });
 
-              } else if (res.cancel) {
-                console.log('用户点击取消');
-                wx.switchTab({
-                  url: '../../pages/my/my',
-                  success: function success(e) {
-                    var page = getCurrentPages().pop(); //当前页面
-                    if (page == undefined || page == null) return;
-                    page.onLoad();
-                    this.getMerchants();
-                  } });
+            wx.switchTab({
+              url: '../../pages/my/my',
+              success: function success(e) {
+                var page = getCurrentPages().pop(); //当前页面
+                if (page == undefined || page == null) return;
+                page.onLoad();
 
-              }
-            } });
+              } });
 
+          }
         }).
         catch(function (err) {
           log(err);
@@ -639,11 +607,7 @@ var _console = console,log = _console.log;var cityData = __webpack_require__(/*!
           icon: "none" });
 
       }
-
-
-
     },
-
     //获取申请店铺状态信息
     getMerchants: function getMerchants() {var _this2 = this;
       console.log("获取申请店铺状态信息");
@@ -653,59 +617,24 @@ var _console = console,log = _console.log;var cityData = __webpack_require__(/*!
 
       (0, _api.listing)(_request.getClient, data).
       then(function (res) {
-        log(res);
-
         //这里查询
         _this2.ApproveStatus = res.data.data.approveStatus;
-        log(_this2.ApproveStatus);
         _this2.StoreInfo = res.data.data;
-        var dataList = res.data.data.urlList;
-        var temp_1 = {
-          name: "me_2",
-          title: "水果陈列照片",
-          url: '' };
-
-        var temp_2 = {
-          name: "me_3",
-          title: "卸货区",
-          url: '' };
-
-        var temp_3 = {
-          name: "me_4",
-          title: "工商营业执照",
-          url: '' };
-
-        if (dataList.length === 1) {
-          dataList.push(temp_1, temp_2, temp_3);
-        }
-        if (dataList.length === 2) {
-          dataList.push(temp_2, temp_3);
-        }
-        if (dataList.length === 3) {
-          dataList.push(temp_3);
-        }
-        _this2.urlList = dataList;
+        var ulist = res.data.data.urlList;
+        var tempList = [];
+        ulist.sort(function (a, b) {
+          return a.name.replace(/[^0-9]/ig, "") - b.name.replace(/[^0-9]/ig, "");
+        });
+        _this2.urlList = ulist;
         _this2.Address1 = res.data.data.address;
-        log(res.data.data);
-
         //根据id获取地址，地址已经获取到
         var addThree = _this2.getAddressById(_this2.StoreInfo.address);
-        log(addThree);
         //拿到第三级，根据第三级的pid就是第二级的id，根据第二级的pid就是第一级的id
         var addTwo = _this2.getAddressById(addThree.pId);
         var addOne = _this2.getAddressById(addTwo.pId);
 
-        // console.log("addThree===",addThree.name)
-        // console.log("addTwo===",addTwo.name)
-        // console.log("addOne===",addOne.name)
         _this2.textAddress = addOne.name + "/" + addTwo.name + "/" + addThree.name;
-        // this.textAddress = '测试';
-        // this.idAddress = this.textAddress
-
         _this2.StoreInfo.address = _this2.textAddress;
-        log(_this2.textAddress);
-        log('查询');
-        //this.text1 = addInfo.name
 
       }).
       catch(function (err) {
@@ -718,7 +647,6 @@ var _console = console,log = _console.log;var cityData = __webpack_require__(/*!
       this.postAddressDatas();
       this.getMerchants();
       log(setdata);
-      console.log('refresh');
       setTimeout(function () {
         uni.stopPullDownRefresh();
       }, 1000);

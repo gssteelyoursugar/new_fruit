@@ -91,6 +91,7 @@
 
 <script>
 	import {
+		listing,
 		listing2
 	} from '../../api/api.js'
 	//请求地址
@@ -102,6 +103,7 @@
 	const {
 		log
 	} = console
+	let setdata = uni.getStorageSync('usermen')//Token
 	export default {
 
 		data() {

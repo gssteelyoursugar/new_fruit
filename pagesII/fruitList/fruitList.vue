@@ -88,6 +88,7 @@
 <script>
 	//请求
 	import {
+		listing,
 		listing2
 	} from '../../api/api.js'
 	//请求地址
@@ -96,6 +97,7 @@
 		getNewsAll,
 		imgurl
 	} from '../../api/request.js'
+	let setdata = uni.getStorageSync('usermen')//Token
 	var {
 		log
 	} = console

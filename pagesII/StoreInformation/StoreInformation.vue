@@ -58,18 +58,18 @@
 				<view class="tui-order-list">
 					<view class="tui-order-item">
 						<view class="tui-icon-box">
-
 							<image :src="urlList[0].url || ''" mode="aspectFit" class="imgUplod"></image>
 							<!-- <view>点击上传图片</view> -->
 						</view>
-						<view class="tui-order-text">{{urlList[0].title}}</view>
+						<view class="tui-order-text">门头照</view>
 					</view>
+					
 					<view class="tui-order-item">
 						<view class="tui-icon-box">
 							<image :src="urlList[1].url || ''" mode="aspectFit" class="imgUplod"></image>
 							<!-- <view>点击上传图片</view> -->
 						</view>
-						<view class="tui-order-text">{{urlList[1].title ||"水果陈列照片"}}</view>
+						<view class="tui-order-text">水果陈列照片</view>
 					</view>
 				</view>
 
@@ -80,14 +80,14 @@
 							<image :src="urlList[2].url || ''" mode="aspectFit" class="imgUplod"></image>
 							<!-- <view class="">点击上传图片</view> -->
 						</view>
-						<view class="tui-order-text">{{urlList[2].title || '卸货区'}}</view>
+						<view class="tui-order-text">卸货区</view>
 					</view>
 					<view class="tui-order-item">
 						<view class="tui-icon-box">
 							<image :src="urlList[3].url || ''" mode="aspectFit" class="imgUplod"></image>
 							<!-- <view>点击上传图片</view> -->
 						</view>
-						<view class="tui-order-text">{{urlList[3].title || '工商营业执照'}}</view>
+						<view class="tui-order-text">工商营业执照</view>
 					</view>
 				</view>
 			</view>
@@ -147,9 +147,6 @@
 				//end
 				approveStatus: undefined, //店铺状态标识
 				StoreInfo: {}, //店铺信息
-
-
-
 				imagesList: [{
 						url: '../../static/images/B@2x.png'
 					},
@@ -332,7 +329,6 @@
 				}, 1000);
 			},
 
-
 			//获取申请店铺状态信息
 			getMerchants() {
 				let data = {
@@ -340,13 +336,16 @@
 				}
 				listing(getClient, data)
 					.then((res) => {
-						log(res)
 						//这里查询
 						this.approveStatus = res.data.data.approveStatus
 						// log(this.ApproveStatus)
 						this.StoreInfo = res.data.data
-						this.urlList = res.data.data.urlList
-						// log(this.StoreInfo)
+						let ulist= res.data.data.urlList
+						let tempList = []
+						ulist.sort((a,b)=>{
+							return a.name.replace(/[^0-9]/ig,"") - b.name.replace(/[^0-9]/ig,"")
+						})
+						this.urlList = ulist
 						//根据id获取地址，地址已经获取到
 						let addThree = this.getAddressById(this.StoreInfo.address)
 						// log(addThree)
@@ -367,7 +366,6 @@
 					})
 
 			},
-
 
 			//请求保存店铺
 			postsaveStores(e) {
@@ -396,49 +394,13 @@
 					.catch((err) => {
 						log(err)
 					})
-
-
 			},
-
 			//获取token
 			getToken() {
 				let setdata = uni.getStorageSync('usermen')
 				// log(setdata)
 			},
-			//上传图片
-			chooseImage(e) {
-				let that = this;
-				if (that.files.length >= 9) {
-					this.tui.toast("最多上传9张图片");
-					return
-				}
-				uni.chooseImage({
-					count: 9 - that.files.length,
-					sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-					sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-					success: function(res) {
-
-						// 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-						that.files = that.files.concat(res.tempFilePaths)
-						console.log(that.files)
-						//上传功能已移除
-						//...
-					}
-				})
-			},
-
-
-			previewImage: function(e) {
-				uni.previewImage({
-					current: e.currentTarget.id,
-					urls: this.files
-				})
-			},
-			deleteImage: function(e) {
-				const index = e.index;
-				this.files.splice(index, 1);
-			},
-
+		
 			formSubmit(e) {
 				//表单规则
 				let rules = [{
@@ -498,7 +460,7 @@
 		top: 0;
 		left: 0;
 		right: 0;
-
+		z-index: 999;
 	}
 	
 	.no-pass {

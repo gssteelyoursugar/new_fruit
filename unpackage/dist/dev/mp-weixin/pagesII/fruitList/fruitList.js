@@ -227,6 +227,7 @@ var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
 
+
 var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 //
 //
@@ -316,13 +317,14 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 //
 //请求
 //请求地址
+var setdata = uni.getStorageSync('usermen'); //Token
 var _console = console,log = _console.log;var _default = { data: function data() {return { infoList: [], GoodsData: [], url: '', ApproveStatus: 0, preferdata: [{ image: '/static/images/youzi@3x.png' }, { image: '/static/images/youzi@3x.png' }, { image: '/static/images/youzi@3x.png' }, { image: '/static/images/youzi@3x.png' }], hideing: 0, num: 0, ranking: ['销量榜', '评价榜', '关注榜', '回购榜'], // imageUrl: "../../static/images/new_fruit.png",
       imageUrl: "/static/images/shangxin@3x.png", height: 64, //header高度
       top: 26, //标题图标距离顶部距离
       scrollH: 0, //滚动总高度
       opcity: 0, iconOpcity: 0.5, bannerIndex: 0, menuShow: false, popupShow: false, value: 1, collected: false };}, onLoad: function onLoad(options) {var _this = this;this.url = _request.imgurl;this.getGoodsAll();var obj = {};obj = wx.getMenuButtonBoundingClientRect();setTimeout(function () {uni.getSystemInfo({ success: function success(res) {_this.width = obj.left || res.windowWidth;_this.height = obj.top ? obj.top + obj.height + 8 : res.statusBarHeight + 44;_this.top = obj.top ? obj.top + (obj.height - 32) / 2 : res.statusBarHeight + 6;_this.scrollH = res.windowWidth;} });}, 0);}, //下拉刷新
   onPullDownRefresh: function onPullDownRefresh() {this.getGoodsAll();console.log('refresh');setTimeout(function () {uni.stopPullDownRefresh();}, 1000);}, methods: { getMerchants: function getMerchants() {var _this2 = this;var data = { token: setdata }; // log(data)
-      listing(_request.getClient, data).then(function (res) {// log(res)
+      (0, _api.listing)(_request.getClient, data).then(function (res) {// log(res)
         ///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
         _this2.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
         // log(this.ApproveStatus)

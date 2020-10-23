@@ -59,6 +59,7 @@
 <script>
 	//请求
 	import {
+		listing,
 		listing2,
 		publicing
 	} from '../../api/api.js'
@@ -68,6 +69,7 @@
 		getselectHot,
 		imgurl
 	} from '../../api/request.js'
+	var setdata = uni.getStorageSync('usermen');
 	var {
 		log
 	} = console

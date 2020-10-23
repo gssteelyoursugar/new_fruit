@@ -413,10 +413,7 @@ var _console = console,log = _console.log;var form = __webpack_require__(/*! @/c
         _this.addressTwo = _this.getAddressByPId(_this.addressOne[0].id); //默认显示一级的第一个地址的二级地址
         _this.addressThree = _this.getAddressByPId(_this.addressTwo[0].id); //默认显示二级的第一个地址的三级地址
         _this.multiArray = [_this.toArr(_this.addressOne), _this.toArr(_this.addressTwo), _this.toArr(_this.addressThree)];that.getMerchants();}).catch(function (err) {log(err);});}, //根据pid获取后台的三级联动地址
-    getAddressByPId: function getAddressByPId(pid) {
-      var data = new Array();
-      for (var i = 0; i < this.addressAllData.length; i++) {
-        var dd = this.addressAllData[i];
+    getAddressByPId: function getAddressByPId(pid) {var data = new Array();for (var i = 0; i < this.addressAllData.length; i++) {var dd = this.addressAllData[i];
         if (dd.pId === pid) {
           data.push(dd);
         }
@@ -468,7 +465,6 @@ var _console = console,log = _console.log;var form = __webpack_require__(/*! @/c
       }, 1000);
     },
 
-
     //获取申请店铺状态信息
     getMerchants: function getMerchants() {var _this2 = this;
       var data = {
@@ -476,13 +472,16 @@ var _console = console,log = _console.log;var form = __webpack_require__(/*! @/c
 
       (0, _api.listing)(_request.getClient, data).
       then(function (res) {
-        log(res);
         //这里查询
         _this2.approveStatus = res.data.data.approveStatus;
         // log(this.ApproveStatus)
         _this2.StoreInfo = res.data.data;
-        _this2.urlList = res.data.data.urlList;
-        // log(this.StoreInfo)
+        var ulist = res.data.data.urlList;
+        var tempList = [];
+        ulist.sort(function (a, b) {
+          return a.name.replace(/[^0-9]/ig, "") - b.name.replace(/[^0-9]/ig, "");
+        });
+        _this2.urlList = ulist;
         //根据id获取地址，地址已经获取到
         var addThree = _this2.getAddressById(_this2.StoreInfo.address);
         // log(addThree)
@@ -503,7 +502,6 @@ var _console = console,log = _console.log;var form = __webpack_require__(/*! @/c
       });
 
     },
-
 
     //请求保存店铺
     postsaveStores: function postsaveStores(e) {
@@ -532,47 +530,11 @@ var _console = console,log = _console.log;var form = __webpack_require__(/*! @/c
       catch(function (err) {
         log(err);
       });
-
-
     },
-
     //获取token
     getToken: function getToken() {
       var setdata = uni.getStorageSync('usermen');
       // log(setdata)
-    },
-    //上传图片
-    chooseImage: function chooseImage(e) {
-      var that = this;
-      if (that.files.length >= 9) {
-        this.tui.toast("最多上传9张图片");
-        return;
-      }
-      uni.chooseImage({
-        count: 9 - that.files.length,
-        sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-        sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-        success: function success(res) {
-
-          // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-          that.files = that.files.concat(res.tempFilePaths);
-          console.log(that.files);
-          //上传功能已移除
-          //...
-        } });
-
-    },
-
-
-    previewImage: function previewImage(e) {
-      uni.previewImage({
-        current: e.currentTarget.id,
-        urls: this.files });
-
-    },
-    deleteImage: function deleteImage(e) {
-      var index = e.index;
-      this.files.splice(index, 1);
     },
 
     formSubmit: function formSubmit(e) {

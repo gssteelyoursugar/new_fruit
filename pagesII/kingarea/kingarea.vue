@@ -16,7 +16,6 @@
 		<image :src="imageUrl" class="tui-my-bg" mode="aspectFill"></image>
 		</view>
 		<!-- <view class="tui-cent-box">
-			
 		</view> -->
 		<view class="tui-rink-sceate">
 			<view class="tui-rank-list" >
@@ -54,10 +53,11 @@
 
 <script>
 	//请求
-	import {listing2,publicing} from '../../api/api.js'
+	import {listing,listing2,publicing} from '../../api/api.js'
 	//请求地址
 	import {getselectImport,imgurl,getClient} from '../../api/request.js'
 	var {log} = console
+	let setdata = uni.getStorageSync('usermen')//Token
 	export default {
 	
 		data() {

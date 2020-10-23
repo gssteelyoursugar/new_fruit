@@ -110,9 +110,6 @@ var components = {
   },
   tuiNomore: function() {
     return __webpack_require__.e(/*! import() | components/tui-nomore/tui-nomore */ "components/tui-nomore/tui-nomore").then(__webpack_require__.bind(null, /*! @/components/tui-nomore/tui-nomore.vue */ 403))
-  },
-  lygPopup: function() {
-    return __webpack_require__.e(/*! import() | components/lyg-popup/lyg-popup */ "components/lyg-popup/lyg-popup").then(__webpack_require__.bind(null, /*! @/components/lyg-popup/lyg-popup.vue */ 410))
   }
 }
 var render = function() {

@@ -179,6 +179,7 @@
 
 <script>
 	import {
+		listing,
 		publicing
 	} from '../../api/api.js'
 	//请求地址

@@ -57,9 +57,10 @@
 
 <script>
 	//请求
-	import {listing2,publicing} from '../../api/api.js'
+	import {listing,listing2,publicing} from '../../api/api.js'
 	//请求地址
 	import {getselectImport,imgurl,getClient} from '../../api/request.js'
+	var setdata = uni.getStorageSync('usermen');
 	var {log} = console
 	export default {
 	

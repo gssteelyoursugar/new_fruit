@@ -53,21 +53,16 @@
 
 						<view class="tag-tit-pra" v-if="!canPraise" @tap="praiseLike(shopListdata.id)">
 							<tui-icon name="agree" color="#999" :size="15"></tui-icon>
-							<text>点赞{{ shopListdata.praiseNumber||0 |filterNum}}</text>
+							<text>{{ shopListdata.praiseNumber||0 |filterNum}}</text>
 						</view>
 						<view class="tag-tit-pra" v-if="canPraise" @tap="praiseLikeTwo">
 							<tui-icon name="agree-fill" color="#ff0000" :size="15"></tui-icon>
-							<text>点赞{{ shopListdata.praiseNumber||0  |filterNum}}</text>
+							<text>{{ shopListdata.praiseNumber||0  |filterNum}}</text>
 						</view>
 					</view>
 					<view class="tui-original-price tui-gray">{{ shopListdata.describe ||0}}</view>
+					<view class="tui-text-overflow">{{ shopListdata.specification ||''}}, 净重约{{ shopListdata.kg2 ||0}}斤</view>
 					<view class="tui-pro-titbox">
-						<view class="tui-pro-title">
-							<text class="tui-pro-title-tag" v-if="shopListdata.number">仅剩{{ shopListdata.number || 0 }}件</text>
-							<!--    -->
-							<text class="tui-pro-title-tag" v-if="shopListdata.totalPirce!== undefined">成交{{ shopListdata.totalPirce | filterNum }}元</text>
-							<text class="tui-pro-title-tag" v-if="shopListdata.viewNumber!== undefined">{{ shopListdata.viewNumber | filterNum }}人看</text>
-						</view>
 						<button open-type="share" class="tui-share-btn tui-share-position" @tap="onShare">
 							<tui-tag type="gray" shape="circleLeft" padding="12rpx 16rpx">
 								<view class="tui-share-box">
@@ -79,15 +74,27 @@
 					</view>
 					<view class="tui-padding">
 						<view class="tui-sale-info tui-size tui-gray">
-							<view class="tui-magin">
-								<text class="tui-code">￥</text>
-								<text class="tui-price-one">{{ApproveStatus===1? shopListdata.platformClientPrice:'***' }}</text>
-								<text style="font-size:28rpx;color: #FF6500;">元</text>
-								<text>/件</text>
+							<view class="kilo-price">
+								<view class="kilo-unit">¥</view>
+								<view class="kilo-price-num">{{ApproveStatus===1? shopListdata.kgPrice :'***'}}</view>
+								<view class="kilo-wg">元/斤</view>
 							</view>
-							<view class="tui-huaxian"  v-if="shopListdata.marketPrice != 0">￥{{ApproveStatus===1? shopListdata.marketPrice:'***'}}/件</view>
-							<view class="tui-text-overflow">{{ shopListdata.specification ||''}}, 水果净重约{{ shopListdata.kg2 ||0}}斤</view>
+							<view class="line-price">
+								<view class="tui-magin">
+									<text class="tui-code">￥</text>
+									<text class="tui-price-one">{{ApproveStatus===1? shopListdata.platformClientPrice:'***' }}</text>
+									<text style="font-size:28rpx;">元</text>
+									<text>/件</text>
+								</view>
+								<view class="tui-huaxian" v-if="shopListdata.marketPrice != 0">￥{{ApproveStatus===1? shopListdata.marketPrice:'***'}}/件</view>
+							</view>
 						</view>
+					</view>
+					<view class="tui-pro-title">
+						<text class="tui-pro-title-tag" v-if="shopListdata.number">仅剩{{ shopListdata.number || 0 }}件</text>
+						<!--    -->
+						<text class="tui-pro-title-tag" v-if="shopListdata.totalPirce!== undefined">成交{{ shopListdata.totalPirce | filterNum }}元</text>
+						<text class="tui-pro-title-tag" v-if="shopListdata.viewNumber!== undefined">{{ shopListdata.viewNumber | filterNum }}人看</text>
 					</view>
 				</view>
 				<!-- 水果身份 -->
@@ -348,7 +355,7 @@
 					<view class="tui-tab-rank">
 						<view class="tui-tab-rank-cent">
 							<image :src="shopListdata.urlVideo!==''? urlList[1]:urlList[0]" mode="aspectFill" class="img-rink"></image>
-							
+
 							<view class="tui-pro-tit" style="padding: 0 30rpx 0 0;">
 								<text class="tag-tit">{{ item.name }}</text>
 								<text class="tag-tit-text" style="font-size:28rpx">{{ shopListdata.name }}</text>
@@ -364,7 +371,7 @@
 												</view>
 												/件
 											</view>
-											<view class="tui-huaxian"  v-if="shopListdata.marketPrice != 0">￥{{ApproveStatus===1? shopListdata.marketPrice:'***' }}</view>
+											<view class="tui-huaxian" v-if="shopListdata.marketPrice != 0">￥{{ApproveStatus===1? shopListdata.marketPrice:'***' }}</view>
 										</view>
 									</view>
 
@@ -831,7 +838,7 @@
 			messcancel() {
 				this.modaishow = false;
 			},
-			noGoods () {
+			noGoods() {
 				uni.showToast({
 					title: "正在补货中～",
 					icon: 'none'
@@ -1004,7 +1011,7 @@
 						});
 						return;
 					}
-					if(this.canCart === true) {
+					if (this.canCart === true) {
 						uni.showToast({
 							title: '重复加入进货单',
 							icon: 'none',
@@ -1186,8 +1193,8 @@
 		display: flex;
 		padding: 20rpx 0 0;
 	}
-	
-	
+
+
 	.img-rink {
 		width: 220rpx;
 		height: 220rpx;
@@ -1249,6 +1256,11 @@
 		font-size: 12px;
 		display: flex;
 		align-items: baseline;
+
+	}
+
+	.shabi .tui-price-one {
+		color: #ff6500;
 	}
 
 	.tag-tit3-flex {
@@ -1537,23 +1549,33 @@
 		align-items: baseline;
 	}
 
+	.tui-magin .tui-price-one {
+
+		color: #969696;
+	}
+
 	.tui-text-overflow {
 		/* width: 460rpx; */
 		overflow: hidden;
 		white-space: nowrap;
 		text-overflow: ellipsis;
-	}
+		color: #969696;
+		font-size: 24rpx;
+		padding: 10rpx 0 10rpx 30rpx;
 
-	.tui-code {
-		color: rgba(255, 101, 0, 1);
-		font-size: 20rpx;
 	}
 
 	.tui-price-one {
 		font-size: 40rpx;
 		font-weight: bold;
-		color: rgba(255, 101, 0, 1);
 	}
+
+	.tui-code {
+		color: #969696;
+		font-size: 28rpx;
+	}
+
+
 
 	.tui-gray {
 		color: #999;
@@ -1583,7 +1605,9 @@
 	.tui-product-title {
 		background: #fff;
 		padding: 30rpx 0;
-		border-bottom: 20rpx solid #f5f5f5
+		border-bottom: 20rpx solid #f5f5f5;
+		position: relative;
+
 	}
 
 	/* 2020/8/29 */
@@ -1786,6 +1810,12 @@
 		border-radius: 10px 0 0 10px;
 		color: rgba(182, 182, 182, 1);
 		font-size: 24rpx;
+		top: 150rpx;
+		height: 40rpx;
+		display: flex;
+		align-items: center;
+		text-align: center;
+
 	}
 
 	.tui-pro-pricebox {
@@ -1851,16 +1881,17 @@
 	}
 
 	.tui-pro-title {
-		padding-top: 20rpx;
+		padding: 20rpx 30rpx;
 	}
 
 	.tui-pro-title-tag {
-		background-color: rgba(245, 245, 245, 1);
-		color: rgba(255, 101, 0, 1);
-		border-radius: 10px;
-		margin: 0 10rpx;
+		background-color: #f5f5f5;
+		color: #555;
+		border-radius: 6rpx;
+		margin-right: 10rpx;
 		font-size: 24rpx;
-		padding: 5rpx 20rpx;
+		padding: 10rpx 20rpx;
+
 	}
 
 	.tui-share-btn {
@@ -1897,10 +1928,40 @@
 	}
 
 	.tui-sale-info {
+		/* display: flex;
+		align-items: baseline; */
+		/* justify-content: space-between; */
+		/* padding-top: 30rpx; */
+	}
+
+	.kilo-price {
 		display: flex;
 		align-items: baseline;
-		/* justify-content: space-between; */
-		padding-top: 30rpx;
+		color: #ff6500;
+		padding: 20rpx 0;
+	}
+
+	.kilo-price .kilo-unit {
+		font-size: 28rpx;
+		font-weight: 400;
+	}
+
+	.kilo-price .kilo-price-num {
+		font-size: 52rpx;
+		font-weight: bold;
+		margin: 0 4rpx;
+
+	}
+
+	.kilo-price .kilo-wg {
+		font-size: 28rpx;
+		font-weight: 400;
+		color: #969696;
+	}
+
+	.line-price {
+		display: flex;
+		align-items: baseline;
 	}
 
 	.tui-discount-box {

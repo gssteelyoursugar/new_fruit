@@ -248,7 +248,8 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 //
 //请求
 //请求地址
-var _console = console,log = _console.log;var _default = { data: function data() {return { url: '', title: '应季专区', hideing: 0, num: 0, imageUrl: "http://qg-qr.oss-cn-shenzhen.aliyuncs.com/test/1599787289206.png?Expires=1915147284&OSSAccessKeyId=LTAI4G74cnhsbDWNkfvuNew3&Signature=cwrmtVmShk7w%2FKp0d%2FEPxyKbCNQ%3D", rankBgUrl: "/static/images/paihangbang@2x.png", height: 64, //header高度
+var _console = console,log = _console.log;var setdata = uni.getStorageSync('usermen'); //Token
+var _default = { data: function data() {return { url: '', title: '应季专区', hideing: 0, num: 0, imageUrl: "http://qg-qr.oss-cn-shenzhen.aliyuncs.com/test/1599787289206.png?Expires=1915147284&OSSAccessKeyId=LTAI4G74cnhsbDWNkfvuNew3&Signature=cwrmtVmShk7w%2FKp0d%2FEPxyKbCNQ%3D", rankBgUrl: "/static/images/paihangbang@2x.png", height: 64, //header高度
       top: 26, //标题图标距离顶部距离
       scrollH: 0, //滚动总高度
       opcity: 0, iconOpcity: 0.5, bannerIndex: 0, menuShow: false, popupShow: false, value: 1, collected: false, importData: [], //请求的数据

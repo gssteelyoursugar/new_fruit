@@ -56,16 +56,17 @@
 
 				<view class="tui-order-list">
 					<view class="tui-order-list">
-						<view class="tui-order-item" v-for="(item,index) in urlList" :key="index" @click="uploadImages(index,item.id)">
-							<view class="tui-icon-box">
-								<image :src="item.url" mode="aspectFit" class="imgUplod"></image>
+						<view class="tui-order-item" v-for="(item,index) in urlList" :key="index">
+							<view class="del-img" v-if="item.url !== ''">
+								<tui-icon style="margin-top: 0rpx;" @click.stop="delImg(index)" name="close-fill" :size='20' color='#00BF3D'></tui-icon>
+							</view>
+							<view class="tui-icon-box"  @click="uploadImages(index,item.id)">
+								<image :src="item.url || '../../static/images/storeup.png'" mode="aspectFit" class="imgUplod"></image>
 							</view>
 							<view class="tui-order-text">{{item.title}}</view>
 						</view>
 					</view>
-
 				</view>
-
 			</view>
 
 			<tui-list-cell :hover="false"> <text class="colot-text-1">注: 如无办理工商营业执照，请联系客服专员</text>
@@ -79,7 +80,8 @@
 				</view>
 			</tui-list-cell>
 			<view class="tui-btn-box">
-				<button class="tui-button-primary" style="border-radius: 60rpx;" hover-class="tui-button-hover" formType="submit" type="primary">提交</button>
+				<button class="tui-button-primary" style="border-radius: 60rpx;" hover-class="tui-button-hover" formType="submit"
+				 type="primary">提交</button>
 				<!-- <button class="tui-button-primary tui-button-gray" hover-class="tui-button-gray_hover" formType="reset">重置</button> -->
 			</view>
 		</form>
@@ -122,10 +124,9 @@
 				textAddress: '',
 				Address1: '', //更新店铺地址
 				//end
-				idArrList: '',
 				urlListFlag: [false, false, false, false], //对应下面urlList的四张图片状态，修改下面那个index的图片就设置当前对应的index为true
 				urlList: [],
-				arrId: [],
+				
 				imgName: ['门头照', '水果陈列照', '卸货区', '工商营业执照'],
 				imgDataLi: [{
 						"title": "门头照片",
@@ -184,6 +185,7 @@
 				imgUrlData: '',
 				addressDetails: '请填写详细地址',
 				flag: false,
+				idList: ''
 			}
 		},
 		methods: {
@@ -292,28 +294,16 @@
 				let that = this;
 				publicing(postAddressList)
 					.then((res) => {
-						log(res.data)
-						log(res)
-
 						this.addressAllData = res.data
-
 						//初始化三级信息
 						this.addressOne = this.getAddressByPId("0") //一级地址
 						this.addressTwo = this.getAddressByPId(this.addressOne[0].id) //默认显示一级的第一个地址的二级地址
 						this.addressThree = this.getAddressByPId(this.addressTwo[0].id) //默认显示二级的第一个地址的三级地址
-						console.log(this.addressTwo[0].id)
-
-
-
 						this.multiArray = [
 							this.toArr(this.addressOne),
 							this.toArr(this.addressTwo),
 							this.toArr(this.addressThree)
 						]
-						console.log("获取全国一级地址===", this.addressOne)
-						console.log("获取全国二级地址===", this.addressTwo)
-						console.log("获取全国三级地址===", this.addressThree)
-
 						that.getMerchants()
 					})
 					.catch((err) => {
@@ -336,7 +326,6 @@
 				for (let i = 0; i < this.addressAllData.length; i++) {
 					let dd = this.addressAllData[i];
 					if (dd.id === id) {
-						log(dd)
 						return dd
 					}
 				}
@@ -344,30 +333,22 @@
 			},
 
 
-
+			delImg(index) {
+				let list = this.urlList
+				let idList = []
+				list[index].url = ''
+				idList.push(list[index].id)
+				this.urlList = list
+				this.urlListFlag[index] = false
+				this.idList = idList.join(",")
+			},
 
 			//上传文件
 			uploadImages(index, id) {
-				this.flag = true
 				//如果用户不点击上传图片，不用传参fileUrls，delFileIds
-
 				let that = this;
-				this.arrId.push(id)
-				log(index)
-				log(this.arrId)
-				//拼接字符串id
-				let ids = "";
-				for (let index in this.arrId) {
-					ids = ids + this.arrId[index] + ",";
-				}
-				// console.log("ids====",ids)
-				//去除ids最后一个逗号
-				ids = ids.substring(0, ids.length - 1);
-				// console.log("ids去除逗号后====",ids)
-				this.idArrList = ids
-				console.log(this.idArrList)
-
-
+				that.flag = true
+			
 				uploadFiles((res) => {
 					console.log(res.data)
 					that.urlList[index].url = res.data //替换图片路径
@@ -377,21 +358,27 @@
 			},
 
 			//更新店铺信息
+
+			/**
+			 * 修改图片注意
+			 * 如果用户修改信息时，没有删除图片或者（修改/添加）图片，
+			 * 则不需要返回图片的对应信息；
+			 * 如果删除了图片，则需要把 删除了的图片的ID传给delFileIds；
+			 * 如果修改了图片，则只需要把修改了的图片的信息传到fileUrls
+			 * 
+			 */
 			postUpdateStore(e) {
 				log(e)
-
-
-
 				//表单规则
 				let rules = [{
 						name: "storeName",
 						rule: ["required", "isChinese", "minLength:2", "maxLength:20"], //可使用区间，此处主要测试功能
-						msg: ["请输入店铺名称", "店铺名必须全部为中文", "姓名必须2个或以上字符", "不能超过20个字符"]
+						msg: ["请输入店铺名称", "店铺名必须全部为中文", "请输入2个或以上字符", "不能超过20个字符"]
 					},
 					{
 						name: "merchantsName",
 						rule: ["required", "isChinese", "minLength:2", "maxLength:6"], //可使用区间，此处主要测试功能
-						msg: ["请输入真实性名", "姓名必须全部为中文", "姓名必须2个或以上字符", "不能超过6个字符"]
+						msg: ["请输入真实姓名", "姓名必须全部为中文", "姓名必须2个或以上字符", "不能超过6个字符"]
 					}, {
 						name: "phone",
 						rule: ["required", "isMobile"],
@@ -413,40 +400,25 @@
 				let formData = e.detail.value;
 				let checkRes = form.validation(formData, rules);
 				if (!checkRes) {
-
 					//判断四张图片中哪几张是改变了的然后存储已改变的图片为一个list发送后台，没改动的就不传
-					let urlList = new Array();
+					let changeImg = []
 					for (let index in this.urlListFlag) {
 						if (this.urlListFlag[index]) { //等于true则证明这个index下标对应的this.urlList图片有改动
 							//就把这个this.urlList下标内容存储
-							urlList.push(this.urlList[index]);
+							changeImg.push(this.urlList[index])
 						}
 					}
-					console.log("修改的图片去除没修改的====", urlList.length);
-					console.log("修改的图片去除没修改的====", urlList);
-					if (urlList.length < 1) {
-
-						uni.showToast({
-							title: '重新编辑至少需要上传1张图片！',
-							icon: 'none'
-						})
-						return
-
-					}
-
-
 					let setdata = uni.getStorageSync('usermen') //Token
 					let data = {
 						storeName: e.detail.value.storeName,
 						merchantsName: e.detail.value.merchantsName,
 						phone: e.detail.value.phone,
 						address: this.Address1,
-
 						token: setdata,
 						type: 1,
 						addressDetails: e.detail.value.addressDetails,
-						fileUrls: JSON.stringify(urlList), //这个地方不要传json数组，要把json数组转字符串，用JSON.stringify能转为字符串json数组，这样后台才能接收
-						delFileIds: this.idArrList
+						fileUrls: JSON.stringify(changeImg), //这个地方不要传json数组，要把json数组转字符串，用JSON.stringify能转为字符串json数组，这样后台才能接收
+						delFileIds: this.idList
 					}
 					//判断用户是否点击上传图片，是否要传fileUrls，delFileIds,flase不传值
 					if (this.flag == false) {
@@ -458,40 +430,33 @@
 					}
 
 					log(data)
-
 					publicing(postupdateClient, data)
 						.then((res) => {
-							log(res)
-							uni.showModal({
-								title: '提示',
-								showCancel: false,
-								content: `${res.data.msg}`,
-								success: (res) => {
-									if (res.confirm) {
-
-										wx.switchTab({
-											url: '../../pages/my/my',
-											success: function(e) {
-												var page = getCurrentPages().pop(); //当前页面
-												if (page == undefined || page == null) return;
-												page.onLoad();
-
-											}
-										})
-									} else if (res.cancel) {
-										console.log('用户点击取消');
-										wx.switchTab({
-											url: '../../pages/my/my',
-											success: function(e) {
-												var page = getCurrentPages().pop(); //当前页面
-												if (page == undefined || page == null) return;
-												page.onLoad();
-												this.getMerchants()
-											}
-										})
+							
+							if (res.data.code === -1) {
+								uni.showToast({
+									title: `${res.data.msg}`,
+									icon: "none",
+									duration: 3000
+								})
+								return
+							}
+							if (res.data.code ===200) {
+								uni.showToast({
+									title: `${res.data.msg}`,
+									icon: "none",
+									duration: 3000
+								})
+								wx.switchTab({
+									url: '../../pages/my/my',
+									success: function(e) {
+										var page = getCurrentPages().pop(); //当前页面
+										if (page == undefined || page == null) return;
+										page.onLoad();
+								
 									}
-								}
-							});
+								})
+							}
 						})
 						.catch((err) => {
 							log(err)
@@ -503,11 +468,7 @@
 						icon: "none"
 					});
 				}
-
-
-
 			},
-
 			//获取申请店铺状态信息
 			getMerchants() {
 				console.log("获取申请店铺状态信息")
@@ -517,59 +478,24 @@
 				}
 				listing(getClient, data)
 					.then((res) => {
-						log(res)
-
 						//这里查询
 						this.ApproveStatus = res.data.data.approveStatus
-						log(this.ApproveStatus)
 						this.StoreInfo = res.data.data
-						let dataList = res.data.data.urlList
-						let temp_1 = {
-							name: "me_2",
-							title: "水果陈列照片",
-							url: ''
-						}
-						let temp_2 = {
-							name: "me_3",
-							title: "卸货区",
-							url: ''
-						}
-						let temp_3 = {
-							name: "me_4",
-							title: "工商营业执照",
-							url: ''
-						}
-						if (dataList.length===1) {
-							dataList.push(temp_1,temp_2,temp_3)
-						}
-						if (dataList.length===2) {
-							dataList.push(temp_2,temp_3)
-						}
-						if (dataList.length===3) {
-							dataList.push(temp_3)
-						}
-						this.urlList = dataList
+						let ulist = res.data.data.urlList
+						let tempList = []
+						ulist.sort((a, b) => {
+							return a.name.replace(/[^0-9]/ig, "") - b.name.replace(/[^0-9]/ig, "")
+						})
+						this.urlList = ulist
 						this.Address1 = res.data.data.address
-						log(res.data.data)
-
 						//根据id获取地址，地址已经获取到
 						let addThree = this.getAddressById(this.StoreInfo.address)
-						log(addThree)
 						//拿到第三级，根据第三级的pid就是第二级的id，根据第二级的pid就是第一级的id
 						let addTwo = this.getAddressById(addThree.pId)
 						let addOne = this.getAddressById(addTwo.pId)
-
-						// console.log("addThree===",addThree.name)
-						// console.log("addTwo===",addTwo.name)
-						// console.log("addOne===",addOne.name)
+						
 						this.textAddress = addOne.name + "/" + addTwo.name + "/" + addThree.name;
-						// this.textAddress = '测试';
-						// this.idAddress = this.textAddress
-
 						this.StoreInfo.address = this.textAddress
-						log(this.textAddress)
-						log('查询')
-						//this.text1 = addInfo.name
 
 					})
 					.catch((err) => {
@@ -582,7 +508,6 @@
 				this.postAddressDatas()
 				this.getMerchants()
 				log(setdata)
-				console.log('refresh');
 				setTimeout(function() {
 					uni.stopPullDownRefresh();
 				}, 1000);
@@ -705,17 +630,16 @@
 	.container {
 		padding: 0rpx 0 250rpx 0;
 	}
-	
-	
+
+
 
 	.imgUplod {
 		width: 300rpx;
 		height: 200rpx;
-		background: #f5f5f5;
 		max-width: 300rpx;
 		max-height: 200rpx;
-		border-radius: 4rpx;
-	
+		border-radius: 16rpx;
+		border: 1px solid #f5f5f5;
 	}
 
 	.tui-list-title1 {
@@ -931,7 +855,14 @@
 		width: 50%;
 		text-align: center;
 		margin: 10rpx 0;
+		position: relative;
 
+	}
+	
+	.del-img{
+		position: absolute;
+		right: 14rpx;
+		top: -16rpx;
 	}
 
 	.tui-order-text,
