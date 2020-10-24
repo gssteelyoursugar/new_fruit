@@ -126,7 +126,32 @@
 				//end
 				urlListFlag: [false, false, false, false], //对应下面urlList的四张图片状态，修改下面那个index的图片就设置当前对应的index为true
 				urlList: [],
-				
+				checkList: [
+					{
+						id: "",
+						"title": "门头照片",
+						"name": "me_1",
+						"url": ""
+					},
+					{
+						id: "",
+						"title": "水果陈列照片",
+						"name": "me_2",
+						"url": ""
+					},
+					{
+						id: "",
+						"title": "卸货区",
+						"name": "me_3",
+						"url": ""
+					},
+					{
+						id: "",
+						"title": "工商营业执照",
+						"name": "me_4",
+						"url": ""
+					}
+				],
 				imgName: ['门头照', '水果陈列照', '卸货区', '工商营业执照'],
 				imgDataLi: [{
 						"title": "门头照片",
@@ -185,7 +210,7 @@
 				imgUrlData: '',
 				addressDetails: '请填写详细地址',
 				flag: false,
-				idList: ''
+				idList: []
 			}
 		},
 		methods: {
@@ -331,16 +356,15 @@
 				}
 				return null
 			},
-
-
 			delImg(index) {
 				let list = this.urlList
-				let idList = []
+				let idList = this.idList
 				list[index].url = ''
 				idList.push(list[index].id)
 				this.urlList = list
 				this.urlListFlag[index] = false
-				this.idList = idList.join(",")
+				this.idList =idList
+				console.log(this.idList)
 			},
 
 			//上传文件
@@ -418,16 +442,18 @@
 						type: 1,
 						addressDetails: e.detail.value.addressDetails,
 						fileUrls: JSON.stringify(changeImg), //这个地方不要传json数组，要把json数组转字符串，用JSON.stringify能转为字符串json数组，这样后台才能接收
-						delFileIds: this.idList
+						delFileIds: this.idList.join(',')
 					}
-					//判断用户是否点击上传图片，是否要传fileUrls，delFileIds,flase不传值
-					if (this.flag == false) {
-						delete data.fileUrls
-						delete data.delFileIds
-						log('没有上传图片')
-					} else if (this.flag == true) {
-						log('点击了上传图片')
-					}
+					console.log(data)
+					// return 
+					// //判断用户是否点击上传图片，是否要传fileUrls，delFileIds,flase不传值
+					// if (this.flag == false) {
+					// 	delete data.fileUrls
+					// 	delete data.delFileIds
+					// 	log('没有上传图片')
+					// } else if (this.flag == true) {
+					// 	log('点击了上传图片')
+					// }
 
 					log(data)
 					publicing(postupdateClient, data)
@@ -482,11 +508,20 @@
 						this.ApproveStatus = res.data.data.approveStatus
 						this.StoreInfo = res.data.data
 						let ulist = res.data.data.urlList
+						let clist = this.checkList
 						let tempList = []
-						ulist.sort((a, b) => {
-							return a.name.replace(/[^0-9]/ig, "") - b.name.replace(/[^0-9]/ig, "")
+						ulist.forEach((item,index)=>{
+							clist.forEach((itm,idx)=>{
+								if (item.name === itm.name) {
+									itm.url = item.url
+									itm.id = item.id
+								}
+							})
 						})
-						this.urlList = ulist
+						clist.sort((a,b)=>{
+							return a.name.replace(/[^0-9]/ig,"") - b.name.replace(/[^0-9]/ig,"")
+						})
+						this.urlList = clist
 						this.Address1 = res.data.data.address
 						//根据id获取地址，地址已经获取到
 						let addThree = this.getAddressById(this.StoreInfo.address)

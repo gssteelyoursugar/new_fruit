@@ -97,7 +97,7 @@ var components = {
     return __webpack_require__.e(/*! import() | components/tui-icon/tui-icon */ "components/tui-icon/tui-icon").then(__webpack_require__.bind(null, /*! @/components/tui-icon/tui-icon.vue */ 389))
   },
   tuiDatetime: function() {
-    return __webpack_require__.e(/*! import() | components/tui-datetime/tui-datetime */ "components/tui-datetime/tui-datetime").then(__webpack_require__.bind(null, /*! @/components/tui-datetime/tui-datetime.vue */ 520))
+    return __webpack_require__.e(/*! import() | components/tui-datetime/tui-datetime */ "components/tui-datetime/tui-datetime").then(__webpack_require__.bind(null, /*! @/components/tui-datetime/tui-datetime.vue */ 513))
   }
 }
 var render = function() {

@@ -160,6 +160,32 @@
 						url: '../../static/images/B@2x.png'
 					}
 				],
+				checkList: [
+					{
+						id: "",
+						"title": "门头照片",
+						"name": "me_1",
+						"url": ""
+					},
+					{
+						id: "",
+						"title": "水果陈列照片",
+						"name": "me_2",
+						"url": ""
+					},
+					{
+						id: "",
+						"title": "卸货区",
+						"name": "me_3",
+						"url": ""
+					},
+					{
+						id: "",
+						"title": "工商营业执照",
+						"name": "me_4",
+						"url": ""
+					}
+				],
 				urlList: [],
 				storeName: '请填写店铺名',
 				merchantsName: '填写姓名',
@@ -340,26 +366,29 @@
 						this.approveStatus = res.data.data.approveStatus
 						// log(this.ApproveStatus)
 						this.StoreInfo = res.data.data
-						let ulist= res.data.data.urlList
+						let ulist = res.data.data.urlList
+						let clist = this.checkList
 						let tempList = []
-						ulist.sort((a,b)=>{
+						
+						ulist.forEach((item,index)=>{
+							clist.forEach((itm,idx)=>{
+								if (item.name === itm.name) {
+									itm.url = item.url
+									itm.id = item.id
+								}
+							})
+						})
+						console.log("tempList",tempList)
+						
+						clist.sort((a,b)=>{
 							return a.name.replace(/[^0-9]/ig,"") - b.name.replace(/[^0-9]/ig,"")
 						})
-						this.urlList = ulist
-						//根据id获取地址，地址已经获取到
+						this.urlList = clist
 						let addThree = this.getAddressById(this.StoreInfo.address)
-						// log(addThree)
-						//拿到第三级，根据第三级的pid就是第二级的id，根据第二级的pid就是第一级的id
 						let addTwo = this.getAddressById(addThree.pId)
 						let addOne = this.getAddressById(addTwo.pId)
-						// console.log("addThree===", addThree.name)
-						// console.log("addTwo===", addTwo.name)
-						// console.log("addOne===", addOne.name)
 						this.textAddress = addOne.name + "/" + addTwo.name + "/" + addThree.name;
-						// log(this.textAddress)
 						this.StoreInfo.address = this.textAddress
-						//this.text1 = addInfo.name
-
 					})
 					.catch((err) => {
 						log(err)
@@ -461,6 +490,9 @@
 		left: 0;
 		right: 0;
 		z-index: 999;
+		background: #f7f7f7;
+		border: none;
+
 	}
 	
 	.no-pass {

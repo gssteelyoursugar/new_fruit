@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiListCell: function() {
-    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 452))
+    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 445))
   },
   tuiIcon: function() {
     return __webpack_require__.e(/*! import() | components/tui-icon/tui-icon */ "components/tui-icon/tui-icon").then(__webpack_require__.bind(null, /*! @/components/tui-icon/tui-icon.vue */ 389))
@@ -332,14 +332,39 @@ var _console = console,log = _console.log;var cityData = __webpack_require__(/*!
       textAddress: '', Address1: '', //更新店铺地址
       //end
       urlListFlag: [false, false, false, false], //对应下面urlList的四张图片状态，修改下面那个index的图片就设置当前对应的index为true
-      urlList: [], imgName: ['门头照', '水果陈列照', '卸货区', '工商营业执照'], imgDataLi: [{ "title": "门头照片", "name": "me_1", "url": "" }, { "title": "水果陈列照片", "name": "me_2", "url": "" }, { "title": "卸货区", "name": "me_3", "url": "" }, { "title": "工商营业执照", "name": "me_4", "url": "" }], imgUrlData0: '../../static/images/B@2x.png', imgUrlData1: '../../static/images/B@2x.png', imgUrlData2: '../../static/images/B@2x.png', imgUrlData3: '../../static/images/B@2x.png', updataImg0: '', updataImg1: '', updataImg2: '', updataImg3: '', imagesList: [{ url: '../../static/images/B@2x.png' }, { url: '../../static/images/B@2x.png' }, { url: '../../static/images/B@2x.png' }, { url: '../../static/images/B@2x.png' }], storeName: '请填写店铺名', merchantsName: '填写姓名', phone: '请输入收货人手机号码', address: '南宁', //地址
+      urlList: [], checkList: [{ id: "", "title": "门头照片", "name": "me_1", "url": "" }, { id: "", "title": "水果陈列照片", "name": "me_2", "url": "" }, { id: "", "title": "卸货区", "name": "me_3", "url": "" }, { id: "", "title": "工商营业执照", "name": "me_4", "url": "" }], imgName: ['门头照', '水果陈列照', '卸货区', '工商营业执照'], imgDataLi: [{ "title": "门头照片", "name": "me_1", "url": "" }, { "title": "水果陈列照片", "name": "me_2", "url": "" }, { "title": "卸货区", "name": "me_3", "url": "" }, { "title": "工商营业执照", "name": "me_4", "url": "" }], imgUrlData0: '../../static/images/B@2x.png', imgUrlData1: '../../static/images/B@2x.png', imgUrlData2: '../../static/images/B@2x.png', imgUrlData3: '../../static/images/B@2x.png', updataImg0: '', updataImg1: '', updataImg2: '', updataImg3: '', imagesList: [{ url: '../../static/images/B@2x.png' }, { url: '../../static/images/B@2x.png' }, { url: '../../static/images/B@2x.png' }, { url: '../../static/images/B@2x.png' }],
+
+
+      storeName: '请填写店铺名',
+      merchantsName: '填写姓名',
+      phone: '请输入收货人手机号码',
+      address: '南宁', //地址
       serviceNumber: '', //客服专员
       files: [], //最多上传9张图片
-      imageList: [], category: 'image', ctx: {}, StoreInfo: {}, //店铺信息
-      cartIds: [], imgUrlData: '', addressDetails: '请填写详细地址', flag: false, idList: '' };}, methods: { //地址选择弹出
-    picker: function picker(e) {console.log("pick=============", e); //获取选中的三级信息
+      imageList: [],
+      category: 'image',
+      ctx: {},
+      StoreInfo: {}, //店铺信息
+      cartIds: [],
+      imgUrlData: '',
+      addressDetails: '请填写详细地址',
+      flag: false,
+      idList: [] };
+
+  },
+  methods: {
+
+    //地址选择弹出
+
+    picker: function picker(e) {
+      console.log("pick=============", e);
+
+      //获取选中的三级信息
       var value = e.detail.value; //这个是三级的picker分别选中的下标，value=[].length = 3,第一个是一级，第二个是二级。。。
-      var one = this.addressOne[value[0]];var two = this.addressTwo[value[1]];var three = this.addressThree[value[2]];this.text1 = one.name + " " + two.name + " " + three.name;
+      var one = this.addressOne[value[0]];
+      var two = this.addressTwo[value[1]];
+      var three = this.addressThree[value[2]];
+      this.text1 = one.name + " " + two.name + " " + three.name;
 
       var addThree = this.getAddressById(three.id);
       log(three);
@@ -470,16 +495,15 @@ var _console = console,log = _console.log;var cityData = __webpack_require__(/*!
       }
       return null;
     },
-
-
     delImg: function delImg(index) {
       var list = this.urlList;
-      var idList = [];
+      var idList = this.idList;
       list[index].url = '';
       idList.push(list[index].id);
       this.urlList = list;
       this.urlListFlag[index] = false;
-      this.idList = idList.join(",");
+      this.idList = idList;
+      console.log(this.idList);
     },
 
     //上传文件
@@ -557,16 +581,18 @@ var _console = console,log = _console.log;var cityData = __webpack_require__(/*!
           type: 1,
           addressDetails: e.detail.value.addressDetails,
           fileUrls: JSON.stringify(changeImg), //这个地方不要传json数组，要把json数组转字符串，用JSON.stringify能转为字符串json数组，这样后台才能接收
-          delFileIds: this.idList };
+          delFileIds: this.idList.join(',') };
 
-        //判断用户是否点击上传图片，是否要传fileUrls，delFileIds,flase不传值
-        if (this.flag == false) {
-          delete _data.fileUrls;
-          delete _data.delFileIds;
-          log('没有上传图片');
-        } else if (this.flag == true) {
-          log('点击了上传图片');
-        }
+        console.log(_data);
+        // return 
+        // //判断用户是否点击上传图片，是否要传fileUrls，delFileIds,flase不传值
+        // if (this.flag == false) {
+        // 	delete data.fileUrls
+        // 	delete data.delFileIds
+        // 	log('没有上传图片')
+        // } else if (this.flag == true) {
+        // 	log('点击了上传图片')
+        // }
 
         log(_data);
         (0, _api.publicing)(_request.postupdateClient, _data).
@@ -621,11 +647,20 @@ var _console = console,log = _console.log;var cityData = __webpack_require__(/*!
         _this2.ApproveStatus = res.data.data.approveStatus;
         _this2.StoreInfo = res.data.data;
         var ulist = res.data.data.urlList;
+        var clist = _this2.checkList;
         var tempList = [];
-        ulist.sort(function (a, b) {
+        ulist.forEach(function (item, index) {
+          clist.forEach(function (itm, idx) {
+            if (item.name === itm.name) {
+              itm.url = item.url;
+              itm.id = item.id;
+            }
+          });
+        });
+        clist.sort(function (a, b) {
           return a.name.replace(/[^0-9]/ig, "") - b.name.replace(/[^0-9]/ig, "");
         });
-        _this2.urlList = ulist;
+        _this2.urlList = clist;
         _this2.Address1 = res.data.data.address;
         //根据id获取地址，地址已经获取到
         var addThree = _this2.getAddressById(_this2.StoreInfo.address);

@@ -97,28 +97,28 @@ var components = {
     return __webpack_require__.e(/*! import() | components/tui-icon/tui-icon */ "components/tui-icon/tui-icon").then(__webpack_require__.bind(null, /*! @/components/tui-icon/tui-icon.vue */ 389))
   },
   tuiTabs: function() {
-    return __webpack_require__.e(/*! import() | components/tui-tabs/tui-tabs */ "components/tui-tabs/tui-tabs").then(__webpack_require__.bind(null, /*! @/components/tui-tabs/tui-tabs.vue */ 480))
+    return __webpack_require__.e(/*! import() | components/tui-tabs/tui-tabs */ "components/tui-tabs/tui-tabs").then(__webpack_require__.bind(null, /*! @/components/tui-tabs/tui-tabs.vue */ 473))
   },
   tuiTag: function() {
-    return __webpack_require__.e(/*! import() | components/tui-tag/tui-tag */ "components/tui-tag/tui-tag").then(__webpack_require__.bind(null, /*! @/components/tui-tag/tui-tag.vue */ 499))
+    return __webpack_require__.e(/*! import() | components/tui-tag/tui-tag */ "components/tui-tag/tui-tag").then(__webpack_require__.bind(null, /*! @/components/tui-tag/tui-tag.vue */ 492))
   },
   tuiRate: function() {
-    return __webpack_require__.e(/*! import() | components/tui-rate/tui-rate */ "components/tui-rate/tui-rate").then(__webpack_require__.bind(null, /*! @/components/tui-rate/tui-rate.vue */ 544))
+    return __webpack_require__.e(/*! import() | components/tui-rate/tui-rate */ "components/tui-rate/tui-rate").then(__webpack_require__.bind(null, /*! @/components/tui-rate/tui-rate.vue */ 537))
   },
   jyfParser: function() {
-    return Promise.all(/*! import() | components/jyf-parser/jyf-parser */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/jyf-parser/jyf-parser")]).then(__webpack_require__.bind(null, /*! @/components/jyf-parser/jyf-parser.vue */ 534))
+    return Promise.all(/*! import() | components/jyf-parser/jyf-parser */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/jyf-parser/jyf-parser")]).then(__webpack_require__.bind(null, /*! @/components/jyf-parser/jyf-parser.vue */ 527))
   },
   tuiNomore: function() {
     return __webpack_require__.e(/*! import() | components/tui-nomore/tui-nomore */ "components/tui-nomore/tui-nomore").then(__webpack_require__.bind(null, /*! @/components/tui-nomore/tui-nomore.vue */ 403))
   },
   tuiButton: function() {
-    return __webpack_require__.e(/*! import() | components/tui-button/tui-button */ "components/tui-button/tui-button").then(__webpack_require__.bind(null, /*! @/components/tui-button/tui-button.vue */ 445))
+    return __webpack_require__.e(/*! import() | components/tui-button/tui-button */ "components/tui-button/tui-button").then(__webpack_require__.bind(null, /*! @/components/tui-button/tui-button.vue */ 438))
   },
   wybPopup: function() {
-    return __webpack_require__.e(/*! import() | components/wyb-popup/wyb-popup */ "components/wyb-popup/wyb-popup").then(__webpack_require__.bind(null, /*! @/components/wyb-popup/wyb-popup.vue */ 551))
+    return __webpack_require__.e(/*! import() | components/wyb-popup/wyb-popup */ "components/wyb-popup/wyb-popup").then(__webpack_require__.bind(null, /*! @/components/wyb-popup/wyb-popup.vue */ 544))
   },
   tuiNumberbox: function() {
-    return __webpack_require__.e(/*! import() | components/tui-numberbox/tui-numberbox */ "components/tui-numberbox/tui-numberbox").then(__webpack_require__.bind(null, /*! @/components/tui-numberbox/tui-numberbox.vue */ 438))
+    return __webpack_require__.e(/*! import() | components/tui-numberbox/tui-numberbox */ "components/tui-numberbox/tui-numberbox").then(__webpack_require__.bind(null, /*! @/components/tui-numberbox/tui-numberbox.vue */ 431))
   }
 }
 var render = function() {

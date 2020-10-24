@@ -1287,7 +1287,7 @@
 		right: 0;
 		left: 0;
 		bottom: 0;
-		background: rgba(0,0,0,.4);
+		background: rgba(255, 255, 255, .5);
 		display: flex;
 		align-items: center;
 		text-align: center;
@@ -1296,7 +1296,7 @@
 	}
 	
 	.item-text {
-		background: rgba(0,0,0,.3);
+		background: rgba(0,0,0,.6);
 		color: #fff;
 		font-size: 28rpx;
 		padding: 6rpx 16rpx;

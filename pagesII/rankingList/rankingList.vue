@@ -183,6 +183,7 @@
 		publicing
 	} from '../../api/api.js'
 	//请求地址
+	let setdata = uni.getStorageSync('usermen')//Token
 	import {
 		postOrder,
 		imgurl,

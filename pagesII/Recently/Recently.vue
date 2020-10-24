@@ -302,7 +302,6 @@
 						uni.showToast({
 							title: `${err}`
 						});
-
 						log(err);
 					});
 			},

@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiRate: function() {
-    return __webpack_require__.e(/*! import() | components/tui-rate/tui-rate */ "components/tui-rate/tui-rate").then(__webpack_require__.bind(null, /*! @/components/tui-rate/tui-rate.vue */ 544))
+    return __webpack_require__.e(/*! import() | components/tui-rate/tui-rate */ "components/tui-rate/tui-rate").then(__webpack_require__.bind(null, /*! @/components/tui-rate/tui-rate.vue */ 537))
   }
 }
 var render = function() {
