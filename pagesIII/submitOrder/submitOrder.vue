@@ -275,28 +275,27 @@
 						log(res)
 						let orderNumber = res.data.data.orderNumber
 						this.payUrl = res.data.data.payUrl
-						
-						uni.showModal({
-							title: '提示',
-							content: '确认支付',
-							success: (res) => {
-								if (res.confirm) {
-									console.log('用户点击确定');
-									that.clip() 
-									that.btnPay(orderNumber)
-								} else if (res.cancel) {
-									uni.showToast({
-										title: '订单已取消',
-										icon: 'none',
-										duration: 2000
-									})
-									// uni.reLaunch({
-									// 	url: '../../pagesII/myOrder/myOrder'
-									// })
-									return
-								}
-							}
-						});
+						that.clip()
+						// that.btnPay(orderNumber)
+						// uni.showModal({
+						// 	title: '提示',
+						// 	content: '确认支付',
+						// 	success: (res) => {
+						// 		if (res.confirm) {
+						// 			console.log('用户点击确定');
+						// 		} else if (res.cancel) {
+						// 			uni.showToast({
+						// 				title: '订单已取消',
+						// 				icon: 'none',
+						// 				duration: 2000
+						// 			})
+						// 			// uni.reLaunch({
+						// 			// 	url: '../../pagesII/myOrder/myOrder'
+						// 			// })
+						// 			return
+						// 		}
+						// 	}
+						// });
 						// 	uni.requestPayment({
 						// 	        timeStamp: data.timeStamp,
 						// 	        nonceStr: data.nonceStr,

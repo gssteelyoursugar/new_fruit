@@ -74,25 +74,17 @@
 						<view class="tui-order-btn">
 							<view class="tui-btn-ml" v-if="item.after_sale_status ==0 ||item.after_sale_status ==3 ">
 								<button  type="primary"  hover-class='none' class="icon-img3"  @tap="goAfterCancel(item.order_item_id,item.id)">取消申请</button>
-								
 							</view>
 							<view class="tui-btn-ml" v-if="item.after_sale_status ==5 ">
-					
 								<button  type="primary"  hover-class='none' class="icon-img3"   @tap="goAfter(item.order_item_id)">重新申请</button>
-					
-								
-					
-								
 							</view>
 							<view class="tui-btn-ml" v-if="item.after_sale_status ==0||item.after_sale_status ==1||item.after_sale_status ==3||item.after_sale_status ==5 ">
 								<button  type="primary"  hover-class='none' class="icon-img3"  @tap="goAfterDetail(item.id)">申请详情</button>
 							</view>
 							<view class="tui-btn-ml" v-if="item.after_sale_status ==11 ">
 								<button  type="primary"  hover-class='none' class="icon-img3" @tap="goAfterSaleDetail(item.id)">售后详情</button>
-								
 							</view>
 							<view class="tui-btn-ml" v-if="item.after_sale_status ==3 ">
-								
 								<button type="primary"   class="icon-img3" @tap="goAfterConfirm(item.id)" >去确认</button>
 							</view>
 						</view>

@@ -10444,18 +10444,7 @@ module.exports = logins;
 
 /***/ }),
 
-/***/ 55:
-/*!**********************************************************!*\
-  !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
-  \**********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! regenerator-runtime */ 56);
-
-/***/ }),
-
-/***/ 552:
+/***/ 540:
 /*!************************************************************************************!*\
   !*** /Users/gsheng/Downloads/new_fruit/components/jyf-parser/libs/MpHtmlParser.js ***!
   \************************************************************************************/
@@ -10469,9 +10458,9 @@ module.exports = __webpack_require__(/*! regenerator-runtime */ 56);
  * @author JinYufeng
  * @listens MIT
  */
-var cfg = __webpack_require__(/*! ./config.js */ 553),
+var cfg = __webpack_require__(/*! ./config.js */ 541),
 blankChar = cfg.blankChar,
-CssHandler = __webpack_require__(/*! ./CssHandler.js */ 554),
+CssHandler = __webpack_require__(/*! ./CssHandler.js */ 542),
 windowWidth = uni.getSystemInfoSync().windowWidth;
 var emoji;
 
@@ -11001,7 +10990,7 @@ module.exports = MpHtmlParser;
 
 /***/ }),
 
-/***/ 553:
+/***/ 541:
 /*!******************************************************************************!*\
   !*** /Users/gsheng/Downloads/new_fruit/components/jyf-parser/libs/config.js ***!
   \******************************************************************************/
@@ -11091,14 +11080,14 @@ module.exports = cfg;
 
 /***/ }),
 
-/***/ 554:
+/***/ 542:
 /*!**********************************************************************************!*\
   !*** /Users/gsheng/Downloads/new_fruit/components/jyf-parser/libs/CssHandler.js ***!
   \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var cfg = __webpack_require__(/*! ./config.js */ 553),
+var cfg = __webpack_require__(/*! ./config.js */ 541),
 isLetter = function isLetter(c) {return c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z';};
 
 function CssHandler(tagStyle) {
@@ -11195,6 +11184,17 @@ parser.prototype.Content = function () {
   this.list = [];
   this.state = this.Space;
 };
+
+/***/ }),
+
+/***/ 55:
+/*!**********************************************************!*\
+  !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! regenerator-runtime */ 56);
 
 /***/ }),
 

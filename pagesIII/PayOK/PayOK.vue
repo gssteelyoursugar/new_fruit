@@ -24,7 +24,7 @@
 		methods: {
 			back(){
 				uni.reLaunch({
-					url:'../../pagesII/myOrder/myOrder'
+					url:'../../pagesII/myOrder/myOrder?index=0'
 				})
 			}
 

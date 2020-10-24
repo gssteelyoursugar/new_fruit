@@ -156,7 +156,7 @@ var _default =
   methods: {
     back: function back() {
       uni.reLaunch({
-        url: '../../pagesII/myOrder/myOrder' });
+        url: '../../pagesII/myOrder/myOrder?index=0' });
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

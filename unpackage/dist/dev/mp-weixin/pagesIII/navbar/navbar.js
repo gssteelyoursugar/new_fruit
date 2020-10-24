@@ -96,7 +96,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiListCell: function() {
-    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 465))
+    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 453))
   }
 }
 var render = function() {
@@ -137,14 +137,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
-
-
-
-
-
-
-
-
 
 
 
@@ -433,14 +425,6 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 // 缓存最多页数
 var MAX_CACHE_PAGEINDEX = 3; // 缓存页签数量
 var MAX_CACHE_PAGE = 3;var newsData = [];var setdata = uni.getStorageSync('usermen');var _console = console,log = _console.log;var thorui = __webpack_require__(/*! @/common/tui-clipboard/tui-clipboard.js */ 82);var _default = { data: function data() {return { isIos: false, newsList: [], cacheTab: [], tabIndex: 0, tabBars: [{ name: '全部' }, { name: '待确认' }], count: 0, currentTab: 0, pageIndex: 1, loadding: false, pullUpOn: true, scrollTop: 0, AfterSaleData: [], //列表数据
@@ -455,8 +439,16 @@ var MAX_CACHE_PAGE = 3;var newsData = [];var setdata = uni.getStorageSync('userm
     clipboard: function clipboard(event) {console.log(event);var data = event;thorui.getClipboardData(data, function (res) {}, event);}, // 显示
     init: function init() {this.modaishow = true;}, // 取消
     messcancel: function messcancel() {this.modaishow = false;}, //申请详情
-    goAfterDetail: function goAfterDetail(id) {uni.navigateTo({ url: '../../pagesIII/afterDetails/afterDetails?id=' + id });}, //售后详情
-    goAfterSaleDetail: function goAfterSaleDetail(id) {uni.navigateTo({ url: '../../pagesIII/AfterSaleDetails/AfterSaleDetails?id=' + id });}, //取消申请
+    goAfterDetail: function goAfterDetail(id) {uni.navigateTo({ url: '../../pagesIII/afterDetails/afterDetails?id=' + id });
+
+    },
+    //售后详情
+    goAfterSaleDetail: function goAfterSaleDetail(id) {
+      uni.navigateTo({
+        url: '../../pagesIII/AfterSaleDetails/AfterSaleDetails?id=' + id });
+
+    },
+    //取消申请
     goAfterCancel: function goAfterCancel(order_id, id) {
       this.init();
       this.itemid = order_id;

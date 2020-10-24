@@ -94,13 +94,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiListCell: function() {
-    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 465))
+    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 453))
   },
   tuiButton: function() {
-    return __webpack_require__.e(/*! import() | components/tui-button/tui-button */ "components/tui-button/tui-button").then(__webpack_require__.bind(null, /*! @/components/tui-button/tui-button.vue */ 458))
+    return __webpack_require__.e(/*! import() | components/tui-button/tui-button */ "components/tui-button/tui-button").then(__webpack_require__.bind(null, /*! @/components/tui-button/tui-button.vue */ 446))
   },
   wybPopup: function() {
-    return __webpack_require__.e(/*! import() | components/wyb-popup/wyb-popup */ "components/wyb-popup/wyb-popup").then(__webpack_require__.bind(null, /*! @/components/wyb-popup/wyb-popup.vue */ 564))
+    return __webpack_require__.e(/*! import() | components/wyb-popup/wyb-popup */ "components/wyb-popup/wyb-popup").then(__webpack_require__.bind(null, /*! @/components/wyb-popup/wyb-popup.vue */ 552))
   }
 }
 var render = function() {
@@ -417,28 +417,27 @@ var _default = { components: {}, data: function data() {return { payUrl: '', isT
         log(res);
         var orderNumber = res.data.data.orderNumber;
         _this3.payUrl = res.data.data.payUrl;
-
-        uni.showModal({
-          title: '提示',
-          content: '确认支付',
-          success: function success(res) {
-            if (res.confirm) {
-              console.log('用户点击确定');
-              that.clip();
-              that.btnPay(orderNumber);
-            } else if (res.cancel) {
-              uni.showToast({
-                title: '订单已取消',
-                icon: 'none',
-                duration: 2000 });
-
-              // uni.reLaunch({
-              // 	url: '../../pagesII/myOrder/myOrder'
-              // })
-              return;
-            }
-          } });
-
+        that.clip();
+        // that.btnPay(orderNumber)
+        // uni.showModal({
+        // 	title: '提示',
+        // 	content: '确认支付',
+        // 	success: (res) => {
+        // 		if (res.confirm) {
+        // 			console.log('用户点击确定');
+        // 		} else if (res.cancel) {
+        // 			uni.showToast({
+        // 				title: '订单已取消',
+        // 				icon: 'none',
+        // 				duration: 2000
+        // 			})
+        // 			// uni.reLaunch({
+        // 			// 	url: '../../pagesII/myOrder/myOrder'
+        // 			// })
+        // 			return
+        // 		}
+        // 	}
+        // });
         // 	uni.requestPayment({
         // 	        timeStamp: data.timeStamp,
         // 	        nonceStr: data.nonceStr,

@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiListCell: function() {
-    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 465))
+    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 453))
   }
 }
 var render = function() {
@@ -692,21 +692,7 @@ var _console = console,log = _console.log;var logins = __webpack_require__(/*! .
 
       }
     },
-    //跳转到待付款
-    ToBePaid: function ToBePaid() {
-      if (!this.wxlogin) {
-        uni.showToast({
-          title: "请先登录",
-          icon: 'none' });
 
-
-      } else {
-        uni.navigateTo({
-          url: '../../pagesII/myOrder/myOrder?index=1' });
-
-      }
-
-    },
     //跳转到待发货
     ToBeDelivered: function ToBeDelivered() {
       if (!this.wxlogin) {
@@ -717,7 +703,7 @@ var _console = console,log = _console.log;var logins = __webpack_require__(/*! .
 
       } else {
         uni.navigateTo({
-          url: '../../pagesII/myOrder/myOrder?index=2' });
+          url: '../../pagesII/myOrder/myOrder?index=1' });
 
       }
     },
@@ -731,11 +717,25 @@ var _console = console,log = _console.log;var logins = __webpack_require__(/*! .
 
       } else {
         uni.navigateTo({
-          url: '../../pagesII/myOrder/myOrder?index=3' });
+          url: '../../pagesII/myOrder/myOrder?index=2' });
 
       }
     },
+    //跳转到已完成
+    ToBePaid: function ToBePaid() {
+      if (!this.wxlogin) {
+        uni.showToast({
+          title: "请先登录",
+          icon: 'none' });
 
+
+      } else {
+        uni.navigateTo({
+          url: '../../pagesII/myOrder/myOrder?index=3' });
+
+      }
+
+    },
 
     // getWxdata(){
     // 	uni.request({

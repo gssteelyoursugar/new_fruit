@@ -55,9 +55,7 @@
         "orderDetail/orderDetail",
         "navbar/navbar",
         "pay/pay",
-        "storeReturn/storeReturn",
-        "serviceAgreement/serviceAgreement",
-        "privacyPolicy/privacyPolicy"
+        "serviceAgreement/serviceAgreement"
       ]
     }
   ],

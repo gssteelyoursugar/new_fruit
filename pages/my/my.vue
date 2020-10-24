@@ -73,13 +73,6 @@
 					</view>
 				</tui-list-cell>
 				<view class="tui-order-list tui-order-list-wrap">
-					<view class="tui-order-item" @tap="ToBePaid">
-						<view class="tui-icon-box">
-							<image src="/static/images/daifukuan@3x.png" class="tui-order-icon"></image>
-							<!-- <view class="tui-badge tui-badge-red">1</view> -->
-						</view>
-						<view class="tui-order-text">待付款<text v-if="fukuanList !== ''&&fukuanList == 0">{{fukuanList}}</text></view>
-					</view>
 					<view class="tui-order-item" @tap="ToBeDelivered">
 						<view class="tui-icon-box">
 							<image src="/static/images/daifahuo@3x.png" class="tui-order-icon"></image>
@@ -92,6 +85,13 @@
 							<view class="tui-badge tui-badge-red" v-if="false">12</view>
 						</view>
 						<view class="tui-order-text">待收货<text v-if="shouhuoList !== ''&&shouhuoList!==0">{{shouhuoList}}</text></view>
+					</view>
+					<view class="tui-order-item" @tap="ToBePaid">
+						<view class="tui-icon-box">
+							<image src="/static/images/daifukuan@3x.png" class="tui-order-icon"></image>
+							<!-- <view class="tui-badge tui-badge-red">1</view> -->
+						</view>
+						<view class="tui-order-text">已完成<text v-if="fukuanList !== ''&&fukuanList == 0">{{fukuanList}}</text></view>
 					</view>
 					<view class="tui-order-item" @tap="gotoAfter">
 						<view class="tui-icon-box">
@@ -556,21 +556,7 @@
 					})
 				}
 			},
-			//跳转到待付款
-			ToBePaid() {
-				if (!this.wxlogin) {
-					uni.showToast({
-						title: "请先登录",
-						icon: 'none'
-					})
-
-				} else {
-					uni.navigateTo({
-						url: '../../pagesII/myOrder/myOrder?index=1'
-					})
-				}
-
-			},
+			
 			//跳转到待发货
 			ToBeDelivered() {
 				if (!this.wxlogin) {
@@ -581,7 +567,7 @@
 
 				} else {
 					uni.navigateTo({
-						url: '../../pagesII/myOrder/myOrder?index=2'
+						url: '../../pagesII/myOrder/myOrder?index=1'
 					})
 				}
 			},
@@ -595,11 +581,25 @@
 
 				} else {
 					uni.navigateTo({
-						url: '../../pagesII/myOrder/myOrder?index=3'
+						url: '../../pagesII/myOrder/myOrder?index=2'
 					})
 				}
 			},
-
+			//跳转到已完成
+			ToBePaid() {
+				if (!this.wxlogin) {
+					uni.showToast({
+						title: "请先登录",
+						icon: 'none'
+					})
+			
+				} else {
+					uni.navigateTo({
+						url: '../../pagesII/myOrder/myOrder?index=3'
+					})
+				}
+			
+			},
 			
 			// getWxdata(){
 			// 	uni.request({

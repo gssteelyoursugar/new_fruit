@@ -123,10 +123,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiTag: function() {
-    return __webpack_require__.e(/*! import() | components/tui-tag/tui-tag */ "components/tui-tag/tui-tag").then(__webpack_require__.bind(null, /*! @/components/tui-tag/tui-tag.vue */ 512))
+    return __webpack_require__.e(/*! import() | components/tui-tag/tui-tag */ "components/tui-tag/tui-tag").then(__webpack_require__.bind(null, /*! @/components/tui-tag/tui-tag.vue */ 500))
   },
   tuiActionsheet: function() {
-    return __webpack_require__.e(/*! import() | components/tui-actionsheet/tui-actionsheet */ "components/tui-actionsheet/tui-actionsheet").then(__webpack_require__.bind(null, /*! @/components/tui-actionsheet/tui-actionsheet.vue */ 519))
+    return __webpack_require__.e(/*! import() | components/tui-actionsheet/tui-actionsheet */ "components/tui-actionsheet/tui-actionsheet").then(__webpack_require__.bind(null, /*! @/components/tui-actionsheet/tui-actionsheet.vue */ 507))
   }
 }
 var render = function() {
