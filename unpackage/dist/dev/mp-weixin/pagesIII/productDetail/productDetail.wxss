@@ -660,7 +660,7 @@ page {
 .tag-tit-pra {
 	position: absolute;
 	right: 0;
-	background-color: rgba(244, 244, 244, 1);
+	background-color: #ededed;
 	padding: 5rpx 20rpx 5rpx 20rpx;
 	border-radius: 10px 0 0 10px;
 	color: rgba(182, 182, 182, 1);

@@ -54,7 +54,10 @@
         "AfterSaleDetails/AfterSaleDetails",
         "orderDetail/orderDetail",
         "navbar/navbar",
-        "pay/pay"
+        "pay/pay",
+        "storeReturn/storeReturn",
+        "serviceAgreement/serviceAgreement",
+        "privacyPolicy/privacyPolicy"
       ]
     }
   ],

@@ -9995,7 +9995,7 @@ var errdata = {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.uploadFiles = exports.getMsgInfo = exports.getEvaluateList = exports.orderCount = exports.getBeConfirmed = exports.PostDataById = exports.postAfterCen = exports.posAfterDetails = exports.posAfterSaleList = exports.postCancelPay = exports.posAfterSale = exports.getAfterSaleData = exports.postConfirmOrder = exports.postDelOrders = exports.postCancelOrder = exports.getDetails = exports.postAgainOrder = exports.postSettle = exports.getMsg = exports.postCancelPraise = exports.getSubmitOrder = exports.postAddressList = exports.postupdateClient = exports.getClient = exports.getNewsAll = exports.postRecentlyDel = exports.getselectSuper = exports.getselectSeasonal = exports.getselectHot = exports.getselectImport = exports.getMyOrder = exports.postOrderPay = exports.getRecently = exports.postPraise = exports.postDelLike = exports.getLike = exports.postLike = exports.postUpOrder = exports.postDelOrder = exports.getCart = exports.postmyOrder = exports.postSaveStore = exports.getActivity = exports.wxloginurl = exports.imgurl = exports.postOrder = exports.url = exports.getAttribute = exports.getGoodsall = exports.postdelist = exports.getClassify = exports.postActivity = exports.getsearch = exports.loginis = exports.getIndex = void 0; // 公用地址
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.uploadFiles = exports.getAgreeInfo = exports.getAgreeList = exports.getMsgInfo = exports.getEvaluateList = exports.orderCount = exports.getBeConfirmed = exports.PostDataById = exports.postAfterCen = exports.posAfterDetails = exports.posAfterSaleList = exports.postCancelPay = exports.posAfterSale = exports.getAfterSaleData = exports.postConfirmOrder = exports.postDelOrders = exports.postCancelOrder = exports.getDetails = exports.postAgainOrder = exports.postSettle = exports.getMsg = exports.postCancelPraise = exports.getSubmitOrder = exports.postAddressList = exports.postupdateClient = exports.getClient = exports.getNewsAll = exports.postRecentlyDel = exports.getselectSuper = exports.getselectSeasonal = exports.getselectHot = exports.getselectImport = exports.getMyOrder = exports.postOrderPay = exports.getRecently = exports.postPraise = exports.postDelLike = exports.getLike = exports.postLike = exports.postUpOrder = exports.postDelOrder = exports.getCart = exports.postmyOrder = exports.postSaveStore = exports.getActivity = exports.wxloginurl = exports.imgurl = exports.postOrder = exports.url = exports.getAttribute = exports.getGoodsall = exports.postdelist = exports.getClassify = exports.postActivity = exports.getsearch = exports.loginis = exports.getIndex = void 0; // 公用地址
 
 
 //测试用
@@ -10197,8 +10197,16 @@ exports.getAfterSaleData = getAfterSaleData;var orderCount = "".concat(url, "api
 // 评价管理
 exports.orderCount = orderCount;var getEvaluateList = "".concat(url, "api/wx/evaluate/list");
 
+//获取协议列表
+exports.getEvaluateList = getEvaluateList;var getAgreeList = "".concat(url, "api/wx/ruleExplain/select");
+
+//获取协议详情
+exports.getAgreeList = getAgreeList;var getAgreeInfo = "".concat(url, "api/wx/ruleExplain/get");
+
 //导出请求地址
-exports.getEvaluateList = getEvaluateList;
+exports.getAgreeInfo = getAgreeInfo;
+
+
 
 
 
@@ -10344,7 +10352,110 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 532:
+/***/ 54:
+/*!********************************************************!*\
+  !*** /Users/gsheng/Downloads/new_fruit/login/login.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 55));
+
+
+var _api = __webpack_require__(/*! ../api/api.js */ 19);
+
+var _request = __webpack_require__(/*! ../api/request.js */ 21);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}var _console =
+console,log = _console.log;var
+
+logins = /*#__PURE__*/function () {
+  // 构造方法执行：必须是类已经实例化
+  function logins(wxuser) {_classCallCheck(this, logins);
+    this.wxuser = wxuser;
+    log(wxuser);
+  }
+
+  // 先获取发起请求的必须条件
+  _createClass(logins, [{ key: "listing", value: function () {var _listing = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var userdata, usermen;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
+
+                  this.wxlogin());case 2:userdata = _context.sent;
+                log(userdata);
+                // 请求接口：登录
+                _context.next = 6;return this.gologin(userdata);case 6:usermen = _context.sent;return _context.abrupt("return",
+                usermen);case 8:case "end":return _context.stop();}}}, _callee, this);}));function listing() {return _listing.apply(this, arguments);}return listing;}()
+
+
+    // 拿到用户头像，昵称，code
+  }, { key: "wxlogin", value: function wxlogin() {
+      var wxuser = this.wxuser;
+      return new Promise(function (resolve, reject) {
+        if (wxuser != undefined) {
+          wx.login({
+            success: function success(res) {
+              log(res);
+              var data = {
+                appid: 'wxb820c791e554616c',
+                secret: 'adb3d89546af6e74f2ccb8e16aba51ae',
+                nickName: wxuser.nickName,
+                avatarUrl: wxuser.avatarUrl,
+                code: res.code };
+
+              resolve(data);
+            },
+            fail: function fail(err) {
+              log(err);
+              reject('获取code失败');
+            } });
+
+        } else {
+          console.log('拒绝登录');
+          reject('FAIL');
+        }
+      });
+    }
+
+    // 请求接口：登录
+  }, { key: "gologin", value: function gologin(userdata) {
+      return new Promise(function (resolve, reject) {
+        (0, _api.publicing)(_request.wxloginurl, userdata).
+        then(function (res) {
+          log(res);
+          if (res.data.msg == 'success') {
+            // 存入本地
+            resolve('SUCCESS');
+            uni.setStorageSync('usermen', res.data.datas);
+          }
+        }).
+        catch(function (err) {
+          log(err);
+        });
+      });
+    }
+
+
+
+    // 获取用户信息和code
+  }]);return logins;}();
+
+
+// 模块
+module.exports = logins;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 55:
+/*!**********************************************************!*\
+  !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! regenerator-runtime */ 56);
+
+/***/ }),
+
+/***/ 552:
 /*!************************************************************************************!*\
   !*** /Users/gsheng/Downloads/new_fruit/components/jyf-parser/libs/MpHtmlParser.js ***!
   \************************************************************************************/
@@ -10358,9 +10469,9 @@ module.exports = g;
  * @author JinYufeng
  * @listens MIT
  */
-var cfg = __webpack_require__(/*! ./config.js */ 533),
+var cfg = __webpack_require__(/*! ./config.js */ 553),
 blankChar = cfg.blankChar,
-CssHandler = __webpack_require__(/*! ./CssHandler.js */ 534),
+CssHandler = __webpack_require__(/*! ./CssHandler.js */ 554),
 windowWidth = uni.getSystemInfoSync().windowWidth;
 var emoji;
 
@@ -10890,7 +11001,7 @@ module.exports = MpHtmlParser;
 
 /***/ }),
 
-/***/ 533:
+/***/ 553:
 /*!******************************************************************************!*\
   !*** /Users/gsheng/Downloads/new_fruit/components/jyf-parser/libs/config.js ***!
   \******************************************************************************/
@@ -10980,14 +11091,14 @@ module.exports = cfg;
 
 /***/ }),
 
-/***/ 534:
+/***/ 554:
 /*!**********************************************************************************!*\
   !*** /Users/gsheng/Downloads/new_fruit/components/jyf-parser/libs/CssHandler.js ***!
   \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var cfg = __webpack_require__(/*! ./config.js */ 533),
+var cfg = __webpack_require__(/*! ./config.js */ 553),
 isLetter = function isLetter(c) {return c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z';};
 
 function CssHandler(tagStyle) {
@@ -11084,109 +11195,6 @@ parser.prototype.Content = function () {
   this.list = [];
   this.state = this.Space;
 };
-
-/***/ }),
-
-/***/ 54:
-/*!********************************************************!*\
-  !*** /Users/gsheng/Downloads/new_fruit/login/login.js ***!
-  \********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 55));
-
-
-var _api = __webpack_require__(/*! ../api/api.js */ 19);
-
-var _request = __webpack_require__(/*! ../api/request.js */ 21);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}var _console =
-console,log = _console.log;var
-
-logins = /*#__PURE__*/function () {
-  // 构造方法执行：必须是类已经实例化
-  function logins(wxuser) {_classCallCheck(this, logins);
-    this.wxuser = wxuser;
-    log(wxuser);
-  }
-
-  // 先获取发起请求的必须条件
-  _createClass(logins, [{ key: "listing", value: function () {var _listing = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var userdata, usermen;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
-
-                  this.wxlogin());case 2:userdata = _context.sent;
-                log(userdata);
-                // 请求接口：登录
-                _context.next = 6;return this.gologin(userdata);case 6:usermen = _context.sent;return _context.abrupt("return",
-                usermen);case 8:case "end":return _context.stop();}}}, _callee, this);}));function listing() {return _listing.apply(this, arguments);}return listing;}()
-
-
-    // 拿到用户头像，昵称，code
-  }, { key: "wxlogin", value: function wxlogin() {
-      var wxuser = this.wxuser;
-      return new Promise(function (resolve, reject) {
-        if (wxuser != undefined) {
-          wx.login({
-            success: function success(res) {
-              log(res);
-              var data = {
-                appid: 'wxb820c791e554616c',
-                secret: 'adb3d89546af6e74f2ccb8e16aba51ae',
-                nickName: wxuser.nickName,
-                avatarUrl: wxuser.avatarUrl,
-                code: res.code };
-
-              resolve(data);
-            },
-            fail: function fail(err) {
-              log(err);
-              reject('获取code失败');
-            } });
-
-        } else {
-          console.log('拒绝登录');
-          reject('FAIL');
-        }
-      });
-    }
-
-    // 请求接口：登录
-  }, { key: "gologin", value: function gologin(userdata) {
-      return new Promise(function (resolve, reject) {
-        (0, _api.publicing)(_request.wxloginurl, userdata).
-        then(function (res) {
-          log(res);
-          if (res.data.msg == 'success') {
-            // 存入本地
-            resolve('SUCCESS');
-            uni.setStorageSync('usermen', res.data.datas);
-          }
-        }).
-        catch(function (err) {
-          log(err);
-        });
-      });
-    }
-
-
-
-    // 获取用户信息和code
-  }]);return logins;}();
-
-
-// 模块
-module.exports = logins;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
-
-/***/ 55:
-/*!**********************************************************!*\
-  !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
-  \**********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! regenerator-runtime */ 56);
 
 /***/ }),
 

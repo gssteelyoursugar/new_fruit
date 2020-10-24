@@ -54,7 +54,8 @@
         "AfterSaleDetails/AfterSaleDetails",
         "orderDetail/orderDetail",
         "navbar/navbar",
-        "pay/pay"
+        "pay/pay",
+        "serviceAgreement/serviceAgreement"
       ]
     }
   ],
@@ -106,6 +107,5 @@
       "desc": "已为您提供最近的服务信息"
     }
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap33.json"
+  "usingComponents": {}
 }

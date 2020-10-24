@@ -200,6 +200,12 @@ let orderCount = `${url}api/wx/goods/totalGoods`
 // 评价管理
 let getEvaluateList = `${url}api/wx/evaluate/list`
 
+//获取协议列表
+let getAgreeList =  `${url}api/wx/ruleExplain/select`
+
+//获取协议详情
+let getAgreeInfo =  `${url}api/wx/ruleExplain/get`
+
 //导出请求地址
 export {
 	getIndex,
@@ -255,7 +261,9 @@ export {
 	getBeConfirmed,
 	orderCount,
 	getEvaluateList,
-	getMsgInfo
+	getMsgInfo,
+	getAgreeList,
+	getAgreeInfo
 }
 
 

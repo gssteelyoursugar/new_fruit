@@ -51,17 +51,17 @@
 
 						<text class="tag-tit-text">{{ shopListdata.name ||''}}</text>
 
-						<view class="tag-tit-pra" v-if="!canPraise" @tap="praiseLike(shopListdata.id)">
-							<tui-icon name="agree" color="#999" :size="15"></tui-icon>
-							<text>{{ shopListdata.praiseNumber||0 |filterNum}}</text>
+						<view class="tag-tit-pra" v-if="!canPraise" @tap="praiseLike(shopListdata.id)" >
+							<tui-icon name="agree" color="#B6B6B6" :size="15"></tui-icon>
+							<text style="font-size: 28rpx;">{{ shopListdata.praiseNumber||0 |filterNum}}</text>
 						</view>
-						<view class="tag-tit-pra" v-if="canPraise" @tap="praiseLikeTwo">
-							<tui-icon name="agree-fill" color="#ff0000" :size="15"></tui-icon>
-							<text>{{ shopListdata.praiseNumber||0  |filterNum}}</text>
+						<view class="tag-tit-pra" v-if="canPraise" @tap="praiseLikeTwo" style="background: rgba(255, 119, 9, 0.35);">
+							<tui-icon name="agree-fill" color="#FF7709" :size="15"></tui-icon>
+							<text style="color:#FF7709;font-size: 28rpx;">{{ shopListdata.praiseNumber||0  |filterNum}}</text>
 						</view>
 					</view>
 					<view class="tui-original-price tui-gray">{{ shopListdata.describe ||0}}</view>
-					<view class="tui-text-overflow">{{ shopListdata.specification ||''}}, 净重约{{ shopListdata.kg2 ||0}}斤</view>
+					<view class="tui-text-overflow">毛重约{{ shopListdata.kg1 || 0}}斤/件, 净重约{{ shopListdata.kg2 ||0}}斤/件</view>
 					<view class="tui-pro-titbox">
 						<button open-type="share" class="tui-share-btn tui-share-position" @tap="onShare">
 							<tui-tag type="gray" shape="circleLeft" padding="12rpx 16rpx">
@@ -86,7 +86,7 @@
 									<text style="font-size:28rpx;">元</text>
 									<text>/件</text>
 								</view>
-								<view class="tui-huaxian" v-if="shopListdata.marketPrice != 0">￥{{ApproveStatus===1? shopListdata.marketPrice:'***'}}/件</view>
+								<view class="tui-huaxian" v-if="shopListdata.marketPrice != 0">￥{{ApproveStatus===1? shopListdata.marketPrice:'***'}}元/件</view>
 							</view>
 						</view>
 					</view>
@@ -117,7 +117,8 @@
 						</view>
 						<view class="tui-right-one">
 							<text class="tui-title-class">储藏条件：</text>
-							<text class="tui-name-class" style="font-size: 24rpx;">{{ shopListdata.storageMode || '常规' }}</text>
+							<text class="tui-name-class" style="font-size: 24rpx;">{{ shopListdata.storageMode || "常规"}}</text>
+							<text style="font-size: 24rpx;padding-left: 4rpx;" v-if="shopListdata.storageMode">℃</text>
 						</view>
 					</view>
 					<view class="tui-height-flex">
@@ -371,7 +372,7 @@
 												</view>
 												/件
 											</view>
-											<view class="tui-huaxian" v-if="shopListdata.marketPrice != 0">￥{{ApproveStatus===1? shopListdata.marketPrice:'***' }}</view>
+											<view class="tui-huaxian" v-if="shopListdata.marketPrice != 0">￥{{ApproveStatus===1? shopListdata.marketPrice:'***' }}<text style="font-size: 24rpx;">元</text></view>
 										</view>
 									</view>
 
@@ -1805,7 +1806,7 @@
 	.tag-tit-pra {
 		position: absolute;
 		right: 0;
-		background-color: rgba(244, 244, 244, 1);
+		background-color: #ededed;
 		padding: 5rpx 20rpx 5rpx 20rpx;
 		border-radius: 10px 0 0 10px;
 		color: rgba(182, 182, 182, 1);

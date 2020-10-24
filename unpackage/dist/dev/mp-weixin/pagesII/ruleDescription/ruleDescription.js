@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiListCell: function() {
-    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 445))
+    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 465))
   }
 }
 var render = function() {
@@ -134,46 +134,54 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
-{
-  data: function data() {
-    return {};
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
-  },
-  methods: {
-    detail: function detail() {
-      uni.showToast({
-        icon: 'none',
-        title: '待完善',
-        duration: 1000 });
 
+
+
+
+
+
+
+
+
+
+var _api = __webpack_require__(/*! ../../api/api.js */ 19);
+
+
+var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = { data: function data() {return { agreeList: [] };}, onLoad: function onLoad() {this.getList();}, methods: {
+    getList: function getList() {var _this = this;
+      (0, _api.listing2)(_request.getAgreeList).then(function (res) {
+        console.log(res);
+        var list = res.data.data;
+        var arr = [];
+        var ids = ["1319827321417515008", "1319827163120287744", "1304408017931272192"];
+        list.forEach(function (item) {
+          var idx = ids.indexOf(item.id);
+          if (idx !== -1) {
+            arr.push(item);
+          }
+        });
+        _this.agreeList = arr;
+      });
+    },
+
+    detail: function detail(id) {
+      uni.navigateTo({
+        url: "../../pagesIII/serviceAgreement/serviceAgreement?id=" + id });
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

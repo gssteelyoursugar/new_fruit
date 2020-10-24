@@ -444,18 +444,7 @@
 						fileUrls: JSON.stringify(changeImg), //这个地方不要传json数组，要把json数组转字符串，用JSON.stringify能转为字符串json数组，这样后台才能接收
 						delFileIds: this.idList.join(',')
 					}
-					console.log(data)
-					// return 
-					// //判断用户是否点击上传图片，是否要传fileUrls，delFileIds,flase不传值
-					// if (this.flag == false) {
-					// 	delete data.fileUrls
-					// 	delete data.delFileIds
-					// 	log('没有上传图片')
-					// } else if (this.flag == true) {
-					// 	log('点击了上传图片')
-					// }
 
-					log(data)
 					publicing(postupdateClient, data)
 						.then((res) => {
 							

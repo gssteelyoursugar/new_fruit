@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiCountdown: function() {
-    return __webpack_require__.e(/*! import() | components/tui-countdown/tui-countdown */ "components/tui-countdown/tui-countdown").then(__webpack_require__.bind(null, /*! @/components/tui-countdown/tui-countdown.vue */ 396))
+    return __webpack_require__.e(/*! import() | components/tui-countdown/tui-countdown */ "components/tui-countdown/tui-countdown").then(__webpack_require__.bind(null, /*! @/components/tui-countdown/tui-countdown.vue */ 416))
   }
 }
 var render = function() {

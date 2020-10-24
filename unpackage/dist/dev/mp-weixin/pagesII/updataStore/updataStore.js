@@ -94,10 +94,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiListCell: function() {
-    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 445))
+    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 465))
   },
   tuiIcon: function() {
-    return __webpack_require__.e(/*! import() | components/tui-icon/tui-icon */ "components/tui-icon/tui-icon").then(__webpack_require__.bind(null, /*! @/components/tui-icon/tui-icon.vue */ 389))
+    return __webpack_require__.e(/*! import() | components/tui-icon/tui-icon */ "components/tui-icon/tui-icon").then(__webpack_require__.bind(null, /*! @/components/tui-icon/tui-icon.vue */ 409))
   }
 }
 var render = function() {
@@ -583,18 +583,7 @@ var _console = console,log = _console.log;var cityData = __webpack_require__(/*!
           fileUrls: JSON.stringify(changeImg), //这个地方不要传json数组，要把json数组转字符串，用JSON.stringify能转为字符串json数组，这样后台才能接收
           delFileIds: this.idList.join(',') };
 
-        console.log(_data);
-        // return 
-        // //判断用户是否点击上传图片，是否要传fileUrls，delFileIds,flase不传值
-        // if (this.flag == false) {
-        // 	delete data.fileUrls
-        // 	delete data.delFileIds
-        // 	log('没有上传图片')
-        // } else if (this.flag == true) {
-        // 	log('点击了上传图片')
-        // }
 
-        log(_data);
         (0, _api.publicing)(_request.postupdateClient, _data).
         then(function (res) {
 

@@ -1,23 +1,9 @@
 <template>
 	<view>
-		<view class="tui-paddingTop">
-			<tui-list-cell @click="detail" :arrow="true" unlined >
+		<view class="tui-paddingTop" v-for="(item,index) of agreeList" :key="index">
+			<tui-list-cell @click="detail(item.id)" :arrow="true" unlined >
 				<view class="tui-item-box">
-					<view class="tui-list-cell_name">服务协议</view>
-				</view>
-			</tui-list-cell>
-		</view>
-		<view class="tui-paddingTop">
-			<tui-list-cell @click="detail" :arrow="true" unlined >
-				<view class="tui-item-box">
-					<view class="tui-list-cell_name">隐私政策</view>
-				</view>
-			</tui-list-cell>
-		</view>
-		<view class="tui-paddingTop">
-			<tui-list-cell @click="detail" :arrow="true" unlined >
-				<view class="tui-item-box">
-					<view class="tui-list-cell_name">关于退货</view>
+					<view class="tui-list-cell_name">{{item.title}}</view>
 				</view>
 			</tui-list-cell>
 		</view>
@@ -25,20 +11,42 @@
 </template>
 
 <script>
+	import {
+		listing2,
+	} from '../../api/api.js'
+	import {
+		getAgreeList
+	} from '../../api/request.js'
 	export default {
 		data() {
 			return {
-				
+				agreeList: []
 			}
 		},
+		onLoad() {
+		this.getList()	
+		},
 		methods: {
-			detail(){
-				uni.showToast({
-					icon:'none',
-				    title: '待完善',
-				    duration: 1000
-				});
-			
+			getList() {
+				listing2(getAgreeList).then(res=> {
+					console.log(res)
+					let list = res.data.data
+					let arr = []
+					let ids = ["1319827321417515008","1319827163120287744","1304408017931272192"]
+					list.forEach((item=> {
+						let idx = ids.indexOf(item.id)
+						if (idx !== -1) {
+							arr.push(item)
+						}
+					}))
+					this.agreeList = arr
+				})
+			},
+		
+			detail(id){
+				uni.navigateTo({
+					url: "../../pagesIII/serviceAgreement/serviceAgreement?id=" + id
+				})
 			}
 		}
 	}

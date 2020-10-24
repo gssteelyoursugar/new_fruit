@@ -1,7 +1,7 @@
 <template>
 	<view class="container" :style="{paddingTop: navHeight + 'px'}">
 		<view class="index-bg" :style="{opacity: bgOpcity}">
-			<image src="../../static/images/bage@3x.png" :style="{height: statusHeight <= 20 ?'318rpx' : '338rpx'}" mode="aspectFill"></image>
+			<image src="../../static/images/index_bg.png" :style="{height: statusHeight <= 20 ?'318rpx' : '338rpx'}" mode="aspectFill"></image>
 		</view>
 		<view class="tui-header-box" :style="{ height: navHeight + 'px', background: 'rgba(0,197,42,' + opcity + ')' }">
 			<!--  -->
@@ -24,9 +24,9 @@
 					<image src="../../static/images/dingwei@2x.png" mode="aspectFit" class="weather-dingwei"></image>
 					<text class="weather-city" style="font-size: 24rpx;" v-if="address&& ApproveStatus === 1">配送至{{address}}</text>
 					<text class="weather-city" v-if="ApproveStatus !== 1">配送至</text>
-					<view class="weather-tui-class" v-if="ApproveStatus !== 1">
+					<view class="weather-tui-class" v-if="ApproveStatus !== 1 && showAuthTips">
 					</view>
-					<view class="weather-tui-class2" v-if="ApproveStatus !== 1">
+					<view class="weather-tui-class2" v-if="ApproveStatus !== 1 && showAuthTips">
 						请认证店铺信息
 					</view>
 				</view>
@@ -355,6 +355,7 @@
 		},
 		data() {
 			return {
+				showAuthTips: true,
 				address: '', //地址
 				ApproveStatus: 0,
 				itemList: [{
@@ -997,6 +998,9 @@
 			// 		this.tian(adData)
 			// 	}
 			// });
+			setTimeout(()=>{
+				this.showAuthTips = false
+			},5000)
 		},
 		// 监听页面滚动距离
 
@@ -1630,8 +1634,13 @@
 		height: 150rpx;
 		display: block;
 		margin: 0 auto;
+		border: 1px solid #f5f5f5;
+		border-radius: 6rpx;
 	}
-
+	
+	.tui-Fruits-ranking-tab .tabimg {
+		border: none;
+	}
 	.tui-Fruits-table {
 
 		text-align: center;
@@ -1930,6 +1939,8 @@
 		height: 180rpx;
 		display: block;
 		margin-right: 20rpx;
+		border: 1px solid #f5f5f5;
+		border-radius: 6rpx;
 	}
 
 	.tui-pro-tit {
