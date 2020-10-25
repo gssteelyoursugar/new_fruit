@@ -99,11 +99,11 @@ var components = {
   tuiDrawer: function() {
     return __webpack_require__.e(/*! import() | components/tui-drawer/tui-drawer */ "components/tui-drawer/tui-drawer").then(__webpack_require__.bind(null, /*! @/components/tui-drawer/tui-drawer.vue */ 467))
   },
-  easySelect: function() {
-    return __webpack_require__.e(/*! import() | components/easy-select/easy-select */ "components/easy-select/easy-select").then(__webpack_require__.bind(null, /*! @/components/easy-select/easy-select.vue */ 474))
-  },
   tuiIcon: function() {
     return __webpack_require__.e(/*! import() | components/tui-icon/tui-icon */ "components/tui-icon/tui-icon").then(__webpack_require__.bind(null, /*! @/components/tui-icon/tui-icon.vue */ 397))
+  },
+  easySelect: function() {
+    return __webpack_require__.e(/*! import() | components/easy-select/easy-select */ "components/easy-select/easy-select").then(__webpack_require__.bind(null, /*! @/components/easy-select/easy-select.vue */ 474))
   },
   tuiNomore: function() {
     return __webpack_require__.e(/*! import() | components/tui-nomore/tui-nomore */ "components/tui-nomore/tui-nomore").then(__webpack_require__.bind(null, /*! @/components/tui-nomore/tui-nomore.vue */ 411))
@@ -195,6 +195,25 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -876,6 +895,25 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _console = console,log = _console.log;var setdata = uni.getStorageSync('usermen');var _default = { data: function data() {return { title: '选中', sleter: false, sleter2: false, ApproveStatus: 0, dropdownlistData: [{ name: "微信支付" }, { name: "支付宝支付" }, { name: "银行卡支付" }, { name: "微信支付" }, { name: "支付宝支付" }, { name: "银行卡支付" }], dropdownShow: false, dropdownShow2: false, seleVarieties: [], //全部品种
       color_level: [], //颜色等级
       // facade_level: [], //外观等级
@@ -944,27 +982,8 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       }).catch(function (err) {log(err);});}, //点击搜索
     goToSearchGoods: function goToSearchGoods() {uni.navigateTo({ url: '../../pagesII/searchGoods/searchGoods' });}, //商品详情页
     gotoList: function gotoList(id) {log(id);uni.navigateTo({ url: '../../pagesIII/productDetail/productDetail?id=' + id });}, //下拉选
-    dropDownList: function dropDownList(index, name) {if (index !== -1) {console.log("index：" + index, name);}this.title = name;this.dropdownShow = !this.dropdownShow;}, dropDownList2: function dropDownList2(index, name) {
-      if (index !== -1) {
-        console.log("index：" + index, name);
-      }
-      this.title = name;
-      this.dropdownShow2 = !this.dropdownShow2;
-    },
-
-    // 搜索请求数据
-    getSearch: function getSearch(serrchName) {var _this3 = this;
-      var data = {
-        pageNo: 1,
-        pageSize: 10,
-        name: serrchName };
-
-      (0, _api.listing)(_request.getGoodsall, data).
-      then(function (res) {
-        log("搜索结果", res);
-        _this3.goods = res.data.data.goods;
-        _this3.seleVarieties = res.data.data;
-        if (_this3.seleVarieties === undefined) {
+    dropDownList: function dropDownList(index, name) {if (index !== -1) {console.log("index：" + index, name);}this.title = name;this.dropdownShow = !this.dropdownShow;}, dropDownList2: function dropDownList2(index, name) {if (index !== -1) {console.log("index：" + index, name);}this.title = name;this.dropdownShow2 = !this.dropdownShow2;}, // 搜索请求数据
+    getSearch: function getSearch(serrchName) {var _this3 = this;var data = { pageNo: 1, pageSize: 10, name: serrchName };(0, _api.listing)(_request.getGoodsall, data).then(function (res) {log("搜索结果", res);_this3.goods = res.data.data.goods;_this3.seleVarieties = res.data.data;if (_this3.seleVarieties === undefined) {
           _this3.seleVarieties = _this3.seleVarieties;
         } else if (_this3.seleVarieties != undefined) {}
         _this3.color_level = res.data.data.color_level;
@@ -997,8 +1016,10 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       } else if (this.num == 1) {
         if (this.sleter) {
           log('销量升序');
+          console.log("sleter", this.sleter);
           this.getshopDESC();
         } else {
+          console.log("sleter", this.sleter);
           this.getshopASC();
           log('销量降序');
         }
@@ -1006,8 +1027,10 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       } else if (this.num == 2) {
         if (this.sleter2) {
           log('价格升序');
+          console.log("sleter", this.sleter2);
           this.getpriceDESC();
         } else {
+          console.log("sleter", this.sleter2);
           log('价格降序');
           this.getpriceASC();
         }
@@ -1244,6 +1267,7 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       this.dropScreenShow2 = !this.dropScreenShow2;
       this.isActives2 = false;
     },
+
     // 点击
     clickToConfirm: function clickToConfirm() {var _this9 = this;
       console.log(this.tempData);

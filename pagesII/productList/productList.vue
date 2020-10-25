@@ -21,7 +21,8 @@
 		</view> -->
 		<!--header-->
 		<!-- 搜索框 -->
-		<view class="search-bar" @click="goToSearchGoods" style="top: 0px"> <!--:style="{top: navHeight+ 'px'}"  -->
+		<view class="search-bar" @click="goToSearchGoods" style="top: 0px">
+			<!--:style="{top: navHeight+ 'px'}"  -->
 			<image src="../../static/images/search-icon.png" mode=""></image>
 			<view class="search-text">{{searchName||"搜索您要购买的商品或类型"}}</view>
 		</view>
@@ -34,7 +35,17 @@
 					<view class="tui-top-item tui-icon-ml" :class="[index == num &&num !==3 ? 'tui-active tui-bold' : '']" @tap="Total(index)"
 					 data-index=" ">
 						<view>{{item.name}}</view>
-						<text class="iconfont icon-shangxiajiantou" :color="index == num ? '#00BC45' : '#444' " v-if="index == 1 || index == 2"></text>
+						<!-- <text class="iconfont icon-shangxiajiantou" :color="index == num ? '#00BC45' : '#444' " v-if="index == 1 || index == 2"></text> -->
+						<view class="up-down-icon" v-if="index == 1 || index == 2">
+							<image src="../../static/images/up-t_t.png" v-if="index ==num && index == 1 && !sleter" mode=""></image>
+							<image src="../../static/images/up-t_f.png" v-if="(index == 1 && sleter) || index !=num" mode=""></image>
+							<image src="../../static/images/down-t_t.png" v-if="index == 1 && sleter&& index ==num"></image>
+							<image src="../../static/images/down-t_f.png" v-if="(index == 1 && !sleter)  || index !=num"></image>
+							<image src="../../static/images/up-t_t.png" v-if="index == num &&index == 2 && !sleter2" mode=""></image>
+							<image src="../../static/images/up-t_f.png" v-if="index == num &&index == 2 && sleter2" mode=""></image>
+							<image src="../../static/images/down-t_t.png" v-if="index == num &&index == 2 && sleter2"></image>
+							<image src="../../static/images/down-t_f.png" v-if="index == num &&index == 2 && !sleter2"></image>
+						</view>
 					</view>
 				</block>
 				<!--下拉选择列表综合-->
@@ -70,15 +81,16 @@
 		<!--screen-->
 
 		<!--商品列表list-->
-		<view class="tui-product-list" :style="{marginTop: statusHeight <= 20 ? '130px' : '150px'}" ><!--  -->
+		<view class="tui-product-list" :style="{marginTop: statusHeight <= 20 ? '130px' : '150px'}">
+			<!--  -->
 			<view class="tui-product-container">
 				<block v-for="(item, index) in goods" :key="index" v-if="(index + 1) % 2 != 0">
 					<!-- <template is="productItem" data="{{item,index:index,isList:isList}}" /> -->
 					<!--商品列表1-->
 					<view class="tui-pro-item" @tap="gotoList(item.id)">
 						<view class="img-mask">
-							<image :src="item.url" class="tui-pro-img" mode="widthFix"/>
-							<view class="img-mask-item" v-if="item.number === 0">
+							<image :src="item.url" class="tui-pro-img" mode="widthFix"  @tap="gotoList(item.id)"/>
+							<view class="img-mask-item" v-if="item.number === 0" @tap="gotoList(item.id)">
 								<view class="item-text">抢光了</view>
 							</view>
 						</view>
@@ -103,7 +115,7 @@
 										<text style="font-size: 16rpx;">¥</text>
 										<text style="font-size: 28rpx; font-weight: 500">{{ApproveStatus===1?item.platformClientPrice:'***'}}</text>
 										<text style="font-size: 20rpx;color: #B6B6B6;">/件</text>
-										<view style="color: #B6B6B6;text-decoration: line-through; margin-left:10rpx;"  v-if="item.marketPrice != 0">
+										<view style="color: #B6B6B6;text-decoration: line-through; margin-left:10rpx;" v-if="item.marketPrice != 0">
 											<text style="font-size: 16rpx;"> ¥</text>
 											<text style="font-size: 24rpx;font-weight: 500;">{{ApproveStatus === 1? item.marketPrice:'***'}}</text>
 										</view>
@@ -155,7 +167,7 @@
 										<text style="font-size: 16rpx;">¥</text>
 										<text style="font-size: 28rpx; font-weight: 500">{{ApproveStatus===1?item.platformClinetPrice:'***'}}</text>
 										<text style="font-size: 20rpx;color: #B6B6B6;">/件</text>
-										<view style="color: #B6B6B6;text-decoration: line-through;margin-left:10rpx;"  v-if="item.marketPrice != 0">
+										<view style="color: #B6B6B6;text-decoration: line-through;margin-left:10rpx;" v-if="item.marketPrice != 0">
 											<text style="font-size: 16rpx;"> ¥</text>
 											<text style="font-size: 24rpx;font-weight: 500">{{ApproveStatus===1?item.marketPrice:'***'}}</text>
 										</view>
@@ -222,8 +234,15 @@
 		<!---顶部下拉筛选弹层 属性-->
 		<!--左抽屉弹层 筛选 -->
 		<tui-drawer mode="right" :visible="drawer" @close="closeDrawer">
-			<view class="tui-drawer-box" :style="{ paddingTop: height + 'px' }">
-				<scroll-view class="tui-drawer-scroll" scroll-y :style="{ height: drawerH + 'px'}">
+			<view class="tui-drawer-box" :style="{ paddingTop: 0 + 'px' }">
+				<scroll-view class="tui-drawer-scroll" scroll-y :style="{ height: drawerH + height - 50 + 'px', paddingTop:100+ 'rpx'}">
+					<view class="tui-drawer-top-title">
+						<view @click="closeDrawer">
+							<tui-icon name="close" color="#B6B6B6" :size="22"></tui-icon>
+						</view>
+						<view class="title-content">水果标准</view>
+						<view></view>
+					</view>
 					<view class="tui-drawer-title">
 						<text class="tui-title-bold">果品星级</text>
 					</view>
@@ -801,8 +820,10 @@
 				} else if (this.num == 1) {
 					if (this.sleter) {
 						log('销量升序')
+						console.log("sleter", this.sleter)
 						this.getshopDESC()
 					} else {
+						console.log("sleter", this.sleter)
 						this.getshopASC()
 						log('销量降序')
 					}
@@ -810,8 +831,10 @@
 				} else if (this.num == 2) {
 					if (this.sleter2) {
 						log('价格升序')
+						console.log("sleter", this.sleter2)
 						this.getpriceDESC()
 					} else {
+						console.log("sleter", this.sleter2)
 						log('价格降序')
 						this.getpriceASC()
 					}
@@ -1037,17 +1060,18 @@
 						console.log(res)
 						this.goods = res.data.data.goods
 					})
-				}else {
+				} else {
 					let ids = list.join(',')
 					this.tempData.varietyId = ids
 					listing(getGoodsall, this.tempData).then(res => {
 						this.goods = res.data.data.goods
 					})
 				}
-	
+
 				this.dropScreenShow2 = !this.dropScreenShow2
 				this.isActives2 = false
 			},
+			
 			// 点击
 			clickToConfirm() {
 				console.log(this.tempData)
@@ -1155,7 +1179,7 @@
 			},
 			clickToReset() {
 				this.num = -1
-				this.tempData.fruitLevel= ''
+				this.tempData.fruitLevel = ''
 				this.tempData.weight_parameter_1 = ''
 				this.tempData.weight_parameter_2 = ''
 				this.tempData.size_parameter_1 = ''
@@ -1370,8 +1394,8 @@
 	}
 
 	.search-bar {
-		width: 590rpx;
-		margin: 0 50rpx;
+		width: 690rpx;
+		margin: 0 30rpx;
 		border: 1px solid #F5F5F5;
 		-webkit-box-shadow: 0 0 20rpx 0 #f5f5f5;
 		box-shadow: 0 0 20rpx 0 #f5f5f5;
@@ -1385,6 +1409,7 @@
 		display: flex;
 		align-items: center;
 		padding: 0 40rpx;
+		box-sizing: border-box;
 	}
 
 	.search-bar image {
@@ -1431,6 +1456,18 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+	}
+
+	.up-down-icon {
+		margin-left: 6rpx;
+	}
+
+	.up-down-icon image {
+		width: 14rpx;
+		height: 8rpx;
+		display: block;
+		margin: 4rpx 0;
+
 	}
 
 	.tui-topitem-active {
@@ -1703,6 +1740,29 @@
 		padding-bottom: 100rpx;
 	}
 
+	.tui-drawer-top-title {
+		width: 100%;
+		height: 80rpx;
+		border-bottom: 1px solid #f5f5f5;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0 20rpx;
+		box-sizing: border-box;
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: 1;
+	}
+
+	.tui-drawer-top-title .title-content {
+		font-size: 32rpx;
+		color: #333;
+		font-weight: bold;
+
+	}
+
 	.tui-drawer-title {
 		display: flex;
 		align-items: center;
@@ -1880,25 +1940,27 @@
 		overflow: hidden;
 		transition: all 0.15s ease-in-out;
 	}
+
 	.img-mask {
 		position: relative;
 	}
-	.img-mask-item { 
+
+	.img-mask-item {
 		position: absolute;
 		top: 0;
 		right: 0;
 		left: 0;
 		bottom: 0;
-		background: rgba(255,255,255,.5);
+		background: rgba(255, 255, 255, .5);
 		display: flex;
 		align-items: center;
 		text-align: center;
 		justify-content: center;
-	
+
 	}
-	
+
 	.item-text {
-		background: rgba(0,0,0,.6);
+		background: rgba(0, 0, 0, .6);
 		color: #fff;
 		font-size: 28rpx;
 		padding: 6rpx 16rpx;

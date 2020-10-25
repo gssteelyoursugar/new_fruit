@@ -81,13 +81,13 @@
 					</view>
 					<view class="tui-order-item" @tap="ToBeReceived">
 						<view class="tui-icon-box">
-							<image src="/static/images/daishouhuo@3x.png" class="tui-order-icon"></image>
+							<image src="/static/images/daishouhuo@3x.png" style="width:52rpx;" class="tui-order-icon"></image>
 						</view>
 						<view class="tui-order-text">待收货<text v-if="shouhuoList !== ''&&shouhuoList!==0">{{shouhuoList}}</text></view>
 					</view>
 					<view class="tui-order-item" @tap="ToBePaid">
 						<view class="tui-icon-box">
-							<image src="/static/images/daifukuan@3x.png" class="tui-order-icon"></image>
+							<image src="/static/images/done.png" style="width:40rpx;" class="tui-order-icon"></image>
 						</view>
 						<view class="tui-order-text">已完成<text v-if="fukuanList !== ''&&fukuanList == 0">{{fukuanList}}</text></view>
 					</view>
@@ -444,10 +444,10 @@
 							if (item.payStatus == 0) {
 								fukuanList.push(item)
 							}
-							if (item.tradeStatus == 1) {
+							if (item.tradeStatus == "1"||item.tradeStatus == "2" || item.tradeStatus == "3") {
 								fahuoList.push(item)
 							}
-							if (item.tradeStatus == 2) {
+							if (item.payStatus == '1' && (item.tradeStatus == '4'||item.tradeStatus == '8')) {
 								shouhuoList.push(item)
 							}
 							if (item.tradeStatus == 7) {

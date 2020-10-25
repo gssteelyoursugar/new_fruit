@@ -1,4 +1,13 @@
 
+.picker-mask.data-v-32406354 {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 999;
+	background: rgba(255,255,255,.5);
+}
 .easy-select.data-v-32406354 {
 	position: relative;
 	border: 1px solid #dcdfe6;

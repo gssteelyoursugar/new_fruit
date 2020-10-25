@@ -52,7 +52,7 @@
 		left: 0;
 		right: 0;
 		bottom: 0;
-		z-index: 8888;
+		z-index: 99999;
 		background-color: rgba(0, 0, 0, 0.6);
 		transition: all 0.3s ease-in-out;
 	}

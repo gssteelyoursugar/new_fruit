@@ -586,6 +586,9 @@ page {
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
 }
 .tui-left-one2 {
 	-webkit-box-flex: 4;

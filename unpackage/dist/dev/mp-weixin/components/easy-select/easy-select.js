@@ -149,6 +149,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /**
  * easy-selectmin-width
@@ -287,6 +288,9 @@ var SIZE = {
     console.log(this.options);
   },
   methods: {
+    clickMask: function clickMask() {
+      this.showOptions = !this.showOptions;
+    },
     trigger: function trigger(e) {var _this2 = this;
       var view = uni.createSelectorQuery().in(this);
       view.select('.easy-select').fields({ rect: true }, function (data) {var

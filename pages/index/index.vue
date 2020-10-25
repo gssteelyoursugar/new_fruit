@@ -207,11 +207,11 @@
 				<view class="tui-product-list">
 					<view class="tui-product-container">
 						<!--商品列表1-->
-						<block v-for="(item, index) in IndexGoods" :key="index" v-if="(index + 1) % 2 != 0">
+						<block v-for="(item, index) in IndexGoods" :key="index" v-if="(index + 1) % 2 != 0" @tap="gotoList(item.id)">
 							<view class="tui-pro-item" hover-class="hover" :hover-start-time="150">
 								<view class="img-mask">
 									<image :src="item.url" class="tui-pro-img" mode="widthFix" @tap="gotoList(item.id)" />
-									<view class="img-mask-item" v-if="item.number === 0">
+									<view class="img-mask-item" v-if="item.number === 0" @tap="gotoList(item.id)">
 										<view class="item-text">抢光了</view>
 									</view>
 								</view>
@@ -255,11 +255,11 @@
 					</view>
 					<view class="tui-product-container2">
 						<!--商品列表2-->
-						<block v-for="(item, index) in IndexGoods" :key="index" v-if="(index + 1) % 2 == 0">
+						<block v-for="(item, index) in IndexGoods" :key="index" v-if="(index + 1) % 2 == 0" @tap="gotoList(item.id)">
 							<view class="tui-pro-item" hover-class="hover" :hover-start-time="150">
 								<view class="img-mask">
 									<image :src="item.url" class="tui-pro-img" mode="widthFix" @tap="gotoList(item.id)" />
-									<view class="img-mask-item" v-if="item.number === 0">
+									<view class="img-mask-item" v-if="item.number === 0" @tap="gotoList(item.id)">
 										<view class="item-text">抢光了</view>
 									</view>
 								</view>

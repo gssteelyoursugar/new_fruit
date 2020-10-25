@@ -479,18 +479,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
@@ -827,25 +815,17 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 var setdata = uni.getStorageSync('usermen');var _console = console,log = _console.log;var thorui = __webpack_require__(/*! @/common/tui-clipboard/tui-clipboard.js */ 82);var _default = { data: function data() {return { coundDownTime: '30000', loadStatus: "loading", payStatus: '', //付款状态
       tradeStatus: '', //收货状态
       timeList: 300, tabs: [{ name: "全部" }, // {
       // 	name: "待付款"
       // },
-      { name: "待发货" }, { name: "待收货" }, { name: "已完成" }], currentTab: null, pageIndex: 1, loadding: false, pullUpOn: true, scrollTop: 0, myOrderData: [], url: '', countDown: 0 };}, computed: { // 全部数据
-    allData: function allData() {var data = this.myOrderData;return data;}, // 待付款
+      { name: "待发货" }, { name: "待收货" }, { name: "已完成" }], currentTab: null, pageIndex: 1, loadding: false, pullUpOn: true, scrollTop: 0, myOrderData: [], url: '', countDown: 0 };}, onLoad: function onLoad(options) {console.log(options);if (options.index == 0) {//全部 pt
+      this.currentTab = parseInt(options.index);this.payStatus = '';this.tradeStatus = '';} else if (options.index == 1) {//待发货p1t1
+      this.currentTab = parseInt(options.index);this.payStatus = '1';this.tradeStatus = '1,2,3';} else if (options.index == 2) {//待收货p1t4,8
+      this.currentTab = parseInt(options.index);this.payStatus = '1';this.tradeStatus = '4,8';} else if (options.index == 3) {//已完成p1t8
+      this.currentTab = parseInt(options.index);this.payStatus = '1';this.tradeStatus = '6,11';}console.log(this.currentTab);this.getOrderData();}, computed: { // 全部数据
+    allData: function allData() {var data = this.myOrderData;return data;}, // 待付款 (暂时废弃)
     waitPay: function waitPay() {var data = this.myOrderData;var arr = [];data.map(function (item) {if (item.payStatus == '0') {arr.push(item);}});return arr;}, // 待发货
     waitDeliver: function waitDeliver() {var data = this.myOrderData;var arr = [];data.map(function (item) {if (item.tradeStatus == "1" || item.tradeStatus == "2" || item.tradeStatus == "3") {arr.push(item);}});return arr;}, // 待确认
     waitConfirm: function waitConfirm() {var data = this.myOrderData;var arr = [];data.map(function (item) {if (item.payStatus == '1' && (item.tradeStatus == '4' || item.tradeStatus == '8')) {arr.push(item);}});return arr;}, done: function done() {var data = this.myOrderData;var arr = [];data.map(function (item) {if (item.payStatus == '1' && (item.tradeStatus == '6' || item.tradeStatus == '11')) {arr.push(item);}});return arr;} }, methods: { //手势
@@ -867,20 +847,32 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
     //event 当需要异步请求返回数据再进行复制时，需要传入此参数，或者异步方法转为同步方法（H5端）
     clipboard: function clipboard(event) {console.log(event);var data = event;thorui.getClipboardData(data, function (res) {}, event);}, //申请售后
     goAfter: function goAfter(id) {uni.navigateTo({ url: '../../pagesIII/applyAfter/applyAfter?id=' + id });}, //售后详情
-    goAfterDetails: function goAfterDetails(id) {uni.navigateTo({ url: '../../pagesIII/afterDetails/afterDetails?id=' + id });}, change: function change(e) {this.currentTab = e.index;this.getOrderData();}, detail: function detail() {uni.navigateTo({ url: '../orderDetail/orderDetail' });} }, onShow: function onShow() {this.url = _request.imgurl; // this.getOrderData()
+    goAfterDetails: function goAfterDetails(id) {uni.navigateTo({ url: '../../pagesIII/afterDetails/afterDetails?id=' + id });}, change: function change(options) {this.currentTab = options.index;if (options.index == 0) {//全部 pt
+        this.currentTab = parseInt(options.index);this.payStatus = '';this.tradeStatus = '';} else if (options.index == 1) {//待发货p1t1
+        this.currentTab = parseInt(options.index);this.payStatus = '1';this.tradeStatus = '1,2,3';} else if (options.index == 2) {//待收货p1t4,8
+        this.currentTab = parseInt(options.index);this.payStatus = '1';this.tradeStatus = '4,8';} else if (options.index == 3) {//已完成p1t8
+        this.currentTab = parseInt(options.index);this.payStatus = '1';this.tradeStatus = '6,11';}this.getOrderData();}, detail: function detail() {uni.navigateTo({ url: '../orderDetail/orderDetail' });} }, onShow: function onShow() {this.url = _request.imgurl; // this.getOrderData()
   }, //
-  onLoad: function onLoad(options) {console.log(options);if (options.index == 0) {//全部 pt
-      this.currentTab = parseInt(options.index);this.payStatus = '';this.tradeStatus = '';} else if (options.index == 1) {//待付款p0t
-      this.currentTab = parseInt(options.index);this.payStatus = 0;this.tradeStatus = '';} else if (options.index == 2) {//待发货p1t1
-      this.currentTab = parseInt(options.index);this.payStatus = 1;this.tradeStatus = 1;} else if (options.index == 3) {//待收货p1t2
-      this.currentTab = parseInt(options.index);this.payStatus = 1;this.tradeStatus = 2;} else if (options.index == 4) {//已完成p1t8
-      this.currentTab = parseInt(options.index);this.payStatus = '';this.tradeStatus = 8;}console.log(this.currentTab);this.getOrderData();}, // onPullDownRefresh() {
+  // onPullDownRefresh() {
   // 	log("触发加载")
   // 	setTimeout(() => {
   // 		uni.stopPullDownRefresh()
   // 	}, 200);
   // },
-  onReachBottom: function onReachBottom() {var _this6 = this;if (this.loadStatus === "noMore") {return;}log('我真的触发了下拉加载');this.pageIndex++;this.getOrderData();this.loadding = true;this.pullUpOn = true;uni.hideLoading();setTimeout(function () {_this6.loadding = false;_this6.pullUpOn = false;}, 1000);}, onPageScroll: function onPageScroll(e) {this.scrollTop = e.scrollTop;} };exports.default = _default;
+  onReachBottom: function onReachBottom() {// if (this.loadStatus === "noMore") {
+    // 	return
+    // }
+    // log('我真的触发了下拉加载')
+    // this.pageIndex++
+    // this.getOrderData()
+    // this.loadding = true
+    // this.pullUpOn = true
+    // uni.hideLoading()
+    // setTimeout(() => {
+    // 	this.loadding = false
+    // 	this.pullUpOn = false
+    // }, 1000)
+  }, onPageScroll: function onPageScroll(e) {this.scrollTop = e.scrollTop;} };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

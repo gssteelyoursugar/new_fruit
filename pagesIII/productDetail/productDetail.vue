@@ -1726,6 +1726,7 @@
 	.tui-left-one1 {
 		flex: 4;
 		display: flex;
+		align-items: center;
 
 	}
 

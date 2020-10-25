@@ -14,6 +14,7 @@
 				<text>{{item.label}}</text>
 			</view>
 		</view>
+		<view class="picker-mask" v-if="showOptions" @click.stop="clickMask"></view>
 	</view>
 </template>
 
@@ -155,6 +156,9 @@
 			console.log(this.options)
 		},
 		methods: {
+			clickMask () {
+				this.showOptions = !this.showOptions
+			},
 			trigger(e) {
 				const view = uni.createSelectorQuery().in(this)
 				view.select('.easy-select').fields({rect: true}, data => {
@@ -195,6 +199,16 @@
 </script>
 
 <style scoped>
+	.picker-mask {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 999;
+		background: rgba(255,255,255,.5);
+
+	}
 	.easy-select {
 		position: relative;
 		border: 1px solid #dcdfe6;
