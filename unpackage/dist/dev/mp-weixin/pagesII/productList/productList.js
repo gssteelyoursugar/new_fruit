@@ -553,6 +553,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
@@ -914,7 +925,18 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 //
 //
 //
-var _console = console,log = _console.log;var setdata = uni.getStorageSync('usermen');var _default = { data: function data() {return { title: '选中', sleter: false, sleter2: false, ApproveStatus: 0, dropdownlistData: [{ name: "微信支付" }, { name: "支付宝支付" }, { name: "银行卡支付" }, { name: "微信支付" }, { name: "支付宝支付" }, { name: "银行卡支付" }], dropdownShow: false, dropdownShow2: false, seleVarieties: [], //全部品种
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _console = console,log = _console.log;var setdata = uni.getStorageSync('usermen');var _default = { data: function data() {return { allVariety: false, title: '选中', sleter: false, sleter2: false, ApproveStatus: 0, dropdownlistData: [{ name: "微信支付" }, { name: "支付宝支付" }, { name: "银行卡支付" }, { name: "微信支付" }, { name: "支付宝支付" }, { name: "银行卡支付" }], dropdownShow: false, dropdownShow2: false, seleVarieties: [], //全部品种
       color_level: [], //颜色等级
       // facade_level: [], //外观等级
       fruit_level: [], //果品等级
@@ -942,7 +964,9 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       drawer: false, //显示选果标准抽屉
       drawerH: 0, //抽屉内部scrollview高度
       selectedName: '综合', searchName: '', selectH: 0, num: 0, seleTopList: [{ name: '综合', selected: false }, { name: '销量', selected: false }, { name: '价格', selected: false }, { name: '视频选果', selected: false }], seleBottom: [{ name: '芒果', selected: false }, { name: '品种', selected: true }, { name: '水果标准', selected: false }, { name: '验证保障', selected: false }], dropdownList: [{ name: '综合', selected: true }, { name: '价格升序', selected: false }, { name: '价格降序', selected: false }], pageIndex: 1, loadding: false, pullUpOn: true, // 渲染展示的数据，存的是label名
-      optionList: { tasteLevel_parameter_1: '', //口感左
+      optionList: { fruit_parameter_1: '', //等级左
+        fruit_parameter_2: '', //等级左
+        tasteLevel_parameter_1: '', //口感左
         tasteLevel_parameter_2: '', //口感右
         colorLevel_parameter_1: '', //颜色左
         colorLevel_parameter_2: '', //颜色右
@@ -950,7 +974,9 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
         shapeLevel_parameter_2: '' //形状右
       }, // 提交申请的数据，存的是id
       postList: {}, statusHeight: 20, boxHeight: 44, navHeight: 64, idList: [], //品种多选存放id
-      tempData: { id: '', token: setdata, varietyId: '', fruitLevel: '', //等级
+      tempData: { id: '', token: setdata, varietyId: '', // fruitLevel: '', //等级
+        fruit_parameter_1: '', //等级左
+        fruit_parameter_2: '', //等级右
         weight_parameter_1: '', //单果左
         weight_parameter_2: '', //单果右
         size_parameter_1: '', //果径左
@@ -974,7 +1000,7 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
         //略小，避免误差带来的影响
         _this.dropScreenH = _this.height * 750 / res.windowWidth + 186;_this.drawerH = res.windowHeight - uni.upx2px(100) - _this.height;} });var res = uni.getSystemInfoSync();var statusBarHeight = res.statusBarHeight;var info = uni.getMenuButtonBoundingClientRect();var top = info.top,bottom = info.bottom;this.statusHeight = statusBarHeight;var buttonHeight = bottom - statusBarHeight + (top - statusBarHeight);var navHeight = statusBarHeight + buttonHeight + top - statusBarHeight; //状态栏+导航栏的高度（页面初始高度）
     this.boxHeight = navHeight - statusBarHeight; //导航栏高度
-    this.navHeight = navHeight;console.log("statusBarHeight,", statusBarHeight, "navHeight", navHeight, "boxHeight", this.boxHeight, "buttonHeight", buttonHeight);}, filters: { filterNum: function filterNum(val) {if (val) {var words = (Math.floor(val) + '').split('');var res = '';if (words.length <= 4) {res = val;}if (words.length === 5) {res = words[0] + "." + words[1] + '万';}if (words.length === 6) {res = words[0] + words[1] + "." + words[2] + '万';}if (words.length === 7) {res = words[0] + words[1] + words[2] + "." + words[3] + '万';}if (words.length === 8) {res = words[0] + words[1] + words[2] + words[3] + "." + words[4] + '万';}if (words.length === 9) {res = words[0] + "." + words[1] + '亿';}if (words.length === 10) {res = words[0] + words[1] + "." + words[2] + '亿';}return res;} else {return val;}} }, computed: { tasteBox: function tasteBox() {var arr = [];var data = this.taste_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;}, colorBox: function colorBox() {var arr = [];var data = this.color_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;}, shapeBox: function shapeBox() {var arr = [];var data = this.shape_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;} }, methods: { getMerchants: function getMerchants() {var _this2 = this;var data = { token: setdata }; // log(data)
+    this.navHeight = navHeight;console.log("statusBarHeight,", statusBarHeight, "navHeight", navHeight, "boxHeight", this.boxHeight, "buttonHeight", buttonHeight);}, filters: { filterNum: function filterNum(val) {if (val) {var words = (Math.floor(val) + '').split('');var res = '';if (words.length <= 4) {res = val;}if (words.length === 5) {res = words[0] + "." + words[1] + '万';}if (words.length === 6) {res = words[0] + words[1] + "." + words[2] + '万';}if (words.length === 7) {res = words[0] + words[1] + words[2] + "." + words[3] + '万';}if (words.length === 8) {res = words[0] + words[1] + words[2] + words[3] + "." + words[4] + '万';}if (words.length === 9) {res = words[0] + "." + words[1] + '亿';}if (words.length === 10) {res = words[0] + words[1] + "." + words[2] + '亿';}return res;} else {return val;}} }, computed: { fruitBox: function fruitBox() {var arr = [];var data = this.fruit_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;}, tasteBox: function tasteBox() {var arr = [];var data = this.taste_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;}, colorBox: function colorBox() {var arr = [];var data = this.color_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;}, shapeBox: function shapeBox() {var arr = [];var data = this.shape_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;} }, methods: { getMerchants: function getMerchants() {var _this2 = this;var data = { token: setdata }; // log(data)
       (0, _api.listing)(_request.getClient, data).then(function (res) {// log(res)
         ///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
         _this2.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
@@ -983,7 +1009,12 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
     goToSearchGoods: function goToSearchGoods() {uni.navigateTo({ url: '../../pagesII/searchGoods/searchGoods' });}, //商品详情页
     gotoList: function gotoList(id) {log(id);uni.navigateTo({ url: '../../pagesIII/productDetail/productDetail?id=' + id });}, //下拉选
     dropDownList: function dropDownList(index, name) {if (index !== -1) {console.log("index：" + index, name);}this.title = name;this.dropdownShow = !this.dropdownShow;}, dropDownList2: function dropDownList2(index, name) {if (index !== -1) {console.log("index：" + index, name);}this.title = name;this.dropdownShow2 = !this.dropdownShow2;}, // 搜索请求数据
-    getSearch: function getSearch(serrchName) {var _this3 = this;var data = { pageNo: 1, pageSize: 10, name: serrchName };(0, _api.listing)(_request.getGoodsall, data).then(function (res) {log("搜索结果", res);_this3.goods = res.data.data.goods;_this3.seleVarieties = res.data.data;if (_this3.seleVarieties === undefined) {
+    getSearch: function getSearch(serrchName) {var _this3 = this;var data = { pageNo: 1, pageSize: 10, name: serrchName };(0, _api.listing)(_request.getGoodsall, data).
+      then(function (res) {
+        log("搜索结果", res);
+        _this3.goods = res.data.data.goods;
+        _this3.seleVarieties = res.data.data;
+        if (_this3.seleVarieties === undefined) {
           _this3.seleVarieties = _this3.seleVarieties;
         } else if (_this3.seleVarieties != undefined) {}
         _this3.color_level = res.data.data.color_level;
@@ -1114,8 +1145,24 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       this.ShopIng();
       this.dropScreenShow = !this.dropScreenShow;
     },
+    //品种全选
+    pickAllVariety: function pickAllVariety() {
+      var idlist = this.idList;
+      var list = this.seleVarieties;
+      var arr = [];
+      if (this.allVariety) {
+        this.idList = [];
+      } else {
+        list.forEach(function (item) {
+          arr.push(item.id);
+        });
+        this.idList = arr;
+      }
+      this.allVariety = !this.allVariety;
+    },
     checkVariety: function checkVariety(index, id, title) {
       var list = this.idList;
+      var allList = this.seleVarieties;
       var idx = list.indexOf(id);
       if (idx !== -1) {
         list.splice(idx, 1);
@@ -1123,6 +1170,12 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
         list.push(id);
       }
       this.idList = list;
+      if (list.length === allList.length) {
+        this.allVariety = true;
+      } else {
+        this.allVariety = false;
+      }
+      console.log(this.seleVarieties);
     },
 
     checkDing2: function checkDing2(index, title, id) {
@@ -1254,16 +1307,17 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       if (list.length === 0) {
         (0, _api.listing)(_request.getGoodsall, this.tempData).then(function (res) {
           console.log(res);
+          console.log("jinlai", list);
           _this8.goods = res.data.data.goods;
         });
       } else {
         var ids = list.join(',');
         this.tempData.varietyId = ids;
         (0, _api.listing)(_request.getGoodsall, this.tempData).then(function (res) {
+          console.log("jinqu", list);
           _this8.goods = res.data.data.goods;
         });
       }
-
       this.dropScreenShow2 = !this.dropScreenShow2;
       this.isActives2 = false;
     },
@@ -1314,6 +1368,7 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
     //重置
     reset: function reset() {
       this.isActives2 = false;
+      this.allVariety = false;
       this.isActives = false;
       this.slPinzhong = "品种";
       this.idList = [];
@@ -1375,7 +1430,8 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
     },
     clickToReset: function clickToReset() {
       this.num = -1;
-      this.tempData.fruitLevel = '';
+      this.tempData.fruit_parameter_1 = '';
+      this.tempData.fruit_parameter_2 = '';
       this.tempData.weight_parameter_1 = '';
       this.tempData.weight_parameter_2 = '';
       this.tempData.size_parameter_1 = '';
@@ -1391,6 +1447,8 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       this.tempData.shapeLevel_parameter_1 = '';
       this.tempData.shapeLevel_parameter_2 = '';
       this.optionList = {
+        fruit_parameter_1: '', //等级左
+        fruit_parameter_2: '', //等级右
         tasteLevel_parameter_1: '', //口感左
         tasteLevel_parameter_2: '', //口感右
         colorLevel_parameter_1: '', //颜色左

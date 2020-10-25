@@ -89,7 +89,7 @@
 					<!--商品列表1-->
 					<view class="tui-pro-item" @tap="gotoList(item.id)">
 						<view class="img-mask">
-							<image :src="item.url" class="tui-pro-img" mode="widthFix"  @tap="gotoList(item.id)"/>
+							<image :src="item.url" class="tui-pro-img" mode="widthFix" @tap="gotoList(item.id)" />
 							<view class="img-mask-item" v-if="item.number === 0" @tap="gotoList(item.id)">
 								<view class="item-text">抢光了</view>
 							</view>
@@ -216,13 +216,13 @@
 		<tui-top-dropdown backgroundColor="#f7f7f7" :show="dropScreenShow2" :paddingbtm="110" :translatey="dropScreenH"
 		 @close="btnCloseDrop">
 			<scroll-view class="tui-scroll-box" scroll-y :scroll-top="scrollTop">
-				<view class="tui-drop-item">
-					<text class="tui-ml tui-middle" @click="checkVariety">全部品种</text>
+				<view class="tui-drop-item" :class="{'tui-drop-active':allVariety}" @click="pickAllVariety">
+					<text class="tui-ml tui-middle" :class="{activetext: allVariety}">{{allVariety?"取消全选":"全部品种"}}</text>
 				</view>
 				<view class="hot-wrap">
-					<view class="tui-drop-item" :class="{'tui-drop-active':idList.indexOf(item.id)!==-1}" v-for="(item,index) of seleVarieties"
-					 :key="index">
-						<text class="tui-ml tui-middle" :class="{activetext:idList.indexOf(item.id) !==-1 }" @click="checkVariety(index,item.id,item.title)">{{item.title}}</text>
+					<view class="tui-drop-item" @click="checkVariety(index,item.id,item.title)" :class="{'tui-drop-active':idList.indexOf(item.id)!==-1}"
+					 v-for="(item,index) of seleVarieties" :key="index">
+						<text class="tui-ml tui-middle" :class="{activetext:idList.indexOf(item.id) !==-1 }">{{item.title}}</text>
 					</view>
 				</view>
 			</scroll-view>
@@ -246,12 +246,23 @@
 					<view class="tui-drawer-title">
 						<text class="tui-title-bold">果品星级</text>
 					</view>
-					<view class="tui-drawer-content tui-flex-attr">
+					<!-- <view class="tui-drawer-content tui-flex-attr">
 						<block v-for="(item,index) in fruit_level" :key="index">
 							<view class="tui-attr-item" :class="{activeItem:index == num}" @click="activeGo('fruitLevel',item.id,index)">
 								<view class="tui-attr-ellipsis">{{item.title}}</view>
 							</view>
 						</block>
+					</view> -->
+					<view class="tui-drawer-content">
+						<view class="content" @click="useOutClickSide">
+							<easy-select :options="fruitBox" ref="easySelect" size="mini" :selectName="'fruit_parameter_1'" :value="optionList.fruit_parameter_1"
+							 @selectOne="selectItem"></easy-select>
+						</view>
+						<tui-icon name="reduce" color="#333" :size="14"></tui-icon>
+						<view class="content" @click="useOutClickSide">
+							<easy-select :options="fruitBox" ref="easySelect" size="mini" :selectName="'fruit_parameter_2'" :value="optionList.fruit_parameter_2"
+							 :valueNum="optionList.ltTaste" @selectOne="selectItem"></easy-select>
+						</view><text class="content-text" style="color: #fff;">星</text>
 					</view>
 					<view class="tui-drawer-title">
 						<text class="tui-title-bold">口感星级</text>
@@ -373,6 +384,7 @@
 	export default {
 		data() {
 			return {
+				allVariety: false,
 				title: '选中',
 				sleter: false,
 				sleter2: false,
@@ -548,6 +560,8 @@
 				pullUpOn: true,
 				// 渲染展示的数据，存的是label名
 				optionList: {
+					fruit_parameter_1: '', //等级左
+					fruit_parameter_2: '', //等级左
 					tasteLevel_parameter_1: '', //口感左
 					tasteLevel_parameter_2: '', //口感右
 					colorLevel_parameter_1: '', //颜色左
@@ -566,7 +580,9 @@
 					id: '',
 					token: setdata,
 					varietyId: '',
-					fruitLevel: '', //等级
+					// fruitLevel: '', //等级
+					fruit_parameter_1: '', //等级左
+					fruit_parameter_2: '', //等级右
 					weight_parameter_1: '', //单果左
 					weight_parameter_2: '', //单果右
 					size_parameter_1: '', //果径左
@@ -683,6 +699,21 @@
 			}
 		},
 		computed: {
+			fruitBox() {
+				let arr = []
+				let data = this.fruit_level
+				data.forEach((item, index) => {
+					let tmp = {
+						num: index,
+						star: index + 1,
+						label: item.title,
+						value: item.title,
+						id: item.id
+					}
+					arr.push(tmp)
+				})
+				return arr
+			},
 			tasteBox() {
 				let arr = []
 				let data = this.taste_level
@@ -918,8 +949,24 @@
 				this.ShopIng()
 				this.dropScreenShow = !this.dropScreenShow
 			},
+			//品种全选
+			pickAllVariety() {
+				let idlist = this.idList
+				let list = this.seleVarieties
+				let arr = []
+				if (this.allVariety) {
+					this.idList = []
+				} else { 
+					list.forEach(item=>{
+						arr.push(item.id)
+					})
+					this.idList = arr
+				}
+				this.allVariety = !this.allVariety
+			},
 			checkVariety(index, id, title) {
 				let list = this.idList
+				let allList = this.seleVarieties
 				let idx = list.indexOf(id)
 				if (idx !== -1) {
 					list.splice(idx, 1)
@@ -927,6 +974,12 @@
 					list.push(id)
 				}
 				this.idList = list
+				if (list.length === allList.length) {
+					this.allVariety = true
+				} else {
+					this.allVariety = false
+				}
+				console.log(this.seleVarieties)
 			},
 
 			checkDing2(index, title, id) {
@@ -1058,20 +1111,21 @@
 				if (list.length === 0) {
 					listing(getGoodsall, this.tempData).then(res => {
 						console.log(res)
+						console.log("jinlai", list)
 						this.goods = res.data.data.goods
 					})
 				} else {
 					let ids = list.join(',')
 					this.tempData.varietyId = ids
 					listing(getGoodsall, this.tempData).then(res => {
+						console.log("jinqu", list)
 						this.goods = res.data.data.goods
 					})
 				}
-
 				this.dropScreenShow2 = !this.dropScreenShow2
 				this.isActives2 = false
 			},
-			
+
 			// 点击
 			clickToConfirm() {
 				console.log(this.tempData)
@@ -1118,6 +1172,7 @@
 			//重置
 			reset() {
 				this.isActives2 = false
+				this.allVariety = false
 				this.isActives = false
 				this.slPinzhong = "品种"
 				this.idList = []
@@ -1179,7 +1234,8 @@
 			},
 			clickToReset() {
 				this.num = -1
-				this.tempData.fruitLevel = ''
+				this.tempData.fruit_parameter_1 = ''
+				this.tempData.fruit_parameter_2 = ''
 				this.tempData.weight_parameter_1 = ''
 				this.tempData.weight_parameter_2 = ''
 				this.tempData.size_parameter_1 = ''
@@ -1195,6 +1251,8 @@
 				this.tempData.shapeLevel_parameter_1 = ''
 				this.tempData.shapeLevel_parameter_2 = ''
 				this.optionList = {
+					fruit_parameter_1: '', //等级左
+					fruit_parameter_2: '', //等级右
 					tasteLevel_parameter_1: '', //口感左
 					tasteLevel_parameter_2: '', //口感右
 					colorLevel_parameter_1: '', //颜色左
