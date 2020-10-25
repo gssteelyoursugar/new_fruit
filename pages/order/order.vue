@@ -1,6 +1,6 @@
 <template>
 	<view class="container">
-		<!-- #ifdef MP || H5-->
+		
 		<!-- <view class="tui-edit-goods">
 			<view>购物车共<text class="tui-goods-num">{{cartIds.length}}</text>件商品</view>
 			<view>
@@ -13,13 +13,14 @@
 			<!-- <text class="color-text">{{tips}}</text> -->
 			<view class="btnbox"><button class="btn" type="default" open-type="getUserInfo" @getuserinfo="getUserInfo">去登陆</button></view>
 		</view>
-		<!-- #endif -->
-		<view class="empty-img" v-if="!modaishow&&orderObj.length=== 0">
+		
+		<view class="empty-img" v-if="!modaishow && orderObj.length=== 0">
 			<image src="../../static/images/orderBMG.png" mode="widthFix"></image>
 			<text class="color-text">进货单为空，赶紧去逛逛</text>
 			<view class="color-border" @tap="goIndex"><text>去逛逛</text></view>
 		</view>
-		<checkbox-group @change="buyChange">
+		
+		<checkbox-group @change="buyChange" v-if="!modaishow && orderObj.length!== 0">
 			<view class="tui-cart-cell  tui-mtop" v-for="(item, index) in orderObj" :key="index">
 				<view class="tui-activity">
 					<view class="tui-bold">
@@ -640,16 +641,15 @@
 		},
 		// 看订单的前提条件就是是否登录
 		onShow() {
-
 			//下拉刷新
 			this.allPrice = 0;
 			this.onclike();
 			this.isAll = false
 			this.isCheck = false;
-
 			this.cartIds = []; //清空id
 			this.getMerchants();
 			let setdata = uni.getStorageSync('usermen');
+			console.log(setdata)
 			if (!setdata) {
 				this.hasError = true;
 				this.isActive = false;

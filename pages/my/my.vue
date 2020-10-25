@@ -82,21 +82,18 @@
 					<view class="tui-order-item" @tap="ToBeReceived">
 						<view class="tui-icon-box">
 							<image src="/static/images/daishouhuo@3x.png" class="tui-order-icon"></image>
-							<view class="tui-badge tui-badge-red" v-if="false">12</view>
 						</view>
 						<view class="tui-order-text">待收货<text v-if="shouhuoList !== ''&&shouhuoList!==0">{{shouhuoList}}</text></view>
 					</view>
 					<view class="tui-order-item" @tap="ToBePaid">
 						<view class="tui-icon-box">
 							<image src="/static/images/daifukuan@3x.png" class="tui-order-icon"></image>
-							<!-- <view class="tui-badge tui-badge-red">1</view> -->
 						</view>
 						<view class="tui-order-text">已完成<text v-if="fukuanList !== ''&&fukuanList == 0">{{fukuanList}}</text></view>
 					</view>
 					<view class="tui-order-item" @tap="gotoAfter">
 						<view class="tui-icon-box">
 							<image src="/static/images/shouhou@3x.png" class="tui-order-icon"></image>
-							<!-- <view class="tui-badge tui-badge-red">2</view> -->
 						</view>
 						<view class="tui-order-text">退款/售后<text v-if="tuikuanList !== ''&&tuikuanList!==0">{{tuikuanList}}</text></view>
 					</view>
@@ -436,14 +433,13 @@
 				}
 				listing(getMyOrder, data)
 					.then((res) => {
-						console.log(res)
 						let list = res.data.data
-						// console.log(list)
+						if (list.length === 0) return
+						console.log(list)
 						let fukuanList = []
 						let fahuoList = []
 						let shouhuoList = []
 						let tuikuanList = []
-						if (list.length === 0) return
 						list.forEach(item => {
 							if (item.payStatus == 0) {
 								fukuanList.push(item)

@@ -107,28 +107,30 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  var l1 = _vm.__map(_vm.orderObj, function(item, index) {
-    var $orig = _vm.__get_orig(item)
+  var l1 =
+    !_vm.modaishow && _vm.orderObj.length !== 0
+      ? _vm.__map(_vm.orderObj, function(item, index) {
+          var $orig = _vm.__get_orig(item)
 
-    var l0 = _vm.__map(item.list, function(itemTwo, indexs) {
-      var $orig = _vm.__get_orig(itemTwo)
+          var l0 = _vm.__map(item.list, function(itemTwo, indexs) {
+            var $orig = _vm.__get_orig(itemTwo)
 
-      var f0 = _vm._f("getPrice")(
-        _vm.ApproveStatus === 1 ? itemTwo.platformClientPrice : "***"
-      )
+            var f0 = _vm._f("getPrice")(
+              _vm.ApproveStatus === 1 ? itemTwo.platformClientPrice : "***"
+            )
 
-      return {
-        $orig: $orig,
-        f0: f0
-      }
-    })
+            return {
+              $orig: $orig,
+              f0: f0
+            }
+          })
 
-    return {
-      $orig: $orig,
-      l0: l0
-    }
-  })
-
+          return {
+            $orig: $orig,
+            l0: l0
+          }
+        })
+      : null
   _vm.$mp.data = Object.assign(
     {},
     {
@@ -171,6 +173,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
 
 
 
@@ -387,6 +390,7 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 //
 //
 //
+//
 //请求方式
 //请求地址
 var _console = console,log = _console.log;var setdata = uni.getStorageSync('usermen');var _default = { data: function data() {return { tips: '', modaishow: false, isActive: true, //显示
@@ -400,8 +404,7 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       curId: 0 };}, filters: { getPrice: function getPrice(price) {if (price === '***') {return price;}price = price || 0;return price.toFixed(2);} }, methods: { goIndex: function goIndex() {uni.switchTab({ url: '../index/index' });}, init: function init(bull, tips) {this.modaishow = bull;this.tips = tips;}, //获取头像昵称
     getUserInfo: function getUserInfo(event) {// log(event)
       this.usering = event.detail.userInfo;uni.setStorageSync('userIN', event.detail.userInfo); //把头像存在本地，小程序提供如同浏览器cookie
-      var userING = uni.setStorageSync('userIN', event.detail.userInfo);if (event.detail.userInfo) {var wxing = event.detail.userInfo;this.wxCode(wxing.avatarUrl, wxing.nickName);
-      }
+      var userING = uni.setStorageSync('userIN', event.detail.userInfo);if (event.detail.userInfo) {var wxing = event.detail.userInfo;this.wxCode(wxing.avatarUrl, wxing.nickName);}
       // wx.startPullDownRefresh()
     },
     //获取code
@@ -812,16 +815,15 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
   },
   // 看订单的前提条件就是是否登录
   onShow: function onShow() {
-
     //下拉刷新
     this.allPrice = 0;
     this.onclike();
     this.isAll = false;
     this.isCheck = false;
-
     this.cartIds = []; //清空id
     this.getMerchants();
     var setdata = uni.getStorageSync('usermen');
+    console.log(setdata);
     if (!setdata) {
       this.hasError = true;
       this.isActive = false;

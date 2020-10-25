@@ -327,18 +327,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
 var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
 
 
 var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
-//
-//
-//
 //
 //
 //
@@ -606,8 +600,10 @@ var _console = console,log = _console.log;var logins = __webpack_require__(/*! .
     // 	})
     // },
     // 获取订单
-    getOrderData: function getOrderData() {var _this5 = this;var setdata = uni.getStorageSync('usermen');if (!setdata) {return;}var data = { token: setdata, pageNo: 1, pageSize: 100 };(0, _api.listing)(_request.getMyOrder, data).then(function (res) {console.log(res);var list = res.data.data; // console.log(list)
-        var fukuanList = [];var fahuoList = [];var shouhuoList = [];var tuikuanList = [];if (list.length === 0) return;list.forEach(function (item) {if (item.payStatus == 0) {fukuanList.push(item);}if (item.tradeStatus == 1) {fahuoList.push(item);}if (item.tradeStatus == 2) {shouhuoList.push(item);}if (item.tradeStatus == 7) {tuikuanList.push(item);}});console.log('shouhuoList,', shouhuoList);_this5.fukuanList = fukuanList.length;_this5.fahuoList = fahuoList.length;_this5.shouhuoList = shouhuoList.length;_this5.tuikuanList = tuikuanList.length;_this5.$forceUpdate();}).catch(function (err) {log(err);});}, ifUser: function ifUser() {var setuserdata = uni.getStorageSync('userIN');if (!setuserdata) {
+    getOrderData: function getOrderData() {var _this5 = this;var setdata = uni.getStorageSync('usermen');if (!setdata) {return;}var data = { token: setdata, pageNo: 1, pageSize: 100 };(0, _api.listing)(_request.getMyOrder, data).then(function (res) {var list = res.data.data;if (list.length === 0) return;console.log(list);var fukuanList = [];var fahuoList = [];var shouhuoList = [];var tuikuanList = [];list.forEach(function (item) {if (item.payStatus == 0) {fukuanList.push(item);}if (item.tradeStatus == 1) {fahuoList.push(item);}if (item.tradeStatus == 2) {shouhuoList.push(item);}if (item.tradeStatus == 7) {tuikuanList.push(item);}});console.log('shouhuoList,', shouhuoList);_this5.fukuanList = fukuanList.length;_this5.fahuoList = fahuoList.length;_this5.shouhuoList = shouhuoList.length;_this5.tuikuanList = tuikuanList.length;_this5.$forceUpdate();}).catch(function (err) {log(err);});},
+    ifUser: function ifUser() {
+      var setuserdata = uni.getStorageSync('userIN');
+      if (!setuserdata) {
         this.wxlogin = false;
       } else {
         this.wxlogin = true;
