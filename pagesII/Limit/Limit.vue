@@ -10,11 +10,13 @@
 		</view> -->
 		<!--header-->
 		<!--banner-->
-		<view class="tui-banner-swiper" > <!-- :style="{top: navHeight + 'px'}" -->
+		<view class="tui-banner-swiper">
+			<!-- :style="{top: navHeight + 'px'}" -->
 			<image :src="imageUrl" class="tui-my-bg" mode="aspectFill"></image>
 		</view>
 
-		<view class="scroll-goods" ><!-- :style="{top: statusHeight<=20 ? '430rpx': (430+statusHeight) + 'rpx'}" -->
+		<view class="scroll-goods">
+			<!-- :style="{top: statusHeight<=20 ? '430rpx': (430+statusHeight) + 'rpx'}" -->
 			<view class="tui-cent-box">
 				<view class="tui-cent-box-felx1">
 					<view class="class-name-left">
@@ -42,8 +44,9 @@
 			</view>
 			<view class="flex-column-box">
 				<scroll-view :scroll-top="scrollTop" scroll-y="true" class="scroll-Y" @scroll="scroll">
-					<view class="tui-rink-sceate" >
-						<view class="tui-rank-list"><!-- v-for="ll of 20" :key="ll" -->
+					<view class="tui-rink-sceate">
+						<view class="tui-rank-list">
+							<!-- v-for="ll of 20" :key="ll" -->
 							<view class="tui-tab-rank" v-for="(item,index) in LimitDataList" :key="index">
 								<view class="tui-tab-rank-cent" @tap="gotoList(item.id)">
 									<image :src="item.url" mode="aspectFill" class="img-rink"></image>
@@ -51,13 +54,13 @@
 										<text class="tag-tit">{{item.lableName}}</text> <text class="tag-tit-text">{{item.title}}</text>
 										<view class="tag-tit2">
 											<view class="">
-												<view class="tag-tit2-text" >
-													<view style="width: 200rpx; position: relative;">
-														<view class="cu-progress round sm " :class="active?'active':''" style="position: relative;">
-															<view class="fonsize">仅剩{{item.number}}件</view>
+												<view class="tag-tit2-text">
+													<view style="position: relative; display: flex;margin-top: 20rpx;">
+														<view class="cu-progress round sm " :class="active?'active':''" style="position: relative;width: 180rpx;">
 															<view class="bg-green round" :style="[{ width:loading? (item.number/item.initNumber)*100 + '%':''}]">
 															</view>
 														</view>
+														<view style="margin-left: 20rpx;color: #00C52A;font-size: 20rpx;">仅剩{{item.number}}件</view>
 													</view>
 												</view>
 												<view class="tag-tit2-price">
@@ -103,7 +106,7 @@
 	const {
 		log
 	} = console
-	let setdata = uni.getStorageSync('usermen')//Token
+	let setdata = uni.getStorageSync('usermen') //Token
 	export default {
 
 		data() {
@@ -172,8 +175,8 @@
 			// #endif
 
 		},
-		computed:{
-			
+		computed: {
+
 		},
 		methods: {
 			getMerchants() {
@@ -453,13 +456,13 @@
 		z-index: 99999;
 		border-bottom: 1px solid #f5f5f5;
 	}
-	
+
 	.flex-column-box {
 		position: relative;
 		flex: 1;
 	}
-	
-	.scroll-Y{
+
+	.scroll-Y {
 		position: absolute;
 		top: 0;
 		bottom: 0;
@@ -533,7 +536,7 @@
 		background: #00C52A;
 		font-size: 24rpx;
 		color: #fff;
-		width: 160rpx;
+		width: 130rpx;
 		text-align: center;
 		padding: 16rpx 0;
 		border-radius: 50rpx;

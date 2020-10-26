@@ -20,9 +20,10 @@
 							<view class="tui-order-status" v-if="item.tradeStatus == 1 || item.tradeStatus == 2|| item.tradeStatus == 3">待发货</view>
 							<!-- <view class="tui-order-status" v-if="item.tradeStatus == 2">已发货</view> -->
 							<view class="tui-order-status" v-if="item.tradeStatus == 4">待收货</view>
-							<view class="tui-order-status" v-if="item.tradeStatus == 6">已完成</view>
+							<view class="tui-order-status" v-if="item.tradeStatus == 6 || (item.tradeStatus == 7&&item.afterStatus == 11)">已完成</view>
 							<!-- <view class="tui-order-status" v-if="item.afterStatus == '' && item.tradeStatus == 7">售后中</view> -->
-							<view class="tui-order-status" v-if="item.tradeStatus == 7 && (item.afterStatus !== '1'||item.afterStatus !== '4'||item.afterStatus !== '5')">售后中</view>
+							<view class="tui-order-status" v-if="item.tradeStatus == 7 && (item.afterStatus == '0'||item.afterStatus == '3')">售后中</view>
+							
 							<view class="tui-order-status" v-if="item.tradeStatus == 8">待确认</view>
 							<!-- <view class="tui-order-status" v-if="item.tradeStatus == 9">已完成</view> -->
 
@@ -309,8 +310,11 @@
 						<view class="tui-btn-ml">
 							<button open-type="contact" type="primary" hover-class='none' class="icon-img3">联系客服</button>
 						</view>
-						<view class="tui-btn-ml">
+						<view class="tui-btn-ml" v-if="item.tradeStatus == 6">
 							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="goAfter(item.id)">申请售后</tui-button>
+						</view>
+						<view class="tui-btn-ml" v-if="item.tradeStatus == 7 && item.afterStatus == 11">
+							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="goAfterSaleDetail(item.id)">售后详情</tui-button>
 						</view>
 						<view class="tui-btn-ml">
 							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="buyAgain(item.wx_goods_id)">再次下单</tui-button>
@@ -380,7 +384,8 @@
 				scrollTop: 0,
 				myOrderData: [],
 				url: '',
-				countDown: 0
+				countDown: 0,
+				afterStatus: ''
 			}
 		},
 		onLoad(options) {
@@ -397,10 +402,11 @@
 				this.currentTab = parseInt(options.index);
 				this.payStatus = '1'
 				this.tradeStatus = '4'
-			} else if (options.index == 3) {//已完成p1t8
+			} else if (options.index == 3) {//已完成p1t6 afterStatus11
 				this.currentTab = parseInt(options.index);
 				this.payStatus = '1'
-				this.tradeStatus = '6,11'
+				this.tradeStatus = '6',
+				this.afterStatus = '11'
 			} 
 			console.log(this.currentTab)
 			this.getOrderData()
@@ -458,7 +464,6 @@
 		},
 		methods: {
 			//手势
-
 			//支付倒计时
 			endOfTime(id) {
 				this.goCancel(id)
@@ -570,7 +575,8 @@
 					pageNo: this.pageIndex,
 					pageSize: 1000,
 					payStatus: this.payStatus,
-					tradeStatus: this.tradeStatus
+					tradeStatus: this.tradeStatus,
+					afterStatus: this.afterStatus
 				}
 				listing(getMyOrder, data)
 					.then((res) => {
@@ -619,7 +625,13 @@
 					url: '../../pagesIII/applyAfter/applyAfter?id=' + id
 				})
 			},
-			//售后详情
+			// 售后- 售后详情
+			goAfterSaleDetail(id){
+				uni.navigateTo({
+					url:'../../pagesIII/AfterSaleDetails/AfterSaleDetails?id='+id
+				})
+			},
+			// 售后- 申请详情
 			goAfterDetails(id) {
 				uni.navigateTo({
 					url: '../../pagesIII/afterDetails/afterDetails?id=' + id
@@ -639,10 +651,11 @@
 					this.currentTab = parseInt(options.index);
 					this.payStatus = '1'
 					this.tradeStatus = '4'
-				} else if (options.index == 3) {//已完成p1t6,11
+				} else if (options.index == 3) {//已完成p1t6 afterStatus 11
 					this.currentTab = parseInt(options.index);
 					this.payStatus = '1'
-					this.tradeStatus = '6,11'
+					this.tradeStatus = '6,7'
+					this.afterStatus = '11'
 				} 
 				this.getOrderData()
 				

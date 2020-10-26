@@ -1172,11 +1172,13 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       var arr = [];
       if (this.allVariety) {
         this.idList = [];
+        console.log('进来，', this.allVariety, this.idList);
       } else {
         list.forEach(function (item) {
           arr.push(item.id);
         });
         this.idList = arr;
+        console.log('进去，', this.allVariety, this.idList);
       }
       this.allVariety = !this.allVariety;
     },
@@ -1314,6 +1316,7 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       var list = this.idList;
       var lData = this.seleVarieties;
       if (list.length === 0) {
+        this.tempData.varietyId = '';
         (0, _api.listing)(_request.getGoodsall, this.tempData).then(function (res) {
           console.log(res);
           console.log("jinlai", list);

@@ -112,11 +112,23 @@ var render = function() {
     }
   })
 
+  var l1 = _vm.__map(_vm.goodList, function(item, index) {
+    var $orig = _vm.__get_orig(item)
+
+    var f1 = _vm._f("filterNum")(item.praise_number || 0)
+
+    return {
+      $orig: $orig,
+      f1: f1
+    }
+  })
+
   _vm.$mp.data = Object.assign(
     {},
     {
       $root: {
-        l0: l0
+        l0: l0,
+        l1: l1
       }
     }
   )
@@ -525,7 +537,7 @@ var _console = console,log = _console.log;var _default = { data: function data()
       scrollH: 0, //滚动总高度
       opcity: 0, iconOpcity: 0.5, bannerIndex: 0, menuShow: false, popupShow: false, value: 1, collected: false, valueText: '', ApproveStatus: 0 };}, onLoad: function onLoad(options) {var _this = this;this.getMerchants();this.url = _request.imgurl;var obj = { options: options }; //指定跳转
     this.menubtn(parseInt(options.index), options.value); //this.postRanking()
-    obj = wx.getMenuButtonBoundingClientRect();setTimeout(function () {uni.getSystemInfo({ success: function success(res) {_this.width = obj.left || res.windowWidth;_this.height = obj.top ? obj.top + obj.height + 8 : res.statusBarHeight + 44;_this.top = obj.top ? obj.top + (obj.height - 32) / 2 : res.statusBarHeight + 6;_this.scrollH = res.windowWidth;} });}, 0);}, computed: { currMonth: function currMonth() {return new Date().getMonth() + 1;}, currDay: function currDay() {return new Date().getDate();} }, filters: { filterNum: function filterNum(val) {var data = Math.floor(val) + '';var res = data.split("");var unit = ['', '个', '十', '百', '千', '万', '万', '万', '万', '亿'];if (res.length <= 4) {return data;} else if (res.length === 5) {// 1w √
+    obj = wx.getMenuButtonBoundingClientRect();setTimeout(function () {uni.getSystemInfo({ success: function success(res) {_this.width = obj.left || res.windowWidth;_this.height = obj.top ? obj.top + obj.height + 8 : res.statusBarHeight + 44;_this.top = obj.top ? obj.top + (obj.height - 32) / 2 : res.statusBarHeight + 6;_this.scrollH = res.windowWidth;} });}, 0);}, computed: { currMonth: function currMonth() {return new Date().getMonth() + 1;}, currDay: function currDay() {return new Date().getDate();} }, filters: { filterNum: function filterNum(val) {if (val < 1) {return val;}var data = Math.floor(val) + '';var res = data.split("");var unit = ['', '个', '十', '百', '千', '万', '万', '万', '万', '亿'];if (res.length <= 4) {return data;} else if (res.length === 5) {// 1w √
         if (res[1] !== '0') {return res[0] + "." + res[1] + unit[res.length];} else {return res[0] + "" + unit[res.length];}} else if (res.length === 6) {// 10w √
         if (res[2] !== '0') {return res[0] + res[1] + "." + res[2] + unit[res.length];} else {return res[0] + res[1] + "" + unit[res.length];}} else if (res.length === 7) {// 100w √
         if (res[3] !== '0') {return res[0] + res[1] + res[2] + "." + res[3] + unit[res.length];} else {return res[0] + res[1] + res[2] + "" + unit[res.length];}} else if (res.length === 8) {// 1000w√
@@ -542,7 +554,10 @@ var _console = console,log = _console.log;var _default = { data: function data()
       this.num = index;this.postRanking(); //那这个方法里面的this.valueText怎么会能拿到嘛
       // 子组件调试父组件方法 ：parent
       // this.$parent.fatherMethod(index)
-    }, previewImage: function previewImage(e) {var index = e.currentTarget.dataset.index;uni.previewImage({ current: this.banner[index], urls: this.banner });
+    }, previewImage: function previewImage(e) {var index = e.currentTarget.dataset.index;
+      uni.previewImage({
+        current: this.banner[index],
+        urls: this.banner });
 
     },
     back: function back() {

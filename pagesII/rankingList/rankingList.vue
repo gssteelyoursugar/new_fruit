@@ -92,7 +92,7 @@
 											<text style="font-size: 20rpx;color: #b6b6b6;">/件</text>
 										</view>
 										<view class="tag-tit2-text">
-											{{item.evaluateNumber || 0}}人点了赞
+											{{item.praise_number || 0 |filterNum}}人点了赞
 										</view>
 									</view>
 									<image src="../../static/images/shopcar@2x.png" mode="aspectFill" class="tui-shop-car"></image>
@@ -282,6 +282,9 @@
 
 		filters: {
 			filterNum(val) {
+				if (val < 1) {
+					return val
+				}
 				let data = Math.floor(val) + ''
 				let res = data.split("")
 				const unit = ['','个', '十', '百', '千', '万', '万', '万', '万', '亿']

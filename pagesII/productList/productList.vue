@@ -976,11 +976,13 @@
 				let arr = []
 				if (this.allVariety) {
 					this.idList = []
+					console.log('进来，',this.allVariety,this.idList)
 				} else { 
 					list.forEach(item=>{
 						arr.push(item.id)
 					})
 					this.idList = arr
+					console.log('进去，',this.allVariety,this.idList)
 				}
 				this.allVariety = !this.allVariety
 			},
@@ -1118,6 +1120,7 @@
 				let list = this.idList
 				let lData = this.seleVarieties
 				if (list.length === 0) {
+					this.tempData.varietyId = ''
 					listing(getGoodsall, this.tempData).then(res => {
 						console.log(res)
 						console.log("jinlai", list)

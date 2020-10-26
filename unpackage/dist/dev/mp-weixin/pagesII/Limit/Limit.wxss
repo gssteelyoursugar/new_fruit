@@ -190,7 +190,7 @@ page {
 		-webkit-flex: 1;
 		        flex: 1;
 }
-.scroll-Y{
+.scroll-Y {
 		position: absolute;
 		top: 0;
 		bottom: 0;
@@ -260,7 +260,7 @@ page {
 		background: #00C52A;
 		font-size: 24rpx;
 		color: #fff;
-		width: 160rpx;
+		width: 130rpx;
 		text-align: center;
 		padding: 16rpx 0;
 		border-radius: 50rpx;

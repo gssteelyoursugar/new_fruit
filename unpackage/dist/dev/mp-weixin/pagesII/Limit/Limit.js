@@ -226,12 +226,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
 var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
 
 
 var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
+//
+//
+//
 //
 //
 //
@@ -334,10 +340,7 @@ var _default = { data: function data() {return { loading: false, active: true, u
         _this.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
         // log(this.ApproveStatus)
       }).catch(function (err) {log(err);});}, scroll: function scroll(e) {console.log(e);}, //商品详情页
-    gotoList: function gotoList(id) {log(id);uni.navigateTo({
-        url: '../../pagesIII/productDetail/productDetail?id=' + id });
-
-    },
+    gotoList: function gotoList(id) {log(id);uni.navigateTo({ url: '../../pagesIII/productDetail/productDetail?id=' + id });},
 
     //倒计时
     endOfTime: function endOfTime() {

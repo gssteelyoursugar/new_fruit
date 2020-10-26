@@ -430,8 +430,8 @@
 							if (item.payStatus == '1' && (item.tradeStatus == '4')) {  //||item.tradeStatus == '8' （要不要8）
 								shouhuoList.push(item)
 							}
-							if (item.tradeStatus == 7) {
-								if(item.afterStatus == '0') {
+							if (item.tradeStatus == '7') {  // 只要审核中以及待确定的
+								if(item.afterStatus == '0' || item.afterStatus == '3') { // item.afterStatus == '3' （要不要3）
 									tuikuanList.push(item)
 								}
 							}
