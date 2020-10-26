@@ -184,6 +184,7 @@ page {
 	position: fixed;
 	z-index: 1000;
 	padding-top: 100rpx;
+	border-bottom: 1px solid #f5f5f5;
 }
 .tui-screen-top,
 .tui-screen-bottom {

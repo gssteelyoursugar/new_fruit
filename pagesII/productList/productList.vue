@@ -41,6 +41,7 @@
 							<image src="../../static/images/up-t_f.png" v-if="(index == 1 && sleter) || index !=num" mode=""></image>
 							<image src="../../static/images/down-t_t.png" v-if="index == 1 && sleter&& index ==num"></image>
 							<image src="../../static/images/down-t_f.png" v-if="(index == 1 && !sleter)  || index !=num"></image>
+							
 							<image src="../../static/images/up-t_t.png" v-if="index == num &&index == 2 && !sleter2" mode=""></image>
 							<image src="../../static/images/up-t_f.png" v-if="index == num &&index == 2 && sleter2" mode=""></image>
 							<image src="../../static/images/down-t_t.png" v-if="index == num &&index == 2 && sleter2"></image>
@@ -70,7 +71,7 @@
 					<view class="tui-bottom-text">{{slGuobiao}}</view>
 					<text class="iconfont icon-xiajiantou"></text>
 				</view>
-				<view class="tui-bottom-item tui-icon-ml">
+				<view class="tui-bottom-item tui-icon-ml" @tap="btnDropChange4">
 					<!-- @tap="btnDropChange(slYanzheng)" -->
 					<view class="tui-bottom-text">{{slYanzheng}}</view>
 					<!-- <text class="iconfont icon-xiajiantou"></text> -->
@@ -115,7 +116,7 @@
 										<text style="font-size: 16rpx;">¥</text>
 										<text style="font-size: 28rpx; font-weight: 500">{{ApproveStatus===1?item.platformClientPrice:'***'}}</text>
 										<text style="font-size: 20rpx;color: #B6B6B6;">/件</text>
-										<view style="color: #B6B6B6;text-decoration: line-through; margin-left:10rpx;" v-if="item.marketPrice != 0">
+										<view style="color: #B6B6B6;text-decoration: line-through; margin-left:10rpx;" v-if="item.marketPrice &&item.marketPrice != 0">
 											<text style="font-size: 16rpx;"> ¥</text>
 											<text style="font-size: 24rpx;font-weight: 500;">{{ApproveStatus === 1? item.marketPrice:'***'}}</text>
 										</view>
@@ -165,9 +166,9 @@
 								<view class="tui-pro-pic">
 									<view style="color: #FF7709; display: flex;align-items: baseline;">
 										<text style="font-size: 16rpx;">¥</text>
-										<text style="font-size: 28rpx; font-weight: 500">{{ApproveStatus===1?item.platformClinetPrice:'***'}}</text>
+										<text style="font-size: 28rpx; font-weight: 500">{{ApproveStatus===1?item.platformClientPrice:'***'}}</text>
 										<text style="font-size: 20rpx;color: #B6B6B6;">/件</text>
-										<view style="color: #B6B6B6;text-decoration: line-through;margin-left:10rpx;" v-if="item.marketPrice != 0">
+										<view style="color: #B6B6B6;text-decoration: line-through;margin-left:10rpx;" v-if=" item.marketPrice &&item.marketPrice != 0">
 											<text style="font-size: 16rpx;"> ¥</text>
 											<text style="font-size: 24rpx;font-weight: 500">{{ApproveStatus===1?item.marketPrice:'***'}}</text>
 										</view>
@@ -192,7 +193,7 @@
 		<!--list-->
 
 		<!--果类弹层 -->
-		<tui-top-dropdown backgroundColor="#f7f7f7" :show="dropScreenShow" :paddingbtm="110" :translatey="dropScreenH" @close="btnCloseDrop">
+		<tui-top-dropdown backgroundColor="#fff" :show="dropScreenShow" :paddingbtm="110" :translatey="dropScreenH" @close="btnCloseDrop">
 			<scroll-view class="tui-scroll-box" scroll-y :scroll-top="scrollTop">
 				<view class="tui-hot-title">
 					热门水果
@@ -210,10 +211,9 @@
 					<text class="tui-ml tui-middle " :class="{checked: item.isActives}" @click="checkDing2(index,item.title,item.isActives)">{{ item.title }}</text>
 				</view> -->
 			</scroll-view>
-
 		</tui-top-dropdown>
 		<!-- 品种 -->
-		<tui-top-dropdown backgroundColor="#f7f7f7" :show="dropScreenShow2" :paddingbtm="110" :translatey="dropScreenH"
+		<tui-top-dropdown backgroundColor="#ffff" :show="dropScreenShow2" :paddingbtm="110" :translatey="dropScreenH"
 		 @close="btnCloseDrop">
 			<scroll-view class="tui-scroll-box" scroll-y :scroll-top="scrollTop">
 				<view class="tui-drop-item" :class="{'tui-drop-active':allVariety}" @click="pickAllVariety">
@@ -358,6 +358,27 @@
 			</view>
 		</tui-drawer>
 		<!--左抽屉弹层 筛选-->
+		<!--验货保障 -->
+		<tui-top-dropdown backgroundColor="#fff" :show="dropScreenShow4" :paddingbtm="110" :translatey="dropScreenH" @close="btnDropChange4">
+			<scroll-view class="tui-scroll-box" scroll-y :scroll-top="scrollTop">
+				<!-- <view class="tui-hot-title">
+					热门水果
+				</view> -->
+				<view class="hot-wrap" style="display: flex; flex-wrap: wrap;">
+					<view class="tui-drop-item" :class="{'tui-drop-active': goods_type_id == item.id}" v-for="(item, index) in goods_type"
+					 :key="index" :style="">
+						<text class="" :class="{activetext: goods_type_id == item.id}" @click="clickType(index,item.id,item.name)">{{ item.name }}</text>
+					</view>
+				<!-- 	<view class="tui-drop-item ">
+						<text class="" @click="checkgeng()">更多></text>
+					</view> -->
+				</view>
+				<!-- <view class="tui-drop-item "v-for="(item, index) in variety":key="index" >
+					<text class="tui-ml tui-middle " :class="{checked: item.isActives}" @click="checkDing2(index,item.title,item.isActives)">{{ item.title }}</text>
+				</view> -->
+			</scroll-view>
+		</tui-top-dropdown>
+		
 
 		<!--加载loadding-->
 		<tui-nomore v-if="!pullUpOn"></tui-nomore>
@@ -416,6 +437,7 @@
 				goods: [], //商品
 				packaging: [], //包装
 				species: [], //果类
+				goods_type: [], //验货保障
 				storage_mode: [], //储存方式
 				taste_level: [], //口感等级
 				variety: [], //品种
@@ -491,10 +513,10 @@
 				inputTop: 0, //搜索框距离顶部距离
 				arrowTop: 0, //箭头距离顶部距离
 				dropScreenH: 0, //下拉筛选框距顶部距离
-				attrData: [],
-				attrIndex: -1,
 				dropScreenShow: false, //品种筛选
 				dropScreenShow2: false, //品种筛选
+				dropScreenShow4: false,
+				isActives4 :false,
 				dropNum: 0, //筛选下拉
 				scrollTop: 0,
 				tabIndex: 0, //顶部筛选索引
@@ -579,7 +601,8 @@
 				tempData: {
 					id: '',
 					token: setdata,
-					varietyId: '',
+					varietyId: '', //品种id （可以是多个）
+					goodsTypeId: '', // 验货保障id
 					// fruitLevel: '', //等级
 					fruit_parameter_1: '', //等级左
 					fruit_parameter_2: '', //等级右
@@ -598,8 +621,9 @@
 					price_parameter_1: '', //价格左
 					price_parameter_2: '', //价格右边
 					pageNo: 1,
-					pageSize: 10
-				}
+					pageSize: 10000,
+				},
+				goods_type_id: ''
 			};
 		},
 		onLoad(options) {
@@ -810,7 +834,7 @@
 			getSearch(serrchName) {
 				let data = {
 					pageNo: 1,
-					pageSize: 10,
+					pageSize: 10000,
 					name: serrchName
 				}
 				listing(getGoodsall, data)
@@ -831,6 +855,7 @@
 						// for (var i = 0; i < this.species.length; i++) {
 						// 	this.species[i].isActives = this.activeA
 						// }
+						this.goods_type = res.data.data.goodsType
 						this.storage_mode = res.data.data.storage_mode
 						this.taste_level = res.data.data.taste_level
 						this.variety = res.data.data.variety
@@ -844,29 +869,29 @@
 			/* 第一个筛选 */
 			Total(index) {
 				this.num = index
-				log(this.num)
+				// log(this.num)
 				if (this.num == 0) {
 					this.ShopIng()
 					log('综合')
 				} else if (this.num == 1) {
 					if (this.sleter) {
-						log('销量升序')
-						console.log("sleter", this.sleter)
+						log('销量1')
+						console.log("sleter",this.sleter)
 						this.getshopDESC()
 					} else {
-						console.log("sleter", this.sleter)
+						log('销量2')
+						console.log("sleter",this.sleter)
 						this.getshopASC()
-						log('销量降序')
 					}
 					this.sleter = !this.sleter
 				} else if (this.num == 2) {
 					if (this.sleter2) {
-						log('价格升序')
-						console.log("sleter", this.sleter2)
+						log('销量1')
+						console.log("sleter2",this.sleter2)
 						this.getpriceDESC()
 					} else {
-						console.log("sleter", this.sleter2)
-						log('价格降序')
+						log('销量2')
+						console.log("sleter",this.sleter2)
 						this.getpriceASC()
 					}
 					this.sleter2 = !this.sleter2
@@ -875,16 +900,13 @@
 					// uni.navigateTo({
 					// 	url: '../../pagesIII/videos/videos'
 					// })
-
 					uni.showToast({
 						title: "功能内测中，敬请期待",
 						icon: "none",
 						duration: 2000
 					})
-					log('视频选果')
-
+					// log('视频选果')
 				} else if (this.num == 4) {
-
 					uni.navigateTo({
 						url: '../../pagesII/rankingList/rankingList'
 					})
@@ -897,6 +919,7 @@
 				this.dropScreenShow = !this.dropScreenShow
 				this.dropScreenShow2 = false
 				this.isActives2 = false
+				this.dropScreenShow4 = false
 				// if(this.isActives1 === true){
 				// 	this.dropScreenShow === true
 				// }else if(this.isActives1 === false){
@@ -904,33 +927,14 @@
 				// }
 				// this.isActives1 = !this.isActives1
 				this.isActives1 = this.dropScreenShow
-				// 	this.dropScreenShow = !this.dropScreenShow
-				// this.dropScreenShow2 = false
-				// log(this.dropNum)
-				// if (this.dropNum == 0) {
-				// 	this.dropScreenShow = !this.dropScreenShow
-				// 	this.dropScreenShow2 = false
-				// 	log('芒果')
-				// } else if (this.dropNum == 1) {
-				// 	this.dropScreenShow2 = !this.dropScreenShow2
-				// 	this.dropScreenShow = false
-				// 	log('品种')
-
-				// } else if (this.dropNum == 2) {
-				// 	this.btnCloseDrop();
-				// 	this.drawer = !this.drawer
-				// 	log('果标')
-				// } else if (this.dropNum == 3) {
-				// 	log('保障')
-
-				// } 
-
+				
 			},
 			btnDropChange2() {
-				log('触发')
+				// log('触发')
 				this.$forceUpdate();
 				this.isActives2 = !this.isActives2
 				this.dropScreenShow2 = !this.dropScreenShow2
+				this.dropScreenShow4 = false
 				this.dropScreenShow = false
 				this.isActives1 = false
 			},
@@ -938,8 +942,17 @@
 				this.drawer = !this.drawer
 				this.dropScreenShow2 = false
 				this.dropScreenShow = false
+				this.dropScreenShow4 = false
 				this.isActives2 = false
 				this.isActives = false
+			},
+			btnDropChange4() {
+				this.dropScreenShow2 = false
+				this.dropScreenShow = false
+				this.isActives2 = false
+				this.isActives = false
+				this.dropScreenShow4  = !this.dropScreenShow4 
+				this.isActives4 = !this.isActives4 
 			},
 			//单选
 			checkDing(index, id, title) {
@@ -948,6 +961,13 @@
 				this.varietyId = id
 				this.ShopIng()
 				this.dropScreenShow = !this.dropScreenShow
+			},
+			clickType (index,id,name) {
+				this.goods_type_id = id
+				this.tempData.goodsTypeId = id
+				this.ShopIng()
+				// console.log(index,id,name,this.goods_type_id)
+				this.dropScreenShow4 = !this.dropScreenShow4
 			},
 			//品种全选
 			pickAllVariety() {
@@ -1019,32 +1039,19 @@
 				console.log("tempData:", this.tempData)
 
 			},
-			//关闭
-			isFalse() {
-				this.dropScreenShow2 = false
-				this.dropScreenShow = false
-				this.isActives2 = false
-				this.isActives = false
-			},
-			//打开
-			isTrue() {
-				this.dropScreenShow2 = true
-				this.dropScreenShow = true
-				this.isActives2 = true
-				this.isActives = true
-			},
-
+		
 			useOutClickSide() {
 				this.$refs.easySelect.hideOptions && this.$refs.easySelect.hideOptions()
 			},
 			//销量升序
 			getshopDESC() {
-				let data = {
-					pageNo: 1,
-					pageSize: 10,
-					order: 'A.shop_number DESC'
-				}
-				listing(getGoodsall, data)
+				// let data = {
+				// 	pageNo: 1,
+				// 	pageSize: 10000,
+				// 	order: 'A.shop_number DESC'
+				// }
+				this.tempData.order = 'A.shop_number DESC'
+				listing(getGoodsall, this.tempData)
 					.then((res) => {
 						log(res)
 						this.goods = res.data.data.goods
@@ -1056,13 +1063,13 @@
 			},
 			//销量降序
 			getshopASC() {
-
-				let data = {
-					pageNo: 1,
-					pageSize: 10,
-					order: 'A.shop_number ASC'
-				}
-				listing(getGoodsall, data)
+				// let data = {
+				// 	pageNo: 1,
+				// 	pageSize: 10000,
+				// 	order: 'A.shop_number ASC'
+				// }
+				this.tempData.order = 'A.shop_number ASC'
+				listing(getGoodsall, this.tempData)
 					.then((res) => {
 
 						log(res)
@@ -1075,12 +1082,13 @@
 			},
 			//价格升序
 			getpriceDESC() {
-				let data = {
-					pageNo: 1,
-					pageSize: 10,
-					order: 'A.platform_price DESC'
-				}
-				listing(getGoodsall, data)
+				// let data = {
+				// 	pageNo: 1,
+				// 	pageSize: 10000,
+				// 	order: 'A.platform_price DESC'
+				// }
+				this.tempData.order = 'A.platform_price DESC'
+				listing(getGoodsall, this.tempData)
 					.then((res) => {
 						log(res)
 						this.goods = res.data.data.goods
@@ -1091,12 +1099,13 @@
 			},
 			//价格降序
 			getpriceASC() {
-				let data = {
-					pageNo: 1,
-					pageSize: 10,
-					order: 'A.platform_price ASC'
-				}
-				listing(getGoodsall, data)
+				// let data = {
+				// 	pageNo: 1,
+				// 	pageSize: 10000,
+				// 	order: 'A.platform_price ASC'
+				// }
+				this.tempData.order = 'A.platform_price ASC'
+				listing(getGoodsall, this.tempData)
 					.then((res) => {
 						this.goods = res.data.data.goods
 					})
@@ -1156,6 +1165,7 @@
 						for (var i = 0; i < this.species.length; i++) {
 							this.species[i].isActives = this.activeA
 						}
+						this.goods_type = res[0].data.data.goodsType
 						this.storage_mode = res[0].data.data.storage_mode
 						this.taste_level = res[0].data.data.taste_level
 						this.variety = res[0].data.data.variety
@@ -1177,29 +1187,16 @@
 				this.slPinzhong = "品种"
 				this.idList = []
 				this.tempData.varietyId = ''
-				// let arr = this.attrData;
-				// for (let item of arr) {
-				// 	item.selected = false;
-				// }
-				// this.attrData = arr;
+				
 			},
 			btnCloseDrop() {
 				this.scrollTop = 1;
 				this.$nextTick(() => {
 					this.scrollTop = 0;
 				});
-
 				this.dropScreenShow = false;
-				this.attrIndex = -1;
 			},
-			clickToSure(dd) {
-				this.isActives2 = false
-				this.isActives = false
-				// this.btnCloseDrop();
-				this.dropScreenShow2 = false
-				console.log('我真的点击了', dd)
-				// this.dropScreenShow = false
-			},
+			
 			showDropdownList() {
 				this.selectH = 246;
 				this.tabIndex = 0;
@@ -1490,6 +1487,7 @@
 		position: fixed;
 		z-index: 1000;
 		padding-top: 100rpx;
+		border-bottom: 1px solid #f5f5f5;
 	}
 
 	.tui-screen-top,

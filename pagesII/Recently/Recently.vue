@@ -15,7 +15,7 @@
 		<view class="container-img" v-if="modaishow">
 			<image src="../../static/images/quanguo.png" mode="widthFix" class="img-quanguo"></image>
 			<!-- <text class="color-text">{{tips}}</text> -->
-			<view class="btnbox"><button class="btn" type="default" open-type="getUserInfo" @getuserinfo="getUserInfo">去登陆</button></view>
+			<view class="btnbox"><button class="btn" type="default" open-type="getUserInfo" @getuserinfo="getUserInfo">去登录</button></view>
 		</view>
 		<view>
 			<!-- :style="{marginTop: statusHeight + boxHeight + 'px'}" -->
@@ -311,7 +311,7 @@
 				let data = {
 					token: setdata,
 					pageNo: 1,
-					pageSize: 10
+					pageSize: 10000
 				};
 				listing(getRecently, data)
 					.then(res => {
@@ -921,14 +921,20 @@
 		color: rgba(112, 112, 112, 1);
 	}
 
-	.btnbox {
+	/* .btnbox {
 		position: relative;
 		top: 100rpx;
 		width: 280rpx;
 		border-radius: 100rpx;
 		overflow: hidden;
-		box-shadow: 0 0 8rpx 2rpx rgba(0, 197, 42, 1) !important;
+		box-shadow: 0 0 8rpx 2rpx rgba(0, 197, 42, 1) !important; 
 		border: 1px solid rgba(0, 197, 42, 1);
+	}
+	 */
+	.btnbox {
+		position: relative;
+		top: 100rpx;
+		width: 100%;
 	}
 
 
@@ -957,7 +963,7 @@
 		border-radius: 0;
 	}
 
-	.btn {
+	/* .btn {
 		border-radius: 100rpx;
 		height: 80rpx;
 		width: 280rpx;
@@ -966,5 +972,17 @@
 		border: 1px solid rgba(0, 197, 42, 1);
 		color: rgba(0, 197, 42, 1) !important;
 		font-size: 30rpx;
+	} */
+	
+	.btn {
+		border-radius: 100rpx;
+		height: 80rpx;
+		width: 300rpx;
+		background-color: #ffffff;
+		border: 1px solid rgba(0, 197, 42, 1);
+		color: rgba(0, 197, 42, 1) !important;
+		padding: 16rpx 0;
+		font-size: 32rpx;
+		box-shadow: 0 0 6rpx -1rpx;
 	}
 </style>

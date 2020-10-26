@@ -483,7 +483,7 @@ var _console = console,log = _console.log;var form = __webpack_require__(/*! @/c
         uni.setStorageSync('usermen', res.data.token); //把token存在本地，小程序提供如同浏览器cookie
         var setdata = uni.getStorageSync('usermen');
         uni.showToast({
-          title: '登陆成功' });
+          title: '登录成功' });
 
       }).
       catch(function (err) {

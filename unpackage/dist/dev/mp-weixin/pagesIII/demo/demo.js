@@ -185,7 +185,7 @@ var _default = { data: function data() {return { detail: [{ title: '我是标题
     getListData: function getListData() {var _this = this;
       var data = {
         pageNo: '1',
-        pageSize: '30',
+        pageSize: '10000',
         indexClassify: '2' };
 
 

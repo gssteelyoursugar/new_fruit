@@ -289,10 +289,10 @@
 		listing
 	} from '../../api/api.js';
 	//请求地址
-
 	import {
 		getDetails
 	} from '../../api/request.js';
+	let setdata = uni.getStorageSync('usermen')
 	export default {
 		name: "orderDetail",
 		data() {
@@ -303,11 +303,12 @@
 		methods: {
 			getOrderDetail() {
 				let data = {
-					token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzZXNzaW9uS2V5IjoialNvVU5VVTJXMCtWbWRuV29td0VIZz09Iiwiand0LWlkIjoiMDA3MTcyMzgtOGU4ZS00YjhkLTkxOTAtMDhhNGEwYmQwOTFkIiwid3hPcGVuSWQiOiJvb0MwNDRfdjVMMTBXOXVubU1lNnhRQjNRLVRJIn0.Ndj3uDbgAfK3VRUq9lcRT3pFs5uZUJQADfHMNO9-dAE",
-					id: 1315975296124047360
+					token: setdata,
+					id: this.order_id
 				};
 				listing(getDetails, data).then(res=>{
 					console.log(res)
+					this.orderObj = res.data.data[0]
 				})
 			}
 		},

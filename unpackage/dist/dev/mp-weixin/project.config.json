@@ -1,95 +1,71 @@
 {
-	"description": "项目配置文件。",
-	"packOptions": {
-		"ignore": []
-	},
-	"setting": {
-		"urlCheck": false,
-		"es6": true,
-		"postcss": true,
-		"minified": true
-	},
-	"compileType": "miniprogram",
-	"libVersion": "",
-	"appid": "wxc3f10711eb743246",
-	"projectname": "fruit-test",
-	"simulatorType": "wechat",
-	"simulatorPluginLibVersion": {},
-	"condition": {
-		"search": {
-			"current": -1,
-			"list": []
-		},
-		"conversation": {
-			"current": -1,
-			"list": []
-		},
-		"plugin": {
-			"current": -1,
-			"list": []
-		},
-		"game": {
-			"current": -1,
-			"list": []
-		},
-		"gamePlugin": {
-			"current": -1,
-			"list": []
-		},
-		"miniprogram": {
-			"current": 1,
-			"list": [
-				{
-					"id": 0,
-					"name": "我的123",
-					"pathName": "pages/my/my",
-					"query": ""
-				},
-				{
-					"id": 1,
-					"name": "进货单",
-					"pathName": "pages/order/order",
-					"query": ""
-				},
-				{
-					"id": 2,
-					"name": "我的订单",
-					"pathName": "pagesII/myOrder/myOrder",
-					"query": ""
-				},
-				{
-					"id": 3,
-					"name": "详情",
-					"pathName": "pagesIII/productDetail/productDetail",
-					"query": "id=1314864767386910720&__id__=1"
-				},
-				{
-					"id": 4,
-					"name": "确认订单",
-					"pathName": "pagesIII/submitOrder/submitOrder",
-					"query": "ids=1311225686585892864&__id__=1"
-				},
-				{
-					"id": 5,
-					"name": "支付成功",
-					"pathName": "pagesIII/PayOK/PayOK",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "找水果",
-					"pathName": "pages/search/search",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 7,
-					"name": "商品列表",
-					"pathName": "pagesII/productList/productList",
-					"query": "name=桃子&id=10010&__id__=1",
-					"scene": null
-				}
-			]
-		}
-	}
+  "description": "项目配置文件。",
+  "packOptions": {
+    "ignore": []
+  },
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "postcss": true,
+    "minified": true
+  },
+  "compileType": "miniprogram",
+  "libVersion": "",
+  "appid": "wxc3f10711eb743246",
+  "projectname": "fruit-test",
+  "condition": {
+    "search": {
+      "current": -1,
+      "list": []
+    },
+    "conversation": {
+      "current": -1,
+      "list": []
+    },
+    "game": {
+      "current": -1,
+      "list": []
+    },
+    "miniprogram": {
+      "current": 1,
+      "list": [
+        {
+          "name": "我的123",
+          "query": "",
+          "id": 0,
+          "pathName": "pages/my/my"
+        },
+        {
+          "name": "进货单",
+          "query": "",
+          "id": 1,
+          "pathName": "pages/order/order"
+        },
+        {
+          "name": "我的订单",
+          "query": "",
+          "id": 2,
+          "pathName": "pagesII/myOrder/myOrder"
+        },
+        {
+          "name": "详情",
+          "query": "id=1314864767386910720&__id__=1",
+          "id": 3,
+          "pathName": "pagesIII/productDetail/productDetail"
+        },
+        {
+          "name": "确认订单",
+          "query": "ids=1311225686585892864&__id__=1",
+          "id": 4,
+          "pathName": "pagesIII/submitOrder/submitOrder"
+        },
+        {
+          "name": "支付成功",
+          "query": "",
+          "id": 5,
+          "pathName": "pagesIII/PayOK/PayOK"
+        }
+      ]
+    }
+  }
 }

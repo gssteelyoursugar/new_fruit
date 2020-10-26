@@ -134,7 +134,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
 
@@ -425,7 +425,6 @@ var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
 
-
 var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 //
 //
@@ -713,7 +712,8 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 //
 //
 //请求地址
-var _default = { name: "orderDetail", data: function data() {return { order_id: '' };}, methods: { getOrderDetail: function getOrderDetail() {var data = { token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzZXNzaW9uS2V5IjoialNvVU5VVTJXMCtWbWRuV29td0VIZz09Iiwiand0LWlkIjoiMDA3MTcyMzgtOGU4ZS00YjhkLTkxOTAtMDhhNGEwYmQwOTFkIiwid3hPcGVuSWQiOiJvb0MwNDRfdjVMMTBXOXVubU1lNnhRQjNRLVRJIn0.Ndj3uDbgAfK3VRUq9lcRT3pFs5uZUJQADfHMNO9-dAE", id: 1315975296124047360 };(0, _api.listing)(_request.getDetails, data).then(function (res) {console.log(res);});} }, onLoad: function onLoad(opt) {this.order_id = opt.id;}, onShow: function onShow() {console.log("这里是onShow");this.getOrderDetail();} };exports.default = _default;
+var setdata = uni.getStorageSync('usermen');var _default = { name: "orderDetail", data: function data() {return { order_id: '' };}, methods: { getOrderDetail: function getOrderDetail() {var _this = this;var data = { token: setdata, id: this.order_id };(0, _api.listing)(_request.getDetails, data).then(function (res) {console.log(res);_this.orderObj = res.data.data[0];});} }, onLoad: function onLoad(opt) {this.order_id = opt.id;}, onShow: function onShow() {console.log("这里是onShow");this.getOrderDetail();} };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

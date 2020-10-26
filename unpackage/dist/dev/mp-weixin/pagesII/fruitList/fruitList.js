@@ -332,7 +332,7 @@ var _console = console,log = _console.log;var _default = { data: function data()
     getGoodsAll: function getGoodsAll() {var _this3 = this;
       var data = {
         pageNo: 1,
-        pageSize: 10 };
+        pageSize: 10000 };
 
 
       (0, _api.listing2)(_request.getNewsAll, data).

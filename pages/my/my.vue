@@ -77,25 +77,25 @@
 						<view class="tui-icon-box">
 							<image src="/static/images/daifahuo@3x.png" class="tui-order-icon"></image>
 						</view>
-						<view class="tui-order-text">待发货<text v-if="fahuoList !== ''&&fahuoList!== 0">{{fahuoList}}</text></view>
+						<view class="tui-order-text">待发货<text v-if="wxlogin &&fahuoList !== ''&&fahuoList!== 0">{{fahuoList}}</text></view>
 					</view>
 					<view class="tui-order-item" @tap="ToBeReceived">
 						<view class="tui-icon-box">
 							<image src="/static/images/daishouhuo@3x.png" style="width:52rpx;" class="tui-order-icon"></image>
 						</view>
-						<view class="tui-order-text">待收货<text v-if="shouhuoList !== ''&&shouhuoList!==0">{{shouhuoList}}</text></view>
+						<view class="tui-order-text">待收货<text v-if="wxlogin &&shouhuoList !== ''&&shouhuoList!==0">{{shouhuoList}}</text></view>
 					</view>
 					<view class="tui-order-item" @tap="ToBePaid">
 						<view class="tui-icon-box">
 							<image src="/static/images/done.png" style="width:40rpx;" class="tui-order-icon"></image>
 						</view>
-						<view class="tui-order-text">已完成<text v-if="fukuanList !== ''&&fukuanList == 0">{{fukuanList}}</text></view>
+						<view class="tui-order-text">已完成<text v-if="wxlogin &&fukuanList !== ''&&fukuanList == 0">{{fukuanList}}</text></view>
 					</view>
 					<view class="tui-order-item" @tap="gotoAfter">
 						<view class="tui-icon-box">
 							<image src="/static/images/shouhou@3x.png" class="tui-order-icon"></image>
 						</view>
-						<view class="tui-order-text">退款/售后<text v-if="tuikuanList !== ''&&tuikuanList!==0">{{tuikuanList}}</text></view>
+						<view class="tui-order-text">退款/售后<text v-if="wxlogin &&tuikuanList !== ''&&tuikuanList!==0">{{tuikuanList}}</text></view>
 					</view>
 				</view>
 			</view>
@@ -204,6 +204,7 @@
 
 	export default {
 		onLoad: function(options) {
+			this.getOrderData()
 			console.log("这里是onload")
 			// this.getMerchants()
 			// this.getWxdata()
@@ -227,22 +228,6 @@
 			})
 		},
 		data() {
-			// var value = this.ApproveStatus
-			// log(value)
-			// var msg = ''
-			// if (value == 0) {
-			// 	// this.Goauth2 = true
-			// 	//  //状态为0时证明已经认证
-			// 	this.logMsg = '审核中待通过'
-			// } else if (value == 1) {
-			// 	this.logMsg = '我的店铺已认证'
-			// 	// this.Goauth3 = true
-			// } else if (value == 2) {
-			// 	this.logMsg = '未通过'
-			// 	// this.Goauth4 = true
-			// } else if (!setdata) {
-			// 	this.logMsg = "去认证我的店铺"
-			// }
 			return {
 				lists: [],
 				modaishow: false,
@@ -257,16 +242,11 @@
 				loginText: '',
 				logMsg: "去认证我的店铺", //店铺状态信息展示
 				showBtn: false, //已登录未认证
-				Goauth: true, //未认证
-				Goauth2: false, //以申请待审核
-				Goauth3: false, //通过认证
-				Goauth4: false, //被拒绝,
 				user_phone: "",
 				fukuanList: '',
 				fahuoList: '',
 				shouhuoList: "",
 				tuikuanList: ''
-
 			}
 		},
 		methods: {
@@ -429,7 +409,7 @@
 				let data = {
 					token: setdata,
 					pageNo: 1,
-					pageSize: 100,
+					pageSize: 10000,
 				}
 				listing(getMyOrder, data)
 					.then((res) => {
@@ -447,11 +427,13 @@
 							if (item.tradeStatus == "1"||item.tradeStatus == "2" || item.tradeStatus == "3") {
 								fahuoList.push(item)
 							}
-							if (item.payStatus == '1' && (item.tradeStatus == '4'||item.tradeStatus == '8')) {
+							if (item.payStatus == '1' && (item.tradeStatus == '4')) {  //||item.tradeStatus == '8' （要不要8）
 								shouhuoList.push(item)
 							}
 							if (item.tradeStatus == 7) {
-								tuikuanList.push(item)
+								if(item.afterStatus == '0') {
+									tuikuanList.push(item)
+								}
 							}
 						})
 						console.log('shouhuoList,',shouhuoList)
@@ -474,7 +456,6 @@
 					this.usering = setuserdata
 				}
 			},
-
 			//去认证店铺
 			tendShop() {
 				let setdata = uni.getStorageSync('usermen')
@@ -507,37 +488,6 @@
 						url: '../../pagesIII/navbar/navbar'
 					})
 				}
-
-			},
-			//获取微信code
-			//发送给后台
-			ifUser2() {
-				// log(setdata)
-				if (!setdata) {
-					uni.showToast({
-						title: '登录失败',
-						duration: 2000,
-						icon: 'none'
-					});
-					// log('用户没有登陆')
-					this.wxlogin = false
-				} else {
-					uni.showToast({
-						title: '已登录',
-						duration: 2000
-					});
-					log('用户已经登陆')
-					this.wxlogin = true
-					this.usering = setdata
-				}
-			},
-			// 显示
-			init() {
-				this.modaishow = true
-			},
-			// 取消
-			messcancel() {
-				this.modaishow = false
 			},
 			//我的全部订单
 			myOrder() {
@@ -552,7 +502,6 @@
 					})
 				}
 			},
-			
 			//跳转到待发货
 			ToBeDelivered() {
 				if (!this.wxlogin) {
@@ -560,7 +509,6 @@
 						title: "请先登录",
 						icon: 'none'
 					})
-
 				} else {
 					uni.navigateTo({
 						url: '../../pagesII/myOrder/myOrder?index=1'
@@ -574,7 +522,6 @@
 						title: "请先登录",
 						icon: 'none'
 					})
-
 				} else {
 					uni.navigateTo({
 						url: '../../pagesII/myOrder/myOrder?index=2'
@@ -643,19 +590,11 @@
 					url: '../productDetail/productDetail'
 				})
 			},
-			initNavigation(e) {
-				this.opacity = e.opacity;
-				this.top = e.top;
-			},
-			opacityChange(e) {
-				this.opacity = e.opacity;
-			},
 			back() {
 				uni.navigateBack();
 			}
 		},
 		onShow() {
-			
 			this.getMerchants()
 			this.getOrderData()
 			this.ifUser()

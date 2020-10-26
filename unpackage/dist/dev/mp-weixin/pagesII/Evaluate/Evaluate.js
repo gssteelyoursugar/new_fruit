@@ -232,7 +232,7 @@ var setdata = uni.getStorageSync('usermen');var _default = { data: function data
         ///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
         _this.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
         // log(this.ApproveStatus)
-      }).catch(function (err) {log(err);});}, getList: function getList() {var _this2 = this;var data = { token: setdata, pageNo: 1, pageSize: 10 };(0, _api.publicing)(_request.getEvaluateList, data).then(function (res) {console.log(res);_this2.evaList = res.data.data;});}, clickToDetail: function clickToDetail(id) {uni.navigateTo({
+      }).catch(function (err) {log(err);});}, getList: function getList() {var _this2 = this;var data = { token: setdata, pageNo: 1, pageSize: 10000 };(0, _api.publicing)(_request.getEvaluateList, data).then(function (res) {console.log(res);_this2.evaList = res.data.data;});}, clickToDetail: function clickToDetail(id) {uni.navigateTo({
         url: '../../pagesIII/productDetail/productDetail?id=' + id });
 
     },

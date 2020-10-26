@@ -482,14 +482,21 @@
 .color-text {
 	color: rgba(112, 112, 112, 1);
 }
-.btnbox {
+
+/* .btnbox {
 	position: relative;
 	top: 100rpx;
 	width: 280rpx;
 	border-radius: 100rpx;
 	overflow: hidden;
-	box-shadow: 0 0 8rpx 2rpx rgba(0, 197, 42, 1) !important;
+	box-shadow: 0 0 8rpx 2rpx rgba(0, 197, 42, 1) !important; 
 	border: 1px solid rgba(0, 197, 42, 1);
+}
+ */
+.btnbox {
+	position: relative;
+	top: 100rpx;
+	width: 100%;
 }
 .btnbox button::after {
 	content: "";
@@ -513,7 +520,8 @@ button {
 button {
 	border-radius: 0;
 }
-.btn {
+
+/* .btn {
 	border-radius: 100rpx;
 	height: 80rpx;
 	width: 280rpx;
@@ -522,5 +530,16 @@ button {
 	border: 1px solid rgba(0, 197, 42, 1);
 	color: rgba(0, 197, 42, 1) !important;
 	font-size: 30rpx;
+} */
+.btn {
+	border-radius: 100rpx;
+	height: 80rpx;
+	width: 300rpx;
+	background-color: #ffffff;
+	border: 1px solid rgba(0, 197, 42, 1);
+	color: rgba(0, 197, 42, 1) !important;
+	padding: 16rpx 0;
+	font-size: 32rpx;
+	box-shadow: 0 0 6rpx -1rpx;
 }
 

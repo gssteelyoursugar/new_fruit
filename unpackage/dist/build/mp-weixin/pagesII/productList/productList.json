@@ -4,8 +4,8 @@
   "usingComponents": {
     "tui-top-dropdown": "/components/tui-top-dropdown/tui-top-dropdown",
     "tui-drawer": "/components/tui-drawer/tui-drawer",
-    "easy-select": "/components/easy-select/easy-select",
     "tui-icon": "/components/tui-icon/tui-icon",
+    "easy-select": "/components/easy-select/easy-select",
     "tui-nomore": "/components/tui-nomore/tui-nomore"
   }
 }

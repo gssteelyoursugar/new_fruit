@@ -360,7 +360,7 @@
 				let data = {
 					value: val,
 					pageNo: 1,
-					pageSize: 10
+					pageSize: 10000
 
 
 				}

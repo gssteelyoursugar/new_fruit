@@ -853,7 +853,7 @@ var isFirst1 = true;var _default =
       var setdata = uni.getStorageSync('usermen');
       if (!setdata) {
         uni.showToast({
-          title: '请登陆',
+          title: '请登录',
           duration: 2000 });
 
         this.wxlogin = false;
@@ -873,7 +873,7 @@ var isFirst1 = true;var _default =
       var setdata = uni.getStorageSync('usermen');
       var data = {
         pageNo: '1',
-        pageSize: '30',
+        pageSize: '1000',
         token: setdata };
 
       (0, _api.listing)(_request.getIndex, data) //请求首页数据接口
@@ -908,7 +908,7 @@ var isFirst1 = true;var _default =
     getIndexClass: function getIndexClass() {var _this5 = this;
       var data2 = {
         pageNo: '1',
-        pageSize: '30',
+        pageSize: '10000',
         indexClassify: this.Sumify };
 
       (0, _api.listing)(_request.getClassify, data2).

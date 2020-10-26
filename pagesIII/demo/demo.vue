@@ -53,7 +53,7 @@
 			getListData(){
 				let data ={
 					pageNo:'1',
-					pageSize:'30',
+					pageSize:'10000',
 					indexClassify:'2'
 				}
 				

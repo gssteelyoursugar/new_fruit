@@ -25,7 +25,7 @@
 		</view>
 		<view class="tui-tab-rank" v-for="(item, index) in orderList" :key="index">
 			<view class="tui-time-title"><text class="title-time-left">{{item.time}}</text></view>
-			<view class="tui-tab-rank-cent">
+			<view class="tui-tab-rank-cent" @click="goToDetail(item.goodsId)">
 				<!--  -->
 				<image :src="item.url" mode="aspectFill" class="img-rink"></image>
 				<view class="tui-pro-tit">
@@ -36,13 +36,13 @@
 							<view class="tag-tit2-price"></view>
 							<view class="tag-tit2-text">
 								<text style="font-size: 20rpx;margin-right:4rpx;">¥</text>
-								{{item.platformClinetPrice}}
+								{{item.platformClientPrice}}
 								<text style="font-size: 20rpx;margin-left:4rpx;">元</text>
 								<text class="price2">/件</text>
 							</view>
 							<view style="font-size: 24rpx;color: #666;">
 								实付:
-								<text style="font-size: 28rpx;color: #333;">{{item.platformClinetPrice}}</text>
+								<text style="font-size: 28rpx;color: #333;">{{item.orderTotalPrice}}</text>
 								（含运费）
 							</view>
 						</view>
@@ -130,6 +130,12 @@
 				this.getOrderCount()
 				console.log("看看我的订单呗")
 			},
+			
+			goToDetail(id) {
+				uni.navigateTo({
+					url: '../../pagesIII/productDetail/productDetail?id=' + id 
+				})
+			},
 			bindCancel() {
 				this.isShow = !this.isShow;
 			},
@@ -151,7 +157,7 @@
 						time: this.paramTime,
 						token: userToken,
 						pageNo: 1,
-						pageSize: 10
+						pageSize: 10000
 					}
 					listing(orderCount, data).then(res => {
 						console.log(res)
@@ -165,7 +171,7 @@
 						time: this.paramTime,
 						token: userToken,
 						pageNo: 1,
-						pageSize: 10
+						pageSize: 10000
 					}
 					listing(orderCount, data).then(res => {
 						console.log(res)

@@ -107,11 +107,11 @@
 				if (!setdata) {
 
 					uni.showToast({
-						title: '请登陆',
+						title: '请登录',
 						duration: 2000
 					});
 
-					log('用户没有登陆')
+					log('用户没有登录')
 					this.wxlogin = false
 				} else {
 
@@ -124,7 +124,7 @@
 					})
 					this.gotoindex()
 
-					log('用户已经登陆')
+					log('用户已经登录')
 					this.wxlogin = true
 					this.usering = setdata
 				}

@@ -8,7 +8,7 @@
 				<image src="../../static/images/quanguo.png" mode="widthFix" class="img-quanguo"></image>
 				<!-- <text class="color-text">{{tips}}</text> -->
 				<view class="btnbox">
-					<button class="btn" type="default"  open-type="getUserInfo" @getuserinfo="getUserInfo">去登陆</button>
+					<button class="btn" type="default"  open-type="getUserInfo" @getuserinfo="getUserInfo">去登录</button>
 				</view>
 				
 		</view>

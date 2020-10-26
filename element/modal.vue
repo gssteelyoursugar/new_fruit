@@ -2,7 +2,7 @@
 	<view>
 		<view class="warp" v-if="modaishow">
 			<view class="warp-view">
-				<view class="warp-text">请登陆后再操作</view>
+				<view class="warp-text">请登录后再操作</view>
 				<view class="warp-flex">
 					<button @click="messcancel()" plain="true">取消</button>
 					<button plain="true" open-type="getUserInfo" @getuserinfo="getUserInfo">登录</button>

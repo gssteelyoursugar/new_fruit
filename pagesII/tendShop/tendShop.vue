@@ -95,7 +95,7 @@
 		</form>
 		<view class="warp" v-if="modaishow">
 			<view class="warp-view">
-				<view class="warp-text">请登陆后再操作</view>
+				<view class="warp-text">请登录后再操作</view>
 				<view class="warp-flex">
 					<button @click="messcancel()" plain="true">取消</button>
 					<button plain="true" open-type="getUserInfo" @getuserinfo="getUserInfo">登录</button>
@@ -326,7 +326,7 @@
 						uni.setStorageSync('usermen', res.data.token) //把token存在本地，小程序提供如同浏览器cookie
 						var setdata = uni.getStorageSync('usermen')
 						uni.showToast({
-							title: '登陆成功'
+							title: '登录成功'
 						})
 					})
 					.catch((err) => {

@@ -447,7 +447,7 @@ console,log = _console.log;var _default = (_data$filters$onPullD = {
       var data = {
         token: setdata,
         pageNo: 1,
-        pageSize: 10 };
+        pageSize: 10000 };
 
       (0, _api.listing)(_request.getRecently, data).
       then(function (res) {

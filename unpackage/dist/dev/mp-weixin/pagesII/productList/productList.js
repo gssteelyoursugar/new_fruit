@@ -564,10 +564,52 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
 var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -944,6 +986,7 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       goods: [], //商品
       packaging: [], //包装
       species: [], //果类
+      goods_type: [], //验货保障
       storage_mode: [], //储存方式
       taste_level: [], //口感等级
       variety: [], //品种
@@ -953,9 +996,9 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       inputTop: 0, //搜索框距离顶部距离
       arrowTop: 0, //箭头距离顶部距离
       dropScreenH: 0, //下拉筛选框距顶部距离
-      attrData: [], attrIndex: -1, dropScreenShow: false, //品种筛选
+      dropScreenShow: false, //品种筛选
       dropScreenShow2: false, //品种筛选
-      dropNum: 0, //筛选下拉
+      dropScreenShow4: false, isActives4: false, dropNum: 0, //筛选下拉
       scrollTop: 0, tabIndex: 0, //顶部筛选索引
       tabIndex1: 1, //顶部销量索引
       tabIndex2: 2, //价格索引
@@ -974,7 +1017,9 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
         shapeLevel_parameter_2: '' //形状右
       }, // 提交申请的数据，存的是id
       postList: {}, statusHeight: 20, boxHeight: 44, navHeight: 64, idList: [], //品种多选存放id
-      tempData: { id: '', token: setdata, varietyId: '', // fruitLevel: '', //等级
+      tempData: { id: '', token: setdata, varietyId: '', //品种id （可以是多个）
+        goodsTypeId: '', // 验货保障id
+        // fruitLevel: '', //等级
         fruit_parameter_1: '', //等级左
         fruit_parameter_2: '', //等级右
         weight_parameter_1: '', //单果左
@@ -991,7 +1036,7 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
         rejectRatio_parameter_2: '', //不良右
         price_parameter_1: '', //价格左
         price_parameter_2: '', //价格右边
-        pageNo: 1, pageSize: 10 } };}, onLoad: function onLoad(options) {var _this = this;this.getMerchants();var pages = getCurrentPages();var beforePage = pages[pages.length - 2]; // 前一个页面路径
+        pageNo: 1, pageSize: 10000 }, goods_type_id: '' };}, onLoad: function onLoad(options) {var _this = this;this.getMerchants();var pages = getCurrentPages();var beforePage = pages[pages.length - 2]; // 前一个页面路径
     // log(beforePage.$page.fullPath)
     if (beforePage.$page.fullPath === '/pagesII/searchGoods/searchGoods') {// log('我执行了搜索')
       //搜索	
@@ -1009,30 +1054,10 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
     goToSearchGoods: function goToSearchGoods() {uni.navigateTo({ url: '../../pagesII/searchGoods/searchGoods' });}, //商品详情页
     gotoList: function gotoList(id) {log(id);uni.navigateTo({ url: '../../pagesIII/productDetail/productDetail?id=' + id });}, //下拉选
     dropDownList: function dropDownList(index, name) {if (index !== -1) {console.log("index：" + index, name);}this.title = name;this.dropdownShow = !this.dropdownShow;}, dropDownList2: function dropDownList2(index, name) {if (index !== -1) {console.log("index：" + index, name);}this.title = name;this.dropdownShow2 = !this.dropdownShow2;}, // 搜索请求数据
-    getSearch: function getSearch(serrchName) {var _this3 = this;var data = { pageNo: 1, pageSize: 10, name: serrchName };(0, _api.listing)(_request.getGoodsall, data).
-      then(function (res) {
-        log("搜索结果", res);
-        _this3.goods = res.data.data.goods;
-        _this3.seleVarieties = res.data.data;
-        if (_this3.seleVarieties === undefined) {
-          _this3.seleVarieties = _this3.seleVarieties;
-        } else if (_this3.seleVarieties != undefined) {}
-        _this3.color_level = res.data.data.color_level;
-        _this3.facade_level = res.data.data.facade_level;
-        _this3.fruit_level = res.data.data.fruit_level;
-        _this3.shape_level = res.data.data.shape_level;
-        _this3.goods = res.data.data.goods;
-        _this3.packaging = res.data.data.packaging;
-        _this3.species = res.data.data.species;
-        // for (var i = 0; i < this.species.length; i++) {
+    getSearch: function getSearch(serrchName) {var _this3 = this;var data = { pageNo: 1, pageSize: 10000, name: serrchName };(0, _api.listing)(_request.getGoodsall, data).then(function (res) {log("搜索结果", res);_this3.goods = res.data.data.goods;_this3.seleVarieties = res.data.data;if (_this3.seleVarieties === undefined) {_this3.seleVarieties = _this3.seleVarieties;} else if (_this3.seleVarieties != undefined) {}_this3.color_level = res.data.data.color_level;_this3.facade_level = res.data.data.facade_level;_this3.fruit_level = res.data.data.fruit_level;_this3.shape_level = res.data.data.shape_level;_this3.goods = res.data.data.goods;_this3.packaging = res.data.data.packaging;_this3.species = res.data.data.species; // for (var i = 0; i < this.species.length; i++) {
         // 	this.species[i].isActives = this.activeA
         // }
-        _this3.storage_mode = res.data.data.storage_mode;
-        _this3.taste_level = res.data.data.taste_level;
-        _this3.variety = res.data.data.variety;
-      }).
-      catch(function (err) {
-        log(err);
+        _this3.goods_type = res.data.data.goodsType;_this3.storage_mode = res.data.data.storage_mode;_this3.taste_level = res.data.data.taste_level;_this3.variety = res.data.data.variety;}).catch(function (err) {log(err);
       });
 
     },
@@ -1040,29 +1065,29 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
     /* 第一个筛选 */
     Total: function Total(index) {
       this.num = index;
-      log(this.num);
+      // log(this.num)
       if (this.num == 0) {
         this.ShopIng();
         log('综合');
       } else if (this.num == 1) {
         if (this.sleter) {
-          log('销量升序');
+          log('销量1');
           console.log("sleter", this.sleter);
           this.getshopDESC();
         } else {
+          log('销量2');
           console.log("sleter", this.sleter);
           this.getshopASC();
-          log('销量降序');
         }
         this.sleter = !this.sleter;
       } else if (this.num == 2) {
         if (this.sleter2) {
-          log('价格升序');
-          console.log("sleter", this.sleter2);
+          log('销量1');
+          console.log("sleter2", this.sleter2);
           this.getpriceDESC();
         } else {
+          log('销量2');
           console.log("sleter", this.sleter2);
-          log('价格降序');
           this.getpriceASC();
         }
         this.sleter2 = !this.sleter2;
@@ -1071,16 +1096,13 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
         // uni.navigateTo({
         // 	url: '../../pagesIII/videos/videos'
         // })
-
         uni.showToast({
           title: "功能内测中，敬请期待",
           icon: "none",
           duration: 2000 });
 
-        log('视频选果');
-
+        // log('视频选果')
       } else if (this.num == 4) {
-
         uni.navigateTo({
           url: '../../pagesII/rankingList/rankingList' });
 
@@ -1093,6 +1115,7 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       this.dropScreenShow = !this.dropScreenShow;
       this.dropScreenShow2 = false;
       this.isActives2 = false;
+      this.dropScreenShow4 = false;
       // if(this.isActives1 === true){
       // 	this.dropScreenShow === true
       // }else if(this.isActives1 === false){
@@ -1100,33 +1123,14 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       // }
       // this.isActives1 = !this.isActives1
       this.isActives1 = this.dropScreenShow;
-      // 	this.dropScreenShow = !this.dropScreenShow
-      // this.dropScreenShow2 = false
-      // log(this.dropNum)
-      // if (this.dropNum == 0) {
-      // 	this.dropScreenShow = !this.dropScreenShow
-      // 	this.dropScreenShow2 = false
-      // 	log('芒果')
-      // } else if (this.dropNum == 1) {
-      // 	this.dropScreenShow2 = !this.dropScreenShow2
-      // 	this.dropScreenShow = false
-      // 	log('品种')
-
-      // } else if (this.dropNum == 2) {
-      // 	this.btnCloseDrop();
-      // 	this.drawer = !this.drawer
-      // 	log('果标')
-      // } else if (this.dropNum == 3) {
-      // 	log('保障')
-
-      // } 
 
     },
     btnDropChange2: function btnDropChange2() {
-      log('触发');
+      // log('触发')
       this.$forceUpdate();
       this.isActives2 = !this.isActives2;
       this.dropScreenShow2 = !this.dropScreenShow2;
+      this.dropScreenShow4 = false;
       this.dropScreenShow = false;
       this.isActives1 = false;
     },
@@ -1134,8 +1138,17 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       this.drawer = !this.drawer;
       this.dropScreenShow2 = false;
       this.dropScreenShow = false;
+      this.dropScreenShow4 = false;
       this.isActives2 = false;
       this.isActives = false;
+    },
+    btnDropChange4: function btnDropChange4() {
+      this.dropScreenShow2 = false;
+      this.dropScreenShow = false;
+      this.isActives2 = false;
+      this.isActives = false;
+      this.dropScreenShow4 = !this.dropScreenShow4;
+      this.isActives4 = !this.isActives4;
     },
     //单选
     checkDing: function checkDing(index, id, title) {
@@ -1144,6 +1157,13 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       this.varietyId = id;
       this.ShopIng();
       this.dropScreenShow = !this.dropScreenShow;
+    },
+    clickType: function clickType(index, id, name) {
+      this.goods_type_id = id;
+      this.tempData.goodsTypeId = id;
+      this.ShopIng();
+      // console.log(index,id,name,this.goods_type_id)
+      this.dropScreenShow4 = !this.dropScreenShow4;
     },
     //品种全选
     pickAllVariety: function pickAllVariety() {
@@ -1215,32 +1235,19 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       console.log("tempData:", this.tempData);
 
     },
-    //关闭
-    isFalse: function isFalse() {
-      this.dropScreenShow2 = false;
-      this.dropScreenShow = false;
-      this.isActives2 = false;
-      this.isActives = false;
-    },
-    //打开
-    isTrue: function isTrue() {
-      this.dropScreenShow2 = true;
-      this.dropScreenShow = true;
-      this.isActives2 = true;
-      this.isActives = true;
-    },
 
     useOutClickSide: function useOutClickSide() {
       this.$refs.easySelect.hideOptions && this.$refs.easySelect.hideOptions();
     },
     //销量升序
     getshopDESC: function getshopDESC() {var _this4 = this;
-      var data = {
-        pageNo: 1,
-        pageSize: 10,
-        order: 'A.shop_number DESC' };
-
-      (0, _api.listing)(_request.getGoodsall, data).
+      // let data = {
+      // 	pageNo: 1,
+      // 	pageSize: 10000,
+      // 	order: 'A.shop_number DESC'
+      // }
+      this.tempData.order = 'A.shop_number DESC';
+      (0, _api.listing)(_request.getGoodsall, this.tempData).
       then(function (res) {
         log(res);
         _this4.goods = res.data.data.goods;
@@ -1252,13 +1259,13 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
     },
     //销量降序
     getshopASC: function getshopASC() {var _this5 = this;
-
-      var data = {
-        pageNo: 1,
-        pageSize: 10,
-        order: 'A.shop_number ASC' };
-
-      (0, _api.listing)(_request.getGoodsall, data).
+      // let data = {
+      // 	pageNo: 1,
+      // 	pageSize: 10000,
+      // 	order: 'A.shop_number ASC'
+      // }
+      this.tempData.order = 'A.shop_number ASC';
+      (0, _api.listing)(_request.getGoodsall, this.tempData).
       then(function (res) {
 
         log(res);
@@ -1271,12 +1278,13 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
     },
     //价格升序
     getpriceDESC: function getpriceDESC() {var _this6 = this;
-      var data = {
-        pageNo: 1,
-        pageSize: 10,
-        order: 'A.platform_price DESC' };
-
-      (0, _api.listing)(_request.getGoodsall, data).
+      // let data = {
+      // 	pageNo: 1,
+      // 	pageSize: 10000,
+      // 	order: 'A.platform_price DESC'
+      // }
+      this.tempData.order = 'A.platform_price DESC';
+      (0, _api.listing)(_request.getGoodsall, this.tempData).
       then(function (res) {
         log(res);
         _this6.goods = res.data.data.goods;
@@ -1287,12 +1295,13 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
     },
     //价格降序
     getpriceASC: function getpriceASC() {var _this7 = this;
-      var data = {
-        pageNo: 1,
-        pageSize: 10,
-        order: 'A.platform_price ASC' };
-
-      (0, _api.listing)(_request.getGoodsall, data).
+      // let data = {
+      // 	pageNo: 1,
+      // 	pageSize: 10000,
+      // 	order: 'A.platform_price ASC'
+      // }
+      this.tempData.order = 'A.platform_price ASC';
+      (0, _api.listing)(_request.getGoodsall, this.tempData).
       then(function (res) {
         _this7.goods = res.data.data.goods;
       }).
@@ -1352,6 +1361,7 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
         for (var i = 0; i < _this10.species.length; i++) {
           _this10.species[i].isActives = _this10.activeA;
         }
+        _this10.goods_type = res[0].data.data.goodsType;
         _this10.storage_mode = res[0].data.data.storage_mode;
         _this10.taste_level = res[0].data.data.taste_level;
         _this10.variety = res[0].data.data.variety;
@@ -1373,29 +1383,16 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       this.slPinzhong = "品种";
       this.idList = [];
       this.tempData.varietyId = '';
-      // let arr = this.attrData;
-      // for (let item of arr) {
-      // 	item.selected = false;
-      // }
-      // this.attrData = arr;
+
     },
     btnCloseDrop: function btnCloseDrop() {var _this11 = this;
       this.scrollTop = 1;
       this.$nextTick(function () {
         _this11.scrollTop = 0;
       });
-
       this.dropScreenShow = false;
-      this.attrIndex = -1;
     },
-    clickToSure: function clickToSure(dd) {
-      this.isActives2 = false;
-      this.isActives = false;
-      // this.btnCloseDrop();
-      this.dropScreenShow2 = false;
-      console.log('我真的点击了', dd);
-      // this.dropScreenShow = false
-    },
+
     showDropdownList: function showDropdownList() {
       this.selectH = 246;
       this.tabIndex = 0;

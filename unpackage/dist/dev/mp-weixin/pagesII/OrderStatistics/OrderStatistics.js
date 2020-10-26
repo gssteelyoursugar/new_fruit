@@ -269,6 +269,12 @@ var _api = __webpack_require__(/*! ../../api/api.js */ 19);function ownKeys(obje
       this.getOrderCount();
       console.log("看看我的订单呗");
     },
+
+    goToDetail: function goToDetail(id) {
+      uni.navigateTo({
+        url: '../../pagesIII/productDetail/productDetail?id=' + id });
+
+    },
     bindCancel: function bindCancel() {
       this.isShow = !this.isShow;
     },
@@ -290,7 +296,7 @@ var _api = __webpack_require__(/*! ../../api/api.js */ 19);function ownKeys(obje
           time: this.paramTime,
           token: userToken,
           pageNo: 1,
-          pageSize: 10 };
+          pageSize: 10000 };
 
         (0, _api.listing)(_request.orderCount, data).then(function (res) {
           console.log(res);
@@ -304,7 +310,7 @@ var _api = __webpack_require__(/*! ../../api/api.js */ 19);function ownKeys(obje
           time: this.paramTime,
           token: userToken,
           pageNo: 1,
-          pageSize: 10 };
+          pageSize: 10000 };
 
         (0, _api.listing)(_request.orderCount, _data).then(function (res) {
           console.log(res);

@@ -21,14 +21,15 @@
 							<!-- <view class="tui-order-status" v-if="item.tradeStatus == 2">已发货</view> -->
 							<view class="tui-order-status" v-if="item.tradeStatus == 4">待收货</view>
 							<view class="tui-order-status" v-if="item.tradeStatus == 6">已完成</view>
-							<view class="tui-order-status" v-if="item.afterStatus == '' && item.tradeStatus == 7">售后中</view>
+							<!-- <view class="tui-order-status" v-if="item.afterStatus == '' && item.tradeStatus == 7">售后中</view> -->
+							<view class="tui-order-status" v-if="item.tradeStatus == 7 && (item.afterStatus !== '1'||item.afterStatus !== '4'||item.afterStatus !== '5')">售后中</view>
 							<view class="tui-order-status" v-if="item.tradeStatus == 8">待确认</view>
 							<!-- <view class="tui-order-status" v-if="item.tradeStatus == 9">已完成</view> -->
 
 						</view>
 					</tui-list-cell>
 
-					<tui-list-cell padding="0" @click="detail">
+					<tui-list-cell padding="0" @click="detail(item.id)">
 						<view class="tui-goods-item">
 							<image :src="item.url" class="tui-goods-img"></image>
 							<view class="tui-goods-center">
@@ -160,7 +161,7 @@
 						</view>
 					</tui-list-cell>
 
-					<tui-list-cell padding="0" @click="detail">
+					<tui-list-cell padding="0" @click="detail(item.id)">
 						<view class="tui-goods-item">
 							<image :src="item.url" class="tui-goods-img"></image>
 							<view class="tui-goods-center">
@@ -221,7 +222,7 @@
 							<!-- <view class="tui-order-status" v-if="item.tradeStatus == 8">待确认</view> -->
 						</view>
 					</tui-list-cell>
-					<tui-list-cell padding="0" @click="detail">
+					<tui-list-cell padding="0" @click="detail(item.id)">
 						<view class="tui-goods-item">
 							<image :src="item.url" class="tui-goods-img"></image>
 							<view class="tui-goods-center">
@@ -283,7 +284,7 @@
 						</view>
 					</tui-list-cell>
 
-					<tui-list-cell padding="0" @click="detail">
+					<tui-list-cell padding="0" @click="detail(item.id)">
 						<view class="tui-goods-item">
 							<image :src="item.url" class="tui-goods-img"></image>
 							<view class="tui-goods-center">
@@ -392,10 +393,10 @@
 				this.currentTab = parseInt(options.index);
 				this.payStatus = '1'
 				this.tradeStatus = '1,2,3'
-			} else if (options.index == 2) { //待收货p1t4,8
+			} else if (options.index == 2) { //待收货p1t4 (要不要8)
 				this.currentTab = parseInt(options.index);
 				this.payStatus = '1'
-				this.tradeStatus = '4,8'
+				this.tradeStatus = '4'
 			} else if (options.index == 3) {//已完成p1t8
 				this.currentTab = parseInt(options.index);
 				this.payStatus = '1'
@@ -634,11 +635,11 @@
 					this.currentTab = parseInt(options.index);
 					this.payStatus = '1'
 					this.tradeStatus = '1,2,3'
-				} else if (options.index == 2) { //待收货p1t4,8
+				} else if (options.index == 2) { //待收货p1t4,
 					this.currentTab = parseInt(options.index);
 					this.payStatus = '1'
-					this.tradeStatus = '4,8'
-				} else if (options.index == 3) {//已完成p1t8
+					this.tradeStatus = '4'
+				} else if (options.index == 3) {//已完成p1t6,11
 					this.currentTab = parseInt(options.index);
 					this.payStatus = '1'
 					this.tradeStatus = '6,11'
@@ -646,9 +647,9 @@
 				this.getOrderData()
 				
 			},
-			detail() {
+			detail(id) {
 				uni.navigateTo({
-					url: '../orderDetail/orderDetail'
+					url: '../../pagesIII/orderDetail/orderDetail?id=' + id
 				})
 			}
 		},

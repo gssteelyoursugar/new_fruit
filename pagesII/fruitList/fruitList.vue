@@ -196,7 +196,7 @@
 			getGoodsAll() {
 				let data = {
 					pageNo: 1,
-					pageSize: 10
+					pageSize: 10000
 
 				}
 				listing2(getNewsAll, data)

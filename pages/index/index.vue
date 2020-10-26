@@ -130,7 +130,7 @@
 							<image :src="item.url" mode="aspectFit" class="tabimg"></image>
 							<view class="tui-price">
 								<view class="tui-first-price">&yen;<text class="tui-price-color">{{ ApproveStatus === 1 ?item.platformClinetPrice: '***'}}</text><text class="price-label">/件</text></view>
-								<view class="tui-last-price" v-if="item.marketPrice != 0">&yen;<text class="tui-cribing">{{ApproveStatus === 1 ?item.marketPrice:'***'}}</text></view>
+								<view class="tui-last-price" v-if="item.marketPrice && item.marketPrice != 0">&yen;<text class="tui-cribing">{{ApproveStatus === 1 ?item.marketPrice:'***'}}</text></view>
 							</view>
 							<text class="tui-weight">{{item.specification}}</text>
 						</view>
@@ -159,7 +159,7 @@
 							<image :src="item.url" mode="aspectFit" class="tabimg"></image>
 							<view class="tui-price">
 								<view class="tui-first-price">&yen;<text class="tui-price-color">{{ApproveStatus === 1 ?item.platformClinetPrice:'***'}}</text><text class="price-label">/件</text></view>
-								<view class="tui-last-price"  v-if="item.marketPrice != 0">&yen;<text class="tui-cribing">{{ApproveStatus === 1 ?item.marketPrice:'***'}}</text></view>
+								<view class="tui-last-price"  v-if="item.marketPrice &&item.marketPrice != 0">&yen;<text class="tui-cribing">{{ApproveStatus === 1 ?item.marketPrice:'***'}}</text></view>
 							</view>
 							<text class="tui-weight">{{item.specification}}</text>
 						</view>
@@ -236,7 +236,7 @@
 												{{ApproveStatus===1? item.platformClinetPrice:'***'}}
 												<text class="tui-rate-text "> /件</text>
 											</view>
-											<view class="tui-rate-price"  v-if="item.marketPrice != 0"><text>&yen;</text>{{ApproveStatus===1? item.marketPrice:'***'}}</view>
+											<view class="tui-rate-price"  v-if="item.marketPrice &&item.marketPrice != 0"><text>&yen;</text>{{ApproveStatus===1? item.marketPrice:'***'}}</view>
 											<text class="tui-praise  " @tap="praise(index)">
 												<text class="tui-praise iconfont icon-like  " v-if="!item.showSearch1"></text>
 												<text class="tui-praise iconfont icon-dianzan " v-if="item.showSearch1"></text>{{item.praiseNumber |filterNum}}
@@ -284,7 +284,7 @@
 												{{ApproveStatus===1? item.platformClinetPrice:'***'}}
 												<text class="tui-rate-text "> /件</text>
 											</view>
-											<view class="tui-rate-price"  v-if="item.marketPrice != 0"> <text>&yen;</text>{{ApproveStatus===1? item.marketPrice:'***'}}</view>
+											<view class="tui-rate-price"  v-if="item.marketPrice &&item.marketPrice != 0"> <text>&yen;</text>{{ApproveStatus===1? item.marketPrice:'***'}}</view>
 											<text class="tui-praise  " @tap="praise(index)">
 												<text class="tui-praise iconfont icon-like  " v-if="!item.showSearch1"></text>
 												<text class="tui-praise iconfont icon-dianzan " v-if="item.showSearch1"></text>{{item.praiseNumber |filterNum}}
@@ -669,7 +669,7 @@
 				let setdata = uni.getStorageSync('usermen')
 				if (!setdata) {
 					uni.showToast({
-						title: '请登陆',
+						title: '请登录',
 						duration: 2000
 					});
 					this.wxlogin = false
@@ -689,7 +689,7 @@
 				let setdata = uni.getStorageSync('usermen')
 				let data = {
 					pageNo: '1',
-					pageSize: '30',
+					pageSize: '1000',
 					token: setdata
 				}
 				listing(getIndex, data) //请求首页数据接口
@@ -724,7 +724,7 @@
 			getIndexClass() {
 				let data2 = {
 					pageNo: '1',
-					pageSize: '30',
+					pageSize: '10000',
 					indexClassify: this.Sumify,
 				}
 				listing(getClassify, data2)

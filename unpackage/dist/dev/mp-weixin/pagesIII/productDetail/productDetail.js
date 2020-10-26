@@ -613,10 +613,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-
 var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
@@ -624,10 +620,6 @@ var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
 var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
-//
-//
-//
-//
 //
 //
 //
@@ -1098,12 +1090,7 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
             _this3.shopListdata.praiseNumber++;uni.showToast({ title: '点赞成功', icon: 'none' });}).catch(function (err) {log(err);});}}}, change2: function change2(e) {this.value2 = e.value;}, // 显示
     init: function init() {this.modaishow = true;}, // 取消
     messcancel: function messcancel() {this.modaishow = false;}, noGoods: function noGoods() {uni.showToast({ title: "正在补货中～", icon: 'none' });}, //弹出立即购买
-    showPopup: function showPopup() {var setdata = uni.getStorageSync('usermen');if (!setdata) {this.modaishow = true;return;} else if (this.ApproveStatus != 1) {// uni.showToast({
-        // 	title: '您还没有验证店铺',
-        // 	icon: 'none'
-        // });
-        // return;
-        this.toggleVerify();return;}if (setdata && this.ApproveStatus === 1) {this.$refs.popup.show();}}, toggleVerify: function toggleVerify() {this.isVerify = !this.isVerify;}, clickToVerify: function clickToVerify() {uni.navigateTo({ url: '../../pagesII/tendShop/tendShop' });this.toggleVerify();console.log("前往验证");}, //获取微信昵称
+    showPopup: function showPopup() {var setdata = uni.getStorageSync('usermen');if (!setdata) {this.modaishow = true;return;}if (this.ApproveStatus === '' || this.ApproveStatus === 2) {this.toggleVerify();return;}if (this.ApproveStatus == 0) {uni.showToast({ title: '店铺信息审核中', icon: 'none' });return;}if (setdata && this.ApproveStatus === 1) {this.$refs.popup.show();}}, toggleVerify: function toggleVerify() {this.isVerify = !this.isVerify;}, clickToVerify: function clickToVerify() {uni.navigateTo({ url: '../../pagesII/tendShop/tendShop' });this.toggleVerify();console.log("前往验证");}, //获取微信昵称
     getUserInfo: function getUserInfo(event) {// log(event);
       if (event.detail.userInfo) {uni.setStorageSync('userIN', event.detail.userInfo); //把token存在本地，小程序提供如同浏览器cookie
         var wxing = event.detail.userInfo;this.wxCode(wxing.avatarUrl, wxing.nickName);}this.modaishow = false;}, //获取微信code
@@ -1113,47 +1100,72 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
     wxLoging: function wxLoging(code) {var _this5 = this;uni.showLoading({}); // log(code);
       var data = { code: code };(0, _api.publicing2)(_request.loginis, data) //发送请求携带参数
       .then(function (res) {uni.setStorageSync('usermen', res.data.token); //把token存在本地，小程序提供如同浏览器cookie
-        var setdata = uni.getStorageSync('usermen');uni.showToast({ title: '登陆成功' });_this5.getMerchants();uni.hideLoading();}).catch(function (err) {log(err);});}, //收藏订单
-    likeOrder: function likeOrder(id) {var setdata = uni.getStorageSync('usermen'); //判断是否登录才能收藏
-      if (!setdata) {this.modaishow = true;
+        var setdata = uni.getStorageSync('usermen');uni.showToast({ title: '登录成功' });
+
+        _this5.getMerchants();
+        uni.hideLoading();
+      }).
+      catch(function (err) {
+        log(err);
+      });
+    },
+    //收藏订单
+    likeOrder: function likeOrder(id) {
+      var setdata = uni.getStorageSync('usermen');
+      //判断是否登录才能收藏
+      if (!setdata) {
+        this.modaishow = true;
       } else {
         this.modaishow = false;
-        var data = {
-          goodsId: id,
-          token: setdata };
-
-        if (this.shopListdata.isCollection == true) {
+        if (this.ApproveStatus == 0) {
           uni.showToast({
-            title: '重复收藏',
+            title: '店铺信息审核中',
             icon: 'none' });
 
           return;
         }
-        if (this.canCollect === true) {
-          uni.showToast({
-            title: '重复收藏',
-            icon: 'none' });
-
+        if (this.ApproveStatus === '' || this.ApproveStatus === 2) {
+          this.toggleVerify();
           return;
         }
-        if (this.shopListdata.isCollection == false) {
-          this.canCollect = true;
-          (0, _api.publicing)(_request.postLike, data).
-          then(function (res) {
-            // this.postDetails();
+
+        if (this.ApproveStatus === 1) {
+          var data = {
+            goodsId: id,
+            token: setdata };
+
+          if (this.shopListdata.isCollection == true) {
             uni.showToast({
-              title: '收藏成功',
+              title: '重复收藏',
               icon: 'none' });
 
-          }).
-          catch(function (err) {
-            log(err);
-          });
+            return;
+          }
+          if (this.canCollect === true) {
+            uni.showToast({
+              title: '重复收藏',
+              icon: 'none' });
+
+            return;
+          }
+          if (this.shopListdata.isCollection == false) {
+            this.canCollect = true;
+            (0, _api.publicing)(_request.postLike, data).
+            then(function (res) {
+              // this.postDetails();
+              uni.showToast({
+                title: '收藏成功',
+                icon: 'none' });
+
+            }).
+            catch(function (err) {
+              log(err);
+            });
+          }
         }
       }
     },
     //请求商品详情
-
     postDetails: function postDetails() {var _this6 = this;
       uni.showLoading({
         title: '加载中' });
@@ -1188,52 +1200,66 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
       } else {
         // this.modaishow = false
         this.modaishow = false;
-        var data = {
-          goodsId: id,
-          token: setdata,
-          number: 1 };
-
-        if (this.shopListdata.isCart == true) {
+        if (this.ApproveStatus == 0) {
           uni.showToast({
-            title: '重复加入进货单',
-            icon: 'none',
-            duration: 3000 });
+            title: '店铺信息审核中',
+            icon: 'none' });
 
           return;
         }
-        if (this.canCart === true) {
-          uni.showToast({
-            title: '重复加入进货单',
-            icon: 'none',
-            duration: 3000 });
-
+        if (this.ApproveStatus === '' || this.ApproveStatus === 2) {
+          this.toggleVerify();
           return;
         }
 
-        if (this.shopListdata.isCart == false) {
-          (0, _api.publicing)(_request.postmyOrder, data).
-          then(function (res) {
-            var code = res.data.code;
-            if (code == -1) {
-              uni.showToast({
-                title: "".concat(res.data.msg),
-                icon: 'none',
-                duration: 3000 });
+        if (this.ApproveStatus === 1) {
+          var data = {
+            goodsId: id,
+            token: setdata,
+            number: 1 };
 
-            } else if (code == 200) {
-              // this.postDetails();
-              _this7.canCart = true;
-              uni.showToast({
-                title: '加入进货单成功',
-                icon: 'none',
-                duration: 3000 });
+          if (this.shopListdata.isCart == true) {
+            uni.showToast({
+              title: '重复加入进货单',
+              icon: 'none',
+              duration: 3000 });
 
-            }
-          }).
-          catch(function (err) {
-            log(err);
-          });
+            return;
+          }
+          if (this.canCart === true) {
+            uni.showToast({
+              title: '重复加入进货单',
+              icon: 'none',
+              duration: 3000 });
+
+            return;
+          }
+          if (this.shopListdata.isCart == false) {
+            (0, _api.publicing)(_request.postmyOrder, data).
+            then(function (res) {
+              var code = res.data.code;
+              if (code == -1) {
+                uni.showToast({
+                  title: "".concat(res.data.msg),
+                  icon: 'none',
+                  duration: 3000 });
+
+              } else if (code == 200) {
+                // this.postDetails();
+                _this7.canCart = true;
+                uni.showToast({
+                  title: '加入进货单成功',
+                  icon: 'none',
+                  duration: 3000 });
+
+              }
+            }).
+            catch(function (err) {
+              log(err);
+            });
+          }
         }
+
       }
     },
 

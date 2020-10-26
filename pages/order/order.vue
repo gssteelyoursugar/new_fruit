@@ -11,7 +11,7 @@
 		<view class="container-img" v-if="modaishow">
 			<image src="../../static/images/big_logo.png" mode="widthFix" class="img-quanguo"></image>
 			<!-- <text class="color-text">{{tips}}</text> -->
-			<view class="btnbox"><button class="btn" type="default" open-type="getUserInfo" @getuserinfo="getUserInfo">去登陆</button></view>
+			<view class="btnbox"><button class="btn" type="default" open-type="getUserInfo" @getuserinfo="getUserInfo">去登录</button></view>
 		</view>
 		
 		<view class="empty-img" v-if="!modaishow && orderObj.length=== 0">
@@ -1206,11 +1206,8 @@
 	button {
 		background-color: #fff !important;
 		/* background-color: transparent; */
-
 		padding-left: 0;
-
 		padding-right: 0;
-
 		line-height: inherit;
 	}
 

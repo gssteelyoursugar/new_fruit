@@ -91,7 +91,7 @@
 				let data = {
 					token: setdata,
 					pageNo: 1,
-					pageSize: 10
+					pageSize: 10000
 				}
 				publicing(getEvaluateList, data).then(res => {
 					console.log(res)

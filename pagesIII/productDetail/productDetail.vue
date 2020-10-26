@@ -48,10 +48,8 @@
 						<block v-for="(item, index) in labelList" :key="index">
 							<text class="tag-tit">{{ item.name || ''}}</text>
 						</block>
-
 						<text class="tag-tit-text">{{ shopListdata.name ||''}}</text>
-
-						<view class="tag-tit-pra" v-if="!canPraise" @tap="praiseLike(shopListdata.id)" >
+						<view class="tag-tit-pra" v-if="!canPraise" @tap="praiseLike(shopListdata.id)">
 							<tui-icon name="agree" color="#B6B6B6" :size="15"></tui-icon>
 							<text style="font-size: 28rpx;">{{ shopListdata.praiseNumber||0 |filterNum}}</text>
 						</view>
@@ -126,7 +124,6 @@
 							<text class="tui-title-class">包&nbsp;装：</text>
 							<text class="tui-name-class" style="font-size: 24rpx;">{{ shopListdata.packaging }}</text>
 						</view>
-
 					</view>
 				</view>
 				<!-- 水果标准 -->
@@ -247,8 +244,6 @@
 				</view>
 			</view>
 		</view>
-
-		<!--  -->
 
 		<!-- 选项卡二 -->
 		<view :class="[currentTab === 1 ? 'actineclass' : 'errorclass']" style="padding-top: 100px;">
@@ -372,7 +367,8 @@
 												</view>
 												/件
 											</view>
-											<view class="tui-huaxian" v-if="shopListdata.marketPrice != 0">￥{{ApproveStatus===1? shopListdata.marketPrice:'***' }}<text style="font-size: 24rpx;">元</text></view>
+											<view class="tui-huaxian" v-if="shopListdata.marketPrice != 0">￥{{ApproveStatus===1? shopListdata.marketPrice:'***' }}<text
+												 style="font-size: 24rpx;">元</text></view>
 										</view>
 									</view>
 
@@ -851,14 +847,17 @@
 				if (!setdata) {
 					this.modaishow = true;
 					return
-				} else if (this.ApproveStatus != 1) {
-					// uni.showToast({
-					// 	title: '您还没有验证店铺',
-					// 	icon: 'none'
-					// });
-					// return;
+				}
+				if (this.ApproveStatus === '' || this.ApproveStatus === 2) {
 					this.toggleVerify()
-					return
+					return;
+				}
+				if (this.ApproveStatus == 0) {
+					uni.showToast({
+						title: '店铺信息审核中',
+						icon: 'none'
+					});
+					return;
 				}
 				if (setdata && this.ApproveStatus === 1) {
 					this.$refs.popup.show();
@@ -912,7 +911,7 @@
 						uni.setStorageSync('usermen', res.data.token); //把token存在本地，小程序提供如同浏览器cookie
 						var setdata = uni.getStorageSync('usermen');
 						uni.showToast({
-							title: '登陆成功'
+							title: '登录成功'
 						});
 						this.getMerchants();
 						uni.hideLoading();
@@ -929,42 +928,55 @@
 					this.modaishow = true;
 				} else {
 					this.modaishow = false;
-					let data = {
-						goodsId: id,
-						token: setdata
-					};
-					if (this.shopListdata.isCollection == true) {
+					if (this.ApproveStatus == 0) {
 						uni.showToast({
-							title: '重复收藏',
+							title: '店铺信息审核中',
 							icon: 'none'
 						});
 						return;
 					}
-					if (this.canCollect === true) {
-						uni.showToast({
-							title: '重复收藏',
-							icon: 'none'
-						});
+					if (this.ApproveStatus === '' || this.ApproveStatus === 2) {
+						this.toggleVerify()
 						return;
 					}
-					if (this.shopListdata.isCollection == false) {
-						this.canCollect = true
-						publicing(postLike, data)
-							.then(res => {
-								// this.postDetails();
-								uni.showToast({
-									title: '收藏成功',
-									icon: 'none'
-								});
-							})
-							.catch(err => {
-								log(err);
+					
+					if (this.ApproveStatus === 1) {
+						let data = {
+							goodsId: id,
+							token: setdata
+						};
+						if (this.shopListdata.isCollection == true) {
+							uni.showToast({
+								title: '重复收藏',
+								icon: 'none'
 							});
+							return;
+						}
+						if (this.canCollect === true) {
+							uni.showToast({
+								title: '重复收藏',
+								icon: 'none'
+							});
+							return;
+						}
+						if (this.shopListdata.isCollection == false) {
+							this.canCollect = true
+							publicing(postLike, data)
+								.then(res => {
+									// this.postDetails();
+									uni.showToast({
+										title: '收藏成功',
+										icon: 'none'
+									});
+								})
+								.catch(err => {
+									log(err);
+								});
+						}
 					}
 				}
 			},
 			//请求商品详情
-
 			postDetails() {
 				uni.showLoading({
 					title: '加载中'
@@ -999,52 +1011,66 @@
 				} else {
 					// this.modaishow = false
 					this.modaishow = false;
-					let data = {
-						goodsId: id,
-						token: setdata,
-						number: 1
-					};
-					if (this.shopListdata.isCart == true) {
+					if (this.ApproveStatus == 0) {
 						uni.showToast({
-							title: '重复加入进货单',
-							icon: 'none',
-							duration: 3000
+							title: '店铺信息审核中',
+							icon: 'none'
 						});
 						return;
 					}
-					if (this.canCart === true) {
-						uni.showToast({
-							title: '重复加入进货单',
-							icon: 'none',
-							duration: 3000
-						});
+					if (this.ApproveStatus === '' || this.ApproveStatus === 2) {
+						this.toggleVerify()
 						return;
 					}
 
-					if (this.shopListdata.isCart == false) {
-						publicing(postmyOrder, data)
-							.then(res => {
-								let code = res.data.code;
-								if (code == -1) {
-									uni.showToast({
-										title: `${res.data.msg}`,
-										icon: 'none',
-										duration: 3000
-									});
-								} else if (code == 200) {
-									// this.postDetails();
-									this.canCart = true
-									uni.showToast({
-										title: '加入进货单成功',
-										icon: 'none',
-										duration: 3000
-									});
-								}
-							})
-							.catch(err => {
-								log(err);
+					if (this.ApproveStatus === 1) {
+						let data = {
+							goodsId: id,
+							token: setdata,
+							number: 1
+						};
+						if (this.shopListdata.isCart == true) {
+							uni.showToast({
+								title: '重复加入进货单',
+								icon: 'none',
+								duration: 3000
 							});
+							return;
+						}
+						if (this.canCart === true) {
+							uni.showToast({
+								title: '重复加入进货单',
+								icon: 'none',
+								duration: 3000
+							});
+							return;
+						}
+						if (this.shopListdata.isCart == false) {
+							publicing(postmyOrder, data)
+								.then(res => {
+									let code = res.data.code;
+									if (code == -1) {
+										uni.showToast({
+											title: `${res.data.msg}`,
+											icon: 'none',
+											duration: 3000
+										});
+									} else if (code == 200) {
+										// this.postDetails();
+										this.canCart = true
+										uni.showToast({
+											title: '加入进货单成功',
+											icon: 'none',
+											duration: 3000
+										});
+									}
+								})
+								.catch(err => {
+									log(err);
+								});
+						}
 					}
+
 				}
 			},
 
