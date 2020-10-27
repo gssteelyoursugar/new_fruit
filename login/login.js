@@ -46,7 +46,6 @@ class logins{
 					}
 				})
 			}else{
-				console.log('拒绝登录')
 				reject('FAIL')
 			}
 		})		

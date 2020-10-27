@@ -94,10 +94,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiListView: function() {
-    return __webpack_require__.e(/*! import() | components/tui-list-view/tui-list-view */ "components/tui-list-view/tui-list-view").then(__webpack_require__.bind(null, /*! @/components/tui-list-view/tui-list-view.vue */ 514))
+    return __webpack_require__.e(/*! import() | components/tui-list-view/tui-list-view */ "components/tui-list-view/tui-list-view").then(__webpack_require__.bind(null, /*! @/components/tui-list-view/tui-list-view.vue */ 522))
   },
   tuiListCell: function() {
-    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 453))
+    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 461))
   }
 }
 var render = function() {
@@ -205,9 +205,7 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 //
 //
 //
-var _default = { data: function data() {return { statusHeight: 20, boxHeight: 44, msgList: [] };}, onLoad: function onLoad() {var _this = this;var res = uni.getSystemInfoSync();var statusBarHeight = res.statusBarHeight;var info = uni.getMenuButtonBoundingClientRect();var top = info.top,bottom = info.bottom;this.statusHeight = statusBarHeight;var buttonHeight = bottom - statusBarHeight + (top - statusBarHeight);var navHeight = statusBarHeight + buttonHeight + top - statusBarHeight;this.boxHeight = navHeight - statusBarHeight;console.log(statusBarHeight, navHeight, buttonHeight);(0, _api.listing2)(_request.getMsg).then(function (res) {console.log(res);_this.msgList = res.data.data;});},
-  methods: {
-    back: function back() {
+var _default = { data: function data() {return { statusHeight: 20, boxHeight: 44, msgList: [] };}, onLoad: function onLoad() {var _this = this;var res = uni.getSystemInfoSync();var statusBarHeight = res.statusBarHeight;var info = uni.getMenuButtonBoundingClientRect();var top = info.top,bottom = info.bottom;this.statusHeight = statusBarHeight;var buttonHeight = bottom - statusBarHeight + (top - statusBarHeight);var navHeight = statusBarHeight + buttonHeight + top - statusBarHeight;this.boxHeight = navHeight - statusBarHeight;(0, _api.listing2)(_request.getMsg).then(function (res) {_this.msgList = res.data.data;});}, methods: { back: function back() {
       uni.navigateBack();
     },
     detail: function detail() {
@@ -216,7 +214,6 @@ var _default = { data: function data() {return { statusHeight: 20, boxHeight: 44
 
     },
     clickToItem: function clickToItem(id) {
-      console.log(id);
       uni.navigateTo({
         url: "../../pagesII/timeInfo/timeInfo?id=" + id });
 

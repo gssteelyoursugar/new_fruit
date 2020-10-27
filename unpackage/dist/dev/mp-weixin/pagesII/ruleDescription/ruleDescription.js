@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiListCell: function() {
-    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 453))
+    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 461))
   }
 }
 var render = function() {
@@ -165,7 +165,6 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 var _default = { data: function data() {return { agreeList: [] };}, onLoad: function onLoad() {this.getList();}, methods: {
     getList: function getList() {var _this = this;
       (0, _api.listing2)(_request.getAgreeList).then(function (res) {
-        console.log(res);
         var list = res.data.data;
         var arr = [];
         var ids = ["1319827321417515008", "1319827163120287744", "1304408017931272192"];

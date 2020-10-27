@@ -16,7 +16,6 @@
 		},
 		onLoad (options) {
 			this.url = options.url
-			console.log(options.url)
 		}
 	}
 </script>

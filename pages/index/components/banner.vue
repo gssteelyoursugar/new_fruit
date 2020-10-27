@@ -27,7 +27,6 @@
 		},
 		methods: {
 			detail() {
-				console.log('点击轮播')
 			}
 
 		}

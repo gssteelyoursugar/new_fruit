@@ -170,8 +170,6 @@
 			let navHeight = statusBarHeight + buttonHeight + top - statusBarHeight
 			this.boxHeight = navHeight - statusBarHeight
 			this.navHeight = navHeight
-
-			console.log(statusBarHeight, navHeight, buttonHeight)
 			// #endif
 
 		},
@@ -196,7 +194,6 @@
 					});
 			},
 			scroll(e) {
-				console.log(e)
 			},
 			//商品详情页
 			gotoList(id) {
@@ -208,13 +205,10 @@
 
 			//倒计时
 			endOfTime: function() {
-				console.log('倒计时结束')
 			},
 			//下拉刷新
 			onPullDownRefresh() {
 				this.getLimit()
-
-				console.log('refresh');
 				setTimeout(function() {
 					uni.stopPullDownRefresh();
 
@@ -255,7 +249,6 @@
 			},
 			menubtn(index) {
 				this.num = index
-				console.log(this.num)
 				// 子组件调试父组件方法 ：parent
 				// this.$parent.fatherMethod(index)
 			},
@@ -336,10 +329,8 @@
 						href: ''
 					},
 					function() {
-						console.log('分享成功');
 					},
 					function(e) {
-						console.log('分享失败：' + JSON.stringify(e));
 					}
 				);
 				//#endif

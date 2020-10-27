@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "上市预告",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "jyf-parser": "/components/jyf-parser/jyf-parser"
+  }
+}

@@ -181,7 +181,6 @@
 		//下拉刷新
 		onPullDownRefresh() {
 			this.getRecentlyData();
-			console.log('refresh');
 			setTimeout(function() {
 				uni.stopPullDownRefresh();
 			}, 1000);
@@ -203,7 +202,6 @@
 			let navHeight = statusBarHeight + buttonHeight + top - statusBarHeight
 			this.boxHeight = navHeight - statusBarHeight
 
-			console.log(statusBarHeight, navHeight, buttonHeight)
 			// #endif
 		},
 		methods: {
@@ -279,10 +277,8 @@
 								content: '服务器错误，请重新登录获取信息',
 								success: function(res) {
 									if (res.confirm) {
-										console.log('用户点击确定');
 										uni.hideLoading();
 									} else if (res.cancel) {
-										console.log('用户点击取消');
 										uni.hideLoading();
 									}
 								}
@@ -316,7 +312,6 @@
 				listing(getRecently, data)
 					.then(res => {
 						this.lookDatas = res.data.data;
-						console.log(res.data.data)
 					})
 					.catch(err => {
 						log(err);

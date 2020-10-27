@@ -52,7 +52,6 @@
 			};
 		},
 		mounted() {
-			console.log("进来了",this.canSee)
 		},
 		methods: {
 			Handleclick() {
@@ -64,7 +63,6 @@
 		},
 		watch: {
 			canSee (o,n) {
-				console.log(o,n)
 			}
 		}
 	}

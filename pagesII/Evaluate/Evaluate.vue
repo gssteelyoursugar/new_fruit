@@ -94,7 +94,6 @@
 					pageSize: 10000
 				}
 				publicing(getEvaluateList, data).then(res => {
-					console.log(res)
 					this.evaList =  res.data.data
 				
 				})
@@ -114,16 +113,13 @@
 			},
 
 			cancelPraise(e) {
-				console.log("我要取消点赞")
 				
 				let data = {
 					goodsId: this.curIds,
 					token: setdata
 				}
-				console.log(data)
 				// return
 				publicing(postCancelPraise, data).then(res => {
-					console.log(res)
 					uni.showToast({
 						title: '已取消点赞',
 					

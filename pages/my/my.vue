@@ -89,7 +89,7 @@
 						<view class="tui-icon-box">
 							<image src="/static/images/done.png" style="width:40rpx;" class="tui-order-icon"></image>
 						</view>
-						<view class="tui-order-text">已完成<text v-if="wxlogin &&fukuanList !== ''&&fukuanList == 0">{{fukuanList}}</text></view>
+						<view class="tui-order-text">已完成</view>
 					</view>
 					<view class="tui-order-item" @tap="gotoAfter">
 						<view class="tui-icon-box">
@@ -205,7 +205,6 @@
 	export default {
 		onLoad: function(options) {
 			this.getOrderData()
-			console.log("这里是onload")
 			// this.getMerchants()
 			// this.getWxdata()
 			let obj = {};
@@ -252,13 +251,10 @@
 		methods: {
 			onPullDownRefresh() {
 				this.getMerchants()
-				// console.log('refresh');
 				setTimeout(function() {
 					uni.stopPullDownRefresh();
-
 				}, 1000);
 			},
-
 			//获取头像昵称
 			getUserInfo(event) {
 				log(event)
@@ -362,7 +358,6 @@
 				}
 				listing(getClient, data)
 					.then((res) => {
-						console.log(res.data.data)
 						///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
 						this.ApproveStatus = res.data.data.approveStatus //获取状态码，0未认证，1已认证，2拒绝
 						uni.setStorageSync('StoreStatus', res.data.data.approveStatus)
@@ -415,7 +410,6 @@
 					.then((res) => {
 						let list = res.data.data
 						if (list.length === 0) return
-						console.log(list)
 						let fukuanList = []
 						let fahuoList = []
 						let shouhuoList = []
@@ -436,7 +430,6 @@
 								}
 							}
 						})
-						console.log('shouhuoList,',shouhuoList)
 						this.fukuanList = fukuanList.length
 						this.fahuoList = fahuoList.length
 						this.shouhuoList = shouhuoList.length
@@ -551,7 +544,6 @@
 			// 	    success: function(res) {
 			// 	        // let kefuid = res.data.kf_list[0].kf_id
 
-			// 			console.log(res);
 			// 	    }
 			// 	});
 
@@ -598,12 +590,10 @@
 			this.getMerchants()
 			this.getOrderData()
 			this.ifUser()
-			// this.ifLogin()
-			console.log("这里是onshow")
 		},
-		onPageScroll(e) {
-			this.scrollTop = e.scrollTop;
-		},
+		// onPageScroll(e) {
+		// 	this.scrollTop = e.scrollTop;
+		// },
 		onPullDownRefresh() {
 			setTimeout(() => {
 				uni.stopPullDownRefresh()

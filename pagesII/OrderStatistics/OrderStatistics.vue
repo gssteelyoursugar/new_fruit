@@ -88,22 +88,16 @@
 			let userToken = uni.getStorageSync('usermen')
 			// 初始化时间选择器默认时间
 			if(this.orderTime) {
-				console.log('有时间')
 				let arr = this.orderTime.split()
 				arr.push("01日")
-				console.log()
-				console.log(this.dataTime,this.orderTime)
 				this.dataTime = arr.join('')
 			} else {
-				console.log('没有时间')
 				let curDate = new Date()
 				let year = curDate.getFullYear()
 				let month = curDate.getMonth() + 1
 				let day = curDate.getDay()
 				this.dataTime = `${year}年${month}月${day}日`
-				console.log(this.dataTime)
 			}
-			console.log(userToken)
 			this.getOrderCount()
 		},
 		computed: {
@@ -118,9 +112,7 @@
 				}, 10);
 			},
 			bindChange(e) {
-				console.log(e);
 				let date = e.year + '-' + e.month
-				console.log(date)
 				// return
 				this.setOrderTime({
 					data: e.result, //渲染数据的日期格式
@@ -128,7 +120,6 @@
 					
 				});
 				this.getOrderCount()
-				console.log("看看我的订单呗")
 			},
 			
 			goToDetail(id) {
@@ -160,7 +151,6 @@
 						pageSize: 10000
 					}
 					listing(orderCount, data).then(res => {
-						console.log(res)
 						this.orderList = res.data.data.list
 						this.totalGoodsNumber = res.data.data.totalGoodsNumber
 						this.totalGoodsPirce = res.data.data.totalGoodsPirce
@@ -174,7 +164,6 @@
 						pageSize: 10000
 					}
 					listing(orderCount, data).then(res => {
-						console.log(res)
 						this.orderList = res.data.data.list
 						this.totalGoodsNumber = res.data.data.totalGoodsNumber
 						this.totalGoodsPirce = res.data.data.totalGoodsPirce

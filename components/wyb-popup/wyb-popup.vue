@@ -320,7 +320,6 @@
 			let navHeight = statusBarHeight + buttonHeight + top - statusBarHeight //状态栏+导航栏的高度（页面初始高度）
 			this.boxHeight = navHeight - statusBarHeight //导航栏高度
 			this.navHeight = navHeight
-			console.log("statusBarHeight,",statusBarHeight,"navHeight",navHeight,"boxHeight",this.boxHeight, "buttonHeight",buttonHeight)
 			// #endif
 		},
 		methods: {

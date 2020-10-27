@@ -94,19 +94,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiTopDropdown: function() {
-    return __webpack_require__.e(/*! import() | components/tui-top-dropdown/tui-top-dropdown */ "components/tui-top-dropdown/tui-top-dropdown").then(__webpack_require__.bind(null, /*! @/components/tui-top-dropdown/tui-top-dropdown.vue */ 460))
+    return __webpack_require__.e(/*! import() | components/tui-top-dropdown/tui-top-dropdown */ "components/tui-top-dropdown/tui-top-dropdown").then(__webpack_require__.bind(null, /*! @/components/tui-top-dropdown/tui-top-dropdown.vue */ 468))
   },
   tuiDrawer: function() {
-    return __webpack_require__.e(/*! import() | components/tui-drawer/tui-drawer */ "components/tui-drawer/tui-drawer").then(__webpack_require__.bind(null, /*! @/components/tui-drawer/tui-drawer.vue */ 467))
+    return __webpack_require__.e(/*! import() | components/tui-drawer/tui-drawer */ "components/tui-drawer/tui-drawer").then(__webpack_require__.bind(null, /*! @/components/tui-drawer/tui-drawer.vue */ 475))
   },
   tuiIcon: function() {
-    return __webpack_require__.e(/*! import() | components/tui-icon/tui-icon */ "components/tui-icon/tui-icon").then(__webpack_require__.bind(null, /*! @/components/tui-icon/tui-icon.vue */ 397))
+    return __webpack_require__.e(/*! import() | components/tui-icon/tui-icon */ "components/tui-icon/tui-icon").then(__webpack_require__.bind(null, /*! @/components/tui-icon/tui-icon.vue */ 405))
   },
   easySelect: function() {
-    return __webpack_require__.e(/*! import() | components/easy-select/easy-select */ "components/easy-select/easy-select").then(__webpack_require__.bind(null, /*! @/components/easy-select/easy-select.vue */ 474))
+    return __webpack_require__.e(/*! import() | components/easy-select/easy-select */ "components/easy-select/easy-select").then(__webpack_require__.bind(null, /*! @/components/easy-select/easy-select.vue */ 482))
   },
   tuiNomore: function() {
-    return __webpack_require__.e(/*! import() | components/tui-nomore/tui-nomore */ "components/tui-nomore/tui-nomore").then(__webpack_require__.bind(null, /*! @/components/tui-nomore/tui-nomore.vue */ 411))
+    return __webpack_require__.e(/*! import() | components/tui-nomore/tui-nomore */ "components/tui-nomore/tui-nomore").then(__webpack_require__.bind(null, /*! @/components/tui-nomore/tui-nomore.vue */ 419))
   }
 }
 var render = function() {
@@ -195,19 +195,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -961,19 +948,6 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 var _console = console,log = _console.log;var setdata = uni.getStorageSync('usermen');var _default = { data: function data() {return { allVariety: false, title: '选中', sleter: false, sleter2: false, ApproveStatus: 0, dropdownlistData: [{ name: "微信支付" }, { name: "支付宝支付" }, { name: "银行卡支付" }, { name: "微信支付" }, { name: "支付宝支付" }, { name: "银行卡支付" }], dropdownShow: false, dropdownShow2: false, seleVarieties: [], //全部品种
       color_level: [], //颜色等级
       // facade_level: [], //外观等级
@@ -1018,8 +992,8 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
         // fruitLevel: '', //等级
         fruit_parameter_1: '', //等级左
         fruit_parameter_2: '', //等级右
-        weight_parameter_1: '', //单果左
-        weight_parameter_2: '', //单果右
+        // weight_parameter_1: '', //单果左
+        // weight_parameter_2: '', //单果右
         size_parameter_1: '', //果径左
         size_parameter_2: '', //果径右
         tasteLevel_parameter_1: '', //口感左
@@ -1034,14 +1008,13 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
         price_parameter_2: '', //价格右边
         pageNo: 1, pageSize: 10000 }, goods_type_id: '' };}, onLoad: function onLoad(options) {var _this = this;this.getMerchants();var pages = getCurrentPages();var beforePage = pages[pages.length - 2]; // 前一个页面路径
     // log(beforePage.$page.fullPath)
-    if (beforePage.$page.fullPath === '/pagesII/searchGoods/searchGoods') {// log('我执行了搜索')
-      //搜索	
-      this.getSearch(options.name);this.searchName = options.name;this.slMangguo = options.name;} else {console.log("没错我走到了这里");this.slMangguo = options.name;this.varietyId = options.id;this.searchName = options.name;log(this.varietyId);this.ShopIng();} //this.searchKey = options.name
+    if (beforePage.$page.fullPath === '/pagesII/searchGoods/searchGoods') {//搜索	
+      this.getSearch(options.name);this.searchName = options.name;this.slMangguo = options.name;} else {this.slMangguo = options.name;this.varietyId = options.id;this.searchName = options.name;log(this.varietyId);this.ShopIng();} //this.searchKey = options.name
     var obj = {};obj = wx.getMenuButtonBoundingClientRect();uni.getSystemInfo({ success: function success(res) {_this.width = obj.left || res.windowWidth;_this.height = obj.top ? obj.top + obj.height + 8 : res.statusBarHeight + 44;_this.inputTop = obj.top ? obj.top + (obj.height - 30) / 2 : res.statusBarHeight + 7;_this.arrowTop = obj.top ? obj.top + (obj.height - 32) / 2 : res.statusBarHeight + 6;_this.searchKey = options.name || ''; //传递的搜索关键字
         //略小，避免误差带来的影响
         _this.dropScreenH = _this.height * 750 / res.windowWidth + 186;_this.drawerH = res.windowHeight - uni.upx2px(100) - _this.height;} });var res = uni.getSystemInfoSync();var statusBarHeight = res.statusBarHeight;var info = uni.getMenuButtonBoundingClientRect();var top = info.top,bottom = info.bottom;this.statusHeight = statusBarHeight;var buttonHeight = bottom - statusBarHeight + (top - statusBarHeight);var navHeight = statusBarHeight + buttonHeight + top - statusBarHeight; //状态栏+导航栏的高度（页面初始高度）
     this.boxHeight = navHeight - statusBarHeight; //导航栏高度
-    this.navHeight = navHeight;console.log("statusBarHeight,", statusBarHeight, "navHeight", navHeight, "boxHeight", this.boxHeight, "buttonHeight", buttonHeight);}, filters: { filterNum: function filterNum(val) {if (val) {var words = (Math.floor(val) + '').split('');var res = '';if (words.length <= 4) {res = val;}if (words.length === 5) {res = words[0] + "." + words[1] + '万';}if (words.length === 6) {res = words[0] + words[1] + "." + words[2] + '万';}if (words.length === 7) {res = words[0] + words[1] + words[2] + "." + words[3] + '万';}if (words.length === 8) {res = words[0] + words[1] + words[2] + words[3] + "." + words[4] + '万';}if (words.length === 9) {res = words[0] + "." + words[1] + '亿';}if (words.length === 10) {res = words[0] + words[1] + "." + words[2] + '亿';}return res;} else {return val;}} }, computed: { fruitBox: function fruitBox() {var arr = [];var data = this.fruit_star;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;}, tasteBox: function tasteBox() {var arr = [];var data = this.taste_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;}, colorBox: function colorBox() {var arr = [];var data = this.color_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;}, shapeBox: function shapeBox() {var arr = [];var data = this.shape_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;} }, methods: { getMerchants: function getMerchants() {var _this2 = this;var data = { token: setdata }; // log(data)
+    this.navHeight = navHeight;}, filters: { filterNum: function filterNum(val) {if (val) {var words = (Math.floor(val) + '').split('');var res = '';if (words.length <= 4) {res = val;}if (words.length === 5) {res = words[0] + "." + words[1] + '万';}if (words.length === 6) {res = words[0] + words[1] + "." + words[2] + '万';}if (words.length === 7) {res = words[0] + words[1] + words[2] + "." + words[3] + '万';}if (words.length === 8) {res = words[0] + words[1] + words[2] + words[3] + "." + words[4] + '万';}if (words.length === 9) {res = words[0] + "." + words[1] + '亿';}if (words.length === 10) {res = words[0] + words[1] + "." + words[2] + '亿';}return res;} else {return val;}} }, computed: { fruitBox: function fruitBox() {var arr = [];var data = this.fruit_star;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;}, tasteBox: function tasteBox() {var arr = [];var data = this.taste_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;}, colorBox: function colorBox() {var arr = [];var data = this.color_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;}, shapeBox: function shapeBox() {var arr = [];var data = this.shape_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;} }, methods: { getMerchants: function getMerchants() {var _this2 = this;var data = { token: setdata }; // log(data)
       (0, _api.listing)(_request.getClient, data).then(function (res) {// log(res)
         ///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
         _this2.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
@@ -1049,11 +1022,20 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       }).catch(function (err) {log(err);});}, //点击搜索
     goToSearchGoods: function goToSearchGoods() {uni.navigateTo({ url: '../../pagesII/searchGoods/searchGoods' });}, //商品详情页
     gotoList: function gotoList(id) {log(id);uni.navigateTo({ url: '../../pagesIII/productDetail/productDetail?id=' + id });}, //下拉选
-    dropDownList: function dropDownList(index, name) {if (index !== -1) {console.log("index：" + index, name);}this.title = name;this.dropdownShow = !this.dropdownShow;}, dropDownList2: function dropDownList2(index, name) {if (index !== -1) {console.log("index：" + index, name);}this.title = name;this.dropdownShow2 = !this.dropdownShow2;}, // 搜索请求数据
-    getSearch: function getSearch(serrchName) {var _this3 = this;var data = { pageNo: 1, pageSize: 10000, name: serrchName };(0, _api.listing)(_request.getGoodsall, data).then(function (res) {log("搜索结果", res);_this3.goods = res.data.data.goods;_this3.seleVarieties = res.data.data;if (_this3.seleVarieties === undefined) {_this3.seleVarieties = _this3.seleVarieties;} else if (_this3.seleVarieties != undefined) {}_this3.color_level = res.data.data.color_level;_this3.facade_level = res.data.data.facade_level;_this3.fruit_star = res.data.data.fruit_star;_this3.shape_level = res.data.data.shape_level;_this3.goods = res.data.data.goods;_this3.packaging = res.data.data.packaging;_this3.species = res.data.data.species; // for (var i = 0; i < this.species.length; i++) {
+    dropDownList: function dropDownList(index, name) {if (index !== -1) {}this.title = name;this.dropdownShow = !this.dropdownShow;}, dropDownList2: function dropDownList2(index, name) {if (index !== -1) {}this.title = name;this.dropdownShow2 = !this.dropdownShow2;}, // 搜索请求数据
+    getSearch: function getSearch(serrchName) {var _this3 = this;var data = { pageNo: 1, pageSize: 10000, name: serrchName };(0, _api.listing)(_request.getGoodsall, data).then(function (res) {log("搜索结果", res);_this3.goods = res.data.data.goods;_this3.seleVarieties = res.data.data;if (_this3.seleVarieties === undefined) {_this3.seleVarieties = _this3.seleVarieties;} else if (_this3.seleVarieties != undefined) {}_this3.color_level = res.data.data.color_level;
+        _this3.facade_level = res.data.data.facade_level;
+        _this3.fruit_star = res.data.data.fruit_star;
+        _this3.shape_level = res.data.data.shape_level;
+        _this3.goods = res.data.data.goods;
+        _this3.packaging = res.data.data.packaging;
+        _this3.species = res.data.data.species;
+        // for (var i = 0; i < this.species.length; i++) {
         // 	this.species[i].isActives = this.activeA
         // }
-        _this3.goods_type = res.data.data.goodsType;_this3.storage_mode = res.data.data.storage_mode;_this3.taste_level = res.data.data.taste_level;
+        _this3.goods_type = res.data.data.goodsType;
+        _this3.storage_mode = res.data.data.storage_mode;
+        _this3.taste_level = res.data.data.taste_level;
         _this3.variety = res.data.data.variety;
       }).
       catch(function (err) {
@@ -1065,29 +1047,20 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
     /* 第一个筛选 */
     Total: function Total(index) {
       this.num = index;
-      // log(this.num)
       if (this.num == 0) {
         this.ShopIng();
         log('综合');
       } else if (this.num == 1) {
         if (this.sleter) {
-          log('销量1');
-          console.log("sleter", this.sleter);
           this.getshopDESC();
         } else {
-          log('销量2');
-          console.log("sleter", this.sleter);
           this.getshopASC();
         }
         this.sleter = !this.sleter;
       } else if (this.num == 2) {
         if (this.sleter2) {
-          log('销量1');
-          console.log("sleter2", this.sleter2);
           this.getpriceDESC();
         } else {
-          log('销量2');
-          console.log("sleter", this.sleter2);
           this.getpriceASC();
         }
         this.sleter2 = !this.sleter2;
@@ -1162,7 +1135,6 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       this.goods_type_id = id;
       this.tempData.goodsTypeId = id;
       this.ShopIng();
-      // console.log(index,id,name,this.goods_type_id)
       this.dropScreenShow4 = !this.dropScreenShow4;
     },
     //品种全选
@@ -1172,13 +1144,11 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       var arr = [];
       if (this.allVariety) {
         this.idList = [];
-        console.log('进来，', this.allVariety, this.idList);
       } else {
         list.forEach(function (item) {
           arr.push(item.id);
         });
         this.idList = arr;
-        console.log('进去，', this.allVariety, this.idList);
       }
       this.allVariety = !this.allVariety;
     },
@@ -1197,7 +1167,6 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       } else {
         this.allVariety = false;
       }
-      console.log(this.seleVarieties);
     },
 
     checkDing2: function checkDing2(index, title, id) {
@@ -1223,18 +1192,15 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       this.optionList[name] = id;
       this.tempData[name] = id;
       this.num = idx;
-      console.log(this.optionList);
     },
-    selectItem: function selectItem(e) {
-      // console.log(e)
-      var
+    selectItem: function selectItem(e) {var
+
       id =
 
 
       e.id,s_name = e.s_name,label = e.label;
       this.optionList[s_name] = label;
       this.tempData[s_name] = id;
-      console.log("tempData:", this.tempData);
 
     },
 
@@ -1318,15 +1284,12 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       if (list.length === 0) {
         this.tempData.varietyId = '';
         (0, _api.listing)(_request.getGoodsall, this.tempData).then(function (res) {
-          console.log(res);
-          console.log("jinlai", list);
           _this8.goods = res.data.data.goods;
         });
       } else {
         var ids = list.join(',');
         this.tempData.varietyId = ids;
         (0, _api.listing)(_request.getGoodsall, this.tempData).then(function (res) {
-          console.log("jinqu", list);
           _this8.goods = res.data.data.goods;
         });
       }
@@ -1336,9 +1299,7 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
 
     // 点击
     clickToConfirm: function clickToConfirm() {var _this9 = this;
-      console.log(this.tempData);
       (0, _api.listing)(_request.getGoodsall, this.tempData).then(function (res) {
-        console.log(res);
         _this9.goods = res.data.data.goods;
       });
       this.closeDrawer();
@@ -1352,7 +1313,6 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       Promise.all([(0, _api.listing)(_request.getGoodsall, this.tempData), (0, _api.listing)(_request.getAttribute, data2)])
       // listing(getGoodsall,data)
       .then(function (res) {
-        console.log(res);
         _this10.seleVarieties = res[1].data.data;
         _this10.color_level = res[0].data.data.color_level;
         _this10.facade_level = res[0].data.data.facade_level;
@@ -1432,8 +1392,8 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       this.num = -1;
       this.tempData.fruit_parameter_1 = '';
       this.tempData.fruit_parameter_2 = '';
-      this.tempData.weight_parameter_1 = '';
-      this.tempData.weight_parameter_2 = '';
+      // this.tempData.weight_parameter_1 = ''
+      // this.tempData.weight_parameter_2 = ''
       this.tempData.size_parameter_1 = '';
       this.tempData.size_parameter_2 = '';
       this.tempData.price_parameter_1 = '';
@@ -1473,28 +1433,33 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
 
     },
     detail: function detail(name) {
-      console.log(name);
       uni.navigateTo({
         url: '../../pagesIII/productDetail/productDetail?data=' + name });
 
     } },
 
-  onReachBottom: function onReachBottom() {
-    if (!this.pullUpOn) return;
-    this.loadding = true;
-    if (this.pageIndex == 4) {
-      this.loadding = false;
-      this.pullUpOn = false;
-    } else {
-      var loadData = JSON.parse(JSON.stringify(this.goodsList)); //商品列表
-      loadData = loadData.splice(0, 10);
-      if (this.pageIndex == 1) {
-        loadData = loadData.reverse();
-      }
-      this.goodsList = this.goodsList.concat(loadData);
-      this.pageIndex = this.pageIndex + 1;
-      this.loadding = false;
-    }
+  // onReachBottom: function() {
+  // 	if (!this.pullUpOn) return;
+  // 	this.loadding = true;
+  // 	if (this.pageIndex == 4) {
+  // 		this.loadding = false;
+  // 		this.pullUpOn = false;
+  // 	} else {
+  // 		let loadData = JSON.parse(JSON.stringify(this.goodsList)); //商品列表
+  // 		loadData = loadData.splice(0, 10);
+  // 		if (this.pageIndex == 1) {
+  // 			loadData = loadData.reverse();
+  // 		}
+  // 		this.goodsList = this.goodsList.concat(loadData);
+  // 		this.pageIndex = this.pageIndex + 1;
+  // 		this.loadding = false;
+  // 	}
+  // },
+  onPullDownRefresh: function onPullDownRefresh() {
+    this.ShopIng();
+    setTimeout(function () {
+      uni.stopPullDownRefresh();
+    }, 200);
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

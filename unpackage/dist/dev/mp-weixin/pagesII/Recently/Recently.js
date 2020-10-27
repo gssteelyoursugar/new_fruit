@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiSwipeAction: function() {
-    return __webpack_require__.e(/*! import() | components/tui-swipe-action/tui-swipe-action */ "components/tui-swipe-action/tui-swipe-action").then(__webpack_require__.bind(null, /*! @/components/tui-swipe-action/tui-swipe-action.vue */ 432))
+    return __webpack_require__.e(/*! import() | components/tui-swipe-action/tui-swipe-action */ "components/tui-swipe-action/tui-swipe-action").then(__webpack_require__.bind(null, /*! @/components/tui-swipe-action/tui-swipe-action.vue */ 440))
   }
 }
 var render = function() {
@@ -317,7 +317,6 @@ console,log = _console.log;var _default = (_data$filters$onPullD = {
   //下拉刷新
   onPullDownRefresh: function onPullDownRefresh() {
     this.getRecentlyData();
-    console.log('refresh');
     setTimeout(function () {
       uni.stopPullDownRefresh();
     }, 1000);
@@ -339,7 +338,6 @@ console,log = _console.log;var _default = (_data$filters$onPullD = {
     var navHeight = statusBarHeight + buttonHeight + top - statusBarHeight;
     this.boxHeight = navHeight - statusBarHeight;
 
-    console.log(statusBarHeight, navHeight, buttonHeight);
 
   },
   methods: {
@@ -415,10 +413,8 @@ console,log = _console.log;var _default = (_data$filters$onPullD = {
             content: '服务器错误，请重新登录获取信息',
             success: function success(res) {
               if (res.confirm) {
-                console.log('用户点击确定');
                 uni.hideLoading();
               } else if (res.cancel) {
-                console.log('用户点击取消');
                 uni.hideLoading();
               }
             } });
@@ -452,7 +448,6 @@ console,log = _console.log;var _default = (_data$filters$onPullD = {
       (0, _api.listing)(_request.getRecently, data).
       then(function (res) {
         _this4.lookDatas = res.data.data;
-        console.log(res.data.data);
       }).
       catch(function (err) {
         log(err);

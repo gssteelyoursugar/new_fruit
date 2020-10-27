@@ -247,7 +247,6 @@ export default {
 		//复制
 		//event 当需要异步请求返回数据再进行复制时，需要传入此参数，或者异步方法转为同步方法（H5端）
 		clipboard(event) {
-			console.log(event);
 			let data= event;
 			thorui.getClipboardData(data, (res) => {
 				// #ifdef H5 || MP-ALIPAY
@@ -301,7 +300,6 @@ export default {
 		},
 		change(e) {
 			this.currentTab = e.index
-			console.log(this.currentTab)
 			if(this.currentTab === 0  ){//全部默认0
 				this.postAfterSalelist()
 				this.getBeConfirmedData()
@@ -339,7 +337,6 @@ export default {
 			let list = newsData || [];
 			if (refresh) {
 				activeTab.data = [];
-				console.log('触发上拉加载')
 				activeTab.loadingText = '正在加载...';
 				activeTab.pageIndex = 2;
 				activeTab.data = list || [];
@@ -355,7 +352,6 @@ export default {
 		},
 		
 		loadMore(e) {
-			console.log('触发加载更多')
 			let activeTab = this.newsList[this.tabIndex];
 			if (activeTab.pageIndex < 4 && !activeTab.isLoading) {
 				activeTab.isLoading = true;
@@ -365,12 +361,10 @@ export default {
 			}
 		},
 		tabClick(e) {
-			console.log("点击触发",e.currentTarget.dataset.current)
 			let index = e.currentTarget.dataset.current;
 			this.switchTab(index);
 		},
 		tabChange(e) {
-			console.log("滑动触发", e.detail.current)
 			let index = e.target.current || e.detail.current;
 			this.switchTab(index);
 			this.postAfterSalelist()
@@ -386,7 +380,6 @@ export default {
 				let isExist = this.cacheTab.indexOf(this.tabIndex);
 				if (isExist < 0) {
 					this.cacheTab.push(this.tabIndex);
-					//console.log("cache index:: " + this.tabIndex);
 				}
 			}
 
@@ -399,16 +392,13 @@ export default {
 				let cacheIndex = this.cacheTab[0];
 				this.clearTabData(cacheIndex);
 				this.cacheTab.splice(0, 1);
-				//console.log("remove cache index:: " + cacheIndex);
 			}
 		},
 		clearTabData(e) {
-			console.log('刷新')
 			this.newsList[e].data.length = 0;
 			this.newsList[e].loadingText = '加载更多...';
 		},
 		onrefresh(e) {
-			console.log(e,'触发下拉刷新')
 			this.postAfterSalelist()
 			this.getBeConfirmedData()
 			var tab = this.newsList[this.tabIndex];
@@ -434,7 +424,6 @@ export default {
 				tab.refreshing = false;
 				tab.refreshFlag = false;
 				tab.refreshText = '刷新成功';
-				console.log('下拉刷新成功')
 				// #ifndef H5
 				uni.showToast({
 					title: '刷新成功',

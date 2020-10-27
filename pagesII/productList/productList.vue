@@ -5,20 +5,7 @@
 			<image src="../../static/images/orderBMG.png" mode="widthFix"></image>
 			<text class="color-text">当前水果没有货，再看看别的吧</text>
 		</view>
-		<!-- <view class="tui-header-box" :style="{paddingTop: statusHeight+ 'px',height: boxHeight+ 'px'}">
-			<view class="tui-icon-box" @tap="back">
-				<tui-icon name="arrowleft" :size="30" color="#333"></tui-icon>
-			</view>
-			<view class="tui-header">找水果</view>
-			<view class="tui-searchbox tui-search-mr" :style="{ marginTop: inputTop + 'px' }" @tap="search">
-				<icon type="search" :size="13" color="#999"></icon>
-				<text class="tui-search-text" v-if="!searchKey">搜索圈果商品</text>
-				<view class="tui-search-key" v-if="searchKey">
-					<view class="tui-key-text">{{ searchKey }}</view>
-					<tui-icon name="shut" :size="12" color="#fff"></tui-icon>
-				</view>
-			</view>
-		</view> -->
+		
 		<!--header-->
 		<!-- 搜索框 -->
 		<view class="search-bar" @click="goToSearchGoods" style="top: 0px">
@@ -307,7 +294,7 @@
 						</view>
 						<text class="content-text" style="color: #fff;">星</text>
 					</view>
-					<view class="tui-drawer-title">
+					<!-- <view class="tui-drawer-title">
 						<text class="tui-title-bold">单果重量</text>
 					</view>
 					<view class="tui-drawer-content">
@@ -316,7 +303,7 @@
 						<tui-icon name="reduce" color="#333" :size="14"></tui-icon>
 						<input placeholder-class="tui-phcolor" v-model="tempData.weight_parameter_2" class="tui-input" placeholder="不限"
 						 maxlength="11" type="number" /><text class="content-text">克</text>
-					</view>
+					</view> -->
 					<view class="tui-drawer-title">
 						<text class="tui-title-bold">果径大小</text>
 					</view>
@@ -604,8 +591,8 @@
 					// fruitLevel: '', //等级
 					fruit_parameter_1: '', //等级左
 					fruit_parameter_2: '', //等级右
-					weight_parameter_1: '', //单果左
-					weight_parameter_2: '', //单果右
+					// weight_parameter_1: '', //单果左
+					// weight_parameter_2: '', //单果右
 					size_parameter_1: '', //果径左
 					size_parameter_2: '', //果径右
 					tasteLevel_parameter_1: '', //口感左
@@ -630,13 +617,11 @@
 			var beforePage = pages[pages.length - 2]; // 前一个页面路径
 			// log(beforePage.$page.fullPath)
 			if (beforePage.$page.fullPath === '/pagesII/searchGoods/searchGoods') {
-				// log('我执行了搜索')
 				//搜索	
 				this.getSearch(options.name)
 				this.searchName = options.name
 				this.slMangguo = options.name
 			} else {
-				console.log("没错我走到了这里")
 				this.slMangguo = options.name
 				this.varietyId = options.id
 				this.searchName = options.name
@@ -685,8 +670,7 @@
 			let navHeight = statusBarHeight + buttonHeight + top - statusBarHeight //状态栏+导航栏的高度（页面初始高度）
 			this.boxHeight = navHeight - statusBarHeight //导航栏高度
 			this.navHeight = navHeight
-			console.log("statusBarHeight,", statusBarHeight, "navHeight", navHeight, "boxHeight", this.boxHeight, "buttonHeight",
-				buttonHeight)
+			
 			// #endif
 
 		},
@@ -817,14 +801,12 @@
 			//下拉选
 			dropDownList(index, name) {
 				if (index !== -1) {
-					console.log("index：" + index, name)
 				}
 				this.title = name
 				this.dropdownShow = !this.dropdownShow
 			},
 			dropDownList2(index, name) {
 				if (index !== -1) {
-					console.log("index：" + index, name)
 				}
 				this.title = name
 				this.dropdownShow2 = !this.dropdownShow2
@@ -869,29 +851,20 @@
 			/* 第一个筛选 */
 			Total(index) {
 				this.num = index
-				// log(this.num)
 				if (this.num == 0) {
 					this.ShopIng()
 					log('综合')
 				} else if (this.num == 1) {
 					if (this.sleter) {
-						log('销量1')
-						console.log("sleter",this.sleter)
 						this.getshopDESC()
 					} else {
-						log('销量2')
-						console.log("sleter",this.sleter)
 						this.getshopASC()
 					}
 					this.sleter = !this.sleter
 				} else if (this.num == 2) {
 					if (this.sleter2) {
-						log('销量1')
-						console.log("sleter2",this.sleter2)
 						this.getpriceDESC()
 					} else {
-						log('销量2')
-						console.log("sleter",this.sleter2)
 						this.getpriceASC()
 					}
 					this.sleter2 = !this.sleter2
@@ -966,7 +939,6 @@
 				this.goods_type_id = id
 				this.tempData.goodsTypeId = id
 				this.ShopIng()
-				// console.log(index,id,name,this.goods_type_id)
 				this.dropScreenShow4 = !this.dropScreenShow4
 			},
 			//品种全选
@@ -976,13 +948,11 @@
 				let arr = []
 				if (this.allVariety) {
 					this.idList = []
-					console.log('进来，',this.allVariety,this.idList)
 				} else { 
 					list.forEach(item=>{
 						arr.push(item.id)
 					})
 					this.idList = arr
-					console.log('进去，',this.allVariety,this.idList)
 				}
 				this.allVariety = !this.allVariety
 			},
@@ -1001,7 +971,6 @@
 				} else {
 					this.allVariety = false
 				}
-				console.log(this.seleVarieties)
 			},
 
 			checkDing2(index, title, id) {
@@ -1027,10 +996,8 @@
 				this.optionList[name] = id
 				this.tempData[name] = id
 				this.num = idx
-				console.log(this.optionList)
 			},
 			selectItem(e) {
-				// console.log(e)
 				let {
 					id,
 					s_name,
@@ -1038,7 +1005,6 @@
 				} = e
 				this.optionList[s_name] = label
 				this.tempData[s_name] = id
-				console.log("tempData:", this.tempData)
 
 			},
 		
@@ -1122,15 +1088,12 @@
 				if (list.length === 0) {
 					this.tempData.varietyId = ''
 					listing(getGoodsall, this.tempData).then(res => {
-						console.log(res)
-						console.log("jinlai", list)
 						this.goods = res.data.data.goods
 					})
 				} else {
 					let ids = list.join(',')
 					this.tempData.varietyId = ids
 					listing(getGoodsall, this.tempData).then(res => {
-						console.log("jinqu", list)
 						this.goods = res.data.data.goods
 					})
 				}
@@ -1140,9 +1103,7 @@
 
 			// 点击
 			clickToConfirm() {
-				console.log(this.tempData)
 				listing(getGoodsall, this.tempData).then(res => {
-					console.log(res)
 					this.goods = res.data.data.goods
 				})
 				this.closeDrawer()
@@ -1156,7 +1117,6 @@
 				Promise.all([listing(getGoodsall, this.tempData), listing(getAttribute, data2)])
 					// listing(getGoodsall,data)
 					.then((res) => {
-						console.log(res)
 						this.seleVarieties = res[1].data.data
 						this.color_level = res[0].data.data.color_level
 						this.facade_level = res[0].data.data.facade_level
@@ -1236,8 +1196,8 @@
 				this.num = -1
 				this.tempData.fruit_parameter_1 = ''
 				this.tempData.fruit_parameter_2 = ''
-				this.tempData.weight_parameter_1 = ''
-				this.tempData.weight_parameter_2 = ''
+				// this.tempData.weight_parameter_1 = ''
+				// this.tempData.weight_parameter_2 = ''
 				this.tempData.size_parameter_1 = ''
 				this.tempData.size_parameter_2 = ''
 				this.tempData.price_parameter_1 = ''
@@ -1277,29 +1237,34 @@
 				});
 			},
 			detail(name) {
-				console.log(name)
 				uni.navigateTo({
 					url: '../../pagesIII/productDetail/productDetail?data=' + name
 				});
 			}
 		},
-		onReachBottom: function() {
-			if (!this.pullUpOn) return;
-			this.loadding = true;
-			if (this.pageIndex == 4) {
-				this.loadding = false;
-				this.pullUpOn = false;
-			} else {
-				let loadData = JSON.parse(JSON.stringify(this.goodsList)); //商品列表
-				loadData = loadData.splice(0, 10);
-				if (this.pageIndex == 1) {
-					loadData = loadData.reverse();
-				}
-				this.goodsList = this.goodsList.concat(loadData);
-				this.pageIndex = this.pageIndex + 1;
-				this.loadding = false;
-			}
-		}
+		// onReachBottom: function() {
+		// 	if (!this.pullUpOn) return;
+		// 	this.loadding = true;
+		// 	if (this.pageIndex == 4) {
+		// 		this.loadding = false;
+		// 		this.pullUpOn = false;
+		// 	} else {
+		// 		let loadData = JSON.parse(JSON.stringify(this.goodsList)); //商品列表
+		// 		loadData = loadData.splice(0, 10);
+		// 		if (this.pageIndex == 1) {
+		// 			loadData = loadData.reverse();
+		// 		}
+		// 		this.goodsList = this.goodsList.concat(loadData);
+		// 		this.pageIndex = this.pageIndex + 1;
+		// 		this.loadding = false;
+		// 	}
+		// },
+		onPullDownRefresh() {
+			this.ShopIng()
+			setTimeout(() => {
+				uni.stopPullDownRefresh()
+			}, 200);
+		},
 	};
 </script>
 

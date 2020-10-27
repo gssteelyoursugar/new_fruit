@@ -174,10 +174,6 @@
 			uploadImages(index){
 				// let that = this;
 				uploadFiles((res) => {
-					console.log(res.data)
-				
-					
-					
 					let imgArr
 					imgArr = this.imgUrlData.split(",");
 					log(imgArr)
@@ -192,10 +188,8 @@
 					// for(let index in this.imgUrlData){
 					// 	ids = ids + this.imgUrlData[index] + "";
 					// }
-					// console.log("ids====",ids)
 					// //去除ids最后一个逗号
 					// // ids = ids.substring(0,ids.length - 1);
-					// console.log("ids去除逗号后====",ids)
 					
 					this.urlList[index].url = res.data//替换图片路径
 				});
@@ -300,7 +294,6 @@
 								
 								// 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
 								that.files=that.files.concat(res.tempFilePaths)
-								console.log(that.files)
 								//上传功能已移除
 								//...
 							}
@@ -346,7 +339,6 @@
 				}
 			},
 			formReset: function(e) {
-				console.log("清空数据")
 			}
 		},
 		onLoad() {

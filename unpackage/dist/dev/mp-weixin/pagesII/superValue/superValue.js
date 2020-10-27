@@ -265,7 +265,6 @@ var _default = { data: function data() {return { url: '', title: '超值专区',
     //下拉刷新
     onPullDownRefresh: function onPullDownRefresh() {
       this.getImportData();
-      console.log('refresh');
       setTimeout(function () {
         uni.stopPullDownRefresh();
 
@@ -277,7 +276,6 @@ var _default = { data: function data() {return { url: '', title: '超值专区',
     getImportData: function getImportData() {var _this3 = this;
       (0, _api.listing2)(_request.getselectSuper).
       then(function (res) {
-        console.log(res);
         _this3.importData = res.data.data;
       }).
       catch(function (err) {
@@ -298,7 +296,6 @@ var _default = { data: function data() {return { url: '', title: '超值专区',
     },
     menubtn: function menubtn(index) {
       this.num = index;
-      console.log(this.num);
       // 子组件调试父组件方法 ：parent
       // this.$parent.fatherMethod(index)
     },
@@ -373,8 +370,6 @@ var _default = { data: function data() {return { url: '', title: '超值专区',
 
     },
     onShare: function onShare() {
-
-
 
 
 

@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiIcon: function() {
-    return __webpack_require__.e(/*! import() | components/tui-icon/tui-icon */ "components/tui-icon/tui-icon").then(__webpack_require__.bind(null, /*! @/components/tui-icon/tui-icon.vue */ 397))
+    return __webpack_require__.e(/*! import() | components/tui-icon/tui-icon */ "components/tui-icon/tui-icon").then(__webpack_require__.bind(null, /*! @/components/tui-icon/tui-icon.vue */ 405))
   }
 }
 var render = function() {
@@ -216,7 +216,6 @@ console,log = _console.log;var _default = _defineProperty({
   //下拉刷新
   onPullDownRefresh: function onPullDownRefresh() {
     this.getsearchIng();
-    console.log('refresh');
     setTimeout(function () {
       uni.stopPullDownRefresh();
     }, 1000);
@@ -290,7 +289,6 @@ console,log = _console.log;var _default = _defineProperty({
         if (scrollTop > this.menuList[_i].top && scrollTop < this.menuList[_i].bottom) {
           this.verticalNavTop = (this.menuList[_i].id - 1) * 50;
           this.tabCur = this.menuList[_i].id;
-          // console.log(scrollTop)
           return false;
         }
       }
@@ -298,7 +296,6 @@ console,log = _console.log;var _default = _defineProperty({
 
 {
   this.getsearchIng();
-  console.log('refresh');
   setTimeout(function () {
     uni.stopPullDownRefresh();
   }, 1000);

@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiListCell: function() {
-    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 453))
+    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 461))
   }
 }
 var render = function() {
@@ -519,13 +519,12 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 //
 var setuserdata = uni.getStorageSync('userIN'); //用户信息
 var setdata = uni.getStorageSync('usermen'); //Token
-var _console = console,log = _console.log;var logins = __webpack_require__(/*! ../../login/login.js */ 54);var _default = { onLoad: function onLoad(options) {var _this = this;this.getOrderData();console.log("这里是onload"); // this.getMerchants()
+var _console = console,log = _console.log;var logins = __webpack_require__(/*! ../../login/login.js */ 54);var _default = { onLoad: function onLoad(options) {var _this = this;this.getOrderData(); // this.getMerchants()
     // this.getWxdata()
     var obj = {}; // obj = wx.getMenuButtonBoundingClientRect();
     uni.getSystemInfo({ success: function success(res) {_this.width = obj.left || res.windowWidth;_this.height = obj.top ? obj.top + obj.height + 8 : res.statusBarHeight + 44;_this.top = obj.top ? obj.top + (obj.height - 32) / 2 : res.statusBarHeight + 6;_this.scrollH = res.windowWidth * 0.6;} });}, data: function data() {return { lists: [], modaishow: false, show: true, wxlogin: true, usering: {}, imageUrl: "/static/images/wode.png", kefuID: '', loadding: false, pullUpOn: true, ApproveStatus: undefined, loginText: '', logMsg: "去认证我的店铺", //店铺状态信息展示
       showBtn: false, //已登录未认证
-      user_phone: "", fukuanList: '', fahuoList: '', shouhuoList: "", tuikuanList: '' };}, methods: { onPullDownRefresh: function onPullDownRefresh() {this.getMerchants(); // console.log('refresh');
-      setTimeout(function () {uni.stopPullDownRefresh();}, 1000);}, //获取头像昵称
+      user_phone: "", fukuanList: '', fahuoList: '', shouhuoList: "", tuikuanList: '' };}, methods: { onPullDownRefresh: function onPullDownRefresh() {this.getMerchants();setTimeout(function () {uni.stopPullDownRefresh();}, 1000);}, //获取头像昵称
     getUserInfo: function getUserInfo(event) {log(event);this.usering = event.detail.userInfo;uni.setStorageSync('userIN', event.detail.userInfo); //把头像存在本地，小程序提供如同浏览器cookie
       var userING = uni.setStorageSync('userIN', event.detail.userInfo);if (event.detail.userInfo) {var wxing = event.detail.userInfo;this.wxCode(wxing.avatarUrl, wxing.nickName);} // wx.startPullDownRefresh()
       this.ifUser();}, //获取code
@@ -560,7 +559,7 @@ var _console = console,log = _console.log;var logins = __webpack_require__(/*! .
     // },
     //获取申请店铺状态信息
     getMerchants: function getMerchants() {var _this4 = this;var setdata = uni.getStorageSync('usermen'); //Token
-      var data = { token: setdata };if (!setdata) {return;}(0, _api.listing)(_request.getClient, data).then(function (res) {console.log(res.data.data); ///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
+      var data = { token: setdata };if (!setdata) {return;}(0, _api.listing)(_request.getClient, data).then(function (res) {///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
         _this4.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
         uni.setStorageSync('StoreStatus', res.data.data.approveStatus);var setStore = uni.getStorageSync('StoreStatus'); //状态码
         _this4.user_phone = res.data.data.phone;var valu2 = _this4.ApproveStatus;if (valu2 === undefined || valu2 === null || valu2 === '') {//判断如果请求返回为空说明未申请过店铺认证
@@ -580,14 +579,8 @@ var _console = console,log = _console.log;var logins = __webpack_require__(/*! .
     // 	})
     // },
     // 获取订单
-    getOrderData: function getOrderData() {var _this5 = this;var setdata = uni.getStorageSync('usermen');if (!setdata) {return;}var data = { token: setdata, pageNo: 1, pageSize: 10000 };(0, _api.listing)(_request.getMyOrder, data).then(function (res) {var list = res.data.data;if (list.length === 0) return;console.log(list);var fukuanList = [];var fahuoList = [];var shouhuoList = [];var tuikuanList = [];list.forEach(function (item) {if (item.payStatus == 0) {fukuanList.push(item);}if (item.tradeStatus == "1" || item.tradeStatus == "2" || item.tradeStatus == "3") {fahuoList.push(item);}if (item.payStatus == '1' && (item.tradeStatus == '4' || item.tradeStatus == '8')) {shouhuoList.push(item);}if (item.tradeStatus == '7') {// 只要 待确定的 3
-            if (item.afterStatus == '3') {tuikuanList.push(item);}}});console.log('shouhuoList,', shouhuoList);_this5.fukuanList = fukuanList.length;_this5.fahuoList = fahuoList.length;_this5.shouhuoList = shouhuoList.length;_this5.tuikuanList = tuikuanList.length;_this5.$forceUpdate();}).catch(function (err) {log(err);});
-    },
-    ifUser: function ifUser() {
-      var setuserdata = uni.getStorageSync('userIN');
-      if (!setuserdata) {
-        this.wxlogin = false;
-      } else {
+    getOrderData: function getOrderData() {var _this5 = this;var setdata = uni.getStorageSync('usermen');if (!setdata) {return;}var data = { token: setdata, pageNo: 1, pageSize: 10000 };(0, _api.listing)(_request.getMyOrder, data).then(function (res) {var list = res.data.data;if (list.length === 0) return;var fukuanList = [];var fahuoList = [];var shouhuoList = [];var tuikuanList = [];list.forEach(function (item) {if (item.payStatus == 0) {fukuanList.push(item);}if (item.tradeStatus == "1" || item.tradeStatus == "2" || item.tradeStatus == "3") {fahuoList.push(item);}if (item.payStatus == '1' && (item.tradeStatus == '4' || item.tradeStatus == '8')) {shouhuoList.push(item);}if (item.tradeStatus == '7') {// 只要 待确定的 3
+            if (item.afterStatus == '3') {tuikuanList.push(item);}}});_this5.fukuanList = fukuanList.length;_this5.fahuoList = fahuoList.length;_this5.shouhuoList = shouhuoList.length;_this5.tuikuanList = tuikuanList.length;_this5.$forceUpdate();}).catch(function (err) {log(err);});}, ifUser: function ifUser() {var setuserdata = uni.getStorageSync('userIN');if (!setuserdata) {this.wxlogin = false;} else {
         this.wxlogin = true;
         this.usering = setuserdata;
       }
@@ -687,7 +680,6 @@ var _console = console,log = _console.log;var logins = __webpack_require__(/*! .
     // 	    success: function(res) {
     // 	        // let kefuid = res.data.kf_list[0].kf_id
 
-    // 			console.log(res);
     // 	    }
     // 	});
 
@@ -734,12 +726,10 @@ var _console = console,log = _console.log;var logins = __webpack_require__(/*! .
     this.getMerchants();
     this.getOrderData();
     this.ifUser();
-    // this.ifLogin()
-    console.log("这里是onshow");
   },
-  onPageScroll: function onPageScroll(e) {
-    this.scrollTop = e.scrollTop;
-  },
+  // onPageScroll(e) {
+  // 	this.scrollTop = e.scrollTop;
+  // },
   onPullDownRefresh: function onPullDownRefresh() {
     setTimeout(function () {
       uni.stopPullDownRefresh();

@@ -521,7 +521,6 @@
 			},
 			//倒计时
 			endOfTime: function() {
-				console.log('倒计时结束')
 			},
 			//金刚区跳转
 			hrefKing(index) {
@@ -577,10 +576,8 @@
 			},
 			// 头部
 			onPageScroll(e) {
-				// console.log(e)
 				
 				if (this.statusHeight > 20) {
-
 					if (e.scrollTop < 20) {
 						this.canSee = 1 - (e.scrollTop / 10)
 						this.opcity = 0.3 + (e.scrollTop / 50)
@@ -611,16 +608,12 @@
 						this.bgOpcity = 0
 					}
 				}
-				
 				if (e.scrollTop === 0) {
 					// this.WeatherHide = true
 					this.opcity = 0
 					this.canSee = 1
 				}
-
 			},
-
-
 			//获取头像昵称
 			getUserInfo(event) {
 				this.userInfo = event.detail.userInfo
@@ -896,9 +889,7 @@
 									   条形码内容：${res.result}`,
 							success: function(res) {
 								if (res.confirm) {
-									console.log('用户点击确定');
 								} else if (res.cancel) {
-									console.log('用户点击取消');
 								}
 							}
 						});
@@ -941,7 +932,6 @@
 		},
 		// onShareAppMessage(res) {
 		//     if (res.from === 'button') {// 来自页面内分享按钮
-		//       console.log(res.target)
 		//     }
 		//     return {
 		//       title: '自定义分享标题',
@@ -962,7 +952,6 @@
 			const data = JSON.parse(text);
 			// this.postactivity()
 			//新版头部
-
 			// #ifndef H5 || APP-PLUS || MP-ALIPAY
 			const res = uni.getSystemInfoSync();
 			let {
@@ -978,8 +967,6 @@
 			let navHeight = statusBarHeight + buttonHeight + top - statusBarHeight //状态栏+导航栏的高度（页面初始高度）
 			this.boxHeight = navHeight - statusBarHeight //导航栏高度
 			this.navHeight = navHeight
-			console.log("statusBarHeight,", statusBarHeight, "navHeight", navHeight, "boxHeight", this.boxHeight, "buttonHeight",
-				buttonHeight)
 			// #endif
 			// this.postAct()
 			// this.postactivity()

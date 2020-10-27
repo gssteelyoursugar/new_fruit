@@ -96,7 +96,6 @@
 			//复制
 			//event 当需要异步请求返回数据再进行复制时，需要传入此参数，或者异步方法转为同步方法（H5端）
 			clipboard(event) {
-				console.log(event);
 				let data= event;
 				thorui.getClipboardData(data, (res) => {
 					// #ifdef H5 || MP-ALIPAY
@@ -116,7 +115,6 @@
 			},
 			//取消申请
 			goAfterSale(id,order_item_id){
-				console.log('取消申请')
 				log(id)
 				var setdata = uni.getStorageSync('usermen')
 				let data ={
@@ -140,14 +138,12 @@
 			},
 			//确认
 			goAfterConfirm(id){
-				console.log('确认')
 				log("id是",id)
 				let setdata = uni.getStorageSync('usermen')
 				let datas ={
 					token:setdata,
 					orderItemId:id
 				}
-				console.log(datas)
 				publicing(PostDataById,datas)
 				.then((res)=>{
 					log(res)
@@ -179,7 +175,6 @@
 				}
 				publicing(posAfterDetails,data)
 				.then((res)=>{
-					log(res)
 					this.DetailsData = res.data.data
 					// this.files = res.data.data.imgList
 					let new_arr = res.data.data.imgList.map(obj => {return obj.url})//把图片链接提取出来
@@ -196,7 +191,6 @@
 			
 		},
 		onLoad(options) {
-			console.log(options.id)
 			this.id = options.id
 			this.postAfterDetails()
 			

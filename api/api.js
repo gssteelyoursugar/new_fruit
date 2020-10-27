@@ -18,8 +18,6 @@ let listing = function(urling, shopdata) {
 				data: shopdata
 			})
 			.then((res) => {
-
-				// console.log(res[1])
 				resolve(res[1])
 
 			})
@@ -41,8 +39,6 @@ let listing2 = function(urling, shopdata) {
 				data: shopdata
 			})
 			.then((res) => {
-
-				// console.log(res[1])
 				resolve(res[1])
 
 			})
@@ -67,7 +63,6 @@ let publicing = function(urling, shopdata) {
 
 			})
 			.then((res) => {
-				// console.log(res[1])
 				resolve(res[1])
 			})
 			.catch((err) => {
@@ -91,7 +86,6 @@ let publicing2 = function(urling, shopdata) {
 
 			})
 			.then((res) => {
-				// console.log(res[1])
 				resolve(res[1])
 			})
 			.catch((err) => {

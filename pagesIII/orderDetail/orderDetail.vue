@@ -10,21 +10,21 @@
 					<image src="../../static/images/location.png" mode=""></image>
 				</view>
 				<view class="address-info">
-					<view class="info-province">{{goodsData.address}}</view>
-					<view class="info-detail">{{goodsData.addressDetails}}</view>
+					<text>{{goodsData.address}}</text>
+					<text class="info-detail">{{goodsData.addressDetails}}</text> 
 				</view>
 			</view>
 		</view>
 		<view class="order-info">
-			<view class="order-info-wrap">
-				<view class="info-item">
+			<view class="order-info-wrap" >
+				<view class="info-item" v-if="orderObj.order_number">
 					<view class="info-item-left">订单编号：</view>
 					<view class="info-item-right">
 						<view>{{orderObj.order_number}}</view>
 						<view class="clip">复制</view>
 					</view>
 				</view>
-				<view class="info-item" v-if="">
+				<view class="info-item" v-if="orderObj.logisticsNumber">
 					<view class="info-item-left">物流单号：</view>
 					<view class="info-item-right">
 						<view>{{orderObj.logisticsNumber}}</view>
@@ -39,7 +39,7 @@
 						<view>微信支付</view>
 					</view>
 				</view>
-				<view class="info-item">
+				<view class="info-item" v-if="orderObj.pay_time">
 					<view class="info-item-left">支付时间：</view>
 					<view class="info-item-right">
 						<view>{{orderObj.pay_time | getTime}}</view>
@@ -47,19 +47,19 @@
 				</view>
 			</view>
 			<view class="order-info-wrap">
-				<view class="info-item">
+				<view class="info-item" v-if="orderObj.create_date">
 					<view class="info-item-left">下单时间：</view>
 					<view class="info-item-right">
 						<view>{{orderObj.create_date | getTime}}</view>
 					</view>
 				</view>
-				<view class="info-item">
+				<view class="info-item" v-if="orderObj.shipments_time">
 					<view class="info-item-left">发货时间：</view>
 					<view class="info-item-right">
 						<view>{{orderObj.shipments_time | getTime}}</view>
 					</view>
 				</view>
-				<view class="info-item">
+				<view class="info-item"  v-if="orderObj.delivery_time">
 					<view class="info-item-left">收货时间：</view>
 					<view class="info-item-right">
 						<view>{{orderObj.delivery_time }}</view>
@@ -308,7 +308,6 @@
 		filters: {
 			getTime(val) {
 				let time = new Date(val);
-				console.log(time)
 				let y = time.getFullYear();
 				let m = time.getMonth() + 1;
 				let d = time.getDate();
@@ -329,13 +328,11 @@
 				};
 				listing(getDetails, data).then(res => {
 					this.orderObj = res.data.data[0]
-					console.log(this.orderObj.wx_goods_id)
 					let data = {
 						id: this.orderObj.wx_goods_id,
 						token: setdata
 					}
 					publicing(postdelist, data).then(res => {
-						console.log("res", res)
 						this.goodsData = res.data.data
 					})
 				})
@@ -347,7 +344,6 @@
 		},
 		onShow() {
 			this.getOrderDetail()
-
 		}
 	}
 </script>

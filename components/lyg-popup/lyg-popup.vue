@@ -63,7 +63,6 @@
 				fail: function(e) {
 					that.showPopup = true;
 					uni.hideTabBar({});
-					// console.log(e)
 				}
 			});
 		},

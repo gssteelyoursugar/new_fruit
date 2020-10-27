@@ -94,10 +94,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiListCell: function() {
-    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 453))
+    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 461))
   },
   tuiIcon: function() {
-    return __webpack_require__.e(/*! import() | components/tui-icon/tui-icon */ "components/tui-icon/tui-icon").then(__webpack_require__.bind(null, /*! @/components/tui-icon/tui-icon.vue */ 397))
+    return __webpack_require__.e(/*! import() | components/tui-icon/tui-icon */ "components/tui-icon/tui-icon").then(__webpack_require__.bind(null, /*! @/components/tui-icon/tui-icon.vue */ 405))
   }
 }
 var render = function() {
@@ -365,23 +365,14 @@ var _console = console,log = _console.log;var cityData = __webpack_require__(/*!
       var two = this.addressTwo[value[1]];
       var three = this.addressThree[value[2]];
       this.text1 = one.name + " " + two.name + " " + three.name;
-
       var addThree = this.getAddressById(three.id);
-      log(three);
       //拿到第三级，根据第三级的pid就是第二级的id，根据第二级的pid就是第一级的id
       var addTwo = this.getAddressById(addThree.pId);
       var addOne = this.getAddressById(addTwo.pId);
-
-      console.log("addThree===", addThree.name);
-      console.log("addTwo===", addTwo.name);
-      console.log("addOne===", addOne.name);
       this.textAddress = addOne.name + "/" + addTwo.name + "/" + addThree.name;
-      console.log("选中的三级信息======", this.textAddress);
       this.address = three.id;
       this.StoreInfo.address = this.textAddress;
-
       this.idAddress = three.id;
-      log("选中的三级ID======", this.idAddress);
       this.StoreInfo.address = this.textAddress; //
       // this.StoreInfo.address = this.idAddress //ID
       this.Address1 = this.idAddress;
@@ -411,8 +402,6 @@ var _console = console,log = _console.log;var cityData = __webpack_require__(/*!
       if (column === 0) {
         //获取一级选中的地址信息
         var one = this.addressOne[value];
-        console.log("选中的一级===", one.name);
-
         //一级固定不变，设置二级，三级
         var two = this.getAddressByPId(one.id); //获取二级，根据一级选中的id，获取二级关联的pid
         var three = this.getAddressByPId(two[0].id); //获取三级，默认显示二级的第一个地址的三级信息
@@ -426,11 +415,9 @@ var _console = console,log = _console.log;var cityData = __webpack_require__(/*!
         this.toArr(three)];
 
         this.value = [value, 0, 0];
-        log(this.value);
       } else if (column === 1) {
         //获取二级选中的地址信息
         var _two = this.addressTwo[value];
-        console.log("选中的二级===", _two.name);
 
         //一级\二级固定不变，设置三级
         var _three = this.getAddressByPId(_two.id); //获取三级，根据二级选中的id，获取三级关联的pid
@@ -446,10 +433,8 @@ var _console = console,log = _console.log;var cityData = __webpack_require__(/*!
       } else if (column === 2) {
         //获取二级选中的地址信息
         var _three2 = this.addressThree[value];
-        console.log("选中的三级===", _three2.id);
 
         this.ADDressID = _three2.id;
-        console.log(this.ADDressID);
       }
     },
 
@@ -503,7 +488,6 @@ var _console = console,log = _console.log;var cityData = __webpack_require__(/*!
       this.urlList = list;
       this.urlListFlag[index] = false;
       this.idList = idList;
-      console.log(this.idList);
     },
 
     //上传文件
@@ -513,7 +497,6 @@ var _console = console,log = _console.log;var cityData = __webpack_require__(/*!
       that.flag = true;
 
       (0, _request.uploadFiles)(function (res) {
-        console.log(res.data);
         that.urlList[index].url = res.data; //替换图片路径
         //设置对应的index为true
         that.urlListFlag[index] = true;
@@ -625,7 +608,6 @@ var _console = console,log = _console.log;var cityData = __webpack_require__(/*!
     },
     //获取申请店铺状态信息
     getMerchants: function getMerchants() {var _this2 = this;
-      console.log("获取申请店铺状态信息");
       var setdata = uni.getStorageSync('usermen'); //Token
       var data = {
         token: setdata };
@@ -726,7 +708,6 @@ var _console = console,log = _console.log;var cityData = __webpack_require__(/*!
 
           // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
           that.files = that.files.concat(res.tempFilePaths);
-          console.log(that.files);
           //上传功能已移除
           //...
         } });
@@ -772,7 +753,6 @@ var _console = console,log = _console.log;var cityData = __webpack_require__(/*!
       }
     },
     formReset: function formReset(e) {
-      console.log("清空数据");
     } },
 
   onLoad: function onLoad() {

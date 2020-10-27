@@ -567,8 +567,6 @@
 					}
 				});
 				uni.onNetworkStatusChange(function(res) {
-					console.log(res.isConnected);
-					console.log(res.networkType);
 					if (res.isConnected && res.networkType !== 'wifi') {
 						that.netStatus = false
 						setTimeout(function() {
@@ -589,7 +587,6 @@
 				that.navHeight = statusBarHeight + buttonHeight + top - statusBarHeight
 				that.iconTop = statusBarHeight + (top - statusBarHeight)
 				that.tabsTop = statusBarHeight + buttonHeight + top - statusBarHeight
-				console.log(that.navHeight, buttonHeight)
 				// #endif
 
 
@@ -631,10 +628,8 @@
 				let uList = this.urlList
 				if (vList && vList.urlVideo !== '') {
 					uList.unshift(vList.urlVideo)
-					// console.log("uList", "you", uList, uList.length, )
 					return uList
 				} else {
-					// console.log("uList", "meiyou", uList, uList.length)
 					return uList
 				}
 			},
@@ -693,7 +688,6 @@
 
 		methods: {
 			clickLink(e) {
-				console.log(e)
 			},
 			//购买前获取申请店铺状态信息
 			getMerchants() {
@@ -872,7 +866,6 @@
 					url: '../../pagesII/tendShop/tendShop'
 				})
 				this.toggleVerify()
-				console.log("前往验证")
 			},
 
 			//获取微信昵称
@@ -989,14 +982,12 @@
 				//这个方法是异步执行的，值还没有赋值，后就先执行了postAct这个，异步，同步，
 				publicing(postdelist, data)
 					.then(res => {
-						console.log("res123", res);
 						this.shopListdata = res.data.data;
 						this.labelList = res.data.data.labelList;
 						this.urlList = res.data.data.urlList;
 						this.canPraise = res.data.data.isPraise
 						this.canCollect = res.data.data.isCollection
 						this.canCart = res.data.data.isCart
-						// console.log(this.labelList);
 					})
 					.catch(err => {
 						console.log(err);
@@ -1137,7 +1128,6 @@
 			},
 			changeNum(e) {
 				this.currentTab = e.index;
-				// console.log(this.currentTab);
 			},
 			submit() {
 				this.popupShow = false;
@@ -1267,7 +1257,7 @@
 		min-width: 160rpx;
 		text-align: center;
 		font-size: 24rpx;
-		padding: 10rpx 0;
+		padding: 10rpx;
 		border-radius: 6rpx;
 		margin: 10rpx 0;
 	}

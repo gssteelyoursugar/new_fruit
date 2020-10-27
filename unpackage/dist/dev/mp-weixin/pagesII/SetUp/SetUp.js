@@ -94,10 +94,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiListCell: function() {
-    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 453))
+    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 461))
   },
   ssSwitch: function() {
-    return __webpack_require__.e(/*! import() | components/ss-switch/ss-switch */ "components/ss-switch/ss-switch").then(__webpack_require__.bind(null, /*! @/components/ss-switch/ss-switch.vue */ 528))
+    return __webpack_require__.e(/*! import() | components/ss-switch/ss-switch */ "components/ss-switch/ss-switch").then(__webpack_require__.bind(null, /*! @/components/ss-switch/ss-switch.vue */ 536))
   }
 }
 var render = function() {
@@ -187,22 +187,17 @@ var _default =
     var navHeight = statusBarHeight + buttonHeight + top - statusBarHeight;
     this.boxHeight = navHeight - statusBarHeight;
 
-    console.log(statusBarHeight, navHeight, buttonHeight);
-
 
   },
   methods: {
     switchInput: function switchInput(e) {
-      console.log(e);
     },
     back: function back() {
       uni.navigateBack();
     },
     switchChange: function switchChange(e) {
-      console.log(e.detail.value);
     },
     logout: function logout() {
-      console.log('点击了退出登录');
       uni.removeStorageSync('userIN');
       uni.removeStorageSync('usermen');
       uni.removeStorageSync('StoreStatus');

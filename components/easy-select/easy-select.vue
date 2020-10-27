@@ -152,8 +152,6 @@
 			} catch (e) {
 			    // error
 			}
-			
-			console.log(this.options)
 		},
 		methods: {
 			clickMask () {
@@ -186,9 +184,6 @@
 				this.showOptions = false
 				this.currentSelect = options
 				options.s_name = name
-				console.log("options",options)
-				console.log("this.options",this.options)
-				// console.log(options)
 				this.$emit('selectOne', options)
 			},
 			hideOptions() {

@@ -173,7 +173,6 @@
 		methods: {
 			// 视频页点击商品详情按钮
 			clickToDetail(id) {
-				// console.log(id)
 				// let id = 1311280367173636096
 				uni.navigateTo({
 					url: '../productDetail/productDetail?id=' + id
@@ -181,7 +180,6 @@
 			},
 			// 视频页点击收藏商品
 			clickToCollect(id){
-				console.log(id)
 				this.is_show = !this.is_show
 				this.is_show && uni.showToast({
 					title: '收藏成功',
@@ -212,7 +210,6 @@
 					t,
 					index_
 				} = this
-				console.log(PayVideo, index_)
 				let videoContext = uni.createVideoContext('id' + index_)
 				videoContext.pause()
 				this.PayVideo = PayVideo
@@ -231,7 +228,6 @@
 				PayVideo[current]['istrue'] = true
 				this.PayVideo = PayVideo
 				let videoContext = uni.createVideoContext('id' + index_)
-				console.log(current, index_, '正在播放第' + current + '个视频')
 				videoContext.pause()
 				videoContext = uni.createVideoContext('id' + current)
 				videoContext.play()

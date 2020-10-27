@@ -211,11 +211,8 @@
 				let two = this.addressTwo[value[1]];
 				let three = this.addressThree[value[2]];
 				this.text1 = one.name + " " + two.name + " " + three.name;
-				// console.log("选中的三级信息======",this.text1)
 				// this.StoreInfo.address = this.text1
-
 				this.idAddress = three.id
-
 				/* if (this.selectList.length > 0) {
 					let provice = this.selectList[value[0]].text
 					let city = this.selectList[value[0]].children[value[1]].text
@@ -232,8 +229,6 @@
 				return arr;
 			},
 			columnPicker: function(e) {
-				//console.log("columnPicker=======",e)
-
 				//第几列 下标从0开始,0=一级选择，1=二级选择，2=三级选择
 				let column = e.detail.column;
 				//第几行 下标从0开始
@@ -241,7 +236,6 @@
 				if (column === 0) {
 					//获取一级选中的地址信息
 					let one = this.addressOne[value]
-
 					//一级固定不变，设置二级，三级
 					let two = this.getAddressByPId(one.id) //获取二级，根据一级选中的id，获取二级关联的pid
 					let three = this.getAddressByPId(two[0].id) //获取三级，默认显示二级的第一个地址的三级信息
@@ -327,9 +321,7 @@
 					content: '修改店铺信息需要重修进行审核认证,确定修改?',
 					success: (res) => {
 						if (res.cancel) {
-							console.log('用户点击取消');
 						} else if (res.confirm) {
-							console.log('用户点击确定');
 							uni.navigateTo({
 								url: '../updataStore/updataStore'
 							})
@@ -342,14 +334,12 @@
 			uploadImages(index) {
 				let that = this;
 				uploadFiles((res) => {
-					console.log(res.data)
 					that.imagesList[index].url = res.data
 				});
 			},
 			//下拉刷新
 			onPullDownRefresh() {
 				this.getMerchants()
-				console.log('refresh');
 				setTimeout(function() {
 					uni.stopPullDownRefresh();
 				}, 1000);
@@ -378,8 +368,6 @@
 								}
 							})
 						})
-						console.log("tempList",tempList)
-						
 						clist.sort((a,b)=>{
 							return a.name.replace(/[^0-9]/ig,"") - b.name.replace(/[^0-9]/ig,"")
 						})
@@ -457,7 +445,6 @@
 				}
 			},
 			formReset: function(e) {
-				console.log("清空数据")
 			}
 		},
 		onShow() {

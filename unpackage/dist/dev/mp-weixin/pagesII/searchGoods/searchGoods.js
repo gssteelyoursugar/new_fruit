@@ -123,10 +123,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiTag: function() {
-    return __webpack_require__.e(/*! import() | components/tui-tag/tui-tag */ "components/tui-tag/tui-tag").then(__webpack_require__.bind(null, /*! @/components/tui-tag/tui-tag.vue */ 500))
+    return __webpack_require__.e(/*! import() | components/tui-tag/tui-tag */ "components/tui-tag/tui-tag").then(__webpack_require__.bind(null, /*! @/components/tui-tag/tui-tag.vue */ 508))
   },
   tuiActionsheet: function() {
-    return __webpack_require__.e(/*! import() | components/tui-actionsheet/tui-actionsheet */ "components/tui-actionsheet/tui-actionsheet").then(__webpack_require__.bind(null, /*! @/components/tui-actionsheet/tui-actionsheet.vue */ 507))
+    return __webpack_require__.e(/*! import() | components/tui-actionsheet/tui-actionsheet */ "components/tui-actionsheet/tui-actionsheet").then(__webpack_require__.bind(null, /*! @/components/tui-actionsheet/tui-actionsheet.vue */ 515))
   }
 }
 var render = function() {
@@ -276,7 +276,6 @@ var util = __webpack_require__(/*! @/utils/util.js */ 99);var _default = { data:
     inputKey: function inputKey(e) {
       var name = e.detail.value || this.key;
       var that = this;
-      console.log(name);
       if (name === '') {
         uni.showToast({
           title: "请输入关键词",
@@ -298,7 +297,6 @@ var util = __webpack_require__(/*! @/utils/util.js */ 99);var _default = { data:
     } }),
 
   onLoad: function onLoad(options) {
-    console.log(this.history);
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

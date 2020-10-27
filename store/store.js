@@ -20,7 +20,6 @@ export default new Vuex.Store({
 	// 同步存储
 	mutations: {
 		screenmuta(state, listdata) {
-			console.log(listdata)
 			// 存储到数据仓库
 			state.screendata = {
 				screenarr: listdata
@@ -36,7 +35,6 @@ export default new Vuex.Store({
 		},
 		// 清空搜索结果历史记录
 		clearSearch(state, data) {
-			console.log(data)
 			let list = state.history
 			list = []
 			state.history = list
@@ -46,7 +44,6 @@ export default new Vuex.Store({
 			})
 		},
 		setOrderTime(state, data) {
-			console.log(data)
 			state.orderTime = data.data
 			state.paramTime = data.paramTime
 			uni.setStorageSync('orderTime', data.data)

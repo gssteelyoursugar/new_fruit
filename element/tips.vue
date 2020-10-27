@@ -85,10 +85,8 @@
 								content: '服务器错误，请重新登录获取信息',
 								success: function(res) {
 									if (res.confirm) {
-										// console.log('用户点击确定');
 										uni.hideLoading();
 									} else if (res.cancel) {
-										// console.log('用户点击取消');
 										uni.hideLoading();
 									}
 								}

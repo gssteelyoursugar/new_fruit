@@ -94,10 +94,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiIcon: function() {
-    return __webpack_require__.e(/*! import() | components/tui-icon/tui-icon */ "components/tui-icon/tui-icon").then(__webpack_require__.bind(null, /*! @/components/tui-icon/tui-icon.vue */ 397))
+    return __webpack_require__.e(/*! import() | components/tui-icon/tui-icon */ "components/tui-icon/tui-icon").then(__webpack_require__.bind(null, /*! @/components/tui-icon/tui-icon.vue */ 405))
   },
   tuiDatetime: function() {
-    return __webpack_require__.e(/*! import() | components/tui-datetime/tui-datetime */ "components/tui-datetime/tui-datetime").then(__webpack_require__.bind(null, /*! @/components/tui-datetime/tui-datetime.vue */ 521))
+    return __webpack_require__.e(/*! import() | components/tui-datetime/tui-datetime */ "components/tui-datetime/tui-datetime").then(__webpack_require__.bind(null, /*! @/components/tui-datetime/tui-datetime.vue */ 529))
   }
 }
 var render = function() {
@@ -227,22 +227,16 @@ var _api = __webpack_require__(/*! ../../api/api.js */ 19);function ownKeys(obje
     var userToken = uni.getStorageSync('usermen');
     // 初始化时间选择器默认时间
     if (this.orderTime) {
-      console.log('有时间');
       var arr = this.orderTime.split();
       arr.push("01日");
-      console.log();
-      console.log(this.dataTime, this.orderTime);
       this.dataTime = arr.join('');
     } else {
-      console.log('没有时间');
       var curDate = new Date();
       var year = curDate.getFullYear();
       var month = curDate.getMonth() + 1;
       var day = curDate.getDay();
       this.dataTime = "".concat(year, "\u5E74").concat(month, "\u6708").concat(day, "\u65E5");
-      console.log(this.dataTime);
     }
-    console.log(userToken);
     this.getOrderCount();
   },
   computed: _objectSpread({},
@@ -257,9 +251,7 @@ var _api = __webpack_require__(/*! ../../api/api.js */ 19);function ownKeys(obje
       }, 10);
     },
     bindChange: function bindChange(e) {
-      console.log(e);
       var date = e.year + '-' + e.month;
-      console.log(date);
       // return
       this.setOrderTime({
         data: e.result, //渲染数据的日期格式
@@ -267,7 +259,6 @@ var _api = __webpack_require__(/*! ../../api/api.js */ 19);function ownKeys(obje
       });
 
       this.getOrderCount();
-      console.log("看看我的订单呗");
     },
 
     goToDetail: function goToDetail(id) {
@@ -299,7 +290,6 @@ var _api = __webpack_require__(/*! ../../api/api.js */ 19);function ownKeys(obje
           pageSize: 10000 };
 
         (0, _api.listing)(_request.orderCount, data).then(function (res) {
-          console.log(res);
           _this2.orderList = res.data.data.list;
           _this2.totalGoodsNumber = res.data.data.totalGoodsNumber;
           _this2.totalGoodsPirce = res.data.data.totalGoodsPirce;
@@ -313,7 +303,6 @@ var _api = __webpack_require__(/*! ../../api/api.js */ 19);function ownKeys(obje
           pageSize: 10000 };
 
         (0, _api.listing)(_request.orderCount, _data).then(function (res) {
-          console.log(res);
           _this2.orderList = res.data.data.list;
           _this2.totalGoodsNumber = res.data.data.totalGoodsNumber;
           _this2.totalGoodsPirce = res.data.data.totalGoodsPirce;

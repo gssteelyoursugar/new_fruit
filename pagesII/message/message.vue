@@ -60,10 +60,8 @@
 			let buttonHeight = (bottom - statusBarHeight) + (top - statusBarHeight)
 			let navHeight = statusBarHeight + buttonHeight + top - statusBarHeight
 			this.boxHeight = navHeight - statusBarHeight
-			console.log(statusBarHeight, navHeight, buttonHeight)
 			// #endif
 			listing2(getMsg).then(res=>{
-				console.log(res)
 				this.msgList = res.data.data
 			})
 		},
@@ -77,7 +75,6 @@
 				})
 			},
 			clickToItem(id) {
-				console.log(id)
 				uni.navigateTo({
 					url: "../../pagesII/timeInfo/timeInfo?id="+ id
 				})

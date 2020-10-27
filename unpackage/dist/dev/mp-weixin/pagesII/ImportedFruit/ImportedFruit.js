@@ -255,8 +255,7 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
       scrollH: 0, //滚动总高度
       opcity: 0, iconOpcity: 0.5, bannerIndex: 0, menuShow: false, popupShow: false, value: 1, collected: false, importData: [] //请求的数据
     };}, onLoad: function onLoad(options) {var _this = this;this.getMerchants();this.title = options.title;this.getImportData();this.url = _request.imgurl;var obj = {};obj = wx.getMenuButtonBoundingClientRect();setTimeout(function () {uni.getSystemInfo({ success: function success(res) {_this.width = obj.left || res.windowWidth;_this.height = obj.top ? obj.top + obj.height + 8 : res.statusBarHeight + 44;_this.top = obj.top ? obj.top + (obj.height - 32) / 2 : res.statusBarHeight + 6;_this.scrollH = res.windowWidth;} });}, 0);}, //下拉刷新
-  onPullDownRefresh: function onPullDownRefresh() {this.getImportData();console.log('refresh');setTimeout(function () {uni.stopPullDownRefresh();}, 1000);},
-
+  onPullDownRefresh: function onPullDownRefresh() {this.getImportData();setTimeout(function () {uni.stopPullDownRefresh();}, 1000);},
   methods: {
     getMerchants: function getMerchants() {var _this2 = this;
       var data = {
@@ -278,7 +277,6 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
     getImportData: function getImportData() {var _this3 = this;
       (0, _api.listing2)(_request.getselectImport).
       then(function (res) {
-        console.log(res);
         _this3.importData = res.data.data;
       }).
       catch(function (err) {
@@ -301,7 +299,6 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
     },
     menubtn: function menubtn(index) {
       this.num = index;
-      console.log(this.num);
       // 子组件调试父组件方法 ：parent
       // this.$parent.fatherMethod(index)
     },
@@ -376,8 +373,6 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
 
     },
     onShare: function onShare() {
-
-
 
 
 

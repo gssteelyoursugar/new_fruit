@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiCountdown: function() {
-    return __webpack_require__.e(/*! import() | components/tui-countdown/tui-countdown */ "components/tui-countdown/tui-countdown").then(__webpack_require__.bind(null, /*! @/components/tui-countdown/tui-countdown.vue */ 404))
+    return __webpack_require__.e(/*! import() | components/tui-countdown/tui-countdown */ "components/tui-countdown/tui-countdown").then(__webpack_require__.bind(null, /*! @/components/tui-countdown/tui-countdown.vue */ 412))
   }
 }
 var render = function() {
@@ -334,23 +334,17 @@ var _default = { data: function data() {return { loading: false, active: true, u
       top: 26, //标题图标距离顶部距离
       scrollH: 0, //滚动总高度
       opcity: 0, iconOpcity: 0.5, bannerIndex: 0, menuShow: false, popupShow: false, value: 1, collected: false, WxActivityID: '', //首页传的id
-      startTime: 0, endTime: 0, createTime: 0, ts: 0, te: 3, boxHeight: 44, statusHeight: 20, navHeight: 64, scrollTop: 0 };}, onLoad: function onLoad(options) {this.getMerchants();this.WxActivityID = options.id;this.getLimit();this.url = _request.imgurl;this.getLimit();var obj = {};var that = this;setTimeout(function () {that.loading = true;}, 500);var res = uni.getSystemInfoSync();var statusBarHeight = res.statusBarHeight;var info = uni.getMenuButtonBoundingClientRect();var top = info.top,bottom = info.bottom;this.statusHeight = statusBarHeight;var buttonHeight = bottom - statusBarHeight + (top - statusBarHeight);var navHeight = statusBarHeight + buttonHeight + top - statusBarHeight;this.boxHeight = navHeight - statusBarHeight;this.navHeight = navHeight;console.log(statusBarHeight, navHeight, buttonHeight);}, computed: {}, methods: { getMerchants: function getMerchants() {var _this = this;var data = { token: setdata }; // log(data)
+      startTime: 0, endTime: 0, createTime: 0, ts: 0, te: 3, boxHeight: 44, statusHeight: 20, navHeight: 64, scrollTop: 0 };}, onLoad: function onLoad(options) {this.getMerchants();this.WxActivityID = options.id;this.getLimit();this.url = _request.imgurl;this.getLimit();var obj = {};var that = this;setTimeout(function () {that.loading = true;}, 500);var res = uni.getSystemInfoSync();var statusBarHeight = res.statusBarHeight;var info = uni.getMenuButtonBoundingClientRect();var top = info.top,bottom = info.bottom;this.statusHeight = statusBarHeight;var buttonHeight = bottom - statusBarHeight + (top - statusBarHeight);var navHeight = statusBarHeight + buttonHeight + top - statusBarHeight;this.boxHeight = navHeight - statusBarHeight;this.navHeight = navHeight;}, computed: {}, methods: { getMerchants: function getMerchants() {var _this = this;var data = { token: setdata }; // log(data)
       (0, _api.listing)(_request.getClient, data).then(function (res) {// log(res)
         ///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
         _this.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
         // log(this.ApproveStatus)
-      }).catch(function (err) {log(err);});}, scroll: function scroll(e) {console.log(e);}, //商品详情页
-    gotoList: function gotoList(id) {log(id);uni.navigateTo({ url: '../../pagesIII/productDetail/productDetail?id=' + id });},
-
-    //倒计时
-    endOfTime: function endOfTime() {
-      console.log('倒计时结束');
-    },
+      }).catch(function (err) {log(err);});}, scroll: function scroll(e) {}, //商品详情页
+    gotoList: function gotoList(id) {log(id);uni.navigateTo({ url: '../../pagesIII/productDetail/productDetail?id=' + id });}, //倒计时
+    endOfTime: function endOfTime() {},
     //下拉刷新
     onPullDownRefresh: function onPullDownRefresh() {
       this.getLimit();
-
-      console.log('refresh');
       setTimeout(function () {
         uni.stopPullDownRefresh();
 
@@ -391,7 +385,6 @@ var _default = { data: function data() {return { loading: false, active: true, u
     },
     menubtn: function menubtn(index) {
       this.num = index;
-      console.log(this.num);
       // 子组件调试父组件方法 ：parent
       // this.$parent.fatherMethod(index)
     },
@@ -466,8 +459,6 @@ var _default = { data: function data() {return { loading: false, active: true, u
 
     },
     onShare: function onShare() {
-
-
 
 
 

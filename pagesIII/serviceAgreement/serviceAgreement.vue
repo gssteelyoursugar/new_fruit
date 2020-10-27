@@ -29,7 +29,6 @@
 					id: id
 				}
 				listing2(getAgreeInfo, data).then(res => {
-					console.log(res)
 					this.info = res.data.data
 					uni.setNavigationBarTitle({
 						title: res.data.data.title

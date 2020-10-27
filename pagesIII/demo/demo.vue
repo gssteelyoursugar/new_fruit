@@ -61,9 +61,7 @@
 				.then((res)=>{
 					this.WxIndexViewpager = res.data.data.WxIndexViewpager
 					
-					console.log(res)
 					// this.HotVarieties = res.data.data
-					// console.log(this.HotVarieties)
 				})
 				.catch((err)=>{
 					

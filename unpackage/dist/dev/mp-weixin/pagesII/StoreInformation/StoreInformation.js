@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiListCell: function() {
-    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 453))
+    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 461))
   }
 }
 var render = function() {
@@ -384,16 +384,14 @@ var _console = console,log = _console.log;var form = __webpack_require__(/*! @/c
       imageList: [], category: 'image', ctx: {} };}, methods: { //地址选择弹出
     picker: function picker(e) {//获取选中的三级信息
       var value = e.detail.value; //这个是三级的picker分别选中的下标，value=[].length = 3,第一个是一级，第二个是二级。。。
-      var one = this.addressOne[value[0]];var two = this.addressTwo[value[1]];var three = this.addressThree[value[2]];this.text1 = one.name + " " + two.name + " " + three.name; // console.log("选中的三级信息======",this.text1)
-      // this.StoreInfo.address = this.text1
+      var one = this.addressOne[value[0]];var two = this.addressTwo[value[1]];var three = this.addressThree[value[2]];this.text1 = one.name + " " + two.name + " " + three.name; // this.StoreInfo.address = this.text1
       this.idAddress = three.id; /* if (this.selectList.length > 0) {
                                  	let provice = this.selectList[value[0]].text
                                  	let city = this.selectList[value[0]].children[value[1]].text
                                  	let district = this.selectList[value[0]].children[value[1]].children[value[2]].text
                                  	this.text = provice + " " + city + " " + district;
                                  	this.id = this.selectList[value[0]].children[value[1]].children[value[2]].value
-                                 } */}, toArr: function toArr(object) {var arr = [];for (var i in object) {arr.push(object[i].name);}return arr;}, columnPicker: function columnPicker(e) {//console.log("columnPicker=======",e)
-      //第几列 下标从0开始,0=一级选择，1=二级选择，2=三级选择
+                                 } */}, toArr: function toArr(object) {var arr = [];for (var i in object) {arr.push(object[i].name);}return arr;}, columnPicker: function columnPicker(e) {//第几列 下标从0开始,0=一级选择，1=二级选择，2=三级选择
       var column = e.detail.column; //第几行 下标从0开始
       var value = e.detail.value;if (column === 0) {//获取一级选中的地址信息
         var one = this.addressOne[value]; //一级固定不变，设置二级，三级
@@ -406,12 +404,8 @@ var _console = console,log = _console.log;var form = __webpack_require__(/*! @/c
         var _three = this.getAddressByPId(_two.id); //获取三级，根据二级选中的id，获取三级关联的pid
         //保存地址
         this.addressThree = _three; //设置地址
-        this.multiArray = [this.multiArray[0], this.multiArray[1], this.toArr(_three)];this.value = [this.value[0], value, 0];} else if (column === 2) {
-        //获取二级选中的地址信息
-        var _three2 = this.addressThree[value];
-
-        this.ADDressID = _three2.id;
-      }
+        this.multiArray = [this.multiArray[0], this.multiArray[1], this.toArr(_three)];this.value = [this.value[0], value, 0];} else if (column === 2) {//获取二级选中的地址信息
+        var _three2 = this.addressThree[value];this.ADDressID = _three2.id;}
     },
 
     //获取地理信息,这个地方要
@@ -463,9 +457,7 @@ var _console = console,log = _console.log;var form = __webpack_require__(/*! @/c
         content: '修改店铺信息需要重修进行审核认证,确定修改?',
         success: function success(res) {
           if (res.cancel) {
-            console.log('用户点击取消');
           } else if (res.confirm) {
-            console.log('用户点击确定');
             uni.navigateTo({
               url: '../updataStore/updataStore' });
 
@@ -478,14 +470,12 @@ var _console = console,log = _console.log;var form = __webpack_require__(/*! @/c
     uploadImages: function uploadImages(index) {
       var that = this;
       uploadFiles(function (res) {
-        console.log(res.data);
         that.imagesList[index].url = res.data;
       });
     },
     //下拉刷新
     onPullDownRefresh: function onPullDownRefresh() {
       this.getMerchants();
-      console.log('refresh');
       setTimeout(function () {
         uni.stopPullDownRefresh();
       }, 1000);
@@ -514,8 +504,6 @@ var _console = console,log = _console.log;var form = __webpack_require__(/*! @/c
             }
           });
         });
-        console.log("tempList", tempList);
-
         clist.sort(function (a, b) {
           return a.name.replace(/[^0-9]/ig, "") - b.name.replace(/[^0-9]/ig, "");
         });
@@ -593,7 +581,6 @@ var _console = console,log = _console.log;var form = __webpack_require__(/*! @/c
       }
     },
     formReset: function formReset(e) {
-      console.log("清空数据");
     } },
 
   onShow: function onShow() {

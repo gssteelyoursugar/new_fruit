@@ -120,7 +120,6 @@
 							sourceType: ['camera', 'album'],
 							success: (res) => {
 								let size = (res.size / 1024/1024)
-								console.log(res.tempFilePath)
 								if(Math.ceil(res.size / 1024) < this.upload_max * 1024){
 									this.uploads.push(res.tempFilePath)
 									uni.showLoading({
@@ -135,7 +134,6 @@
 											'user': 'test'
 										},
 										success: (uploadFileRes) => {
-											console.log(JSON.parse(uploadFileRes.data));
 											this.uploadFileResData = JSON.parse(uploadFileRes.data)
 											this.uploadData = this.uploadFileResData.data
 											

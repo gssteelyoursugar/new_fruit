@@ -43,7 +43,6 @@
 				})
 			},
 			clickLink(e){
-				console.log(e)
 			}
 			
 		},

@@ -1965,7 +1965,6 @@ new _vuex.default.Store({
   // 同步存储
   mutations: {
     screenmuta: function screenmuta(state, listdata) {
-      console.log(listdata);
       // 存储到数据仓库
       state.screendata = {
         screenarr: listdata };
@@ -1981,7 +1980,6 @@ new _vuex.default.Store({
     },
     // 清空搜索结果历史记录
     clearSearch: function clearSearch(state, data) {
-      console.log(data);
       var list = state.history;
       list = [];
       state.history = list;
@@ -1991,7 +1989,6 @@ new _vuex.default.Store({
 
     },
     setOrderTime: function setOrderTime(state, data) {
-      console.log(data);
       state.orderTime = data.data;
       state.paramTime = data.paramTime;
       uni.setStorageSync('orderTime', data.data);
@@ -3829,8 +3826,6 @@ var listing = function listing(urling, shopdata) {
       data: shopdata }).
 
     then(function (res) {
-
-      // console.log(res[1])
       resolve(res[1]);
 
     }).
@@ -3852,8 +3847,6 @@ exports.listing = listing;var listing2 = function listing2(urling, shopdata) {
       data: shopdata }).
 
     then(function (res) {
-
-      // console.log(res[1])
       resolve(res[1]);
 
     }).
@@ -3878,7 +3871,6 @@ exports.listing2 = listing2;var publicing = function publicing(urling, shopdata)
 
 
     then(function (res) {
-      // console.log(res[1])
       resolve(res[1]);
     }).
     catch(function (err) {
@@ -3902,7 +3894,6 @@ exports.publicing = publicing;var publicing2 = function publicing2(urling, shopd
     }).
 
     then(function (res) {
-      // console.log(res[1])
       resolve(res[1]);
     }).
     catch(function (err) {
@@ -9995,7 +9986,7 @@ var errdata = {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.uploadFiles = exports.getAgreeInfo = exports.getAgreeList = exports.getMsgInfo = exports.getEvaluateList = exports.orderCount = exports.getBeConfirmed = exports.PostDataById = exports.postAfterCen = exports.posAfterDetails = exports.posAfterSaleList = exports.postCancelPay = exports.posAfterSale = exports.getAfterSaleData = exports.postConfirmOrder = exports.postDelOrders = exports.postCancelOrder = exports.getDetails = exports.postAgainOrder = exports.postSettle = exports.getMsg = exports.postCancelPraise = exports.getSubmitOrder = exports.postAddressList = exports.postupdateClient = exports.getClient = exports.getNewsAll = exports.postRecentlyDel = exports.getselectSuper = exports.getselectSeasonal = exports.getselectHot = exports.getselectImport = exports.getMyOrder = exports.postOrderPay = exports.getRecently = exports.postPraise = exports.postDelLike = exports.getLike = exports.postLike = exports.postUpOrder = exports.postDelOrder = exports.getCart = exports.postmyOrder = exports.postSaveStore = exports.getActivity = exports.wxloginurl = exports.imgurl = exports.postOrder = exports.url = exports.getAttribute = exports.getGoodsall = exports.postdelist = exports.getClassify = exports.postActivity = exports.getsearch = exports.loginis = exports.getIndex = void 0; // 公用地址
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.uploadFiles = exports.getPredictInfo = exports.getPredictList = exports.getAgreeInfo = exports.getAgreeList = exports.getMsgInfo = exports.getEvaluateList = exports.orderCount = exports.getBeConfirmed = exports.PostDataById = exports.postAfterCen = exports.posAfterDetails = exports.posAfterSaleList = exports.postCancelPay = exports.posAfterSale = exports.getAfterSaleData = exports.postConfirmOrder = exports.postDelOrders = exports.postCancelOrder = exports.getDetails = exports.postAgainOrder = exports.postSettle = exports.getMsg = exports.postCancelPraise = exports.getSubmitOrder = exports.postAddressList = exports.postupdateClient = exports.getClient = exports.getNewsAll = exports.postRecentlyDel = exports.getselectSuper = exports.getselectSeasonal = exports.getselectHot = exports.getselectImport = exports.getMyOrder = exports.postOrderPay = exports.getRecently = exports.postPraise = exports.postDelLike = exports.getLike = exports.postLike = exports.postUpOrder = exports.postDelOrder = exports.getCart = exports.postmyOrder = exports.postSaveStore = exports.getActivity = exports.wxloginurl = exports.imgurl = exports.postOrder = exports.url = exports.getAttribute = exports.getGoodsall = exports.postdelist = exports.getClassify = exports.postActivity = exports.getsearch = exports.loginis = exports.getIndex = void 0; // 公用地址
 
 
 //测试用
@@ -10203,8 +10194,18 @@ exports.getEvaluateList = getEvaluateList;var getAgreeList = "".concat(url, "api
 //获取协议详情
 exports.getAgreeList = getAgreeList;var getAgreeInfo = "".concat(url, "api/wx/ruleExplain/get");
 
+
+
+//获取上市预告列表
+exports.getAgreeInfo = getAgreeInfo;var getPredictList = "".concat(url, "api/wx/prediction/list");
+
+//获取上市预告的详情
+exports.getPredictList = getPredictList;var getPredictInfo = "".concat(url, "api/wx/prediction/getDetails");
+
 //导出请求地址
-exports.getAgreeInfo = getAgreeInfo;
+exports.getPredictInfo = getPredictInfo;
+
+
 
 
 
@@ -10408,7 +10409,6 @@ logins = /*#__PURE__*/function () {
             } });
 
         } else {
-          console.log('拒绝登录');
           reject('FAIL');
         }
       });
@@ -10444,7 +10444,7 @@ module.exports = logins;
 
 /***/ }),
 
-/***/ 540:
+/***/ 548:
 /*!************************************************************************************!*\
   !*** /Users/gsheng/Downloads/new_fruit/components/jyf-parser/libs/MpHtmlParser.js ***!
   \************************************************************************************/
@@ -10458,9 +10458,9 @@ module.exports = logins;
  * @author JinYufeng
  * @listens MIT
  */
-var cfg = __webpack_require__(/*! ./config.js */ 541),
+var cfg = __webpack_require__(/*! ./config.js */ 549),
 blankChar = cfg.blankChar,
-CssHandler = __webpack_require__(/*! ./CssHandler.js */ 542),
+CssHandler = __webpack_require__(/*! ./CssHandler.js */ 550),
 windowWidth = uni.getSystemInfoSync().windowWidth;
 var emoji;
 
@@ -10990,7 +10990,7 @@ module.exports = MpHtmlParser;
 
 /***/ }),
 
-/***/ 541:
+/***/ 549:
 /*!******************************************************************************!*\
   !*** /Users/gsheng/Downloads/new_fruit/components/jyf-parser/libs/config.js ***!
   \******************************************************************************/
@@ -11080,14 +11080,25 @@ module.exports = cfg;
 
 /***/ }),
 
-/***/ 542:
+/***/ 55:
+/*!**********************************************************!*\
+  !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! regenerator-runtime */ 56);
+
+/***/ }),
+
+/***/ 550:
 /*!**********************************************************************************!*\
   !*** /Users/gsheng/Downloads/new_fruit/components/jyf-parser/libs/CssHandler.js ***!
   \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var cfg = __webpack_require__(/*! ./config.js */ 541),
+var cfg = __webpack_require__(/*! ./config.js */ 549),
 isLetter = function isLetter(c) {return c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z';};
 
 function CssHandler(tagStyle) {
@@ -11184,17 +11195,6 @@ parser.prototype.Content = function () {
   this.list = [];
   this.state = this.Space;
 };
-
-/***/ }),
-
-/***/ 55:
-/*!**********************************************************!*\
-  !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
-  \**********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! regenerator-runtime */ 56);
 
 /***/ }),
 

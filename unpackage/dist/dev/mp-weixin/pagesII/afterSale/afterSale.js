@@ -94,13 +94,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiTabs: function() {
-    return __webpack_require__.e(/*! import() | components/tui-tabs/tui-tabs */ "components/tui-tabs/tui-tabs").then(__webpack_require__.bind(null, /*! @/components/tui-tabs/tui-tabs.vue */ 481))
+    return __webpack_require__.e(/*! import() | components/tui-tabs/tui-tabs */ "components/tui-tabs/tui-tabs").then(__webpack_require__.bind(null, /*! @/components/tui-tabs/tui-tabs.vue */ 489))
   },
   tuiListCell: function() {
-    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 453))
+    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 461))
   },
   tuiNomore: function() {
-    return __webpack_require__.e(/*! import() | components/tui-nomore/tui-nomore */ "components/tui-nomore/tui-nomore").then(__webpack_require__.bind(null, /*! @/components/tui-nomore/tui-nomore.vue */ 411))
+    return __webpack_require__.e(/*! import() | components/tui-nomore/tui-nomore */ "components/tui-nomore/tui-nomore").then(__webpack_require__.bind(null, /*! @/components/tui-nomore/tui-nomore.vue */ 419))
   }
 }
 var render = function() {
@@ -445,25 +445,21 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
         delete data.afterSaleStatus;}(0, _api.publicing)(_request.posAfterSaleList, data).then(function (res) {log(res);_this3.AfterSaleData = res.data.data;}).catch(function (err) {log(err);});}, //重新申请售后
     goAfter: function goAfter(id) {uni.navigateTo({ url: '../../pagesIII/applyAfter/applyAfter?id=' + id });}, //复制
     //event 当需要异步请求返回数据再进行复制时，需要传入此参数，或者异步方法转为同步方法（H5端）
-    clipboard: function clipboard(event) {console.log(event);var data = event;thorui.getClipboardData(data, function (res) {}, event);}, // 显示
+    clipboard: function clipboard(event) {var data = event;thorui.getClipboardData(data, function (res) {}, event);}, // 显示
     init: function init() {this.modaishow = true;}, // 取消
     messcancel: function messcancel() {this.modaishow = false;}, //申请详情
     goAfterDetail: function goAfterDetail(id) {uni.navigateTo({ url: '../../pagesIII/afterDetails/afterDetails?id=' + id });}, //售后详情
     goAfterSaleDetail: function goAfterSaleDetail(id) {uni.navigateTo({ url: '../../pagesIII/AfterSaleDetails/AfterSaleDetails?id=' + id });}, //取消申请
     goAfterCancel: function goAfterCancel(order_id, id) {this.init();this.itemid = order_id;this.idNum = id;log(this.itemid); // this.Goyes(id)
     }, //去确认售后/售后反馈
-    goAfterConfirm: function goAfterConfirm(id) {log(id);uni.navigateTo({ url: '../../pagesIII/confirmAfter/confirmAfter?id=' + id });}, change: function change(e) {this.currentTab = e.index;console.log(this.currentTab);if (this.currentTab === 0) {//全部默认0
+    goAfterConfirm: function goAfterConfirm(id) {log(id);uni.navigateTo({ url: '../../pagesIII/confirmAfter/confirmAfter?id=' + id });}, change: function change(e) {this.currentTab = e.index;if (this.currentTab === 0) {//全部默认0
         this.postAfterSalelist();this.getBeConfirmedData();} else if (this.currentTab === 1) {//待确认
-        this.postAfterSalelist();this.getBeConfirmedData();}
-    },
-    detail: function detail() {
-      uni.navigateTo({
+        this.postAfterSalelist();this.getBeConfirmedData();}}, detail: function detail() {uni.navigateTo({
         url: '../orderDetail/orderDetail' });
 
     } },
 
   onLoad: function onLoad(options) {
-    // console.log(options.id)
     this.id = options.id;
     this.postAfterSalelist();
     this.getBeConfirmedData();
@@ -473,19 +469,17 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
     setTimeout(function () {
       uni.stopPullDownRefresh();
     });
-  },
-  onReachBottom: function onReachBottom() {var _this4 = this;
-    //只是测试效果，逻辑以实际数据为准
-    this.loadding = true;
-    this.pullUpOn = true;
-    setTimeout(function () {
-      _this4.loadding = false;
-      _this4.pullUpOn = false;
-    });
-  },
-  onPageScroll: function onPageScroll(e) {
-    this.scrollTop = e.scrollTop;
-  } };exports.default = _default;
+  }
+  // onReachBottom() {
+  // 	//只是测试效果，逻辑以实际数据为准
+  // 	this.loadding = true
+  // 	this.pullUpOn = true
+  // 	setTimeout(() => {
+  // 		this.loadding = false
+  // 		this.pullUpOn = false
+  // 	}, 200)
+  // }
+};exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

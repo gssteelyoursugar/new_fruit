@@ -298,10 +298,8 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
             content: '服务器错误，请重新登录获取信息',
             success: function success(res) {
               if (res.confirm) {
-                console.log('用户点击确定');
                 uni.hideLoading();
               } else if (res.cancel) {
-                console.log('用户点击取消');
                 uni.hideLoading();
               }
             } });
@@ -371,9 +369,7 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
             catch(function (err) {
               log(err);
             });
-            console.log('用户点击确定');
           } else if (res.cancel) {
-            console.log('用户点击取消');
 
           }
         } });

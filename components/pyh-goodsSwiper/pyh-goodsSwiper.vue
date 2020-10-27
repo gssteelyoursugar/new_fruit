@@ -38,7 +38,6 @@
 			}
 		},
         created() {
-			// console.log(this.detail)
         },
         methods:{
 			swiperChange(e){

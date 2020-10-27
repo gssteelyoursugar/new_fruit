@@ -66,8 +66,8 @@
 		</view>
 		<view class="tui-safe-area"></view>
 
-		
-		
+
+
 		<view class="tui-tabbar">
 			<view class="tui-flex-end tui-color-red tui-pr-20">
 				<view class="tui-black">实付: </view>
@@ -173,13 +173,13 @@
 			}
 		},
 		methods: {
-			
+
 			clip() {
 				uni.setClipboardData({
-				    data: this.payUrl,
-				    success: function () {
-				        console.log('success');
-				    }
+					data: this.payUrl,
+					success: function() {
+						uni.hideToast()
+					}
 				});
 			},
 			//立即购买
@@ -193,7 +193,6 @@
 				// Promise.all([publicing(postSettle,data),publicing(postSubmitOrder,data2)])
 				publicing(postSettle, data)
 					.then((res) => {
-						console.log(res)
 						this.extraUserInfo = res.data.data.extraData.userInfo
 						this.goodsData = res.data.data.data
 						this.extraData = res.data.data.extraData
@@ -214,7 +213,6 @@
 				// Promise.all([publicing(postSettle,data),publicing(postSubmitOrder,data2)])
 				publicing(postSettle, data)
 					.then((res) => {
-						console.log(res)
 						this.extraUserInfo = res.data.data.extraData.userInfo
 						this.goodsData = res.data.data.data
 						this.extraData = res.data.data.extraData
@@ -228,7 +226,6 @@
 							idList = idList + new_arr[index] + ",";
 						}
 						//去掉双引号
-						console.log("idList====", idList)
 						//去除idList最后一个逗号
 						idList = idList.substring(0, idList.length - 1);
 						console.log("idList去除逗号后====", idList)
@@ -276,26 +273,25 @@
 						let orderNumber = res.data.data.orderNumber
 						this.payUrl = res.data.data.payUrl
 						that.clip()
-						// that.btnPay(orderNumber)
-						// uni.showModal({
-						// 	title: '提示',
-						// 	content: '确认支付',
-						// 	success: (res) => {
-						// 		if (res.confirm) {
-						// 			console.log('用户点击确定');
-						// 		} else if (res.cancel) {
-						// 			uni.showToast({
-						// 				title: '订单已取消',
-						// 				icon: 'none',
-						// 				duration: 2000
-						// 			})
-						// 			// uni.reLaunch({
-						// 			// 	url: '../../pagesII/myOrder/myOrder'
-						// 			// })
-						// 			return
-						// 		}
-						// 	}
-						// });
+						uni.showModal({
+							title: '提示',
+							content: '确认支付',
+							success: (res) => {
+								if (res.confirm) {
+									that.btnPay(orderNumber)
+								} else if (res.cancel) {
+									uni.showToast({
+										title: '订单已取消',
+										icon: 'none',
+										duration: 2000
+									})
+									uni.switchTab({
+										url: '../../pages/my/my'
+									})
+									return
+								}
+							}
+						});
 						// 	uni.requestPayment({
 						// 	        timeStamp: data.timeStamp,
 						// 	        nonceStr: data.nonceStr,
@@ -308,10 +304,8 @@
 						// 	          //   status: 2,
 						// 	          //   is_pay:1,
 						// 	          // }
-
 						// 	        },
 						// 	        fail(res) {
-
 						// 	        }
 						// 	      })
 					})
@@ -320,11 +314,7 @@
 					})
 
 			},
-			testPay() {
-				plus.runtime.openURL(this.payUrl)
-			},
 			open() {
-				console.log('dianji')
 				this.$refs.popup.show()
 			},
 			chooseAddr() {
@@ -357,9 +347,6 @@
 					.catch((err) => {
 						log(err)
 					})
-
-
-
 			},
 			popupClose() {
 				this.show = false
@@ -368,11 +355,9 @@
 		onLoad(options) {
 			this.url = imgurl
 			this.ids = options.ids;
-			console.log("结算页面获得的ids====", this.ids);
 			this.gtePayORderTel()
 
 			var pages = getCurrentPages();
-			console.log(pages, 1241212)
 			var curPage = pages[pages.length - 1]; // 当前页面路径
 			var beforePage = pages[pages.length - 2]; // 前一个页面路径
 			log(beforePage.$page.fullPath)

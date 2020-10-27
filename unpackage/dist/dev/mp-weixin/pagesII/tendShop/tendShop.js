@@ -94,10 +94,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiListCell: function() {
-    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 453))
+    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 461))
   },
   tuiIcon: function() {
-    return __webpack_require__.e(/*! import() | components/tui-icon/tui-icon */ "components/tui-icon/tui-icon").then(__webpack_require__.bind(null, /*! @/components/tui-icon/tui-icon.vue */ 397))
+    return __webpack_require__.e(/*! import() | components/tui-icon/tui-icon */ "components/tui-icon/tui-icon").then(__webpack_require__.bind(null, /*! @/components/tui-icon/tui-icon.vue */ 405))
   }
 }
 var render = function() {
@@ -396,7 +396,7 @@ var _console = console,log = _console.log;var form = __webpack_require__(/*! @/c
       imgDataLi: [{ "title": "门头照片", "name": "me_1", "url": "" }, { "title": "水果陈列照片", "name": "me_2", "url": "" }, { "title": "卸货区", "name": "me_3", "url": "" }, { "title": "工商营业执照", "name": "me_4", "url": "" }], storeName: '请填写店铺名，如圈果水果店', merchantsName: '请填写收货人姓名', phone: '请填写收货人手机号码', address: '请选择店铺所处省市区', //地址
       addressDetails: '请填写街道、门牌号', serviceNumber: '请填写客服专员手机号', //客服专员
       files: [], //最多上传9张图片
-      imageList: [], category: 'image', ctx: {}, idAddress: '' };}, methods: { delImg: function delImg(index) {var list = this.imgDataLi;list[index].url = '';this.urlList = list;this.urlListFlag[index] = false;console.log(list, index);}, //地址选择弹出
+      imageList: [], category: 'image', ctx: {}, idAddress: '' };}, methods: { delImg: function delImg(index) {var list = this.imgDataLi;list[index].url = '';this.urlList = list;this.urlListFlag[index] = false;}, //地址选择弹出
     picker: function picker(e) {//获取选中的三级信息
       var value = e.detail.value; //这个是三级的picker分别选中的下标，value=[].length = 3,第一个是一级，第二个是二级。。。
       var one = this.addressOne[value[0]];var two = this.addressTwo[value[1]];var three = this.addressThree[value[2]];this.text1 = one.name + " " + two.name + " " + three.name;this.idAddress = three.id; /* if (this.selectList.length > 0) {
@@ -424,9 +424,7 @@ var _console = console,log = _console.log;var form = __webpack_require__(/*! @/c
         _this.addressOne = _this.getAddressByPId("0"); //一级地址
         _this.addressTwo = _this.getAddressByPId(_this.addressOne[0].id); //默认显示一级的第一个地址的二级地址
         _this.addressThree = _this.getAddressByPId(_this.addressTwo[0].id); //默认显示二级的第一个地址的三级地址
-        // console.log(this.addressTwo[0].id)
-        _this.multiArray = [_this.toArr(_this.addressOne), _this.toArr(_this.addressTwo), _this.toArr(_this.addressThree)];}).
-      catch(function (err) {
+        _this.multiArray = [_this.toArr(_this.addressOne), _this.toArr(_this.addressTwo), _this.toArr(_this.addressThree)];}).catch(function (err) {
         log(err);
       });
     },
@@ -499,21 +497,19 @@ var _console = console,log = _console.log;var form = __webpack_require__(/*! @/c
       this.modaishow = false;
     },
     //上传文件
-    uploadImages: function uploadImages(index) {var _this4 = this;
+    uploadImages: function uploadImages(index) {
       this.flag = true;
       //如果用户不点击上传图片，不用传参fileUrls，
       var that = this;
 
       (0, _request.uploadFiles)(function (res) {
-        console.log(res); //上传文件路径
         that.imgDataLi[index].url = res.data; //替换路径
         //设置对应的index为true
         that.urlListFlag[index] = true;
-        console.log(_this4.imgDataLi);
       });
     },
     //获取店铺信息
-    getMerchants: function getMerchants() {var _this5 = this;
+    getMerchants: function getMerchants() {var _this4 = this;
       uni.showLoading({});
       var setdata = uni.getStorageSync('usermen');
       if (!setdata) {
@@ -537,9 +533,9 @@ var _console = console,log = _console.log;var form = __webpack_require__(/*! @/c
         // 	duration:1000
         // })
         log(res);
-        _this5.ApproveStatus = res.data.data.approveStatus;
+        _this4.ApproveStatus = res.data.data.approveStatus;
         // log(this.ApproveStatus)
-        _this5.StoreInfo = res.data.data;
+        _this4.StoreInfo = res.data.data;
         // log(this.StoreInfo)
       }).
       catch(function (err) {
@@ -711,14 +707,12 @@ var _console = console,log = _console.log;var form = __webpack_require__(/*! @/c
       }
     },
     formReset: function formReset(e) {
-      console.log("清空数据");
     } },
 
 
   //下拉刷新
   onPullDownRefresh: function onPullDownRefresh() {
     this.getMerchants();
-    console.log('refresh');
     setTimeout(function () {
       uni.stopPullDownRefresh();
     }, 1000);
@@ -939,10 +933,8 @@ var _console = console,log = _console.log;var _default = { data: function data()
             content: '服务器错误，请重新登录获取信息',
             success: function success(res) {
               if (res.confirm) {
-                // console.log('用户点击确定');
                 uni.hideLoading();
               } else if (res.cancel) {
-                // console.log('用户点击取消');
                 uni.hideLoading();
               }
             } });

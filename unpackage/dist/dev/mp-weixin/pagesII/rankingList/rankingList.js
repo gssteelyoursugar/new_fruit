@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiIcon: function() {
-    return __webpack_require__.e(/*! import() | components/tui-icon/tui-icon */ "components/tui-icon/tui-icon").then(__webpack_require__.bind(null, /*! @/components/tui-icon/tui-icon.vue */ 397))
+    return __webpack_require__.e(/*! import() | components/tui-icon/tui-icon */ "components/tui-icon/tui-icon").then(__webpack_require__.bind(null, /*! @/components/tui-icon/tui-icon.vue */ 405))
   }
 }
 var render = function() {
@@ -547,15 +547,14 @@ var _console = console,log = _console.log;var _default = { data: function data()
         ///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
         _this2.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
         // log(this.ApproveStatus)
-      }).catch(function (err) {log(err);});}, onPullDownRefresh: function onPullDownRefresh() {this.postRanking();console.log('refresh');setTimeout(function () {uni.stopPullDownRefresh();}, 1000);}, //商品详情页
+      }).catch(function (err) {log(err);});}, onPullDownRefresh: function onPullDownRefresh() {this.postRanking();setTimeout(function () {uni.stopPullDownRefresh();}, 1000);}, //商品详情页
     gotoList: function gotoList(id) {//log(name)
       uni.navigateTo({ url: '../../pagesIII/productDetail/productDetail?id=' + id });}, //请求数据
     postRanking: function postRanking() {var _this3 = this;uni.showLoading({});var val = this.valueText;var data = { value: val, pageNo: 1, pageSize: 10000 };(0, _api.publicing)(_request.postOrder, data).then(function (res) {log(res);_this3.goodList = res.data.data;}).catch(function (err) {});uni.hideLoading();}, menubtn: function menubtn(index, value) {this.valueText = value; //这个地方你都注释掉了，没有赋值，
       this.num = index;this.postRanking(); //那这个方法里面的this.valueText怎么会能拿到嘛
       // 子组件调试父组件方法 ：parent
       // this.$parent.fatherMethod(index)
-    }, previewImage: function previewImage(e) {var index = e.currentTarget.dataset.index;
-      uni.previewImage({
+    }, previewImage: function previewImage(e) {var index = e.currentTarget.dataset.index;uni.previewImage({
         current: this.banner[index],
         urls: this.banner });
 
@@ -614,8 +613,6 @@ var _console = console,log = _console.log;var _default = { data: function data()
 
     },
     onShare: function onShare() {
-
-
 
 
 

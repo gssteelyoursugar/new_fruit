@@ -1,6 +1,6 @@
 <template>
 	<view class="container">
-		<tui-tabs :tabs="tabs" :isFixed="scrollTop>=0" :currentTab="currentTab" selectedColor="#00C52A" sliderBgColor="#00C52A"
+		<tui-tabs :tabs="tabs" :isFixed="true" :currentTab="currentTab" selectedColor="#00C52A" sliderBgColor="#00C52A"
 		 @change="change" itemWidth="50%">
 		 </tui-tabs>
 		<!--选项卡全部订单-->
@@ -241,17 +241,15 @@
 					log(err)
 				})
 			},
-				//重新申请售后
-						goAfter(id){
-							
-							uni.navigateTo({
-								url:'../../pagesIII/applyAfter/applyAfter?id=' + id
-							})
-						},
+			//重新申请售后
+			goAfter(id){
+				uni.navigateTo({
+					url:'../../pagesIII/applyAfter/applyAfter?id=' + id
+				})
+			},			
 			//复制
 			//event 当需要异步请求返回数据再进行复制时，需要传入此参数，或者异步方法转为同步方法（H5端）
 			clipboard(event) {
-				console.log(event);
 				let data= event;
 				thorui.getClipboardData(data, (res) => {
 					// #ifdef H5 || MP-ALIPAY
@@ -305,7 +303,6 @@
 			},
 			change(e) {
 				this.currentTab = e.index
-				console.log(this.currentTab)
 				if(this.currentTab === 0  ){//全部默认0
 					this.postAfterSalelist()
 					this.getBeConfirmedData()
@@ -321,7 +318,6 @@
 			}
 		},
 		onLoad(options) {
-			// console.log(options.id)
 			this.id = options.id
 			this.postAfterSalelist()
 			this.getBeConfirmedData()
@@ -332,18 +328,16 @@
 				uni.stopPullDownRefresh()
 			}, );
 		},
-		onReachBottom() {
-			//只是测试效果，逻辑以实际数据为准
-			this.loadding = true
-			this.pullUpOn = true
-			setTimeout(() => {
-				this.loadding = false
-				this.pullUpOn = false
-			}, )
-		},
-		onPageScroll(e) {
-			this.scrollTop = e.scrollTop;
-		}
+		// onReachBottom() {
+		// 	//只是测试效果，逻辑以实际数据为准
+		// 	this.loadding = true
+		// 	this.pullUpOn = true
+		// 	setTimeout(() => {
+		// 		this.loadding = false
+		// 		this.pullUpOn = false
+		// 	}, 200)
+		// }
+		
 	}
 </script>
 

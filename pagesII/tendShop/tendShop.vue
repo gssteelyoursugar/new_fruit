@@ -185,7 +185,6 @@
 				list[index].url = ''
 				this.urlList = list
 				this.urlListFlag[index] = false
-				console.log(list,index)
 			},
 			//地址选择弹出
 			picker: function(e) {
@@ -262,7 +261,6 @@
 						this.addressOne = this.getAddressByPId("0") //一级地址
 						this.addressTwo = this.getAddressByPId(this.addressOne[0].id) //默认显示一级的第一个地址的二级地址
 						this.addressThree = this.getAddressByPId(this.addressTwo[0].id) //默认显示二级的第一个地址的三级地址
-						// console.log(this.addressTwo[0].id)
 						this.multiArray = [
 							this.toArr(this.addressOne),
 							this.toArr(this.addressTwo),
@@ -348,11 +346,9 @@
 				let that = this;
 
 				uploadFiles((res) => {
-					console.log(res) //上传文件路径
 					that.imgDataLi[index].url = res.data //替换路径
 					//设置对应的index为true
 					that.urlListFlag[index] = true
-					console.log(this.imgDataLi)
 				});
 			},
 			//获取店铺信息
@@ -554,14 +550,12 @@
 				}
 			},
 			formReset: function(e) {
-				console.log("清空数据")
 			}
 		},
 
 		//下拉刷新
 		onPullDownRefresh() {
 			this.getMerchants()
-			console.log('refresh');
 			setTimeout(function() {
 				uni.stopPullDownRefresh();
 			}, 1000);

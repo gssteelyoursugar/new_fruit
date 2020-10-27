@@ -47,23 +47,18 @@
 			let buttonHeight = (bottom - statusBarHeight) + (top - statusBarHeight)
 			let navHeight = statusBarHeight + buttonHeight + top - statusBarHeight
 			this.boxHeight = navHeight - statusBarHeight
-
-			console.log(statusBarHeight, navHeight, buttonHeight)
 			// #endif
 
 		},
 		methods: {
 			switchInput(e) {
-				console.log(e)
 			},
 			back: function() {
 				uni.navigateBack();
 			},
 			switchChange(e) {
-				console.log(e.detail.value)
 			},
 			logout() {
-				console.log('点击了退出登录')
 				uni.removeStorageSync('userIN')
 				uni.removeStorageSync('usermen')
 				uni.removeStorageSync('StoreStatus')

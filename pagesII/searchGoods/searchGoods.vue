@@ -108,7 +108,6 @@
 			inputKey(e) {
 				let name = e.detail.value || this.key
 				let that = this
-				console.log(name)
 				if (name === '') {
 					uni.showToast({
 						title: "请输入关键词",
@@ -130,7 +129,6 @@
 			}
 		},
 		onLoad(options) {
-			console.log(this.history)
 		}
 	}
 </script>

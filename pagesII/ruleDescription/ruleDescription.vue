@@ -29,7 +29,6 @@
 		methods: {
 			getList() {
 				listing2(getAgreeList).then(res=> {
-					console.log(res)
 					let list = res.data.data
 					let arr = []
 					let ids = ["1319827321417515008","1319827163120287744","1304408017931272192"]

@@ -94,10 +94,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiListView: function() {
-    return __webpack_require__.e(/*! import() | components/tui-list-view/tui-list-view */ "components/tui-list-view/tui-list-view").then(__webpack_require__.bind(null, /*! @/components/tui-list-view/tui-list-view.vue */ 514))
+    return __webpack_require__.e(/*! import() | components/tui-list-view/tui-list-view */ "components/tui-list-view/tui-list-view").then(__webpack_require__.bind(null, /*! @/components/tui-list-view/tui-list-view.vue */ 522))
   },
   tuiListCell: function() {
-    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 453))
+    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 461))
   }
 }
 var render = function() {
@@ -372,7 +372,7 @@ var _console = console,log = _console.log;var form = __webpack_require__(/*! @/c
       imageList: [], category: 'image', ctx: {}, StoreInfo: {}, //店铺信息
       cartIds: [], imgUrlData: '' };}, methods: { //上传文件
     uploadImages: function uploadImages(index) {var _this = this; // let that = this;
-      (0, _request.uploadFiles)(function (res) {console.log(res.data);var imgArr;imgArr = _this.imgUrlData.split(",");log(imgArr); // this.cartIds = [];//清空
+      (0, _request.uploadFiles)(function (res) {var imgArr;imgArr = _this.imgUrlData.split(",");log(imgArr); // this.cartIds = [];//清空
         // for(let i=0;i<this.imgurlData.length;i++){
         //     this.cartIds.push(this.imgurlData[i])
         //    }
@@ -382,20 +382,14 @@ var _console = console,log = _console.log;var form = __webpack_require__(/*! @/c
         // for(let index in this.imgUrlData){
         // 	ids = ids + this.imgUrlData[index] + "";
         // }
-        // console.log("ids====",ids)
         // //去除ids最后一个逗号
         // // ids = ids.substring(0,ids.length - 1);
-        // console.log("ids去除逗号后====",ids)
         _this.urlList[index].url = res.data; //替换图片路径
       });}, //更新店铺信息
     postUpdateStore: function postUpdateStore() {var data = { storeName: this.StoreInfo.storeName, merchantsName: this.StoreInfo.merchantsName, phone: this.StoreInfo.phone, address: this.StoreInfo.address, // serviceNumber:'',
         token: setdata, idCard: this.StoreInfo.idCard, fileUrls: JSON.stringify(this.imgDataLi) };log(data);(0, _api.publicing2)(_request.postupdateClient, data).then(function (res) {log(res);}).catch(function (err) {log(err);});}, //获取申请店铺状态信息
     getMerchants: function getMerchants() {var _this2 = this;var data = { token: setdata };(0, _api.listing)(_request.getClient, data).then(function (res) {log(res);_this2.ApproveStatus = res.data.data.approveStatus;log(_this2.ApproveStatus);_this2.StoreInfo = res.data.data;_this2.urlList = res.data.data.urlList;log(_this2.StoreInfo);}).catch(function (err) {log(err);});}, //请求保存店铺
-    postsaveStores: function postsaveStores(e) {var setdata = uni.getStorageSync('usermen');log(setdata);var data = { storeName: e.detail.value.storeName,
-        merchantsName: e.detail.value.merchantsName,
-        phone: e.detail.value.phone,
-        address: e.detail.value.address,
-        serviceNumber: e.detail.value.serviceNumber,
+    postsaveStores: function postsaveStores(e) {var setdata = uni.getStorageSync('usermen');log(setdata);var data = { storeName: e.detail.value.storeName, merchantsName: e.detail.value.merchantsName, phone: e.detail.value.phone, address: e.detail.value.address, serviceNumber: e.detail.value.serviceNumber,
         token: setdata,
         fileUrls: JSON.stringify(this.imgDataLi) //这个地方不要传json数组，要把json数组转字符串，用JSON.stringify能转为字符串json数组，这样后台才能接收
       };
@@ -439,7 +433,6 @@ var _console = console,log = _console.log;var form = __webpack_require__(/*! @/c
 
           // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
           that.files = that.files.concat(res.tempFilePaths);
-          console.log(that.files);
           //上传功能已移除
           //...
         } });
@@ -485,7 +478,6 @@ var _console = console,log = _console.log;var form = __webpack_require__(/*! @/c
       }
     },
     formReset: function formReset(e) {
-      console.log("清空数据");
     } },
 
   onLoad: function onLoad() {

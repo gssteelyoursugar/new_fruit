@@ -268,17 +268,14 @@
 								content: '服务器错误，请重新登录获取信息',
 								success: function(res) {
 									if (res.confirm) {
-										// console.log('用户点击确定');
 										uni.hideLoading();
 									} else if (res.cancel) {
-										// console.log('用户点击取消');
 										uni.hideLoading();
 									}
 								}
 							});
 							return;
 						} else if (res.statusCode == 200) {
-							log(res);
 						}
 						// log(res) //获得token
 						uni.setStorageSync('usermen', res.data.token); //把token存在本地，小程序提供如同浏览器cookie
@@ -336,7 +333,6 @@
 			//请求订单列表
 			orderIng() {
 				let setdata = uni.getStorageSync('usermen');
-				// console.log("setdata==========", setdata)
 				let data = {
 					token: setdata
 				};
@@ -344,10 +340,8 @@
 					.then(res => {
 						let lists = res.data.data
 						lists.forEach(item=>{
-							console.log(item)
 							item.list.forEach(itm=>{
 								Object.assign(itm,{selected:false})
-								console.log("itm",itm)
 							})
 						})
 						this.orderObj = lists;
@@ -404,15 +398,14 @@
 
 				/* this.valueNum = e.value */
 				/* this.orderObj[index].number 
-					this.valueNum = e.value
-					console.log(e.value) */
+					this.valueNum = e.value*/
+					
 				let data = {
 					id: this.orderObj[e.custom].list[e.index].id,
 					goodsId: this.orderObj[e.custom].list[e.index].goodsId,
 					number: this.orderObj[e.custom].list[e.index].number,
 					token: setdata
 				};
-				// log(data)
 				//更新我的加购单
 				publicing(postUpOrder, data)
 					.then(res => {
@@ -491,11 +484,9 @@
 						title: '先勾选要结算商品呀！',
 						icon: 'none'
 					});
-					// console.log("提示没有选择任何商品，不可结算")
 					return;
 				}
 				//结算,获取到选中的商品id数组
-				console.log(this.cartIds);
 				let setdata = uni.getStorageSync('usermen');
 				//拼接字符串id
 				let ids = '';
@@ -566,12 +557,9 @@
 				lists.forEach(item=> {
 					selectedNum += item.list.length
 					item.list.forEach((itm,index)=> {
-						// console.log(itm)
 						let idxs = target.findIndex(im=>{
-							// console.log(im)
 							return itm.id === im
 						})
-						// console.log(idxs)
 						if (idxs !== -1) {
 							itm.selected = true
 						} else {
@@ -588,12 +576,10 @@
 				this.cartIds = target
 				//计算价格
 				this.jieSuanPrice();
-				console.log(lists,selectedNum)
 			},
 			//全选
 			checkAll(e) {
 				this.isAll = !this.isAll
-				console.log(this.isAll)
 				let lists = this.orderObj
 				let arr = []
 				if (this.isAll === false) {
@@ -603,7 +589,6 @@
 							this.$forceUpdate();
 						})
 					})
-					console.log(lists)
 					this.cartIds = []
 					this.orderObj = lists
 				} 
@@ -615,7 +600,6 @@
 							this.$forceUpdate();
 						})
 					})
-					console.log(lists)
 					let res = new Set(arr)
 					this.orderObj = lists
 					this.cartIds = Array.from(arr)
@@ -649,7 +633,6 @@
 			this.cartIds = []; //清空id
 			this.getMerchants();
 			let setdata = uni.getStorageSync('usermen');
-			console.log(setdata)
 			if (!setdata) {
 				this.hasError = true;
 				this.isActive = false;
@@ -685,7 +668,6 @@
 		onPullDownRefresh() {
 			let setdata = uni.getStorageSync('usermen');
 			this.orderIng();
-			console.log('refresh');
 			setTimeout(function() {
 				uni.stopPullDownRefresh();
 			}, 1000);

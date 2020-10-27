@@ -278,6 +278,15 @@
                     "path" : "msg/msg",
                     "style" : {}
                 }
+                ,{
+                    "path" : "prediction/prediction",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "上市预告",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
             ]
 		},
 		{

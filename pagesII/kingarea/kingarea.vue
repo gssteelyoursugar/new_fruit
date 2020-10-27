@@ -131,7 +131,6 @@
 			getImportData(){
 				listing2(getselectImport)
 				.then((res)=>{
-					console.log(res)
 					this.importData =  res.data.data
 				})
 				.catch((err)=>{
@@ -152,7 +151,6 @@
 			},
 			menubtn(index){
 				this.num = index
-				console.log(this.num )
 				// 子组件调试父组件方法 ：parent
 				// this.$parent.fatherMethod(index)
 			},
@@ -233,10 +231,8 @@
 						href: 'https://www.thorui.cn/'
 					},
 					function() {
-						console.log('分享成功');
 					},
 					function(e) {
-						console.log('分享失败：' + JSON.stringify(e));
 					}
 				);
 				//#endif

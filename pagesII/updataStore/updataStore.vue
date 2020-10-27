@@ -226,23 +226,14 @@
 				let two = this.addressTwo[value[1]];
 				let three = this.addressThree[value[2]];
 				this.text1 = one.name + " " + two.name + " " + three.name;
-
 				let addThree = this.getAddressById(three.id)
-				log(three)
 				//拿到第三级，根据第三级的pid就是第二级的id，根据第二级的pid就是第一级的id
 				let addTwo = this.getAddressById(addThree.pId)
 				let addOne = this.getAddressById(addTwo.pId)
-
-				console.log("addThree===", addThree.name)
-				console.log("addTwo===", addTwo.name)
-				console.log("addOne===", addOne.name)
 				this.textAddress = addOne.name + "/" + addTwo.name + "/" + addThree.name;
-				console.log("选中的三级信息======", this.textAddress)
 				this.address = three.id
 				this.StoreInfo.address = this.textAddress
-
 				this.idAddress = three.id
-				log("选中的三级ID======", this.idAddress)
 				this.StoreInfo.address = this.textAddress //
 				// this.StoreInfo.address = this.idAddress //ID
 				this.Address1 = this.idAddress
@@ -272,8 +263,6 @@
 				if (column === 0) {
 					//获取一级选中的地址信息
 					let one = this.addressOne[value]
-					console.log("选中的一级===", one.name)
-
 					//一级固定不变，设置二级，三级
 					let two = this.getAddressByPId(one.id) //获取二级，根据一级选中的id，获取二级关联的pid
 					let three = this.getAddressByPId(two[0].id) //获取三级，默认显示二级的第一个地址的三级信息
@@ -287,11 +276,9 @@
 						this.toArr(three)
 					];
 					this.value = [value, 0, 0]
-					log(this.value)
 				} else if (column === 1) {
 					//获取二级选中的地址信息
 					let two = this.addressTwo[value]
-					console.log("选中的二级===", two.name)
 
 					//一级\二级固定不变，设置三级
 					let three = this.getAddressByPId(two.id) //获取三级，根据二级选中的id，获取三级关联的pid
@@ -307,10 +294,8 @@
 				} else if (column === 2) {
 					//获取二级选中的地址信息
 					let three = this.addressThree[value]
-					console.log("选中的三级===", three.id)
 
 					this.ADDressID = three.id
-					console.log(this.ADDressID)
 				}
 			},
 
@@ -364,7 +349,6 @@
 				this.urlList = list
 				this.urlListFlag[index] = false
 				this.idList =idList
-				console.log(this.idList)
 			},
 
 			//上传文件
@@ -374,7 +358,6 @@
 				that.flag = true
 			
 				uploadFiles((res) => {
-					console.log(res.data)
 					that.urlList[index].url = res.data //替换图片路径
 					//设置对应的index为true
 					that.urlListFlag[index] = true
@@ -486,7 +469,6 @@
 			},
 			//获取申请店铺状态信息
 			getMerchants() {
-				console.log("获取申请店铺状态信息")
 				let setdata = uni.getStorageSync('usermen') //Token
 				let data = {
 					token: setdata
@@ -587,7 +569,6 @@
 
 						// 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
 						that.files = that.files.concat(res.tempFilePaths)
-						console.log(that.files)
 						//上传功能已移除
 						//...
 					}
@@ -633,7 +614,6 @@
 				}
 			},
 			formReset: function(e) {
-				console.log("清空数据")
 			}
 		},
 		onLoad() {

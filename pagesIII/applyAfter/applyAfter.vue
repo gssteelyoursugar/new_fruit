@@ -137,7 +137,6 @@
 			//复制
 			//event 当需要异步请求返回数据再进行复制时，需要传入此参数，或者异步方法转为同步方法（H5端）
 			clipboard(event) {
-				console.log(event);
 				let data= event;
 				thorui.getClipboardData(data, (res) => {
 					// #ifdef H5 || MP-ALIPAY
@@ -182,7 +181,6 @@
 				//  for ( var i = 0; i <this.ValueList.length; i++){
 				//     console.log(this.ValueList[i]);
 				// }
-					console.log('picker发送选择改变，携带值为', e.target.value)
 					this.index = e.target.value
 					this.ValueText = this.ValueList[e.target.value]
 					this.flagColor = true
@@ -190,7 +188,6 @@
 				},
 				//获取下拉申请原因
 				bindPicker(){
-					log('=====')
 				},
 				//获取商品售后
 			getGoods(){
@@ -224,7 +221,6 @@
 				//如果用户不点击上传图片，不用传参fileUrls，
 				
 				uploadFiles((res) => {
-					console.log(res.data)//上传文件路径
 					that.files=that.files.concat(res.data)
 					//that.files.url = res.data//替换路径
 					//设置对应的index为true
@@ -315,7 +311,6 @@
 				//不带token
 				listing2(getAfterSaleData)
 				.then((res)=>{
-					console.log(res)
 					this.ValueList = res.data.data.data
 					let new_arr = this.ValueList.map(obj => {return obj.treeNames})//提取数组里面的每一项里面的id
 					
@@ -329,7 +324,6 @@
 			
 		},
 		onLoad(options) {
-			console.log(options.id)
 			this.id = options.id
 			this.getGoods()
 			this.getDictValue()

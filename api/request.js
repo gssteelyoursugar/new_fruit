@@ -206,6 +206,14 @@ let getAgreeList =  `${url}api/wx/ruleExplain/select`
 //获取协议详情
 let getAgreeInfo =  `${url}api/wx/ruleExplain/get`
 
+ 
+ 
+//获取上市预告列表
+let getPredictList =  `${url}api/wx/prediction/list`
+
+//获取上市预告的详情
+let getPredictInfo =  `${url}api/wx/prediction/getDetails`
+
 //导出请求地址
 export {
 	getIndex,
@@ -263,7 +271,9 @@ export {
 	getEvaluateList,
 	getMsgInfo,
 	getAgreeList,
-	getAgreeInfo
+	getAgreeInfo,
+	getPredictList,
+	getPredictInfo
 }
 
 

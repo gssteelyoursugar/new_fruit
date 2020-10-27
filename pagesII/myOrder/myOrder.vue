@@ -1,7 +1,7 @@
 <template>
 	<view class="container">
 		<view class="top-tabs">
-			<tui-tabs :tabs="tabs" :isFixed="scrollTop>=0" :currentTab="currentTab" selectedColor="#00C52A" sliderBgColor="#00C52A"
+			<tui-tabs :tabs="tabs" :isFixed="true" :currentTab="currentTab" selectedColor="#00C52A" sliderBgColor="#00C52A"
 			 @change="change" itemWidth="25%"></tui-tabs>
 		</view>
 		<!--选项卡全部订单-->
@@ -28,7 +28,7 @@
 						</view>
 					</tui-list-cell>
 
-					<tui-list-cell padding="0" @click="detail(item.afterStatus,item.id)">
+					<tui-list-cell padding="0" @click="detail(item.tradeStatus,item.id)">
 						<view class="tui-goods-item">
 							<image :src="item.url" class="tui-goods-img"></image>
 							<view class="tui-goods-center">
@@ -63,9 +63,9 @@
 						<view class="tui-btn-ml" v-if="item.payStatus == 1 && (item.tradeStatus == 3  || item.tradeStatus == 6 || item.tradeStatus == 8)">
 							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="goAfter(item.id)">申请售后</tui-button>
 						</view>
-						<view class="tui-btn-ml" v-if="item.tradeStatus == 1 || item.tradeStatus == 2 ||   item.tradeStatus == 3 || item.tradeStatus == 4 ||item.tradeStatus == 6 ||item.tradeStatus == 8||item.tradeStatus == 9">
+						<!-- <view class="tui-btn-ml" v-if="item.tradeStatus == 1 || item.tradeStatus == 2 ||   item.tradeStatus == 3 || item.tradeStatus == 4 ||item.tradeStatus == 6 ||item.tradeStatus == 8||item.tradeStatus == 9">
 							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle">查看物流</tui-button>
-						</view>
+						</view> -->
 						<view class="tui-btn-ml" v-if="item.payStatus == 0 || item.payStatus == 2 || item.tradeStatus == 5">
 							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="goCancel(item.id)">取消订单</tui-button>
 						</view>
@@ -85,8 +85,6 @@
 						<view class="tui-btn-ml" v-if="item.payStatus == 1 && (item.tradeStatus == 2 || item.tradeStatus == 4 ||item.tradeStatus == 8)">
 							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="goConfirm(item.id)">确认收货</tui-button>
 						</view>
-
-						
 					</view>
 				</view>
 			</wyb-slide-listener>
@@ -159,8 +157,7 @@
 							<view class="tui-order-status">待发货</view>
 						</view>
 					</tui-list-cell>
-
-					<tui-list-cell padding="0" @click="detail(item.afterStatus,item.id)">
+					<tui-list-cell padding="0" @click="detail(item.tradeStatus,item.id)">
 						<view class="tui-goods-item">
 							<image :src="item.url" class="tui-goods-img"></image>
 							<view class="tui-goods-center">
@@ -193,9 +190,9 @@
 						<view class="tui-btn-ml">
 							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle">联系客服</tui-button>
 						</view>
-						<view class="tui-btn-ml">
+						<!-- <view class="tui-btn-ml">
 							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle">查看物流</tui-button>
-						</view>
+						</view> -->
 						<!-- <view class="tui-btn-ml">
 						<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle">评价晒单</tui-button>
 					</view> -->
@@ -221,7 +218,7 @@
 							<!-- <view class="tui-order-status" v-if="item.tradeStatus == 8">待确认</view> -->
 						</view>
 					</tui-list-cell>
-					<tui-list-cell padding="0" @click="detail(item.afterStatus,item.id)">
+					<tui-list-cell padding="0" @click="detail(item.tradeStatus,item.id)">
 						<view class="tui-goods-item">
 							<image :src="item.url" class="tui-goods-img"></image>
 							<view class="tui-goods-center">
@@ -258,9 +255,9 @@
 						<view class="tui-btn-ml">
 							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="goAfter(item.id)">申请售后</tui-button>
 						</view>
-						<view class="tui-btn-ml">
+						<!-- <view class="tui-btn-ml">
 							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle">查看物流</tui-button>
-						</view>
+						</view> -->
 						<view class="tui-btn-ml">
 							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="goConfirm(item.id)">确认收货</tui-button>
 						</view>
@@ -283,7 +280,7 @@
 						</view>
 					</tui-list-cell>
 
-					<tui-list-cell padding="0" @click="detail(item.afterStatus,item.id)">
+					<tui-list-cell padding="0" @click="detail(item.tradeStatus,item.id)">
 						<view class="tui-goods-item">
 							<image :src="item.url" class="tui-goods-img"></image>
 							<view class="tui-goods-center">
@@ -387,7 +384,6 @@
 			}
 		},
 		onLoad(options) {
-			console.log(options)
 			if (options.index == 0) { //全部 pt
 				this.currentTab = parseInt(options.index);
 				this.payStatus = ''
@@ -406,7 +402,6 @@
 				this.tradeStatus = '6,7',
 				this.afterStatus = '11'
 			} 
-			console.log(this.currentTab)
 			this.getOrderData()
 		},
 		computed: {
@@ -510,7 +505,6 @@
 					content: '确认支付',
 					success: (res) => {
 						if (res.confirm) {
-							console.log('用户点击确定');
 							let data = {
 								orderNumber: orderNumber
 							}
@@ -592,7 +586,6 @@
 						}
 						// this.countDown = (res.data.data.time - res.data.data.createDate)
 						// let newData = res.data.data
-						// console.log(newData)
 						// let arr = this.myOrderData || []
 						// arr.push(...newData)
 						// this.$set(this.myOrderData, arr)
@@ -605,7 +598,6 @@
 			//复制
 			//event 当需要异步请求返回数据再进行复制时，需要传入此参数，或者异步方法转为同步方法（H5端）
 			clipboard(event) {
-				console.log(event);
 				let data = event;
 				thorui.getClipboardData(data, (res) => {
 					// #ifdef H5 || MP-ALIPAY
@@ -662,7 +654,6 @@
 				if (status== 5) {
 					return
 				}
-				console.log("id",id)
 				uni.navigateTo({
 					url: '../../pagesIII/orderDetail/orderDetail?id=' + id
 				})
@@ -674,15 +665,7 @@
 		},
 		//
 		
-		// onPullDownRefresh() {
-		// 	log("触发加载")
-
-
-		// 	setTimeout(() => {
-		// 		uni.stopPullDownRefresh()
-
-		// 	}, 200);
-		// },
+		
 		onReachBottom() {
 			// if (this.loadStatus === "noMore") {
 			// 	return
@@ -699,7 +682,7 @@
 			// }, 1000)
 		},
 		onPageScroll(e) {
-			this.scrollTop = e.scrollTop;
+			// this.scrollTop = e.scrollTop;
 		}
 	}
 </script>

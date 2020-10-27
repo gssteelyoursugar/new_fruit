@@ -80,7 +80,6 @@
 		//下拉刷新
 		onPullDownRefresh() {
 			this.getsearchIng()
-			console.log('refresh');
 			setTimeout(function() {
 				uni.stopPullDownRefresh();
 			}, 1000);
@@ -154,7 +153,6 @@
 					if (scrollTop > this.menuList[i].top && scrollTop < this.menuList[i].bottom) {
 						this.verticalNavTop = (this.menuList[i].id - 1) * 50
 						this.tabCur = this.menuList[i].id
-						// console.log(scrollTop)
 						return false
 					}
 				}
@@ -162,7 +160,6 @@
 		},
 		onPullDownRefresh() {
 			this.getsearchIng()
-			console.log('refresh');
 			setTimeout(function() {
 				uni.stopPullDownRefresh();
 			}, 1000);

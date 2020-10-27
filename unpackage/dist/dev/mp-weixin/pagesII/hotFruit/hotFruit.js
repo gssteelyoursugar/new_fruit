@@ -289,7 +289,6 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
     getImportData: function getImportData() {var _this3 = this;
       (0, _api.listing2)(_request.getselectHot).
       then(function (res) {
-        console.log(res);
         _this3.importData = res.data.data;
       }).
       catch(function (err) {
@@ -310,7 +309,6 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
     },
     menubtn: function menubtn(index) {
       this.num = index;
-      console.log(this.num);
       // 子组件调试父组件方法 ：parent
       // this.$parent.fatherMethod(index)
     },
@@ -385,8 +383,6 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
 
     },
     onShare: function onShare() {
-
-
 
 
 

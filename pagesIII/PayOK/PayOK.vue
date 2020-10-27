@@ -23,8 +23,8 @@
 		},
 		methods: {
 			back(){
-				uni.reLaunch({
-					url:'../../pagesII/myOrder/myOrder?index=0'
+				uni.switchTab({
+					url:'../../pages/my/my'
 				})
 			}
 

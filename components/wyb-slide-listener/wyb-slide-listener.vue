@@ -132,13 +132,4 @@
 		}
 	}
 
-	/*开发时Log
-	console.log("开始时的X坐标：" + this.startX)
-	console.log("开始时的Y坐标：" + this.startY)
-	console.log("结束时的X坐标：" + this.lastX)
-	console.log("结束时的Y坐标：" + this.lastY)
-	console.log("X坐标绝对差值：" + Math.abs(this.startX - this.lastX))
-	console.log("Y坐标绝对差值：" + Math.abs(this.startX - this.lastX))
-	console.log("X坐标差值：" + (this.startX - this.lastX))
-	console.log("Y坐标差值：" + (this.startY - this.lastY))*/
 </script>

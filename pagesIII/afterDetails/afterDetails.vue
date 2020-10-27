@@ -111,7 +111,6 @@
 			//复制
 			//event 当需要异步请求返回数据再进行复制时，需要传入此参数，或者异步方法转为同步方法（H5端）
 			clipboard(event) {
-				console.log(event);
 				let data= event;
 				thorui.getClipboardData(data, (res) => {
 					// #ifdef H5 || MP-ALIPAY
@@ -128,7 +127,6 @@
 			
 		},
 		onLoad(options) {
-			console.log(options.id)
 			this.id = options.id
 			this.postAfterDetails()
 			

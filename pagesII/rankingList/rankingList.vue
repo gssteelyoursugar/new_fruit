@@ -342,7 +342,6 @@
 			},
 			onPullDownRefresh() {
 				this.postRanking()
-				console.log('refresh');
 				setTimeout(function() {
 					uni.stopPullDownRefresh();
 				}, 1000);
@@ -453,10 +452,8 @@
 						href: ''
 					},
 					function() {
-						console.log('分享成功');
 					},
 					function(e) {
-						console.log('分享失败：' + JSON.stringify(e));
 					}
 				);
 				//#endif

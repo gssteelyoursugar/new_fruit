@@ -60,8 +60,6 @@
 			let buttonHeight = (bottom - statusBarHeight) + (top - statusBarHeight)
 			let navHeight = statusBarHeight + buttonHeight + top - statusBarHeight
 			this.boxHeight = navHeight - statusBarHeight
-			
-			console.log(statusBarHeight,navHeight, buttonHeight)
 			// #endif
 			
 		},
@@ -75,11 +73,9 @@
 					phoneNumber: '0771-5633659',
 					// 成功回调
 					success: (res) => {
-						console.log('调用成功!')
 					},
 					// 失败回调
 					fail: (res) => {
-						console.log('调用失败!')
 					}
 			
 				});

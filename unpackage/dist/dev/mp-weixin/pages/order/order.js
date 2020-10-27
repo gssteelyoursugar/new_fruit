@@ -94,13 +94,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiSwipeAction: function() {
-    return __webpack_require__.e(/*! import() | components/tui-swipe-action/tui-swipe-action */ "components/tui-swipe-action/tui-swipe-action").then(__webpack_require__.bind(null, /*! @/components/tui-swipe-action/tui-swipe-action.vue */ 432))
+    return __webpack_require__.e(/*! import() | components/tui-swipe-action/tui-swipe-action */ "components/tui-swipe-action/tui-swipe-action").then(__webpack_require__.bind(null, /*! @/components/tui-swipe-action/tui-swipe-action.vue */ 440))
   },
   tuiNumberbox: function() {
-    return __webpack_require__.e(/*! import() | components/tui-numberbox/tui-numberbox */ "components/tui-numberbox/tui-numberbox").then(__webpack_require__.bind(null, /*! @/components/tui-numberbox/tui-numberbox.vue */ 439))
+    return __webpack_require__.e(/*! import() | components/tui-numberbox/tui-numberbox */ "components/tui-numberbox/tui-numberbox").then(__webpack_require__.bind(null, /*! @/components/tui-numberbox/tui-numberbox.vue */ 447))
   },
   tuiButton: function() {
-    return __webpack_require__.e(/*! import() | components/tui-button/tui-button */ "components/tui-button/tui-button").then(__webpack_require__.bind(null, /*! @/components/tui-button/tui-button.vue */ 446))
+    return __webpack_require__.e(/*! import() | components/tui-button/tui-button */ "components/tui-button/tui-button").then(__webpack_require__.bind(null, /*! @/components/tui-button/tui-button.vue */ 454))
   }
 }
 var render = function() {
@@ -442,17 +442,14 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
             content: '服务器错误，请重新登录获取信息',
             success: function success(res) {
               if (res.confirm) {
-                // console.log('用户点击确定');
                 uni.hideLoading();
               } else if (res.cancel) {
-                // console.log('用户点击取消');
                 uni.hideLoading();
               }
             } });
 
           return;
         } else if (res.statusCode == 200) {
-          log(res);
         }
         // log(res) //获得token
         uni.setStorageSync('usermen', res.data.token); //把token存在本地，小程序提供如同浏览器cookie
@@ -510,7 +507,6 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
     //请求订单列表
     orderIng: function orderIng() {var _this4 = this;
       var setdata = uni.getStorageSync('usermen');
-      // console.log("setdata==========", setdata)
       var data = {
         token: setdata };
 
@@ -518,10 +514,8 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       then(function (res) {
         var lists = res.data.data;
         lists.forEach(function (item) {
-          console.log(item);
           item.list.forEach(function (itm) {
             Object.assign(itm, { selected: false });
-            console.log("itm", itm);
           });
         });
         _this4.orderObj = lists;
@@ -578,15 +572,14 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
 
       /* this.valueNum = e.value */
       /* this.orderObj[index].number 
-                                    	this.valueNum = e.value
-                                    	console.log(e.value) */
+                                    	this.valueNum = e.value*/
+
       var data = {
         id: this.orderObj[e.custom].list[e.index].id,
         goodsId: this.orderObj[e.custom].list[e.index].goodsId,
         number: this.orderObj[e.custom].list[e.index].number,
         token: setdata };
 
-      // log(data)
       //更新我的加购单
       (0, _api.publicing)(_request.postUpOrder, data).
       then(function (res) {
@@ -665,11 +658,9 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
           title: '先勾选要结算商品呀！',
           icon: 'none' });
 
-        // console.log("提示没有选择任何商品，不可结算")
         return;
       }
       //结算,获取到选中的商品id数组
-      console.log(this.cartIds);
       var setdata = uni.getStorageSync('usermen');
       //拼接字符串id
       var ids = '';
@@ -740,12 +731,9 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       lists.forEach(function (item) {
         selectedNum += item.list.length;
         item.list.forEach(function (itm, index) {
-          // console.log(itm)
           var idxs = target.findIndex(function (im) {
-            // console.log(im)
             return itm.id === im;
           });
-          // console.log(idxs)
           if (idxs !== -1) {
             itm.selected = true;
           } else {
@@ -762,12 +750,10 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       this.cartIds = target;
       //计算价格
       this.jieSuanPrice();
-      console.log(lists, selectedNum);
     },
     //全选
     checkAll: function checkAll(e) {var _this6 = this;
       this.isAll = !this.isAll;
-      console.log(this.isAll);
       var lists = this.orderObj;
       var arr = [];
       if (this.isAll === false) {
@@ -777,7 +763,6 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
             _this6.$forceUpdate();
           });
         });
-        console.log(lists);
         this.cartIds = [];
         this.orderObj = lists;
       }
@@ -789,7 +774,6 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
             _this6.$forceUpdate();
           });
         });
-        console.log(lists);
         var res = new Set(arr);
         this.orderObj = lists;
         this.cartIds = Array.from(arr);
@@ -823,7 +807,6 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
     this.cartIds = []; //清空id
     this.getMerchants();
     var setdata = uni.getStorageSync('usermen');
-    console.log(setdata);
     if (!setdata) {
       this.hasError = true;
       this.isActive = false;
@@ -859,7 +842,6 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
   onPullDownRefresh: function onPullDownRefresh() {
     var setdata = uni.getStorageSync('usermen');
     this.orderIng();
-    console.log('refresh');
     setTimeout(function () {
       uni.stopPullDownRefresh();
     }, 1000);

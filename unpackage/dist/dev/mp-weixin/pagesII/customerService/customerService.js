@@ -178,11 +178,9 @@ var _default =
         phoneNumber: '0771-5633659',
         // 成功回调
         success: function success(res) {
-          console.log('调用成功!');
         },
         // 失败回调
         fail: function fail(res) {
-          console.log('调用失败!');
         } });
 
 

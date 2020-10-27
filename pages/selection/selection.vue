@@ -29,17 +29,14 @@
 
 		},
 		onLoad(option) {
-			console.log(option.name)
 			this.searchKey = option.name
 		},
-		//下拉刷新
-		// onPullDownRefresh() {
-
-		//        console.log('refresh');
-		//        setTimeout(function () {
-		//            uni.stopPullDownRefresh();
-		//        }, 500);
-		//    }
+		// 下拉刷新
+		onPullDownRefresh() {
+			setTimeout(function() {
+				uni.stopPullDownRefresh();
+			}, 500);
+		}
 
 	}
 </script>
