@@ -23,14 +23,12 @@
 							<view class="tui-order-status" v-if="item.tradeStatus == 6 || (item.tradeStatus == 7&&item.afterStatus == 11)">已完成</view>
 							<!-- <view class="tui-order-status" v-if="item.afterStatus == '' && item.tradeStatus == 7">售后中</view> -->
 							<view class="tui-order-status" v-if="item.tradeStatus == 7 && (item.afterStatus == '0'||item.afterStatus == '3')">售后中</view>
-							
 							<view class="tui-order-status" v-if="item.tradeStatus == 8">待确认</view>
 							<!-- <view class="tui-order-status" v-if="item.tradeStatus == 9">已完成</view> -->
-
 						</view>
 					</tui-list-cell>
 
-					<tui-list-cell padding="0" @click="detail(item.id)">
+					<tui-list-cell padding="0" @click="detail(item.afterStatus,item.id)">
 						<view class="tui-goods-item">
 							<image :src="item.url" class="tui-goods-img"></image>
 							<view class="tui-goods-center">
@@ -62,7 +60,7 @@
 						<!-- <view class="tui-btn-ml" v-if="item.tradeStatus == 6 || item.tradeStatus == 5">
 							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle"  @tap="goDel(item.id)">删除订单</tui-button>
 						</view> -->
-						<view class="tui-btn-ml" v-if="item.payStatus == 1 && (item.tradeStatus == 3  || item.tradeStatus == 6 || item.tradeStatus == 8 || item.tradeStatus == 9)">
+						<view class="tui-btn-ml" v-if="item.payStatus == 1 && (item.tradeStatus == 3  || item.tradeStatus == 6 || item.tradeStatus == 8)">
 							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="goAfter(item.id)">申请售后</tui-button>
 						</view>
 						<view class="tui-btn-ml" v-if="item.tradeStatus == 1 || item.tradeStatus == 2 ||   item.tradeStatus == 3 || item.tradeStatus == 4 ||item.tradeStatus == 6 ||item.tradeStatus == 8||item.tradeStatus == 9">
@@ -81,8 +79,8 @@
 							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="buyAgain(item.wx_goods_id)">再次下单</tui-button>
 						</view>
 
-						<view class="tui-btn-ml" v-if="item.tradeStatus == 7 && (item.afterStatus ==0||item.afterStatus ==1||item.afterStatus ==3||item.afterStatus ==5 )">
-							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="goAfterDetails(item.afterSaleId)">申请详情</tui-button>
+						<view class="tui-btn-ml" v-if="item.tradeStatus == 7 && (item.afterStatus ==0||item.afterStatus ==1||item.afterStatus ==2||item.afterStatus ==3||item.afterStatus ==4 )">
+							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="goAfterSaleDetail(item.afterSaleId)">售后详情</tui-button>
 						</view>
 						<view class="tui-btn-ml" v-if="item.payStatus == 1 && (item.tradeStatus == 2 || item.tradeStatus == 4 ||item.tradeStatus == 8)">
 							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="goConfirm(item.id)">确认收货</tui-button>
@@ -162,7 +160,7 @@
 						</view>
 					</tui-list-cell>
 
-					<tui-list-cell padding="0" @click="detail(item.id)">
+					<tui-list-cell padding="0" @click="detail(item.afterStatus,item.id)">
 						<view class="tui-goods-item">
 							<image :src="item.url" class="tui-goods-img"></image>
 							<view class="tui-goods-center">
@@ -223,7 +221,7 @@
 							<!-- <view class="tui-order-status" v-if="item.tradeStatus == 8">待确认</view> -->
 						</view>
 					</tui-list-cell>
-					<tui-list-cell padding="0" @click="detail(item.id)">
+					<tui-list-cell padding="0" @click="detail(item.afterStatus,item.id)">
 						<view class="tui-goods-item">
 							<image :src="item.url" class="tui-goods-img"></image>
 							<view class="tui-goods-center">
@@ -273,11 +271,11 @@
 		<!--选项卡已完成-->
 		<view :class="[currentTab === 3 ? 'actineclass' : 'errorclass']">
 			<wyb-slide-listener @slideUp="onSlide" @slideDown="onSlide" @slideLeft="onSlide" @slideRight="onSlide">
-				<view class="container-img " v-if="myOrderData.length == 0">
+				<view class="container-img " v-if="done.length == 0">
 					<!-- <image src="../../static/images/orderBMG.png" mode="widthFix"></image> -->
 					<!-- <text class="color-text">您还没有相关的订单</text> -->
 				</view>
-				<view class="tui-order-item" v-for="(item,index) in myOrderData" :key="index">
+				<view class="tui-order-item" v-for="(item,index) in done" :key="index">
 					<tui-list-cell :hover="false" :lineLeft="false">
 						<view class="tui-goods-title">
 							<view class="font-size-color">订单号：{{item.orderNumber}} <text class="iconfont icon-lujing182" @click="clipboard(item.orderNumber)"></text></view>
@@ -285,7 +283,7 @@
 						</view>
 					</tui-list-cell>
 
-					<tui-list-cell padding="0" @click="detail(item.id)">
+					<tui-list-cell padding="0" @click="detail(item.afterStatus,item.id)">
 						<view class="tui-goods-item">
 							<image :src="item.url" class="tui-goods-img"></image>
 							<view class="tui-goods-center">
@@ -310,11 +308,11 @@
 						<view class="tui-btn-ml">
 							<button open-type="contact" type="primary" hover-class='none' class="icon-img3">联系客服</button>
 						</view>
-						<view class="tui-btn-ml" v-if="item.tradeStatus == 6">
+						<view class="tui-btn-ml" v-if="item.tradeStatus == 6 || (item.tradeStatus == 7 && item.afterStatus == 5)">
 							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="goAfter(item.id)">申请售后</tui-button>
 						</view>
 						<view class="tui-btn-ml" v-if="item.tradeStatus == 7 && item.afterStatus == 11">
-							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="goAfterSaleDetail(item.id)">售后详情</tui-button>
+							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="goAfterSaleDetail(item.afterSaleId)">售后详情</tui-button>
 						</view>
 						<view class="tui-btn-ml">
 							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="buyAgain(item.wx_goods_id)">再次下单</tui-button>
@@ -398,14 +396,14 @@
 				this.currentTab = parseInt(options.index);
 				this.payStatus = '1'
 				this.tradeStatus = '1,2,3'
-			} else if (options.index == 2) { //待收货p1t4 (要不要8)
+			} else if (options.index == 2) { //待收货p1t4,8 
 				this.currentTab = parseInt(options.index);
 				this.payStatus = '1'
-				this.tradeStatus = '4'
-			} else if (options.index == 3) {//已完成p1t6 afterStatus11
+				this.tradeStatus = '4,8'
+			} else if (options.index == 3) {//已完成p1t6,7 afterStatus11
 				this.currentTab = parseInt(options.index);
 				this.payStatus = '1'
-				this.tradeStatus = '6',
+				this.tradeStatus = '6,7',
 				this.afterStatus = '11'
 			} 
 			console.log(this.currentTab)
@@ -454,7 +452,7 @@
 				let data = this.myOrderData
 				let arr = []
 				data.map(item => {
-					if (item.payStatus == '1' && (item.tradeStatus == '6'||item.tradeStatus == '11')) {
+					if (item.tradeStatus == '6'||(item.tradeStatus == '7' && item.afterStatus == '11')) {
 						arr.push(item)
 					}
 				})
@@ -647,10 +645,10 @@
 					this.currentTab = parseInt(options.index);
 					this.payStatus = '1'
 					this.tradeStatus = '1,2,3'
-				} else if (options.index == 2) { //待收货p1t4,
+				} else if (options.index == 2) { //待收货p1t4,8
 					this.currentTab = parseInt(options.index);
 					this.payStatus = '1'
-					this.tradeStatus = '4'
+					this.tradeStatus = '4,8'
 				} else if (options.index == 3) {//已完成p1t6 afterStatus 11
 					this.currentTab = parseInt(options.index);
 					this.payStatus = '1'
@@ -660,7 +658,11 @@
 				this.getOrderData()
 				
 			},
-			detail(id) {
+			detail(status,id) {
+				if (status== 5) {
+					return
+				}
+				console.log("id",id)
 				uni.navigateTo({
 					url: '../../pagesIII/orderDetail/orderDetail?id=' + id
 				})

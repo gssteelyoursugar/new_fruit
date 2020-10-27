@@ -149,12 +149,18 @@ page {
 }
 .order-detail-container .order-snapshoot .snap-goods .goods-item .item-img {
   margin-right: 20rpx;
+  width: 160rpx;
 }
 .order-detail-container .order-snapshoot .snap-goods .goods-item .item-img image {
   width: 160rpx;
   height: 160rpx;
   background: #eee;
   border-radius: 6rpx;
+}
+.order-detail-container .order-snapshoot .snap-goods .goods-item .item-info {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
 }
 .order-detail-container .order-snapshoot .snap-goods .goods-item .item-info .info-title text:first-child {
   background: #00C52A;
@@ -164,6 +170,8 @@ page {
   margin-right: 4rpx;
   padding: 2rpx 4rpx;
   display: inline-block;
+  width: 100rpx;
+  text-align: center;
 }
 .order-detail-container .order-snapshoot .snap-goods .goods-item .item-info .info-title text:last-child {
   color: #333333;
@@ -273,7 +281,7 @@ page {
   font-weight: bold;
 }
 .tui-title-line {
-  color: #333333;
+  color: #000;
   font-weight: 400;
   font-size: 28rpx;
   padding-bottom: 14rpx;
@@ -375,7 +383,7 @@ page {
   border-right: 1px solid #f4f5f7;
 }
 .tui-title-class {
-  font-size: 24rpx;
+  font-size: 28rpx;
   color: #929397;
 }
 .tui-name-class {
@@ -388,7 +396,7 @@ page {
   font-size: 20rpx;
 }
 .tui-text-left {
-  margin-left: 40rpx;
+  margin-left: 20rpx;
 }
 .tui-right-one {
   -webkit-box-flex: 3;

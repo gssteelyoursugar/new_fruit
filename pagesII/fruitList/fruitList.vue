@@ -24,7 +24,7 @@
 					<scroll-view scroll-x="true" class="scroll" scroll-with-animation="true">
 						<view class="prefer-dis">
 							<block v-for="(item, index) in infoList" :key="index">
-								<view class="prefer-view">
+								<view class="prefer-view" @click="goToInfo(item.id)">
 									<view class="tui-img-text">
 										<image :src="item.url" mode="aspectFill" class="tui-img"></image>
 										<view class="tui-tag-mag">
@@ -141,6 +141,7 @@
 			};
 		},
 		onLoad: function(options) {
+			this.getMerchants()
 			this.url = imgurl
 			this.getGoodsAll()
 			let obj = {};
@@ -153,7 +154,6 @@
 			// #ifdef MP-ALIPAY
 			my.hideAddToDesktopMenu();
 			// #endif
-
 			setTimeout(() => {
 				uni.getSystemInfo({
 					success: res => {
@@ -215,6 +215,14 @@
 				// 	return
 				uni.navigateTo({
 					url: '../../pagesIII/productDetail/productDetail?id=' + id
+				})
+			},
+			
+			goToInfo (id) {
+				log(id)
+				// 	return
+				uni.navigateTo({
+					url: '../../pagesII/timeInfo/timeInfo?id=' + id
 				})
 			},
 

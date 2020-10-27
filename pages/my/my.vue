@@ -427,11 +427,11 @@
 							if (item.tradeStatus == "1"||item.tradeStatus == "2" || item.tradeStatus == "3") {
 								fahuoList.push(item)
 							}
-							if (item.payStatus == '1' && (item.tradeStatus == '4')) {  //||item.tradeStatus == '8' （要不要8）
+							if (item.payStatus == '1' && (item.tradeStatus == '4'||item.tradeStatus == '8')) {  
 								shouhuoList.push(item)
 							}
-							if (item.tradeStatus == '7') {  // 只要审核中以及待确定的
-								if(item.afterStatus == '0' || item.afterStatus == '3') { // item.afterStatus == '3' （要不要3）
+							if (item.tradeStatus == '7') {  // 只要 待确定的 3
+								if(item.afterStatus == '3') { 
 									tuikuanList.push(item)
 								}
 							}

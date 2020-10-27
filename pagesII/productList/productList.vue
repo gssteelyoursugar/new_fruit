@@ -247,7 +247,7 @@
 						<text class="tui-title-bold">果品星级</text>
 					</view>
 					<!-- <view class="tui-drawer-content tui-flex-attr">
-						<block v-for="(item,index) in fruit_level" :key="index">
+						<block v-for="(item,index) in fruit_star" :key="index">
 							<view class="tui-attr-item" :class="{activeItem:index == num}" @click="activeGo('fruitLevel',item.id,index)">
 								<view class="tui-attr-ellipsis">{{item.title}}</view>
 							</view>
@@ -378,8 +378,6 @@
 				</view> -->
 			</scroll-view>
 		</tui-top-dropdown>
-		
-
 		<!--加载loadding-->
 		<tui-nomore v-if="!pullUpOn"></tui-nomore>
 		<tui-loadmore v-if="loadding" :index="3" type="red"></tui-loadmore>
@@ -432,7 +430,7 @@
 				seleVarieties: [], //全部品种
 				color_level: [], //颜色等级
 				// facade_level: [], //外观等级
-				fruit_level: [], //果品等级
+				fruit_star: [], //果品等级
 				shape_level: [], //果形等级
 				goods: [], //商品
 				packaging: [], //包装
@@ -669,6 +667,8 @@
 					this.drawerH = res.windowHeight - uni.upx2px(100) - this.height;
 				}
 			});
+			
+		
 
 			// #ifndef H5 || APP-PLUS || MP-ALIPAY
 			const res = uni.getSystemInfoSync();
@@ -725,7 +725,7 @@
 		computed: {
 			fruitBox() {
 				let arr = []
-				let data = this.fruit_level
+				let data = this.fruit_star
 				data.forEach((item, index) => {
 					let tmp = {
 						num: index,
@@ -847,7 +847,7 @@
 						} else if (this.seleVarieties != undefined) {}
 						this.color_level = res.data.data.color_level
 						this.facade_level = res.data.data.facade_level
-						this.fruit_level = res.data.data.fruit_level
+						this.fruit_star = res.data.data.fruit_star
 						this.shape_level = res.data.data.shape_level
 						this.goods = res.data.data.goods
 						this.packaging = res.data.data.packaging
@@ -1160,7 +1160,7 @@
 						this.seleVarieties = res[1].data.data
 						this.color_level = res[0].data.data.color_level
 						this.facade_level = res[0].data.data.facade_level
-						this.fruit_level = res[0].data.data.fruit_level
+						this.fruit_star = res[0].data.data.fruit_star
 						this.shape_level = res[0].data.data.shape_level
 						this.goods = res[0].data.data.goods
 						this.packaging = res[0].data.data.packaging

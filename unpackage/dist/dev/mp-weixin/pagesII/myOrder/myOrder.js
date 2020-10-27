@@ -482,15 +482,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
 var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
 
 var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
-//
-//
 //
 //
 //
@@ -832,13 +828,13 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
       // },
       { name: "待发货" }, { name: "待收货" }, { name: "已完成" }], currentTab: null, pageIndex: 1, loadding: false, pullUpOn: true, scrollTop: 0, myOrderData: [], url: '', countDown: 0, afterStatus: '' };}, onLoad: function onLoad(options) {console.log(options);if (options.index == 0) {//全部 pt
       this.currentTab = parseInt(options.index);this.payStatus = '';this.tradeStatus = '';} else if (options.index == 1) {//待发货p1t1
-      this.currentTab = parseInt(options.index);this.payStatus = '1';this.tradeStatus = '1,2,3';} else if (options.index == 2) {//待收货p1t4 (要不要8)
-      this.currentTab = parseInt(options.index);this.payStatus = '1';this.tradeStatus = '4';} else if (options.index == 3) {//已完成p1t6 afterStatus11
-      this.currentTab = parseInt(options.index);this.payStatus = '1';this.tradeStatus = '6', this.afterStatus = '11';}console.log(this.currentTab);this.getOrderData();}, computed: { // 全部数据
+      this.currentTab = parseInt(options.index);this.payStatus = '1';this.tradeStatus = '1,2,3';} else if (options.index == 2) {//待收货p1t4,8 
+      this.currentTab = parseInt(options.index);this.payStatus = '1';this.tradeStatus = '4,8';} else if (options.index == 3) {//已完成p1t6,7 afterStatus11
+      this.currentTab = parseInt(options.index);this.payStatus = '1';this.tradeStatus = '6,7', this.afterStatus = '11';}console.log(this.currentTab);this.getOrderData();}, computed: { // 全部数据
     allData: function allData() {var data = this.myOrderData;return data;}, // 待付款 (暂时废弃)
     waitPay: function waitPay() {var data = this.myOrderData;var arr = [];data.map(function (item) {if (item.payStatus == '0') {arr.push(item);}});return arr;}, // 待发货
     waitDeliver: function waitDeliver() {var data = this.myOrderData;var arr = [];data.map(function (item) {if (item.tradeStatus == "1" || item.tradeStatus == "2" || item.tradeStatus == "3") {arr.push(item);}});return arr;}, // 待确认
-    waitConfirm: function waitConfirm() {var data = this.myOrderData;var arr = [];data.map(function (item) {if (item.payStatus == '1' && (item.tradeStatus == '4' || item.tradeStatus == '8')) {arr.push(item);}});return arr;}, done: function done() {var data = this.myOrderData;var arr = [];data.map(function (item) {if (item.payStatus == '1' && (item.tradeStatus == '6' || item.tradeStatus == '11')) {arr.push(item);}});return arr;} }, methods: { //手势
+    waitConfirm: function waitConfirm() {var data = this.myOrderData;var arr = [];data.map(function (item) {if (item.payStatus == '1' && (item.tradeStatus == '4' || item.tradeStatus == '8')) {arr.push(item);}});return arr;}, done: function done() {var data = this.myOrderData;var arr = [];data.map(function (item) {if (item.tradeStatus == '6' || item.tradeStatus == '7' && item.afterStatus == '11') {arr.push(item);}});return arr;} }, methods: { //手势
     //支付倒计时
     endOfTime: function endOfTime(id) {this.goCancel(id);}, //删除订单
     goDel: function goDel(id) {var _this = this;log(id);var data = { id: id, token: setdata };(0, _api.publicing)(_request.postDelOrders, data).then(function (res) {log(res);_this.getOrderData();_this.$forceUpdate();}).catch(function (err) {log(err);});}, //取消支付
@@ -860,9 +856,9 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
     goAfterSaleDetail: function goAfterSaleDetail(id) {uni.navigateTo({ url: '../../pagesIII/AfterSaleDetails/AfterSaleDetails?id=' + id });}, // 售后- 申请详情
     goAfterDetails: function goAfterDetails(id) {uni.navigateTo({ url: '../../pagesIII/afterDetails/afterDetails?id=' + id });}, change: function change(options) {this.currentTab = options.index;if (options.index == 0) {//全部 pt
         this.currentTab = parseInt(options.index);this.payStatus = '';this.tradeStatus = '';} else if (options.index == 1) {//待发货p1t1
-        this.currentTab = parseInt(options.index);this.payStatus = '1';this.tradeStatus = '1,2,3';} else if (options.index == 2) {//待收货p1t4,
-        this.currentTab = parseInt(options.index);this.payStatus = '1';this.tradeStatus = '4';} else if (options.index == 3) {//已完成p1t6 afterStatus 11
-        this.currentTab = parseInt(options.index);this.payStatus = '1';this.tradeStatus = '6,7';this.afterStatus = '11';}this.getOrderData();}, detail: function detail(id) {uni.navigateTo({ url: '../../pagesIII/orderDetail/orderDetail?id=' + id });} }, onShow: function onShow() {this.url = _request.imgurl; // this.getOrderData()
+        this.currentTab = parseInt(options.index);this.payStatus = '1';this.tradeStatus = '1,2,3';} else if (options.index == 2) {//待收货p1t4,8
+        this.currentTab = parseInt(options.index);this.payStatus = '1';this.tradeStatus = '4,8';} else if (options.index == 3) {//已完成p1t6 afterStatus 11
+        this.currentTab = parseInt(options.index);this.payStatus = '1';this.tradeStatus = '6,7';this.afterStatus = '11';}this.getOrderData();}, detail: function detail(status, id) {if (status == 5) {return;}console.log("id", id);uni.navigateTo({ url: '../../pagesIII/orderDetail/orderDetail?id=' + id });} }, onShow: function onShow() {this.url = _request.imgurl; // this.getOrderData()
   }, //
   // onPullDownRefresh() {
   // 	log("触发加载")

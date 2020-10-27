@@ -76,10 +76,10 @@
 					"query": ""
 				},
 				{
-					"id": 6,
-					"name": "限量批",
-					"pathName": "pagesII/Limit/Limit",
-					"query": "id=1320567250606813184&__id__=1",
+					"id": -1,
+					"name": "订单详情",
+					"pathName": "pagesIII/orderDetail/orderDetail",
+					"query": "id=1320630219034259456&__id__=3",
 					"scene": null
 				}
 			]

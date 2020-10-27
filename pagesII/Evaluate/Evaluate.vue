@@ -17,7 +17,7 @@
 							</view>
 							<view class="tag-tit2-text">
 								<text class="price1">
-									<text style="font-size: 20rpx;margin-right:4rpx;">¥</text>{{ApproveStatus === 1 ?itm.platform_price : '***'}}<text style="font-size: 20rpx;margin-left:4rpx;">元</text>
+									<text style="font-size: 20rpx;margin-right:4rpx;">¥</text>{{ApproveStatus === 1 ?itm.platformClientPrice : '***'}}<text style="font-size: 20rpx;margin-left:4rpx;">元</text>
 									<text class="price2">/件</text>
 								</text>
 							</view>

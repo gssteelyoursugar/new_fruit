@@ -101,6 +101,22 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var f0 = _vm._f("getTime")(_vm.orderObj.pay_time)
+
+  var f1 = _vm._f("getTime")(_vm.orderObj.create_date)
+
+  var f2 = _vm._f("getTime")(_vm.orderObj.shipments_time)
+
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        f0: f0,
+        f1: f1,
+        f2: f2
+      }
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -421,7 +437,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var _api = __webpack_require__(/*! ../../api/api.js */ 19);
+
 
 
 
@@ -711,8 +729,9 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 //
 //
 //
+//
 //请求地址
-var setdata = uni.getStorageSync('usermen');var _default = { name: "orderDetail", data: function data() {return { order_id: '' };}, methods: { getOrderDetail: function getOrderDetail() {var _this = this;var data = { token: setdata, id: this.order_id };(0, _api.listing)(_request.getDetails, data).then(function (res) {console.log(res);_this.orderObj = res.data.data[0];});} }, onLoad: function onLoad(opt) {this.order_id = opt.id;}, onShow: function onShow() {console.log("这里是onShow");this.getOrderDetail();} };exports.default = _default;
+var setdata = uni.getStorageSync('usermen');var _default = { name: "orderDetail", data: function data() {return { order_id: '', orderObj: {}, goodsData: {} };}, filters: { getTime: function getTime(val) {var time = new Date(val);console.log(time);var y = time.getFullYear();var m = time.getMonth() + 1;var d = time.getDate();var h = time.getHours();var mm = time.getMinutes();var s = time.getSeconds();return y + '-' + m + '-' + d + ' ' + h + ':' + mm + ':' + s;} }, methods: { add0: function add0(m) {return m < 10 ? '0' + m : m;}, getOrderDetail: function getOrderDetail() {var _this = this;var data = { token: setdata, id: this.order_id };(0, _api.listing)(_request.getDetails, data).then(function (res) {_this.orderObj = res.data.data[0];console.log(_this.orderObj.wx_goods_id);var data = { id: _this.orderObj.wx_goods_id, token: setdata };(0, _api.publicing)(_request.postdelist, data).then(function (res) {console.log("res", res);_this.goodsData = res.data.data;});});} }, onLoad: function onLoad(opt) {this.order_id = opt.id;}, onShow: function onShow() {this.getOrderDetail();} };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

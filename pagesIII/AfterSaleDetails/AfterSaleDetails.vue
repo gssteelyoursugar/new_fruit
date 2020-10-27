@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<!-- 处理结果 -->
-		<view class="tui-content">
+		<view class="tui-content" v-if="DetailsData.after_sale_status == '1'|| DetailsData.after_sale_status == '11'|| DetailsData.after_sale_status =='2'||DetailsData.after_sale_status =='3'||DetailsData.after_sale_status =='4'">
 			<view class="tui-title">处理结果</view>
 			<view class="tui-text-line">
 				<text>处理时间:</text><text class="maginLeft colorNum">{{DetailsData.affirm_time}}</text>
@@ -17,7 +17,7 @@
 			</view>
 		</view>
 		<!-- 反馈信息 -->
-		<view class="tui-content">
+		<view class="tui-content" v-if="DetailsData.after_sale_status == '1'||DetailsData.after_sale_status == '11'|| DetailsData.after_sale_status =='2'||DetailsData.after_sale_status =='3'||DetailsData.after_sale_status =='4'">
 			<view class="tui-title">反馈信息</view>
 			<view class="tui-text-line">
 				<text>反馈时间:</text><text class="maginLeft colorNum">{{DetailsData.feedback_time}}</text>
@@ -128,7 +128,7 @@
 				}
 				publicing(posAfterDetails,data)
 				.then((res)=>{
-					log(res)
+					log("DetailsData",res.data.data)
 					this.DetailsData = res.data.data
 					this.refund_money = res.data.data.refund_money //退款金额
 					// this.DetailsData.after_sale_mode = '退款'

@@ -2,16 +2,16 @@
 	<view class="order-detail-container">
 		<view class="address-wrap">
 			<view class="user-phone-name">
-				<view class="user-name">陆盈盈</view>
-				<view class="user-phone">19324234323</view>
+				<view class="user-name">{{goodsData.userName}}</view>
+				<view class="user-phone">{{goodsData.phone}}</view>
 			</view>
 			<view class="user-address">
 				<view class="address-icon">
 					<image src="../../static/images/location.png" mode=""></image>
 				</view>
 				<view class="address-info">
-					<view class="info-province">广西省南宁市青秀区-龙光世纪B塔45层4516商铺</view>
-					<view class="info-detail">圈果水果店</view>
+					<view class="info-province">{{goodsData.address}}</view>
+					<view class="info-detail">{{goodsData.addressDetails}}</view>
 				</view>
 			</view>
 		</view>
@@ -20,14 +20,14 @@
 				<view class="info-item">
 					<view class="info-item-left">订单编号：</view>
 					<view class="info-item-right">
-						<view>127188608472</view>
+						<view>{{orderObj.order_number}}</view>
 						<view class="clip">复制</view>
 					</view>
 				</view>
-				<view class="info-item">
+				<view class="info-item" v-if="">
 					<view class="info-item-left">物流单号：</view>
 					<view class="info-item-right">
-						<view>127188608472</view>
+						<view>{{orderObj.logisticsNumber}}</view>
 						<view class="clip">复制</view>
 					</view>
 				</view>
@@ -42,7 +42,7 @@
 				<view class="info-item">
 					<view class="info-item-left">支付时间：</view>
 					<view class="info-item-right">
-						<view>2020-09-21 22:18:09</view>
+						<view>{{orderObj.pay_time | getTime}}</view>
 					</view>
 				</view>
 			</view>
@@ -50,19 +50,19 @@
 				<view class="info-item">
 					<view class="info-item-left">下单时间：</view>
 					<view class="info-item-right">
-						<view>2020-09-21 22:18:09</view>
+						<view>{{orderObj.create_date | getTime}}</view>
 					</view>
 				</view>
 				<view class="info-item">
 					<view class="info-item-left">发货时间：</view>
 					<view class="info-item-right">
-						<view>2020-09-21 22:18:09</view>
+						<view>{{orderObj.shipments_time | getTime}}</view>
 					</view>
 				</view>
 				<view class="info-item">
 					<view class="info-item-left">收货时间：</view>
 					<view class="info-item-right">
-						<view>2020-09-21 22:18:09</view>
+						<view>{{orderObj.delivery_time }}</view>
 					</view>
 				</view>
 			</view>
@@ -74,28 +74,30 @@
 				<view> <text>*</text> 核对交易细节时，可作为判断依据</view>
 			</view>
 			<view class="snap-goods">
-				<view class="goods-item" v-for="item of 2" :key="item">
+				<view class="goods-item">
+					<!-- v-for="item of 2" :key="item" -->
 					<view class="item-img">
-						<image src="../../static/images/niuyouguo1.png" mode=""></image>
+						<image :src="orderObj.url" mode=""></image>
 					</view>
 					<view class="item-info">
 						<view class="info-title">
-							<text>采手精选</text>
-							<text>八六王哈密瓜B级1.8~2.2公斤/个</text>
+							<text v-for="(item,index) of orderObj.labelList" :key="index">{{item.name}}</text>
+							<text>{{orderObj.name}}</text>
 						</view>
 						<view class="info-desc">
-							<view>5斤装</view>
-							<view><text>X</text>2</view>
+							<!-- <view>5斤装</view> -->
+							<view></view>
+							<view><text>X</text>{{orderObj.goods_number}}</view>
 						</view>
 						<view class="info-price">
 							<view class="left-price">
 								<text>￥</text>
-								<text>108</text>
+								<text>{{orderObj.goods_price}}</text>
 								<text>元</text>
 							</view>
 							<view class="right-price">
 								<text>实付:</text>
-								<text>108.00</text>
+								<text>{{orderObj.order_total_price}}</text>
 								<text>(含运费)</text>
 							</view>
 						</view>
@@ -109,23 +111,23 @@
 			<view class="frui-info-wrap">
 				<view class="fruit-info-item">
 					<view class="left-item">种类:</view>
-					<view class="right-item">哈密瓜</view>
+					<view class="right-item">{{goodsData.classify}}</view>
 				</view>
 				<view class="fruit-info-item">
 					<view class="left-item">品种:</view>
-					<view class="right-item">八六王</view>
+					<view class="right-item">{{goodsData.variety}}</view>
 				</view>
 				<view class="fruit-info-item">
 					<view class="left-item">产地:</view>
-					<view class="right-item">广西</view>
+					<view class="right-item">{{goodsData.originAddress}}</view>
 				</view>
 				<view class="fruit-info-item">
 					<view class="left-item">储存条件:</view>
-					<view class="right-item">4-28℃</view>
+					<view class="right-item">{{goodsData.storageMode}}℃</view>
 				</view>
 				<view class="fruit-info-item">
 					<view class="left-item">包装:</view>
-					<view class="right-item">塑料胶框</view>
+					<view class="right-item">{{goodsData.packaging}}</view>
 				</view>
 			</view>
 
@@ -137,55 +139,54 @@
 				<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
 					<view class="tui-left-one">
 						<text class="tui-text-left tui-title-class">果品星级</text>
-						<tui-rate :current="4" active="#ff7900" :hollow="true" :disabled="true" :size="16"></tui-rate>
+						<tui-rate :current="goodsData.fruitStar" active="#ff7900" :hollow="true" :disabled="true" :size="16"></tui-rate>
 					</view>
 					<view class="tui-left-one">
 						<text class=" tui-text-left tui-title-class">口感星级</text>
-						<tui-rate :current="4" active="#ff7900" :hollow="true" :disabled="true" :size="16"></tui-rate>
+						<tui-rate :current="goodsData.tasteLevel" active="#ff7900" :hollow="true" :disabled="true" :size="16"></tui-rate>
 					</view>
 
 				</view>
 				<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
 					<view class="tui-left-one">
 						<text class="tui-text-left tui-title-class">果色星级</text>
-						<tui-rate :current="4" active="#ff7900" :hollow="true" :disabled="true" :size="16"></tui-rate>
+						<tui-rate :current="goodsData.colorLevel" active="#ff7900" :hollow="true" :disabled="true" :size="16"></tui-rate>
 					</view>
 					<view class="tui-left-one">
 						<text class="tui-text-left tui-title-class">外观星级</text>
-						<tui-rate :current="4" active="#ff7900" :hollow="true" :disabled="true" :size="16"></tui-rate>
+						<tui-rate :current="goodsData.shapeLevel" active="#ff7900" :hollow="true" :disabled="true" :size="16"></tui-rate>
 					</view>
 
 				</view>
 				<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
 					<view class="tui-left-one2">
 						<text class="tui-text-left tui-title-class">果径大小</text>
-						<text class=" tui-text-left tui-title-class">{{shopListdata.data.platformClinetPrice || 0}}mm</text>
+						<text class=" tui-text-left tui-title-class">{{goodsData.size}}mm</text>
 					</view>
 					<view class="tui-right-one" style="flex: 4;">
 						<text class=" tui-text-left tui-title-class ">不良率</text>
-						<text class=" tui-text-left tui-title-class">{{shopListdata.data.rejectRatio || 0}}</text>
+						<text class=" tui-text-left tui-title-class">{{goodsData.rejectRatio|| 0}}%</text>
 					</view>
-
 				</view>
 				<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
 					<view class="tui-left-one2">
 						<text class="tui-text-left tui-title-class">糖分</text>
-						<text class=" tui-text-left tui-title-class">{{shopListdata.data.sugar || 0}}</text>
+						<text class=" tui-text-left tui-title-class">{{goodsData.sugar || 0}}%</text>
 					</view>
 					<view class="tui-right-one" style="flex: 4;">
 						<text class="tui-text-left tui-title-class">酸度</text>
-						<text class="tui-text-left tui-title-class">{{shopListdata.data.acidity || 0}}</text>
+						<text class="tui-text-left tui-title-class">{{goodsData.acidity || 0}}%</text>
 					</view>
 
 				</view>
 				<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
 					<view class="tui-left-one2">
 						<text class="tui-text-left tui-title-class">水分</text>
-						<text class="tui-text-left tui-title-class">{{shopListdata.data.moisture || 0}}</text>
+						<text class="tui-text-left tui-title-class">{{goodsData.moisture || 0}}%</text>
 					</view>
 					<view class="tui-right-one" style="flex: 4;">
 						<text class="tui-text-left tui-title-class">硬度</text>
-						<text class="tui-text-left tui-title-class">{{shopListdata.data.hardness || 0}}</text>
+						<text class="tui-text-left tui-title-class">{{goodsData.hardness || 0}}kg/.co</text>
 					</view>
 
 				</view>
@@ -286,10 +287,12 @@
 
 <script>
 	import {
-		listing
+		listing,
+		publicing
 	} from '../../api/api.js';
 	//请求地址
 	import {
+		postdelist,
 		getDetails
 	} from '../../api/request.js';
 	let setdata = uni.getStorageSync('usermen')
@@ -297,26 +300,52 @@
 		name: "orderDetail",
 		data() {
 			return {
-				order_id: ''
+				order_id: '',
+				orderObj: {},
+				goodsData: {}
 			};
 		},
+		filters: {
+			getTime(val) {
+				let time = new Date(val);
+				console.log(time)
+				let y = time.getFullYear();
+				let m = time.getMonth() + 1;
+				let d = time.getDate();
+				let h = time.getHours();
+				let mm = time.getMinutes();
+				let s = time.getSeconds();
+				return y + '-' + m + '-' + d + ' ' + h + ':' + mm + ':' + s
+			}
+		},
 		methods: {
+			add0(m) {
+				return m < 10 ? '0' + m : m
+			},
 			getOrderDetail() {
 				let data = {
 					token: setdata,
 					id: this.order_id
 				};
-				listing(getDetails, data).then(res=>{
-					console.log(res)
+				listing(getDetails, data).then(res => {
 					this.orderObj = res.data.data[0]
+					console.log(this.orderObj.wx_goods_id)
+					let data = {
+						id: this.orderObj.wx_goods_id,
+						token: setdata
+					}
+					publicing(postdelist, data).then(res => {
+						console.log("res", res)
+						this.goodsData = res.data.data
+					})
 				})
-			}
+			},
+
 		},
-		onLoad(opt){
+		onLoad(opt) {
 			this.order_id = opt.id
 		},
 		onShow() {
-			console.log("这里是onShow")
 			this.getOrderDetail()
 
 		}
@@ -488,6 +517,7 @@
 
 					.item-img {
 						margin-right: 20rpx;
+						width: 160rpx;
 
 						image {
 							width: 160rpx;
@@ -498,6 +528,8 @@
 					}
 
 					.item-info {
+						flex: 1;
+
 						.info-title {
 							text {
 								&:first-child {
@@ -508,6 +540,9 @@
 									margin-right: 4rpx;
 									padding: 2rpx 4rpx;
 									display: inline-block;
+									width: 100rpx;
+									text-align: center;
+
 								}
 
 								&:last-child {
@@ -634,7 +669,7 @@
 	}
 
 	.tui-title-line {
-		color: rgba(51, 51, 51, 1);
+		color: #000;
 		font-weight: 400;
 		font-size: 28rpx;
 		padding-bottom: 14rpx;
@@ -745,7 +780,7 @@
 	}
 
 	.tui-title-class {
-		font-size: 24rpx;
+		font-size: 28rpx;
 		color: rgba(146, 147, 151, 1);
 	}
 
@@ -761,7 +796,7 @@
 	}
 
 	.tui-text-left {
-		margin-left: 40rpx;
+		margin-left: 20rpx;
 	}
 
 	.tui-right-one {

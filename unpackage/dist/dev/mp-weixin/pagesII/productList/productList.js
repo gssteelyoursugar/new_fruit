@@ -583,8 +583,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
 var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
@@ -976,12 +974,10 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 //
 //
 //
-//
-//
 var _console = console,log = _console.log;var setdata = uni.getStorageSync('usermen');var _default = { data: function data() {return { allVariety: false, title: '选中', sleter: false, sleter2: false, ApproveStatus: 0, dropdownlistData: [{ name: "微信支付" }, { name: "支付宝支付" }, { name: "银行卡支付" }, { name: "微信支付" }, { name: "支付宝支付" }, { name: "银行卡支付" }], dropdownShow: false, dropdownShow2: false, seleVarieties: [], //全部品种
       color_level: [], //颜色等级
       // facade_level: [], //外观等级
-      fruit_level: [], //果品等级
+      fruit_star: [], //果品等级
       shape_level: [], //果形等级
       goods: [], //商品
       packaging: [], //包装
@@ -1045,7 +1041,7 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
         //略小，避免误差带来的影响
         _this.dropScreenH = _this.height * 750 / res.windowWidth + 186;_this.drawerH = res.windowHeight - uni.upx2px(100) - _this.height;} });var res = uni.getSystemInfoSync();var statusBarHeight = res.statusBarHeight;var info = uni.getMenuButtonBoundingClientRect();var top = info.top,bottom = info.bottom;this.statusHeight = statusBarHeight;var buttonHeight = bottom - statusBarHeight + (top - statusBarHeight);var navHeight = statusBarHeight + buttonHeight + top - statusBarHeight; //状态栏+导航栏的高度（页面初始高度）
     this.boxHeight = navHeight - statusBarHeight; //导航栏高度
-    this.navHeight = navHeight;console.log("statusBarHeight,", statusBarHeight, "navHeight", navHeight, "boxHeight", this.boxHeight, "buttonHeight", buttonHeight);}, filters: { filterNum: function filterNum(val) {if (val) {var words = (Math.floor(val) + '').split('');var res = '';if (words.length <= 4) {res = val;}if (words.length === 5) {res = words[0] + "." + words[1] + '万';}if (words.length === 6) {res = words[0] + words[1] + "." + words[2] + '万';}if (words.length === 7) {res = words[0] + words[1] + words[2] + "." + words[3] + '万';}if (words.length === 8) {res = words[0] + words[1] + words[2] + words[3] + "." + words[4] + '万';}if (words.length === 9) {res = words[0] + "." + words[1] + '亿';}if (words.length === 10) {res = words[0] + words[1] + "." + words[2] + '亿';}return res;} else {return val;}} }, computed: { fruitBox: function fruitBox() {var arr = [];var data = this.fruit_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;}, tasteBox: function tasteBox() {var arr = [];var data = this.taste_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;}, colorBox: function colorBox() {var arr = [];var data = this.color_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;}, shapeBox: function shapeBox() {var arr = [];var data = this.shape_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;} }, methods: { getMerchants: function getMerchants() {var _this2 = this;var data = { token: setdata }; // log(data)
+    this.navHeight = navHeight;console.log("statusBarHeight,", statusBarHeight, "navHeight", navHeight, "boxHeight", this.boxHeight, "buttonHeight", buttonHeight);}, filters: { filterNum: function filterNum(val) {if (val) {var words = (Math.floor(val) + '').split('');var res = '';if (words.length <= 4) {res = val;}if (words.length === 5) {res = words[0] + "." + words[1] + '万';}if (words.length === 6) {res = words[0] + words[1] + "." + words[2] + '万';}if (words.length === 7) {res = words[0] + words[1] + words[2] + "." + words[3] + '万';}if (words.length === 8) {res = words[0] + words[1] + words[2] + words[3] + "." + words[4] + '万';}if (words.length === 9) {res = words[0] + "." + words[1] + '亿';}if (words.length === 10) {res = words[0] + words[1] + "." + words[2] + '亿';}return res;} else {return val;}} }, computed: { fruitBox: function fruitBox() {var arr = [];var data = this.fruit_star;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;}, tasteBox: function tasteBox() {var arr = [];var data = this.taste_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;}, colorBox: function colorBox() {var arr = [];var data = this.color_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;}, shapeBox: function shapeBox() {var arr = [];var data = this.shape_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title, id: item.id };arr.push(tmp);});return arr;} }, methods: { getMerchants: function getMerchants() {var _this2 = this;var data = { token: setdata }; // log(data)
       (0, _api.listing)(_request.getClient, data).then(function (res) {// log(res)
         ///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
         _this2.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
@@ -1054,10 +1050,14 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
     goToSearchGoods: function goToSearchGoods() {uni.navigateTo({ url: '../../pagesII/searchGoods/searchGoods' });}, //商品详情页
     gotoList: function gotoList(id) {log(id);uni.navigateTo({ url: '../../pagesIII/productDetail/productDetail?id=' + id });}, //下拉选
     dropDownList: function dropDownList(index, name) {if (index !== -1) {console.log("index：" + index, name);}this.title = name;this.dropdownShow = !this.dropdownShow;}, dropDownList2: function dropDownList2(index, name) {if (index !== -1) {console.log("index：" + index, name);}this.title = name;this.dropdownShow2 = !this.dropdownShow2;}, // 搜索请求数据
-    getSearch: function getSearch(serrchName) {var _this3 = this;var data = { pageNo: 1, pageSize: 10000, name: serrchName };(0, _api.listing)(_request.getGoodsall, data).then(function (res) {log("搜索结果", res);_this3.goods = res.data.data.goods;_this3.seleVarieties = res.data.data;if (_this3.seleVarieties === undefined) {_this3.seleVarieties = _this3.seleVarieties;} else if (_this3.seleVarieties != undefined) {}_this3.color_level = res.data.data.color_level;_this3.facade_level = res.data.data.facade_level;_this3.fruit_level = res.data.data.fruit_level;_this3.shape_level = res.data.data.shape_level;_this3.goods = res.data.data.goods;_this3.packaging = res.data.data.packaging;_this3.species = res.data.data.species; // for (var i = 0; i < this.species.length; i++) {
+    getSearch: function getSearch(serrchName) {var _this3 = this;var data = { pageNo: 1, pageSize: 10000, name: serrchName };(0, _api.listing)(_request.getGoodsall, data).then(function (res) {log("搜索结果", res);_this3.goods = res.data.data.goods;_this3.seleVarieties = res.data.data;if (_this3.seleVarieties === undefined) {_this3.seleVarieties = _this3.seleVarieties;} else if (_this3.seleVarieties != undefined) {}_this3.color_level = res.data.data.color_level;_this3.facade_level = res.data.data.facade_level;_this3.fruit_star = res.data.data.fruit_star;_this3.shape_level = res.data.data.shape_level;_this3.goods = res.data.data.goods;_this3.packaging = res.data.data.packaging;_this3.species = res.data.data.species; // for (var i = 0; i < this.species.length; i++) {
         // 	this.species[i].isActives = this.activeA
         // }
-        _this3.goods_type = res.data.data.goodsType;_this3.storage_mode = res.data.data.storage_mode;_this3.taste_level = res.data.data.taste_level;_this3.variety = res.data.data.variety;}).catch(function (err) {log(err);
+        _this3.goods_type = res.data.data.goodsType;_this3.storage_mode = res.data.data.storage_mode;_this3.taste_level = res.data.data.taste_level;
+        _this3.variety = res.data.data.variety;
+      }).
+      catch(function (err) {
+        log(err);
       });
 
     },
@@ -1356,7 +1356,7 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
         _this10.seleVarieties = res[1].data.data;
         _this10.color_level = res[0].data.data.color_level;
         _this10.facade_level = res[0].data.data.facade_level;
-        _this10.fruit_level = res[0].data.data.fruit_level;
+        _this10.fruit_star = res[0].data.data.fruit_star;
         _this10.shape_level = res[0].data.data.shape_level;
         _this10.goods = res[0].data.data.goods;
         _this10.packaging = res[0].data.data.packaging;

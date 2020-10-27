@@ -203,11 +203,11 @@
 				hideing: 0,
 				num: 0,
 				ranking: [{
-						value: 'order_total',
+						value: 'shop',
 						name: '销量榜'
 					},
 					{
-						value: 'evaluate',
+						value: 'praise',
 						name: '评价榜'
 					},
 					{
