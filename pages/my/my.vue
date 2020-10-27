@@ -274,6 +274,7 @@
 					success: (res) => {
 						// log(res)
 						let code = res.code
+						console.log(res)
 						this.wxLoging(code)
 					},
 					fail: (err) => {

@@ -7,10 +7,8 @@
 let wxloginurl = `${url}wxuser/wxlogin`
 // //本地商品
 // let url = 'http://192.168.1.10:8980/'
-// let url2 = 'http://192.168.1.10:8080/'
 // // 线上
 // let url = 'https://cs.zgqgpt.com/'
-let url2 = 'https://cs.zgqgpt.com/'
 // let url = "http://testqg.natapp1.cc/"
 let url = "https://qg.zgqgpt.com/"
 

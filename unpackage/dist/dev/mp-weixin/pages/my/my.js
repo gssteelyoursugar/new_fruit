@@ -529,7 +529,7 @@ var _console = console,log = _console.log;var logins = __webpack_require__(/*! .
       var userING = uni.setStorageSync('userIN', event.detail.userInfo);if (event.detail.userInfo) {var wxing = event.detail.userInfo;this.wxCode(wxing.avatarUrl, wxing.nickName);} // wx.startPullDownRefresh()
       this.ifUser();}, //获取code
     wxCode: function wxCode(avatarUrl, nickName) {var _this2 = this;wx.login({ success: function success(res) {// log(res)
-          var code = res.code;_this2.wxLoging(code);}, fail: function fail(err) {log(err);} });}, //发code给后台换取token
+          var code = res.code;console.log(res);_this2.wxLoging(code);}, fail: function fail(err) {log(err);} });}, //发code给后台换取token
     wxLoging: function wxLoging(code) {var _this3 = this;log(code);var data = { code: code };uni.showLoading({ title: '加载中', icon: 'none', duration: 2000 // mask:true
       });(0, _api.publicing2)(_request.loginis, data) //发送请求携带参数
       .then(function (res) {if (res.statusCode == 500) {uni.showModal({ title: '提示', content: '登录出错，请重新登录获取信息', success: function success(res) {if (res.confirm) {uni.hideLoading();} else if (res.cancel) {uni.hideLoading();}} });return;} else if (res.statusCode == 200) {_this3.getOrderData();} // log(res) //获得token
@@ -580,7 +580,8 @@ var _console = console,log = _console.log;var logins = __webpack_require__(/*! .
     // },
     // 获取订单
     getOrderData: function getOrderData() {var _this5 = this;var setdata = uni.getStorageSync('usermen');if (!setdata) {return;}var data = { token: setdata, pageNo: 1, pageSize: 10000 };(0, _api.listing)(_request.getMyOrder, data).then(function (res) {var list = res.data.data;if (list.length === 0) return;var fukuanList = [];var fahuoList = [];var shouhuoList = [];var tuikuanList = [];list.forEach(function (item) {if (item.payStatus == 0) {fukuanList.push(item);}if (item.tradeStatus == "1" || item.tradeStatus == "2" || item.tradeStatus == "3") {fahuoList.push(item);}if (item.payStatus == '1' && (item.tradeStatus == '4' || item.tradeStatus == '8')) {shouhuoList.push(item);}if (item.tradeStatus == '7') {// 只要 待确定的 3
-            if (item.afterStatus == '3') {tuikuanList.push(item);}}});_this5.fukuanList = fukuanList.length;_this5.fahuoList = fahuoList.length;_this5.shouhuoList = shouhuoList.length;_this5.tuikuanList = tuikuanList.length;_this5.$forceUpdate();}).catch(function (err) {log(err);});}, ifUser: function ifUser() {var setuserdata = uni.getStorageSync('userIN');if (!setuserdata) {this.wxlogin = false;} else {
+            if (item.afterStatus == '3') {tuikuanList.push(item);}}});_this5.fukuanList = fukuanList.length;_this5.fahuoList = fahuoList.length;_this5.shouhuoList = shouhuoList.length;_this5.tuikuanList = tuikuanList.length;_this5.$forceUpdate();}).catch(function (err) {log(err);});}, ifUser: function ifUser() {var setuserdata = uni.getStorageSync('userIN');if (!setuserdata) {this.wxlogin = false;
+      } else {
         this.wxlogin = true;
         this.usering = setuserdata;
       }
