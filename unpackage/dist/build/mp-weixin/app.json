@@ -36,7 +36,8 @@
         "StoreInformation/StoreInformation",
         "editStore/editStore",
         "updataStore/updataStore",
-        "msg/msg"
+        "msg/msg",
+        "prediction/prediction"
       ]
     },
     {

@@ -1045,7 +1045,7 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 //
 //
 //请求地址
-var setdata = uni.getStorageSync('usermen');var _console = console,log = _console.log;var _default = { data: function data() {return { ApproveStatus: 0, //店铺认证状态
+var setdata = uni.getStorageSync('usermen');var _console = console,log = _console.log;var _default = { data: function data() {return { ApproveStatus: '', //店铺认证状态
       isLogin: false, current: 0, //星星
       modaishow: false, isVerify: false, saveLike: true, //已收藏
       praLike: true, //已点赞
@@ -1088,7 +1088,7 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
             _this3.shopListdata.praiseNumber++;uni.showToast({ title: '点赞成功', icon: 'none' });}).catch(function (err) {log(err);});}}}, change2: function change2(e) {this.value2 = e.value;}, // 显示
     init: function init() {this.modaishow = true;}, // 取消
     messcancel: function messcancel() {this.modaishow = false;}, noGoods: function noGoods() {uni.showToast({ title: "正在补货中～", icon: 'none' });}, //弹出立即购买
-    showPopup: function showPopup() {var setdata = uni.getStorageSync('usermen');if (!setdata) {this.modaishow = true;return;}if (this.ApproveStatus === '' || this.ApproveStatus === 2) {this.toggleVerify();return;}if (this.ApproveStatus == 0) {uni.showToast({ title: '店铺信息审核中', icon: 'none' });return;}if (setdata && this.ApproveStatus === 1) {this.$refs.popup.show();}}, toggleVerify: function toggleVerify() {this.isVerify = !this.isVerify;}, clickToVerify: function clickToVerify() {uni.navigateTo({ url: '../../pagesII/tendShop/tendShop' });this.toggleVerify();}, //获取微信昵称
+    showPopup: function showPopup() {var setdata = uni.getStorageSync('usermen');if (!setdata) {this.modaishow = true;return;}if (this.ApproveStatus === null || this.ApproveStatus === undefined || this.ApproveStatus === '' || this.ApproveStatus === 2) {this.toggleVerify();return;}if (this.ApproveStatus === 0) {uni.showToast({ title: '店铺信息审核中', icon: 'none' });return;}if (setdata && this.ApproveStatus === 1) {this.$refs.popup.show();}}, toggleVerify: function toggleVerify() {this.isVerify = !this.isVerify;}, clickToVerify: function clickToVerify() {uni.navigateTo({ url: '../../pagesII/tendShop/tendShop' });this.toggleVerify();}, //获取微信昵称
     getUserInfo: function getUserInfo(event) {// log(event);
       if (event.detail.userInfo) {uni.setStorageSync('userIN', event.detail.userInfo); //把token存在本地，小程序提供如同浏览器cookie
         var wxing = event.detail.userInfo;this.wxCode(wxing.avatarUrl, wxing.nickName);}this.modaishow = false;}, //获取微信code
@@ -1110,14 +1110,14 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
         this.modaishow = true;
       } else {
         this.modaishow = false;
-        if (this.ApproveStatus == 0) {
+        if (this.ApproveStatus === 0) {
           uni.showToast({
             title: '店铺信息审核中',
             icon: 'none' });
 
           return;
         }
-        if (this.ApproveStatus === '' || this.ApproveStatus === 2) {
+        if (this.ApproveStatus === null || this.ApproveStatus === undefined || this.ApproveStatus === '' || this.ApproveStatus === 2) {
           this.toggleVerify();
           return;
         }
@@ -1191,15 +1191,16 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
       } else {
         // this.modaishow = false
         this.modaishow = false;
-        if (this.ApproveStatus == 0) {
+
+        if (this.ApproveStatus === null || this.ApproveStatus === undefined || this.ApproveStatus === '' || this.ApproveStatus === 2) {
+          this.toggleVerify();
+          return;
+        }
+        if (this.ApproveStatus === 0) {
           uni.showToast({
             title: '店铺信息审核中',
             icon: 'none' });
 
-          return;
-        }
-        if (this.ApproveStatus === '' || this.ApproveStatus === 2) {
-          this.toggleVerify();
           return;
         }
 

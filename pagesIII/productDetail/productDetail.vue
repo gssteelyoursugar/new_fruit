@@ -449,7 +449,7 @@
 	export default {
 		data() {
 			return {
-				ApproveStatus: 0, //店铺认证状态
+				ApproveStatus: '', //店铺认证状态
 				isLogin: false,
 				current: 0, //星星
 				modaishow: false,
@@ -842,11 +842,11 @@
 					this.modaishow = true;
 					return
 				}
-				if (this.ApproveStatus === '' || this.ApproveStatus === 2) {
+				if (this.ApproveStatus === null ||this.ApproveStatus === undefined || this.ApproveStatus === '' || this.ApproveStatus === 2) {
 					this.toggleVerify()
 					return;
 				}
-				if (this.ApproveStatus == 0) {
+				if (this.ApproveStatus === 0) {
 					uni.showToast({
 						title: '店铺信息审核中',
 						icon: 'none'
@@ -921,14 +921,14 @@
 					this.modaishow = true;
 				} else {
 					this.modaishow = false;
-					if (this.ApproveStatus == 0) {
+					if (this.ApproveStatus === 0) {
 						uni.showToast({
 							title: '店铺信息审核中',
 							icon: 'none'
 						});
 						return;
 					}
-					if (this.ApproveStatus === '' || this.ApproveStatus === 2) {
+					if (this.ApproveStatus === null ||this.ApproveStatus === undefined || this.ApproveStatus === '' || this.ApproveStatus === 2) {
 						this.toggleVerify()
 						return;
 					}
@@ -1002,15 +1002,16 @@
 				} else {
 					// this.modaishow = false
 					this.modaishow = false;
-					if (this.ApproveStatus == 0) {
+					
+					if (this.ApproveStatus === null ||this.ApproveStatus === undefined || this.ApproveStatus === '' || this.ApproveStatus === 2) {
+						this.toggleVerify()
+						return;
+					}
+					if (this.ApproveStatus === 0) {
 						uni.showToast({
 							title: '店铺信息审核中',
 							icon: 'none'
 						});
-						return;
-					}
-					if (this.ApproveStatus === '' || this.ApproveStatus === 2) {
-						this.toggleVerify()
 						return;
 					}
 
