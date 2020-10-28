@@ -215,7 +215,7 @@
 					<tui-list-cell :hover="false" :lineLeft="false">
 						<view class="tui-goods-title">
 							<view class="font-size-color">订单号：{{item.orderNumber}} <text class="iconfont icon-lujing182" @click="clipboard(item.orderNumber)"></text></view>
-							<view class="tui-order-status">待收货</view>
+							<view class="tui-order-status" v-if="">待收货</view>
 							<!-- <view class="tui-order-status" v-if="item.tradeStatus == 8">待确认</view> -->
 						</view>
 					</tui-list-cell>
@@ -237,21 +237,9 @@
 									</view>
 								</view>
 							</view>
-							<!-- <view class="tui-price-right">
-								<view>￥298.00</view>
-								<view>x2</view>
-							</view> -->
+							
 						</view>
 					</tui-list-cell>
-
-					<!-- <tui-list-cell :hover="false" unlined>
-						<view class="tui-goods-price">
-							<view>共{{item.goodsNumber}}件商品 合计：</view>
-							<view class="tui-size-24">￥</view>
-							<view class="tui-price-large">{{item.totalPrice}}</view>
-							<view class="tui-size-24">.00</view>
-						</view>
-					</tui-list-cell> -->
 					<view class="tui-order-btn">
 						<view class="tui-btn-ml">
 							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="goAfter(item.id)">申请售后</tui-button>
@@ -578,6 +566,7 @@
 					.then((res) => {
 						log(res.data.data)
 						if (res.data.data.length === 0) {
+							this.myOrderData = res.data.data
 							setTimeout(() => {
 								this.loadStatus = "noMore"
 							}, 1000)
@@ -588,11 +577,6 @@
 							this.myOrderData = res.data.data
 							this.loadStatus = "noMore"
 						}
-						// this.countDown = (res.data.data.time - res.data.data.createDate)
-						// let newData = res.data.data
-						// let arr = this.myOrderData || []
-						// arr.push(...newData)
-						// this.$set(this.myOrderData, arr)
 						this.$forceUpdate()
 					})
 					.catch((err) => {

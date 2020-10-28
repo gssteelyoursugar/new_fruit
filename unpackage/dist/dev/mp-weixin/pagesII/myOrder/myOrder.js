@@ -468,35 +468,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
 
 var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -838,13 +814,8 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
     payGo: function payGo(orderNumber) {var _this3 = this;uni.showModal({ title: '提示', content: '确认支付', success: function success(res) {if (res.confirm) {var data = { orderNumber: orderNumber };(0, _api.publicing)(_request.postOrderPay, data).then(function (res) {log(res);uni.showToast({ title: "".concat(res.data.msg), icon: 'none', duration: 2000 });_this3.getOrderData();_this3.$forceUpdate();}).catch(function (err) {log(err);});} else if (res.cancel) {uni.showToast({ title: '已取消支付', icon: 'none', duration: 2000 });return;}} });}, //确认收货
     goConfirm: function goConfirm(id) {var _this4 = this;log(id);var data = { id: id, token: setdata };(0, _api.publicing)(_request.postConfirmOrder, data).then(function (res) {log(res);_this4.getOrderData();_this4.$forceUpdate();}).catch(function (err) {log(err);});}, //再次下单
     buyAgain: function buyAgain(id) {log(id);uni.navigateTo({ url: '../../pagesIII/productDetail/productDetail?id=' + id });}, //请求订单数据
-    getOrderData: function getOrderData() {var _this5 = this;var data = { token: setdata, pageNo: this.pageIndex, pageSize: 1000, payStatus: this.payStatus, tradeStatus: this.tradeStatus, afterStatus: this.afterStatus };(0, _api.listing)(_request.getMyOrder, data).then(function (res) {log(res.data.data);if (res.data.data.length === 0) {setTimeout(function () {_this5.loadStatus = "noMore";}, 1000); // this.$set(this.loadStatus,dataLoad)
-          _this5.$forceUpdate();return;} else {_this5.myOrderData = res.data.data;_this5.loadStatus = "noMore";} // this.countDown = (res.data.data.time - res.data.data.createDate)
-        // let newData = res.data.data
-        // let arr = this.myOrderData || []
-        // arr.push(...newData)
-        // this.$set(this.myOrderData, arr)
-        _this5.$forceUpdate();}).catch(function (err) {log(err);});}, // 联系客服
+    getOrderData: function getOrderData() {var _this5 = this;var data = { token: setdata, pageNo: this.pageIndex, pageSize: 1000, payStatus: this.payStatus, tradeStatus: this.tradeStatus, afterStatus: this.afterStatus };(0, _api.listing)(_request.getMyOrder, data).then(function (res) {log(res.data.data);if (res.data.data.length === 0) {_this5.myOrderData = res.data.data;setTimeout(function () {_this5.loadStatus = "noMore";}, 1000); // this.$set(this.loadStatus,dataLoad)
+          _this5.$forceUpdate();return;} else {_this5.myOrderData = res.data.data;_this5.loadStatus = "noMore";}_this5.$forceUpdate();}).catch(function (err) {log(err);});}, // 联系客服
     clickToService: function clickToService() {uni.navigateTo({ url: '../../pagesII/customerService/customerService' });}, //event 当需要异步请求返回数据再进行复制时，需要传入此参数，或者异步方法转为同步方法（H5端）
     clipboard: function clipboard(event) {var data = event;thorui.getClipboardData(data, function (res) {}, event);}, //申请售后
     goAfter: function goAfter(id) {uni.navigateTo({ url: '../../pagesIII/applyAfter/applyAfter?id=' + id });}, // 售后- 售后详情
