@@ -46,10 +46,6 @@
 				"navigationStyle": "custom"
 			}
 		}
-
-
-
-
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
@@ -118,7 +114,7 @@
 					"path": "myOrder/myOrder",
 					"style": {
 						// "navigationStyle":"custom",
-						"enablePullDownRefresh": false,
+						"enablePullDownRefresh": true,
 						"navigationBarTitleText": "我的订单"
 					}
 				}, {

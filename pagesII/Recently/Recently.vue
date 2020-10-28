@@ -8,16 +8,18 @@
 			<view class="tui-header">最近看过</view>
 		</view> -->
 		<!--header-->
-		<view class="container-img " v-if="lookDatas && lookDatas.length === 0" :class="{ active: isActive, 'text-danger': hasError }">
-			<image src="../../static/images/orderBMG.png" mode="widthFix"></image>
-			<text class="color-text">最近没有浏览过商品先去逛逛</text>
-		</view>
+		
 		<view class="container-img" v-if="modaishow">
 			<image src="../../static/images/quanguo.png" mode="widthFix" class="img-quanguo"></image>
 			<!-- <text class="color-text">{{tips}}</text> -->
 			<view class="btnbox"><button class="btn" type="default" open-type="getUserInfo" @getuserinfo="getUserInfo">去登录</button></view>
 		</view>
-		<view>
+		<view class="container-img " v-if="!modaishow && lookDatas && lookDatas.length === 0" >
+			<image src="../../static/images/orderBMG.png" mode="widthFix"></image>
+			<text class="color-text">最近没有浏览过商品先去逛逛</text>
+		</view>
+		
+		<view  v-if="!modaishow && lookDatas && lookDatas.length !== 0" >
 			<!-- :style="{marginTop: statusHeight + boxHeight + 'px'}" -->
 			<checkbox-group @change="buyChange">
 				<view class="tui-cart-cell  tui-mtop" v-for="(item, index) in lookDatas" :key="index">
@@ -168,7 +170,7 @@
 				pullUpOn: true,
 				allPrice: 0, //总价
 				statusHeight: 20,
-				boxHeight: 44
+				boxHeight: 44,
 			};
 		},
 		filters: {
@@ -238,9 +240,6 @@
 					let wxing = event.detail.userInfo;
 					this.wxCode(wxing.avatarUrl, wxing.nickName);
 				}
-				// wx.startPullDownRefresh()
-
-				log('dddddddddd');
 			},
 			//获取code
 			wxCode(avatarUrl, nickName) {

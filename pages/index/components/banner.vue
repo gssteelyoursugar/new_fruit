@@ -7,7 +7,7 @@
 				<view class="tui-banner-box">
 					<swiper :indicator-dots="true" :autoplay="true" :interval="5000" :duration="150" class="tui-banner-swiper"
 					 :circular="true" indicator-color="rgba(255, 255, 255, 0.8)" indicator-active-color="#ff7129">
-						<swiper-item v-for="(item, index) in banner" :key="index" @tap.stop="detail">
+						<swiper-item v-for="(item, index) in banner" :key="index" @tap.stop="detail(item.jumpUrl)">
 							<image :src="item.url" class="tui-slide-image" mode="scaleToFill" />
 						</swiper-item>
 					</swiper>
@@ -26,7 +26,10 @@
 			}
 		},
 		methods: {
-			detail() {
+			detail(id) {
+				uni.navigateTo({
+					url: "../../pagesIII/productDetail/productDetail?id=" + id
+				})
 			}
 
 		}

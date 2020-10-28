@@ -206,6 +206,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
 var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
@@ -374,9 +376,6 @@ console,log = _console.log;var _default = (_data$filters$onPullD = {
         var wxing = event.detail.userInfo;
         this.wxCode(wxing.avatarUrl, wxing.nickName);
       }
-      // wx.startPullDownRefresh()
-
-      log('dddddddddd');
     },
     //获取code
     wxCode: function wxCode(avatarUrl, nickName) {var _this2 = this;

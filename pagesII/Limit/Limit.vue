@@ -66,7 +66,7 @@
 												<view class="tag-tit2-price">
 													<text style="color:#555;margin-right: 6rpx;font-size: 24rpx;">限量价</text>
 													<text style="font-size: 20rpx;">¥</text>
-													<text style="font-size: 40rpx;font-weight: bold;margin: 6rpx 0;">{{ApproveStatus===1?item.marketPrice:'***'}}</text>
+													<text style="font-size: 40rpx;font-weight: bold;margin: 6rpx 0;">{{ApproveStatus===1?item.platformClinetPrice:'***'}}</text>
 													<text style="font-size: 24rpx;font-weight: 400;">元</text>
 													<text style="color: #b6b6b6;font-size: 20rpx;">/件</text>
 												</view>

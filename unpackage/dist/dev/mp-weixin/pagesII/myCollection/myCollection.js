@@ -186,22 +186,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 var _api = __webpack_require__(/*! ../../api/api.js */ 19);
+
+
+
+
 
 var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 //
@@ -257,40 +246,39 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //请求方式
 //请求地址
-var setdata = uni.getStorageSync('usermen');var _console = console,log = _console.log;var _default = { data: function data() {return { tips: '', modaishow: false, isCollection: false, isActive: true, //显示
+var setdata = uni.getStorageSync('usermen');var _console = console,log = _console.log;var _default = { data: function data() {return { showTips: false, tips: '', modaishow: false, isCollection: false, isActive: true, //显示
       hasError: false, //隐藏
-      showLike: true, url: 'http://192.168.1.10:8980/', likeDatas: [], ApproveStatus: 0 };}, methods: { getMerchants: function getMerchants() {var _this = this;var data = { token: setdata }; // log(data)
+      showLike: true, url: 'http://192.168.1.10:8980/', likeDatas: [], ApproveStatus: 0, curIds: '' };}, methods: { getMerchants: function getMerchants() {var _this = this;var data = { token: setdata }; // log(data)
       (0, _api.listing)(_request.getClient, data).then(function (res) {// log(res)
         ///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
         _this.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
         // log(this.ApproveStatus)
-      }).catch(function (err) {log(err);});}, //反馈提示
-    tising: function tising(bull, tips) {this.init(bull, tips);}, init: function init(bull, tips) {this.modaishow = bull;this.tips = tips;}, //获取头像昵称
+      }).catch(function (err) {log(err);});}, //获取头像昵称
     getUserInfo: function getUserInfo(event) {log(event);this.usering = event.detail.userInfo;uni.setStorageSync('userIN', event.detail.userInfo); //把头像存在本地，小程序提供如同浏览器cookie
       var userING = uni.setStorageSync('userIN', event.detail.userInfo);if (event.detail.userInfo) {var wxing = event.detail.userInfo;this.wxCode(wxing.avatarUrl, wxing.nickName);} // wx.startPullDownRefresh()
-      log('dddddddddd');}, //获取code
-    wxCode: function wxCode(avatarUrl, nickName) {var _this2 = this;wx.login({ success: function success(res) {log(res);var code = res.code;_this2.wxLoging(code);}, fail: function fail(err) {log(err);} });}, //发code给后台换取token
-    wxLoging: function wxLoging(code) {var _this3 = this;log(code); // let appid = wx.getAccountInfoSync().miniProgram.appId
+    }, //获取code
+    wxCode: function wxCode(avatarUrl, nickName) {var _this2 = this;wx.login({ success: function success(res) {log(res);var code = res.code;_this2.wxLoging(code);}, fail: function fail(err) {log(err);
+        } });
+
+
+    },
+    //发code给后台换取token
+    wxLoging: function wxLoging(code) {var _this3 = this;
+      log(code);
+
+      // let appid = wx.getAccountInfoSync().miniProgram.appId
       // let secret = "956f8c9345cbe06a42c6494f7bb53f7f"
-      var data = { code: code };uni.showLoading({ title: '加载中', icon: 'none' // mask:true
-      });(0, _api.publicing2)(_request.loginis, data) //发送请求携带参数
+      var data = {
+        code: code };
+
+      uni.showLoading({
+        title: '加载中',
+        icon: 'none'
+        // mask:true
+      });
+      (0, _api.publicing2)(_request.loginis, data) //发送请求携带参数
       .then(function (res) {
         if (res.statusCode == 500) {
           uni.showModal({
@@ -316,18 +304,13 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
         uni.hideLoading();
         _this3.modaishow = false;
         _this3.getLikeData();
-
-
-
       }).
       catch(function (err) {
         uni.showToast({
           title: "".concat(err) });
 
-
         log(err);
       });
-
     },
     //获取收藏列表
     getLikeData: function getLikeData() {var _this4 = this;
@@ -346,34 +329,35 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
         log(err);
       });
     },
+
+    unShowTips: function unShowTips() {
+      this.showTips = false;
+    },
+
+
+    toggleTips: function toggleTips(id) {
+      this.curIds = id;
+      this.showTips = !this.showTips;
+    },
+
     //删除收藏
-    delLike: function delLike(goodsId) {var _this5 = this;
+    delLike: function delLike() {var _this5 = this;
       var setdata = uni.getStorageSync('usermen');
       var data = {
-        goodsId: goodsId,
+        goodsId: this.curIds,
         token: setdata };
 
-      uni.showModal({
-        title: '提示',
-        content: '取消收藏这件宝贝，确定吗？',
-        success: function success(res) {
-          if (res.confirm) {
-            (0, _api.publicing)(_request.postDelLike, data).
-            then(function (res) {
-              log(res.data.msg);
-              uni.showToast({
-                title: "\u5220\u9664".concat(res.data.msg) });
-
-              _this5.getLikeData();
-            }).
-            catch(function (err) {
-              log(err);
-            });
-          } else if (res.cancel) {
-
-          }
-        } });
-
+      (0, _api.publicing)(_request.postDelLike, data).
+      then(function (res) {
+        _this5.showTips = !_this5.showTips;
+        uni.showToast({
+          title: "\u53D6\u6D88\u6536\u85CF" //${res.data.msg}
+        });
+        _this5.getLikeData();
+      }).
+      catch(function (err) {
+        log(err);
+      });
     } },
 
 
@@ -382,18 +366,8 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
     var setdata = uni.getStorageSync('usermen');
     log(setdata);
     if (!setdata) {
-      this.hasError = true;
-      this.isActive = false;
-      var bull = true;
-      var tips = '请登录后再查看';
-      this.tising(bull, tips);
     } else {
-      var _bull = false;
-      var _tips = '';
-      this.tising(_bull, _tips);
-
       this.getLikeData();
-      log('显示订单');
     }
 
   } };exports.default = _default;

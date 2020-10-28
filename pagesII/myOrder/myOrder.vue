@@ -15,7 +15,8 @@
 					<tui-list-cell :hover="false" :lineLeft="false">
 						<view class="tui-goods-title">
 							<view class="font-size-color">订单号：{{item.orderNumber}} <text class="iconfont icon-lujing182" @click="clipboard(item.orderNumber)"></text></view>
-							<view class="tui-order-status" v-if="item.tradeStatus == 0 || item.payStatus == 2||item.tradeStatus == 5">已取消</view>
+							<view class="tui-order-status" v-if="item.payStatus == 2||item.tradeStatus == 5">已取消</view>
+							<view class="tui-order-status" v-if="item.tradeStatus == 0  ">进行中</view> 
 							<!-- <view class="tui-order-status" v-if="item.payStatus == 0 ">待付款</view> -->
 							<view class="tui-order-status" v-if="item.tradeStatus == 1 || item.tradeStatus == 2|| item.tradeStatus == 3">待发货</view>
 							<!-- <view class="tui-order-status" v-if="item.tradeStatus == 2">已发货</view> -->
@@ -50,8 +51,8 @@
 						</view>
 					</tui-list-cell>
 
-					<view class="tui-order-btn">
-						<view class="tui-btn-ml" v-if="item.tradeStatus == 1 || item.tradeStatus == 2 || item.tradeStatus == 3 || item.tradeStatus == 4 || item.tradeStatus == 7||item.afterStatus == 7">
+					<view class="tui-order-btn" >
+						<view class="tui-btn-ml" @click="clickToService" v-if="item.tradeStatus == 1 || item.tradeStatus == 2 || item.tradeStatus == 3 || item.tradeStatus == 4 || item.tradeStatus == 7||item.afterStatus == 7">
 							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle">联系客服</tui-button>
 						</view>
 						<!-- <view class="tui-btn-ml" v-if="item.payStatus == 2">
@@ -66,9 +67,9 @@
 						<!-- <view class="tui-btn-ml" v-if="item.tradeStatus == 1 || item.tradeStatus == 2 ||   item.tradeStatus == 3 || item.tradeStatus == 4 ||item.tradeStatus == 6 ||item.tradeStatus == 8||item.tradeStatus == 9">
 							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle">查看物流</tui-button>
 						</view> -->
-						<view class="tui-btn-ml" v-if="item.payStatus == 0 || item.payStatus == 2 || item.tradeStatus == 5">
+						<!-- <view class="tui-btn-ml" v-if="item.payStatus == 0 || item.payStatus == 2 || item.tradeStatus == 5">
 							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="goCancel(item.id)">取消订单</tui-button>
-						</view>
+						</view> -->
 						<!-- <view class="tui-btn-ml" v-if="item.payStatus == 0">
 							<view class="tui-btn-ml-pay" @tap="payGo(item.orderNumber)">
 								<text>去支付</text>
@@ -187,7 +188,7 @@
 						</view>
 					</tui-list-cell> -->
 					<view class="tui-order-btn">
-						<view class="tui-btn-ml">
+						<view class="tui-btn-ml" @click="clickToService">
 							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle">联系客服</tui-button>
 						</view>
 						<!-- <view class="tui-btn-ml">
@@ -302,7 +303,7 @@
 						</view>
 					</tui-list-cell>
 					<view class="tui-order-btn">
-						<view class="tui-btn-ml">
+						<view class="tui-btn-ml" @click="clickToService">
 							<button open-type="contact" type="primary" hover-class='none' class="icon-img3">联系客服</button>
 						</view>
 						<view class="tui-btn-ml" v-if="item.tradeStatus == 6 || (item.tradeStatus == 7 && item.afterStatus == 5)">
@@ -457,6 +458,9 @@
 		},
 		methods: {
 			//手势
+			onSlide(event) {
+				console.log(event)
+			},
 			//支付倒计时
 			endOfTime(id) {
 				this.goCancel(id)
@@ -595,7 +599,13 @@
 						log(err)
 					})
 			},
-			//复制
+			
+			// 联系客服
+			clickToService() {
+				uni.navigateTo({
+					url: '../../pagesII/customerService/customerService'
+				})
+			},
 			//event 当需要异步请求返回数据再进行复制时，需要传入此参数，或者异步方法转为同步方法（H5端）
 			clipboard(event) {
 				let data = event;
@@ -665,12 +675,17 @@
 		},
 		//
 		
+		onPullDownRefresh() {
+			setTimeout(()=> {
+				uni.stopPullDownRefresh()
+			},500)
+		},
+		
 		
 		onReachBottom() {
 			// if (this.loadStatus === "noMore") {
 			// 	return
 			// }
-			// log('我真的触发了下拉加载')
 			// this.pageIndex++
 			// this.getOrderData()
 			// this.loadding = true
@@ -681,9 +696,7 @@
 			// 	this.pullUpOn = false
 			// }, 1000)
 		},
-		onPageScroll(e) {
-			// this.scrollTop = e.scrollTop;
-		}
+		
 	}
 </script>
 

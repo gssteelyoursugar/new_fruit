@@ -479,11 +479,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
 
 var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
+//
 //
 //
 //
@@ -829,7 +831,7 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
     waitPay: function waitPay() {var data = this.myOrderData;var arr = [];data.map(function (item) {if (item.payStatus == '0') {arr.push(item);}});return arr;}, // 待发货
     waitDeliver: function waitDeliver() {var data = this.myOrderData;var arr = [];data.map(function (item) {if (item.tradeStatus == "1" || item.tradeStatus == "2" || item.tradeStatus == "3") {arr.push(item);}});return arr;}, // 待确认
     waitConfirm: function waitConfirm() {var data = this.myOrderData;var arr = [];data.map(function (item) {if (item.payStatus == '1' && (item.tradeStatus == '4' || item.tradeStatus == '8')) {arr.push(item);}});return arr;}, done: function done() {var data = this.myOrderData;var arr = [];data.map(function (item) {if (item.tradeStatus == '6' || item.tradeStatus == '7' && item.afterStatus == '11') {arr.push(item);}});return arr;} }, methods: { //手势
-    //支付倒计时
+    onSlide: function onSlide(event) {console.log(event);}, //支付倒计时
     endOfTime: function endOfTime(id) {this.goCancel(id);}, //删除订单
     goDel: function goDel(id) {var _this = this;log(id);var data = { id: id, token: setdata };(0, _api.publicing)(_request.postDelOrders, data).then(function (res) {log(res);_this.getOrderData();_this.$forceUpdate();}).catch(function (err) {log(err);});}, //取消支付
     goCancel: function goCancel(id) {var _this2 = this;log(id);var data = { id: id, token: setdata };(0, _api.publicing)(_request.postCancelPay, data).then(function (res) {log(res);_this2.getOrderData();_this2.$forceUpdate();}).catch(function (err) {log(err);});}, //去付款
@@ -842,8 +844,8 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
         // let arr = this.myOrderData || []
         // arr.push(...newData)
         // this.$set(this.myOrderData, arr)
-        _this5.$forceUpdate();}).catch(function (err) {log(err);});}, //复制
-    //event 当需要异步请求返回数据再进行复制时，需要传入此参数，或者异步方法转为同步方法（H5端）
+        _this5.$forceUpdate();}).catch(function (err) {log(err);});}, // 联系客服
+    clickToService: function clickToService() {uni.navigateTo({ url: '../../pagesII/customerService/customerService' });}, //event 当需要异步请求返回数据再进行复制时，需要传入此参数，或者异步方法转为同步方法（H5端）
     clipboard: function clipboard(event) {var data = event;thorui.getClipboardData(data, function (res) {}, event);}, //申请售后
     goAfter: function goAfter(id) {uni.navigateTo({ url: '../../pagesIII/applyAfter/applyAfter?id=' + id });}, // 售后- 售后详情
     goAfterSaleDetail: function goAfterSaleDetail(id) {uni.navigateTo({ url: '../../pagesIII/AfterSaleDetails/AfterSaleDetails?id=' + id });}, // 售后- 申请详情
@@ -853,10 +855,9 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
         this.currentTab = parseInt(options.index);this.payStatus = '1';this.tradeStatus = '4,8';} else if (options.index == 3) {//已完成p1t6 afterStatus 11
         this.currentTab = parseInt(options.index);this.payStatus = '1';this.tradeStatus = '6,7';this.afterStatus = '11';}this.getOrderData();}, detail: function detail(status, id) {if (status == 5) {return;}uni.navigateTo({ url: '../../pagesIII/orderDetail/orderDetail?id=' + id });} }, onShow: function onShow() {this.url = _request.imgurl; // this.getOrderData()
   }, //
-  onReachBottom: function onReachBottom() {// if (this.loadStatus === "noMore") {
+  onPullDownRefresh: function onPullDownRefresh() {setTimeout(function () {uni.stopPullDownRefresh();}, 500);}, onReachBottom: function onReachBottom() {// if (this.loadStatus === "noMore") {
     // 	return
     // }
-    // log('我真的触发了下拉加载')
     // this.pageIndex++
     // this.getOrderData()
     // this.loadding = true
@@ -866,7 +867,6 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
     // 	this.loadding = false
     // 	this.pullUpOn = false
     // }, 1000)
-  }, onPageScroll: function onPageScroll(e) {// this.scrollTop = e.scrollTop;
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

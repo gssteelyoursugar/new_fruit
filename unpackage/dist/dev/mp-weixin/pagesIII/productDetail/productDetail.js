@@ -1291,31 +1291,7 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
     common: function common() {
       this.tui.toast('功能开发中~');
     },
-    btnTopMenu: function btnTopMenu(index) {
-      this.closeMenu();
-      if (index == 4) {
-        uni.makePhoneCall({
-          phoneNumber: '10086' });
 
-      } else if (index == 6) {
-
-        this.common();
-
-
-
-
-
-      } else {
-        var url = {
-          0: '../message/message',
-          1: '../mall/mall',
-          2: '../my/my',
-          3: '../shopcart/shopcart',
-          5: '/pages/my/feedback/feedback?page=mall' }[
-        index];
-        url && this.tui.href(url);
-      }
-    },
     changeNum: function changeNum(e) {
       this.currentTab = e.index;
     },

@@ -245,7 +245,6 @@ var setdata = uni.getStorageSync('usermen');var _default = { data: function data
     },
 
     cancelPraise: function cancelPraise(e) {var _this3 = this;
-
       var data = {
         goodsId: this.curIds,
         token: setdata };

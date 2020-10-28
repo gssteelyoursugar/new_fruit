@@ -113,7 +113,6 @@
 			},
 
 			cancelPraise(e) {
-				
 				let data = {
 					goodsId: this.curIds,
 					token: setdata

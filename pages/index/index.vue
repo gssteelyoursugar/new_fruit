@@ -925,7 +925,7 @@
 		// 转发
 		onShareAppMessage: function() {
 			return {
-				title: '测试圈果测试圈果测试圈果测试圈果测试圈果测试圈果测试圈果测试圈果测试圈果测试圈果测试圈果测试圈果测试圈果',
+				title: '',
 				imageUrl: '../../static/images/taozi.jpg',
 				// path: '/pages/test/test?id=123'
 			}

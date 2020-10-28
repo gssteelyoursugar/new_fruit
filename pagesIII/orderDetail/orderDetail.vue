@@ -21,14 +21,14 @@
 					<view class="info-item-left">订单编号：</view>
 					<view class="info-item-right">
 						<view>{{orderObj.order_number}}</view>
-						<view class="clip">复制</view>
+						<view class="clip" @click="clipNumber(orderObj.order_number)">复制</view>
 					</view>
 				</view>
 				<view class="info-item" v-if="orderObj.logisticsNumber">
 					<view class="info-item-left">物流单号：</view>
 					<view class="info-item-right">
 						<view>{{orderObj.logisticsNumber}}</view>
-						<view class="clip">复制</view>
+						<view class="clip" @click="clipNumber(orderObj.logisticsNumber)">复制</view>
 					</view>
 				</view>
 			</view>
@@ -337,6 +337,14 @@
 					})
 				})
 			},
+			clipNumber(val) {
+				uni.setClipboardData({
+					data: val,
+					// success: function() {
+					// 	uni.hideToast()
+					// }
+				})
+			}
 
 		},
 		onLoad(opt) {
@@ -344,7 +352,8 @@
 		},
 		onShow() {
 			this.getOrderDetail()
-		}
+		},
+		
 	}
 </script>
 
