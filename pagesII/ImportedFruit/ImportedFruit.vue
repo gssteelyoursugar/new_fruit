@@ -278,7 +278,8 @@
 		/* padding-bottom: 110rpx; */
 	}
 	.tui-rank-list{
-		padding: 0 30rpx;
+		/* padding: 0 30rpx; */
+		padding: 30rpx;
 	}
 	.tui-my-bg {
 		width: 100%;
@@ -300,10 +301,10 @@
 	
 	.tui-rink-sceate{
 		border-radius: 60rpx 60rpx 0 0;
-		padding: 18rpx 0;
 		position: relative;
-		top: -26px;
 		background-color: #fff;
+		overflow: hidden;
+		margin-top: -60rpx;
 	}
 	.tui-cent-box{
 		padding-top: 26rpx;
@@ -312,13 +313,10 @@
 		background-color: #fff;
 		position: relative;
 		top: -20rpx;
-		
-		
 	}
 	.tui-tab-rank-cent{
 		display: flex;
 		padding: 32rpx 0;
-		
 	}
 	.img-rink{
 		width: 150rpx;
@@ -384,8 +382,14 @@
 
 	}
 	.tui-tab-rank{
-		margin: 10rpx 0;
-		border-bottom: 1rpx solid #ccc;
+		/* margin: 10rpx 0; */
+		border-bottom: 1rpx solid #e5e5e5;
+		overflow: hidden;
+	}
+	
+	.tui-tab-rank:last-child{
+		/* margin: 10rpx 0; */
+		border-bottom: none;
 	}
 	.actineclass{display: block; }
 	.errorclass{display: none;}

@@ -251,6 +251,7 @@
 		methods: {
 			onPullDownRefresh() {
 				this.getMerchants()
+				this.getOrderData()
 				setTimeout(function() {
 					uni.stopPullDownRefresh();
 				}, 1000);
@@ -380,22 +381,7 @@
 					})
 
 			},
-			// getUserInfo(event){
-			// 	log(event)
-			// 	let wxing = event.detail.userInfo
-			// 	// 实例化类
-			// 	const logclass = new logins(wxing)
-			// 	// 实例化类之后。可以访问类中的方法和属性
-			// 	logclass.listing()
-			// 	.then((res)=>{
-			// 		log(res)
-			// 		this.ifUser()
-			// 	})
-			// 	.catch((err)=>{
-			// 		log(err)
-			// 	})
-
-			// },
+			
 			// 获取订单
 			getOrderData() {
 				let setdata = uni.getStorageSync('usermen')
@@ -596,27 +582,10 @@
 		// 	this.scrollTop = e.scrollTop;
 		// },
 		onPullDownRefresh() {
+			this.getOrderData()
 			setTimeout(() => {
 				uni.stopPullDownRefresh()
 			}, 200)
-		},
-		onReachBottom: function() {
-			//下拉加载
-			// if (!this.pullUpOn) return;
-			// this.loadding = true;
-			// if (this.pageIndex == 4) {
-			// 	this.loadding = false;
-			// 	this.pullUpOn = false
-			// } else {
-			// 	let loadData = JSON.parse(JSON.stringify(this.productList));
-			// 	loadData = loadData.splice(0, 10)
-			// 	if (this.pageIndex == 1) {
-			// 		loadData = loadData.reverse();
-			// 	}
-			// 	this.productList = this.productList.concat(loadData);
-			// 	this.pageIndex = this.pageIndex + 1;
-			// 	this.loadding = false
-			// }
 		}
 	}
 </script>

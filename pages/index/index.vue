@@ -107,17 +107,17 @@
 			</view> -->
 			</view>
 			<!-- 限量批 -->
-			<view class="tui-count-down" >
-				<view class="tui-col-2"  @click="goLimit()">
+			<view class="tui-count-down">
+				<view class="tui-col-2" @click="goLimit()">
 					<text class="tui-font">限量批</text>
 				</view>
 				<!-- 倒计时 -->
-				<view class="tui-col-5 tui-line-hight" >
+				<view class="tui-col-5 tui-line-hight">
 					<tui-countdown :time="ts" color="#fff" borderColor="rgba(70, 66, 70, 1)" backgroundColor="rgba(70, 66, 70, 1)"
 					 colonColor="rgba(70, 66, 70, 1)" @end="endOfTime">
 					</tui-countdown>
 				</view>
-				<view class="tui-col-6" @click="fruitGo" >
+				<view class="tui-col-6" @click="fruitGo">
 					<text class="tui-font">新果上市</text>
 					<text class="tui-barcolor">抢鲜市场 <text class="iconfont icon-weibiaoti34"></text> </text>
 				</view>
@@ -129,7 +129,8 @@
 						<view class="tui-Fruits-table">
 							<image :src="item.url" mode="aspectFit" class="tabimg"></image>
 							<view class="tui-price">
-								<view class="tui-first-price">&yen;<text class="tui-price-color">{{ ApproveStatus === 1 ?item.platformClinetPrice: '***'}}</text><text class="price-label">/件</text></view>
+								<view class="tui-first-price">&yen;<text class="tui-price-color">{{ ApproveStatus === 1 ?item.platformClinetPrice: '***'}}</text><text
+									 class="price-label">/件</text></view>
 								<view class="tui-last-price" v-if="item.marketPrice && item.marketPrice != 0">&yen;<text class="tui-cribing">{{ApproveStatus === 1 ?item.marketPrice:'***'}}</text></view>
 							</view>
 							<text class="tui-weight">{{item.specification}}</text>
@@ -158,8 +159,9 @@
 						<view class="tui-Fruits-table" @click="fruitGo">
 							<image :src="item.url" mode="aspectFit" class="tabimg"></image>
 							<view class="tui-price">
-								<view class="tui-first-price">&yen;<text class="tui-price-color">{{ApproveStatus === 1 ?item.platformClinetPrice:'***'}}</text><text class="price-label">/件</text></view>
-								<view class="tui-last-price"  v-if="item.marketPrice &&item.marketPrice != 0">&yen;<text class="tui-cribing">{{ApproveStatus === 1 ?item.marketPrice:'***'}}</text></view>
+								<view class="tui-first-price">&yen;<text class="tui-price-color">{{ApproveStatus === 1 ?item.platformClinetPrice:'***'}}</text><text
+									 class="price-label">/件</text></view>
+								<view class="tui-last-price" v-if="item.marketPrice &&item.marketPrice != 0">&yen;<text class="tui-cribing">{{ApproveStatus === 1 ?item.marketPrice:'***'}}</text></view>
 							</view>
 							<text class="tui-weight">{{item.specification}}</text>
 						</view>
@@ -236,7 +238,7 @@
 												{{ApproveStatus===1? item.platformClinetPrice:'***'}}
 												<text class="tui-rate-text "> /件</text>
 											</view>
-											<view class="tui-rate-price"  v-if="item.marketPrice &&item.marketPrice != 0"><text>&yen;</text>{{ApproveStatus===1? item.marketPrice:'***'}}</view>
+											<view class="tui-rate-price" v-if="item.marketPrice &&item.marketPrice != 0"><text>&yen;</text>{{ApproveStatus===1? item.marketPrice:'***'}}</view>
 											<text class="tui-praise  " @tap="praise(index)">
 												<text class="tui-praise iconfont icon-like  " v-if="!item.showSearch1"></text>
 												<text class="tui-praise iconfont icon-dianzan " v-if="item.showSearch1"></text>{{item.praiseNumber |filterNum}}
@@ -284,7 +286,7 @@
 												{{ApproveStatus===1? item.platformClinetPrice:'***'}}
 												<text class="tui-rate-text "> /件</text>
 											</view>
-											<view class="tui-rate-price"  v-if="item.marketPrice &&item.marketPrice != 0"> <text>&yen;</text>{{ApproveStatus===1? item.marketPrice:'***'}}</view>
+											<view class="tui-rate-price" v-if="item.marketPrice &&item.marketPrice != 0"> <text>&yen;</text>{{ApproveStatus===1? item.marketPrice:'***'}}</view>
 											<text class="tui-praise  " @tap="praise(index)">
 												<text class="tui-praise iconfont icon-like  " v-if="!item.showSearch1"></text>
 												<text class="tui-praise iconfont icon-dianzan " v-if="item.showSearch1"></text>{{item.praiseNumber |filterNum}}
@@ -321,6 +323,7 @@
 	import Weather from './components/weather.vue'
 	import Banner from './components/banner.vue'
 	// import amap from '@/common/SDK/amap-wx.js'
+	import amap from '../../common/SDK/amap-wx.js';
 	//请求
 	import {
 		listing,
@@ -426,6 +429,8 @@
 				city: '', //城市
 				citys: '', //
 				temperature: '', //气温
+				amapPlugin: null,
+				key: '69d24a06f6710467afea85cb0c8db3e1',
 				banner: ['6.jpg', '6.jpg', '6.jpg', '6.jpg', '6.jpg'],
 				flexing: [{
 						title: '推荐好货',
@@ -489,7 +494,6 @@
 					})
 
 			},
-
 			//打开气泡
 			rtBubble() {
 				this.$refs.rtBubble.toggle();
@@ -502,7 +506,6 @@
 				let text = ["首页", "收藏", "分享"][e.index];
 				this.tui.toast(`您点击了：${text}`);
 			},
-
 			//最近看过
 			golook() {
 				uni.navigateTo({
@@ -520,8 +523,7 @@
 				})
 			},
 			//倒计时
-			endOfTime: function() {
-			},
+			endOfTime: function() {},
 			//金刚区跳转
 			hrefKing(index) {
 				let url = "";
@@ -576,7 +578,6 @@
 			},
 			// 头部
 			onPageScroll(e) {
-				
 				if (this.statusHeight > 20) {
 					if (e.scrollTop < 20) {
 						this.canSee = 1 - (e.scrollTop / 10)
@@ -724,7 +725,7 @@
 					.then((res) => {
 						//处理数据格式,praiseNumber
 						let goodsData = res.data.data.data;
-						
+
 						this.IndexGoods = goodsData //【1】首页分类数据
 					})
 					.catch((err) => {
@@ -888,9 +889,7 @@
 							content: `条形码类型：${res.scanType}
 									   条形码内容：${res.result}`,
 							success: function(res) {
-								if (res.confirm) {
-								} else if (res.cancel) {
-								}
+								if (res.confirm) {} else if (res.cancel) {}
 							}
 						});
 					}
@@ -902,15 +901,66 @@
 					url: 'https://restapi.amap.com/v3/weather/weatherInfo', //高德地图查询天气
 					method: 'GET',
 					data: {
-						key: this.webkey,
+						key: "69d24a06f6710467afea85cb0c8db3e1",
 						city: e,
 					},
 					success: (res) => {
-						this.temperature = res.data.lives[0].temperature //气温
-						this.citys = res.data.lives[0].city //获取区域
+						// this.temperature = res.data.lives[0].temperature //气温
+						// this.citys = res.data.lives[0].city //获取区域
+						console.log("天气结果",res)
 					}
 				});
 			}
+			
+		},
+		//初始化
+		onLoad() {
+			this.getMerchants()
+			this.getIndexClass()
+			// this.getGoodsAll()
+			//请求首页
+			this.getHomelist()
+			// var text = '{"id":1301422737316712448}';
+			// const id = text.match(/\d{17,}/)[0]; // 正则获取大于17位数字的值
+			// text = text.replace(id, `"${id}"`); // 补上双引号
+			// const data = JSON.parse(text);
+			// this.postactivity()
+			//新版头部
+			// #ifndef H5 || APP-PLUS || MP-ALIPAY
+			const res = uni.getSystemInfoSync();
+			let {
+				statusBarHeight
+			} = res
+			let info = uni.getMenuButtonBoundingClientRect()
+			let {
+				top,
+				bottom
+			} = info
+			this.statusHeight = statusBarHeight
+			let buttonHeight = (bottom - statusBarHeight) + (top - statusBarHeight)
+			let navHeight = statusBarHeight + buttonHeight + top - statusBarHeight //状态栏+导航栏的高度（页面初始高度）
+			this.boxHeight = navHeight - statusBarHeight //导航栏高度
+			this.navHeight = navHeight
+			// #endif
+		// 	this.amapPlugin = new amap.AMapWX({
+		// 		key: this.key
+		// 	});
+		
+		// 	this.amapPlugin.getRegeo({
+		// 		success: (data) => {
+		// 			console.log("高德天气：", data)
+		// 			// this.addressName = data[0].name;
+		// 			this.city = data[0].regeocodeData.addressComponent.city.replace(/市/g, ''); //把"市"去掉
+		// 			console.log("city",city)
+		// 			let adData = data[0].regeocodeData.addressComponent.adcode //拿到城市的编码用于查寻天气
+		// 			//使用说明https://lbs.amap.com/api/webservice/guide/api/weatherinfo/#instructions
+		// 			console.log(adData)
+		// 			this.tian(adData)
+		// 		}
+		// 	});
+			setTimeout(() => {
+				this.showAuthTips = false
+			}, 5000)
 		},
 
 		onNavigationBarButtonTap(e) {
@@ -939,59 +989,12 @@
 		//     }
 		//   }
 
-		//初始化
-		onLoad() {
-			this.getMerchants()
-			this.getIndexClass()
-			// this.getGoodsAll()
-			//请求首页
-			this.getHomelist()
-			var text = '{"id":1301422737316712448}';
-			const id = text.match(/\d{17,}/)[0]; // 正则获取大于17位数字的值
-			text = text.replace(id, `"${id}"`); // 补上双引号
-			const data = JSON.parse(text);
-			// this.postactivity()
-			//新版头部
-			// #ifndef H5 || APP-PLUS || MP-ALIPAY
-			const res = uni.getSystemInfoSync();
-			let {
-				statusBarHeight
-			} = res
-			let info = uni.getMenuButtonBoundingClientRect()
-			let {
-				top,
-				bottom
-			} = info
-			this.statusHeight = statusBarHeight
-			let buttonHeight = (bottom - statusBarHeight) + (top - statusBarHeight)
-			let navHeight = statusBarHeight + buttonHeight + top - statusBarHeight //状态栏+导航栏的高度（页面初始高度）
-			this.boxHeight = navHeight - statusBarHeight //导航栏高度
-			this.navHeight = navHeight
-			// #endif
-			// this.postAct()
-			// this.postactivity()
-			// this.amapPlugin = new amap.AMapWX({
-			// 	//高德地图小程序KEY，替换为自己的KEY，参考：http://ask.dcloud.net.cn/article/35070
-			// 	key: this.key
-			// });
-			//定位地址
-			// this.amapPlugin.getRegeo({
-			// 	success: (res) => {
-			// 		//this.city = data[0].regeocodeData.addressComponent.city.replace(/市/g, ''); //把"市"去掉
-			// 		this.city = res[0].regeocodeData.addressComponent.city.replace(/市/g, '');
-			// 		let adData = res[0].regeocodeData.addressComponent.adcode //拿到城市的编码用于查寻天气
-			// 		//使用说明https://lbs.amap.com/api/webservice/guide/api/weatherinfo/#instructions
-			// 		console.log(adData)
-			// 		this.tian(adData)
-			// 	}
-			// });
-			setTimeout(()=>{
-				this.showAuthTips = false
-			},5000)
-		},
+		
 		// 监听页面滚动距离
 
-		mounted() {},
+		mounted() {
+			
+		},
 		filters: {
 			filterNum(val) {
 				if (val) {
@@ -1268,11 +1271,12 @@
 		border-radius: 6rpx;
 		overflow: hidden;
 	}
-	
+
 	.img-mask {
 		position: relative;
 	}
-	.img-mask-item { 
+
+	.img-mask-item {
 		position: absolute;
 		top: 0;
 		right: 0;
@@ -1285,9 +1289,9 @@
 		justify-content: center;
 
 	}
-	
+
 	.item-text {
-		background: rgba(0,0,0,.6);
+		background: rgba(0, 0, 0, .6);
 		color: #fff;
 		font-size: 28rpx;
 		padding: 6rpx 16rpx;
@@ -1624,10 +1628,11 @@
 		border: 1px solid #f5f5f5;
 		border-radius: 6rpx;
 	}
-	
+
 	.tui-Fruits-ranking-tab .tabimg {
 		border: none;
 	}
+
 	.tui-Fruits-table {
 
 		text-align: center;
@@ -2035,7 +2040,6 @@
 		justify-content: center;
 		padding: 0 30rpx;
 		box-sizing: border-box;
-
 	}
 
 	/* 头部 */

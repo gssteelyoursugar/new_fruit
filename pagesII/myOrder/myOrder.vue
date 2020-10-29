@@ -52,8 +52,8 @@
 					</tui-list-cell>
 
 					<view class="tui-order-btn" >
-						<view class="tui-btn-ml" @click="clickToService" v-if="item.tradeStatus == 1 || item.tradeStatus == 2 || item.tradeStatus == 3 || item.tradeStatus == 4 || item.tradeStatus == 7||item.afterStatus == 7">
-							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle">联系客服</tui-button>
+						<view class="tui-btn-ml"  v-if="item.tradeStatus == 1 || item.tradeStatus == 2 || item.tradeStatus == 3 || item.tradeStatus == 4 || item.tradeStatus == 7||item.afterStatus == 7">
+							<tui-button type="black" plain width="152rpx" :openType="contactType" height="56rpx" :size="26" shape="circle">联系客服</tui-button>
 						</view>
 						<!-- <view class="tui-btn-ml" v-if="item.payStatus == 2">
 							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="buyAgain(item.wx_goods_id)">再次下单</tui-button>
@@ -188,8 +188,8 @@
 						</view>
 					</tui-list-cell> -->
 					<view class="tui-order-btn">
-						<view class="tui-btn-ml" @click="clickToService">
-							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle">联系客服</tui-button>
+						<view class="tui-btn-ml">
+							<tui-button type="black" plain width="152rpx" :openType="contactType" height="56rpx" :size="26" shape="circle">联系客服</tui-button>
 						</view>
 						<!-- <view class="tui-btn-ml">
 							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle">查看物流</tui-button>
@@ -291,8 +291,8 @@
 						</view>
 					</tui-list-cell>
 					<view class="tui-order-btn">
-						<view class="tui-btn-ml" @click="clickToService">
-							<button open-type="contact" type="primary" hover-class='none' class="icon-img3">联系客服</button>
+						<view class="tui-btn-ml" >
+							<button open-type="contact" type="primary" :openType="contactType" hover-class='none' class="icon-img3">联系客服</button>
 						</view>
 						<view class="tui-btn-ml" v-if="item.tradeStatus == 6 || (item.tradeStatus == 7 && item.afterStatus == 5)">
 							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="goAfter(item.id)">申请售后</tui-button>
@@ -342,6 +342,7 @@
 	export default {
 		data() {
 			return {
+				contactType: 'contact',
 				coundDownTime: '30000',
 				loadStatus: "loading",
 				payStatus: '', //付款状态

@@ -4,7 +4,7 @@
 			<image src="../../static/images/orderBMG.png" mode="widthFix"></image>
 			<text class="color-text">最近没有点赞过商品~</text>
 		</view>
-		<view class="tui-tab-rank" v-for="(item,index) of evaList" :key="index">
+		<view class="tui-tab-rank" v-for="(item,index) of evaList" :key="index"  v-if="evaList.length !== 0">
 			<view class="tui-time-title"><text class="title-time-left">{{item.time}}</text> </view>
 			<view class="tui-tab-rank-cent" @click="clickToDetail(itm.id)" v-for="(itm,idx) of item.list" :key="idx">
 				<image :src="itm.url" mode="aspectFill" class="img-rink"></image>
@@ -65,8 +65,11 @@
 				ApproveStatus: 0
 			}
 		},
-
 		onLoad() {
+			this.getMerchants()
+			this.getList()
+		},
+		onShow() {
 			this.getList()
 			this.getMerchants()
 		},

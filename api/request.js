@@ -53,6 +53,9 @@ let getMsgInfo = `${url}api/wx/index/getMsg`
 //商品详情页
 let postdelist = `${url}api/wx/goods/getById`
 
+//订单详情
+let orderHistory = `${url}api/wx/goods/getByIdHistory`
+
 //商品找水果
 let getGoodsall = `${url}api/wx/goods/all`
 
@@ -273,7 +276,8 @@ export {
 	getAgreeList,
 	getAgreeInfo,
 	getPredictList,
-	getPredictInfo
+	getPredictInfo,
+	orderHistory
 }
 
 

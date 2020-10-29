@@ -293,7 +293,8 @@
 	//请求地址
 	import {
 		postdelist,
-		getDetails
+		getDetails,
+		orderHistory
 	} from '../../api/request.js';
 	let setdata = uni.getStorageSync('usermen')
 	export default {
@@ -309,18 +310,18 @@
 			getTime(val) {
 				let time = new Date(val);
 				let y = time.getFullYear();
-				let m = time.getMonth() + 1;
-				let d = time.getDate();
-				let h = time.getHours();
-				let mm = time.getMinutes();
-				let s = time.getSeconds();
-				return y + '-' + m + '-' + d + ' ' + h + ':' + mm + ':' + s
-			}
-		},
-		methods: {
-			add0(m) {
-				return m < 10 ? '0' + m : m
+				let m = time.getMonth() + 1 >= 10 ? time.getMonth() + 1 : "0"+(time.getMonth() + 1);
+				let d = time.getDate() >= 10 ? time.getDate() : "0"+time.getDate();
+				let h = time.getHours()>= 10 ? time.getHours() : "0"+time.getHours();
+				let mm = time.getMinutes()>= 10 ? time.getMinutes() : "0"+time.getMinutes();
+				let s = time.getSeconds()>= 10 ? time.getSeconds() : "0"+time.getSeconds();
+				return y + '-' + m+ '-' + d + ' ' + h+ ':' + mm + ':' + s
 			},
+			
+		},
+		
+		methods: {
+			
 			getOrderDetail() {
 				let data = {
 					token: setdata,

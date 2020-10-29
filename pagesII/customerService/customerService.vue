@@ -13,16 +13,13 @@
 					<view class="tui-order-text">0771-5633659</view>
 				</view>
 				<view class="tui-order-item" open-type="contact">
-
 					<view class="tui-icon-box">
 						<view>在线客服</view>
-
 					</view>
 					<view class="tui-icon-box">
 						<button open-type="contact" type="primary" hover-class='none' class="icon-img3">
 							<image src="../../static/images/server.png" mode="" class="icon-img2"></image>
 						</button>
-
 					</view>
 					<view class="tui-order-text text-center"> <text class="text-center">电话无法接通 \n请试试在线客服</text></view>
 				</view>

@@ -1935,6 +1935,107 @@ function normalizeComponent (
 
 /***/ }),
 
+/***/ 100:
+/*!*******************************************************!*\
+  !*** /Users/gsheng/Downloads/new_fruit/utils/util.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * 数据处理
+ * @author echo.
+ * @version 1.5.0
+ **/
+var utils = {
+  //去空格
+  trim: function trim(value) {
+    return value.replace(/(^\s*)|(\s*$)/g, "");
+  },
+  //内容替换
+  replaceAll: function replaceAll(text, repstr, newstr) {
+    return text.replace(new RegExp(repstr, "gm"), newstr);
+  },
+  //格式化手机号码
+  formatNumber: function formatNumber(num) {
+    return num.length === 11 ? num.replace(/^(\d{3})\d{4}(\d{4})$/, '$1****$2') : num;
+  },
+  //金额格式化
+  rmoney: function rmoney(money) {
+    return parseFloat(money).toFixed(2).toString().split('').reverse().join('').replace(/(\d{3})/g, '$1,').replace(
+    /\,$/, '').split('').reverse().join('');
+  },
+  //日期格式化
+  formatDate: function formatDate(formatStr, fdate) {
+    if (fdate) {
+      if (~fdate.indexOf('.')) {
+        fdate = fdate.substring(0, fdate.indexOf('.'));
+      }
+      fdate = fdate.toString().replace('T', ' ').replace(/\-/g, '/');
+      var fTime,fStr = 'ymdhis';
+      if (!formatStr)
+      formatStr = "y-m-d h:i:s";
+      if (fdate)
+      fTime = new Date(fdate);else
+
+      fTime = new Date();
+      var month = fTime.getMonth() + 1;
+      var day = fTime.getDate();
+      var hours = fTime.getHours();
+      var minu = fTime.getMinutes();
+      var second = fTime.getSeconds();
+      month = month < 10 ? '0' + month : month;
+      day = day < 10 ? '0' + day : day;
+      hours = hours < 10 ? '0' + hours : hours;
+      minu = minu < 10 ? '0' + minu : minu;
+      second = second < 10 ? '0' + second : second;
+      var formatArr = [
+      fTime.getFullYear().toString(),
+      month.toString(),
+      day.toString(),
+      hours.toString(),
+      minu.toString(),
+      second.toString()];
+
+      for (var i = 0; i < formatArr.length; i++) {
+        formatStr = formatStr.replace(fStr.charAt(i), formatArr[i]);
+      }
+      return formatStr;
+    } else {
+      return "";
+    }
+  },
+  rgbToHex: function rgbToHex(r, g, b) {
+    return "#" + utils.toHex(r) + utils.toHex(g) + utils.toHex(b);
+  },
+  toHex: function toHex(n) {
+    n = parseInt(n, 10);
+    if (isNaN(n)) return "00";
+    n = Math.max(0, Math.min(n, 255));
+    return "0123456789ABCDEF".charAt((n - n % 16) / 16) +
+    "0123456789ABCDEF".charAt(n % 16);
+  },
+  hexToRgb: function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16) } :
+    null;
+  } };
+
+
+module.exports = {
+  trim: utils.trim,
+  replaceAll: utils.replaceAll,
+  formatNumber: utils.formatNumber,
+  rmoney: utils.rmoney,
+  formatDate: utils.formatDate,
+  rgbToHex: utils.rgbToHex,
+  hexToRgb: utils.hexToRgb };
+
+/***/ }),
+
 /***/ 11:
 /*!********************************************************!*\
   !*** /Users/gsheng/Downloads/new_fruit/store/store.js ***!
@@ -3111,7 +3212,7 @@ var index = {
 
 /***/ }),
 
-/***/ 131:
+/***/ 132:
 /*!*********************************************************************************!*\
   !*** /Users/gsheng/Downloads/new_fruit/common/tui-validation/tui-validation.js ***!
   \*********************************************************************************/
@@ -3388,7 +3489,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 132:
+/***/ 133:
 /*!**************************************************************!*\
   !*** /Users/gsheng/Downloads/new_fruit/utils/picker.city.js ***!
   \**************************************************************/
@@ -3799,114 +3900,13 @@ module.exports = [{
 /***/ }),
 
 /***/ 19:
-/*!****************************************************!*\
-  !*** /Users/gsheng/Downloads/new_fruit/api/api.js ***!
-  \****************************************************/
+/*!***************************************************************!*\
+  !*** /Users/gsheng/Downloads/new_fruit/common/SDK/amap-wx.js ***!
+  \***************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.listing2 = exports.publicing2 = exports.publicing = exports.listing = void 0;
-
-
-
-var _errdata = __webpack_require__(/*! api/errdata.js */ 20); // 封装请求：get post
-// 引进提示
-
-
-
-// GET带token
-var listing = function listing(urling, shopdata) {
-  return new Promise(function (resolve, reject) {
-    var setdata = uni.getStorageSync('usermen'); //这个不能放外面，放外面的话，项目一运行的时候就执行了，没登入前就执行了，肯定拿不到token了
-    shopdata.token = setdata;
-    uni.request({
-      url: urling,
-      method: 'GET',
-      data: shopdata }).
-
-    then(function (res) {
-      resolve(res[1]);
-
-    }).
-    catch(function (err) {
-      var errs = '服务器错误 请稍后再试';
-      _errdata.errdata.errlist(errs);
-      reject(err);
-    });
-  });
-};
-
-// GET不带token
-exports.listing = listing;var listing2 = function listing2(urling, shopdata) {
-  return new Promise(function (resolve, reject) {
-    // shopdata.token = setdata
-    uni.request({
-      url: urling,
-      method: 'GET',
-      data: shopdata }).
-
-    then(function (res) {
-      resolve(res[1]);
-
-    }).
-    catch(function (err) {
-      var errs = '服务器错误 请稍后再试';
-      _errdata.errdata.errlist(errs);
-      reject(err);
-    });
-  });
-};
-
-// POST请求,后台默认键值对方式
-exports.listing2 = listing2;var publicing = function publicing(urling, shopdata) {
-  return new Promise(function (resolve, reject) {
-    uni.request({
-      url: urling,
-      method: 'POST',
-      data: shopdata,
-      header: {
-        'content-type': 'application/x-www-form-urlencoded' } }).
-
-
-
-    then(function (res) {
-      resolve(res[1]);
-    }).
-    catch(function (err) {
-      var errs = '服务器错误 请稍后再试';
-      _errdata.errdata.errlist(errs);
-      reject(err);
-    });
-  });
-};
-
-// POST,Json格式请求
-exports.publicing = publicing;var publicing2 = function publicing2(urling, shopdata) {
-  return new Promise(function (resolve, reject) {
-    uni.request({
-      url: urling,
-      method: 'POST',
-      data: shopdata
-      // header: {
-      //     'content-type': 'application/x-www-form-urlencoded'
-      //    },
-    }).
-
-    then(function (res) {
-      resolve(res[1]);
-    }).
-    catch(function (err) {
-      var errs = '服务器错误 请稍后再试';
-      _errdata.errdata.errlist(errs);
-      reject(err);
-    });
-  });
-};
-
-//公用方法
-exports.publicing2 = publicing2;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+function AMapWX(a) {this.key = a.key, this.requestConfig = { key: a.key, s: "rsx", platform: "WXJS", appname: a.key, sdkversion: "1.2.0", logversion: "2.0" };}AMapWX.prototype.getWxLocation = function (a, b) {wx.getLocation({ type: "gcj02", success: function success(a) {var c = a.longitude + "," + a.latitude;wx.setStorage({ key: "userLocation", data: c }), b(c);}, fail: function fail(c) {wx.getStorage({ key: "userLocation", success: function success(a) {a.data && b(a.data);} }), a.fail({ errCode: "0", errMsg: c.errMsg || "" });} });}, AMapWX.prototype.getRegeo = function (a) {function c(c) {var d = b.requestConfig;wx.request({ url: "https://restapi.amap.com/v3/geocode/regeo", data: { key: b.key, location: c, extensions: "all", s: d.s, platform: d.platform, appname: b.key, sdkversion: d.sdkversion, logversion: d.logversion }, method: "GET", header: { "content-type": "application/json" }, success: function success(b) {var d, e, f, g, h, i, j, k, l;b.data.status && "1" == b.data.status ? (d = b.data.regeocode, e = d.addressComponent, f = [], g = "", d && d.roads[0] && d.roads[0].name && (g = d.roads[0].name + "附近"), h = c.split(",")[0], i = c.split(",")[1], d.pois && d.pois[0] && (g = d.pois[0].name + "附近", j = d.pois[0].location, j && (h = parseFloat(j.split(",")[0]), i = parseFloat(j.split(",")[1]))), e.provice && f.push(e.provice), e.city && f.push(e.city), e.district && f.push(e.district), e.streetNumber && e.streetNumber.street && e.streetNumber.number ? (f.push(e.streetNumber.street), f.push(e.streetNumber.number)) : (k = "", d && d.roads[0] && d.roads[0].name && (k = d.roads[0].name), f.push(k)), f = f.join(""), l = [{ iconPath: a.iconPath, width: a.iconWidth, height: a.iconHeight, name: f, desc: g, longitude: h, latitude: i, id: 0, regeocodeData: d }], a.success(l)) : a.fail({ errCode: b.data.infocode, errMsg: b.data.info });}, fail: function fail(b) {a.fail({ errCode: "0", errMsg: b.errMsg || "" });} });}var b = this;a.location ? c(a.location) : b.getWxLocation(a, function (a) {c(a);});}, AMapWX.prototype.getWeather = function (a) {function d(d) {var e = "base";a.type && "forecast" == a.type && (e = "all"), wx.request({ url: "https://restapi.amap.com/v3/weather/weatherInfo", data: { key: b.key, city: d, extensions: e, s: c.s, platform: c.platform, appname: b.key, sdkversion: c.sdkversion, logversion: c.logversion }, method: "GET", header: { "content-type": "application/json" }, success: function success(b) {function c(a) {var b = { city: { text: "城市", data: a.city }, weather: { text: "天气", data: a.weather }, temperature: { text: "温度", data: a.temperature }, winddirection: { text: "风向", data: a.winddirection + "风" }, windpower: { text: "风力", data: a.windpower + "级" }, humidity: { text: "湿度", data: a.humidity + "%" } };return b;}var d, e;b.data.status && "1" == b.data.status ? b.data.lives ? (d = b.data.lives, d && d.length > 0 && (d = d[0], e = c(d), e["liveData"] = d, a.success(e))) : b.data.forecasts && b.data.forecasts[0] && a.success({ forecast: b.data.forecasts[0] }) : a.fail({ errCode: b.data.infocode, errMsg: b.data.info });}, fail: function fail(b) {a.fail({ errCode: "0", errMsg: b.errMsg || "" });} });}function e(e) {wx.request({ url: "https://restapi.amap.com/v3/geocode/regeo", data: { key: b.key, location: e, extensions: "all", s: c.s, platform: c.platform, appname: b.key, sdkversion: c.sdkversion, logversion: c.logversion }, method: "GET", header: { "content-type": "application/json" }, success: function success(b) {var c, e;b.data.status && "1" == b.data.status ? (e = b.data.regeocode, e.addressComponent ? c = e.addressComponent.adcode : e.aois && e.aois.length > 0 && (c = e.aois[0].adcode), d(c)) : a.fail({ errCode: b.data.infocode, errMsg: b.data.info });}, fail: function fail(b) {a.fail({ errCode: "0", errMsg: b.errMsg || "" });} });}var b = this,c = b.requestConfig;a.city ? d(a.city) : b.getWxLocation(a, function (a) {e(a);});}, AMapWX.prototype.getPoiAround = function (a) {function d(d) {var e = { key: b.key, location: d, s: c.s, platform: c.platform, appname: b.key, sdkversion: c.sdkversion, logversion: c.logversion };a.querytypes && (e["types"] = a.querytypes), a.querykeywords && (e["keywords"] = a.querykeywords), wx.request({ url: "https://restapi.amap.com/v3/place/around", data: e, method: "GET", header: { "content-type": "application/json" }, success: function success(b) {var c, d, e, f;if (b.data.status && "1" == b.data.status) {if (b = b.data, b && b.pois) {for (c = [], d = 0; d < b.pois.length; d++) {e = 0 == d ? a.iconPathSelected : a.iconPath, c.push({ latitude: parseFloat(b.pois[d].location.split(",")[1]), longitude: parseFloat(b.pois[d].location.split(",")[0]), iconPath: e, width: 22, height: 32, id: d, name: b.pois[d].name, address: b.pois[d].address });}f = { markers: c, poisData: b.pois }, a.success(f);}} else a.fail({ errCode: b.data.infocode, errMsg: b.data.info });}, fail: function fail(b) {a.fail({ errCode: "0", errMsg: b.errMsg || "" });} });}var b = this,c = b.requestConfig;a.location ? d(a.location) : b.getWxLocation(a, function (a) {d(a);});}, AMapWX.prototype.getStaticmap = function (a) {function f(b) {c.push("location=" + b), a.zoom && c.push("zoom=" + a.zoom), a.size && c.push("size=" + a.size), a.scale && c.push("scale=" + a.scale), a.markers && c.push("markers=" + a.markers), a.labels && c.push("labels=" + a.labels), a.paths && c.push("paths=" + a.paths), a.traffic && c.push("traffic=" + a.traffic);var e = d + c.join("&");a.success({ url: e });}var e,b = this,c = [],d = "https://restapi.amap.com/v3/staticmap?";c.push("key=" + b.key), e = b.requestConfig, c.push("s=" + e.s), c.push("platform=" + e.platform), c.push("appname=" + e.appname), c.push("sdkversion=" + e.sdkversion), c.push("logversion=" + e.logversion), a.location ? f(a.location) : b.getWxLocation(a, function (a) {f(a);});}, AMapWX.prototype.getInputtips = function (a) {var b = this,c = b.requestConfig,d = { key: b.key, s: c.s, platform: c.platform, appname: b.key, sdkversion: c.sdkversion, logversion: c.logversion };a.location && (d["location"] = a.location), a.keywords && (d["keywords"] = a.keywords), a.type && (d["type"] = a.type), a.city && (d["city"] = a.city), a.citylimit && (d["citylimit"] = a.citylimit), wx.request({ url: "https://restapi.amap.com/v3/assistant/inputtips", data: d, method: "GET", header: { "content-type": "application/json" }, success: function success(b) {b && b.data && b.data.tips && a.success({ tips: b.data.tips });}, fail: function fail(b) {a.fail({ errCode: "0", errMsg: b.errMsg || "" });} });}, AMapWX.prototype.getDrivingRoute = function (a) {var b = this,c = b.requestConfig,d = { key: b.key, s: c.s, platform: c.platform, appname: b.key, sdkversion: c.sdkversion, logversion: c.logversion };a.origin && (d["origin"] = a.origin), a.destination && (d["destination"] = a.destination), a.strategy && (d["strategy"] = a.strategy), a.waypoints && (d["waypoints"] = a.waypoints), a.avoidpolygons && (d["avoidpolygons"] = a.avoidpolygons), a.avoidroad && (d["avoidroad"] = a.avoidroad), wx.request({ url: "https://restapi.amap.com/v3/direction/driving", data: d, method: "GET", header: { "content-type": "application/json" }, success: function success(b) {b && b.data && b.data.route && a.success({ paths: b.data.route.paths, taxi_cost: b.data.route.taxi_cost || "" });}, fail: function fail(b) {a.fail({ errCode: "0", errMsg: b.errMsg || "" });} });}, AMapWX.prototype.getWalkingRoute = function (a) {var b = this,c = b.requestConfig,d = { key: b.key, s: c.s, platform: c.platform, appname: b.key, sdkversion: c.sdkversion, logversion: c.logversion };a.origin && (d["origin"] = a.origin), a.destination && (d["destination"] = a.destination), wx.request({ url: "https://restapi.amap.com/v3/direction/walking", data: d, method: "GET", header: { "content-type": "application/json" }, success: function success(b) {b && b.data && b.data.route && a.success({ paths: b.data.route.paths });}, fail: function fail(b) {a.fail({ errCode: "0", errMsg: b.errMsg || "" });} });}, AMapWX.prototype.getTransitRoute = function (a) {var b = this,c = b.requestConfig,d = { key: b.key, s: c.s, platform: c.platform, appname: b.key, sdkversion: c.sdkversion, logversion: c.logversion };a.origin && (d["origin"] = a.origin), a.destination && (d["destination"] = a.destination), a.strategy && (d["strategy"] = a.strategy), a.city && (d["city"] = a.city), a.cityd && (d["cityd"] = a.cityd), wx.request({ url: "https://restapi.amap.com/v3/direction/transit/integrated", data: d, method: "GET", header: { "content-type": "application/json" }, success: function success(b) {if (b && b.data && b.data.route) {var c = b.data.route;a.success({ distance: c.distance || "", taxi_cost: c.taxi_cost || "", transits: c.transits });}}, fail: function fail(b) {a.fail({ errCode: "0", errMsg: b.errMsg || "" });} });}, AMapWX.prototype.getRidingRoute = function (a) {var b = this,c = b.requestConfig,d = { key: b.key, s: c.s, platform: c.platform, appname: b.key, sdkversion: c.sdkversion, logversion: c.logversion };a.origin && (d["origin"] = a.origin), a.destination && (d["destination"] = a.destination), wx.request({ url: "https://restapi.amap.com/v4/direction/bicycling", data: d, method: "GET", header: { "content-type": "application/json" }, success: function success(b) {b && b.data && b.data.data && a.success({ paths: b.data.data.paths });}, fail: function fail(b) {a.fail({ errCode: "0", errMsg: b.errMsg || "" });} });}, module.exports.AMapWX = AMapWX;
 
 /***/ }),
 
@@ -9958,6 +9958,118 @@ internalMixin(Vue);
 /***/ }),
 
 /***/ 20:
+/*!****************************************************!*\
+  !*** /Users/gsheng/Downloads/new_fruit/api/api.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.listing2 = exports.publicing2 = exports.publicing = exports.listing = void 0;
+
+
+
+var _errdata = __webpack_require__(/*! api/errdata.js */ 21); // 封装请求：get post
+// 引进提示
+
+
+
+// GET带token
+var listing = function listing(urling, shopdata) {
+  return new Promise(function (resolve, reject) {
+    var setdata = uni.getStorageSync('usermen'); //这个不能放外面，放外面的话，项目一运行的时候就执行了，没登入前就执行了，肯定拿不到token了
+    shopdata.token = setdata;
+    uni.request({
+      url: urling,
+      method: 'GET',
+      data: shopdata }).
+
+    then(function (res) {
+      resolve(res[1]);
+
+    }).
+    catch(function (err) {
+      var errs = '服务器错误 请稍后再试';
+      _errdata.errdata.errlist(errs);
+      reject(err);
+    });
+  });
+};
+
+// GET不带token
+exports.listing = listing;var listing2 = function listing2(urling, shopdata) {
+  return new Promise(function (resolve, reject) {
+    // shopdata.token = setdata
+    uni.request({
+      url: urling,
+      method: 'GET',
+      data: shopdata }).
+
+    then(function (res) {
+      resolve(res[1]);
+
+    }).
+    catch(function (err) {
+      var errs = '服务器错误 请稍后再试';
+      _errdata.errdata.errlist(errs);
+      reject(err);
+    });
+  });
+};
+
+// POST请求,后台默认键值对方式
+exports.listing2 = listing2;var publicing = function publicing(urling, shopdata) {
+  return new Promise(function (resolve, reject) {
+    uni.request({
+      url: urling,
+      method: 'POST',
+      data: shopdata,
+      header: {
+        'content-type': 'application/x-www-form-urlencoded' } }).
+
+
+
+    then(function (res) {
+      resolve(res[1]);
+    }).
+    catch(function (err) {
+      var errs = '服务器错误 请稍后再试';
+      _errdata.errdata.errlist(errs);
+      reject(err);
+    });
+  });
+};
+
+// POST,Json格式请求
+exports.publicing = publicing;var publicing2 = function publicing2(urling, shopdata) {
+  return new Promise(function (resolve, reject) {
+    uni.request({
+      url: urling,
+      method: 'POST',
+      data: shopdata
+      // header: {
+      //     'content-type': 'application/x-www-form-urlencoded'
+      //    },
+    }).
+
+    then(function (res) {
+      resolve(res[1]);
+    }).
+    catch(function (err) {
+      var errs = '服务器错误 请稍后再试';
+      _errdata.errdata.errlist(errs);
+      reject(err);
+    });
+  });
+};
+
+//公用方法
+exports.publicing2 = publicing2;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 21:
 /*!********************************************************!*\
   !*** /Users/gsheng/Downloads/new_fruit/api/errdata.js ***!
   \********************************************************/
@@ -9978,7 +10090,7 @@ var errdata = {
 
 /***/ }),
 
-/***/ 21:
+/***/ 22:
 /*!********************************************************!*\
   !*** /Users/gsheng/Downloads/new_fruit/api/request.js ***!
   \********************************************************/
@@ -9986,7 +10098,7 @@ var errdata = {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.uploadFiles = exports.getPredictInfo = exports.getPredictList = exports.getAgreeInfo = exports.getAgreeList = exports.getMsgInfo = exports.getEvaluateList = exports.orderCount = exports.getBeConfirmed = exports.PostDataById = exports.postAfterCen = exports.posAfterDetails = exports.posAfterSaleList = exports.postCancelPay = exports.posAfterSale = exports.getAfterSaleData = exports.postConfirmOrder = exports.postDelOrders = exports.postCancelOrder = exports.getDetails = exports.postAgainOrder = exports.postSettle = exports.getMsg = exports.postCancelPraise = exports.getSubmitOrder = exports.postAddressList = exports.postupdateClient = exports.getClient = exports.getNewsAll = exports.postRecentlyDel = exports.getselectSuper = exports.getselectSeasonal = exports.getselectHot = exports.getselectImport = exports.getMyOrder = exports.postOrderPay = exports.getRecently = exports.postPraise = exports.postDelLike = exports.getLike = exports.postLike = exports.postUpOrder = exports.postDelOrder = exports.getCart = exports.postmyOrder = exports.postSaveStore = exports.getActivity = exports.wxloginurl = exports.imgurl = exports.postOrder = exports.url = exports.getAttribute = exports.getGoodsall = exports.postdelist = exports.getClassify = exports.postActivity = exports.getsearch = exports.loginis = exports.getIndex = void 0; // 公用地址
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.uploadFiles = exports.orderHistory = exports.getPredictInfo = exports.getPredictList = exports.getAgreeInfo = exports.getAgreeList = exports.getMsgInfo = exports.getEvaluateList = exports.orderCount = exports.getBeConfirmed = exports.PostDataById = exports.postAfterCen = exports.posAfterDetails = exports.posAfterSaleList = exports.postCancelPay = exports.posAfterSale = exports.getAfterSaleData = exports.postConfirmOrder = exports.postDelOrders = exports.postCancelOrder = exports.getDetails = exports.postAgainOrder = exports.postSettle = exports.getMsg = exports.postCancelPraise = exports.getSubmitOrder = exports.postAddressList = exports.postupdateClient = exports.getClient = exports.getNewsAll = exports.postRecentlyDel = exports.getselectSuper = exports.getselectSeasonal = exports.getselectHot = exports.getselectImport = exports.getMyOrder = exports.postOrderPay = exports.getRecently = exports.postPraise = exports.postDelLike = exports.getLike = exports.postLike = exports.postUpOrder = exports.postDelOrder = exports.getCart = exports.postmyOrder = exports.postSaveStore = exports.getActivity = exports.wxloginurl = exports.imgurl = exports.postOrder = exports.url = exports.getAttribute = exports.getGoodsall = exports.postdelist = exports.getClassify = exports.postActivity = exports.getsearch = exports.loginis = exports.getIndex = void 0; // 公用地址
 
 
 //测试用
@@ -10041,8 +10153,11 @@ exports.getMsg = getMsg;var getMsgInfo = "".concat(url, "api/wx/index/getMsg");
 //商品详情页
 exports.getMsgInfo = getMsgInfo;var postdelist = "".concat(url, "api/wx/goods/getById");
 
+//订单详情
+exports.postdelist = postdelist;var orderHistory = "".concat(url, "api/wx/goods/getByIdHistory");
+
 //商品找水果
-exports.postdelist = postdelist;var getGoodsall = "".concat(url, "api/wx/goods/all");
+exports.orderHistory = orderHistory;var getGoodsall = "".concat(url, "api/wx/goods/all");
 
 //品种种类
 exports.getGoodsall = getGoodsall;var getAttribute = "".concat(url, "api/wx/goods/selectAttribute");
@@ -10268,6 +10383,7 @@ exports.getPredictInfo = getPredictInfo;
 
 
 
+
 // 导出文件上传
 var uploadFiles = function uploadFiles(callback) {
   uni.chooseImage({
@@ -10353,98 +10469,7 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 54:
-/*!********************************************************!*\
-  !*** /Users/gsheng/Downloads/new_fruit/login/login.js ***!
-  \********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 55));
-
-
-var _api = __webpack_require__(/*! ../api/api.js */ 19);
-
-var _request = __webpack_require__(/*! ../api/request.js */ 21);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}var _console =
-console,log = _console.log;var
-
-logins = /*#__PURE__*/function () {
-  // 构造方法执行：必须是类已经实例化
-  function logins(wxuser) {_classCallCheck(this, logins);
-    this.wxuser = wxuser;
-    log(wxuser);
-  }
-
-  // 先获取发起请求的必须条件
-  _createClass(logins, [{ key: "listing", value: function () {var _listing = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var userdata, usermen;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
-
-                  this.wxlogin());case 2:userdata = _context.sent;
-                log(userdata);
-                // 请求接口：登录
-                _context.next = 6;return this.gologin(userdata);case 6:usermen = _context.sent;return _context.abrupt("return",
-                usermen);case 8:case "end":return _context.stop();}}}, _callee, this);}));function listing() {return _listing.apply(this, arguments);}return listing;}()
-
-
-    // 拿到用户头像，昵称，code
-  }, { key: "wxlogin", value: function wxlogin() {
-      var wxuser = this.wxuser;
-      return new Promise(function (resolve, reject) {
-        if (wxuser != undefined) {
-          wx.login({
-            success: function success(res) {
-              log(res);
-              var data = {
-                appid: 'wxb820c791e554616c',
-                secret: 'adb3d89546af6e74f2ccb8e16aba51ae',
-                nickName: wxuser.nickName,
-                avatarUrl: wxuser.avatarUrl,
-                code: res.code };
-
-              resolve(data);
-            },
-            fail: function fail(err) {
-              log(err);
-              reject('获取code失败');
-            } });
-
-        } else {
-          reject('FAIL');
-        }
-      });
-    }
-
-    // 请求接口：登录
-  }, { key: "gologin", value: function gologin(userdata) {
-      return new Promise(function (resolve, reject) {
-        (0, _api.publicing)(_request.wxloginurl, userdata).
-        then(function (res) {
-          log(res);
-          if (res.data.msg == 'success') {
-            // 存入本地
-            resolve('SUCCESS');
-            uni.setStorageSync('usermen', res.data.datas);
-          }
-        }).
-        catch(function (err) {
-          log(err);
-        });
-      });
-    }
-
-
-
-    // 获取用户信息和code
-  }]);return logins;}();
-
-
-// 模块
-module.exports = logins;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
-
-/***/ 548:
+/***/ 549:
 /*!************************************************************************************!*\
   !*** /Users/gsheng/Downloads/new_fruit/components/jyf-parser/libs/MpHtmlParser.js ***!
   \************************************************************************************/
@@ -10458,9 +10483,9 @@ module.exports = logins;
  * @author JinYufeng
  * @listens MIT
  */
-var cfg = __webpack_require__(/*! ./config.js */ 549),
+var cfg = __webpack_require__(/*! ./config.js */ 550),
 blankChar = cfg.blankChar,
-CssHandler = __webpack_require__(/*! ./CssHandler.js */ 550),
+CssHandler = __webpack_require__(/*! ./CssHandler.js */ 551),
 windowWidth = uni.getSystemInfoSync().windowWidth;
 var emoji;
 
@@ -10990,7 +11015,98 @@ module.exports = MpHtmlParser;
 
 /***/ }),
 
-/***/ 549:
+/***/ 55:
+/*!********************************************************!*\
+  !*** /Users/gsheng/Downloads/new_fruit/login/login.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 56));
+
+
+var _api = __webpack_require__(/*! ../api/api.js */ 20);
+
+var _request = __webpack_require__(/*! ../api/request.js */ 22);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}var _console =
+console,log = _console.log;var
+
+logins = /*#__PURE__*/function () {
+  // 构造方法执行：必须是类已经实例化
+  function logins(wxuser) {_classCallCheck(this, logins);
+    this.wxuser = wxuser;
+    log(wxuser);
+  }
+
+  // 先获取发起请求的必须条件
+  _createClass(logins, [{ key: "listing", value: function () {var _listing = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var userdata, usermen;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
+
+                  this.wxlogin());case 2:userdata = _context.sent;
+                log(userdata);
+                // 请求接口：登录
+                _context.next = 6;return this.gologin(userdata);case 6:usermen = _context.sent;return _context.abrupt("return",
+                usermen);case 8:case "end":return _context.stop();}}}, _callee, this);}));function listing() {return _listing.apply(this, arguments);}return listing;}()
+
+
+    // 拿到用户头像，昵称，code
+  }, { key: "wxlogin", value: function wxlogin() {
+      var wxuser = this.wxuser;
+      return new Promise(function (resolve, reject) {
+        if (wxuser != undefined) {
+          wx.login({
+            success: function success(res) {
+              log(res);
+              var data = {
+                appid: 'wxb820c791e554616c',
+                secret: 'adb3d89546af6e74f2ccb8e16aba51ae',
+                nickName: wxuser.nickName,
+                avatarUrl: wxuser.avatarUrl,
+                code: res.code };
+
+              resolve(data);
+            },
+            fail: function fail(err) {
+              log(err);
+              reject('获取code失败');
+            } });
+
+        } else {
+          reject('FAIL');
+        }
+      });
+    }
+
+    // 请求接口：登录
+  }, { key: "gologin", value: function gologin(userdata) {
+      return new Promise(function (resolve, reject) {
+        (0, _api.publicing)(_request.wxloginurl, userdata).
+        then(function (res) {
+          log(res);
+          if (res.data.msg == 'success') {
+            // 存入本地
+            resolve('SUCCESS');
+            uni.setStorageSync('usermen', res.data.datas);
+          }
+        }).
+        catch(function (err) {
+          log(err);
+        });
+      });
+    }
+
+
+
+    // 获取用户信息和code
+  }]);return logins;}();
+
+
+// 模块
+module.exports = logins;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 550:
 /*!******************************************************************************!*\
   !*** /Users/gsheng/Downloads/new_fruit/components/jyf-parser/libs/config.js ***!
   \******************************************************************************/
@@ -11080,25 +11196,14 @@ module.exports = cfg;
 
 /***/ }),
 
-/***/ 55:
-/*!**********************************************************!*\
-  !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
-  \**********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! regenerator-runtime */ 56);
-
-/***/ }),
-
-/***/ 550:
+/***/ 551:
 /*!**********************************************************************************!*\
   !*** /Users/gsheng/Downloads/new_fruit/components/jyf-parser/libs/CssHandler.js ***!
   \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var cfg = __webpack_require__(/*! ./config.js */ 549),
+var cfg = __webpack_require__(/*! ./config.js */ 550),
 isLetter = function isLetter(c) {return c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z';};
 
 function CssHandler(tagStyle) {
@@ -11199,6 +11304,17 @@ parser.prototype.Content = function () {
 /***/ }),
 
 /***/ 56:
+/*!**********************************************************!*\
+  !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! regenerator-runtime */ 57);
+
+/***/ }),
+
+/***/ 57:
 /*!************************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime-module.js ***!
   \************************************************************/
@@ -11229,7 +11345,7 @@ var oldRuntime = hadRuntime && g.regeneratorRuntime;
 // Force reevalutation of runtime.js.
 g.regeneratorRuntime = undefined;
 
-module.exports = __webpack_require__(/*! ./runtime */ 57);
+module.exports = __webpack_require__(/*! ./runtime */ 58);
 
 if (hadRuntime) {
   // Restore the original runtime.
@@ -11246,7 +11362,7 @@ if (hadRuntime) {
 
 /***/ }),
 
-/***/ 57:
+/***/ 58:
 /*!*****************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime.js ***!
   \*****************************************************/
@@ -11978,7 +12094,7 @@ if (hadRuntime) {
 
 /***/ }),
 
-/***/ 82:
+/***/ 83:
 /*!*******************************************************************************!*\
   !*** /Users/gsheng/Downloads/new_fruit/common/tui-clipboard/tui-clipboard.js ***!
   \*******************************************************************************/
@@ -12038,107 +12154,6 @@ var thorui = {
 module.exports = {
   getClipboardData: thorui.getClipboardData };
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
-
-/***/ 99:
-/*!*******************************************************!*\
-  !*** /Users/gsheng/Downloads/new_fruit/utils/util.js ***!
-  \*******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-/**
- * 数据处理
- * @author echo.
- * @version 1.5.0
- **/
-var utils = {
-  //去空格
-  trim: function trim(value) {
-    return value.replace(/(^\s*)|(\s*$)/g, "");
-  },
-  //内容替换
-  replaceAll: function replaceAll(text, repstr, newstr) {
-    return text.replace(new RegExp(repstr, "gm"), newstr);
-  },
-  //格式化手机号码
-  formatNumber: function formatNumber(num) {
-    return num.length === 11 ? num.replace(/^(\d{3})\d{4}(\d{4})$/, '$1****$2') : num;
-  },
-  //金额格式化
-  rmoney: function rmoney(money) {
-    return parseFloat(money).toFixed(2).toString().split('').reverse().join('').replace(/(\d{3})/g, '$1,').replace(
-    /\,$/, '').split('').reverse().join('');
-  },
-  //日期格式化
-  formatDate: function formatDate(formatStr, fdate) {
-    if (fdate) {
-      if (~fdate.indexOf('.')) {
-        fdate = fdate.substring(0, fdate.indexOf('.'));
-      }
-      fdate = fdate.toString().replace('T', ' ').replace(/\-/g, '/');
-      var fTime,fStr = 'ymdhis';
-      if (!formatStr)
-      formatStr = "y-m-d h:i:s";
-      if (fdate)
-      fTime = new Date(fdate);else
-
-      fTime = new Date();
-      var month = fTime.getMonth() + 1;
-      var day = fTime.getDate();
-      var hours = fTime.getHours();
-      var minu = fTime.getMinutes();
-      var second = fTime.getSeconds();
-      month = month < 10 ? '0' + month : month;
-      day = day < 10 ? '0' + day : day;
-      hours = hours < 10 ? '0' + hours : hours;
-      minu = minu < 10 ? '0' + minu : minu;
-      second = second < 10 ? '0' + second : second;
-      var formatArr = [
-      fTime.getFullYear().toString(),
-      month.toString(),
-      day.toString(),
-      hours.toString(),
-      minu.toString(),
-      second.toString()];
-
-      for (var i = 0; i < formatArr.length; i++) {
-        formatStr = formatStr.replace(fStr.charAt(i), formatArr[i]);
-      }
-      return formatStr;
-    } else {
-      return "";
-    }
-  },
-  rgbToHex: function rgbToHex(r, g, b) {
-    return "#" + utils.toHex(r) + utils.toHex(g) + utils.toHex(b);
-  },
-  toHex: function toHex(n) {
-    n = parseInt(n, 10);
-    if (isNaN(n)) return "00";
-    n = Math.max(0, Math.min(n, 255));
-    return "0123456789ABCDEF".charAt((n - n % 16) / 16) +
-    "0123456789ABCDEF".charAt(n % 16);
-  },
-  hexToRgb: function hexToRgb(hex) {
-    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result ? {
-      r: parseInt(result[1], 16),
-      g: parseInt(result[2], 16),
-      b: parseInt(result[3], 16) } :
-    null;
-  } };
-
-
-module.exports = {
-  trim: utils.trim,
-  replaceAll: utils.replaceAll,
-  formatNumber: utils.formatNumber,
-  rmoney: utils.rmoney,
-  formatDate: utils.formatDate,
-  rgbToHex: utils.rgbToHex,
-  hexToRgb: utils.hexToRgb };
 
 /***/ })
 

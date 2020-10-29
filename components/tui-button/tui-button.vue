@@ -300,7 +300,7 @@
 		box-sizing: border-box;
 		left: 0;
 		top: 0;
-		border-radius: 12rpx;
+		border-radius: 40rpx;
 		border: 0;
 	}
 
@@ -334,6 +334,7 @@
 
 	.tui-outline-hover {
 		opacity: 0.5;
+		border-radius: 40rpx;
 	}
 
 	.tui-primary-hover {

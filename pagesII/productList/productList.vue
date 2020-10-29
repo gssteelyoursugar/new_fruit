@@ -931,6 +931,8 @@
 			checkDing(index, id, title) {
 				this.numNull = index
 				this.slMangguo = title
+				this.idList = []
+				this.allVariety = false
 				this.varietyId = id
 				this.ShopIng()
 				this.dropScreenShow = !this.dropScreenShow

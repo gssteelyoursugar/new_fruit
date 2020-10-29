@@ -17,7 +17,7 @@
 		</view>
 
 		<!--选项卡一-->
-		<view :class="[currentTab === 0 ? 'actineclass' : 'errorclass']">
+		<view :class="[currentTab === 0 ? 'actineclass' : 'errorclass']" :style="{paddingTop:navHeight + 40+ 'px'}">
 			<view class="tui-banner-swiper">
 				<swiper :autoplay="false" :interval="5000" :duration="150" :circular="true" :style="{ height: 750 + 'rpx' }"
 				 @change="bannerChange">
@@ -246,12 +246,13 @@
 		</view>
 
 		<!-- 选项卡二 -->
-		<view :class="[currentTab === 1 ? 'actineclass' : 'errorclass']" style="padding-top: 100px;">
+		<view :class="[currentTab === 1 ? 'actineclass' : 'errorclass']" :style="{paddingTop:navHeight + 40+ 'px'}">
 			<view class="tui-pro-detail">
 				<!-- 免赔情况 -->
 				<view class="tui-height-full">
 					<view class="tui-title-line"><text>免赔情况</text></view>
-					<view class="tui-height-flex tui-height-flex-top">
+					<jyf-parser selectable  :html="shopListdata.deductible"></jyf-parser>
+					<!-- <view class="tui-height-flex tui-height-flex-top">
 						<view class="tui-left-one1">
 							<text class="iconfont icon-quan"></text>
 							<text class="tui-name-class">果子颜色不一</text>
@@ -270,12 +271,13 @@
 							<text class="iconfont icon-quan"></text>
 							<text class="tui-name-class">轻微流浆</text>
 						</view>
-					</view>
+					</view> -->
 				</view>
 				<!-- 可售后情况 -->
 				<view class="tui-height-full ">
 					<view class="tui-title-line"><text>可售后情况</text></view>
-					<view class="tui-height-flex tui-height-flex-top">
+					<jyf-parser selectable  :html="shopListdata.afterSale"></jyf-parser>
+					<!-- <view class="tui-height-flex tui-height-flex-top">
 						<view class="tui-left-one1">
 							<text class="iconfont icon-quan"></text>
 							<text class="tui-name-class">摔坏</text>
@@ -294,11 +296,12 @@
 							<text class="iconfont icon-quan"></text>
 							<text class="tui-name-class">单果重量不达标</text>
 						</view>
-					</view>
+					</view> -->
 				</view>
 				<view class="tui-height-full tui-full-bac">
 					<view class="tui-title-line"><text>免赔情况</text></view>
-					<view class="shuoming">
+					<jyf-parser selectable  :html="shopListdata.regulation"></jyf-parser>
+					<!-- <view class="shuoming">
 						在相关法规明确规定网络销售的鲜活易腐类商品不适用
 						<text>“七天无理由退换货”</text>
 						规则的情况下，圈果公司基于相信商品品质、信任可敬顾客的初衷，主动推出退换货服务，得到广大顾客的赞赏和支持，形成了良好互动，为提升顾客消费体验、构建和谐商业环境起到正向作用。
@@ -307,7 +310,7 @@
 						，具体规则内容可到
 						<text>“我的”-“我的服务”-“规则说明”</text>
 						查阅全部内容。
-					</view>
+					</view> -->
 				</view>
 			</view>
 		</view>
@@ -1396,7 +1399,6 @@
 
 	.tui-banner-swiper {
 		position: relative;
-		padding-top: 220rpx;
 	}
 
 	.tui-banner-tag {

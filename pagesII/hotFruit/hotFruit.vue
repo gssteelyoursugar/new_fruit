@@ -289,7 +289,8 @@
 	}
 
 	.tui-rank-list {
-		padding: 0 30rpx;
+		padding: 30rpx;
+		overflow: hidden;
 	}
 
 	.tui-my-bg {
@@ -314,10 +315,9 @@
 
 	.tui-rink-sceate {
 		border-radius: 60rpx 60rpx 0 0;
-		padding: 18rpx 0;
 		position: relative;
-		top: -100rpx;
 		background-color: #fff;
+		margin-top: -60rpx;
 	}
 
 	.tui-cent-box {
@@ -407,8 +407,13 @@
 	}
 
 	.tui-tab-rank {
-		margin: 10rpx 0;
-		border-bottom: 1rpx solid #ccc;
+		/* margin: 10rpx 0; */
+		overflow: hidden;
+		border-bottom: 1rpx solid #e5e5e5;
+	}
+	.tui-tab-rank:last-child{
+		/* margin: 10rpx 0; */
+		border-bottom: none;
 	}
 
 	.actineclass {
@@ -502,7 +507,6 @@
 
 	.tui-banner-swiper {
 		position: relative;
-		height: 400rpx;
 		overflow: hidden;
 
 	}
