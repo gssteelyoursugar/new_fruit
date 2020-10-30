@@ -47,7 +47,6 @@
 							<image :src="item.url" mode="aspectFit" class="iconImg icon-right"></image> {{item.title}}
 						</view>
 					</block>
-
 				</view>
 			</view>
 			<!-- 金刚区 -->
