@@ -4,10 +4,23 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
-		"minified": true
+		"minified": true,
+		"newFeature": true,
+		"coverView": true,
+		"autoAudits": false,
+		"showShadowRootInWxmlPanel": true,
+		"scopeDataCheck": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		}
 	},
 	"compileType": "miniprogram",
 	"libVersion": "",
@@ -24,15 +37,7 @@
 			"current": -1,
 			"list": []
 		},
-		"plugin": {
-			"current": -1,
-			"list": []
-		},
 		"game": {
-			"current": -1,
-			"list": []
-		},
-		"gamePlugin": {
 			"current": -1,
 			"list": []
 		},
@@ -40,56 +45,40 @@
 			"current": 1,
 			"list": [
 				{
-					"id": 0,
 					"name": "我的123",
-					"pathName": "pages/my/my",
-					"query": ""
+					"query": "",
+					"id": 0,
+					"pathName": "pages/my/my"
 				},
 				{
-					"id": 1,
 					"name": "进货单",
-					"pathName": "pages/order/order",
-					"query": ""
+					"query": "",
+					"id": 1,
+					"pathName": "pages/order/order"
 				},
 				{
-					"id": 2,
 					"name": "我的订单",
-					"pathName": "pagesII/myOrder/myOrder",
-					"query": "index=0",
-					"scene": null
+					"query": "",
+					"id": 2,
+					"pathName": "pagesII/myOrder/myOrder"
 				},
 				{
-					"id": 3,
 					"name": "详情",
-					"pathName": "pagesIII/productDetail/productDetail",
-					"query": "id=1314874387086049280&__id__=2",
-					"scene": null
+					"query": "id=1314864767386910720&__id__=1",
+					"id": 3,
+					"pathName": "pagesIII/productDetail/productDetail"
 				},
 				{
-					"id": 4,
 					"name": "确认订单",
-					"pathName": "pagesIII/submitOrder/submitOrder",
-					"query": "ids=1311225686585892864&__id__=1"
+					"query": "ids=1311225686585892864&__id__=1",
+					"id": 4,
+					"pathName": "pagesIII/submitOrder/submitOrder"
 				},
 				{
-					"id": 5,
 					"name": "支付成功",
-					"pathName": "pagesIII/PayOK/PayOK",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "热门水果",
-					"pathName": "pagesII/hotFruit/hotFruit",
-					"query": "index=0",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "应季水果",
-					"pathName": "pagesII/seasonal/seasonal",
-					"query": "index=0",
-					"scene": null
+					"query": "",
+					"id": 5,
+					"pathName": "pagesIII/PayOK/PayOK"
 				}
 			]
 		}

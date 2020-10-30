@@ -30,7 +30,7 @@
 						请认证店铺信息
 					</view>
 				</view>
-				<view class="weather-tui-right ">
+				<view class="weather-tui-right">
 					<image src="../../static/images/tianqi@2x.png" mode="aspectFit" class="weather-yun-icon"></image>
 					<!-- <text class="iconfont icon-yun city"></text> -->
 					<text>30℃</text>
@@ -898,12 +898,9 @@
 			// 天气
 			tian(e) {
 				uni.request({
-					url: 'https://restapi.amap.com/v3/weather/weatherInfo', //高德地图查询天气
+					url: "https://restapi.amap.com/v3/weather/weatherInfo?address=北京", //高德地图查询天气
 					method: 'GET',
-					data: {
-						key: "69d24a06f6710467afea85cb0c8db3e1",
-						city: e,
-					},
+					
 					success: (res) => {
 						// this.temperature = res.data.lives[0].temperature //气温
 						// this.citys = res.data.lives[0].city //获取区域
@@ -942,22 +939,18 @@
 			this.boxHeight = navHeight - statusBarHeight //导航栏高度
 			this.navHeight = navHeight
 			// #endif
-		// 	this.amapPlugin = new amap.AMapWX({
-		// 		key: this.key
-		// 	});
-		
-		// 	this.amapPlugin.getRegeo({
-		// 		success: (data) => {
-		// 			console.log("高德天气：", data)
-		// 			// this.addressName = data[0].name;
-		// 			this.city = data[0].regeocodeData.addressComponent.city.replace(/市/g, ''); //把"市"去掉
-		// 			console.log("city",city)
-		// 			let adData = data[0].regeocodeData.addressComponent.adcode //拿到城市的编码用于查寻天气
-		// 			//使用说明https://lbs.amap.com/api/webservice/guide/api/weatherinfo/#instructions
-		// 			console.log(adData)
-		// 			this.tian(adData)
-		// 		}
-		// 	});
+			
+			// this.amapPlugin = new amap.AMapWX({
+			// 	key: this.key,
+			// });
+			// this.amapPlugin.getWeather({
+			// 	city: '110000',
+			// 	success: (data) => {
+			// 		console.log("高德天气：", data)
+			// 		// this.addressName = data[0].name;
+			// 		// this.city = data[0].regeocodeData.addressComponent.city.replace(/市/g, ''); //把"市"去掉
+			// 	}
+			// });
 			setTimeout(() => {
 				this.showAuthTips = false
 			}, 5000)
@@ -971,6 +964,17 @@
 		onShow() {
 			this.getMerchants()
 			this.getHomelist()
+			this.amapPlugin = new amap.AMapWX({
+				key: this.key,
+			});
+			this.amapPlugin.getWeather({
+				city: '110000',
+				success: (data) => {
+					console.log("高德天气：", data)
+					// this.addressName = data[0].name;
+					// this.city = data[0].regeocodeData.addressComponent.city.replace(/市/g, ''); //把"市"去掉
+				}
+			});
 		},
 		// 转发
 		onShareAppMessage: function() {
