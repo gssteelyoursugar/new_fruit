@@ -77,27 +77,27 @@
 				<view class="goods-item">
 					<!-- v-for="item of 2" :key="item" -->
 					<view class="item-img">
-						<image :src="orderObj.url" mode=""></image>
+						<image :src="goodsData.url" mode=""></image>
 					</view>
 					<view class="item-info">
 						<view class="info-title">
-							<text v-for="(item,index) of orderObj.labelList" :key="index">{{item.name}}</text>
-							<text>{{orderObj.name}}</text>
+							<text v-for="(item,index) of goodsData.labelList" :key="index">{{item.name}}</text>
+							<text>{{goodsData.name}}</text>
 						</view>
 						<view class="info-desc">
 							<!-- <view>5斤装</view> -->
 							<view></view>
-							<view><text>X</text>{{orderObj.goods_number}}</view>
+							<view><text>X</text>{{goodsData.goodsNumber}}</view>
 						</view>
 						<view class="info-price">
 							<view class="left-price">
 								<text>￥</text>
-								<text>{{orderObj.goods_price}}</text>
+								<text>{{goodsData.goodsPrice}}</text>
 								<text>元</text>
 							</view>
 							<view class="right-price">
 								<text>实付:</text>
-								<text>{{orderObj.order_total_price}}</text>
+								<text>{{goodsData.orderTotalPrice}}</text>
 								<text>(含运费)</text>
 							</view>
 						</view>
@@ -138,55 +138,54 @@
 				</view>
 				<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
 					<view class="tui-left-one">
-						<text class="tui-text-left tui-title-class">果品星级</text>
+						<text class="tui-text-left tui-title-class self-left">果品星级</text>
 						<tui-rate :current="goodsData.fruitStar" active="#ff7900" :hollow="true" :disabled="true" :size="16"></tui-rate>
 					</view>
 					<view class="tui-left-one">
-						<text class=" tui-text-left tui-title-class">口感星级</text>
+						<text class=" tui-text-left tui-title-class self-left">口感星级</text>
 						<tui-rate :current="goodsData.tasteLevel" active="#ff7900" :hollow="true" :disabled="true" :size="16"></tui-rate>
 					</view>
 
 				</view>
 				<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
 					<view class="tui-left-one">
-						<text class="tui-text-left tui-title-class">果色星级</text>
+						<text class="tui-text-left tui-title-class self-left">果色星级</text>
 						<tui-rate :current="goodsData.colorLevel" active="#ff7900" :hollow="true" :disabled="true" :size="16"></tui-rate>
 					</view>
 					<view class="tui-left-one">
 						<text class="tui-text-left tui-title-class">外观星级</text>
-						<tui-rate :current="goodsData.shapeLevel" active="#ff7900" :hollow="true" :disabled="true" :size="16"></tui-rate>
+						<tui-rate :current="goodsData.facadeLevel" active="#ff7900" :hollow="true" :disabled="true" :size="16"></tui-rate>
+					</view>
+				</view>
+				<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
+					<view class="tui-left-one2">
+						<text class="tui-text-left tui-title-class self-left">果径大小</text>
+						<text class=" tui-text-left tui-title-class self-right">{{goodsData.size || 0}}mm</text>
+					</view>
+					<view class="tui-right-one" style="flex: 4;">
+						<text class=" tui-text-left tui-title-class self-left">不良率</text>
+						<text class=" tui-text-left tui-title-class self-right">{{goodsData.rejectRatio|| 0}}%</text>
+					</view>
+				</view>
+				<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
+					<view class="tui-left-one2">
+						<text class="tui-text-left tui-title-class self-left">糖分</text>
+						<text class="tui-text-left tui-title-class self-right">{{goodsData.sugar || 0}}%</text>
+					</view>
+					<view class="tui-right-one" style="flex: 4;">
+						<text class="tui-text-left tui-title-class self-left">酸度</text>
+						<text class="tui-text-left tui-title-class self-right">{{goodsData.acidity || 0}}%</text>
 					</view>
 
 				</view>
 				<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
 					<view class="tui-left-one2">
-						<text class="tui-text-left tui-title-class">果径大小</text>
-						<text class=" tui-text-left tui-title-class">{{goodsData.size}}mm</text>
+						<text class="tui-text-left tui-title-class self-left">水分</text>
+						<text class="tui-text-left tui-title-class self-right">{{goodsData.moisture || 0}}%</text>
 					</view>
 					<view class="tui-right-one" style="flex: 4;">
-						<text class=" tui-text-left tui-title-class ">不良率</text>
-						<text class=" tui-text-left tui-title-class">{{goodsData.rejectRatio|| 0}}%</text>
-					</view>
-				</view>
-				<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
-					<view class="tui-left-one2">
-						<text class="tui-text-left tui-title-class">糖分</text>
-						<text class=" tui-text-left tui-title-class">{{goodsData.sugar || 0}}%</text>
-					</view>
-					<view class="tui-right-one" style="flex: 4;">
-						<text class="tui-text-left tui-title-class">酸度</text>
-						<text class="tui-text-left tui-title-class">{{goodsData.acidity || 0}}%</text>
-					</view>
-
-				</view>
-				<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
-					<view class="tui-left-one2">
-						<text class="tui-text-left tui-title-class">水分</text>
-						<text class="tui-text-left tui-title-class">{{goodsData.moisture || 0}}%</text>
-					</view>
-					<view class="tui-right-one" style="flex: 4;">
-						<text class="tui-text-left tui-title-class">硬度</text>
-						<text class="tui-text-left tui-title-class">{{goodsData.hardness || 0}}kg/.co</text>
+						<text class="tui-text-left tui-title-class self-left">硬度</text>
+						<text class="tui-text-left tui-title-class self-right">{{goodsData.hardness || 0}}kg/.co</text>
 					</view>
 
 				</view>
@@ -235,7 +234,10 @@
 				<view class="tui-title-line">
 					<text>免赔情况</text>
 				</view>
-				<view class="tui-height-flex tui-height-flex-top">
+				<view>
+					<jyf-parser selectable @linkpress="clickLink" :html="goodsData.deductible"></jyf-parser>
+				</view>
+				<!-- <view class="tui-height-flex tui-height-flex-top">
 					<view class="tui-left-one1">
 						<text class="iconfont icon-quan"></text><text class="tui-name-class">果子颜色不一</text>
 					</view>
@@ -252,7 +254,7 @@
 						<text class="iconfont icon-quan"></text><text class="tui-name-class">轻微流浆</text>
 					</view>
 
-				</view>
+				</view> -->
 
 			</view>
 			<!-- 可售后情况 -->
@@ -260,7 +262,12 @@
 				<view class="tui-title-line">
 					<text>可售后情况</text>
 				</view>
-				<view class="tui-height-flex tui-height-flex-top">
+				
+				<view>
+					<jyf-parser selectable @linkpress="clickLink" :html="goodsData.afterSale"></jyf-parser>
+				</view>
+				
+				<!-- <view class="tui-height-flex tui-height-flex-top">
 					<view class="tui-left-one1">
 						<text class="iconfont icon-quan"></text><text class="tui-name-class">摔坏</text>
 					</view>
@@ -277,7 +284,7 @@
 						<text class="iconfont icon-quan"></text><text class="tui-name-class">单果重量不达标</text>
 					</view>
 
-				</view>
+				</view> -->
 			</view>
 
 		</view>
@@ -330,11 +337,12 @@
 				listing(getDetails, data).then(res => {
 					this.orderObj = res.data.data[0]
 					let data = {
-						id: this.orderObj.wx_goods_id,
+						id: this.orderObj.goods_id,
 						token: setdata
 					}
-					publicing(postdelist, data).then(res => {
+					publicing(orderHistory, data).then(res => {
 						this.goodsData = res.data.data
+						console.log(this.goodsData)
 					})
 				})
 			},
@@ -369,7 +377,7 @@
 		.address-wrap {
 			background: #fff;
 			border-radius: 30rpx;
-			padding: 20rpx 48rpx;
+			padding: 40rpx 48rpx;
 			margin: 20rpx 0;
 
 			.user-phone-name {
@@ -452,7 +460,7 @@
 					.info-item-left {
 						color: #8C8C8C;
 						font-size: 28rpx;
-						font-weight: 500;
+						font-weight: 400;
 						width: 30%;
 					}
 
@@ -541,7 +549,7 @@
 								&:first-child {
 									background: #00C52A;
 									font-size: 24rpx;
-									border-radius: 10rpx 2rpx 10rpx 2rpx;
+									border-radius: 14rpx 2rpx 14rpx 2rpx;
 									color: #fff;
 									margin-right: 4rpx;
 									padding: 2rpx 4rpx;
@@ -574,6 +582,8 @@
 
 									text {
 										font-size: 24rpx;
+										margin-right: 6rpx;
+
 									}
 								}
 							}
@@ -589,6 +599,7 @@
 
 									&:first-child {
 										font-size: 16rpx;
+										margin-right: 4rpx;
 									}
 
 									&:nth-child(2) {
@@ -603,6 +614,7 @@
 							}
 
 							.right-price {
+								font-weight: 500;
 								text {
 									color: #666666;
 
@@ -641,16 +653,23 @@
 					display: flex;
 					align-items: center;
 					font-size: 28rpx;
-					width: 50%;
 					padding: 6rpx 0;
+					&:nth-child(odd) {
+						width: 58%;
+					}
+					&:nth-child(even) {
+						width: 42%;
+					}
 
 					.left-item {
 						color: #939297;
+						font-weight: 400;
 					}
 
 					.right-item {
 						color: #333;
 						margin-left: 16rpx;
+						font-weight: 400;
 					}
 				}
 			}
@@ -809,5 +828,14 @@
 		flex: 3;
 		display: flex;
 		align-items: center;
+	}
+	.self-left {
+		min-width: 120rpx;
+		width: 120rpx;
+		display: inline-block;
+
+	}
+	.self-right {
+		color: #333;
 	}
 </style>

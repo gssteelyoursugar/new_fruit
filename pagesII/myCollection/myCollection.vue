@@ -9,8 +9,8 @@
 			</view>
 		</view>
 
-		<view class="container-img " v-if="!modaishow && likeDatas.length == 0">
-			<image src="../../static/images/orderBMG.png" mode="widthFix"></image>
+		<view class="container-img no-likes" v-if="!modaishow && likeDatas.length == 0">
+			<image src="../../static/images/no_like.png" mode="widthFix"></image>
 			<text class="color-text">最近没有收藏过商品~</text>
 		</view>
 		<view class="tui-tab-rank" v-if="!modaishow && likeDatas.length !== 0">
@@ -365,7 +365,9 @@
 		align-items: center;
 		justify-content: center;
 	}
-
+	.no-likes {
+		margin-top: 0;
+	}
 	.img-quanguo {
 		height: 600rpx;
 		width: 300rpx;

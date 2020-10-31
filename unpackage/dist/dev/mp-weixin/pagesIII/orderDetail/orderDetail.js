@@ -95,6 +95,9 @@ __webpack_require__.r(__webpack_exports__);
 var components = {
   tuiRate: function() {
     return __webpack_require__.e(/*! import() | components/tui-rate/tui-rate */ "components/tui-rate/tui-rate").then(__webpack_require__.bind(null, /*! @/components/tui-rate/tui-rate.vue */ 554))
+  },
+  jyfParser: function() {
+    return Promise.all(/*! import() | components/jyf-parser/jyf-parser */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/jyf-parser/jyf-parser")]).then(__webpack_require__.bind(null, /*! @/components/jyf-parser/jyf-parser.vue */ 544))
   }
 }
 var render = function() {
@@ -154,6 +157,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
 
 
 
@@ -733,8 +743,15 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 22); //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 //请求地址
-var setdata = uni.getStorageSync('usermen');var _default = { name: "orderDetail", data: function data() {return { order_id: '', orderObj: {}, goodsData: {} };}, filters: { getTime: function getTime(val) {var time = new Date(val);var y = time.getFullYear();var m = time.getMonth() + 1 >= 10 ? time.getMonth() + 1 : "0" + (time.getMonth() + 1);var d = time.getDate() >= 10 ? time.getDate() : "0" + time.getDate();var h = time.getHours() >= 10 ? time.getHours() : "0" + time.getHours();var mm = time.getMinutes() >= 10 ? time.getMinutes() : "0" + time.getMinutes();var s = time.getSeconds() >= 10 ? time.getSeconds() : "0" + time.getSeconds();return y + '-' + m + '-' + d + ' ' + h + ':' + mm + ':' + s;} }, methods: { getOrderDetail: function getOrderDetail() {var _this = this;var data = { token: setdata, id: this.order_id };(0, _api.listing)(_request.getDetails, data).then(function (res) {_this.orderObj = res.data.data[0];var data = { id: _this.orderObj.wx_goods_id, token: setdata };(0, _api.publicing)(_request.postdelist, data).then(function (res) {_this.goodsData = res.data.data;});});}, clipNumber: function clipNumber(val) {uni.setClipboardData({ data: val // success: function() {
+var setdata = uni.getStorageSync('usermen');var _default = { name: "orderDetail", data: function data() {return { order_id: '', orderObj: {}, goodsData: {} };}, filters: { getTime: function getTime(val) {var time = new Date(val);var y = time.getFullYear();var m = time.getMonth() + 1 >= 10 ? time.getMonth() + 1 : "0" + (time.getMonth() + 1);var d = time.getDate() >= 10 ? time.getDate() : "0" + time.getDate();var h = time.getHours() >= 10 ? time.getHours() : "0" + time.getHours();var mm = time.getMinutes() >= 10 ? time.getMinutes() : "0" + time.getMinutes();var s = time.getSeconds() >= 10 ? time.getSeconds() : "0" + time.getSeconds();return y + '-' + m + '-' + d + ' ' + h + ':' + mm + ':' + s;} }, methods: { getOrderDetail: function getOrderDetail() {var _this = this;var data = { token: setdata, id: this.order_id };(0, _api.listing)(_request.getDetails, data).then(function (res) {_this.orderObj = res.data.data[0];var data = { id: _this.orderObj.goods_id, token: setdata };(0, _api.publicing)(_request.orderHistory, data).then(function (res) {_this.goodsData = res.data.data;console.log(_this.goodsData);});});}, clipNumber: function clipNumber(val) {uni.setClipboardData({ data: val // success: function() {
         // 	uni.hideToast()
         // }
       });} }, onLoad: function onLoad(opt) {this.order_id = opt.id;}, onShow: function onShow() {this.getOrderDetail();} };exports.default = _default;

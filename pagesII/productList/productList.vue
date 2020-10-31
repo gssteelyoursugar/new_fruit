@@ -2,7 +2,7 @@
 	<view class="container">
 		<!--header-->
 		<view class="container-img" v-if="goods.length == 0">
-			<image src="../../static/images/orderBMG.png" mode="widthFix"></image>
+			<image src="../../static/images/no_search.png" mode="widthFix"></image>
 			<text class="color-text">当前水果没有货，再看看别的吧</text>
 		</view>
 		
@@ -222,7 +222,7 @@
 		<!--左抽屉弹层 筛选 -->
 		<tui-drawer mode="right" :visible="drawer" @close="closeDrawer">
 			<view class="tui-drawer-box" :style="{ paddingTop: 0 + 'px' }">
-				<scroll-view class="tui-drawer-scroll" scroll-y :style="{ height: drawerH + height - 50 + 'px', paddingTop:100+ 'rpx'}">
+				<scroll-view class="tui-drawer-scroll" scroll-y :style="{ height: drawerH + height + 'px'}">
 					<view class="tui-drawer-top-title">
 						<view @click="closeDrawer">
 							<tui-icon name="close" color="#B6B6B6" :size="22"></tui-icon>
@@ -1309,7 +1309,7 @@
 	}
 
 	.container-img {
-		margin-top: 450rpx;
+		margin-top: 250rpx;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -1775,11 +1775,11 @@
 		justify-content: space-between;
 		padding: 0 20rpx;
 		box-sizing: border-box;
-		position: fixed;
+		/* position: fixed;
 		top: 0;
 		left: 0;
 		right: 0;
-		z-index: 1;
+		z-index: 1; */
 	}
 
 	.tui-drawer-top-title .title-content {

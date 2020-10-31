@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view class="container-img " v-if="evaList.length === 0" :class="{ active: isActive, 'text-danger': hasError }">
-			<image src="../../static/images/orderBMG.png" mode="widthFix"></image>
+			<image src="../../static/images/no_like.png" mode="widthFix"></image>
 			<text class="color-text">最近没有点赞过商品~</text>
 		</view>
 		<view class="tui-tab-rank" v-for="(item,index) of evaList" :key="index"  v-if="evaList.length !== 0">
@@ -139,7 +139,7 @@
 
 <style>
 	.container-img{
-		margin-top: 150rpx;
+		/* margin-top: 150rpx; */
 		display: flex;
 		flex-direction: column;
 		align-items: center;

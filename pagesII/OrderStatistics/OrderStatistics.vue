@@ -19,7 +19,7 @@
 			</view>
 		</view>
 		<view class="empty-img" v-if="orderList.length=== 0">
-			<image src="../../static/images/orderBMG.png" mode="widthFix"></image>
+			<image src="../../static/images/no_calculate.png" mode="widthFix"></image>
 			<text class="color-text">{{orderTime ? '本月没有订单哦～': '没有数据哦～' }}</text>
 			<!-- <view class="color-border" @tap="goIndex"><text>去逛逛</text></view> -->
 		</view>

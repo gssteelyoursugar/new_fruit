@@ -59,7 +59,7 @@
 											累计成交
 											<text class="tag-tit3-text">
 												<!-- {{item.totalPrice |filterNum}} -->
-												{{item.totalPrice| filterNum }}
+												{{item.totalPrice||0 | filterNum }}
 											</text> 元
 										</view>
 									</view>
@@ -356,15 +356,12 @@
 			//请求数据
 			postRanking() {
 				uni.showLoading({
-
 				})
 				let val = this.valueText
 				let data = {
 					value: val,
 					pageNo: 1,
 					pageSize: 10000
-
-
 				}
 				publicing(postOrder, data)
 					.then((res) => {

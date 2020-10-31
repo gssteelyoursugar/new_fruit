@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "订单详情",
   "usingComponents": {
-    "tui-rate": "/components/tui-rate/tui-rate"
+    "tui-rate": "/components/tui-rate/tui-rate",
+    "jyf-parser": "/components/jyf-parser/jyf-parser"
   }
 }

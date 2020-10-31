@@ -631,13 +631,13 @@ var isFirst1 = true;var _default =
 
     [{
       name: '销量排行',
-      value: 'order_total',
+      value: 'shop',
       title: '跟榜买 不愁卖',
       imgsrc: '../../static/images/baixiangguo1.png' },
 
     {
       name: '评价排行',
-      value: 'evaluate',
+      value: 'praise',
       title: '好货靠口碑',
       imgsrc: '../../static/images/niuyouguo1.png' },
 
@@ -657,11 +657,14 @@ var isFirst1 = true;var _default =
 
     20), _defineProperty(_ref, "boxHeight",
     44), _defineProperty(_ref, "navHeight",
-    64), _ref;
+    64), _defineProperty(_ref, "weatherObj",
+    {
+      weather: "",
+      temperature: "" }), _ref;
+
 
   },
   methods: (_methods = {
-
     getMerchants: function getMerchants() {var _this = this;
       var setdata = uni.getStorageSync('usermen'); //Token
       var data = {
@@ -671,6 +674,18 @@ var isFirst1 = true;var _default =
       then(function (res) {
         ///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
         _this.ApproveStatus = res.data.data.approveStatus; //获取电偶状态码，0未认证，1已认证，2拒绝
+        var cityCode = res.data.data.address;
+        _this.amapPlugin = new _amapWx.default.AMapWX({
+          key: _this.key });
+
+        _this.amapPlugin.getWeather({
+          city: cityCode,
+          success: function success(wres) {
+            console.log("高德天气：", wres);
+            _this.weatherObj.temperature = wres.liveData.temperature;
+            _this.weatherObj.weather = wres.liveData.weather;
+          } });
+
       }).
       catch(function (err) {
         log(err);
@@ -1100,11 +1115,6 @@ var isFirst1 = true;var _default =
     // this.getGoodsAll()
     //请求首页
     this.getHomelist();
-    // var text = '{"id":1301422737316712448}';
-    // const id = text.match(/\d{17,}/)[0]; // 正则获取大于17位数字的值
-    // text = text.replace(id, `"${id}"`); // 补上双引号
-    // const data = JSON.parse(text);
-    // this.postactivity()
     //新版头部
 
     var res = uni.getSystemInfoSync();var
@@ -1127,13 +1137,13 @@ var isFirst1 = true;var _default =
     // 	key: this.key,
     // });
     // this.amapPlugin.getWeather({
-    // 	city: '110000',
+    // 	city: '', // 城市编码
     // 	success: (data) => {
     // 		console.log("高德天气：", data)
-    // 		// this.addressName = data[0].name;
-    // 		// this.city = data[0].regeocodeData.addressComponent.city.replace(/市/g, ''); //把"市"去掉
     // 	}
     // });
+    // getCityCodeByName("北京")
+    console.log();
     setTimeout(function () {
       _this6.showAuthTips = false;
     }, 5000);
@@ -1147,16 +1157,6 @@ var isFirst1 = true;var _default =
   onShow: function onShow() {
     this.getMerchants();
     this.getHomelist();
-    this.amapPlugin = new _amapWx.default.AMapWX({
-      key: this.key });
-
-    this.amapPlugin.getWeather({
-      city: '110000',
-      success: function success(data) {
-        console.log("高德天气：", data);
-        // this.addressName = data[0].name;
-        // this.city = data[0].regeocodeData.addressComponent.city.replace(/市/g, ''); //把"市"去掉
-      } });
 
   },
   // 转发

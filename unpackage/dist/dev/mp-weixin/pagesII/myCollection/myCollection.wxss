@@ -363,6 +363,9 @@
 	-webkit-justify-content: center;
 	        justify-content: center;
 }
+.no-likes {
+	margin-top: 0;
+}
 .img-quanguo {
 	height: 600rpx;
 	width: 300rpx;

@@ -104,7 +104,7 @@ var render = function() {
   var l0 = _vm.__map(_vm.goodList, function(item, index) {
     var $orig = _vm.__get_orig(item)
 
-    var f0 = _vm._f("filterNum")(item.totalPrice)
+    var f0 = _vm._f("filterNum")(item.totalPrice || 0)
 
     return {
       $orig: $orig,
@@ -554,10 +554,7 @@ var _console = console,log = _console.log;var _default = { data: function data()
       this.num = index;this.postRanking(); //那这个方法里面的this.valueText怎么会能拿到嘛
       // 子组件调试父组件方法 ：parent
       // this.$parent.fatherMethod(index)
-    }, previewImage: function previewImage(e) {var index = e.currentTarget.dataset.index;uni.previewImage({
-        current: this.banner[index],
-        urls: this.banner });
-
+    }, previewImage: function previewImage(e) {var index = e.currentTarget.dataset.index;uni.previewImage({ current: this.banner[index], urls: this.banner });
     },
     back: function back() {
       uni.navigateBack();

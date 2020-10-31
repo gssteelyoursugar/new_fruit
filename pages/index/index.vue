@@ -30,10 +30,10 @@
 						请认证店铺信息
 					</view>
 				</view>
-				<view class="weather-tui-right">
-					<image src="../../static/images/tianqi@2x.png" mode="aspectFit" class="weather-yun-icon"></image>
+				<view class="weather-tui-right" v-if="ApproveStatus === 1">
+					<!-- <image src="../../static/images/tianqi@2x.png" mode="aspectFit" class="weather-yun-icon"></image> -->
 					<!-- <text class="iconfont icon-yun city"></text> -->
-					<text>30℃</text>
+					<text>{{weatherObj.weather}}</text><text>{{weatherObj.temperature}}℃</text>
 				</view>
 			</view>
 		</view>
@@ -447,13 +447,13 @@
 				],
 				dataList: [{
 						name: '销量排行',
-						value: 'order_total',
+						value: 'shop',
 						title: '跟榜买 不愁卖',
 						imgsrc: '../../static/images/baixiangguo1.png'
 					},
 					{
 						name: '评价排行',
-						value: 'evaluate',
+						value: 'praise',
 						title: '好货靠口碑',
 						imgsrc: '../../static/images/niuyouguo1.png'
 					},
@@ -473,11 +473,14 @@
 				],
 				statusHeight: 20,
 				boxHeight: 44,
-				navHeight: 64
+				navHeight: 64,
+				weatherObj: {
+					weather: "",
+					temperature: ""
+				}
 			}
 		},
 		methods: {
-
 			getMerchants() {
 				let setdata = uni.getStorageSync('usermen') //Token
 				let data = {
@@ -487,6 +490,18 @@
 					.then((res) => {
 						///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
 						this.ApproveStatus = res.data.data.approveStatus //获取电偶状态码，0未认证，1已认证，2拒绝
+						let cityCode = res.data.data.address
+						this.amapPlugin = new amap.AMapWX({
+							key: this.key,
+						});
+						this.amapPlugin.getWeather({
+							city: cityCode,
+							success: (wres) => {
+								console.log("高德天气：", wres)
+								this.weatherObj.temperature = wres.liveData.temperature
+								this.weatherObj.weather = wres.liveData.weather
+							}
+						});
 					})
 					.catch((err) => {
 						log(err)
@@ -899,15 +914,15 @@
 				uni.request({
 					url: "https://restapi.amap.com/v3/weather/weatherInfo?address=北京", //高德地图查询天气
 					method: 'GET',
-					
+
 					success: (res) => {
 						// this.temperature = res.data.lives[0].temperature //气温
 						// this.citys = res.data.lives[0].city //获取区域
-						console.log("天气结果",res)
+						console.log("天气结果", res)
 					}
 				});
 			}
-			
+
 		},
 		//初始化
 		onLoad() {
@@ -916,11 +931,6 @@
 			// this.getGoodsAll()
 			//请求首页
 			this.getHomelist()
-			// var text = '{"id":1301422737316712448}';
-			// const id = text.match(/\d{17,}/)[0]; // 正则获取大于17位数字的值
-			// text = text.replace(id, `"${id}"`); // 补上双引号
-			// const data = JSON.parse(text);
-			// this.postactivity()
 			//新版头部
 			// #ifndef H5 || APP-PLUS || MP-ALIPAY
 			const res = uni.getSystemInfoSync();
@@ -938,18 +948,18 @@
 			this.boxHeight = navHeight - statusBarHeight //导航栏高度
 			this.navHeight = navHeight
 			// #endif
-			
+
 			// this.amapPlugin = new amap.AMapWX({
 			// 	key: this.key,
 			// });
 			// this.amapPlugin.getWeather({
-			// 	city: '110000',
+			// 	city: '', // 城市编码
 			// 	success: (data) => {
 			// 		console.log("高德天气：", data)
-			// 		// this.addressName = data[0].name;
-			// 		// this.city = data[0].regeocodeData.addressComponent.city.replace(/市/g, ''); //把"市"去掉
 			// 	}
 			// });
+			// getCityCodeByName("北京")
+			console.log()
 			setTimeout(() => {
 				this.showAuthTips = false
 			}, 5000)
@@ -963,17 +973,7 @@
 		onShow() {
 			this.getMerchants()
 			this.getHomelist()
-			this.amapPlugin = new amap.AMapWX({
-				key: this.key,
-			});
-			this.amapPlugin.getWeather({
-				city: '110000',
-				success: (data) => {
-					console.log("高德天气：", data)
-					// this.addressName = data[0].name;
-					// this.city = data[0].regeocodeData.addressComponent.city.replace(/市/g, ''); //把"市"去掉
-				}
-			});
+			
 		},
 		// 转发
 		onShareAppMessage: function() {
@@ -992,11 +992,11 @@
 		//     }
 		//   }
 
-		
+
 		// 监听页面滚动距离
 
 		mounted() {
-			
+
 		},
 		filters: {
 			filterNum(val) {
@@ -1130,7 +1130,10 @@
 	}
 
 	.weather-tui-right text {
-		font-size: 32rpx;
+		font-size: 30rpx;
+		margin: 0 4rpx;
+		font-weight: 500;
+
 	}
 
 	/* 协议 */

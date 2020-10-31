@@ -15,7 +15,7 @@
 		</view>
 		
 		<view class="empty-img" v-if="!modaishow && orderObj.length=== 0">
-			<image src="../../static/images/orderBMG.png" mode="widthFix"></image>
+			<image src="../../static/images/no_cart.png" mode="widthFix"></image>
 			<text class="color-text">进货单为空，赶紧去逛逛</text>
 			<view class="color-border" @tap="goIndex"><text>去逛逛</text></view>
 		</view>

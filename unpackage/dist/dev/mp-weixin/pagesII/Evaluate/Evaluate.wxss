@@ -1,6 +1,6 @@
 
 .container-img{
-	margin-top: 150rpx;
+	/* margin-top: 150rpx; */
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;

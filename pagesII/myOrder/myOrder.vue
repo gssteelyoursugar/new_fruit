@@ -52,7 +52,7 @@
 					</tui-list-cell>
 
 					<view class="tui-order-btn" >
-						<view class="tui-btn-ml"  v-if="item.tradeStatus == 1 || item.tradeStatus == 2 || item.tradeStatus == 3 || item.tradeStatus == 4 || item.tradeStatus == 7||item.afterStatus == 7">
+						<view class="tui-btn-ml"  v-if="item.tradeStatus == 1 || item.tradeStatus == 2 || item.tradeStatus == 3 || item.tradeStatus == 4 || item.tradeStatus == 7||item.afterStatus == 7 || item.afterStatus == 11">
 							<tui-button type="black" plain width="152rpx" :openType="contactType" height="56rpx" :size="26" shape="circle">联系客服</tui-button>
 						</view>
 						<!-- <view class="tui-btn-ml" v-if="item.payStatus == 2">
@@ -61,7 +61,7 @@
 						<!-- <view class="tui-btn-ml" v-if="item.tradeStatus == 6 || item.tradeStatus == 5">
 							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle"  @tap="goDel(item.id)">删除订单</tui-button>
 						</view> -->
-						<view class="tui-btn-ml" v-if="item.payStatus == 1 && (item.tradeStatus == 3  || item.tradeStatus == 6 || item.tradeStatus == 8)">
+						<view class="tui-btn-ml" v-if="item.payStatus == 1 && (item.tradeStatus == 3  || item.tradeStatus == 6 || item.tradeStatus == 8) && item.afterStatus != 11">
 							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="goAfter(item.id)">申请售后</tui-button>
 						</view>
 						<!-- <view class="tui-btn-ml" v-if="item.tradeStatus == 1 || item.tradeStatus == 2 ||   item.tradeStatus == 3 || item.tradeStatus == 4 ||item.tradeStatus == 6 ||item.tradeStatus == 8||item.tradeStatus == 9">
@@ -241,7 +241,7 @@
 						</view>
 					</tui-list-cell>
 					<view class="tui-order-btn">
-						<view class="tui-btn-ml">
+						<view class="tui-btn-ml" v-if="item.afterStatus != 11">
 							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="goAfter(item.id)">申请售后</tui-button>
 						</view>
 						<!-- <view class="tui-btn-ml">
@@ -291,10 +291,10 @@
 						</view>
 					</tui-list-cell>
 					<view class="tui-order-btn">
-						<view class="tui-btn-ml" >
+						<view class="tui-btn-ml">
 							<button open-type="contact" type="primary" :openType="contactType" hover-class='none' class="icon-img3">联系客服</button>
 						</view>
-						<view class="tui-btn-ml" v-if="item.tradeStatus == 6 || (item.tradeStatus == 7 && item.afterStatus == 5)">
+						<view class="tui-btn-ml" v-if="(item.tradeStatus == 6&& item.afterStatus != 11)|| (item.tradeStatus == 7 && item.afterStatus == 5) ">
 							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="goAfter(item.id)">申请售后</tui-button>
 						</view>
 						<view class="tui-btn-ml" v-if="item.tradeStatus == 7 && item.afterStatus == 11">

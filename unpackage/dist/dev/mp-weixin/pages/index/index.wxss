@@ -218,7 +218,9 @@
 	top: -6rpx;
 }
 .weather-tui-right text.data-v-57280228 {
-	font-size: 32rpx;
+	font-size: 30rpx;
+	margin: 0 4rpx;
+	font-weight: 500;
 }
 
 /* 协议 */
