@@ -7,7 +7,7 @@
 			<image :src="imageUrl" class="tui-my-bg" mode="aspectFill"></image>
 			<view class="tui-header-center">
 				<image :src="usering.avatarUrl" class="tui-avatar" mode="aspectFill" v-if="wxlogin"></image>
-				<image src="../../static/images/userimg.png" class="tui-avatar" mode="aspectFill" v-if="!wxlogin"></image>
+				<image src="../../static/images/default_avatar.png" class="tui-avatar" mode="aspectFill" v-if="!wxlogin"></image>
 				<!-- 已登录个人信息状态wxlogin -->
 				<view class="tui-info" v-if="wxlogin">
 					<view class="tui-explain">{{usering.nickName}}</view>
@@ -204,6 +204,7 @@
 
 	export default {
 		onLoad: function(options) {
+			console.log(123)
 			this.getOrderData()
 			// this.getMerchants()
 			// this.getWxdata()
@@ -316,6 +317,7 @@
 						// log(res) //获得token
 						uni.setStorageSync('usermen', res.data.token) //把token存在本地，小程序提供如同浏览器cookie
 						uni.hideLoading();
+						this.getOrderData()
 						this.getMerchants()
 					})
 					.catch((err) => {

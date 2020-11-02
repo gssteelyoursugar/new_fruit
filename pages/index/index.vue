@@ -497,7 +497,6 @@
 						this.amapPlugin.getWeather({
 							city: cityCode,
 							success: (wres) => {
-								console.log("高德天气：", wres)
 								this.weatherObj.temperature = wres.liveData.temperature
 								this.weatherObj.weather = wres.liveData.weather
 							}
@@ -690,8 +689,6 @@
 					this.usering = setdata
 				}
 			},
-
-
 			//请求首页
 			getHomelist() {
 				let setdata = uni.getStorageSync('usermen')
@@ -722,7 +719,7 @@
 						this.hh = parseInt(this.ts / 60 / 60 % 24, 10); //计算剩余的小时数
 						this.mm = parseInt(this.ts / 60 % 60); //计算剩余的分钟数
 						this.ss = parseInt(this.ts % 60, 10); //计算剩余的秒数
-						log(this.dd + "天" + this.hh + "时" + this.mm + "分" + this.ss + "秒")
+						// log(this.dd + "天" + this.hh + "时" + this.mm + "分" + this.ss + "秒")
 					})
 					.catch((err) => {
 						console.log(err)
@@ -739,7 +736,6 @@
 					.then((res) => {
 						//处理数据格式,praiseNumber
 						let goodsData = res.data.data.data;
-
 						this.IndexGoods = goodsData //【1】首页分类数据
 					})
 					.catch((err) => {
@@ -910,18 +906,17 @@
 				});
 			},
 			// 天气
-			tian(e) {
-				uni.request({
-					url: "https://restapi.amap.com/v3/weather/weatherInfo?address=北京", //高德地图查询天气
-					method: 'GET',
-
-					success: (res) => {
-						// this.temperature = res.data.lives[0].temperature //气温
-						// this.citys = res.data.lives[0].city //获取区域
-						console.log("天气结果", res)
-					}
-				});
-			}
+			// tian(e) {
+			// 	uni.request({
+			// 		url: "https://restapi.amap.com/v3/weather/weatherInfo?address=北京", //高德地图查询天气
+			// 		method: 'GET',
+			// 		success: (res) => {
+			// 			// this.temperature = res.data.lives[0].temperature //气温
+			// 			// this.citys = res.data.lives[0].city //获取区域
+			// 			console.log("天气结果", res)
+			// 		}
+			// 	});
+			// }
 
 		},
 		//初始化
@@ -959,7 +954,6 @@
 			// 	}
 			// });
 			// getCityCodeByName("北京")
-			console.log()
 			setTimeout(() => {
 				this.showAuthTips = false
 			}, 5000)

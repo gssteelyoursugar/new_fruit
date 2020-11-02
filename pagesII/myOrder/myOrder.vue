@@ -83,7 +83,7 @@
 						<view class="tui-btn-ml" v-if="item.tradeStatus == 7 && (item.afterStatus ==0||item.afterStatus ==1||item.afterStatus ==2||item.afterStatus ==3||item.afterStatus ==4 )">
 							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="goAfterSaleDetail(item.afterSaleId)">售后详情</tui-button>
 						</view>
-						<view class="tui-btn-ml" v-if="item.payStatus == 1 && (item.tradeStatus == 2 || item.tradeStatus == 4 ||item.tradeStatus == 8)">
+						<view class="tui-btn-ml" v-if="item.payStatus == 1 && (item.tradeStatus == 4 ||item.tradeStatus == 8)"> <!-- item.tradeStatus == 2 -->
 							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="goConfirm(item.id)">确认收货</tui-button>
 						</view>
 					</view>

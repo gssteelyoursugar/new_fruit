@@ -321,13 +321,18 @@
 		<view class="tui-operation">
 			<view class="tui-operation-left tui-col-5">
 				<view class="tui-operation-item" hover-class="tui-opcity" :hover-stay-time="150" @tap="likeOrder(shopListdata.id)">
-					<tui-icon name="like" :size="22" color="#333" v-if="!canCollect"></tui-icon>
-					<tui-icon name="like-fill" :size="22" color="#ff0000" v-if="canCollect"></tui-icon>
+					<!-- <tui-icon name="like" :size="22" color="#333" v-if="!canCollect"></tui-icon>
+					<tui-icon name="like-fill" :size="22" color="#ff0000" v-if="canCollect"></tui-icon> -->
+					<image src="../../static/images/add_like-f.png" mode="" v-if="!canCollect" style="width: 52rpx;height: 46rpx;"></image>
+					<image src="../../static/images/add_like-t.png" mode="" v-if="canCollect" style="width: 52rpx;height: 46rpx;"></image>
 					<view class="tui-operation-text tui-scale-small">收藏</view>
 				</view>
 				<view class="tui-operation-item" hover-class="tui-opcity" :hover-stay-time="150" @tap="postShopping(shopListdata.id)">
-					<tui-icon name="order" :size="22" color="#333" v-if="!canCart"></tui-icon>
-					<tui-icon name="order" :size="22" color="#ff0000" v-if="canCart"></tui-icon>
+					<!-- <tui-icon name="order" :size="22" color="#333" v-if="!canCart"></tui-icon>
+					<tui-icon name="order" :size="22" color="#ff0000" v-if="canCart"></tui-icon> -->
+					<image src="../../static/images/add_order-f.png" mode="" v-if="!canCart" style="width: 44rpx;height: 52rpx;"></image>
+					<image src="../../static/images/add_order-t.png" mode="" v-if="canCart" style="width: 44rpx;height: 52rpx;"></image>
+					
 					<view class="tui-operation-text tui-scale-small">加入进货单</view>
 				</view>
 				<!-- <view class="tui-operation-item" hover-class="tui-opcity" :hover-stay-time="150">
@@ -338,8 +343,8 @@
 			</view>
 			<view class="tui-operation-right tui-right-flex tui-col-7 tui-btnbox-4">
 				<view class="tui-flex-1">
-					<tui-button height="68rpx" :size="26" type="danger" shape="circle" @click="showPopup" v-if="shopListdata.number !== 0">立即购买</tui-button>
-					<tui-button height="68rpx" :size="26" type="info" shape="circle" @click="noGoods" v-if="shopListdata.number === 0">售罄</tui-button>
+					<tui-button height="80rpx" :size="26" type="danger" shape="circle" @click="showPopup" v-if="shopListdata.number !== 0">立即购买</tui-button>
+					<tui-button height="80rpx" :size="26" type="info" shape="circle" @click="noGoods" v-if="shopListdata.number === 0">售罄</tui-button>
 				</view>
 				<!-- <view class="tui-flex-1">
 					<tui-button height="68rpx" :size="26" type="warning" shape="circle" @click="submit">立即购买</tui-button>
@@ -393,7 +398,7 @@
 							<!-- <text>合计{{shopListdata.platformClinetPrice * value2}}含运费</text> -->
 							<text style="color: #333333;font-size: 24rpx;margin-right:4rpx">合计:</text>
 							<text style="color: #FF5600;font-size: 20rpx;">¥</text>
-							<text style="font-weight: bold;">{{ shopListdata.platformClientPrice * value2 }}</text>
+							<text style="font-weight: bold;">{{ shopListdata.platformClientPrice * value2 | countNum }}</text>
 							<text style="color: #FF5600;font-size: 22rpx;margin-right:8rpx">元</text>
 							<text style="color: #888888;font-size: 22rpx;">含运费</text>
 						</view>
@@ -640,12 +645,11 @@
 				let time = new Date().getHours()
 				return time
 			},
-
+			
 
 		},
 		filters: {
 			filterNum(val) {
-
 				if (val) {
 					let words = (Math.floor(val) + '').split('');
 					let res = '';
@@ -686,6 +690,9 @@
 					result = data[0] + data[1] + "月" + data[3] + (data[4] * 1 + 1) + "日"
 				}
 				return result
+			},
+			countNum(val) {
+				return val.toFixed(2) * 1
 			}
 		},
 
@@ -2132,7 +2139,7 @@
 
 	.tui-operation {
 		width: 100%;
-		height: 100rpx;
+		height: 120rpx;
 		background: rgba(255, 255, 255, 0.98);
 		position: fixed;
 		display: flex;
@@ -2176,7 +2183,8 @@
 
 	.tui-operation-text {
 		font-size: 22rpx;
-		color: #333;
+		color: #6e6e6e;
+		margin-top: 10rpx;
 	}
 
 	.tui-opacity {

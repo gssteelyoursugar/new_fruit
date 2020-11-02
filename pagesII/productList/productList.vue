@@ -208,7 +208,7 @@
 				</view>
 				<view class="hot-wrap">
 					<view class="tui-drop-item" @click="checkVariety(index,item.id,item.title)" :class="{'tui-drop-active':idList.indexOf(item.id)!==-1}"
-					 v-for="(item,index) of seleVarieties" :key="index">
+					 v-for="(item,index) of variety" :key="index">
 						<text class="tui-ml tui-middle" :class="{activetext:idList.indexOf(item.id) !==-1 }">{{item.title}}</text>
 					</view>
 				</view>
@@ -946,7 +946,7 @@
 			//品种全选
 			pickAllVariety() {
 				let idlist = this.idList
-				let list = this.seleVarieties
+				let list = this.variety
 				let arr = []
 				if (this.allVariety) {
 					this.idList = []
@@ -960,7 +960,7 @@
 			},
 			checkVariety(index, id, title) {
 				let list = this.idList
-				let allList = this.seleVarieties
+				let allList = this.variety
 				let idx = list.indexOf(id)
 				if (idx !== -1) {
 					list.splice(idx, 1)
@@ -1086,7 +1086,7 @@
 			// 品种多选请求
 			getTypeData() {
 				let list = this.idList
-				let lData = this.seleVarieties
+				let lData = this.variety
 				if (list.length === 0) {
 					this.tempData.varietyId = ''
 					listing(getGoodsall, this.tempData).then(res => {
@@ -1134,6 +1134,7 @@
 						this.storage_mode = res[0].data.data.storage_mode
 						this.taste_level = res[0].data.data.taste_level
 						this.variety = res[0].data.data.variety
+						console.log(res,this.variety )
 
 					})
 					.catch((err) => {
@@ -1302,6 +1303,7 @@
 	.activeNull {
 		background-image: linear-gradient(to right, rgba(0, 197, 42, 1), rgba(0, 188, 69, 1));
 		color: #fff;
+		border-color: #00BC45 !important;
 	}
 
 	.container {
@@ -1691,8 +1693,8 @@
 	}
 
 	.tui-btn-white {
-		background: #fff;
-		color: #333;
+		background: #DCDCDC;
+		color: #555555;
 	}
 
 	.tui-white-hover {

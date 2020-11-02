@@ -328,7 +328,7 @@
 					}
 				}
 				let order = this.orderObj
-				this.allPrice = allPrice.toFixed(2); //保留两位小数toFixed
+				this.allPrice = allPrice.toFixed(2) * 1; //保留两位小数toFixed
 			},
 			//请求订单列表
 			orderIng() {

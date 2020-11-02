@@ -25,6 +25,7 @@ page {
 	background-image: -webkit-linear-gradient(left, rgba(0, 197, 42, 1), rgba(0, 188, 69, 1));
 	background-image: linear-gradient(to right, rgba(0, 197, 42, 1), rgba(0, 188, 69, 1));
 	color: #fff;
+	border-color: #00BC45 !important;
 }
 .container {
 	padding-bottom: env(safe-area-inset-bottom);
@@ -417,8 +418,8 @@ page {
 	color: #e5e5e5;
 }
 .tui-btn-white {
-	background: #fff;
-	color: #333;
+	background: #DCDCDC;
+	color: #555555;
 }
 .tui-white-hover {
 	background: #e5e5e5;

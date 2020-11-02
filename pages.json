@@ -34,7 +34,7 @@
 
 			"path": "pages/order/order",
 			"style": {
-				"enablePullDownRefresh": true,
+				"enablePullDownRefresh": false,
 				"navigationBarTitleText": "进货单"
 			}
 		}, {
