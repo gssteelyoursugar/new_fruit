@@ -218,8 +218,6 @@
 			//地址选择弹出
 
 			picker: function(e) {
-				console.log("pick=============", e)
-
 				//获取选中的三级信息
 				let value = e.detail.value; //这个是三级的picker分别选中的下标，value=[].length = 3,第一个是一级，第二个是二级。。。
 				let one = this.addressOne[value[0]];
@@ -254,7 +252,7 @@
 				return arr;
 			},
 			columnPicker: function(e) {
-				//console.log("columnPicker=======",e)
+
 
 				//第几列 下标从0开始,0=一级选择，1=二级选择，2=三级选择
 				let column = e.detail.column;
@@ -513,7 +511,6 @@
 			onPullDownRefresh() {
 				this.postAddressDatas()
 				this.getMerchants()
-				log(setdata)
 				setTimeout(function() {
 					uni.stopPullDownRefresh();
 				}, 1000);
@@ -525,17 +522,12 @@
 			postsaveStores() {
 
 				let setdata = uni.getStorageSync('usermen')
-				log(setdata)
-
-				log(data)
 				uni.showLoading({
 					title: '提交中'
 				});
 				publicing(postSaveStore, data)
 					.then((res) => {
-						log(res)
 						uni.hideLoading();
-						// log(res.data.msg)
 						uni.showToast({
 							title: `${res.data.msg}`,
 							icon: "none"
@@ -552,7 +544,6 @@
 			//获取token
 			getToken() {
 				let setdata = uni.getStorageSync('usermen')
-				log(setdata)
 			},
 			//上传图片
 			chooseImage(e) {
@@ -618,8 +609,6 @@
 		},
 		onLoad() {
 			this.postAddressDatas()
-			log(setdata)
-
 			// this.getToken()
 			this.getMerchants()
 		}

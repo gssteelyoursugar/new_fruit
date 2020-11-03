@@ -278,7 +278,7 @@
 							content: '确认支付',
 							success: (res) => {
 								if (res.confirm) {
-									that.btnPay(orderNumber)
+									that.btnPay()
 								} else if (res.cancel) {
 									uni.showToast({
 										title: '订单已取消',
@@ -328,25 +328,10 @@
 					title: '支付中',
 					duration: 2000
 				})
-				let data = {
-					orderNumber: orderNumber
-				}
-				publicing(postOrderPay, data)
-					.then((res) => {
-						log(res)
-						uni.showToast({
-							title: `${res.data.msg}`,
-							icon: 'none',
-							duration: 2000
-						});
-						uni.reLaunch({
-							url: '../PayOK/PayOK'
-						})
-
-					})
-					.catch((err) => {
-						log(err)
-					})
+				uni.reLaunch({
+					url: '../PayOK/PayOK'
+				})
+				
 			},
 			popupClose() {
 				this.show = false

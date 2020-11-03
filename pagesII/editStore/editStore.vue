@@ -176,12 +176,10 @@
 				uploadFiles((res) => {
 					let imgArr
 					imgArr = this.imgUrlData.split(",");
-					log(imgArr)
 					// this.cartIds = [];//清空
 					// for(let i=0;i<this.imgurlData.length;i++){
 					//     this.cartIds.push(this.imgurlData[i])
 					//    }
-					// log(this.cartIds)
 					//拼接字符串
 					
 					// let ids = "";
@@ -207,10 +205,8 @@
 					idCard:this.StoreInfo.idCard,
 					fileUrls:JSON.stringify(this.imgDataLi)
 				}
-				log(data)
 				publicing2(postupdateClient,data)
 				.then((res)=>{
-					log(res)
 				})
 				.catch((err)=>{
 					log(err)
@@ -225,12 +221,9 @@
 				}
 				listing(getClient,data)
 				.then((res)=>{
-					log(res)
 					this.ApproveStatus =  res.data.data.approveStatus
-					log(this.ApproveStatus)
 					this.StoreInfo = res.data.data
 					this.urlList = res.data.data.urlList
-					log(this.StoreInfo)
 				})
 				.catch((err)=>{
 					log(err)
@@ -244,7 +237,6 @@
 			postsaveStores(e){
 				
 				let setdata = uni.getStorageSync('usermen')
-				log(setdata)
 				let data ={
 					storeName:e.detail.value.storeName,
 					merchantsName:e.detail.value.merchantsName,
@@ -254,13 +246,9 @@
 					token:setdata,
 					fileUrls:JSON.stringify(this.imgDataLi)//这个地方不要传json数组，要把json数组转字符串，用JSON.stringify能转为字符串json数组，这样后台才能接收
 				}
-				log(data)
-				
 				publicing(postSaveStore,data)
 				.then((res)=>{
-					log(res)
 					
-					// log(res.data.msg)
 					uni.showToast({
 						title: `${res.data.msg}`,
 						icon: "none"
@@ -277,7 +265,6 @@
 			//获取token
 			getToken(){
 				let setdata = uni.getStorageSync('usermen')
-				log(setdata)
 			},
 			//上传图片
 			chooseImage (e) {

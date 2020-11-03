@@ -8,10 +8,11 @@
 			<view class="tui-header-center">
 				<image :src="usering.avatarUrl" class="tui-avatar" mode="aspectFill" v-if="wxlogin"></image>
 				<image src="../../static/images/default_avatar.png" class="tui-avatar" mode="aspectFill" v-if="!wxlogin"></image>
+				
 				<!-- 已登录个人信息状态wxlogin -->
 				<view class="tui-info" v-if="wxlogin">
 					<view class="tui-explain">{{usering.nickName}}</view>
-					<view class="tui-user-phone" v-if="wxlogin && ApproveStatus === 1">
+					<view class="tui-user-phone" v-if="wxlogin && (ApproveStatus === 1 || dangerUsr)">
 						<image src="../../static/images/cellphone.png" mode="aspectFill"></image>
 						<text>{{user_phone}}</text>
 					</view>
@@ -24,38 +25,51 @@
 					<view class="tui-explain">
 					</view>
 				</view>
+				
+				<!-- 用户被停用 -->
+				<view class="tui-set-box3" v-if="wxlogin && dangerUsr">
+					<view class="tui-icon-box">
+						<view class="tui-icon-box">
+							<text class="tui-icon-text3">{{logMsg}}</text>
+						</view>
+					</view>
+				</view>
+				<!-- 用户被停用 -->
+				
 				<!-- 未提交审核 => 去认证店铺-->
-				<view class="tui-set-box3" v-if="wxlogin && ApproveStatus === undefined ||ApproveStatus ==='' ||ApproveStatus === null">
+				<view class="tui-set-box3" v-if="wxlogin && (ApproveStatus === undefined ||ApproveStatus ==='' ||ApproveStatus === null) && !dangerUsr">
 					<view class="tui-icon-box ">
-						<view class="tui-icon-box " @tap="tendShop">
+						<view class="tui-icon-box " @tap.stop="tendShop">
 							<text class="tui-icon-text3">{{logMsg}}</text>
 						</view>
 					</view>
 				</view>
 				<!-- 未提交审核 => 去认证店铺 -->
+				
 				<!-- 提交审核并等待通过 => 查看店铺信息-->
-				<view class="tui-set-box3" v-if="wxlogin && ApproveStatus === 0">
+				<view class="tui-set-box3" v-if="wxlogin && ApproveStatus === 0  && !dangerUsr">
 					<view class="tui-icon-box">
-						<view class="tui-icon-box " @tap="tendShop1">
+						<view class="tui-icon-box " @tap.stop="tendShop1">
 							<text class="tui-icon-text3">{{logMsg}}<text style="margin-left: 6rpx;"> ></text></text>
 						</view>
 					</view>
 				</view>
 				<!-- 提交审核并等待通过 => 查看店铺信息-->
+				
 				<!-- 提交审核并通过 -->
-				<view class="tui-set-box" v-if="wxlogin && ApproveStatus === 1">
+				<view class="tui-set-box" v-if="wxlogin && ApproveStatus === 1  && !dangerUsr">
 					<view class="tui-icon-box ">
 						<image src="../../static/images/dianpu@2x.png" mode="aspectFill" class="tui-icon-shop"></image>
 					</view>
-					<view class="tui-icon-box " @tap="tendShop1">
+					<view class="tui-icon-box " @tap.stop="tendShop1">
 						<text class="tui-icon-text">{{logMsg}}</text>
 					</view>
 				</view>
 				<!-- 提交审核并通过 -->
 				<!-- 拒绝 -->
-				<view class="tui-set-box3" v-if="wxlogin && ApproveStatus === 2">
+				<view class="tui-set-box3" v-if="wxlogin && ApproveStatus === 2  && !dangerUsr">
 					<view class="tui-icon-box ">
-						<view class="tui-icon-box " @tap="tendShop1">
+						<view class="tui-icon-box " @tap.stop="tendShop1">
 							<text class="tui-icon-text3">{{logMsg}}</text>
 						</view>
 					</view>
@@ -204,9 +218,7 @@
 
 	export default {
 		onLoad: function(options) {
-			console.log(123)
 			this.getOrderData()
-			// this.getMerchants()
 			// this.getWxdata()
 			let obj = {};
 			// #ifdef MP-WEIXIN
@@ -246,17 +258,11 @@
 				fukuanList: '',
 				fahuoList: '',
 				shouhuoList: "",
-				tuikuanList: ''
+				tuikuanList: '',
+				dangerUsr: false,  //用户是否被停用
 			}
 		},
 		methods: {
-			onPullDownRefresh() {
-				this.getMerchants()
-				this.getOrderData()
-				setTimeout(function() {
-					uni.stopPullDownRefresh();
-				}, 1000);
-			},
 			//获取头像昵称
 			getUserInfo(event) {
 				log(event)
@@ -328,29 +334,7 @@
 					})
 
 			},
-			//一、认证店铺首先判断是否登录
-			// ifLogin() {
-			// 	var value = this.ApproveStatus
-			// 	if (!setdata) { //判断有无token，没有就显示去认证店铺
-			// 		log('没有token信息请点击登录')
-			// 		// log(this.logMsg)
-			// 	} else if (value == 0) {
-			// 		this.Goauth2 = true
-			// 		//状态为0时证明已经认证
-			// 		// this.logMsg = '审核中待通过'
-			// 	} else if (value == 1) {
-			// 		// this.logMsg = '我的店铺已认证'
-			// 		this.Goauth3 = true
-			// 	} else if (value == 2) {
-			// 		// this.logMsg = '未认证'
-			// 		// this.Goauth4 = true
-			// 	} else if (value == undefined) {
-			// 		this.Goauth = false
-			// 		this.Goauth2 = false
-			// 		this.Goauth3 = false
-			// 		this.logMsg = '去认证我的店铺'
-			// 	}
-			// },
+
 			//获取申请店铺状态信息
 			getMerchants() {
 				let setdata = uni.getStorageSync('usermen') //Token
@@ -362,20 +346,30 @@
 				}
 				listing(getClient, data)
 					.then((res) => {
-						///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
-						this.ApproveStatus = res.data.data.approveStatus //获取状态码，0未认证，1已认证，2拒绝
-						uni.setStorageSync('StoreStatus', res.data.data.approveStatus)
-						let setStore = uni.getStorageSync('StoreStatus') //状态码
-						this.user_phone = res.data.data.phone
-						let valu2 = this.ApproveStatus
-						if (valu2 === undefined || valu2 === null ||  valu2 === '') { //判断如果请求返回为空说明未申请过店铺认证
-							this.logMsg = '去认证我的店铺'
-						} else if (valu2 === 0) {
-							this.logMsg = '审核中待通过'
-						} else if (valu2 === 1) {
-							this.logMsg = '我的店铺已认证'
-						} else if (valu2 === 2) {
-							this.logMsg = '未通过,请重新提交'
+						console.log(res)
+						// 200 用户正常 201用户停用
+						if (res.data.code == 201) {
+							this.dangerUsr = true
+							this.user_phone = res.data.phone
+							this.logMsg = '账户已被停用'
+							return
+						} else {
+							this.dangerUsr = false
+							///登录成功后 未认证或者认证失败 显示去认证店铺，如果已认证，显示已认证店铺
+							this.ApproveStatus = res.data.data.approveStatus //获取状态码，0未认证，1已认证，2拒绝
+							uni.setStorageSync('StoreStatus', res.data.data.approveStatus)
+							let setStore = uni.getStorageSync('StoreStatus') //状态码
+							this.user_phone = res.data.data.phone
+							let valu2 = this.ApproveStatus
+							if (valu2 === undefined || valu2 === null || valu2 === '') { //判断如果请求返回为空说明未申请过店铺认证
+								this.logMsg = '去认证我的店铺'
+							} else if (valu2 === 0) {
+								this.logMsg = '审核中待通过'
+							} else if (valu2 === 1) {
+								this.logMsg = '我的店铺已认证'
+							} else if (valu2 === 2) {
+								this.logMsg = '未通过,请重新提交'
+							}
 						}
 					})
 					.catch((err) => {
@@ -383,7 +377,6 @@
 					})
 
 			},
-			
 			// 获取订单
 			getOrderData() {
 				let setdata = uni.getStorageSync('usermen')
@@ -407,14 +400,14 @@
 							if (item.payStatus == 0) {
 								fukuanList.push(item)
 							}
-							if (item.tradeStatus == "1"||item.tradeStatus == "2" || item.tradeStatus == "3") {
+							if (item.tradeStatus == "1" || item.tradeStatus == "2" || item.tradeStatus == "3") {
 								fahuoList.push(item)
 							}
-							if (item.payStatus == '1' && (item.tradeStatus == '4'||item.tradeStatus == '8')) {  
+							if (item.payStatus == '1' && (item.tradeStatus == '4' || item.tradeStatus == '8')) {
 								shouhuoList.push(item)
 							}
-							if (item.tradeStatus == '7') {  // 只要 待确定的 3
-								if(item.afterStatus == '3') { 
+							if (item.tradeStatus == '7') { // 只要 待确定的 3
+								if (item.afterStatus == '3') {
 									tuikuanList.push(item)
 								}
 							}
@@ -517,15 +510,15 @@
 						title: "请先登录",
 						icon: 'none'
 					})
-			
+
 				} else {
 					uni.navigateTo({
 						url: '../../pagesII/myOrder/myOrder?index=3'
 					})
 				}
-			
+
 			},
-			
+
 			// getWxdata(){
 			// 	uni.request({
 			// 	    url: 'https://api.weixin.qq.com/cgi-bin/customservice/getkflist?access_token=36_S2bdqu6Yy3WdGlcPmw0UH9fMGV6H0SjujlM0t6R7rVkn2ESWoiQ346FUz0mEI2GsDKOoAzUwnQNah7G5dzANuNzuXnudm0S-JONDlp6kn58nnqNKA-apYL1vcz7nwR_l5Ubn6HqnOLUAY0brVRQgAIAZVU', //仅为示例，并非真实接口地址。
@@ -575,16 +568,16 @@
 				uni.navigateBack();
 			}
 		},
+
 		onShow() {
 			this.getMerchants()
 			this.getOrderData()
 			this.ifUser()
 		},
-		// onPageScroll(e) {
-		// 	this.scrollTop = e.scrollTop;
-		// },
+
 		onPullDownRefresh() {
 			this.getOrderData()
+			this.getMerchants()
 			setTimeout(() => {
 				uni.stopPullDownRefresh()
 			}, 200)

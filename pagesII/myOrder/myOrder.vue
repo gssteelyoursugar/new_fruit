@@ -566,6 +566,10 @@
 				listing(getMyOrder, data)
 					.then((res) => {
 						log(res.data.data)
+						if (res.data.code == 201) {
+							this.loadStatus = "noMore"
+							return
+						}
 						if (res.data.data.length === 0) {
 							this.myOrderData = res.data.data
 							setTimeout(() => {

@@ -231,7 +231,6 @@
 						this.toArr(three)
 					];
 					this.value = [value, 0, 0]
-					log(this.value)
 				} else if (column === 1) {
 					//获取二级选中的地址信息
 					let two = this.addressTwo[value]
@@ -290,7 +289,6 @@
 			},
 			//获取微信昵称
 			getUserInfo(event) {
-				log(event)
 				if (event.detail.userInfo) {
 					uni.setStorageSync('userIN', event.detail.userInfo) //把token存在本地，小程序提供如同浏览器cookie
 					let wxing = event.detail.userInfo
@@ -302,7 +300,6 @@
 			wxCode(avatarUrl, nickName) {
 				wx.login({
 					success: (res) => {
-						log(res)
 						// return
 						let code = res.code
 						this.wxLoging(code)
@@ -314,13 +311,11 @@
 			},
 			//发给后台拿token
 			wxLoging(code) {
-				log(code)
 				let data = {
 					code,
 				}
 				publicing2(loginis, data) //发送请求携带参数
 					.then((res) => {
-						log(res.data.token) //获得token
 						uni.setStorageSync('usermen', res.data.token) //把token存在本地，小程序提供如同浏览器cookie
 						var setdata = uni.getStorageSync('usermen')
 						uni.showToast({
@@ -356,13 +351,11 @@
 				uni.showLoading({})
 				let setdata = uni.getStorageSync('usermen')
 				if (!setdata) {
-					log(setdata)
 					this.modaishow = true
 				} else {
 					// this.modaishow = false
 					this.modaishow = false
 				}
-				log(setdata)
 				let data = {
 					goodsId: this.productID,
 					token: setdata,
@@ -375,11 +368,8 @@
 						// 	icon:'none',
 						// 	duration:1000
 						// })
-						log(res)
 						this.ApproveStatus = res.data.data.approveStatus
-						// log(this.ApproveStatus)
 						this.StoreInfo = res.data.data
-						// log(this.StoreInfo)
 					})
 					.catch((err) => {
 						log(err)
@@ -448,16 +438,11 @@
 					//判断用户是否点击上传图片，是否要传fileUrls,flase不传值
 					if (this.flag == false) {
 						delete data.fileUrls
-						log('没有上传图片')
 					} else if (this.flag == true) {
-						log('点击了上传图片')
 					}
-					log(data)
 					publicing(postSaveStore, data)
 						.then((res) => {
 							uni.showLoading({})
-							log(res)
-							// log(res.data.msg)
 							if (res.data.code === -1) {
 								uni.showToast({
 									title: `${res.data.msg}`,
@@ -499,7 +484,6 @@
 			//获取token
 			getToken() {
 				let setdata = uni.getStorageSync('usermen')
-				// log(setdata)
 			},
 			//上传图片
 			//进来先判断登录了没
