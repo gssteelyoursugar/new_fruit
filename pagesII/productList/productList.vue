@@ -575,7 +575,6 @@
 					colorLevel_parameter_2: '', //颜色右
 					shapeLevel_parameter_1: '', //形状左
 					shapeLevel_parameter_2: '', //形状右
-
 				},
 				// 提交申请的数据，存的是id
 				postList: {},
@@ -933,7 +932,8 @@
 				this.slMangguo = title
 				this.idList = []
 				this.allVariety = false
-				this.varietyId = id
+				this.varietyId = id //种类id
+				this.tempData.varietyId = "" //品种id  两种id名字起得冲突是因为前面那个前端老哥写冲突了，重复的地方太多，就不改了，害怕改漏了就哭唧唧
 				this.ShopIng()
 				this.dropScreenShow = !this.dropScreenShow
 			},
@@ -1116,24 +1116,24 @@
 				let data2 = {
 					id: this.varietyId
 				}
-				Promise.all([listing(getGoodsall, this.tempData), listing(getAttribute, data2)])
+				listing(getGoodsall, this.tempData) //, listing(getAttribute, data2)
 					// listing(getGoodsall,data)
 					.then((res) => {
-						this.seleVarieties = res[1].data.data
-						this.color_level = res[0].data.data.color_level
-						this.facade_level = res[0].data.data.facade_level
-						this.fruit_star = res[0].data.data.fruit_star
-						this.shape_level = res[0].data.data.shape_level
-						this.goods = res[0].data.data.goods
-						this.packaging = res[0].data.data.packaging
-						this.species = res[0].data.data.species
+						this.seleVarieties = res.data.data
+						this.color_level = res.data.data.color_level
+						this.facade_level = res.data.data.facade_level
+						this.fruit_star = res.data.data.fruit_star
+						this.shape_level = res.data.data.shape_level
+						this.goods = res.data.data.goods
+						this.packaging = res.data.data.packaging
+						this.species = res.data.data.species
 						for (var i = 0; i < this.species.length; i++) {
 							this.species[i].isActives = this.activeA
 						}
-						this.goods_type = res[0].data.data.goodsType
-						this.storage_mode = res[0].data.data.storage_mode
-						this.taste_level = res[0].data.data.taste_level
-						this.variety = res[0].data.data.variety
+						this.goods_type = res.data.data.goodsType
+						this.storage_mode = res.data.data.storage_mode
+						this.taste_level = res.data.data.taste_level
+						this.variety = res.data.data.variety
 						console.log(res,this.variety )
 
 					})
@@ -1153,7 +1153,6 @@
 				this.slPinzhong = "品种"
 				this.idList = []
 				this.tempData.varietyId = ''
-				
 			},
 			btnCloseDrop() {
 				this.scrollTop = 1;
