@@ -67,7 +67,8 @@
 		-webkit-flex: 1;
 		        flex: 1;
 		padding: 20rpx 8rpx;
-		box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		        box-sizing: border-box;
 }
 .tui-goods-name {
 		/* max-width: 310rpx; */
@@ -82,11 +83,13 @@
 }
 .tag-tit{
 			/* 渐变色 */
+			background-image: -webkit-gradient(linear, left top, right top, from(#00C94A) , to(#00AC3F));
 			background-image: -webkit-linear-gradient(left, #00C94A , #00AC3F);
 			background-image: linear-gradient(to right, #00C94A , #00AC3F);
 			margin-right: 10rpx;
 			padding: 0 10rpx;
-			border-radius: 15rpx 0 15rpx 0;
+			-webkit-border-radius: 15rpx 0 15rpx 0;
+			        border-radius: 15rpx 0 15rpx 0;
 			color: #fff;
 			font-size: 20rpx;
 }

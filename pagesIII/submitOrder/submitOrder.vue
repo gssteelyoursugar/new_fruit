@@ -269,45 +269,61 @@
 				}
 				listing(getSubmitOrder, data2)
 					.then((res) => {
-						log(res)
-						let orderNumber = res.data.data.orderNumber
-						this.payUrl = res.data.data.payUrl
-						that.clip()
-						uni.showModal({
-							title: '提示',
-							content: '确认支付',
-							success: (res) => {
-								if (res.confirm) {
-									that.btnPay()
-								} else if (res.cancel) {
-									uni.showToast({
-										title: '订单已取消',
-										icon: 'none',
-										duration: 2000
+						let {
+							payinfo
+						} = res.data.data
+						let tmp = JSON.parse(payinfo)
+						console.log(tmp)
+						uni.requestPayment({
+							timeStamp: tmp.timeStamp,
+							nonceStr: tmp.nonceStr,
+							package: tmp.package,
+							signType: tmp.signType,
+							paySign: tmp.paySign,
+							success(resovle) {
+								uni.showToast({
+									title:"支付成功"
+								})
+								uni.reLaunch({
+									url: '../../pagesII/myOrder/myOrder?index=0'
+								})
+							},
+							fail(reject) {
+								uni.showToast({
+									title:"取消支付",
+									icon: 'none'
+								})
+								setTimeout(()=> {
+									uni.reLaunch({
+										url: '../../pagesII/myOrder/myOrder?index=0'
 									})
-									uni.switchTab({
-										url: '../../pages/my/my'
-									})
-									return
-								}
+								},500)
+								return
 							}
-						});
-						// 	uni.requestPayment({
-						// 	        timeStamp: data.timeStamp,
-						// 	        nonceStr: data.nonceStr,
-						// 	        package: data.package,
-						// 	        signType: 'MD5',
-						// 	        paySign: data.paySign,
-						// 	        success(res) {
-						// 	          // var temp = {
-						// 	          //   id: data.order_id,
-						// 	          //   status: 2,
-						// 	          //   is_pay:1,
-						// 	          // }
-						// 	        },
-						// 	        fail(res) {
-						// 	        }
-						// 	      })
+						})
+						// let orderNumber = res.data.data.orderNumber
+						// this.payUrl = res.data.data.payUrl
+						// that.clip()
+						// uni.showModal({
+						// 	title: '提示',
+						// 	content: '确认支付',
+						// 	success: (res) => {
+						// 		if (res.confirm) {
+						// 			that.btnPay()
+						// 		} else if (res.cancel) {
+						// 			uni.showToast({
+						// 				title: '订单已取消',
+						// 				icon: 'none',
+						// 				duration: 2000
+						// 			})
+						// 			uni.switchTab({
+						// 				url: '../../pages/my/my'
+						// 			})
+						// 			return
+						// 		}
+						// 	}
+						// });
+
 					})
 					.catch((err) => {
 						log(err)
@@ -331,7 +347,7 @@
 				uni.reLaunch({
 					url: '../PayOK/PayOK'
 				})
-				
+
 			},
 			popupClose() {
 				this.show = false

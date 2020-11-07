@@ -69,7 +69,6 @@
 				title:'应季专区',
 				hideing: 0,
 				num:0,
-				
 				imageUrl:"http://qg-qr.oss-cn-shenzhen.aliyuncs.com/test/1599787289206.png?Expires=1915147284&OSSAccessKeyId=LTAI4G74cnhsbDWNkfvuNew3&Signature=cwrmtVmShk7w%2FKp0d%2FEPxyKbCNQ%3D",
 				rankBgUrl:"/static/images/paihangbang@2x.png",
 				height: 64, //header高度

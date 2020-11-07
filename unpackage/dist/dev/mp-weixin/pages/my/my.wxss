@@ -9,7 +9,8 @@
 .tui-header-box {
 	width: 100%;
 	padding: 0 30rpx 0 20rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -72,6 +73,7 @@
 	-webkit-box-pack: justify;
 	-webkit-justify-content: space-between;
 	        justify-content: space-between;
+	background-image: -webkit-gradient(linear, left top, right top, from(#FF943D), to(#FF5600));
 	background-image: -webkit-linear-gradient(left, #FF943D, #FF5600);
 	background-image: linear-gradient(to right, #FF943D, #FF5600);
 	width: 250rpx;
@@ -84,7 +86,8 @@
 	-webkit-box-pack: center;
 	-webkit-justify-content: center;
 	        justify-content: center;
-	border-radius: 60rpx 0 0 60rpx;
+	-webkit-border-radius: 60rpx 0 0 60rpx;
+	        border-radius: 60rpx 0 0 60rpx;
 }
 
 /* 未认证 */
@@ -104,7 +107,8 @@
 	position: absolute;
 	line-height: 70rpx;
 	right: 0;
-	border-radius: 60rpx 0 0 60rpx;
+	-webkit-border-radius: 60rpx 0 0 60rpx;
+	        border-radius: 60rpx 0 0 60rpx;
 }
 
 /* 审核中/未通过 */
@@ -125,7 +129,8 @@
 	line-height: 70rpx;
 	right: 0;
 	bottom: -12rpx;
-	border-radius: 60rpx 0 0 60rpx;
+	-webkit-border-radius: 60rpx 0 0 60rpx;
+	        border-radius: 60rpx 0 0 60rpx;
 }
 .tui-set-box3 .tui-icon-box {
 	position: relative;
@@ -176,7 +181,8 @@
 	height: 32rpx;
 	min-width: 20rpx;
 	padding: 0 6rpx;
-	border-radius: 40rpx;
+	-webkit-border-radius: 40rpx;
+	        border-radius: 40rpx;
 	right: 10rpx;
 	top: -5rpx;
 	-webkit-transform: scale(0.8) translateX(60%);
@@ -206,7 +212,8 @@
 	position: absolute;
 	height: 12rpx;
 	width: 12rpx;
-	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	        border-radius: 50%;
 	right: -12rpx;
 	top: 0;
 	background: #F74D54;
@@ -228,7 +235,8 @@
 	left: 0;
 	top: 130rpx;
 	padding: 0 30rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
@@ -242,7 +250,8 @@
 	width: 130rpx;
 	height: 130rpx;
 	display: block;
-	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	        border-radius: 50%;
 }
 .tui-info {
 	width: 60%;
@@ -308,7 +317,8 @@
 	width: 98%;
 	padding: 15rpx 30rpx;
 	margin: 0 1%;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	position: absolute;
 	left: 0;
 	top: 345rpx;
@@ -354,7 +364,8 @@
 .tui-content-box {
 	width: 100%;
 	padding: 0 20rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	position: relative;
 	top: 20rpx;
 	z-index: 10;
@@ -363,8 +374,10 @@
 .tui-box {
 	width: 100%;
 	background: #fff;
-	box-shadow: 0 3rpx 20rpx rgba(183, 183, 183, 0.1);
-	border-radius: 10rpx;
+	-webkit-box-shadow: 0 3rpx 20rpx rgba(183, 183, 183, 0.1);
+	        box-shadow: 0 3rpx 20rpx rgba(183, 183, 183, 0.1);
+	-webkit-border-radius: 10rpx;
+	        border-radius: 10rpx;
 	overflow: hidden;
 }
 .tui-order-box {
@@ -374,7 +387,8 @@
 	width: 100%;
 	height: 74rpx;
 	padding: 0 26rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
@@ -400,7 +414,8 @@
 .tui-order-list {
 	width: 100%;
 	height: 180rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
@@ -457,6 +472,7 @@
 	border: 1px solid #f93b3f;
 	color: #fff;
 	font-weight: 500;
+	-webkit-border-radius: 50%;
 	border-radius: 50%;
 	line-height: 30rpx;
 	z-index: -1;
@@ -551,7 +567,8 @@
 	left: 0;
 	bottom: 0;
 	right: 0;
-	border-radius: 8rpx;
+	-webkit-border-radius: 8rpx;
+	        border-radius: 8rpx;
 	overflow: hidden;
 }
 .warp-text {

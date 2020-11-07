@@ -54,10 +54,13 @@ button.data-v-7706e779 {
 }
 button.data-v-7706e779 {
 
-	border-radius: 0;
+	-webkit-border-radius: 0;
+
+	        border-radius: 0;
 }
 .btn.data-v-7706e779 {
-	border-radius: 100rpx;
+	-webkit-border-radius: 100rpx;
+	        border-radius: 100rpx;
 	height: 50rpx;
 	width: 30%;
 	background-color: #FFFFFF;
@@ -103,7 +106,8 @@ button.data-v-7706e779 {
 	height: 220rpx;
 	margin: 0 30rpx;
 	border: 1px solid #f5f5f5;
-	border-radius: 16rpx;
+	-webkit-border-radius: 16rpx;
+	        border-radius: 16rpx;
 }
 .tui-list-title.data-v-9a9cee74 {
 	height: 30rpx;
@@ -169,7 +173,8 @@ button.data-v-7706e779 {
 }
 .tui-line-cell.data-v-9a9cee74 {
 	width: 100%;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
@@ -179,7 +184,8 @@ button.data-v-7706e779 {
 }
 .tui-line-cell2.data-v-9a9cee74 {
 	width: 100%;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 
 	-webkit-box-align: center;
 
@@ -232,13 +238,15 @@ button.data-v-7706e779 {
 	bottom: 0rpx;
 	width: 100%;
 	padding: 40rpx 50rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	background-color: #fff;
 	z-index: 999;
 	border-top: 1px solid #e5e5e5;
 }
 .tui-btn-box .tui-button-primary.data-v-9a9cee74 {
-	border-radius: 40rpx;
+	-webkit-border-radius: 40rpx;
+	        border-radius: 40rpx;
 }
 .tui-button-gray.data-v-9a9cee74 {
 	margin-top: 30rpx;
@@ -253,7 +261,8 @@ button.data-v-7706e779 {
 .tui-content-box.data-v-9a9cee74 {
 	width: 100%;
 	padding: 0 30rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	position: relative;
 	top: -172rpx;
 	z-index: 10;
@@ -261,8 +270,10 @@ button.data-v-7706e779 {
 .tui-box.data-v-9a9cee74 {
 	width: 100%;
 	background: #fff;
-	box-shadow: 0 3rpx 20rpx rgba(183, 183, 183, 0.1);
-	border-radius: 10rpx;
+	-webkit-box-shadow: 0 3rpx 20rpx rgba(183, 183, 183, 0.1);
+	        box-shadow: 0 3rpx 20rpx rgba(183, 183, 183, 0.1);
+	-webkit-border-radius: 10rpx;
+	        border-radius: 10rpx;
 	overflow: hidden;
 }
 .tui-order-box.data-v-9a9cee74 {
@@ -273,7 +284,8 @@ button.data-v-7706e779 {
 	width: 100%;
 
 	padding: 0 26rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
@@ -429,7 +441,8 @@ button.data-v-7706e779 {
 	left: 0;
 	bottom: 0;
 	right: 0;
-	border-radius: 8rpx;
+	-webkit-border-radius: 8rpx;
+	        border-radius: 8rpx;
 	overflow: hidden;
 }
 .warp-text.data-v-9a9cee74 {

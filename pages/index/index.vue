@@ -571,12 +571,7 @@
 					})
 				}
 			},
-			goKingarea(index) {
-
-				uni.navigateTo({
-					url: '../../pagesII/kingarea/kingarea?title=' + title
-				})
-			},
+			
 
 			//资讯页
 			goMessage() {

@@ -653,7 +653,7 @@
 					display: flex;
 					align-items: center;
 					font-size: 28rpx;
-					padding: 6rpx 0;
+					padding: 14rpx 0;
 					&:nth-child(odd) {
 						width: 58%;
 					}

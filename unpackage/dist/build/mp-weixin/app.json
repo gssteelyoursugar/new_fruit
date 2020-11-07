@@ -19,7 +19,6 @@
         "fruitList/fruitList",
         "tendShop/tendShop",
         "message/message",
-        "kingarea/kingarea",
         "ImportedFruit/ImportedFruit",
         "hotFruit/hotFruit",
         "seasonal/seasonal",
@@ -108,6 +107,5 @@
       "desc": "已为您提供最近的服务信息"
     }
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {}
 }

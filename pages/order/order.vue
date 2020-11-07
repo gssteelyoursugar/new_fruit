@@ -84,7 +84,7 @@
 			<view class="tui-total-price" v-if="!isEdit">
 				<text class="total-all">合计:</text>
 				<text class="total-label">￥</text>
-				<text class="total-price-num">{{ allPrice }}</text>
+				<text class="total-price-num">{{  allPrice  }}</text>
 				<text class="total-label" v-if="cartIds.length !== 0">元</text>
 				<text class="total-fee" v-if="cartIds.length !== 0">含运费</text>
 			</view>

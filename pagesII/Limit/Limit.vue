@@ -48,7 +48,7 @@
 						<view class="tui-rank-list">
 							<!-- v-for="ll of 20" :key="ll" -->
 							<view class="tui-tab-rank" v-for="(item,index) in LimitDataList" :key="index">
-								<view class="tui-tab-rank-cent" @tap="gotoList(item.id)">
+								<view class="tui-tab-rank-cent">
 									<image :src="item.url" mode="aspectFill" class="img-rink"></image>
 									<view class="tui-pro-tit">
 										<text class="tag-tit">{{item.lableName}}</text> <text class="tag-tit-text">{{item.title}}</text>
@@ -75,7 +75,8 @@
 									</view> -->
 											</view>
 											<!-- <image src="../../static/images/shopcar@2x.png" mode="aspectFill" class="tui-shop-car"></image> -->
-											<view class="robb-item">抢购</view>
+											<view class="robb-item"  @tap="gotoList(item.id)" v-if="activityStatus != '3' && item.number !== 0  ">抢购</view>
+											<view class="robb-item no-item" v-else @click="showTipsOnData(item.number)">抢购</view>
 											<!-- <view>购物车</view> -->
 										</view>
 
@@ -141,7 +142,8 @@
 				boxHeight: 44,
 				statusHeight: 20,
 				navHeight: 64,
-				scrollTop: 0
+				scrollTop: 0,
+				activityStatus: '' // 活动状态
 			};
 		},
 		onLoad: function(options) {
@@ -202,7 +204,24 @@
 					url: '../../pagesIII/productDetail/productDetail?id=' + id
 				})
 			},
-
+			showTipsOnData(goodsNumber) {
+				if (this.activityStatus == '3') {
+					uni.showToast({
+						title: "活动结束啦!",
+						icon: 'none'
+					})
+					return
+				} else {
+					if (goodsNumber === 0) {
+						uni.showToast({
+							title: "该商品抢完啦!",
+							icon: 'none'
+						})
+						return
+					}
+				}
+				
+			},
 			//倒计时
 			endOfTime: function() {
 			},
@@ -228,6 +247,7 @@
 						log(res)
 						this.LimitData = res.data.data
 						this.LimitDataList = res.data.data.list
+						this.activityStatus = res.data.data.status
 						this.startTime = res.data.data.startTime
 						this.endTime = res.data.data.endTime
 						this.createTime = res.data.data.createTime
@@ -534,6 +554,10 @@
 		font-weight: 500;
 		box-shadow: 0 0rpx 4rpx 0 rgba(0, 197, 42, 1);
 
+	}
+	.no-item {
+		background: #cfcfcf;
+		box-shadow: 0 0rpx 4rpx 0 #cfcfcf;
 	}
 
 	.tui-shop-car {

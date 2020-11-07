@@ -18,7 +18,8 @@
 	background-color: rgba(0, 0, 0, 0.9);
 	font-size: 24rpx;
 	color: #fff;
-	border-radius: 24rpx;
+	-webkit-border-radius: 24rpx;
+	        border-radius: 24rpx;
 	padding: 10rpx 20rpx;
 }
 .weather-active.data-v-87e6745e {

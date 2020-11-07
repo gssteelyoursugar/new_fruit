@@ -159,13 +159,6 @@
 						
 					}
 				}, {
-					"path": "kingarea/kingarea",
-					"style": {
-						"enablePullDownRefresh": true,
-						"navigationStyle": "custom",
-						"navigationBarTitleText": "金刚区空页面"
-					}
-				}, {
 					"path": "ImportedFruit/ImportedFruit",
 					"style": {
 

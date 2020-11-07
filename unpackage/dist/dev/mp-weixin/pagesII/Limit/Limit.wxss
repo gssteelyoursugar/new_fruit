@@ -87,7 +87,8 @@ to {
 	color: #ffffff;
 }
 .round{
-	border-radius: 20rpx;
+	-webkit-border-radius: 20rpx;
+	        border-radius: 20rpx;
 }
 page {
 		background-color: #fff;
@@ -149,7 +150,8 @@ page {
 		left: 0;
 		top: 170rpx;
 		padding: 0 30rpx;
-		box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		        box-sizing: border-box;
 		display: -webkit-box;
 		display: -webkit-flex;
 		display: flex;
@@ -158,7 +160,8 @@ page {
 		        align-items: center;
 }
 .scroll-goods {
-		border-radius: 60rpx 60rpx 0 0;
+		-webkit-border-radius: 60rpx 60rpx 0 0;
+		        border-radius: 60rpx 60rpx 0 0;
 		position: fixed;
 		bottom: 0;
 		top: 283rpx;
@@ -212,7 +215,8 @@ page {
 		display: block;
 		margin-right: 10rpx;
 		background: #eee;
-		border-radius: 6rpx;
+		-webkit-border-radius: 6rpx;
+		        border-radius: 6rpx;
 }
 .tui-pro-tit {
 		-webkit-box-flex: 5;
@@ -221,11 +225,13 @@ page {
 }
 .tag-tit {
 		/* 渐变色 */
+		background-image: -webkit-gradient(linear, left top, right top, from(#00C94A), to(#00AC3F));
 		background-image: -webkit-linear-gradient(left, #00C94A, #00AC3F);
 		background-image: linear-gradient(to right, #00C94A, #00AC3F);
 		margin-right: 10rpx;
 		padding: 0 10rpx;
-		border-radius: 15rpx 0 15rpx 0;
+		-webkit-border-radius: 15rpx 0 15rpx 0;
+		        border-radius: 15rpx 0 15rpx 0;
 		color: #fff;
 		font-size: 24rpx;
 }
@@ -263,9 +269,16 @@ page {
 		width: 130rpx;
 		text-align: center;
 		padding: 16rpx 0;
-		border-radius: 50rpx;
+		-webkit-border-radius: 50rpx;
+		        border-radius: 50rpx;
 		font-weight: 500;
-		box-shadow: 0 0rpx 4rpx 0 rgba(0, 197, 42, 1);
+		-webkit-box-shadow: 0 0rpx 4rpx 0 rgba(0, 197, 42, 1);
+		        box-shadow: 0 0rpx 4rpx 0 rgba(0, 197, 42, 1);
+}
+.no-item {
+		background: #cfcfcf;
+		-webkit-box-shadow: 0 0rpx 4rpx 0 #cfcfcf;
+		        box-shadow: 0 0rpx 4rpx 0 #cfcfcf;
 }
 .tui-shop-car {
 		width: 80rpx;
@@ -288,9 +301,11 @@ page {
 }
 .activetext {
 		color: #fff !important;
+		background-image: -webkit-gradient(linear, left top, right top, from(#FF943D), to(#FF5600));
 		background-image: -webkit-linear-gradient(left, #FF943D, #FF5600);
 		background-image: linear-gradient(to right, #FF943D, #FF5600);
-		border-radius: 60rpx;
+		-webkit-border-radius: 60rpx;
+		        border-radius: 60rpx;
 }
 .tui-cent-tab {
 		position: relative;
@@ -302,7 +317,8 @@ page {
 		-webkit-box-pack: justify;
 		-webkit-justify-content: space-between;
 		        justify-content: space-between;
-		border-radius: 60rpx;
+		-webkit-border-radius: 60rpx;
+		        border-radius: 60rpx;
 		background-color: #f7f7f7;
 		margin-bottom: 80rpx;
 }
@@ -372,7 +388,9 @@ page {
 		width: 20px !important;
 		padding: 6px !important;
 
-		border-radius: 50%;
+		-webkit-border-radius: 50%;
+
+		        border-radius: 50%;
 		display: -webkit-box;
 		display: -webkit-flex;
 		display: flex;
@@ -404,7 +422,8 @@ page {
 		left: 0;
 		top: 300rpx;
 		padding: 0 30rpx;
-		box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		        box-sizing: border-box;
 		/* display: flex; */
 		-webkit-box-align: center;
 		-webkit-align-items: center;
