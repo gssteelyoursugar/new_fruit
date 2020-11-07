@@ -410,19 +410,19 @@
 				let checkRes = form.validation(formData, rules);
 				if (!checkRes) {
 					let imgDataLi = []
-					let subNum = 0
-					for (let i in this.urlListFlag) {
-						if (this.urlListFlag[i]) {
-							subNum++
-						}
-					}
-					if (subNum < 1) {
-						uni.showToast({
-							title: '至少要上传一张照片',
-							icon: 'none'
-						})
-						return
-					}
+					// let subNum = 0
+					// for (let i in this.urlListFlag) {
+					// 	if (this.urlListFlag[i]) {
+					// 		subNum++
+					// 	}
+					// }
+					// if (subNum < 1) {
+					// 	uni.showToast({
+					// 		title: '至少要上传一张照片',
+					// 		icon: 'none'
+					// 	})
+					// 	return
+					// }
 					let setdata = uni.getStorageSync('usermen')
 					let data = {
 						storeName: e.detail.value.storeName,

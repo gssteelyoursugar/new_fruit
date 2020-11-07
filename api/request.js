@@ -9,8 +9,8 @@ let wxloginurl = `${url}wxuser/wxlogin`
 // let url = 'http://192.168.1.10:8980/'
 // // 线上
 // let url = 'https://cs.zgqgpt.com/'
-let url = "http://testqg.natapp1.cc/"
-// let url = "https://qg.zgqgpt.com/"
+// let url = "http://testqg.natapp1.cc/"
+let url = "https://qg.zgqgpt.com/"
 
 // let url = 'http://dwh.natapp1.cc/js/'
 let imgurl = 'http://192.168.1.10:8980'

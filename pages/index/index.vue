@@ -488,6 +488,11 @@
 				}
 				listing(getClient, data)
 					.then((res) => {
+						console.log(res)
+						if (res.data.code == 500) {
+							this.ApproveStatus = 0
+							return
+						}
 						///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
 						this.ApproveStatus = res.data.data.approveStatus //获取电偶状态码，0未认证，1已认证，2拒绝
 						let cityCode = res.data.data.address
@@ -962,7 +967,8 @@
 		onShow() {
 			this.getMerchants()
 			this.getHomelist()
-			
+			this.getIndexClass()
+			console.log(this.ApproveStatus)
 		},
 		// 转发
 		onShareAppMessage: function() {

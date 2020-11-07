@@ -251,7 +251,7 @@
 				<!-- 免赔情况 -->
 				<view class="tui-height-full">
 					<view class="tui-title-line"><text>免赔情况</text></view>
-					<jyf-parser selectable  :html="shopListdata.deductible"></jyf-parser>
+					<jyf-parser selectable :html="shopListdata.deductible"></jyf-parser>
 					<!-- <view class="tui-height-flex tui-height-flex-top">
 						<view class="tui-left-one1">
 							<text class="iconfont icon-quan"></text>
@@ -276,7 +276,7 @@
 				<!-- 可售后情况 -->
 				<view class="tui-height-full ">
 					<view class="tui-title-line"><text>可售后情况</text></view>
-					<jyf-parser selectable  :html="shopListdata.afterSale"></jyf-parser>
+					<jyf-parser selectable :html="shopListdata.afterSale"></jyf-parser>
 					<!-- <view class="tui-height-flex tui-height-flex-top">
 						<view class="tui-left-one1">
 							<text class="iconfont icon-quan"></text>
@@ -300,7 +300,7 @@
 				</view>
 				<view class="tui-height-full tui-full-bac">
 					<view class="tui-title-line"><text>免赔情况</text></view>
-					<jyf-parser selectable  :html="shopListdata.regulation"></jyf-parser>
+					<jyf-parser selectable :html="shopListdata.regulation"></jyf-parser>
 					<!-- <view class="shuoming">
 						在相关法规明确规定网络销售的鲜活易腐类商品不适用
 						<text>“七天无理由退换货”</text>
@@ -332,7 +332,7 @@
 					<tui-icon name="order" :size="22" color="#ff0000" v-if="canCart"></tui-icon> -->
 					<image src="../../static/images/add_order-f.png" mode="" v-if="!canCart" style="width: 44rpx;height: 52rpx;"></image>
 					<image src="../../static/images/add_order-t.png" mode="" v-if="canCart" style="width: 44rpx;height: 52rpx;"></image>
-					
+
 					<view class="tui-operation-text tui-scale-small">加入进货单</view>
 				</view>
 				<!-- <view class="tui-operation-item" hover-class="tui-opcity" :hover-stay-time="150">
@@ -408,7 +408,7 @@
 				</view>
 			</block>
 		</wyb-popup>
-		<view class="warp" v-if="modaishow">
+		<view class="warp" :style="{top: navHeight + 'px'}" v-if="modaishow">
 			<view class="warp-view">
 				<view class="warp-text1">温馨提示</view>
 				<view class="warp-text">请先登录</view>
@@ -418,7 +418,7 @@
 				</view>
 			</view>
 		</view>
-		<view class="warp" v-if="isVerify">
+		<view class="warp" :style="{top: navHeight + 'px'}" v-if="isVerify">
 			<view class="warp-view">
 				<view class="warp-text1">温馨提示</view>
 				<view class="warp-text">未验证店铺信息</view>
@@ -560,6 +560,21 @@
 				let {
 					statusBarHeight
 				} = res
+
+					// #ifndef H5 || APP-PLUS || MP-ALIPAY
+					let info = uni.getMenuButtonBoundingClientRect()
+					let {
+						top,
+						height,
+						bottom
+					} = info
+					let buttonHeight = (bottom - statusBarHeight) + (top - statusBarHeight)
+					that.navHeight = statusBarHeight + buttonHeight + top - statusBarHeight
+					that.iconTop = statusBarHeight + (top - statusBarHeight)
+					that.tabsTop = statusBarHeight + buttonHeight + top - statusBarHeight
+					console.log("info",info,statusBarHeight,that.navHeight)
+					// #endif
+
 				uni.getNetworkType({
 					success: function(res) {
 						console.log(res.networkType);
@@ -585,19 +600,6 @@
 						that.netStatus = true
 					}
 				});
-				// #ifndef H5 || APP-PLUS || MP-ALIPAY
-				let info = uni.getMenuButtonBoundingClientRect()
-				let {
-					top,
-					bottom
-				} = info
-				let buttonHeight = (bottom - statusBarHeight) + (top - statusBarHeight)
-				that.navHeight = statusBarHeight + buttonHeight + top - statusBarHeight
-				that.iconTop = statusBarHeight + (top - statusBarHeight)
-				that.tabsTop = statusBarHeight + buttonHeight + top - statusBarHeight
-				// #endif
-
-
 			} catch (err) {
 				console.log(err)
 			}
@@ -645,7 +647,7 @@
 				let time = new Date().getHours()
 				return time
 			},
-			
+
 
 		},
 		filters: {
@@ -697,8 +699,7 @@
 		},
 
 		methods: {
-			clickLink(e) {
-			},
+			clickLink(e) {},
 			//购买前获取申请店铺状态信息
 			getMerchants() {
 				let data = {
@@ -706,6 +707,7 @@
 				};
 				listing(getClient, data)
 					.then(res => {
+
 						// log(res);
 						///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
 						this.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
@@ -852,7 +854,8 @@
 					this.modaishow = true;
 					return
 				}
-				if (this.ApproveStatus === null ||this.ApproveStatus === undefined || this.ApproveStatus === '' || this.ApproveStatus === 2) {
+				if (this.ApproveStatus === null || this.ApproveStatus === undefined || this.ApproveStatus === '' || this.ApproveStatus ===
+					2) {
 					this.toggleVerify()
 					return;
 				}
@@ -938,11 +941,12 @@
 						});
 						return;
 					}
-					if (this.ApproveStatus === null ||this.ApproveStatus === undefined || this.ApproveStatus === '' || this.ApproveStatus === 2) {
+					if (this.ApproveStatus === null || this.ApproveStatus === undefined || this.ApproveStatus === '' || this.ApproveStatus ===
+						2) {
 						this.toggleVerify()
 						return;
 					}
-					
+
 					if (this.ApproveStatus === 1) {
 						let data = {
 							goodsId: id,
@@ -1012,8 +1016,9 @@
 				} else {
 					// this.modaishow = false
 					this.modaishow = false;
-					
-					if (this.ApproveStatus === null ||this.ApproveStatus === undefined || this.ApproveStatus === '' || this.ApproveStatus === 2) {
+
+					if (this.ApproveStatus === null || this.ApproveStatus === undefined || this.ApproveStatus === '' || this.ApproveStatus ===
+						2) {
 						this.toggleVerify()
 						return;
 					}
@@ -1112,7 +1117,7 @@
 			common: function() {
 				this.tui.toast('功能开发中~');
 			},
-			
+
 			changeNum(e) {
 				this.currentTab = e.index;
 			},

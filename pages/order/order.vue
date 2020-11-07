@@ -60,7 +60,7 @@
 									
 									这个是组件封装好了的，方法不能传参数，只能接受组件传出来的
 									-->
-									<tui-numberbox :value="itemTwo.number" iconColor="#444444" :height="48" :width="76" :min="0" :custom="index"
+									<tui-numberbox :value="itemTwo.number" iconColor="#444444" :height="48" :width="76" :min="1" :max="itemTwo.number" :custom="index"
 									 :index="indexs" @change="changeNum()"></tui-numberbox>
 								</view>
 							</view>

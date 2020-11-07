@@ -31,16 +31,7 @@
 						 colonColor="#000" @end="endOfTime"></tui-countdown>
 					</view>
 				</view>
-				<!-- <view class="tui-cent-box-felx1">
-						<view class="class-name-left">
-							<image src="../../static/images/gengduo@3x.png" mode="aspectFit" class="imgtime2"></image>
-						</view>
-
-						<view class="class-name-left">
-							<text class="tite-color-time">宁*果巨峰葡萄A级33斤果径20-35 鲜度5星</text>
-						</view>
-					</view>
-				-->
+				
 			</view>
 			<view class="flex-column-box">
 				<scroll-view :scroll-top="scrollTop" scroll-y="true" class="scroll-Y" @scroll="scroll">
@@ -49,7 +40,12 @@
 							<!-- v-for="ll of 20" :key="ll" -->
 							<view class="tui-tab-rank" v-for="(item,index) in LimitDataList" :key="index">
 								<view class="tui-tab-rank-cent">
-									<image :src="item.url" mode="aspectFill" class="img-rink"></image>
+									<view class="img-wrapper">
+										<image :src="item.url" mode="aspectFill" class="img-rink"></image>
+										<view class="no-goods-bg" v-if="activityStatus == '3' && item.number === 0  ">
+											<view class="bg-text">抢光了</view>
+										</view>
+									</view>
 									<view class="tui-pro-tit">
 										<text class="tag-tit">{{item.lableName}}</text> <text class="tag-tit-text">{{item.title}}</text>
 										<view class="tag-tit2">
@@ -79,7 +75,6 @@
 											<view class="robb-item no-item" v-else @click="showTipsOnData(item.number)">抢购</view>
 											<!-- <view>购物车</view> -->
 										</view>
-
 									</view>
 								</view>
 							</view>
@@ -491,16 +486,44 @@
 		padding-bottom: 1rpx solid rgba(245, 245, 245, 1);
 
 	}
+	
+	.img-wrapper {
+		position: relative;
+		margin-right: 10rpx;
+		border: 1px solid #e5e5e5;
 
+	}
 	.img-rink {
 		width: 150rpx;
 		height: 150rpx;
 		display: block;
-		margin-right: 10rpx;
 		background: #eee;
 		border-radius: 6rpx;
+	}
+	.no-goods-bg {
+		position: absolute;
+		top: 0;
+		right: 0;
+		left: 0;
+		bottom: 0;
+		background: rgba(255,255,255,0.5);
+		display: flex;
+		justify-content: center;
+		align-items: center;
 
 	}
+	
+	.bg-text {
+		font-size: 24rpx;
+		background: rgba(0,0,0,.5);
+		border-radius: 40rpx;
+		width: 100rpx;
+		text-align: center;
+		height: 36rpx;
+		color: #fff;
+
+	}
+	
 
 	.tui-pro-tit {
 		flex: 5;
@@ -549,15 +572,16 @@
 		color: #fff;
 		width: 130rpx;
 		text-align: center;
-		padding: 16rpx 0;
 		border-radius: 50rpx;
 		font-weight: 500;
+		height: 56rpx;
+		line-height: 56rpx;
 		box-shadow: 0 0rpx 4rpx 0 rgba(0, 197, 42, 1);
 
 	}
 	.no-item {
-		background: #cfcfcf;
-		box-shadow: 0 0rpx 4rpx 0 #cfcfcf;
+		background: rgba(0, 197, 42, 0.5);
+		box-shadow: 0 0rpx 4rpx 0 rgba(0, 197, 42, 0.5);
 	}
 
 	.tui-shop-car {
