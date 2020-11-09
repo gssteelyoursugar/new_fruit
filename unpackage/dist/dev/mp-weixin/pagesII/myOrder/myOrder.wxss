@@ -251,6 +251,15 @@
 	-webkit-box-sizing: border-box;
 	        box-sizing: border-box;
 }
+.tui-order-btn .tui-btn-ml:last-child button {
+	background: #00C52A !important;
+	color: #fff !important;
+	border-color: #00C52A !important;
+}
+.tui-order-btn .tui-btn-ml:last-child button::after {
+
+	border-color: #00C52A !important;
+}
 .tui-order-btn .tui-btn-ml:last-child .tui-btn {
 	background: #00C52A !important;
 	color: #fff !important;
@@ -318,5 +327,69 @@ button {
 button {
 	-webkit-border-radius: 0;
 	        border-radius: 0;
+}
+
+/* 模态弹窗布局 */
+.warp {
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.6);
+	z-index: 9999;
+}
+.warp-view {
+	width: 500rpx;
+	height: 260rpx;
+	background: #ffffff;
+	margin: auto;
+	position: absolute;
+	-webkit-position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	-webkit-border-radius: 8rpx;
+	        border-radius: 8rpx;
+	overflow: hidden;
+}
+.warp-text {
+	text-align: center;
+	margin-top: 34rpx;
+	font-size: 34rpx;
+	color: #666666;
+}
+.warp-text1 {
+	text-align: center;
+	height: 60rpx;
+	line-height: 60rpx;
+	font-size: 34rpx;
+	color: #fff;
+	background-color: rgba(0, 197, 42, 1);
+}
+.warp-flex {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-justify-content: space-around;
+	        justify-content: space-around;
+	border-top: 1rpx solid #eeeeee;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 80rpx;
+	line-height: 80rpx;
+}
+.color-green {
+	color: rgba(0, 197, 42, 1);
+}
+.warp-flex button {
+	border: none;
+	font-size: 30rpx;
+}
+.warp-flex button:nth-child(2) {
+	color: rgba(0, 197, 42, 1);
 }
 

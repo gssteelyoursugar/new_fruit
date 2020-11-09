@@ -451,6 +451,14 @@
 								});
 								return
 							}
+							if (res.data.code == 500) {
+								uni.showToast({
+									title: "服务器异常,请重试",
+									icon: "none",
+									duration: 3000
+								});
+								return
+							}
 							if (res.data.code === 200) {
 								uni.showToast({
 									title: `${res.data.msg}`,

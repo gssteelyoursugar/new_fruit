@@ -336,6 +336,7 @@
 				};
 				listing(getDetails, data).then(res => {
 					this.orderObj = res.data.data[0]
+					console.log(res)
 					let data = {
 						id: this.orderObj.goods_id,
 						token: setdata
@@ -358,6 +359,7 @@
 		},
 		onLoad(opt) {
 			this.order_id = opt.id
+			console.log(opt)
 		},
 		onShow() {
 			this.getOrderDetail()

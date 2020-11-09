@@ -342,6 +342,7 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		margin-top: 30rpx;
 	}
 	.tag-tit2-price{
 		color: #FF5600;
@@ -369,8 +370,8 @@
 		font-size: 16rpx;
 	}
 	.tui-shop-car{
-		width: 80rpx;
-		height: 80rpx;
+		width: 52rpx;
+		height: 52rpx;
 		display: block;
 	}
 	.tag-tit-text{

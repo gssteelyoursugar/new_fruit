@@ -387,7 +387,7 @@
 						<view class="tag-tit3-flex">
 							<view class="tag-tit2-price">购买数量</view>
 							<view class="tag-tit2-text">
-								<tui-numberbox :min="1" :max="99" :value="value2" @change="change2"></tui-numberbox>
+								<tui-numberbox :min="1" :max="shopListdata.number" :value="value2" @change="change2"></tui-numberbox>
 							</view>
 						</view>
 					</view>
@@ -758,15 +758,14 @@
 								uni.showToast({
 									title: `${res.data.msg}`,
 									icon: 'none',
-									duration: 2000
+									duration: 3000
 								});
-								uni.hideLoading();
 								return;
 							} else if (code == 200) {
 								uni.showToast({
 									title: `${res.data.msg}`,
 									icon: 'none',
-									duration: 2000
+									duration: 3000
 								});
 								uni.navigateTo({
 									url: '../../pagesIII/submitOrder/submitOrder?ids=' + ids

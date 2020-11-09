@@ -167,7 +167,6 @@
 								<view class="tui-pro-dea">
 									<text class="tui-jin">{{item.specification}}</text>
 									<text class="tui-jin">成交<text class="tui-dea-color">{{item.totalPirce | filterNum}}</text>元</text>
-
 								</view>
 							</view>
 						</view>

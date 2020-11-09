@@ -12,7 +12,6 @@
 							<view class="tui-addr-tag">
 								<image src="../../static/images/location.png" mode=""></image>
 							</view>
-
 							<view class="tui-maginRiht">
 								<view><text>{{extraUserInfo.address}}{{extraUserInfo.addressDetails}}</text></view>
 								<view><text>{{extraUserInfo.storeName}}</text></view>
@@ -269,6 +268,14 @@
 				}
 				listing(getSubmitOrder, data2)
 					.then((res) => {
+						if(res.data.code === -1) {
+							uni.showToast({
+								title: res.data.msg,
+								icon: 'none',
+								duration: 3000
+							})
+							return
+						}
 						let {
 							payinfo
 						} = res.data.data

@@ -1,25 +1,17 @@
 <template>
 	<view class="container">
-		
-		<!-- <view class="tui-edit-goods">
-			<view>购物车共<text class="tui-goods-num">{{cartIds.length}}</text>件商品</view>
-			<view>
-				<tui-button type="gray" :plain="true" shape="circle" width="160rpx" height="60rpx" :size="24" @click="editGoods">{{isEdit?"完成":"编辑商品"}}</tui-button>
-			</view>
-		</view> -->
-		
 		<view class="container-img" v-if="modaishow">
 			<image src="../../static/images/big_logo.png" mode="widthFix" class="img-quanguo"></image>
 			<!-- <text class="color-text">{{tips}}</text> -->
 			<view class="btnbox"><button class="btn" type="default" open-type="getUserInfo" @getuserinfo="getUserInfo">去登录</button></view>
 		</view>
-		
+
 		<view class="empty-img" v-if="!modaishow && orderObj.length=== 0">
 			<image src="../../static/images/no_cart.png" mode="widthFix"></image>
 			<text class="color-text">进货单为空，赶紧去逛逛</text>
 			<view class="color-border" @tap="goIndex"><text>去逛逛</text></view>
 		</view>
-		
+
 		<checkbox-group @change="buyChange" v-if="!modaishow && orderObj.length!== 0">
 			<view class="tui-cart-cell  tui-mtop" v-for="(item, index) in orderObj" :key="index">
 				<view class="tui-activity">
@@ -35,7 +27,7 @@
 						<view class="tui-goods-item">
 							<label class="tui-checkbox">
 								<!-- <checkbox :value="itemTwo.id" :checked="checkFlag" color="#fff" ></checkbox> -->
-								 <!-- @click="setIds(itemTwo.id)" -->
+								<!-- @click="setIds(itemTwo.id)" -->
 								<checkbox :value="itemTwo.id" :checked="itemTwo.selected" color="#fff"></checkbox>
 							</label>
 							<image :src="itemTwo.url" class="tui-goods-img" @tap="gotoList(itemTwo.goodsId)" />
@@ -47,7 +39,7 @@
 								<view class="tui-goods-model">
 									<view class="tui-model-text">{{ itemTwo.kg1 }}斤装</view>
 								</view>
-								
+
 								<view class="tui-price-box">
 									<view class="tui-goods-price">
 										<text class="goods-price-tag">￥</text>
@@ -60,8 +52,8 @@
 									
 									这个是组件封装好了的，方法不能传参数，只能接受组件传出来的
 									-->
-									<tui-numberbox :value="itemTwo.number" iconColor="#444444" :height="48" :width="76" :min="1" :max="itemTwo.number" :custom="index"
-									 :index="indexs" @change="changeNum()"></tui-numberbox>
+									<tui-numberbox :value="itemTwo.number" iconColor="#444444" :height="48" :width="76" :min="1" :max="itemTwo.goodsNumber" :custom="index"
+									 :index="indexs" @change="changeNum()"></tui-numberbox>  <!--  -->
 								</view>
 							</view>
 						</view>
@@ -84,7 +76,7 @@
 			<view class="tui-total-price" v-if="!isEdit">
 				<text class="total-all">合计:</text>
 				<text class="total-label">￥</text>
-				<text class="total-price-num">{{  allPrice  }}</text>
+				<text class="total-price-num">{{ allPrice  }}</text>
 				<text class="total-label" v-if="cartIds.length !== 0">元</text>
 				<text class="total-fee" v-if="cartIds.length !== 0">含运费</text>
 			</view>
@@ -123,10 +115,11 @@
 	var {
 		log
 	} = console;
-	var setdata = uni.getStorageSync('usermen');
+	
 	export default {
 		data() {
 			return {
+				setdata: '',
 				tips: '',
 				modaishow: false,
 				isActive: true, //显示
@@ -137,7 +130,6 @@
 				allFlag: '', //全选
 				checkedArr: [], //存放选中的数据
 				valueNum: 0,
-				url: 'http://192.168.1.10:8980',
 				orderObj: [],
 				openid: '',
 				neworder: [],
@@ -217,10 +209,6 @@
 				});
 			},
 
-			init(bull, tips) {
-				this.modaishow = bull;
-				this.tips = tips;
-			},
 			//获取头像昵称
 			getUserInfo(event) {
 				// log(event)
@@ -248,26 +236,25 @@
 			},
 			//发code给后台换取token
 			wxLoging(code) {
-				log(code);
-
-				// let appid = wx.getAccountInfoSync().miniProgram.appId
-				// let secret = "956f8c9345cbe06a42c6494f7bb53f7f"
 				let data = {
 					code
 				};
 				uni.showLoading({
 					title: '加载中',
 					icon: 'none'
-					// mask:true
 				});
 				publicing2(loginis, data) //发送请求携带参数
 					.then(res => {
 						if (res.statusCode == 500) {
+							this.modaishow = true;
 							uni.showModal({
 								title: '提示',
 								content: '服务器错误，请重新登录获取信息',
 								success: function(res) {
 									if (res.confirm) {
+										uni.switchTab({
+											url: '../my/my'
+										})
 										uni.hideLoading();
 									} else if (res.cancel) {
 										uni.hideLoading();
@@ -276,14 +263,12 @@
 							});
 							return;
 						} else if (res.statusCode == 200) {
+							uni.setStorageSync('usermen', res.data.token); 
+							this.modaishow = false;
+							this.orderIng();
+							this.getMerchants();
+							uni.hideLoading();
 						}
-						// log(res) //获得token
-						uni.setStorageSync('usermen', res.data.token); //把token存在本地，小程序提供如同浏览器cookie
-
-						this.modaishow = false;
-						this.orderIng();
-						this.getMerchants();
-						uni.hideLoading();
 					})
 					.catch(err => {
 						uni.showToast({
@@ -295,16 +280,18 @@
 			},
 			//购买前获取申请店铺状态信息
 			getMerchants() {
+				let setdata = uni.getStorageSync('usermen');
+				if (!setdata){
+					return
+				}
 				let data = {
 					token: setdata
 				};
 				// log(data)
 				listing(getClient, data)
 					.then(res => {
-						// log(res)
 						///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
 						this.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
-						// log(this.ApproveStatus)
 					})
 					.catch(err => {
 						log(err);
@@ -339,9 +326,11 @@
 				listing(getCart, data)
 					.then(res => {
 						let lists = res.data.data
-						lists.forEach(item=>{
-							item.list.forEach(itm=>{
-								Object.assign(itm,{selected:false})
+						lists.forEach(item => {
+							item.list.forEach(itm => {
+								Object.assign(itm, {
+									selected: false
+								})
 							})
 						})
 						this.orderObj = lists;
@@ -353,17 +342,11 @@
 
 			//商品详情页
 			gotoList(id) {
-				log(id);
-				// 	return
 				uni.navigateTo({
 					url: '../../pagesIII/productDetail/productDetail?id=' + id
 				});
 			},
-
-			//反馈提示
-			tising(bull, tips) {
-				this.init(bull, tips);
-			},
+			
 			//结算
 			calcHandle() {
 				let buyNum = 0;
@@ -391,60 +374,58 @@
 						title: '不能再少啦～',
 						icon: 'none'
 					})
+					return
 				}
-				this.orderObj[e.custom].list[e.index].number = e.value;
 				//计算价格
-				this.jieSuanPrice();
-
-				/* this.valueNum = e.value */
-				/* this.orderObj[index].number 
-					this.valueNum = e.value*/
-					
+				let setdata = uni.getStorageSync('usermen');
 				let data = {
 					id: this.orderObj[e.custom].list[e.index].id,
 					goodsId: this.orderObj[e.custom].list[e.index].goodsId,
-					number: this.orderObj[e.custom].list[e.index].number,
+					number: this.orderObj[e.custom].list[e.index].number = e.value,
 					token: setdata
 				};
 				//更新我的加购单
 				publicing(postUpOrder, data)
 					.then(res => {
-						// log(res)
-						// log(res.data.msg)
-						// uni.showToast({
-						// 	title:`${}`
-						// })
 						uni.hideLoading();
+						if (res.data.code == -1) {
+							uni.showToast({
+								title: res.data.msg,
+								icon: 'none'
+							})
+							return
+						}
+						if (res.data.code == 500) {
+							uni.showToast({
+								title: "账号异常",
+								icon: 'none'
+							})
+						}
+						if (res.data.code == 200) {
+							this.orderObj[e.custom].list[e.index].number = e.value
+							this.jieSuanPrice();
+							// this.orderIng()
+						}
+
 					})
 					.catch(err => {
 						log(err);
 					});
-
-				// this.dataList[e.index].buyNum = e.value
-				// setTimeout(() => {
-				// 	this.calcHandle()
-				// }, 0)
 			},
 			//删除商品
 			handlerButton(id, goodsId) {
-				log(id);
-				var setdata = uni.getStorageSync('usermen');
+				let setdata = uni.getStorageSync('usermen');
 				let data = {
 					id: id,
 					goodsId: goodsId,
 					token: setdata
 				};
-				// log(data)
 				publicing(postDelOrder, data)
 					.then(res => {
-						// log(res)
-
 						uni.showToast({
 							title: `${res.data.msg}`
 						});
 						this.orderIng();
-
-						// this.$forceUpdate();
 					})
 					.catch(err => {
 						log(err);
@@ -452,66 +433,7 @@
 							title: '删除失败'
 						});
 					});
-				// let index = e.index;
-				// let item = e.item;
 			},
-			editGoods: function() {
-				// #ifdef H5 || MP
-				this.isEdit = !this.isEdit;
-				// #endif
-			},
-			detail: function() {
-				uni.navigateTo({
-					url: '../productDetail/productDetail'
-				});
-			},
-
-			//提交订单
-			postSubOrder() {
-				if (this.ApproveStatus != 1) {
-					uni.showToast({
-						title: '您还没有验证店铺',
-						icon: 'none'
-					});
-					return;
-				}
-				if (this.cartIds.length <= 0) {
-					this.isAll = false;
-					this.checkFlag = false;
-					this.flag = false;
-					//提示没有选择任何商品，不可结算
-					uni.showToast({
-						title: '先勾选要结算商品呀！',
-						icon: 'none'
-					});
-					return;
-				}
-				//结算,获取到选中的商品id数组
-				let setdata = uni.getStorageSync('usermen');
-				//拼接字符串id
-				let ids = '';
-				for (let index in this.cartIds) {
-					ids = ids + this.cartIds[index] + ',';
-				}
-				//去除ids最后一个逗号
-				ids = ids.substring(0, ids.length - 1);
-				return;
-				let data = {
-					id: ids,
-					token: setdata
-				};
-				publicing(postSubmitOrder, data)
-					.then(res => {
-						// log(res)
-						uni.navigateTo({
-							url: '../../pagesIII/submitOrder/submitOrder?ids=' + ids
-						});
-					})
-					.catch(err => {
-						log(err);
-					});
-			},
-
 			//去结算
 			btnPay() {
 				if (this.ApproveStatus != 1) {
@@ -530,7 +452,6 @@
 					return;
 				}
 				//结算,获取到选中的商品id数组
-				// console.log(this.cartIds);
 				//拼接字符串id
 				let ids = '';
 				for (let index in this.cartIds) {
@@ -545,19 +466,16 @@
 					url: '../../pagesIII/submitOrder/submitOrder?ids=' + ids
 				});
 			},
-			// setIds(id) {
-			// 	this.curId = id
-				
-			// },
+
 			//加购单,勾选
 			buyChange(e) {
 				let lists = this.orderObj
 				let target = e.detail.value
 				let selectedNum = 0
-				lists.forEach(item=> {
+				lists.forEach(item => {
 					selectedNum += item.list.length
-					item.list.forEach((itm,index)=> {
-						let idxs = target.findIndex(im=>{
+					item.list.forEach((itm, index) => {
+						let idxs = target.findIndex(im => {
 							return itm.id === im
 						})
 						if (idxs !== -1) {
@@ -567,9 +485,9 @@
 						}
 					})
 				})
-				if (selectedNum === target.length){
+				if (selectedNum === target.length) {
 					this.isAll = true
-				}else {
+				} else {
 					this.isAll = false
 				}
 				this.orderObj = lists
@@ -591,8 +509,8 @@
 					})
 					this.cartIds = []
 					this.orderObj = lists
-				} 
-				if (this.isAll === true) {	
+				}
+				if (this.isAll === true) {
 					lists.forEach(item => {
 						item.list.forEach(itm => {
 							itm.selected = true
@@ -614,15 +532,7 @@
 				this.isAll = false;
 			}
 		},
-		watch: {
-			// "checkedNames": function() {
-			//     if (this.checkedNames.length == this.checkedArr.length) {
-			//         this.checked = true
-			//     } else {
-			//         this.checked = false
-			//     }
-			// }
-		},
+
 		// 看订单的前提条件就是是否登录
 		onShow() {
 			//下拉刷新
@@ -631,21 +541,17 @@
 			this.isAll = false
 			this.isCheck = false;
 			this.cartIds = []; //清空id
-			this.getMerchants();
 			let setdata = uni.getStorageSync('usermen');
+			console.log("setdata1",setdata,this.modaishow)
 			if (!setdata) {
-				this.hasError = true;
-				this.isActive = false;
-				let bull = true;
-				let tips = '请登录后再查看';
-				this.tising(bull, tips);
-			} else {
-				let bull = false;
-				let tips = '';
-				this.tising(bull, tips);
-				this.orderIng();
-				log('显示订单');
+				this.modaishow = true
+				console.log("setdata2",setdata,this.modaishow)
+				return
 			}
+			this.modaishow = false
+			console.log("setdata3",setdata,this.modaishow)
+			this.orderIng();
+			this.getMerchants();
 			let olist = this.orderObj;
 			if (olist.length === 0) {
 				return;

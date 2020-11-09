@@ -8,7 +8,7 @@
 			<view class="tui-header-center">
 				<image :src="usering.avatarUrl" class="tui-avatar" mode="aspectFill" v-if="wxlogin"></image>
 				<image src="../../static/images/default_avatar.png" class="tui-avatar" mode="aspectFill" v-if="!wxlogin"></image>
-				
+
 				<!-- 已登录个人信息状态wxlogin -->
 				<view class="tui-info" v-if="wxlogin">
 					<view class="tui-explain">{{usering.nickName}}</view>
@@ -25,7 +25,7 @@
 					<view class="tui-explain">
 					</view>
 				</view>
-				
+
 				<!-- 用户被停用 -->
 				<view class="tui-set-box3" v-if="wxlogin && dangerUsr">
 					<view class="tui-icon-box">
@@ -35,7 +35,7 @@
 					</view>
 				</view>
 				<!-- 用户被停用 -->
-				
+
 				<!-- 未提交审核 => 去认证店铺-->
 				<view class="tui-set-box3" v-if="wxlogin && (ApproveStatus === undefined ||ApproveStatus ==='' ||ApproveStatus === null) && !dangerUsr">
 					<view class="tui-icon-box ">
@@ -45,7 +45,7 @@
 					</view>
 				</view>
 				<!-- 未提交审核 => 去认证店铺 -->
-				
+
 				<!-- 提交审核并等待通过 => 查看店铺信息-->
 				<view class="tui-set-box3" v-if="wxlogin && ApproveStatus === 0  && !dangerUsr">
 					<view class="tui-icon-box">
@@ -55,7 +55,7 @@
 					</view>
 				</view>
 				<!-- 提交审核并等待通过 => 查看店铺信息-->
-				
+
 				<!-- 提交审核并通过 -->
 				<view class="tui-set-box" v-if="wxlogin && ApproveStatus === 1  && !dangerUsr">
 					<view class="tui-icon-box ">
@@ -259,13 +259,12 @@
 				fahuoList: '',
 				shouhuoList: "",
 				tuikuanList: '',
-				dangerUsr: false,  //用户是否被停用
+				dangerUsr: false, //用户是否被停用
 			}
 		},
 		methods: {
 			//获取头像昵称
 			getUserInfo(event) {
-				log(event)
 				this.usering = event.detail.userInfo
 				uni.setStorageSync('userIN', event.detail.userInfo) //把头像存在本地，小程序提供如同浏览器cookie
 				let userING = uni.setStorageSync('userIN', event.detail.userInfo)
@@ -282,7 +281,6 @@
 					success: (res) => {
 						// log(res)
 						let code = res.code
-						console.log(res)
 						this.wxLoging(code)
 					},
 					fail: (err) => {
@@ -292,7 +290,6 @@
 			},
 			//发code给后台换取token
 			wxLoging(code) {
-				log(code)
 				let data = {
 					code
 				}
@@ -342,18 +339,34 @@
 					token: setdata
 				}
 				if (!setdata) {
+					this.modaishow = true
 					return
 				}
+				this.modaishow = false
 				listing(getClient, data)
 					.then((res) => {
-						console.log(res)
 						// 200 用户正常 201用户停用
 						if (res.data.code == 201) {
 							this.dangerUsr = true
 							this.user_phone = res.data.phone
 							this.logMsg = '账户已被停用'
 							return
-						} else {
+						}
+						if (res.data.code == 500) {
+							uni.showToast({
+								title: '服务器异常,请重试',
+								icon: 'none',
+								duration: 3000
+							})
+							setTimeout(()=>{
+								uni.removeStorageSync('userIN')
+								uni.removeStorageSync('usermen')
+								uni.removeStorageSync('StoreStatus')
+								uni.removeStorageSync('userIN')
+								this.ifUser()
+							},1500)
+						}
+						if (res.data.code == 200) {
 							this.dangerUsr = false
 							///登录成功后 未认证或者认证失败 显示去认证店铺，如果已认证，显示已认证店铺
 							this.ApproveStatus = res.data.data.approveStatus //获取状态码，0未认证，1已认证，2拒绝
@@ -375,7 +388,6 @@
 					.catch((err) => {
 						log(err)
 					})
-
 			},
 			// 获取订单
 			getOrderData() {
