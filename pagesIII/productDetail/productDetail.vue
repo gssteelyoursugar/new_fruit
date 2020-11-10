@@ -124,6 +124,10 @@
 							<text class="tui-title-class">包&nbsp;装：</text>
 							<text class="tui-name-class" style="font-size: 24rpx;">{{ shopListdata.packaging }}</text>
 						</view>
+						<view class="tui-right-one">
+							<text class="tui-title-class">售后时效：</text>
+							<text class="tui-name-class" style="font-size: 24rpx;">{{ shopListdata.afterSalesTime}}</text>
+						</view>
 					</view>
 				</view>
 				<!-- 水果标准 -->
@@ -152,31 +156,37 @@
 					<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
 						<view class="tui-left-one2">
 							<text class="tui-text-left tui-title-class">果径大小</text>
-							<text class=" tui-text-left tui-title-class">{{ shopListdata.size }}mm</text>
+							<text class=" tui-text-left tui-title-class"  v-if="shopListdata.size && shopListdata.size !==''">{{ shopListdata.size }}mm</text>
+							<text class=" tui-text-left tui-title-class" v-else>暂无</text>
 						</view>
 						<view class="tui-right-one" style="flex: 4;">
 							<text class=" tui-text-left tui-title-class ">不良率</text>
-							<text class=" tui-text-left tui-title-class">{{ shopListdata.rejectRatio }}%</text>
+							<text class=" tui-text-left tui-title-class" v-if="shopListdata.rejectRatio && shopListdata.rejectRatio !==''">{{ shopListdata.rejectRatio }}%</text>
+							<text class=" tui-text-left tui-title-class" v-else>暂无</text>
 						</view>
 					</view>
 					<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
 						<view class="tui-left-one2">
 							<text class="tui-text-left tui-title-class">糖分</text>
-							<text class=" tui-text-left tui-title-class">{{ shopListdata.sugar }}%</text>
+							<text class=" tui-text-left tui-title-class" v-if="shopListdata.sugar && shopListdata.sugar !==''">{{ shopListdata.sugar }}%</text>
+							<text class=" tui-text-left tui-title-class" v-else>暂无</text>
 						</view>
 						<view class="tui-right-one" style="flex: 4;">
 							<text class="tui-text-left tui-title-class">酸度</text>
-							<text class="tui-text-left tui-title-class">{{ shopListdata.acidity }}%</text>
+							<text class="tui-text-left tui-title-class"  v-if="shopListdata.acidity && shopListdata.acidity !==''">{{ shopListdata.acidity }}%</text>
+							<text class=" tui-text-left tui-title-class" v-else>暂无</text>
 						</view>
 					</view>
 					<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
 						<view class="tui-left-one2">
 							<text class="tui-text-left tui-title-class">水分</text>
-							<text class="tui-text-left tui-title-class">{{ shopListdata.moisture }}%</text>
+							<text class="tui-text-left tui-title-class" v-if="shopListdata.moisture && shopListdata.moisture !==''">{{ shopListdata.moisture }}%</text>
+							<text class=" tui-text-left tui-title-class" v-else>暂无</text>
 						</view>
 						<view class="tui-right-one" style="flex: 4;">
 							<text class="tui-text-left tui-title-class">硬度</text>
-							<text class="tui-text-left tui-title-class">{{ shopListdata.hardness }}kg/.co</text>
+							<text class="tui-text-left tui-title-class"  v-if="shopListdata.hardness && shopListdata.hardness !==''">{{ shopListdata.hardness }}kg/.co</text>
+							<text class=" tui-text-left tui-title-class" v-else>暂无</text>
 						</view>
 					</view>
 					<!-- 	<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
@@ -330,8 +340,8 @@
 				<view class="tui-operation-item" hover-class="tui-opcity" :hover-stay-time="150" @tap="postShopping(shopListdata.id)">
 					<!-- <tui-icon name="order" :size="22" color="#333" v-if="!canCart"></tui-icon>
 					<tui-icon name="order" :size="22" color="#ff0000" v-if="canCart"></tui-icon> -->
-					<image src="../../static/images/add_order-f.png" mode="" v-if="!canCart" style="width: 44rpx;height: 52rpx;"></image>
-					<image src="../../static/images/add_order-t.png" mode="" v-if="canCart" style="width: 44rpx;height: 52rpx;"></image>
+					<image src="../../static/images/add_order-f.png" mode="" v-if="!modaishow && !canCart" style="width: 44rpx;height: 52rpx;"></image>
+					<image src="../../static/images/add_order-t.png" mode="" v-if="!modaishow && canCart" style="width: 44rpx;height: 52rpx;"></image>
 
 					<view class="tui-operation-text tui-scale-small">加入进货单</view>
 				</view>
@@ -395,12 +405,12 @@
 				<view class="tui-pay-flex-box">
 					<view class="tui-pay-flex">
 						<view class="tui-pay1-flex">
-							<!-- <text>合计{{shopListdata.platformClinetPrice * value2}}含运费</text> -->
+							<!-- <text>合计{{shopListdata.platformClinetPrice * value2}}免运费</text> -->
 							<text style="color: #333333;font-size: 24rpx;margin-right:4rpx">合计:</text>
 							<text style="color: #FF5600;font-size: 20rpx;">¥</text>
 							<text style="font-weight: bold;">{{ shopListdata.platformClientPrice * value2 | countNum }}</text>
 							<text style="color: #FF5600;font-size: 22rpx;margin-right:8rpx">元</text>
-							<text style="color: #888888;font-size: 22rpx;">含运费</text>
+							<text style="color: #888888;font-size: 22rpx;">免运费</text>
 						</view>
 
 						<button class="tui-pay2-flex" @tap="buyNow(shopListdata.id)">结算</button>
@@ -572,12 +582,10 @@
 					that.navHeight = statusBarHeight + buttonHeight + top - statusBarHeight
 					that.iconTop = statusBarHeight + (top - statusBarHeight)
 					that.tabsTop = statusBarHeight + buttonHeight + top - statusBarHeight
-					console.log("info",info,statusBarHeight,that.navHeight)
 					// #endif
 
 				uni.getNetworkType({
 					success: function(res) {
-						console.log(res.networkType);
 						if (res.networkType === 'wifi') {
 							that.netStatus = true
 						}
@@ -784,12 +792,12 @@
 					icon: 'none'
 				});
 			},
-
 			//点赞
 			praiseLike(id) {
 				let setdata = uni.getStorageSync('usermen');
 				if (!setdata) {
 					this.modaishow = true;
+					return
 				} else {
 					this.modaishow = false;
 					let data = {
@@ -879,7 +887,6 @@
 				})
 				this.toggleVerify()
 			},
-
 			//获取微信昵称
 			getUserInfo(event) {
 				// log(event);
@@ -919,6 +926,7 @@
 							title: '登录成功'
 						});
 						this.getMerchants();
+						this.postDetails()
 						uni.hideLoading();
 					})
 					.catch(err => {
@@ -931,6 +939,7 @@
 				//判断是否登录才能收藏
 				if (!setdata) {
 					this.modaishow = true;
+					return
 				} else {
 					this.modaishow = false;
 					if (this.ApproveStatus === 0) {
@@ -987,9 +996,10 @@
 				uni.showLoading({
 					title: '加载中'
 				});
+				let user_token = uni.getStorageSync('usermen')
 				let data = {
 					id: this.productID,
-					token: setdata
+					token: user_token,
 				};
 				// 批量并发请求多个接口，Promise.all =>可以并发请求多个接口。并且同时得到多个接口的数据
 				//这个方法是异步执行的，值还没有赋值，后就先执行了postAct这个，异步，同步，
@@ -1012,10 +1022,10 @@
 				let setdata = uni.getStorageSync('usermen');
 				if (!setdata) {
 					this.modaishow = true;
+					return
 				} else {
 					// this.modaishow = false
 					this.modaishow = false;
-
 					if (this.ApproveStatus === null || this.ApproveStatus === undefined || this.ApproveStatus === '' || this.ApproveStatus ===
 						2) {
 						this.toggleVerify()
@@ -1028,13 +1038,8 @@
 						});
 						return;
 					}
-
 					if (this.ApproveStatus === 1) {
-						let data = {
-							goodsId: id,
-							token: setdata,
-							number: 1
-						};
+						
 						if (this.shopListdata.isCart == true) {
 							uni.showToast({
 								title: '重复加入进货单',
@@ -1052,6 +1057,11 @@
 							return;
 						}
 						if (this.shopListdata.isCart == false) {
+							let data = {
+								goodsId: id,
+								token: setdata,
+								number: 1
+							};
 							publicing(postmyOrder, data)
 								.then(res => {
 									let code = res.data.code;
@@ -1617,11 +1627,12 @@
 
 	}
 
-	/* 2020/8/29 */
 	.tui-height-full {
 		background-color: #fff;
 		padding: 24rpx 30rpx;
 		border-bottom: 20rpx solid #f5f5f5;
+		color: #929397;
+		font-size: 28rpx;
 	}
 
 	.shuoming {

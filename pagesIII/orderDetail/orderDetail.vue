@@ -53,10 +53,10 @@
 						<view>{{orderObj.create_date | getTime}}</view>
 					</view>
 				</view>
-				<view class="info-item" v-if="orderObj.shipments_time">
+				<view class="info-item" v-if="orderObj.printTime">
 					<view class="info-item-left">发货时间：</view>
 					<view class="info-item-right">
-						<view>{{orderObj.shipments_time | getTime}}</view>
+						<view>{{orderObj.printTime }}</view>
 					</view>
 				</view>
 				<view class="info-item"  v-if="orderObj.delivery_time">
@@ -98,7 +98,7 @@
 							<view class="right-price">
 								<text>实付:</text>
 								<text>{{goodsData.orderTotalPrice}}</text>
-								<text>(含运费)</text>
+								<text>(免运费)</text>
 							</view>
 						</view>
 					</view>
@@ -128,6 +128,10 @@
 				<view class="fruit-info-item">
 					<view class="left-item">包装:</view>
 					<view class="right-item">{{goodsData.packaging}}</view>
+				</view>
+				<view class="fruit-info-item">
+					<view class="left-item">售后时效:</view>
+					<view class="right-item">{{goodsData.afterSalesTime}}</view>
 				</view>
 			</view>
 
@@ -160,34 +164,39 @@
 				<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
 					<view class="tui-left-one2">
 						<text class="tui-text-left tui-title-class self-left">果径大小</text>
-						<text class=" tui-text-left tui-title-class self-right">{{goodsData.size || 0}}mm</text>
+						<text class=" tui-text-left tui-title-class self-right" v-if="goodsData.size && goodsData.size!=='' ">{{goodsData.size}}mm</text>
+						<text class=" tui-text-left tui-title-class self-right" v-else>暂无</text>
 					</view>
 					<view class="tui-right-one" style="flex: 4;">
 						<text class=" tui-text-left tui-title-class self-left">不良率</text>
-						<text class=" tui-text-left tui-title-class self-right">{{goodsData.rejectRatio|| 0}}%</text>
+						<text class=" tui-text-left tui-title-class self-right"  v-if="goodsData.rejectRatio && goodsData.rejectRatio!=='' ">{{goodsData.rejectRatio|| 0}}%</text>
+						<text class=" tui-text-left tui-title-class self-right" v-else>暂无</text>
 					</view>
 				</view>
 				<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
 					<view class="tui-left-one2">
 						<text class="tui-text-left tui-title-class self-left">糖分</text>
-						<text class="tui-text-left tui-title-class self-right">{{goodsData.sugar || 0}}%</text>
+						<text class="tui-text-left tui-title-class self-right"  v-if="goodsData.sugar && goodsData.sugar!=='' ">{{goodsData.sugar || 0}}%</text>
+						<text class=" tui-text-left tui-title-class self-right" v-else>暂无</text>
 					</view>
 					<view class="tui-right-one" style="flex: 4;">
 						<text class="tui-text-left tui-title-class self-left">酸度</text>
-						<text class="tui-text-left tui-title-class self-right">{{goodsData.acidity || 0}}%</text>
+						<text class="tui-text-left tui-title-class self-right"   v-if="goodsData.acidity && goodsData.acidity!=='' ">{{goodsData.acidity || 0}}%</text>
+						<text class=" tui-text-left tui-title-class self-right" v-else>暂无</text>
 					</view>
 
 				</view>
 				<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
 					<view class="tui-left-one2">
 						<text class="tui-text-left tui-title-class self-left">水分</text>
-						<text class="tui-text-left tui-title-class self-right">{{goodsData.moisture || 0}}%</text>
+						<text class="tui-text-left tui-title-class self-right"  v-if="goodsData.moisture && goodsData.moisture!=='' ">{{goodsData.moisture || 0}}%</text>
+						<text class=" tui-text-left tui-title-class self-right" v-else>暂无</text>
 					</view>
 					<view class="tui-right-one" style="flex: 4;">
 						<text class="tui-text-left tui-title-class self-left">硬度</text>
-						<text class="tui-text-left tui-title-class self-right">{{goodsData.hardness || 0}}kg/.co</text>
+						<text class="tui-text-left tui-title-class self-right"  v-if="goodsData.hardness && goodsData.hardness!==''">{{goodsData.hardness || 0}}kg/.co</text>
+						<text class=" tui-text-left tui-title-class self-right" v-else>暂无</text>
 					</view>
-
 				</view>
 				<!-- 	<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
 					<view class="tui-left-one">
@@ -336,14 +345,12 @@
 				};
 				listing(getDetails, data).then(res => {
 					this.orderObj = res.data.data[0]
-					console.log(res)
 					let data = {
 						id: this.orderObj.goods_id,
 						token: setdata
 					}
 					publicing(orderHistory, data).then(res => {
 						this.goodsData = res.data.data
-						console.log(this.goodsData)
 					})
 				})
 			},
@@ -359,7 +366,6 @@
 		},
 		onLoad(opt) {
 			this.order_id = opt.id
-			console.log(opt)
 		},
 		onShow() {
 			this.getOrderDetail()
@@ -508,6 +514,8 @@
 				view {
 					&:first-child {
 						color: #000;
+						font-size: 32rpx;
+						font-weight: 500;
 					}
 
 					&:last-child {
@@ -640,7 +648,7 @@
 			}
 
 			.fruit-info-title {
-				font-size: 28rpx;
+				font-size: 32rpx;
 				border-bottom: 1px solid #F2F2F2;
 				padding: 12rpx 0;
 			}
@@ -682,6 +690,9 @@
 	.tui-height-full {
 		background-color: #fff;
 		margin: 40rpx 0;
+		color: #929397;
+		font-size: 28rpx;
+
 	}
 
 	.shuoming {
@@ -698,7 +709,7 @@
 	.tui-title-line {
 		color: #000;
 		font-weight: 400;
-		font-size: 28rpx;
+		font-size: 32rpx;
 		padding-bottom: 14rpx;
 		border-bottom: 1px solid #f5f5f5;
 		margin-bottom: 30rpx;

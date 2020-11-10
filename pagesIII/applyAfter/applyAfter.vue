@@ -20,7 +20,7 @@
 						</view>
 						<view class="tui-goods-flex">
 							<view class="tui-goods-attr1"> <text class="yuanicon">￥</text> <text class="yuanPrice">{{goodsData.goods_price}} </text> <text class="yuanText">元</text> </view>
-							<view class="tui-goods-attr">实付:<text class="fontTotal">{{goodsData.order_total_price}}</text> (含运费)</view>
+							<view class="tui-goods-attr">实付:<text class="fontTotal">{{goodsData.order_total_price}}</text> (免运费)</view>
 						</view>
 				</view>
 				
@@ -179,7 +179,6 @@
 			bindPickerChange: function(e) {
 				log(e)
 				//  for ( var i = 0; i <this.ValueList.length; i++){
-				//     console.log(this.ValueList[i]);
 				// }
 					this.index = e.target.value
 					this.ValueText = this.ValueList[e.target.value]
@@ -198,10 +197,8 @@
 				}
 				listing(getDetails,data)
 				.then((res)=>{
-					log(res)
 					this.goodsData = res.data.data[0]
 					this.labelList = res.data.data[0].labelList
-					log(this.labelList)
 				})
 				.catch((err)=>{
 					log(err)
@@ -210,7 +207,6 @@
 			
 			//上传文件
 			uploadImages(e){
-				log(e)
 				this.flag = true
 				let that = this;
 				if (that.files.length >= 5) {

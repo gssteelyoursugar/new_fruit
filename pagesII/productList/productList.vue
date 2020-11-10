@@ -1133,7 +1133,6 @@
 						this.storage_mode = res.data.data.storage_mode
 						this.taste_level = res.data.data.taste_level
 						this.variety = res.data.data.variety
-						console.log(res,this.variety )
 
 					})
 					.catch((err) => {
@@ -1174,7 +1173,6 @@
 			//筛选汇总
 			screen(e) {
 				let index = e.currentTarget.dataset.index ? e.currentTarget.dataset.index : e;
-				console.log(index)
 				this.hideDropdownList();
 				this.btnCloseDrop();
 				if (index == 0) {

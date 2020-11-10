@@ -52,8 +52,8 @@
 									
 									这个是组件封装好了的，方法不能传参数，只能接受组件传出来的
 									-->
-									<tui-numberbox :value="itemTwo.number" iconColor="#444444" :height="48" :width="76" :min="1" :max="itemTwo.goodsNumber" :custom="index"
-									 :index="indexs" @change="changeNum()"></tui-numberbox>  <!--  -->
+									<tui-numberbox :value="itemTwo.number" iconColor="#444444" :height="48" :width="76" :min="1" :max="itemTwo.goodsNumber"
+									 :custom="index" :index="indexs" @change="changeNum()"></tui-numberbox> <!--  -->
 								</view>
 							</view>
 						</view>
@@ -78,7 +78,7 @@
 				<text class="total-label">￥</text>
 				<text class="total-price-num">{{ allPrice  }}</text>
 				<text class="total-label" v-if="cartIds.length !== 0">元</text>
-				<text class="total-fee" v-if="cartIds.length !== 0">含运费</text>
+				<text class="total-fee" v-if="cartIds.length !== 0">免运费</text>
 			</view>
 			<view class="pay-btns">
 				<!-- cartIds.length 商品数量 -->
@@ -110,12 +110,13 @@
 		postUpOrder,
 		getClient,
 		postSubmitOrder,
+		postSettle,
 		loginis
 	} from '../../api/request.js';
 	var {
 		log
 	} = console;
-	
+
 	export default {
 		data() {
 			return {
@@ -263,7 +264,7 @@
 							});
 							return;
 						} else if (res.statusCode == 200) {
-							uni.setStorageSync('usermen', res.data.token); 
+							uni.setStorageSync('usermen', res.data.token);
 							this.modaishow = false;
 							this.orderIng();
 							this.getMerchants();
@@ -281,7 +282,7 @@
 			//购买前获取申请店铺状态信息
 			getMerchants() {
 				let setdata = uni.getStorageSync('usermen');
-				if (!setdata){
+				if (!setdata) {
 					return
 				}
 				let data = {
@@ -346,7 +347,7 @@
 					url: '../../pagesIII/productDetail/productDetail?id=' + id
 				});
 			},
-			
+
 			//结算
 			calcHandle() {
 				let buyNum = 0;
@@ -436,6 +437,7 @@
 			},
 			//去结算
 			btnPay() {
+				let setdata = uni.getStorageSync('usermen')
 				if (this.ApproveStatus != 1) {
 					uni.showToast({
 						title: '您还没有验证店铺',
@@ -446,13 +448,11 @@
 				if (this.cartIds.length <= 0) {
 					//提示没有选择任何商品，不可结算
 					uni.showToast({
-						title: '先勾选要结算商品呀！',
+						title: '先勾选要结算商品呀',
 						icon: 'none'
 					});
 					return;
 				}
-				//结算,获取到选中的商品id数组
-				//拼接字符串id
 				let ids = '';
 				for (let index in this.cartIds) {
 					ids = ids + this.cartIds[index] + ',';
@@ -460,11 +460,34 @@
 				//去除ids最后一个逗号
 				ids = ids.substring(0, ids.length - 1);
 				this.orderID = ids;
-
-				//去结算页面
-				uni.navigateTo({
-					url: '../../pagesIII/submitOrder/submitOrder?ids=' + ids
-				});
+				let s_data = {
+					id: ids,
+					token: setdata
+				}
+				publicing(postSettle, s_data).then(res => {
+					console.log(res)
+					if (res.data.data.code == -1) {
+						uni.showToast({
+							title: res.data.data.msg,
+							icon: 'none',
+							duration: 3000
+						})
+						return
+					}
+					if (res.data.data.code == 500) {
+						uni.showToast({
+							title: res.data.data.msg,
+							icon: 'none',
+							duration: 3000
+						})
+						return
+					}
+					if (res.data.data.code == 200) {
+						uni.navigateTo({
+							url: '../../pagesIII/submitOrder/submitOrder?ids=' + ids
+						});
+					}
+				})
 			},
 
 			//加购单,勾选
@@ -542,14 +565,11 @@
 			this.isCheck = false;
 			this.cartIds = []; //清空id
 			let setdata = uni.getStorageSync('usermen');
-			console.log("setdata1",setdata,this.modaishow)
 			if (!setdata) {
 				this.modaishow = true
-				console.log("setdata2",setdata,this.modaishow)
 				return
 			}
 			this.modaishow = false
-			console.log("setdata3",setdata,this.modaishow)
 			this.orderIng();
 			this.getMerchants();
 			let olist = this.orderObj;

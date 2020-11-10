@@ -51,8 +51,8 @@
 										<view class="tui-goods-name"><text class="tag-tit">采手精选</text>{{item.name}}</view>
 										<view class="tui-goods-attrp">{{item.specification}} × {{item.goods_number}}</view>
 										<view class="tui-goods-flex">
-											<view class="tui-goods-attr1"><text class="iconyuan">￥</text> <text class="yuanText">{{item.platform_price}} </text><text class="yuanPrice">元</text> </view>
-											<view class="tui-goods-attr">实付: <text class="yuan-tui"> {{item.order_total_price}}</text> (含运费)</view>
+											<view class="tui-goods-attr1"><text class="iconyuan">￥</text> <text class="yuanText">{{item.platform_client_price}} </text><text class="yuanPrice">元</text> </view>
+											<view class="tui-goods-attr">实付: <text class="yuan-tui"> {{item.order_total_price}}</text> (免运费)</view>
 										</view>
 										
 									</view>
@@ -309,9 +309,10 @@ export default {
 			}
 		},
 		detail(id) {
-			uni.navigateTo({
-				url: '../orderDetail/orderDetail?id='+id
-			})
+			return
+			// uni.navigateTo({
+			// 	url: '../orderDetail/orderDetail?id='+id
+			// })
 		},
 		randomfn() {
 			let ary = [];
@@ -683,7 +684,7 @@ page {
 	}
 	.order-munber-box{
 		flex-direction:row;
-		font-size: 24rpx;
+		font-size: 28rpx;
 		color: rgba(85, 85, 85, 1);
 	}
 

@@ -145,7 +145,6 @@
 			//下拉刷新
 			onPullDownRefresh() {
 				this.getImportData()
-				console.log('refresh');
 				setTimeout(function() {
 					uni.stopPullDownRefresh();
 

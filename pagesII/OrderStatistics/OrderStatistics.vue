@@ -43,7 +43,7 @@
 							<view style="font-size: 24rpx;color: #666;">
 								实付:
 								<text style="font-size: 28rpx;color: #333;">{{item.orderTotalPrice}}</text>
-								（含运费）
+								（免运费）
 							</view>
 						</view>
 						<view style="color: #333333;font-size: 24rpx;">X {{item.goodsNumber}}</view>

@@ -17,7 +17,7 @@
 							<view class="tag-tit2-text">
 								 <text class="iconyuan">￥</text>  <text class="price1">{{DetailsData.platform_price}} </text><text class="price2">元</text>
 							</view>
-							<view class="price-title">实付:<text class="priceText">{{DetailsData.order_total_price}}</text>(含运费)</view>
+							<view class="price-title">实付:<text class="priceText">{{DetailsData.order_total_price}}</text>(免运费)</view>
 						</view>
 						
 					</view>
@@ -149,7 +149,7 @@
 	}
 	.font-size-color{
 		color: rgba(85, 85, 85, 1);
-		font-size: 24rpx;
+		font-size: 28rpx;
 	}
 	.icon-lujing182{
 		font-size: 30rpx;
@@ -186,7 +186,8 @@
 	}
 	.title-time-left{
 		margin-left: 20rpx;
-		
+		font-size: 28rpx;
+		font-weight: 400;
 	}
 	.tui-tab-rank-cent{
 		display: flex;
@@ -254,9 +255,9 @@
 	}
 	.tui-title {
 	  padding: 55rpx 0 30rpx 0;
-	  font-size: 26rpx;
-	  color: #333;
-	  font-weight: 400;
+	  font-size: 32rpx;
+	  color: #000;
+	  font-weight: 500;
 	  background-color: #fff;
 	}
 	.tui-upload-box {

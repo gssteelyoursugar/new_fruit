@@ -179,7 +179,7 @@
 						<view class="tui-Fruits-ranking-lien">
 							<text class="tui-Fruits-ranking-tab-font">{{item.title}}</text>
 						</view>
-						<image :src=item.imgsrc mode="widthFix" class="tabimg"></image>
+						<image :src="item.imgsrc" class="tabimg"></image>
 					</view>
 				</block>
 			</view>
@@ -449,25 +449,25 @@
 						name: '销量排行',
 						value: 'shop',
 						title: '跟榜买 不愁卖',
-						imgsrc: '../../static/images/baixiangguo1.png'
+						imgsrc: '../../static/images/rank_1.png'
 					},
 					{
 						name: '评价排行',
 						value: 'praise',
 						title: '好货靠口碑',
-						imgsrc: '../../static/images/niuyouguo1.png'
+						imgsrc: '../../static/images/rank_2.png'
 					},
 					{
 						name: '关注排行',
 						value: 'follow',
 						title: '大家都关注',
-						imgsrc: '../../static/images/putao1.png'
+						imgsrc: '../../static/images/rank_3.png'
 					},
 					{
 						name: '复购排行',
 						value: 'back',
 						title: '买了又买',
-						imgsrc: '../../static/images/pingguo1.png'
+						imgsrc: '../../static/images/rank_4.png'
 					}
 
 				],
@@ -488,7 +488,6 @@
 				}
 				listing(getClient, data)
 					.then((res) => {
-						console.log(res)
 						if (res.data.code == 500) {
 							this.ApproveStatus = 0
 							return
@@ -1622,10 +1621,10 @@
 	}
 
 	.tabimg {
-		width: 150rpx;
-		height: 150rpx;
+		width: 130rpx;
+		height: 130rpx;
 		display: block;
-		margin: 0 auto;
+		margin: 10rpx auto;
 		border: 1px solid #f5f5f5;
 		border-radius: 6rpx;
 	}

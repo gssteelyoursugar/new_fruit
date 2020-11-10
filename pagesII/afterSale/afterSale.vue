@@ -28,7 +28,7 @@
 									<view class="tui-goods-attr">{{item.specification}}×{{item.goods_number}}</view>
 									<view class="tui-goods-flex">
 										<view class="tui-goods-attr1"><text class="iconyuan">￥</text> <text class="yuanText">{{item.platform_price}} </text><text class="yuanPrice">元</text> </view>
-										<view class="tui-goods-attr">实付: <text class="yuan-tui"> {{item.order_total_price}}</text> (含运费)</view>
+										<view class="tui-goods-attr">实付: <text class="yuan-tui"> {{item.order_total_price}}</text> (免运费)</view>
 									</view>
 									
 								</view>
@@ -92,7 +92,7 @@
 								<view class="tui-goods-attr">{{item.specification}}×{{item.goods_number}}</view>
 								<view class="tui-goods-flex">
 									<view class="tui-goods-attr1"><text class="iconyuan">￥</text> <text class="yuanText">{{item.platform_price}} </text><text class="yuanPrice">元</text> </view>
-									<view class="tui-goods-attr">实付: <text class="yuan-tui"> {{item.order_total_price}}.00</text> (含运费)</view>
+									<view class="tui-goods-attr">实付: <text class="yuan-tui"> {{item.order_total_price}}.00</text> (免运费)</view>
 								</view>
 								
 							</view>

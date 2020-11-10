@@ -484,13 +484,12 @@ page {
 	border-bottom: 20rpx solid #f5f5f5;
 	position: relative;
 }
-
-
-/* 2020/8/29 */
 .tui-height-full {
 	background-color: #fff;
 	padding: 24rpx 30rpx;
 	border-bottom: 20rpx solid #f5f5f5;
+	color: #929397;
+	font-size: 28rpx;
 }
 .shuoming {
 	line-height: 60rpx;

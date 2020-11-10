@@ -301,21 +301,22 @@
 				})
 				publicing2(loginis, data) //发送请求携带参数
 					.then((res) => {
-						if (res.statusCode == 500) {
-							uni.showModal({
-								title: '提示',
-								content: '登录出错，请重新登录获取信息',
-								success: function(res) {
-									if (res.confirm) {
-										uni.hideLoading();
-									} else if (res.cancel) {
-										uni.hideLoading();
-									}
-								}
-							});
+						if (res.data.statusCode == 500) {
+							uni.showToast({
+								title: '登录出错,请重新登录',
+								icon:"none"
+							})
+							setTimeout(()=>{
+								uni.removeStorageSync('userIN')
+								uni.removeStorageSync('usermen')
+								uni.removeStorageSync('StoreStatus')
+								uni.removeStorageSync('userIN')
+								this.ifUser()
+							},1500)
 							return
-						} else if (res.statusCode == 200) {
+						} else if (res.data.statusCode == 200) {
 							this.getOrderData()
+							
 						}
 						// log(res) //获得token
 						uni.setStorageSync('usermen', res.data.token) //把token存在本地，小程序提供如同浏览器cookie

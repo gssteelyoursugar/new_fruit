@@ -60,7 +60,6 @@ let publicing = function(urling, shopdata) {
 				header: {
 					'content-type': 'application/x-www-form-urlencoded'
 				},
-
 			})
 			.then((res) => {
 				resolve(res[1])

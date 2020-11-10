@@ -133,6 +133,8 @@ page {
 }
 .order-detail-container .order-snapshoot .snap-title view:first-child {
   color: #000;
+  font-size: 32rpx;
+  font-weight: 500;
 }
 .order-detail-container .order-snapshoot .snap-title view:last-child {
   color: #8C8C8C;
@@ -245,7 +247,7 @@ page {
   font-size: 24rpx;
 }
 .order-detail-container .order-snapshoot .fruit-info-title {
-  font-size: 28rpx;
+  font-size: 32rpx;
   border-bottom: 1px solid #F2F2F2;
   padding: 12rpx 0;
 }
@@ -288,6 +290,8 @@ page {
 .tui-height-full {
   background-color: #fff;
   margin: 40rpx 0;
+  color: #929397;
+  font-size: 28rpx;
 }
 .shuoming {
   line-height: 60rpx;
@@ -301,7 +305,7 @@ page {
 .tui-title-line {
   color: #000;
   font-weight: 400;
-  font-size: 28rpx;
+  font-size: 32rpx;
   padding-bottom: 14rpx;
   border-bottom: 1px solid #f5f5f5;
   margin-bottom: 30rpx;

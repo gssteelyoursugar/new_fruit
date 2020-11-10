@@ -43,7 +43,7 @@
 									<view class="shifu-total">
 										<text>实付:</text>
 										<text>{{item.totalPrice}}</text>
-										<text>(含运费)</text>
+										<text>(免运费)</text>
 									</view>
 								</view>
 							</view>
@@ -116,7 +116,7 @@
 									<view class="shifu-total">
 										<text>实付:</text>
 										<text>{{item.totalPrice}}</text>
-										<text>(含运费)</text>
+										<text>(免运费)</text>
 									</view>
 								</view>
 							</view>
@@ -178,7 +178,7 @@
 									<view class="shifu-total">
 										<text>实付:</text>
 										<text>{{item.totalPrice}}</text>
-										<text>(含运费)</text>
+										<text>(免运费)</text>
 									</view>
 								</view>
 							</view>
@@ -228,7 +228,7 @@
 									<view class="shifu-total">
 										<text>实付:</text>
 										<text>{{item.totalPrice}}</text>
-										<text>(含运费)</text>
+										<text>(免运费)</text>
 									</view>
 								</view>
 							</view>
@@ -365,7 +365,6 @@
 			} = info
 			let buttonHeight = (bottom - statusBarHeight) + (top - statusBarHeight)
 			this.navHeight = statusBarHeight + buttonHeight + top - statusBarHeight
-			console.log("info", info, statusBarHeight, this.navHeight)
 			// #endif
 
 		},
@@ -523,6 +522,8 @@
 								title: "收货成功",
 								duration: 2000
 							})
+							this.isConfirm = !this.isConfirm
+							this.getOrderData()
 						} else {
 							uni.showToast({
 								title: res.data.msg,
@@ -655,6 +656,7 @@
 		//
 
 		onPullDownRefresh() {
+			this.getOrderData()
 			setTimeout(() => {
 				uni.stopPullDownRefresh()
 			}, 500)

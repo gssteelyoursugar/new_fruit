@@ -22,7 +22,7 @@
 					<view class="tui-goods-attr">{{DetailsData.specification}}×{{DetailsData.goods_number}}</view>
 					<!-- <view class="tui-goods-flex">
 						<view class="tui-goods-attr1">￥{{DetailsData.goods_price}}元</view>
-						<view class="tui-goods-attr">实付{{DetailsData.market_price}}元(含运费)</view>
+						<view class="tui-goods-attr">实付{{DetailsData.market_price}}元(免运费)</view>
 					</view> -->
 					
 				</view>

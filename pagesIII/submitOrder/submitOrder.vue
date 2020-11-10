@@ -73,7 +73,7 @@
 				<view class="tui-size-24">￥</view>
 				<view class="tui-price-large">{{extraData.orderAmount}}</view>
 				<view class="tui-size-24"></view>
-				<view class="tui-black">(含运费) </view>
+				<view class="tui-black">(免运费) </view>
 			</view>
 			<view class="tui-pr25">
 				<tui-button width="200rpx" height="70rpx" :size="28" type="danger" shape="circle" @click="SubmitOrder">提交订单</tui-button>
@@ -124,6 +124,7 @@
 	import {
 		postSettle,
 		imgurl,
+		postCancelOrder,
 		postOrderPay,
 		getSubmitOrder
 	} from '../../api/request.js'
@@ -157,8 +158,6 @@
 				size: 32,
 				color: '#000',
 				margin: '0'
-
-
 			}
 		},
 		computed: {
@@ -261,14 +260,14 @@
 			//获得订单号，才能支付
 			SubmitOrder() {
 				let that = this
-				var setdata = uni.getStorageSync('usermen')
+				let setdata = uni.getStorageSync('usermen')
 				let data2 = {
 					id: that.ids,
 					token: setdata
 				}
 				listing(getSubmitOrder, data2)
 					.then((res) => {
-						if(res.data.code === -1) {
+						if (res.data.code === -1) {
 							uni.showToast({
 								title: res.data.msg,
 								icon: 'none',
@@ -277,10 +276,11 @@
 							return
 						}
 						let {
-							payinfo
+							payinfo,
+							orderNumber
 						} = res.data.data
+						
 						let tmp = JSON.parse(payinfo)
-						console.log(tmp)
 						uni.requestPayment({
 							timeStamp: tmp.timeStamp,
 							nonceStr: tmp.nonceStr,
@@ -291,8 +291,8 @@
 								uni.showToast({
 									title:"支付成功"
 								})
-								uni.reLaunch({
-									url: '../../pagesII/myOrder/myOrder?index=0'
+								uni.switchTab({
+									url: '../../pages/my/my'
 								})
 							},
 							fail(reject) {
@@ -300,17 +300,18 @@
 									title:"取消支付",
 									icon: 'none'
 								})
-								setTimeout(()=> {
-									uni.reLaunch({
-										url: '../../pagesII/myOrder/myOrder?index=0'
-									})
-								},500)
+								that.cancelOrder(orderNumber,setdata)
+								
 								return
 							}
 						})
-						// let orderNumber = res.data.data.orderNumber
-						// this.payUrl = res.data.data.payUrl
-						// that.clip()
+						// 测试环境代码
+						// uni.setClipboardData({
+						// 	data: payinfo,
+						// 	success() {
+						// 		uni.hideToast()
+						// 	}
+						// })
 						// uni.showModal({
 						// 	title: '提示',
 						// 	content: '确认支付',
@@ -318,6 +319,7 @@
 						// 		if (res.confirm) {
 						// 			that.btnPay()
 						// 		} else if (res.cancel) {
+						// 			that.cancelOrder(orderNumber,setdata)
 						// 			uni.showToast({
 						// 				title: '订单已取消',
 						// 				icon: 'none',
@@ -345,6 +347,17 @@
 					url: "../address/address"
 				})
 			},
+			// 取消订单
+			cancelOrder(orderNumber,token) {
+				let data = {
+					token: token,
+					orderNumber: orderNumber
+				}
+				publicing(postCancelOrder, data).then(res => {
+					console.log(res)
+				})
+
+			},
 			//去支付
 			btnPay(orderNumber) {
 				uni.showLoading({
@@ -364,7 +377,6 @@
 			this.url = imgurl
 			this.ids = options.ids;
 			this.gtePayORderTel()
-
 			var pages = getCurrentPages();
 			var curPage = pages[pages.length - 1]; // 当前页面路径
 			var beforePage = pages[pages.length - 2]; // 前一个页面路径
