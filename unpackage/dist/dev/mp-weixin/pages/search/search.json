@@ -1,7 +1,0 @@
-{
-  "enablePullDownRefresh": true,
-  "navigationBarTitleText": "找水果",
-  "usingComponents": {
-    "tui-icon": "/components/tui-icon/tui-icon"
-  }
-}

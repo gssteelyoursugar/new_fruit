@@ -51,7 +51,7 @@
 										<view class="tui-goods-name"><text class="tag-tit">采手精选</text>{{item.name}}</view>
 										<view class="tui-goods-attrp">{{item.specification}} × {{item.goods_number}}</view>
 										<view class="tui-goods-flex">
-											<view class="tui-goods-attr1"><text class="iconyuan">￥</text> <text class="yuanText">{{item.platform_client_price}} </text><text class="yuanPrice">元</text> </view>
+											<view class="tui-goods-attr1"><text class="iconyuan">￥</text> <text class="yuanText">{{item.goods_price}} </text><text class="yuanPrice">元</text> </view>
 											<view class="tui-goods-attr">实付: <text class="yuan-tui"> {{item.order_total_price}}</text> (免运费)</view>
 										</view>
 										

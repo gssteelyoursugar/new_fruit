@@ -239,7 +239,7 @@
 						</view>
 					</view>
 					<view class="pay-time">
-						<text class="tui-pay-color">{{payTime <= 16 ? '16:00前':'现在'}}完成支付，预计{{ shopListdata.deliveryTime|| nowTime | deliverTime }}送达</text>
+						<text class="tui-pay-color">{{payTime < 16 ? '16:00前':'现在'}}完成支付，预计{{ shopListdata.deliveryTime|| nowTime | deliverTime }}送达</text>
 					</view>
 				</view>
 				<!-- 水果描述 -->

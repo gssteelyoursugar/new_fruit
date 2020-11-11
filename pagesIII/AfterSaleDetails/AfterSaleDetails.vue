@@ -163,6 +163,7 @@
 
 	.tui-content2 {
 		background-color: #fff;
+		padding: 20rpx 0 30rpx;
 	}
 
 	.tui-content3 {
@@ -202,16 +203,16 @@
 		line-height: 60rpx;
 		font-size: 28rpx;
 		color: rgba(57, 57, 57, 1);
-		padding: 0 30rpx;
+		padding: 6rpx 30rpx;
 		/* font-weight: 400; */
 	}
 
 	.tui-text-line2 {
 
-		line-height: 40rpx;
+		line-height: 60rpx;
 		font-size: 28rpx;
 		color: rgba(57, 57, 57, 1);
-		padding: 0 30rpx;
+		padding: 6rpx 30rpx;
 
 	}
 
@@ -292,7 +293,7 @@
 
 	.tui-upload-box {
 		width: 100%;
-		margin-top: 30rpx;
+		/* margin-top: 30rpx; */
 		margin-bottom: 30rpx;
 		padding-bottom: 30rpx;
 		display: flex;

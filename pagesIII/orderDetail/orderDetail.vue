@@ -66,7 +66,6 @@
 					</view>
 				</view>
 			</view>
-
 		</view>
 		<view class="order-snapshoot">
 			<view class="snap-title">
@@ -134,7 +133,6 @@
 					<view class="right-item">{{goodsData.afterSalesTime}}</view>
 				</view>
 			</view>
-
 			<!-- 水果标准 -->
 			<view class="tui-height-full">
 				<view class="tui-title-line">
@@ -149,7 +147,6 @@
 						<text class=" tui-text-left tui-title-class self-left">口感星级</text>
 						<tui-rate :current="goodsData.tasteLevel" active="#ff7900" :hollow="true" :disabled="true" :size="16"></tui-rate>
 					</view>
-
 				</view>
 				<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
 					<view class="tui-left-one">
@@ -205,7 +202,6 @@
 					<view class="tui-right-one">
 						<text class="tui-title-class">{{shopListdata.data.facadeLevel}}</text>
 					</view>
-					
 				</view>
 				<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
 					<view class="tui-left-one">
@@ -214,7 +210,6 @@
 					<view class="tui-right-one">
 						<text class="tui-title-class">{{shopListdata.data.shapeLevel}}</text>
 					</view>
-					
 				</view>
 				<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
 					<view class="tui-left-one">
@@ -223,7 +218,6 @@
 					<view class="tui-right-one">
 						<text class="tui-title-class">{{shopListdata.data.rejectRatio}}</text>
 					</view>
-					
 				</view>
 				<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
 					<view class="tui-left-one">
@@ -232,12 +226,8 @@
 					<view class="tui-right-one">
 						<text class=" tui-title-class">{{shopListdata.data.afterSalesTime}}</text>
 					</view>
-					
 				</view> -->
-
-
 			</view>
-
 			<!-- 免赔情况 -->
 			<view class="tui-height-full">
 				<view class="tui-title-line">
@@ -253,7 +243,6 @@
 					<view class="tui-right-one">
 						<text class="iconfont icon-quan"></text><text class="tui-name-class">轻微风花</text>
 					</view>
-
 				</view>
 				<view class="tui-height-flex tui-height-flex-top">
 					<view class="tui-left-one1">
@@ -262,20 +251,16 @@
 					<view class="tui-right-one">
 						<text class="iconfont icon-quan"></text><text class="tui-name-class">轻微流浆</text>
 					</view>
-
 				</view> -->
-
 			</view>
 			<!-- 可售后情况 -->
 			<view class="tui-height-full ">
 				<view class="tui-title-line">
 					<text>可售后情况</text>
 				</view>
-				
 				<view>
 					<jyf-parser selectable @linkpress="clickLink" :html="goodsData.afterSale"></jyf-parser>
 				</view>
-				
 				<!-- <view class="tui-height-flex tui-height-flex-top">
 					<view class="tui-left-one1">
 						<text class="iconfont icon-quan"></text><text class="tui-name-class">摔坏</text>
@@ -283,7 +268,6 @@
 					<view class="tui-right-one">
 						<text class="iconfont icon-quan"></text><text class="tui-name-class">压伤</text>
 					</view>
-
 				</view>
 				<view class="tui-height-flex tui-height-flex-top">
 					<view class="tui-left-one1">
@@ -292,12 +276,9 @@
 					<view class="tui-right-one">
 						<text class="iconfont icon-quan"></text><text class="tui-name-class">单果重量不达标</text>
 					</view>
-
 				</view> -->
 			</view>
-
 		</view>
-
 	</view>
 </template>
 
@@ -312,7 +293,6 @@
 		getDetails,
 		orderHistory
 	} from '../../api/request.js';
-	let setdata = uni.getStorageSync('usermen')
 	export default {
 		name: "orderDetail",
 		data() {
@@ -333,25 +313,26 @@
 				let s = time.getSeconds()>= 10 ? time.getSeconds() : "0"+time.getSeconds();
 				return y + '-' + m+ '-' + d + ' ' + h+ ':' + mm + ':' + s
 			},
-			
 		},
 		
 		methods: {
-			
 			getOrderDetail() {
+				let setdata = uni.getStorageSync('usermen')
 				let data = {
 					token: setdata,
 					id: this.order_id
 				};
 				listing(getDetails, data).then(res => {
 					this.orderObj = res.data.data[0]
-					let data = {
-						id: this.orderObj.goods_id,
-						token: setdata
+					if (this.orderObj.goods_id) {
+						let data = {
+							id: this.orderObj.goods_id,
+							token: setdata
+						}
+						publicing(orderHistory, data).then(res => {
+							this.goodsData = res.data.data
+						})
 					}
-					publicing(orderHistory, data).then(res => {
-						this.goodsData = res.data.data
-					})
 				})
 			},
 			clipNumber(val) {
@@ -362,10 +343,10 @@
 					// }
 				})
 			}
-
 		},
 		onLoad(opt) {
 			this.order_id = opt.id
+			this.getOrderDetail()
 		},
 		onShow() {
 			this.getOrderDetail()

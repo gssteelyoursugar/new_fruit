@@ -546,13 +546,13 @@
 				let url = "";
 				switch (index) {
 					case 0:
-						url = "../../pagesII/ImportedFruit/ImportedFruit" //进口水果
+						url = "../../pagesII/seasonal/seasonal" //应季专区
 						break;
 					case 1:
 						url = "../../pagesII/hotFruit/hotFruit" //热门品种
 						break;
 					case 2:
-						url = "../../pagesII/seasonal/seasonal" //应季专区
+						url = "../../pagesII/ImportedFruit/ImportedFruit" //进口水果
 						break;
 					case 3:
 						url = "../../pagesII/superValue/superValue" //超值专区
@@ -560,7 +560,6 @@
 					case 4:
 						url = "../../pagesII/Recently/Recently" //最近看过
 						break;
-
 					default:
 						break;
 				}
