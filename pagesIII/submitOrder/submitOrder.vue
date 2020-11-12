@@ -155,7 +155,8 @@
 				unit: 'rpx',
 				size: 32,
 				color: '#000',
-				margin: '0'
+				margin: '0',
+				isPaying: false
 			}
 		},
 		computed: {
@@ -251,10 +252,13 @@
 					return;
 				}
 			},
-
 			//获得订单号，才能支付
 			SubmitOrder() {
 				let that = this
+				if (that.isPaying) {
+					return false
+				}
+				that.isPaying = true
 				let setdata = uni.getStorageSync('usermen')
 				let data2 = {
 					id: that.ids,
@@ -274,7 +278,7 @@
 							payinfo,
 							orderNumber
 						} = res.data.data
-						
+						//正式环境代码
 						// let tmp = JSON.parse(payinfo)
 						// uni.requestPayment({
 						// 	timeStamp: tmp.timeStamp,
@@ -289,6 +293,7 @@
 						// 		uni.switchTab({
 						// 			url: '../../pages/my/my'
 						// 		})
+						// 		that.isPaying = false
 						// 	},
 						// 	fail(reject) {
 						// 		uni.showToast({
@@ -296,10 +301,11 @@
 						// 			icon: 'none'
 						// 		})
 						// 		that.cancelOrder(orderNumber,setdata)
-								
+						// 		that.isPaying = false
 						// 		return
 						// 	}
 						// })
+						
 						//测试环境代码
 						uni.setClipboardData({
 							data: payinfo,
@@ -313,7 +319,9 @@
 							success: (res) => {
 								if (res.confirm) {
 									that.btnPay()
+									that.isPaying = false
 								} else if (res.cancel) {
+									that.isPaying = false
 									that.cancelOrder(orderNumber,setdata)
 									uni.showToast({
 										title: '订单已取消',
@@ -327,7 +335,6 @@
 								}
 							}
 						});
-
 					})
 					.catch((err) => {
 						log(err)

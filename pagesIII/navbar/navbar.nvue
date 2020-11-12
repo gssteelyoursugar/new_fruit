@@ -17,13 +17,11 @@
 			<swiper-item class="tui-swiper-item" v-for="(tab, index1) in newsList" :key="index1">
 				<!-- #ifndef APP-NVUE -->
 				<scroll-view
-					
 					class="tui-scroll-v"
 					refresher-enabled
 					:refresher-triggered="tab.refreshing"
 					refresher-background="#fafafa"
 					enable-back-to-top
-					
 					:refresher-threshold="100"
 					scroll-y
 					@scrolltolower="loadMore(index)"
@@ -49,28 +47,17 @@
 									<image :src="item.url" class="tui-goods-img"></image>
 									<view class="tui-goods-center">
 										<view class="tui-goods-name"><text class="tag-tit">采手精选</text>{{item.name}}</view>
-										<view class="tui-goods-attrp">{{item.specification}} × {{item.goods_number}}</view>
+										<view class="tui-goods-attrp">
+											<text>毛重约{{ item.kg1 || 0}}斤/件</text>
+											<text class="goods-num">x{{item.goodsNumber}}</text>
+										</view>
 										<view class="tui-goods-flex">
 											<view class="tui-goods-attr1"><text class="iconyuan">￥</text> <text class="yuanText">{{item.goods_price}} </text><text class="yuanPrice">元</text> </view>
 											<view class="tui-goods-attr">实付: <text class="yuan-tui"> {{item.order_total_price}}</text> (免运费)</view>
 										</view>
-										
 									</view>
-									<!-- <view class="tui-price-right">
-										<view>￥298.00</view>
-										<view>x2</view>
-									</view> -->
 								</view>
 							</tui-list-cell>
-						
-						<!-- <tui-list-cell :hover="false" unlined>
-							<view class="tui-goods-price">
-								<view>共4件商品 合计：</view>
-								<view class="tui-size-24">￥</view>
-								<view class="tui-price-large">1192</view>
-								<view class="tui-size-24">.00</view>
-							</view>
-						</tui-list-cell> -->
 						<view class="tui-order-btn">
 							<view class="tui-btn-ml" v-if="item.after_sale_status ==0 ||item.after_sale_status ==3 ">
 								<button  type="primary"  hover-class='none' class="icon-img3"  @tap="goAfterCancel(item.order_item_id,item.id)">取消申请</button>
@@ -757,18 +744,26 @@ page {
 		-webkit-line-clamp: 2;
 	}
 	.tui-goods-attrp {
-		font-size: 12px;
+		font-size: 24px;
 		font-weight: 500;
 		color: rgba(102, 102, 102, 1);
 		line-height: 32rpx;
 		padding-top: 20rpx;
-		word-break: break-all;
+	/* 	word-break: break-all;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		display: -webkit-box;
 		-webkit-box-orient: vertical;
-		-webkit-line-clamp: 2;
+		-webkit-line-clamp: 2; */
+		display: flex;
+		justify-content: space-between;
 	}
+	
+	
+	.tui-goods-attrp .goods-num {
+		font-size: 28rpx;
+	}
+	
 	.yuan-tui{
 		color: rgba(51, 51, 51, 1);
 		font-size: 14px;

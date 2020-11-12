@@ -1,0 +1,16 @@
+{
+  "navigationBarTextStyle": "white",
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "商品详情",
+  "usingComponents": {
+    "tui-icon": "/components/tui-icon/tui-icon",
+    "tui-tabs": "/components/tui-tabs/tui-tabs",
+    "tui-tag": "/components/tui-tag/tui-tag",
+    "tui-rate": "/components/tui-rate/tui-rate",
+    "jyf-parser": "/components/jyf-parser/jyf-parser",
+    "tui-nomore": "/components/tui-nomore/tui-nomore",
+    "tui-button": "/components/tui-button/tui-button",
+    "wyb-popup": "/components/wyb-popup/wyb-popup",
+    "tui-numberbox": "/components/tui-numberbox/tui-numberbox"
+  }
+}

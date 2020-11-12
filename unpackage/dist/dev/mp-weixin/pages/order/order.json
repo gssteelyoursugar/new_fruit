@@ -1,0 +1,9 @@
+{
+  "enablePullDownRefresh": false,
+  "navigationBarTitleText": "进货单",
+  "usingComponents": {
+    "tui-swipe-action": "/components/tui-swipe-action/tui-swipe-action",
+    "tui-numberbox": "/components/tui-numberbox/tui-numberbox",
+    "tui-button": "/components/tui-button/tui-button"
+  }
+}

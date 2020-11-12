@@ -1,0 +1,7 @@
+{
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "最近看过",
+  "usingComponents": {
+    "tui-swipe-action": "/components/tui-swipe-action/tui-swipe-action"
+  }
+}

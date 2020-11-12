@@ -53,6 +53,12 @@
 						<view>{{orderObj.create_date | getTime}}</view>
 					</view>
 				</view>
+				<view class="info-item"  v-if="orderObj.shipments_time">
+					<view class="info-item-left">预计送达：</view>
+					<view class="info-item-right">
+						<view>{{orderObj.shipments_time | getTime }}</view>
+					</view>
+				</view>
 				<view class="info-item" v-if="orderObj.printTime">
 					<view class="info-item-left">发货时间：</view>
 					<view class="info-item-right">
@@ -65,6 +71,7 @@
 						<view>{{orderObj.delivery_time }}</view>
 					</view>
 				</view>
+				
 			</view>
 		</view>
 		<view class="order-snapshoot">

@@ -34,7 +34,10 @@
 							<image :src="item.url" class="tui-goods-img"></image>
 							<view class="tui-goods-center">
 								<view class="tui-goods-name"><text class="tag-tit">{{item.labelName}}</text> {{item.name}}</view>
-								<view class="tui-goods-attr">{{item.specification}}×{{item.goodsNumber}}</view>
+								<view class="tui-goods-attr">
+									<text>毛重约{{ item.kg1 || 0}}斤/件</text>
+									<text class="goods-num">x{{item.goodsNumber}}</text>
+								</view>
 								<view class="tui-goods-shabi">
 									<view class="total-price"><text>¥</text>
 										<text>{{item.totalPrice}}</text>
@@ -107,7 +110,10 @@
 							<image :src="item.url" class="tui-goods-img"></image>
 							<view class="tui-goods-center">
 								<view class="tui-goods-name"><text class="tag-tit">{{item.labelName}}</text> {{item.name}}</view>
-								<view class="tui-goods-attr">{{item.specification}}×{{item.goodsNumber}}</view>
+								<view class="tui-goods-attr">
+									<text>毛重约{{ item.kg1 || 0}}斤/件</text>
+									<text class="goods-num">x{{item.goodsNumber}}</text>
+								</view>
 								<view class="tui-goods-shabi">
 									<view class="total-price"><text>¥</text>
 										<text>{{item.totalPrice}}</text>
@@ -169,7 +175,10 @@
 							<image :src="item.url" class="tui-goods-img"></image>
 							<view class="tui-goods-center">
 								<view class="tui-goods-name"><text class="tag-tit">{{item.labelName}}</text> {{item.name}}</view>
-								<view class="tui-goods-attr">{{item.specification}}×{{item.goodsNumber}}</view>
+								<view class="tui-goods-attr">
+									<text>毛重约{{ item.kg1 || 0}}斤/件</text>
+									<text class="goods-num">x{{item.goodsNumber}}</text>
+								</view>
 								<view class="tui-goods-shabi">
 									<view class="total-price"><text>¥</text>
 										<text>{{item.totalPrice}}</text>
@@ -219,7 +228,10 @@
 							<image :src="item.url" class="tui-goods-img"></image>
 							<view class="tui-goods-center">
 								<view class="tui-goods-name"><text class="tag-tit">{{item.labelName}}</text> {{item.name}}</view>
-								<view class="tui-goods-attr">{{item.specification}}×{{item.goodsNumber}}</view>
+								<view class="tui-goods-attr">
+									<text>毛重约{{ item.kg1 || 0}}斤/件</text>
+									<text class="goods-num">x{{item.goodsNumber}}</text>
+								</view>
 								<view class="tui-goods-shabi">
 									<view class="total-price"><text>¥</text>
 										<text>{{item.totalPrice}}</text>
@@ -822,22 +834,29 @@
 	}
 
 	.tui-goods-attr {
-		font-size: 22rpx;
+		font-size: 24rpx;
 		color: #888888;
 		line-height: 32rpx;
 		padding-top: 20rpx;
-		word-break: break-all;
+		/* word-break: break-all;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		display: -webkit-box;
 		-webkit-box-orient: vertical;
-		-webkit-line-clamp: 2;
+		-webkit-line-clamp: 2; */
+		display: flex;
+		justify-content: space-between;
+	}
+	
+	.tui-goods-attr .goods-num {
+		font-size: 28rpx;
 	}
 
 	.tui-goods-shabi {
 		display: flex;
 		margin: 20rpx 0;
 		justify-content: space-between;
+		align-items: baseline;
 	}
 
 	.total-price {

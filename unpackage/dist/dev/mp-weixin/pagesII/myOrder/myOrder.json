@@ -1,0 +1,11 @@
+{
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "我的订单",
+  "usingComponents": {
+    "tui-tabs": "/components/tui-tabs/tui-tabs",
+    "wyb-slide-listener": "/components/wyb-slide-listener/wyb-slide-listener",
+    "tui-list-cell": "/components/tui-list-cell/tui-list-cell",
+    "tui-button": "/components/tui-button/tui-button",
+    "uni-load-more": "/components/uni-load-more/uni-load-more"
+  }
+}

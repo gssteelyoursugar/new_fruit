@@ -1,0 +1,1 @@
+<view class="tui-nomore-class tui-loadmore-none data-v-5fb428e4"><view class="{{['data-v-5fb428e4',isDot?'tui-nomore-dot':'tui-nomore']}}"><view class="{{['data-v-5fb428e4',isDot?'tui-dot-text':'tui-nomore-text']}}" style="{{'background-color:'+(backgroundColor)+';'}}">{{isDot?dotText:text}}</view></view></view>

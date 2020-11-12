@@ -15,11 +15,7 @@ let url = "http://testqg.natapp1.cc/"
 // let url = 'http://dwh.natapp1.cc/js/'
 let imgurl = 'http://192.168.1.10:8980'
 
-
 //测试
-
-
-
 
 // 首页
 let getIndex = `${url}api/wx/index/getData`
