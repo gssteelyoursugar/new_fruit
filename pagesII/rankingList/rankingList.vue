@@ -569,6 +569,8 @@
 	.tag-tit2 {
 		display: flex;
 		justify-content: space-between;
+		align-items: center;
+
 	}
 
 	.tag-tit2-price {
@@ -588,8 +590,8 @@
 	}
 
 	.tui-shop-car {
-		width: 94rpx;
-		height: 94rpx;
+		width: 52rpx;
+		height: 52rpx;
 		display: block;
 	}
 

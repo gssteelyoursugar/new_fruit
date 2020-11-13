@@ -286,9 +286,7 @@
 						} else if (res.statusCode == 200) {
 							log(res);
 						}
-
-						log(res); //获得token
-						uni.setStorageSync('usermen', res.data.token); //把token存在本地，小程序提供如同浏览器cookie
+						uni.setStorageSync('usermen', res.data.token); 
 						uni.hideLoading();
 						this.modaishow = false;
 						this.getRecentlyData();

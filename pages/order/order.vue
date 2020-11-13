@@ -250,7 +250,7 @@
 							this.modaishow = true;
 							uni.showModal({
 								title: '提示',
-								content: '服务器错误，请重新登录获取信息',
+								content: '登录超时，请重新登录获取信息',
 								success: function(res) {
 									if (res.confirm) {
 										uni.switchTab({

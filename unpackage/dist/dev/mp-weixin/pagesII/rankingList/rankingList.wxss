@@ -103,6 +103,9 @@ page {
 	-webkit-box-pack: justify;
 	-webkit-justify-content: space-between;
 	        justify-content: space-between;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
 }
 .tag-tit2-price {
 	color: #FF5600;
@@ -118,8 +121,8 @@ page {
 	color: #FF5600;
 }
 .tui-shop-car {
-	width: 94rpx;
-	height: 94rpx;
+	width: 52rpx;
+	height: 52rpx;
 	display: block;
 }
 .tag-tit-text {

@@ -355,7 +355,7 @@
 						}
 						if (res.data.code == 500) {
 							uni.showToast({
-								title: '服务器异常,请重试',
+								title: '登录超时,请重试',
 								icon: 'none',
 								duration: 3000
 							})

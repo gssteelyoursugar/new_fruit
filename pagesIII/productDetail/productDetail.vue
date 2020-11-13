@@ -616,8 +616,11 @@
 			this.token = setdata;
 			this.productID = options.id;
 			this.postDetails();
-			this.postSettle();
-			this.getMerchants();
+			if (setdata) {
+				this.postSettle();
+				this.getMerchants();
+			}
+			
 			let obj = {};
 			// #ifdef MP-WEIXIN
 			obj = wx.getMenuButtonBoundingClientRect();
@@ -655,8 +658,6 @@
 				let time = new Date().getHours()
 				return time
 			},
-
-
 		},
 		filters: {
 			filterNum(val) {
@@ -715,12 +716,30 @@
 				};
 				listing(getClient, data)
 					.then(res => {
-
-						// log(res);
-						///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
-						this.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
-
-						// log(this.ApproveStatus);
+						if (res.data.code == 201) {
+							uni.showToast({
+								title: "账户已被停用",
+								icon: 'none',
+								duration: 3000
+							})
+							return
+						}
+						if (res.data.code == 500) {
+							uni.showToast({
+								title: '登录超时,请重试',
+								icon: 'none',
+								duration: 3000
+							})
+							this.ifUser()
+							setTimeout(()=>{
+								uni.removeStorageSync('userIN')
+								uni.removeStorageSync('usermen')
+								uni.removeStorageSync('StoreStatus')
+							},1500)
+						}
+						if (res.data.code == 200) {
+							this.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
+						}
 					})
 					.catch(err => {
 						log(err);
@@ -887,6 +906,14 @@
 				})
 				this.toggleVerify()
 			},
+			ifUser() {
+				let setuserdata = uni.getStorageSync('userIN')
+				if (!setuserdata) {
+					this.modaishow = true
+				} else {
+					this.modaishow = false
+				}
+			},
 			//获取微信昵称
 			getUserInfo(event) {
 				// log(event);
@@ -913,21 +940,38 @@
 			},
 			//发给后台拿token
 			wxLoging(code) {
-				uni.showLoading({});
 				// log(code);
 				let data = {
 					code
 				};
 				publicing2(loginis, data) //发送请求携带参数
 					.then(res => {
-						uni.setStorageSync('usermen', res.data.token); //把token存在本地，小程序提供如同浏览器cookie
-						var setdata = uni.getStorageSync('usermen');
-						uni.showToast({
-							title: '登录成功'
-						});
-						this.getMerchants();
-						this.postDetails()
-						uni.hideLoading();
+						console.log(res)
+						if (res.statusCode == 200 && res.data.statusCode == 500) {
+							uni.showToast({
+								title: '登录信息过期,请重新登录',
+								icon:"none"
+							})
+							setTimeout(()=>{
+								uni.removeStorageSync('userIN')
+								uni.removeStorageSync('usermen')
+								uni.removeStorageSync('StoreStatus')
+								this.ifUser()
+							},1000)
+							return
+						} else  {
+							uni.setStorageSync('usermen', res.data.token); //把token存在本地，小程序提供如同浏览器cookie
+							var setdata = uni.getStorageSync('usermen');
+							uni.hideLoading();
+							setTimeout(()=> {
+								uni.showToast({
+									title: '登录成功'
+								});
+							},100)
+							this.getMerchants();
+							this.postDetails()
+							
+						}
 					})
 					.catch(err => {
 						log(err);
