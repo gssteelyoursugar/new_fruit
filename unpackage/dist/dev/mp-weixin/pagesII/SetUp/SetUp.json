@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "设置",
-  "usingComponents": {
-    "tui-list-cell": "/components/tui-list-cell/tui-list-cell",
-    "ss-switch": "/components/ss-switch/ss-switch"
-  }
-}

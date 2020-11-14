@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "确认订单",
-  "usingComponents": {
-    "tui-list-cell": "/components/tui-list-cell/tui-list-cell",
-    "tui-button": "/components/tui-button/tui-button",
-    "wyb-popup": "/components/wyb-popup/wyb-popup"
-  }
-}

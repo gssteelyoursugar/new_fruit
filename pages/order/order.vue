@@ -49,11 +49,14 @@
 									<!-- :custom="index" :index="indexs" 
 									这个存储用的，第一个是存储最大外面的那个下标
 									第二个是存储第二个循环的下标，这样才能找到对应的商品的 number
-									
 									这个是组件封装好了的，方法不能传参数，只能接受组件传出来的
 									-->
-									<tui-numberbox :value="itemTwo.number" iconColor="#444444" :height="48" :width="76" :min="1" :max="itemTwo.goodsNumber"
-									 :custom="index" :index="indexs" @change="changeNum()"></tui-numberbox> <!--  -->
+									<tui-numberbox v-if="itemTwo.isRestriction" :value="itemTwo.number" iconColor="#444444" :height="48" :width="76" :min="1" 
+									:max="itemTwo.goodsNumber >= itemTwo.restrictionNumber ? itemTwo.restrictionNumber : itemTwo.goodsNumber"
+									:custom="index" :index="indexs" @change="changeNum()"></tui-numberbox> 
+									 
+									 <tui-numberbox v-else :value="itemTwo.number" iconColor="#444444" :height="48" :width="76" :min="1" :max="itemTwo.goodsNumber"
+									  :custom="index" :index="indexs" @change="changeNum()"></tui-numberbox> 
 								</view>
 							</view>
 						</view>

@@ -89,7 +89,8 @@
 						</view>
 					</view>
 					<view class="tui-pro-title">
-						<text class="tui-pro-title-tag" v-if="shopListdata.number">仅剩{{ shopListdata.number || 0 }}件</text>
+						<text class="tui-pro-title-tag special-item" v-if="shopListdata.restrictionNumber">每人限购{{ shopListdata.restrictionNumber || 0 }}件</text>
+						<text class="tui-pro-title-tag" :class="{'special-item': shopListdata.number < 10}" v-if="shopListdata.number">仅剩{{ shopListdata.number || 0 }}件</text>
 						<!--    -->
 						<text class="tui-pro-title-tag" v-if="shopListdata.totalPirce!== undefined">成交{{ shopListdata.totalPirce | filterNum }}元</text>
 						<text class="tui-pro-title-tag" v-if="shopListdata.viewNumber!== undefined">{{ shopListdata.viewNumber | filterNum }}人看</text>
@@ -227,7 +228,6 @@
 					</view> -->
 				</view>
 				<!-- 物流配送 -->
-
 				<view class="tui-height-full">
 					<view class="tui-title-line"><text>物流配送</text></view>
 					<view class="tui-height-flex tui-bottom-border">
@@ -239,7 +239,7 @@
 						</view>
 					</view>
 					<view class="pay-time">
-						<text class="tui-pay-color">{{payTime < 16 ? '16:00前':'现在'}}完成支付，预计{{ shopListdata.deliveryTime|| nowTime | deliverTime }}送达</text>
+						<text class="tui-pay-color">{{payTime < 16 ? '16:00前':'现在'}}完成支付，预计{{ shopListdata.deliveryTime | deliverTime }}送达</text>
 					</view>
 				</view>
 				<!-- 水果描述 -->
@@ -389,7 +389,6 @@
 												 style="font-size: 24rpx;">元</text></view>
 										</view>
 									</view>
-
 									<!-- <view>购物车</view> -->
 								</view>
 							</view>
@@ -397,7 +396,14 @@
 						<view class="tag-tit3-flex">
 							<view class="tag-tit2-price">购买数量</view>
 							<view class="tag-tit2-text">
-								<tui-numberbox :min="1" :max="shopListdata.number" :value="value2" @change="change2"></tui-numberbox>
+								<!--
+									先看 isRestriction 是不是限购商品，如果是，则商品最大数量需要判断。 
+									库存 > 限购数量 则商品购买最大数量则为限购数量 
+									库存 < 限购数量 则商品购买最大数量则为库存数量
+									如果不是限购商品，则商品最大数量直接等于库存数量
+								-->
+								<tui-numberbox v-if="shopListdata.isRestriction" :min="1" :max="shopListdata.number >= shopListdata.restrictionNumber ? shopListdata.restrictionNumber : shopListdata.number" :value="value2" @change="change2"></tui-numberbox>
+								<tui-numberbox v-else :min="1" :max="shopListdata.number" :value="value2" @change="change2"></tui-numberbox>
 							</view>
 						</view>
 					</view>
@@ -558,7 +564,7 @@
 				canCollect: true,
 				canCart: true,
 				netStatus: true,
-				nowTime: '2020-10-20',
+				
 
 			};
 		},
@@ -1955,6 +1961,11 @@
 		font-size: 24rpx;
 		padding: 10rpx 20rpx;
 
+	}
+	
+	.special-item {
+		background: #FFCFA9;
+		color: #FF6902;
 	}
 
 	.tui-share-btn {

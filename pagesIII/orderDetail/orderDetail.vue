@@ -56,7 +56,7 @@
 				<view class="info-item"  v-if="orderObj.shipments_time">
 					<view class="info-item-left">预计送达：</view>
 					<view class="info-item-right">
-						<view>{{orderObj.shipments_time | getTime }}</view>
+						<view>{{orderObj.shipments_time }}</view>
 					</view>
 				</view>
 				<view class="info-item" v-if="orderObj.printTime">

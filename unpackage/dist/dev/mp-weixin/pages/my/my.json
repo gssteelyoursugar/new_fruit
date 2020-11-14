@@ -1,9 +1,0 @@
-{
-  "navigationBarTextStyle": "white",
-  "navigationBarTitleText": "我的",
-  "enablePullDownRefresh": true,
-  "navigationStyle": "custom",
-  "usingComponents": {
-    "tui-list-cell": "/components/tui-list-cell/tui-list-cell"
-  }
-}
