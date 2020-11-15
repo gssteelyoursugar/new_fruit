@@ -208,16 +208,18 @@
 		},
 		methods: {
 			getMerchants() {
+				let setdata = uni.getStorageSync("usermen")
+				if (!setdata) { 
+					this.ApproveStatus = 0
+					return
+				}
 				let data = {
 					token: setdata
 				};
-				// log(data)
 				listing(getClient, data)
 					.then(res => {
-						// log(res)
-						///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
+						//登录成功后显示去认证店铺，如果已认证，显示已认证店铺
 						this.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
-						// log(this.ApproveStatus)
 					})
 					.catch(err => {
 						log(err);
@@ -232,7 +234,6 @@
 			},
 			//获取头像昵称
 			getUserInfo(event) {
-				log(event);
 				this.usering = event.detail.userInfo;
 				uni.setStorageSync('userIN', event.detail.userInfo); //把头像存在本地，小程序提供如同浏览器cookie
 				let userING = uni.setStorageSync('userIN', event.detail.userInfo);
@@ -245,7 +246,6 @@
 			wxCode(avatarUrl, nickName) {
 				wx.login({
 					success: res => {
-						log(res);
 						let code = res.code;
 						this.wxLoging(code);
 					},
@@ -256,8 +256,6 @@
 			},
 			//发code给后台换取token
 			wxLoging(code) {
-				log(code);
-
 				// let appid = wx.getAccountInfoSync().miniProgram.appId
 				// let secret = "956f8c9345cbe06a42c6494f7bb53f7f"
 				let data = {
@@ -284,7 +282,6 @@
 							});
 							return;
 						} else if (res.statusCode == 200) {
-							log(res);
 						}
 						uni.setStorageSync('usermen', res.data.token); 
 						uni.hideLoading();
@@ -317,7 +314,6 @@
 			},
 			//收藏
 			likeOrder(event) {
-				log(event);
 				let setdata = uni.getStorageSync('usermen');
 				//判断是否登录才能收藏
 				if (!setdata) {
@@ -343,7 +339,6 @@
 				}
 
 				// let setdata = uni.getStorageSync('usermen')
-				log(setdata);
 			},
 			//删除收藏
 			delLike(event) {
@@ -368,7 +363,6 @@
 
 			//商品详情页
 			gotoList(id) {
-				log("id", id);
 				// 	return
 				uni.navigateTo({
 					url: '../../pagesIII/productDetail/productDetail?id=' + id
@@ -379,17 +373,13 @@
 
 			//删除商品
 			handlerButton(id) {
-				log(id);
 				var setdata = uni.getStorageSync('usermen');
 				let data = {
 					goodsId: id,
 					token: setdata
 				};
-				log(data);
 				publicing(postRecentlyDel, data)
 					.then(res => {
-						log(res);
-
 						uni.showToast({
 							title: `${res.data.msg}`
 						});
@@ -424,7 +414,6 @@
 			// this.getRecentlyData()
 
 			let setdata = uni.getStorageSync('usermen');
-			log(setdata);
 			if (!setdata) {
 				this.hasError = true;
 				this.isActive = false;
@@ -435,9 +424,7 @@
 				let bull = false;
 				let tips = '';
 				this.tising(bull, tips);
-
 				this.getRecentlyData();
-				log('显示订单');
 			}
 		},
 		onPullDownRefresh() {

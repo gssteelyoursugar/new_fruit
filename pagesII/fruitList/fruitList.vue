@@ -176,16 +176,18 @@
 
 		methods: {
 			getMerchants() {
+				let setdata = uni.getStorageSync("usermen")
+				if (!setdata) { 
+					this.ApproveStatus = 0
+					return
+				}
 				let data = {
 					token: setdata
 				};
-				// log(data)
 				listing(getClient, data)
 					.then(res => {
-						// log(res)
 						///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
 						this.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
-						// log(this.ApproveStatus)
 					})
 					.catch(err => {
 						log(err);
@@ -200,7 +202,6 @@
 				}
 				listing2(getNewsAll, data)
 					.then((res) => {
-						log(res)
 						this.infoList = res.data.data.imgage
 						this.GoodsData = res.data.data.goods
 					})
@@ -210,16 +211,12 @@
 			},
 			//商品详情页
 			gotoList(id) {
-				log(id)
-				// 	return
 				uni.navigateTo({
 					url: '../../pagesIII/productDetail/productDetail?id=' + id
 				})
 			},
 			
 			goToInfo (id) {
-				log(id)
-				// 	return
 				uni.navigateTo({
 					url: '../../pagesII/prediction/prediction?id=' + id
 				})

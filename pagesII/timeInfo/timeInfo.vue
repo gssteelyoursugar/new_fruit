@@ -40,7 +40,6 @@
 				}
 				listing(getMsgInfo, data)
 					.then((res) => {
-						log(res)
 						let contents = res.data.data.data.content
 						this.content = contents.replace(/\<image/g, '<image style="width:100%;max-width:100%;height:auto" ');
 						this.createDate = res.data.data.data.createDate

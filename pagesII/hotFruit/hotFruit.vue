@@ -127,6 +127,11 @@
 
 		methods: {
 			getMerchants() {
+				let setdata = uni.getStorageSync("usermen")
+				if (!setdata) {
+					this.ApproveStatus = 0
+					return
+				}
 				let data = {
 					token: setdata
 				};
@@ -147,9 +152,6 @@
 				this.getImportData()
 				setTimeout(function() {
 					uni.stopPullDownRefresh();
-
-
-
 				}, 1000);
 			},
 			//获取进口水果

@@ -215,8 +215,6 @@
 						let new_arr = this.goodsData.map(obj => {
 							return obj.id
 						}) //提取数组里面的每一项里面的id
-						// this.ids2 = new_arr
-						//拼接字符串id
 						let idList = "";
 						for (let index in new_arr) {
 							idList = idList + new_arr[index] + ",";
@@ -224,12 +222,8 @@
 						//去掉双引号
 						//去除idList最后一个逗号
 						idList = idList.substring(0, idList.length - 1);
-						console.log("idList去除逗号后====", idList)
-						log(idList)
 						this.ids = idList
-						// this.ids2 = idList
-						// log(this.ids2)
-						// this.SubmitOrder(idList)
+						
 					})
 					.catch((err) => {
 						console.log(err)
@@ -382,12 +376,9 @@
 			var pages = getCurrentPages();
 			var curPage = pages[pages.length - 1]; // 当前页面路径
 			var beforePage = pages[pages.length - 2]; // 前一个页面路径
-			log(beforePage.$page.fullPath)
 			if (beforePage.$page.fullPath === '/pages/order/order') {
-				log('我执行了加购清单')
 				this.gtePayORder(); //请求结算
 			} else if (beforePage.$page.fullPath == '/pagesIII/productDetail/productDetail') {
-				log('我执行了立即购买')
 			}
 		}
 

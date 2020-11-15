@@ -90,7 +90,7 @@
 					</view>
 					<view class="tui-pro-title">
 						<text class="tui-pro-title-tag special-item" v-if="shopListdata.restrictionNumber">每人限购{{ shopListdata.restrictionNumber || 0 }}件</text>
-						<text class="tui-pro-title-tag" :class="{'special-item': shopListdata.number < 10}" v-if="shopListdata.number">仅剩{{ shopListdata.number || 0 }}件</text>
+						<text class="tui-pro-title-tag" :class="{'special-item': shopListdata.number < 10}" v-if="shopListdata.number!=='' || shopListdata.number!== undefined || shopListdata.number!== null">仅剩{{ shopListdata.number || 0 }}件</text>
 						<!--    -->
 						<text class="tui-pro-title-tag" v-if="shopListdata.totalPirce!== undefined">成交{{ shopListdata.totalPirce | filterNum }}元</text>
 						<text class="tui-pro-title-tag" v-if="shopListdata.viewNumber!== undefined">{{ shopListdata.viewNumber | filterNum }}人看</text>
@@ -622,11 +622,8 @@
 			this.token = setdata;
 			this.productID = options.id;
 			this.postDetails();
-			if (setdata) {
-				this.postSettle();
-				this.getMerchants();
-			}
-			
+			this.postSettle();
+			this.getMerchants();
 			let obj = {};
 			// #ifdef MP-WEIXIN
 			obj = wx.getMenuButtonBoundingClientRect();
@@ -697,16 +694,19 @@
 				}
 			},
 			deliverTime(val) {
-				let res = val.split("")
-				let data = res.splice(5, 5)
-				let time = new Date().getHours()
-				let result = ''
-				if (time <= 16) {
-					result = data[0] + data[1] + "月" + data[3] + data[4] + "日"
-				} else {
-					result = data[0] + data[1] + "月" + data[3] + (data[4] * 1 + 1) + "日"
+				if (val) {
+					let res = val.split("")
+					let data = res.splice(5, 5)
+					let time = new Date().getHours() //1605434575000
+					let result = ''
+					if (time <= 16) {
+						result = data[0] + data[1] + "月" + data[3] + data[4] + "日"
+					} else {
+						result = data[0] + data[1] + "月" + data[3] + (data[4] * 1 + 1) + "日"
+					}
+					return result
 				}
-				return result
+				
 			},
 			countNum(val) {
 				return val.toFixed(2) * 1
@@ -717,6 +717,11 @@
 			clickLink(e) {},
 			//购买前获取申请店铺状态信息
 			getMerchants() {
+				let setdata = uni.getStorageSync("usermen")
+				if (!setdata) { 
+					this.ApproveStatus = 0
+					return
+				}
 				let data = {
 					token: setdata
 				};
@@ -755,18 +760,19 @@
 			//物流配送
 			postSettle() {
 				let setdata = uni.getStorageSync('usermen');
-				let data = {
-					id: this.productID,
-					token: setdata
-				};
-				publicing(postSettle, data)
-					.then(res => {
-						// log(res);
-						this.userInfoData = res.data.data.extraData.userInfo;
-					})
-					.catch(err => {
-						log(err);
-					});
+				if (setdata) {
+					let data = {
+						id: this.productID,
+						token: setdata
+					};
+					publicing(postSettle, data)
+						.then(res => {
+							this.userInfoData = res.data.data.extraData.userInfo;
+						})
+						.catch(err => {
+							log(err);
+						});
+				}
 			},
 			//结算，立即购买
 			buyNow(id) {
@@ -774,7 +780,6 @@
 				if (!setdata) {
 					this.modaishow = true;
 				} else {
-					// this.modaishow = false
 					this.modaishow = false;
 					let data = {
 						goodsId: id,
@@ -784,7 +789,6 @@
 					};
 					publicing(postmyOrder, data)
 						.then(res => {
-							// log(res);
 							let ids = res.data.data;
 							let code = res.data.code;
 							if (code == -1) {
@@ -847,7 +851,6 @@
 						this.canPraise = true
 						publicing(postPraise, data)
 							.then(res => {
-								log(res);
 								// this.postDetails();
 								this.shopListdata.praiseNumber++
 								uni.showToast({
@@ -922,7 +925,6 @@
 			},
 			//获取微信昵称
 			getUserInfo(event) {
-				// log(event);
 				if (event.detail.userInfo) {
 					uni.setStorageSync('userIN', event.detail.userInfo); //把token存在本地，小程序提供如同浏览器cookie
 					let wxing = event.detail.userInfo;
@@ -934,7 +936,6 @@
 			wxCode(avatarUrl, nickName) {
 				wx.login({
 					success: res => {
-						// log(res);
 						// return
 						let code = res.code;
 						this.wxLoging(code);
@@ -946,13 +947,11 @@
 			},
 			//发给后台拿token
 			wxLoging(code) {
-				// log(code);
 				let data = {
 					code
 				};
 				publicing2(loginis, data) //发送请求携带参数
 					.then(res => {
-						console.log(res)
 						if (res.statusCode == 200 && res.data.statusCode == 500) {
 							uni.showToast({
 								title: '登录信息过期,请重新登录',
@@ -1199,7 +1198,6 @@
 					},
 					function() {},
 					function(e) {
-						console.log('分享失败：' + JSON.stringify(e));
 					}
 				);
 				//#endif
@@ -1950,7 +1948,7 @@
 	}
 
 	.tui-pro-title {
-		padding: 20rpx 30rpx;
+		padding: 20rpx 30rpx 10rpx;
 	}
 
 	.tui-pro-title-tag {
@@ -1960,6 +1958,8 @@
 		margin-right: 10rpx;
 		font-size: 24rpx;
 		padding: 10rpx 20rpx;
+		display: inline-flex;
+		margin-top: 10rpx;
 
 	}
 	

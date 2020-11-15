@@ -30,7 +30,7 @@
 						请认证店铺信息
 					</view>
 				</view>
-				<view class="weather-tui-right" v-if="ApproveStatus === 1">
+				<view class="weather-tui-right" v-if="ApproveStatus === 1 ">
 					<!-- <image src="../../static/images/tianqi@2x.png" mode="aspectFit" class="weather-yun-icon"></image> -->
 					<!-- <text class="iconfont icon-yun city"></text> -->
 					<text>{{weatherObj.weather}}</text><text>{{weatherObj.temperature}}℃</text>
@@ -209,10 +209,10 @@
 					<view class="tui-product-container">
 						<!--商品列表1-->
 						<block v-for="(item, index) in IndexGoods" :key="index" v-if="(index + 1) % 2 != 0" @tap="gotoList(item.id)">
-							<view class="tui-pro-item" hover-class="hover" :hover-start-time="150">
+							<view class="tui-pro-item" hover-class="hover" @tap="gotoList(item.id)" :hover-start-time="150">
 								<view class="img-mask">
-									<image :src="item.url" class="tui-pro-img" mode="widthFix" @tap="gotoList(item.id)" />
-									<view class="img-mask-item" v-if="item.number === 0" @tap="gotoList(item.id)">
+									<image :src="item.url" class="tui-pro-img" mode="widthFix" />
+									<view class="img-mask-item" v-if="item.number === 0">
 										<view class="item-text">抢光了</view>
 									</view>
 								</view>
@@ -228,7 +228,7 @@
 										</view>
 										<view class="tui-pro-pay">
 											<block v-for="(itemTwo,indexs) in item.goodsType" :key="indexs">
-												<text class="tag-tit-border">{{itemTwo.name}}</text>
+												<view class="tag-tit-border">{{itemTwo.name}}</view>
 											</block>
 										</view>
 										<view class="tui-pro-pic">
@@ -256,11 +256,11 @@
 					</view>
 					<view class="tui-product-container2">
 						<!--商品列表2-->
-						<block v-for="(item, index) in IndexGoods" :key="index" v-if="(index + 1) % 2 == 0" @tap="gotoList(item.id)">
-							<view class="tui-pro-item" hover-class="hover" :hover-start-time="150">
+						<block v-for="(item, index) in IndexGoods" :key="index" v-if="(index + 1) % 2 == 0">
+							<view class="tui-pro-item" hover-class="hover" @tap="gotoList(item.id)" :hover-start-time="150">
 								<view class="img-mask">
-									<image :src="item.url" class="tui-pro-img" mode="widthFix" @tap="gotoList(item.id)" />
-									<view class="img-mask-item" v-if="item.number === 0" @tap="gotoList(item.id)">
+									<image :src="item.url" class="tui-pro-img" mode="widthFix" />
+									<view class="img-mask-item" v-if="item.number === 0">
 										<view class="item-text">抢光了</view>
 									</view>
 								</view>
@@ -276,7 +276,7 @@
 										</view>
 										<view class="tui-pro-pay">
 											<block v-for="(itemTwo,indexs) in item.goodsType" :key="indexs">
-												<text class="tag-tit-border">{{itemTwo.name}}</text>
+												<view class="tag-tit-border">{{itemTwo.name}}</view>
 											</block>
 										</view>
 										<view class="tui-pro-pic">
@@ -374,11 +374,6 @@
 					}
 				],
 				show: false,
-				newsList: [
-					"致力发展负责任的人工智能 中国发布八大治理原则",
-					"格兰仕暗示拜访拼多多后遭天猫打压，拼多多高层赞其有勇气",
-					"阿里计划将每股普通股拆为8股，增加筹资灵活性"
-				],
 				NewGoods: [], //新果上市
 				WxActivityList: [], //限量批
 				WeatherHide: true,
@@ -388,7 +383,7 @@
 				ts: 0,
 				mm: 0,
 				ss1: 59,
-				ranking: ['销量榜', '评价榜', '关注榜', '回购榜'],
+				
 				imageUrl: "/static/images/paihang@2x.png",
 				rankBgUrl: "/static/images/paihangbang@2x.png",
 				bannerIndex: 0,
@@ -482,34 +477,38 @@
 		},
 		methods: {
 			getMerchants() {
-				let setdata = uni.getStorageSync('usermen') //Token
-				let data = {
-					token: setdata
-				}
-				listing(getClient, data)
-					.then((res) => {
-						if (res.data.code == 500) {
-							this.ApproveStatus = 0
-							return
-						}
-						///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
-						this.ApproveStatus = res.data.data.approveStatus //获取电偶状态码，0未认证，1已认证，2拒绝
-						let cityCode = res.data.data.address
-						this.amapPlugin = new amap.AMapWX({
-							key: this.key,
-						});
-						this.amapPlugin.getWeather({
-							city: cityCode,
-							success: (wres) => {
-								this.weatherObj.temperature = wres.liveData.temperature
-								this.weatherObj.weather = wres.liveData.weather
+				let setdata = uni.getStorageSync('usermen')
+				if (!setdata) {
+					this.ApproveStatus = 0
+					return
+				} else {
+					let data = {
+						token: setdata
+					}
+					listing(getClient, data)
+						.then((res) => {
+							if (res.data.code == 500) {
+								this.ApproveStatus = 0
+								return
 							}
-						});
-					})
-					.catch((err) => {
-						log(err)
-					})
-
+							///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
+							this.ApproveStatus = res.data.data.approveStatus //获取电偶状态码，0未认证，1已认证，2拒绝
+							let cityCode = res.data.data.address
+							this.amapPlugin = new amap.AMapWX({
+								key: this.key,
+							});
+							this.amapPlugin.getWeather({
+								city: cityCode,
+								success: (wres) => {
+									this.weatherObj.temperature = wres.liveData.temperature
+									this.weatherObj.weather = wres.liveData.weather
+								}
+							});
+						})
+						.catch((err) => {
+							log(err)
+						})
+				}
 			},
 			//打开气泡
 			rtBubble() {
@@ -574,7 +573,7 @@
 					})
 				}
 			},
-			
+
 
 			//资讯页
 			goMessage() {
@@ -963,10 +962,10 @@
 			}
 		},
 		onShow() {
+
 			this.getMerchants()
 			this.getHomelist()
 			this.getIndexClass()
-			console.log(this.ApproveStatus)
 		},
 		// 转发
 		onShareAppMessage: function() {
@@ -1424,6 +1423,8 @@
 		padding: 2rpx 10rpx;
 		border-radius: 18rpx;
 		margin-right: 10rpx;
+		display: inline-flex;
+
 	}
 
 	/* 推荐好货 */

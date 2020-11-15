@@ -126,16 +126,19 @@
 		
 		methods: {
 			getMerchants() {
+				let setdata = uni.getStorageSync("usermen")
+				if (!setdata) { 
+					this.ApproveStatus = 0
+					return
+				}
 				let data = {
 					token: setdata
 				};
 				// log(data)
 				listing(getClient, data)
 					.then(res => {
-						// log(res)
 						///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
 						this.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
-						// log(this.ApproveStatus)
 					})
 					.catch(err => {
 						log(err);

@@ -1,0 +1,14 @@
+
+.centen {
+	text-align: center;
+}
+.imgWidth {
+	margin: 30rpx 20rpx;
+	width: 710rpx;
+}
+.imgWidth image {
+	height: 400rpx;
+	width: 710rpx;
+	vertical-align: top;
+}
+

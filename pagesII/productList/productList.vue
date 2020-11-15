@@ -613,7 +613,6 @@
 			this.getMerchants()
 			var pages = getCurrentPages();
 			var beforePage = pages[pages.length - 2]; // 前一个页面路径
-			// log(beforePage.$page.fullPath)
 			if (beforePage.$page.fullPath === '/pagesII/searchGoods/searchGoods') {
 				//搜索	
 				this.getSearch(options.name)
@@ -623,7 +622,6 @@
 				this.slMangguo = options.name
 				this.varietyId = options.id
 				this.searchName = options.name
-				log(this.varietyId)
 				this.ShopIng()
 			}
 
@@ -768,16 +766,18 @@
 		},
 		methods: {
 			getMerchants() {
+				let setdata = uni.getStorageSync("usermen")
+				if (!setdata) { 
+					this.ApproveStatus = 0
+					return
+				}
 				let data = {
 					token: setdata
 				};
-				// log(data)
 				listing(getClient, data)
 					.then(res => {
-						// log(res)
 						///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
 						this.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
-						// log(this.ApproveStatus)
 					})
 					.catch(err => {
 						log(err);
@@ -791,7 +791,6 @@
 			},
 			//商品详情页
 			gotoList(id) {
-				log(id)
 				uni.navigateTo({
 					url: '../../pagesIII/productDetail/productDetail?id=' + id
 				})
@@ -819,7 +818,6 @@
 				}
 				listing(getGoodsall, data)
 					.then((res) => {
-						log("搜索结果", res)
 						this.goods = res.data.data.goods
 						this.seleVarieties = res.data.data
 						if (this.seleVarieties === undefined) {
@@ -851,7 +849,6 @@
 				this.num = index
 				if (this.num == 0) {
 					this.ShopIng()
-					log('综合')
 				} else if (this.num == 1) {
 					if (this.sleter) {
 						this.getshopDESC()
@@ -876,7 +873,6 @@
 						icon: "none",
 						duration: 2000
 					})
-					// log('视频选果')
 				} else if (this.num == 4) {
 					uni.navigateTo({
 						url: '../../pagesII/rankingList/rankingList'
@@ -901,7 +897,6 @@
 				
 			},
 			btnDropChange2() {
-				// log('触发')
 				this.$forceUpdate();
 				this.isActives2 = !this.isActives2
 				this.dropScreenShow2 = !this.dropScreenShow2
@@ -977,21 +972,11 @@
 			checkDing2(index, title, id) {
 				this.numNull2 = index
 				this.slPinzhong = title
-				log(index, title, id)
 			},
 			checkgeng() {
 				uni.switchTab({
 					url: '../../pages/search/search'
 				})
-			},
-			Sales(id) {
-				log(id)
-			},
-			Priceda(id) {
-				log(id)
-			},
-			Videosl(id) {
-				log(id)
 			},
 			activeGo(name, id, idx) {
 				this.optionList[name] = id
@@ -1022,7 +1007,6 @@
 				this.tempData.order = 'A.shop_number DESC'
 				listing(getGoodsall, this.tempData)
 					.then((res) => {
-						log(res)
 						this.goods = res.data.data.goods
 					})
 					.catch((err) => {
@@ -1040,8 +1024,6 @@
 				this.tempData.order = 'A.shop_number ASC'
 				listing(getGoodsall, this.tempData)
 					.then((res) => {
-
-						log(res)
 						this.goods = res.data.data.goods
 					})
 					.catch((err) => {
@@ -1059,7 +1041,6 @@
 				this.tempData.order = 'A.platform_price DESC'
 				listing(getGoodsall, this.tempData)
 					.then((res) => {
-						log(res)
 						this.goods = res.data.data.goods
 					})
 					.catch((err) => {
@@ -1167,9 +1148,6 @@
 			hideDropdownList() {
 				this.selectH = 0;
 			},
-			dropdownItem() {
-				log('2')
-			},
 			//筛选汇总
 			screen(e) {
 				let index = e.currentTarget.dataset.index ? e.currentTarget.dataset.index : e;
@@ -1185,7 +1163,6 @@
 				} else if (index == 3) {
 					this.drawer = true;
 				} else if (index == 4) {
-					log('')
 					uni.navigateTo({
 						url: '../../pagesII/rankingList/rankingList'
 					})
@@ -2100,6 +2077,8 @@
 		padding: 2rpx 10rpx;
 		border-radius: 18rpx;
 		margin-right: 10rpx;
+		display: inline-flex;
+		margin-top: 10rpx;
 	}
 
 	.tag-tit {

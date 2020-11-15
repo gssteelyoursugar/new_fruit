@@ -100,18 +100,12 @@
 
 				listing2(getsearch)
 					.then((res) => {
-						log(res)
 						this.menuList = res.data.data
 						//添加属性
 						for (var i = 0; i < this.menuList.length; i++) {
 							// this.menuList[i].id = this.menuList[i]
 							this.menuList[i].id = i
 						}
-
-						log(this.menuList)
-
-
-						// log(this.menuList)
 					})
 					.catch((err) => {
 						log(err)

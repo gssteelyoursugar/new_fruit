@@ -4,7 +4,7 @@
 			<image src="../../static/images/no_like.png" mode="widthFix"></image>
 			<text class="color-text">最近没有点赞过商品~</text>
 		</view>
-		<view class="tui-tab-rank" v-for="(item,index) of evaList" :key="index"  v-if="evaList.length !== 0">
+		<view class="tui-tab-rank" v-for="(item,index) of evaList" :key="index" v-if="evaList.length !== 0">
 			<view class="tui-time-title"><text class="title-time-left">{{item.time}}</text> </view>
 			<view class="tui-tab-rank-cent" @click="clickToDetail(itm.id)" v-for="(itm,idx) of item.list" :key="idx">
 				<image :src="itm.url" mode="aspectFill" class="img-rink"></image>
@@ -17,7 +17,8 @@
 							</view>
 							<view class="tag-tit2-text">
 								<text class="price1">
-									<text style="font-size: 20rpx;margin-right:4rpx;">¥</text>{{ApproveStatus === 1 ?itm.platformClientPrice : '***'}}<text style="font-size: 20rpx;margin-left:4rpx;">元</text>
+									<text style="font-size: 20rpx;margin-right:4rpx;">¥</text>{{ApproveStatus === 1 ?itm.platformClientPrice : '***'}}<text
+									 style="font-size: 20rpx;margin-left:4rpx;">元</text>
 									<text class="price2">/件</text>
 								</text>
 							</view>
@@ -70,21 +71,24 @@
 			this.getList()
 		},
 		onShow() {
-			this.getList()
 			this.getMerchants()
+			this.getList()
 		},
 		methods: {
 			getMerchants() {
+				let setdata = uni.getStorageSync("usermen")
+				if (!setdata) {
+					this.ApproveStatus = 0
+					return
+				}
 				let data = {
 					token: setdata
 				};
 				// log(data)
 				listing(getClient, data)
 					.then(res => {
-						// log(res)
 						///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
 						this.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
-						// log(this.ApproveStatus)
 					})
 					.catch(err => {
 						log(err);
@@ -97,21 +101,21 @@
 					pageSize: 10000
 				}
 				publicing(getEvaluateList, data).then(res => {
-					this.evaList =  res.data.data
-				
+					this.evaList = res.data.data
+
 				})
 			},
 			clickToDetail(id) {
-					uni.navigateTo({
-						url: '../../pagesIII/productDetail/productDetail?id='+id
-					})
+				uni.navigateTo({
+					url: '../../pagesIII/productDetail/productDetail?id=' + id
+				})
 			},
 			toggleTips(id) {
 				this.curIds = id
 				this.showTips = !this.showTips
 			},
-			
-			unShowTips () {
+
+			unShowTips() {
 				this.showTips = false
 			},
 
@@ -124,7 +128,7 @@
 				publicing(postCancelPraise, data).then(res => {
 					uni.showToast({
 						title: '已取消点赞',
-					
+
 					})
 					this.unShowTips()
 					this.getList()
@@ -138,16 +142,18 @@
 </script>
 
 <style>
-	.container-img{
+	.container-img {
 		/* margin-top: 150rpx; */
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
 	}
-	.color-text{
+
+	.color-text {
 		color: rgba(112, 112, 112, 1);
 	}
+
 	.price1 {
 		color: #FF5600;
 		font-size: 36rpx;

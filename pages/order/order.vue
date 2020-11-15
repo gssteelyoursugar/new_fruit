@@ -286,6 +286,7 @@
 			getMerchants() {
 				let setdata = uni.getStorageSync('usermen');
 				if (!setdata) {
+					this.ApproveStatus = 0
 					return
 				}
 				let data = {

@@ -46,7 +46,7 @@
 								（免运费）
 							</view>
 						</view>
-						<view style="color: #333333;font-size: 24rpx;">X {{item.goodsNumber}}</view>
+						<view style="color: #333333;font-size: 24rpx;">x {{item.goodsNumber}}</view>
 					</view>
 				</view>
 			</view>
@@ -275,6 +275,7 @@
 	.tag-tit2 {
 		display: flex;
 		justify-content: space-between;
+		align-items: center;
 	}
 
 	.tag-tit2-price {

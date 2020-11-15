@@ -175,16 +175,18 @@
 		},
 		methods: {
 			getMerchants() {
+				let setdata = uni.getStorageSync("usermen")
+				if (!setdata) { 
+					this.ApproveStatus = 0
+					return
+				}
 				let data = {
 					token: setdata
 				};
-				// log(data)
 				listing(getClient, data)
 					.then(res => {
-						// log(res)
 						///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
 						this.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
-						// log(this.ApproveStatus)
 					})
 					.catch(err => {
 						log(err);
@@ -194,7 +196,6 @@
 			},
 			//商品详情页
 			gotoList(id) {
-				log(id)
 				uni.navigateTo({
 					url: '../../pagesIII/productDetail/productDetail?id=' + id
 				})
@@ -239,7 +240,6 @@
 				}
 				listing2(getActivity, data)
 					.then((res) => {
-						log(res)
 						this.LimitData = res.data.data
 						this.LimitDataList = res.data.data.list
 						this.activityStatus = res.data.data.status
@@ -251,7 +251,6 @@
 						this.hh = parseInt(this.ts / 60 / 60 % 24, 10); //计算剩余的小时数
 						this.mm = parseInt(this.ts / 60 % 60); //计算剩余的分钟数
 						this.ss = parseInt(this.ts % 60, 10); //计算剩余的秒数
-						log(this.dd + "天" + this.hh + "时" + this.mm + "分" + this.ss + "秒")
 					})
 					.catch((err) => {
 						log(err)

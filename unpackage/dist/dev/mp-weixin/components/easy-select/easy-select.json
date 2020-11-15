@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "tui-icon": "/components/tui-icon/tui-icon"
+  },
+  "component": true
+}

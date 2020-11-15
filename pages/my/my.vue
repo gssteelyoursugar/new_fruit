@@ -218,7 +218,10 @@
 
 	export default {
 		onLoad: function(options) {
-			this.getOrderData()
+			let user_token = uni.getStorageSync("usermen")
+			if (user_token) {
+				this.getOrderData()
+			}
 			// this.getWxdata()
 			let obj = {};
 			// #ifdef MP-WEIXIN
@@ -304,19 +307,19 @@
 						if (res.data.statusCode == 500) {
 							uni.showToast({
 								title: '登录出错,请重新登录',
-								icon:"none"
+								icon: "none"
 							})
-							setTimeout(()=>{
+							setTimeout(() => {
 								uni.removeStorageSync('userIN')
 								uni.removeStorageSync('usermen')
 								uni.removeStorageSync('StoreStatus')
 								uni.removeStorageSync('userIN')
 								this.ifUser()
-							},1500)
+							}, 1500)
 							return
 						} else if (res.data.statusCode == 200) {
 							this.getOrderData()
-							
+
 						}
 						// log(res) //获得token
 						uni.setStorageSync('usermen', res.data.token) //把token存在本地，小程序提供如同浏览器cookie
@@ -336,14 +339,15 @@
 			//获取申请店铺状态信息
 			getMerchants() {
 				let setdata = uni.getStorageSync('usermen') //Token
-				let data = {
-					token: setdata
-				}
 				if (!setdata) {
 					this.modaishow = true
+					this.ApproveStatus = 0
 					return
 				}
 				this.modaishow = false
+				let data = {
+					token: setdata
+				}
 				listing(getClient, data)
 					.then((res) => {
 						// 200 用户正常 201用户停用
@@ -359,13 +363,13 @@
 								icon: 'none',
 								duration: 3000
 							})
-							setTimeout(()=>{
+							setTimeout(() => {
 								uni.removeStorageSync('userIN')
 								uni.removeStorageSync('usermen')
 								uni.removeStorageSync('StoreStatus')
 								uni.removeStorageSync('userIN')
 								this.ifUser()
-							},1500)
+							}, 1500)
 						}
 						if (res.data.code == 200) {
 							this.dangerUsr = false

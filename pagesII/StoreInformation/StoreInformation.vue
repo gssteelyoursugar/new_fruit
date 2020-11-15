@@ -347,6 +347,11 @@
 
 			//获取申请店铺状态信息
 			getMerchants() {
+				let setdata = uni.getStorageSync("usermen")
+				if (!setdata) { 
+					this.ApproveStatus = 0
+					return
+				}
 				let data = {
 					token: setdata
 				}
@@ -354,12 +359,10 @@
 					.then((res) => {
 						//这里查询
 						this.approveStatus = res.data.data.approveStatus
-						// log(this.ApproveStatus)
 						this.StoreInfo = res.data.data
 						let ulist = res.data.data.urlList
 						let clist = this.checkList
 						let tempList = []
-						
 						ulist.forEach((item,index)=>{
 							clist.forEach((itm,idx)=>{
 								if (item.name === itm.name) {
@@ -381,9 +384,7 @@
 					.catch((err) => {
 						log(err)
 					})
-
 			},
-
 			//请求保存店铺
 			postsaveStores(e) {
 				log(e)

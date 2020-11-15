@@ -114,7 +114,6 @@
 <script>
 	import {publicing2,listing,publicing} from '../../api/api.js'
 	import {loginis,getClient,postupdateClient,uploadFiles,postSaveStore} from '../../api/request.js'
-	let setdata = uni.getStorageSync('usermen')//Token
 	let {log} = console
 	const form = require("@/common/tui-validation/tui-validation.js")
 	export default {
@@ -195,6 +194,7 @@
 			
 			//更新店铺信息
 			postUpdateStore(){
+				let setdata = uni.getStorageSync("usermen")
 				let data ={
 					storeName:this.StoreInfo.storeName,
 					merchantsName:this.StoreInfo.merchantsName,
@@ -216,6 +216,7 @@
 			
 			//获取申请店铺状态信息
 			getMerchants(){
+				let setdata = uni.getStorageSync("usermen")
 				let data = {
 					token:setdata
 				}
