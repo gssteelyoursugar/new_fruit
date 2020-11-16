@@ -47,7 +47,7 @@
 				<!-- 未提交审核 => 去认证店铺 -->
 
 				<!-- 提交审核并等待通过 => 查看店铺信息-->
-				<view class="tui-set-box3" v-if="wxlogin && ApproveStatus === 0  && !dangerUsr">
+				<view class="tui-set-box3" v-if="wxlogin && ApproveStatus === 0 &&  ApproveStatus !== null  && ApproveStatus !== undefined && ApproveStatus !== ''  && !dangerUsr">
 					<view class="tui-icon-box">
 						<view class="tui-icon-box " @tap.stop="tendShop1">
 							<text class="tui-icon-text3">{{logMsg}}<text style="margin-left: 6rpx;"> ></text></text>
@@ -57,7 +57,7 @@
 				<!-- 提交审核并等待通过 => 查看店铺信息-->
 
 				<!-- 提交审核并通过 -->
-				<view class="tui-set-box" v-if="wxlogin && ApproveStatus === 1  && !dangerUsr">
+				<view class="tui-set-box" v-if="wxlogin && ApproveStatus === 1 && ApproveStatus !== null  && ApproveStatus !== undefined && ApproveStatus !== ''  && !dangerUsr">
 					<view class="tui-icon-box ">
 						<image src="../../static/images/dianpu@2x.png" mode="aspectFill" class="tui-icon-shop"></image>
 					</view>
@@ -341,7 +341,7 @@
 				let setdata = uni.getStorageSync('usermen') //Token
 				if (!setdata) {
 					this.modaishow = true
-					this.ApproveStatus = 0
+					this.ApproveStatus = undefined
 					return
 				}
 				this.modaishow = false
@@ -375,8 +375,9 @@
 							this.dangerUsr = false
 							///登录成功后 未认证或者认证失败 显示去认证店铺，如果已认证，显示已认证店铺
 							this.ApproveStatus = res.data.data.approveStatus //获取状态码，0未认证，1已认证，2拒绝
-							uni.setStorageSync('StoreStatus', res.data.data.approveStatus)
-							let setStore = uni.getStorageSync('StoreStatus') //状态码
+
+							// uni.setStorageSync('StoreStatus', res.data.data.approveStatus)
+							// let setStore = uni.getStorageSync('StoreStatus') //状态码
 							this.user_phone = res.data.data.phone
 							let valu2 = this.ApproveStatus
 							if (valu2 === undefined || valu2 === null || valu2 === '') { //判断如果请求返回为空说明未申请过店铺认证

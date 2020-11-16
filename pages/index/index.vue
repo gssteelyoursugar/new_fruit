@@ -52,7 +52,7 @@
 					</view>
 				</block>
 				<block v-if="!WxTopNavigationBar || WxTopNavigationBar.length=== 0">
-					<view class="conteng-img" @tap="hrefKing(index)"  v-for="item of 5" :key="">
+					<view class="conteng-img" @tap="hrefKing(index)"  v-for="item of 5" :key="item">
 						<view class="loading-bg"></view>
 						<view class=""></view>
 					</view>

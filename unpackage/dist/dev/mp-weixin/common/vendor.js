@@ -10105,8 +10105,8 @@ var wxloginurl = "".concat(url, "wxuser/wxlogin");
 // let url = 'http://192.168.1.10:8980/'
 // // 线上
 // let url = 'https://cs.zgqgpt.com/'
-exports.wxloginurl = wxloginurl;var url = "http://testqg.natapp1.cc/";
-// let url = "https://qg.zgqgpt.com/"
+// let url = "http://testqg.natapp1.cc/"
+exports.wxloginurl = wxloginurl;var url = "https://qg.zgqgpt.com/";
 
 // let url = 'http://dwh.natapp1.cc/js/'
 exports.url = url;var imgurl = 'http://192.168.1.10:8980';
