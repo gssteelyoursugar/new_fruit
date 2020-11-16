@@ -43,6 +43,9 @@
 								<text v-if="index<9" :style="{backgroundColor: rankColor[index]}">{{"0"+(index+1)}}</text>
 								<text v-if="index===9" :style="{backgroundColor: rankColor[9]}">{{(index+1)}}</text>
 								<image :src="item.url" mode="aspectFill" class="img-rink"></image>
+								<view class="img-mask-item" v-if="item.number === 0">
+									<view class="item-text">抢光了</view>
+								</view>
 							</view>
 							<view class="tui-pro-tit">
 								<text class="tag-tit">{{item.lableName}}</text> <text class="tag-tit-text">{{item.name}}</text>
@@ -79,6 +82,9 @@
 								<text v-if="index<9" :style="{backgroundColor: rankColor[index]}">{{"0"+(index+1)}}</text>
 								<text v-if="index===9" :style="{backgroundColor: rankColor[9]}">{{(index+1)}}</text>
 								<image :src="item.url" mode="aspectFill" class="img-rink"></image>
+								<view class="img-mask-item" v-if="item.number === 0">
+									<view class="item-text">抢光了</view>
+								</view>
 							</view>
 							<view class="tui-pro-tit">
 								<text class="tag-tit">{{item.lableName}}</text> <text class="tag-tit-text">{{item.name}}</text>
@@ -111,6 +117,9 @@
 								<text v-if="index<9" :style="{backgroundColor: rankColor[index]}">{{"0"+(index+1)}}</text>
 								<text v-if="index===9" :style="{backgroundColor: rankColor[9]}">{{(index+1)}}</text>
 								<image :src="item.url" mode="aspectFill" class="img-rink"></image>
+								<view class="img-mask-item" v-if="item.number === 0">
+									<view class="item-text">抢光了</view>
+								</view>
 							</view>
 							<view class="tui-pro-tit">
 								<text class="tag-tit">{{item.lableName}}</text> <text class="tag-tit-text">{{item.name}}</text>
@@ -144,6 +153,9 @@
 								<text v-if="index<9" :style="{backgroundColor: rankColor[index]}">{{"0"+(index+1)}}</text>
 								<text v-if="index===9" :style="{backgroundColor: rankColor[9]}">{{(index+1)}}</text>
 								<image :src="item.url" mode="aspectFill" class="img-rink"></image>
+								<view class="img-mask-item" v-if="item.number === 0">
+									<view class="item-text">抢光了</view>
+								</view>
 							</view>
 							<view class="tui-pro-tit">
 								<text class="tag-tit">{{item.lableName}}</text> <text class="tag-tit-text">{{item.name}}</text>
@@ -526,6 +538,9 @@
 		border: 1px solid transparent;
 		border-radius: 6rpx;
 		overflow: hidden;
+		position: relative;
+		width: 180rpx;
+		height: 180rpx;
 	}
 
 	.rank-box text {
@@ -539,6 +554,27 @@
 		height: 20rpx;
 		line-height: 20rpx;
 		border-radius: 4rpx 0 16rpx 0;
+	}
+	.img-mask-item {
+		position: absolute;
+		top: 0;
+		right: 0;
+		left: 0;
+		bottom: 0;
+		background: rgba(255, 255, 255, .5);
+		display: flex;
+		align-items: center;
+		text-align: center;
+		justify-content: center;
+	
+	}
+	
+	.item-text {
+		background: rgba(0, 0, 0, .6);
+		color: #fff;
+		font-size: 24rpx;
+		padding: 0rpx 16rpx;
+		border-radius: 40rpx;
 	}
 
 	.img-rink {

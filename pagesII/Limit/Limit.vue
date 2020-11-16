@@ -39,7 +39,7 @@
 						<view class="tui-rank-list">
 							<!-- v-for="ll of 20" :key="ll" -->
 							<view class="tui-tab-rank" v-for="(item,index) in LimitDataList" :key="index">
-								<view class="tui-tab-rank-cent">
+								<view class="tui-tab-rank-cent"   @tap="gotoList(item.id)">
 									<view class="img-wrapper">
 										<image :src="item.url" mode="aspectFill" class="img-rink"></image>
 										<view class="no-goods-bg" v-if="activityStatus == '3' && item.number === 0  ">

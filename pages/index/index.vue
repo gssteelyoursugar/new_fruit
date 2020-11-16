@@ -4,9 +4,7 @@
 			<image src="../../static/images/index_bg.png" :style="{height: statusHeight <= 20 ?'318rpx' : '338rpx'}" mode="aspectFill"></image>
 		</view>
 		<view class="tui-header-box" :style="{ height: navHeight + 'px', background: 'rgba(0,197,42,' + opcity + ')' }">
-			<!--  -->
 			<view class="tui-header" :style="{ marginTop: statusHeight + 'px',height: boxHeight + 'px' }">
-				<!-- -->
 				<view class="tui-left" @click="scanCode">
 					<image src="../../static/images/sceen.png" mode="aspectFit" class="tui-left-saoma"></image>
 				</view>
@@ -16,8 +14,6 @@
 				<view class="tui-left"></view>
 			</view>
 		</view>
-		<!-- <Weather ref="mychild" :canSee="canSee" :city="city" :citys="citys" :address="address" :weath="temperature" :ApproveStatus="ApproveStatus"
-		 ></Weather> -->
 		<view class="weather-container" style="margin: 10rpx 0 20rpx;" :style="{opacity: canSee}">
 			<view class="weather-tui-flex ">
 				<view class="weather-tui-left ">
@@ -31,15 +27,13 @@
 					</view>
 				</view>
 				<view class="weather-tui-right" v-if="ApproveStatus === 1 ">
-					<!-- <image src="../../static/images/tianqi@2x.png" mode="aspectFit" class="weather-yun-icon"></image> -->
-					<!-- <text class="iconfont icon-yun city"></text> -->
 					<text>{{weatherObj.weather}}</text><text>{{weatherObj.temperature}}℃</text>
 				</view>
 			</view>
 		</view>
 		<view class="index-content">
-			<Banner :banner="WxIndexViewpager"></Banner>
-
+			
+			<Banner @childSwitch="goToLimit" :banner="WxIndexViewpager"></Banner>
 			<view class="bac">
 				<view class="tui-tag">
 					<block v-for="(item,index) in WxPostersBottomAdve" :key="index">
@@ -51,26 +45,30 @@
 			</view>
 			<!-- 金刚区 -->
 			<view class=" swiper-item-top">
-				<block v-for=" (item,index) in WxTopNavigationBar" :key="index">
-					<view class="conteng-img" @tap="hrefKing(index)">
+				<block v-if="WxTopNavigationBar">
+					<view class="conteng-img" @tap="hrefKing(index)"  v-for=" (item,index) in WxTopNavigationBar" :key="index">
 						<image :src="item.url" mode="widthFix" class="uploadimg1"></image>
 						<text>{{item.title}}</text>
 					</view>
 				</block>
-				<!-- <view class="conteng-img"  @tap="golook()">
-				<image src="../../static/images/look.png" mode="widthFix" class="uploadimg1"></image>
-				<text>最近看过</text>
-			</view> -->
-
+				<block v-if="!WxTopNavigationBar || WxTopNavigationBar.length=== 0">
+					<view class="conteng-img" @tap="hrefKing(index)"  v-for="item of 5" :key="">
+						<view class="loading-bg"></view>
+						<view class=""></view>
+					</view>
+				</block>
 			</view>
-			<!-- <tui-button width="240rpx" height="80rpx" :size="30" @click="rtBubble">打开菜单</tui-button>
-		<t-rt-popup :itemList="itemList" ref="rtBubble" @click="itemClick"></t-rt-popup> -->
-			<!-- 品种区 -->
-			<view class="swiper-item ">
-				<block v-for=" (item,index) in HotVarieties" :key="index">
-					<view class="conteng-img contentitem" @tap="gotoBreed(item.name,item.id)">
+			<view class="swiper-item">
+				<block v-if="HotVarieties">
+					<view class="conteng-img contentitem" v-for=" (item,index) in HotVarieties" :key="index" @tap="gotoBreed(item.name,item.id)">
 						<image :src="item.url" mode="widthFix" class="uploadimg"></image>
 						<text>{{item.name}}</text>
+					</view>
+				</block>
+				<block v-if="!HotVarieties || HotVarieties.length === 0">
+					<view class="conteng-img contentitem" v-for=" (item,index) in 9" :key="index" @tap="gotoBreed(item.name,item.id)">
+						<view class="hot-loading-bg"></view>
+						<view></view>
 					</view>
 				</block>
 				<view class="conteng-img contentitem" @tap="gotoGun">
@@ -79,7 +77,6 @@
 				</view>
 			</view>
 			<!-- 温馨提示 -->
-
 			<view class="tui-reminder">
 				<view class="tui-rolling-news">
 					<tui-icon style="margin-top: 4rpx;" name="news-fill" :size='28' color='#00BF3D'></tui-icon>
@@ -90,33 +87,19 @@
 						</swiper-item>
 					</swiper>
 				</view>
-				<!--  -->
-				<!-- <view class="tui-left tui-magin-left" @click="goMessage">
-				<image src="../../static/images/dalaba.png" mode="aspectFit" class="dalaba-icon"></image>
-			</view>
-			<view class="tui-middle">
-				<block v-for="(item,index) in WxPublicMsg" :key="index">
-					
-				<view class="tui-tips">{{item.title}}客服工作时间 {{item.createDate}}</view>
-				</block>
-			</view>
-			<view class="tui-right" @tap="goTimeInfo(item.id,item.content,item.title,item.createDate)" v-for="(item,index) in WxPublicMsg" :key="index">
-				
-				<text class="tui-see">查看<text class="iconfont icon-weibiaoti34"></text></text>
-			</view> -->
 			</view>
 			<!-- 限量批 -->
 			<view class="tui-count-down">
-				<view class="tui-col-2" @click="goLimit()">
-					<text class="tui-font">限量批</text>
+				<view class="limit-title" @click="goLimit()">
+					<text class="tui-font">爆品限量批</text>
 				</view>
 				<!-- 倒计时 -->
-				<view class="tui-col-5 tui-line-hight">
+				<view class=" tui-line-hight">
 					<tui-countdown :time="ts" color="#fff" borderColor="rgba(70, 66, 70, 1)" backgroundColor="rgba(70, 66, 70, 1)"
 					 colonColor="rgba(70, 66, 70, 1)" @end="endOfTime">
 					</tui-countdown>
 				</view>
-				<view class="tui-col-6" @click="fruitGo">
+				<view class="new-fruit-title" @click="fruitGo">
 					<text class="tui-font">新果上市</text>
 					<text class="tui-barcolor">抢鲜市场 <text class="iconfont icon-weibiaoti34"></text> </text>
 				</view>
@@ -126,7 +109,7 @@
 				<view class="tui-Fruits" style="width: 50%;text-align: center;" @click="goLimit()">
 					<block v-for="(item,index) in WxActivityList" :key="index">
 						<view class="tui-Fruits-table">
-							<image :src="item.url" mode="aspectFit" class="tabimg"></image>
+							<image :src="item.url" mode="aspectFit" class="active-img" ></image>
 							<view class="tui-price">
 								<view class="tui-first-price">&yen;<text class="tui-price-color">{{ ApproveStatus === 1 ?item.platformClinetPrice: '***'}}</text><text
 									 class="price-label">/件</text></view>
@@ -136,27 +119,11 @@
 						</view>
 					</block>
 				</view>
-				<!-- 限量批注释 -->
-				<!-- <view class="tui-Fruits" style="width: 50%;text-align: center;">
-			<swiper style="width: 100%; height: 250rpx;" :autoplay="true" :display-multiple-items="2">
-				<block v-for="(item,index) in WxActivity" :key="index">
-				<swiper-item>
-					<view class="tui-Fruits-table" @click="limitGo(index)">
-						<image :src="url+item.url" mode="widthFix" class="tabimg"></image>
-						<view class="tui-price">
-							<text class="tui-price-color">&yen;{{item.platformClinetPrice}}/件</text><text class="tui-cribing">&yen;{{item.marketPrice}}/件</text>
-						</view>
-						<text class="tui-weight">{{item.title}}</text>
-					</view>
-				</swiper-item>
-				</block>
-			</swiper>
-		</view> -->
 				<!-- 鲜果上市 -->
 				<view class="tui-Fruits" style="width: 50%;text-align: center;">
 					<block v-for="(item,index) in NewGoods" :key="index">
 						<view class="tui-Fruits-table" @click="fruitGo">
-							<image :src="item.url" mode="aspectFit" class="tabimg"></image>
+							<image :src="item.url" mode="aspectFit" class="active-img"></image>
 							<view class="tui-price">
 								<view class="tui-first-price">&yen;<text class="tui-price-color">{{ApproveStatus === 1 ?item.platformClinetPrice:'***'}}</text><text
 									 class="price-label">/件</text></view>
@@ -196,13 +163,6 @@
 				</view>
 			</view>
 
-			<!-- 分割线 -->
-			<!-- 分割线 -->
-			<!-- 分割线 -->
-			<!-- 分割线 -->
-			<!-- <view style="height: 100px; width: 100%;background-color: #fff;">
-			
-		</view> -->
 			<!-- 水果列表页 -->
 			<view class="tui-product-box">
 				<view class="tui-product-list">
@@ -246,8 +206,6 @@
 										<view class="tui-pro-dea">
 											<text class="tui-jin1">{{item.specification}}</text>
 											<text class="tui-jin">成交<text class="tui-dea-color">{{item.total | filterNum}}</text>元</text>
-
-
 										</view>
 									</view>
 								</view>
@@ -294,7 +252,6 @@
 										<view class="tui-pro-dea">
 											<text class="tui-jin1">{{item.specification}}</text>
 											<text class="tui-jin">成交<text class="tui-dea-color">{{item.total | filterNum}}</text>元</text>
-
 										</view>
 									</view>
 								</view>
@@ -303,14 +260,8 @@
 					</view>
 				</view>
 			</view>
-
 			<tui-nomore v-if="!pullUpOn"></tui-nomore>
 			<view class="tui-safearea-bottom"></view>
-
-			<!-- <view class="agreement">
-				<lyg-popup @popupState="popupState" title="温馨提醒" protocolPath='../webview/webview?can_share=false&url=/hybrid/html/protocol.html'
-				 policyPath='../webview/webview?can_share=false&url=/hybrid/html/policy.html' policyStorageKey="has_read_privacy"></lyg-popup>
-			</view> -->
 		</view>
 	</view>
 </template>
@@ -352,8 +303,7 @@
 	export default {
 		components: {
 			Weather,
-			Banner,
-
+			Banner
 		},
 		data() {
 			return {
@@ -383,7 +333,6 @@
 				ts: 0,
 				mm: 0,
 				ss1: 59,
-				
 				imageUrl: "/static/images/paihang@2x.png",
 				rankBgUrl: "/static/images/paihangbang@2x.png",
 				bannerIndex: 0,
@@ -464,7 +413,6 @@
 						title: '买了又买',
 						imgsrc: '../../static/images/rank_4.png'
 					}
-
 				],
 				statusHeight: 20,
 				boxHeight: 44,
@@ -476,6 +424,11 @@
 			}
 		},
 		methods: {
+			goToLimit() {
+				uni.navigateTo({
+					url: "../../pagesII/Limit/Limit?id=1327960611696472064"
+				})
+			},
 			getMerchants() {
 				let setdata = uni.getStorageSync('usermen')
 				if (!setdata) {
@@ -573,8 +526,6 @@
 					})
 				}
 			},
-
-
 			//资讯页
 			goMessage() {
 				uni.navigateTo({
@@ -638,32 +589,21 @@
 					success: (res) => {
 						let code = res.code
 						this.wxLogin(avatarUrl, nickName, code)
-
 					},
 					fail: (err) => {
 						log(err)
 
 					}
 				})
-
 			},
 			wxLogin(avatarUrl, nickName, code) {
-
-				// let appid = wx.getAccountInfoSync().miniProgram.appId
-				// let secret = "956f8c9345cbe06a42c6494f7bb53f7f"
 				let data = {
 					code,
 				}
-
 				publicing(loginis, data) //发送请求携带参数
 					.then((res) => {
 						uni.setStorageSync('usermen', res.data.token) //把token存在本地，小程序提供如同浏览器cookie
 						this.ifUser()
-						// if(res.data.msg == 'success'){
-						// 	//存入本地
-						// 	uni.setStorageSync('usermen',res.data.datas)
-						// 	this.ifUser()
-						// }
 					})
 					.catch((err) => {
 						log(err)
@@ -716,7 +656,6 @@
 						this.hh = parseInt(this.ts / 60 / 60 % 24, 10); //计算剩余的小时数
 						this.mm = parseInt(this.ts / 60 % 60); //计算剩余的分钟数
 						this.ss = parseInt(this.ts % 60, 10); //计算剩余的秒数
-						// log(this.dd + "天" + this.hh + "时" + this.mm + "分" + this.ss + "秒")
 					})
 					.catch((err) => {
 						console.log(err)
@@ -757,9 +696,6 @@
 				}
 				return num;
 			},
-
-
-
 			//推荐好货请求
 			flexClick(e) {
 				this.num = e
@@ -773,9 +709,7 @@
 					this.Sumify = 3
 					this.getIndexClass()
 				}
-
 			},
-
 			//限量批页面
 			goLimit() {
 				let id = this.WxActivityID
@@ -783,7 +717,6 @@
 					url: '../../pagesII/Limit/Limit?id=' + id
 				})
 			},
-
 			//新果上市
 			fruitGo() {
 				uni.navigateTo({
@@ -820,16 +753,8 @@
 				this.pullUpOn = true;
 				this.loadding = false;
 				uni.stopPullDownRefresh();
-				uni.showLoading({
-					title: '刷新中'
-				});
-
-				setTimeout(function() {
-					uni.hideLoading();
-				}, 1000);
+				
 			},
-
-
 			onReachBottom: function() {
 				//下拉加载
 				if (!this.pullUpOn) return;
@@ -858,7 +783,6 @@
 					this.pageIndex = this.pageIndex + 1;
 					uni.hideLoading()
 					this.loadding = false;
-
 				}
 			},
 			// 点赞列表1
@@ -870,12 +794,6 @@
 					this.IndexGoods[index].showSearch1 = true;
 					this.IndexGoods[index].praiseNum1++; //点赞一次
 				}
-				/* if(isFirst){
-						this.showSearch = ! this.showSearch
-						this.praiseNum++//点赞一次
-				  　　   isFirst = false;
-					  }
-				 log(e) */
 			},
 			// 点赞列表2
 			praise1(e) {
@@ -885,7 +803,6 @@
 					isFirst1 = false;
 				}
 			},
-
 			// 调起摄像头扫码
 			scanCode() {
 				uni.scanCode({
@@ -902,19 +819,6 @@
 					}
 				});
 			},
-			// 天气
-			// tian(e) {
-			// 	uni.request({
-			// 		url: "https://restapi.amap.com/v3/weather/weatherInfo?address=北京", //高德地图查询天气
-			// 		method: 'GET',
-			// 		success: (res) => {
-			// 			// this.temperature = res.data.lives[0].temperature //气温
-			// 			// this.citys = res.data.lives[0].city //获取区域
-			// 			console.log("天气结果", res)
-			// 		}
-			// 	});
-			// }
-
 		},
 		//初始化
 		onLoad() {
@@ -940,17 +844,6 @@
 			this.boxHeight = navHeight - statusBarHeight //导航栏高度
 			this.navHeight = navHeight
 			// #endif
-
-			// this.amapPlugin = new amap.AMapWX({
-			// 	key: this.key,
-			// });
-			// this.amapPlugin.getWeather({
-			// 	city: '', // 城市编码
-			// 	success: (data) => {
-			// 		console.log("高德天气：", data)
-			// 	}
-			// });
-			// getCityCodeByName("北京")
 			setTimeout(() => {
 				this.showAuthTips = false
 			}, 5000)
@@ -962,7 +855,6 @@
 			}
 		},
 		onShow() {
-
 			this.getMerchants()
 			this.getHomelist()
 			this.getIndexClass()
@@ -975,20 +867,8 @@
 				// path: '/pages/test/test?id=123'
 			}
 		},
-		// onShareAppMessage(res) {
-		//     if (res.from === 'button') {// 来自页面内分享按钮
-		//     }
-		//     return {
-		//       title: '自定义分享标题',
-		//       path: '/pages/test/test?id=123'
-		//     }
-		//   }
-
-
 		// 监听页面滚动距离
-
 		mounted() {
-
 		},
 		filters: {
 			filterNum(val) {
@@ -1022,7 +902,6 @@
 				}
 			}
 		},
-
 		computed: {
 			...mapState(['screendata']),
 			// 筛选来的商家数据
@@ -1626,9 +1505,18 @@
 		display: block;
 		margin: 10rpx auto;
 		border: 1px solid #f5f5f5;
-		border-radius: 6rpx;
+		border-radius: 10rpx;
 	}
-
+	
+	.active-img {
+		width: 130rpx;
+		height: 130rpx;
+		display: block;
+		margin: 10rpx auto;
+		border: 1px solid #f5f5f5;
+		border-radius: 10rpx;
+	}
+	
 	.tui-Fruits-ranking-tab .tabimg {
 		border: none;
 	}
@@ -1673,8 +1561,14 @@
 	.tui-line-hight {
 		position: relative;
 		top: 35rpx;
+		width: 33%;
 	}
-
+	.limit-title {
+		width: 33%;
+	}
+	.new-fruit-title{
+		width: 56%;
+	}
 	.tui-line {
 		padding-top: 50rpx;
 	}
@@ -1786,6 +1680,35 @@
 		display: block;
 		margin: 0 auto;
 	}
+	
+	.loading-bg {
+		width: 100upx;
+		height: 100upx;
+		/* border-radius: 50upx; */
+		display: block;
+		margin: 0 auto;
+		background: #f5f5f5;
+		border-radius: 32rpx;
+	}
+	
+	.hot-loading-bg{
+		width: 100upx;
+		height: 100upx;
+		/* border-radius: 10upx; */
+		display: block;
+		margin: 0 auto;
+		background: #f5f5f5;
+		border-radius: 50%;
+	}
+	
+	.loading-bg-text {
+		padding-top: 20upx;
+		background: #f5f5f5;
+		width: 96rpx;
+		height: 52rpx;
+	}
+	
+	
 
 	.conteng-img text {
 		padding-top: 20upx;

@@ -6,8 +6,7 @@ page {
 }
 .order-detail-container .address-wrap {
   background: #fff;
-  -webkit-border-radius: 30rpx;
-          border-radius: 30rpx;
+  border-radius: 30rpx;
   padding: 40rpx 48rpx;
   margin: 20rpx 0;
 }
@@ -47,8 +46,7 @@ page {
   margin: 20rpx 0;
   background: #fff;
   padding: 10rpx 40rpx;
-  -webkit-border-radius: 30rpx;
-          border-radius: 30rpx;
+  border-radius: 30rpx;
 }
 .order-detail-container .order-info .order-info-wrap {
   position: relative;
@@ -107,13 +105,11 @@ page {
   background: #f2f2f2;
   color: #000;
   text-align: center;
-  -webkit-border-radius: 40rpx;
-          border-radius: 40rpx;
+  border-radius: 40rpx;
 }
 .order-detail-container .order-snapshoot {
   background: #fff;
-  -webkit-border-radius: 30rpx;
-          border-radius: 30rpx;
+  border-radius: 30rpx;
   padding: 40rpx 40rpx;
   margin: 20rpx 0 80rpx;
 }
@@ -161,8 +157,7 @@ page {
   width: 160rpx;
   height: 160rpx;
   background: #eee;
-  -webkit-border-radius: 6rpx;
-          border-radius: 6rpx;
+  border-radius: 6rpx;
 }
 .order-detail-container .order-snapshoot .snap-goods .goods-item .item-info {
   -webkit-box-flex: 1;
@@ -172,8 +167,7 @@ page {
 .order-detail-container .order-snapshoot .snap-goods .goods-item .item-info .info-title text:first-child {
   background: #00C52A;
   font-size: 24rpx;
-  -webkit-border-radius: 14rpx 2rpx 14rpx 2rpx;
-          border-radius: 14rpx 2rpx 14rpx 2rpx;
+  border-radius: 14rpx 2rpx 14rpx 2rpx;
   color: #fff;
   margin-right: 4rpx;
   padding: 2rpx 4rpx;
@@ -347,8 +341,7 @@ page {
 }
 .heigth-tui {
   background-color: #fff;
-  -webkit-border-radius: 50rpx;
-          border-radius: 50rpx;
+  border-radius: 50rpx;
   height: 518rpx;
 }
 .text-indent {

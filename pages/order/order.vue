@@ -292,7 +292,6 @@
 				let data = {
 					token: setdata
 				};
-				// log(data)
 				listing(getClient, data)
 					.then(res => {
 						///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
@@ -331,14 +330,17 @@
 				listing(getCart, data)
 					.then(res => {
 						let lists = res.data.data
-						lists.forEach(item => {
-							item.list.forEach(itm => {
-								Object.assign(itm, {
-									selected: false
+						if (lists) {
+							lists.forEach(item => {
+								item.list.forEach(itm => {
+									Object.assign(itm, {
+										selected: false
+									})
 								})
 							})
-						})
-						this.orderObj = lists;
+							this.orderObj = lists;
+						}
+						
 					})
 					.catch(err => {
 						log(err);

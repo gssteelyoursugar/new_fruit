@@ -7,24 +7,18 @@
 		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
+		"preloadBackgroundData": false,
 		"minified": true,
 		"newFeature": true,
-		"coverView": true,
 		"autoAudits": false,
+		"coverView": true,
 		"showShadowRootInWxmlPanel": true,
 		"scopeDataCheck": false,
-		"checkInvalidKey": true,
-		"checkSiteMap": true,
-		"uploadWithSourceMap": true,
-		"babelSetting": {
-			"ignore": [],
-			"disablePlugins": [],
-			"outputPath": ""
-		}
+		"useCompilerModule": false
 	},
 	"compileType": "miniprogram",
 	"libVersion": "",
-	"appid": "wxc3f10711eb743246",
+	"appid": "wx57b8cd1492538bbf",
 	"projectname": "fruit-test",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},

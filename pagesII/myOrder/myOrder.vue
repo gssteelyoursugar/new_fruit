@@ -434,7 +434,6 @@
 		methods: {
 			//手势
 			onSlide(event) {
-				console.log(event)
 			},
 			//支付倒计时
 			endOfTime(id) {
@@ -442,14 +441,12 @@
 			},
 			//删除订单
 			goDel(id) {
-				log(id)
 				let data = {
 					id: id,
 					token: setdata,
 				}
 				publicing(postDelOrders, data)
 					.then((res) => {
-						log(res)
 						this.getOrderData()
 						this.$forceUpdate()
 					})
@@ -460,15 +457,12 @@
 
 			//取消支付
 			goCancel(id) {
-				log(id)
-
 				let data = {
 					id: id,
 					token: setdata,
 				}
 				publicing(postCancelPay, data)
 					.then((res) => {
-						log(res)
 						this.getOrderData()
 						this.$forceUpdate()
 					})
@@ -528,7 +522,6 @@
 				}
 				publicing(postConfirmOrder, data)
 					.then((res) => {
-						log(res)
 						if (res.data.code == 200) {
 							uni.showToast({
 								title: "收货成功",
@@ -568,7 +561,6 @@
 				}
 				listing(getMyOrder, data)
 					.then((res) => {
-						log(res.data.data)
 						if (res.data.code == 201) {
 							this.loadStatus = "noMore"
 							return

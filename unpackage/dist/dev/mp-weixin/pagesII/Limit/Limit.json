@@ -1,6 +1,6 @@
 {
   "enablePullDownRefresh": true,
-  "navigationBarTitleText": "限量批",
+  "navigationBarTitleText": "爆款限量批",
   "usingComponents": {
     "tui-countdown": "/components/tui-countdown/tui-countdown"
   }

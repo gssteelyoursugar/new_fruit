@@ -8,8 +8,7 @@ page {
 .tui-title {
 		width: 100%;
 		padding-left: 20rpx;
-		-webkit-box-sizing: border-box;
-		        box-sizing: border-box;
+		box-sizing: border-box;
 		
 		display: -webkit-box;
 		

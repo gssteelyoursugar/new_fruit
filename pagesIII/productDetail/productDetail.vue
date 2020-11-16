@@ -246,15 +246,11 @@
 				<view class="tui-height-full" style="border-bottom: none;">
 					<view class="tui-title-line"><text>水果描述</text></view>
 				</view>
-
 				<view class="tui-product-img tui-radius-all">
-					<!-- <image src="../../static/images/putao1.png"
-					 mode="widthFix"></image> -->
 					<jyf-parser selectable @linkpress="clickLink" :html="shopListdata.remarks"></jyf-parser>
 				</view>
 			</view>
 		</view>
-
 		<!-- 选项卡二 -->
 		<view :class="[currentTab === 1 ? 'actineclass' : 'errorclass']" :style="{paddingTop:navHeight + 40+ 'px'}">
 			<view class="tui-pro-detail">
@@ -262,103 +258,42 @@
 				<view class="tui-height-full">
 					<view class="tui-title-line"><text>免赔情况</text></view>
 					<jyf-parser selectable :html="shopListdata.deductible"></jyf-parser>
-					<!-- <view class="tui-height-flex tui-height-flex-top">
-						<view class="tui-left-one1">
-							<text class="iconfont icon-quan"></text>
-							<text class="tui-name-class">果子颜色不一</text>
-						</view>
-						<view class="tui-right-one">
-							<text class="iconfont icon-quan"></text>
-							<text class="tui-name-class">轻微风花</text>
-						</view>
-					</view>
-					<view class="tui-height-flex tui-height-flex-top">
-						<view class="tui-left-one1">
-							<text class="iconfont icon-quan"></text>
-							<text class="tui-name-class">果形大小不一</text>
-						</view>
-						<view class="tui-right-one">
-							<text class="iconfont icon-quan"></text>
-							<text class="tui-name-class">轻微流浆</text>
-						</view>
-					</view> -->
+					
 				</view>
 				<!-- 可售后情况 -->
 				<view class="tui-height-full ">
 					<view class="tui-title-line"><text>可售后情况</text></view>
 					<jyf-parser selectable :html="shopListdata.afterSale"></jyf-parser>
-					<!-- <view class="tui-height-flex tui-height-flex-top">
-						<view class="tui-left-one1">
-							<text class="iconfont icon-quan"></text>
-							<text class="tui-name-class">摔坏</text>
-						</view>
-						<view class="tui-right-one">
-							<text class="iconfont icon-quan"></text>
-							<text class="tui-name-class">压伤</text>
-						</view>
-					</view>
-					<view class="tui-height-flex tui-height-flex-top">
-						<view class="tui-left-one1">
-							<text class="iconfont icon-quan"></text>
-							<text class="tui-name-class">腐烂</text>
-						</view>
-						<view class="tui-right-one">
-							<text class="iconfont icon-quan"></text>
-							<text class="tui-name-class">单果重量不达标</text>
-						</view>
-					</view> -->
+					
 				</view>
 				<view class="tui-height-full tui-full-bac">
-					<view class="tui-title-line"><text>免赔情况</text></view>
+					<view class="tui-title-line"><text>退换货说明</text></view>
 					<jyf-parser selectable :html="shopListdata.regulation"></jyf-parser>
-					<!-- <view class="shuoming">
-						在相关法规明确规定网络销售的鲜活易腐类商品不适用
-						<text>“七天无理由退换货”</text>
-						规则的情况下，圈果公司基于相信商品品质、信任可敬顾客的初衷，主动推出退换货服务，得到广大顾客的赞赏和支持，形成了良好互动，为提升顾客消费体验、构建和谐商业环境起到正向作用。
-						为使该服务持久良性发展，更好的惠及顾客，圈果公司制定并发布了
-						<text>《退换货规则》</text>
-						，具体规则内容可到
-						<text>“我的”-“我的服务”-“规则说明”</text>
-						查阅全部内容。
-					</view> -->
+					
 				</view>
 			</view>
 		</view>
-		<!--  -->
 		<tui-nomore text="已经到最底了" backgroundColor="#f7f7f7"></tui-nomore>
 		<view class="tui-safearea-bottom"></view>
 		<!--底部操作栏-->
 		<view class="tui-operation">
 			<view class="tui-operation-left tui-col-5">
 				<view class="tui-operation-item" hover-class="tui-opcity" :hover-stay-time="150" @tap="likeOrder(shopListdata.id)">
-					<!-- <tui-icon name="like" :size="22" color="#333" v-if="!canCollect"></tui-icon>
-					<tui-icon name="like-fill" :size="22" color="#ff0000" v-if="canCollect"></tui-icon> -->
 					<image src="../../static/images/add_like-f.png" mode="" v-if="!canCollect" style="width: 52rpx;height: 46rpx;"></image>
 					<image src="../../static/images/add_like-t.png" mode="" v-if="canCollect" style="width: 52rpx;height: 46rpx;"></image>
 					<view class="tui-operation-text tui-scale-small">收藏</view>
 				</view>
 				<view class="tui-operation-item" hover-class="tui-opcity" :hover-stay-time="150" @tap="postShopping(shopListdata.id)">
-					<!-- <tui-icon name="order" :size="22" color="#333" v-if="!canCart"></tui-icon>
-					<tui-icon name="order" :size="22" color="#ff0000" v-if="canCart"></tui-icon> -->
 					<image src="../../static/images/add_order-f.png" mode="" v-if="!modaishow && !canCart" style="width: 44rpx;height: 52rpx;"></image>
 					<image src="../../static/images/add_order-t.png" mode="" v-if="!modaishow && canCart" style="width: 44rpx;height: 52rpx;"></image>
-
 					<view class="tui-operation-text tui-scale-small">加入进货单</view>
 				</view>
-				<!-- <view class="tui-operation-item" hover-class="tui-opcity" :hover-stay-time="150">
-					<tui-icon name="cart" :size="22" color="#333"></tui-icon>
-					<view class="tui-operation-text tui-scale-small">购物车</view>
-					<tui-badge type="red" absolute :scaleRatio="0.8" right="10rpx" top="-4rpx">9</tui-badge>
-				</view> -->
 			</view>
 			<view class="tui-operation-right tui-right-flex tui-col-7 tui-btnbox-4">
 				<view class="tui-flex-1">
 					<tui-button height="80rpx" :size="26" type="danger" shape="circle" @click="showPopup" v-if="shopListdata.number !== 0">立即购买</tui-button>
 					<tui-button height="80rpx" :size="26" type="info" shape="circle" @click="noGoods" v-if="shopListdata.number === 0">售罄</tui-button>
 				</view>
-				<!-- <view class="tui-flex-1">
-					<tui-button height="68rpx" :size="26" type="warning" shape="circle" @click="submit">立即购买</tui-button>
-				</view> -->
 			</view>
 		</view>
 		<wyb-popup ref="popup" type="bottom" height="500" width="750" radius="14" mode="size-fixed" :showCloseIcon="true"
@@ -396,12 +331,6 @@
 						<view class="tag-tit3-flex">
 							<view class="tag-tit2-price">购买数量</view>
 							<view class="tag-tit2-text">
-								<!--
-									先看 isRestriction 是不是限购商品，如果是，则商品最大数量需要判断。 
-									库存 > 限购数量 则商品购买最大数量则为限购数量 
-									库存 < 限购数量 则商品购买最大数量则为库存数量
-									如果不是限购商品，则商品最大数量直接等于库存数量
-								-->
 								<tui-numberbox v-if="shopListdata.isRestriction" :min="1" :max="shopListdata.number >= shopListdata.restrictionNumber ? shopListdata.restrictionNumber : shopListdata.number" :value="value2" @change="change2"></tui-numberbox>
 								<tui-numberbox v-else :min="1" :max="shopListdata.number" :value="value2" @change="change2"></tui-numberbox>
 							</view>
@@ -411,7 +340,6 @@
 				<view class="tui-pay-flex-box">
 					<view class="tui-pay-flex">
 						<view class="tui-pay1-flex">
-							<!-- <text>合计{{shopListdata.platformClinetPrice * value2}}免运费</text> -->
 							<text style="color: #333333;font-size: 24rpx;margin-right:4rpx">合计:</text>
 							<text style="color: #FF5600;font-size: 20rpx;">¥</text>
 							<text style="font-weight: bold;">{{ shopListdata.platformClientPrice * value2 | countNum }}</text>
@@ -697,16 +625,15 @@
 				if (val) {
 					let res = val.split("")
 					let data = res.splice(5, 5)
-					let time = new Date().getHours() //1605434575000
+					// let time = new Date().getHours() //1605434575000
 					let result = ''
-					if (time <= 16) {
-						result = data[0] + data[1] + "月" + data[3] + data[4] + "日"
-					} else {
-						result = data[0] + data[1] + "月" + data[3] + (data[4] * 1 + 1) + "日"
-					}
+					result = data[0] + data[1] + "月" + data[3] + data[4] + "日"
+					// if (time <= 16) {
+					// } else {
+						// result = data[0] + data[1] + "月" + data[3] + (data[4] * 1 + 1) + "日"
+					// }
 					return result
 				}
-				
 			},
 			countNum(val) {
 				return val.toFixed(2) * 1

@@ -11,8 +11,7 @@
 .tui-swipeout-item.data-v-ed6bf278 {
 	width: 100%;
 	/* padding: 15px 20px; */
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 	-webkit-transition: -webkit-transform 0.2s ease;
 	transition: -webkit-transform 0.2s ease;
 	transition: transform 0.2s ease;
@@ -35,8 +34,7 @@
 	height: 100%;
 	float: left;
 	white-space: nowrap;
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;

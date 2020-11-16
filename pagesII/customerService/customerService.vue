@@ -10,7 +10,7 @@
 					<view class="tui-icon-box">
 						<image src="../../static/images/tell.png" mode="" class="icon-img"></image>
 					</view>
-					<view class="tui-order-text">0771-5633659</view>
+					<view class="tui-order-text">19195791199</view>
 				</view>
 				<view class="tui-order-item" open-type="contact">
 					<view class="tui-icon-box">
@@ -40,7 +40,7 @@
 			goTell() {
 				uni.makePhoneCall({
 					// 手机号
-					phoneNumber: '0771-5633659',
+					phoneNumber: '19195791199',
 					// 成功回调
 					success: (res) => {
 					},

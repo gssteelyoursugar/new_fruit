@@ -10,8 +10,7 @@
 }
 .tui-order-item {
 		margin-top: 20rpx;
-		-webkit-border-radius: 10rpx;
-		        border-radius: 10rpx;
+		border-radius: 10rpx;
 		overflow: hidden;
 }
 .tui-goods-title {
@@ -38,21 +37,18 @@
 }
 .tag-tit{
 			/* 渐变色 */
-			background-image: -webkit-gradient(linear, left top, right top, from(#00C94A) , to(#00AC3F));
 			background-image: -webkit-linear-gradient(left, #00C94A , #00AC3F);
 			background-image: linear-gradient(to right, #00C94A , #00AC3F);
 			margin-right: 10rpx;
 			padding: 0 10rpx;
-			-webkit-border-radius: 15rpx 0 15rpx 0;
-			        border-radius: 15rpx 0 15rpx 0;
+			border-radius: 15rpx 0 15rpx 0;
 			color: #fff;
 			font-size: 20rpx;
 }
 .tui-goods-item {
 		width: 100%;
 		padding: 20rpx 30rpx;
-		-webkit-box-sizing: border-box;
-		        box-sizing: border-box;
+		box-sizing: border-box;
 		display: -webkit-box;
 		display: -webkit-flex;
 		display: flex;
@@ -72,8 +68,7 @@
 		-webkit-flex: 1;
 		        flex: 1;
 		padding: 0rpx 8rpx;
-		-webkit-box-sizing: border-box;
-		        box-sizing: border-box;
+		box-sizing: border-box;
 }
 .tui-goods-name {
 		/* max-width: 310rpx; */
@@ -180,14 +175,12 @@
 		        justify-content: flex-end;
 		background: #fff;
 		padding: 10rpx 30rpx 20rpx;
-		-webkit-box-sizing: border-box;
-		        box-sizing: border-box;
+		box-sizing: border-box;
 }
 .tui-btn-ml {
 		margin-left: 20rpx;
 }
 .tui-btn-ml:last-child .icon-img3{
-		background-image: -webkit-gradient(linear, left top, right top, from(#00C94A) , to(#00AC3F));
 		background-image: -webkit-linear-gradient(left, #00C94A , #00AC3F);
 		background-image: linear-gradient(to right, #00C94A , #00AC3F);
 		color: #fff!important;
@@ -200,12 +193,10 @@
 		height: 56rpx!important;
 		line-height: 56rpx;
 		font-size: 26rpx!important;
-		-webkit-border-radius: 50rpx!important;
-		        border-radius: 50rpx!important;
+		border-radius: 50rpx!important;
 		border: 1rpx solid #929292!important;
 }
 .green-btn{
-		background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 197, 42, 1)) , to(rgba(0, 188, 69, 1)));
 		background-image: -webkit-linear-gradient(left, rgba(0, 197, 42, 1) , rgba(0, 188, 69, 1));
 		background-image: linear-gradient(to right, rgba(0, 197, 42, 1) , rgba(0, 188, 69, 1));
 }
@@ -221,8 +212,7 @@ button {
 	padding-right: 0;
 	
 	line-height:inherit;
-	-webkit-border-radius:0;
-	        border-radius:0;
+	border-radius:0;
 }
 	 /* 模态弹窗布局 */
 .warp{position: fixed;
@@ -242,8 +232,7 @@ button {
 			left: 0;
 			bottom: 0;
 			right: 0;
-			-webkit-border-radius: 8rpx;
-			        border-radius: 8rpx;
+			border-radius: 8rpx;
 			overflow: hidden;
 }
 .warp-text{
