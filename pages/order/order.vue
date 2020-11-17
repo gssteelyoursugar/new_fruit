@@ -30,7 +30,12 @@
 								<!-- @click="setIds(itemTwo.id)" -->
 								<checkbox :value="itemTwo.id" :checked="itemTwo.selected" color="#fff"></checkbox>
 							</label>
-							<image :src="itemTwo.url" class="tui-goods-img" @tap="gotoList(itemTwo.goodsId)" />
+							<view class="img-mask">
+								<image :src="itemTwo.url" class="tui-goods-img" @tap="gotoList(itemTwo.goodsId)" />
+								<view class="img-mask-item" v-if="item.number === 0">
+									<view class="item-text">抢光了</view>
+								</view>
+							</view>
 							<view class="tui-goods-info">
 								<view class="tui-goods-title">
 									<text class="tag-tit">{{ itemTwo.labelName }}</text>
@@ -751,6 +756,32 @@
 	}
 
 	/* #endif */
+	
+	.img-mask {
+		position: relative;
+		width: 150rpx;
+		height: 150rpx;
+	}
+	
+	.img-mask-item {
+		position: absolute;
+		top: 0;
+		right: 0;
+		left: 0;
+		bottom: 0;
+		background: rgba(255, 255, 255, .5);
+		display: flex;
+		align-items: center;
+		text-align: center;
+		justify-content: center;
+	}
+	.item-text {
+		background: rgba(0, 0, 0, .6);
+		color: #fff;
+		font-size: 24rpx;
+		padding: 0rpx 16rpx;
+		border-radius: 40rpx;
+	}
 	.tui-goods-img {
 		width: 150rpx;
 		height: 150rpx !important;
@@ -758,8 +789,6 @@
 		flex-shrink: 0;
 		display: block;
 		background: #ddd;
-		border: 1px solid #e5e5e5;
-
 	}
 
 	.tui-goods-info {

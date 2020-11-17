@@ -30,7 +30,12 @@
 							<block v-if="item.list.length !== 0">
 								<view class="tui-goods-item" @tap="gotoList(dt.id)">
 									<!-- //v-for="dt of item.list" :key="idx" -->
-									<image :src="dt.url" class="tui-goods-img" />
+									<view class="img-mask">
+										<image :src="dt.url" class="tui-goods-img" />
+										<view class="img-mask-item" v-if="item.number === 0">
+											<view class="item-text">抢光了</view>
+										</view>
+									</view>
 									<view class="tui-goods-info">
 										<view class="tui-goods-title">
 											<text class="tag-tit">{{ dt.lableName || '' }}</text>
@@ -546,6 +551,8 @@
 		box-sizing: border-box;
 		border-bottom: 1px solid #f7f7f7;
 	}
+	
+	
 
 	.tui-checkbox {
 		min-width: 70rpx;
@@ -590,6 +597,35 @@
 	}
 
 	/* #endif */
+	
+	
+	
+	.img-mask {
+		position: relative;
+		width: 140rpx;
+		height: 140rpx;
+		margin-right: 10rpx;
+	}
+	
+	.img-mask-item {
+		position: absolute;
+		top: 0;
+		right: 0;
+		left: 0;
+		bottom: 0;
+		background: rgba(255, 255, 255, .5);
+		display: flex;
+		align-items: center;
+		text-align: center;
+		justify-content: center;
+	}
+	.item-text {
+		background: rgba(0, 0, 0, .6);
+		color: #fff;
+		font-size: 24rpx;
+		padding: 0rpx 16rpx;
+		border-radius: 40rpx;
+	}
 	.tui-goods-img {
 		width: 140rpx;
 		height: 140rpx !important;

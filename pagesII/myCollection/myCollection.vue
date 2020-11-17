@@ -18,7 +18,12 @@
 				<text class="title-time-left">2020年9月6日</text> 
 			</view> -->
 			<view class="tui-tab-rank-cent" v-for="(item,index) in likeDatas" :key="index">
-				<image :src="item.url" mode="aspectFill" class="img-rink"></image>
+				<view class="img-mask">
+					<image :src="item.url" mode="aspectFill" class="img-rink"></image>
+					<view class="img-mask-item" v-if="item.number === 0">
+						<view class="item-text">抢光了</view>
+					</view>
+				</view>
 				<view class="tui-pro-tit">
 					<text class="tag-tit">{{item.lableName}}</text> <text class="tag-tit-text">{{item.name}}</text>
 					<view class="tag-tit2">
@@ -296,11 +301,38 @@
 		border-bottom: none;
 	}
 	
+	
+	.img-mask {
+		position: relative;
+		width: 180rpx;
+		height: 180rpx;
+		margin-right: 20rpx;
+	}
+	
+	.img-mask-item {
+		position: absolute;
+		top: 0;
+		right: 0;
+		left: 0;
+		bottom: 0;
+		background: rgba(255, 255, 255, .5);
+		display: flex;
+		align-items: center;
+		text-align: center;
+		justify-content: center;
+	}
+	.item-text {
+		background: rgba(0, 0, 0, .6);
+		color: #fff;
+		font-size: 24rpx;
+		padding: 0rpx 16rpx;
+		border-radius: 40rpx;
+	}
+	
 	.img-rink {
 		width: 180rpx;
 		height: 180rpx;
 		display: block;
-		margin-right: 20rpx;
 	}
 
 	.tui-pro-tit {

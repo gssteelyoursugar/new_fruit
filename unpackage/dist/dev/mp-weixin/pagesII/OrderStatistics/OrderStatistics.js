@@ -261,11 +261,6 @@ var _api = __webpack_require__(/*! ../../api/api.js */ 20);function ownKeys(obje
       this.getOrderCount();
     },
 
-    goToDetail: function goToDetail(id) {
-      uni.navigateTo({
-        url: '../../pagesIII/productDetail/productDetail?id=' + id });
-
-    },
     bindCancel: function bindCancel() {
       this.isShow = !this.isShow;
     },

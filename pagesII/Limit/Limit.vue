@@ -42,7 +42,7 @@
 								<view class="tui-tab-rank-cent"   @tap="gotoList(item.id)">
 									<view class="img-wrapper">
 										<image :src="item.url" mode="aspectFill" class="img-rink"></image>
-										<view class="no-goods-bg" v-if="activityStatus == '3' && item.number === 0  ">
+										<view class="no-goods-bg" v-if="activityStatus == '3' || item.number === 0  ">
 											<view class="bg-text">抢光了</view>
 										</view>
 									</view>

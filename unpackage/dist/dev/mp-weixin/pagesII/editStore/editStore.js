@@ -463,8 +463,8 @@ var _console = console,log = _console.log;var form = __webpack_require__(/*! @/c
       //表单规则
       var rules = [{
         name: "storeName",
-        rule: ["required", "isChinese", "minLength:2", "maxLength:6"], //可使用区间，此处主要测试功能
-        msg: ["请输入店铺名姓名", "姓名必须全部为中文", "姓名必须2个或以上字符", "姓名不能超过6个字符"] },
+        rule: ["required", "minLength:2", "maxLength:6"], //可使用区间，此处主要测试功能
+        msg: ["请输入店铺名姓名", "姓名必须2个或以上字符", "姓名不能超过6个字符"] },
       {
         name: "mobile",
         rule: ["required", "isMobile"],

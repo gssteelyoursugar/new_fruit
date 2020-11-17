@@ -25,7 +25,7 @@
 		</view>
 		<view class="tui-tab-rank" v-for="(item, index) in orderList" :key="index">
 			<view class="tui-time-title"><text class="title-time-left">{{item.time}}</text></view>
-			<view class="tui-tab-rank-cent" @click="goToDetail(item.goodsId)">
+			<view class="tui-tab-rank-cent">
 				<!--  -->
 				<image :src="item.url" mode="aspectFill" class="img-rink"></image>
 				<view class="tui-pro-tit">
@@ -122,11 +122,6 @@
 				this.getOrderCount()
 			},
 			
-			goToDetail(id) {
-				uni.navigateTo({
-					url: '../../pagesIII/productDetail/productDetail?id=' + id 
-				})
-			},
 			bindCancel() {
 				this.isShow = !this.isShow;
 			},

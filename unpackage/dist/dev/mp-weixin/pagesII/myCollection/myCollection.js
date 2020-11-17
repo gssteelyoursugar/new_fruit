@@ -186,6 +186,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
 var _api = __webpack_require__(/*! ../../api/api.js */ 20);
 
 
@@ -193,6 +198,11 @@ var _api = __webpack_require__(/*! ../../api/api.js */ 20);
 
 
 var _request = __webpack_require__(/*! ../../api/request.js */ 22); //
+//
+//
+//
+//
+//
 //
 //
 //
@@ -257,12 +267,7 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
     getUserInfo: function getUserInfo(event) {log(event);this.usering = event.detail.userInfo;uni.setStorageSync('userIN', event.detail.userInfo); //把头像存在本地，小程序提供如同浏览器cookie
       var userING = uni.setStorageSync('userIN', event.detail.userInfo);if (event.detail.userInfo) {var wxing = event.detail.userInfo;this.wxCode(wxing.avatarUrl, wxing.nickName);} // wx.startPullDownRefresh()
     }, //获取code
-    wxCode: function wxCode(avatarUrl, nickName) {var _this2 = this;wx.login({ success: function success(res) {log(res);
-          var code = res.code;
-          _this2.wxLoging(code);
-        },
-        fail: function fail(err) {
-          log(err);
+    wxCode: function wxCode(avatarUrl, nickName) {var _this2 = this;wx.login({ success: function success(res) {log(res);var code = res.code;_this2.wxLoging(code);}, fail: function fail(err) {log(err);
         } });
 
 

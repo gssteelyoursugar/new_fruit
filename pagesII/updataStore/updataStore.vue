@@ -377,8 +377,8 @@
 				//表单规则
 				let rules = [{
 						name: "storeName",
-						rule: ["required", "isChinese", "minLength:2", "maxLength:20"], //可使用区间，此处主要测试功能
-						msg: ["请输入店铺名称", "店铺名必须全部为中文", "请输入2个或以上字符", "不能超过20个字符"]
+						rule: ["required",  "minLength:2", "maxLength:20"], //可使用区间，此处主要测试功能
+						msg: ["请输入店铺名称", "请输入2个或以上字符", "不能超过20个字符"]
 					},
 					{
 						name: "merchantsName",

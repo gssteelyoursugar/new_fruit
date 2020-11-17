@@ -201,7 +201,8 @@ const form = {
 		return /^[0-9]+$/.test(value);
 	},
 	_isChinese: function(value) {
-		let reg = /.*[\u4e00-\u9fa5]+.*$/;
+		// let reg = /.*[\u4e00-\u9fa5]+.*$/; 
+		let reg =/^[\u4e00-\u9fa5]+$/ 
 		return value !== "" && reg.test(value) && !form._isSpecial(value) && !form._isEmoji(value)
 	},
 	_isEnglish: function(value) {

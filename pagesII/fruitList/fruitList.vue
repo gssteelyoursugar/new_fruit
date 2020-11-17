@@ -50,7 +50,12 @@
 			<view class="tui-rank-list">
 				<view class="tui-tab-rank" v-for="(item,index) in GoodsData" :key="index">
 					<view class="tui-tab-rank-cent" @tap="gotoList(item.id)">
-						<image :src="item.url" mode="aspectFill" class="img-rink"></image>
+						<view class="img-mask">
+							<image :src="item.url" mode="aspectFill" class="img-rink"></image>
+							<view class="img-mask-item" v-if="item.number === 0">
+								<view class="item-text">抢光了</view>
+							</view>
+						</view>
 						<view class="tui-pro-tit">
 							<text class="tag-tit">{{item.lableName}}</text> <text class="tag-tit-text">{{item.title}}</text>
 							<view class="tag-tit2">
@@ -490,12 +495,38 @@
 
 
 	}
+	
+	.img-mask {
+		position: relative;
+		margin-right: 10rpx;
+	}
+	
+	.img-mask-item {
+		position: absolute;
+		top: 0;
+		right: 0;
+		left: 0;
+		bottom: 0;
+		background: rgba(255, 255, 255, .5);
+		display: flex;
+		align-items: center;
+		text-align: center;
+		justify-content: center;
+	
+	}
+	
+	.item-text {
+		background: rgba(0, 0, 0, .6);
+		color: #fff;
+		font-size: 24rpx;
+		padding: 0 16rpx;
+		border-radius: 40rpx;
+	}
 
 	.img-rink {
 		width: 180rpx;
 		height: 180rpx;
 		display: block;
-		margin-right: 10rpx;
 		background: #eee;
 		border-radius: 6rpx;
 	}
