@@ -64,7 +64,8 @@
 }
 .tui-line-cell {
 	width: 100%;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
@@ -104,7 +105,8 @@
 }
 .tui-btn-box {
 	padding: 40rpx 50rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 }
 .tui-button-gray {
 	margin-top: 30rpx;
@@ -118,7 +120,8 @@
 .tui-content-box {
 	width: 100%;
 	padding: 0 30rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	position: relative;
 	top: -172rpx;
 	z-index: 10;
@@ -126,8 +129,10 @@
 .tui-box {
 	width: 100%;
 	background: #fff;
-	box-shadow: 0 3rpx 20rpx rgba(183, 183, 183, 0.1);
-	border-radius: 10rpx;
+	-webkit-box-shadow: 0 3rpx 20rpx rgba(183, 183, 183, 0.1);
+	        box-shadow: 0 3rpx 20rpx rgba(183, 183, 183, 0.1);
+	-webkit-border-radius: 10rpx;
+	        border-radius: 10rpx;
 	overflow: hidden;
 }
 .tui-order-box {
@@ -137,7 +142,8 @@
 	width: 100%;
 	
 	padding: 0 26rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
@@ -164,7 +170,8 @@
 	width: 100%;
 	
 	padding: 0 30rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;

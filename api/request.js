@@ -16,8 +16,8 @@ let url = "http://192.168.1.50:8980/"
 // let url = 'http://dwh.natapp1.cc/js/'
 let imgurl = 'http://192.168.1.10:8980'
 
-//测试
 
+//测试
 // 首页
 let getIndex = `${url}api/wx/index/getData`
 

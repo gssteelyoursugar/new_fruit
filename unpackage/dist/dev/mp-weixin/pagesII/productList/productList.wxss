@@ -8,7 +8,8 @@ page {
 }
 .tui-drop-input-box {
 	padding: 50rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 }
 .icon-shangxiajiantou {
 	font-size: 16rpx;
@@ -17,11 +18,13 @@ page {
 	font-size: 16rpx;
 }
 .checked {
+	background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 197, 42, 1)), to(rgba(0, 188, 69, 1)));
 	background-image: -webkit-linear-gradient(left, rgba(0, 197, 42, 1), rgba(0, 188, 69, 1));
 	background-image: linear-gradient(to right, rgba(0, 197, 42, 1), rgba(0, 188, 69, 1));
 	color: #fff;
 }
 .activeNull {
+	background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 197, 42, 1)), to(rgba(0, 188, 69, 1)));
 	background-image: -webkit-linear-gradient(left, rgba(0, 197, 42, 1), rgba(0, 188, 69, 1));
 	background-image: linear-gradient(to right, rgba(0, 197, 42, 1), rgba(0, 188, 69, 1));
 	color: #fff;
@@ -102,11 +105,13 @@ page {
 	width: 100%;
 	height: 30px;
 	margin-right: 30rpx;
-	border-radius: 15px;
+	-webkit-border-radius: 15px;
+	        border-radius: 15px;
 	font-size: 12px;
 	background: #f7f7f7;
 	padding: 3px 10px;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	color: #999;
 	display: -webkit-box;
 	display: -webkit-flex;
@@ -133,12 +138,14 @@ page {
 	-webkit-box-align: center;
 	-webkit-align-items: center;
 	        align-items: center;
-	border-radius: 15px;
+	-webkit-border-radius: 15px;
+	        border-radius: 15px;
 	background: rgba(0, 0, 0, 0.5);
 	color: #fff;
 }
 .tui-key-text {
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	padding-right: 12rpx;
 	font-size: 12px;
 	line-height: 12px;
@@ -150,10 +157,12 @@ page {
 	width: 690rpx;
 	margin: 0 30rpx;
 	border: 1px solid #F5F5F5;
+	-webkit-box-shadow: 0 0 20rpx 0 #f5f5f5;
 	box-shadow: 0 0 20rpx 0 #f5f5f5;
 	height: 80rpx;
 	background: #fff;
-	border-radius: 40rpx;
+	-webkit-border-radius: 40rpx;
+	        border-radius: 40rpx;
 	position: fixed;
 	/* top: 140rpx; */
 	z-index: 99999;
@@ -165,7 +174,8 @@ page {
 	-webkit-align-items: center;
 	        align-items: center;
 	padding: 0 40rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 }
 .search-bar image {
 	width: 36rpx;
@@ -180,7 +190,8 @@ page {
 /*screen*/
 .tui-header-screen {
 	width: 100%;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	background: #fff;
 	position: fixed;
 	z-index: 1000;
@@ -237,7 +248,8 @@ page {
 .tui-screen-bottom {
 	height: 100rpx;
 	padding: 0 20rpx 20rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	font-size: 24rpx;
 	-webkit-box-align: center;
 	-webkit-align-items: center;
@@ -266,12 +278,14 @@ page {
 	-webkit-justify-content: center;
 	        justify-content: center;
 	padding: 0 12rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	background-color: #fff;
 	margin-right: 20rpx;
 	white-space: nowrap;
 	height: 60rpx;
-	border-radius: 24px;
+	-webkit-border-radius: 24px;
+	        border-radius: 24px;
 	border: 1px solid #ccc;
 }
 .tui-icon-ml {
@@ -292,14 +306,17 @@ page {
 	border: 1rpx solid #00BC45;
 	width: 100%;
 	height: 100%;
-	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	        border-radius: 4px;
 	left: 0;
 	top: 0;
 }
 .tui-btmItem-tap {
 	position: relative;
-	border-bottom-left-radius: 0;
-	border-bottom-right-radius: 0;
+	-webkit-border-bottom-left-radius: 0;
+	        border-bottom-left-radius: 0;
+	-webkit-border-bottom-right-radius: 0;
+	        border-bottom-right-radius: 0;
 }
 .tui-btmItem-tap::after {
 	content: '';
@@ -321,6 +338,7 @@ page {
 	color: #00BC45;
 }
 .tui-active-bottom {
+	background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 197, 42, 1)), to(rgba(0, 188, 69, 1)));
 	background-image: -webkit-linear-gradient(left, rgba(0, 197, 42, 1), rgba(0, 188, 69, 1));
 	background-image: linear-gradient(to right, rgba(0, 197, 42, 1), rgba(0, 188, 69, 1));
 	color: #fff;
@@ -341,7 +359,8 @@ page {
 .tui-scroll-box {
 	width: 100%;
 	height: 480rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	position: relative;
 	z-index: 99;
 	color: #fff;
@@ -367,7 +386,8 @@ page {
 	margin: 0 20rpx 20rpx;
 	text-align: center;
 	border: 1px solid #dcdcdc;
-	border-radius: 40rpx;
+	-webkit-border-radius: 40rpx;
+	        border-radius: 40rpx;
 	font-size: 24rpx;
 	color: #333;
 	overflow: hidden;
@@ -375,6 +395,7 @@ page {
 	white-space: nowrap;
 }
 .tui-drop-active {
+	background: -webkit-gradient(linear, right top, left top, from(rgba(0, 188, 69, 1)), to(rgba(0, 197, 42, 1)));
 	background: -webkit-linear-gradient(right, rgba(0, 188, 69, 1), rgba(0, 197, 42, 1));
 	background: linear-gradient(to left, rgba(0, 188, 69, 1), rgba(0, 197, 42, 1));
 }
@@ -393,7 +414,8 @@ page {
 	position: absolute;
 	left: 0;
 	bottom: 0;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
@@ -433,10 +455,13 @@ page {
 	width: 100%;
 	position: absolute;
 	background-color: #fff;
-	border-bottom-left-radius: 24rpx;
-	border-bottom-right-radius: 24rpx;
+	-webkit-border-bottom-left-radius: 24rpx;
+	        border-bottom-left-radius: 24rpx;
+	-webkit-border-bottom-right-radius: 24rpx;
+	        border-bottom-right-radius: 24rpx;
 	overflow: hidden;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	padding-top: 10rpx;
 	padding-bottom: 26rpx;
 	left: 0;
@@ -475,7 +500,8 @@ page {
 	height: 70rpx;
 	font-size: 28rpx;
 	padding: 0 40rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
@@ -509,7 +535,8 @@ page {
 	-webkit-justify-content: space-between;
 	        justify-content: space-between;
 	padding: 0 20rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	/* position: fixed;
 	top: 0;
 	left: 0;
@@ -532,7 +559,8 @@ page {
 	-webkit-justify-content: space-between;
 	        justify-content: space-between;
 	padding: 0 30rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	height: 80rpx;
 }
 .tui-title-bold {
@@ -575,7 +603,8 @@ page {
 	-webkit-box-pack: justify;
 	-webkit-justify-content: space-between;
 	        justify-content: space-between;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 }
 .tui-drawer-content .content-text {
 	width: 10%;
@@ -583,14 +612,17 @@ page {
 .tui-input {
 	border: 1px solid #DCDCDC;
 	height: 60rpx;
-	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	        border-radius: 4px;
 	width: 200rpx;
 	background-color: #fff;
 	text-align: center;
 	font-size: 24rpx;
 	color: #333;
 
-	border-radius: 40rpx;
+	-webkit-border-radius: 40rpx;
+
+	        border-radius: 40rpx;
 }
 .tui-phcolor {
 	text-align: center;
@@ -618,8 +650,10 @@ page {
 	-webkit-justify-content: center;
 	        justify-content: center;
 	padding: 0 4rpx;
-	box-sizing: border-box;
-	border-radius: 4px;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+	-webkit-border-radius: 4px;
+	        border-radius: 4px;
 	margin-right: 5%;
 	margin-bottom: 5%;
 }
@@ -638,7 +672,8 @@ page {
 	position: absolute;
 	left: 0;
 	bottom: 0;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	/* padding: 0 30rpx; */
 	background: #fff;
 }
@@ -699,7 +734,8 @@ page {
 	        flex-direction: row;
 	-webkit-flex-wrap: wrap;
 	        flex-wrap: wrap;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 }
 .tui-product-container {
 	-webkit-box-flex: 1;
@@ -714,8 +750,10 @@ page {
 	width: 100%;
 	margin-bottom: 10rpx;
 	background: #fff;
-	box-sizing: border-box;
-	border-radius: 6rpx;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+	-webkit-border-radius: 6rpx;
+	        border-radius: 6rpx;
 	overflow: hidden;
 	-webkit-transition: all 0.15s ease-in-out;
 	transition: all 0.15s ease-in-out;
@@ -746,7 +784,8 @@ page {
 	color: #fff;
 	font-size: 28rpx;
 	padding: 6rpx 16rpx;
-	border-radius: 40rpx;
+	-webkit-border-radius: 40rpx;
+	        border-radius: 40rpx;
 }
 .tui-flex-list {
 	display: -webkit-box;
@@ -763,7 +802,8 @@ page {
 	height: 260rpx !important;
 	-webkit-flex-shrink: 0;
 	        flex-shrink: 0;
-	border-radius: 12rpx;
+	-webkit-border-radius: 12rpx;
+	        border-radius: 12rpx;
 }
 .tui-pro-content {
 	display: -webkit-box;
@@ -776,7 +816,8 @@ page {
 	-webkit-box-pack: justify;
 	-webkit-justify-content: space-between;
 	        justify-content: space-between;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	padding: 20rpx;
 }
 .tui-pro-tit {
@@ -856,7 +897,8 @@ page {
 	color: #FFBE33;
 	font-size: 18rpx;
 	padding: 2rpx 10rpx;
-	border-radius: 18rpx;
+	-webkit-border-radius: 18rpx;
+	        border-radius: 18rpx;
 	margin-right: 10rpx;
 	display: -webkit-inline-box;
 	display: -webkit-inline-flex;
@@ -865,11 +907,13 @@ page {
 }
 .tag-tit {
 	/* 渐变色 */
+	background-image: -webkit-gradient(linear, left top, right top, from(#00C94A), to(#00AC3F));
 	background-image: -webkit-linear-gradient(left, #00C94A, #00AC3F);
 	background-image: linear-gradient(to right, #00C94A, #00AC3F);
 	margin-right: 10rpx;
 	padding: 0 10rpx;
-	border-radius: 15rpx 0 15rpx 0;
+	-webkit-border-radius: 15rpx 0 15rpx 0;
+	        border-radius: 15rpx 0 15rpx 0;
 	color: #fff;
 	font-size: 20rpx;
 }
@@ -916,7 +960,8 @@ page {
 }
 .tui-selected-list {
 	background-color: #fff;
-	border-radius: 20rpx;
+	-webkit-border-radius: 20rpx;
+	        border-radius: 20rpx;
 	overflow: hidden;
 	-webkit-transform: translateZ(0);
 	        transform: translateZ(0);

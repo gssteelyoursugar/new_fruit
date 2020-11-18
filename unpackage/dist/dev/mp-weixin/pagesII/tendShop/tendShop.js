@@ -550,11 +550,11 @@ var _console = console,log = _console.log;var form = __webpack_require__(/*! @/c
         rule: ["required", "isMobile"],
         msg: ["请输入手机号", "请输入正确的手机号"] },
 
-      {
-        name: "address",
-        rule: ["required"],
-        msg: ["请选择地区"] },
-
+      // {
+      // 	name: "address",
+      // 	rule: ["required"], 
+      // 	msg: ["请选择地区"]
+      // },
       {
         name: "address2",
         rule: ["required"], //可使用区间，此处主要测试功能
@@ -566,6 +566,13 @@ var _console = console,log = _console.log;var form = __webpack_require__(/*! @/c
       var formData = e.detail.value;
       var checkRes = form.validation(formData, rules);
       if (!checkRes) {
+        if (!this.idAddress) {
+          uni.showToast({
+            title: "请选择地区",
+            icon: "none" });
+
+          return;
+        }
         var imgDataLi = [];
         // let subNum = 0
         // for (let i in this.urlListFlag) {

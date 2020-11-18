@@ -248,11 +248,23 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
 var _api = __webpack_require__(/*! ../../api/api.js */ 20);
 
 
 
 var _request = __webpack_require__(/*! ../../api/request.js */ 22); //
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -371,13 +383,7 @@ var _default = { components: {}, data: function data() {return { payUrl: '', isT
       (0, _api.publicing)(_request.postSettle, data).then(function (res) {_this2.extraUserInfo = res.data.data.extraData.userInfo;_this2.goodsData = res.data.data.data;_this2.extraData = res.data.data.extraData;var new_arr = _this2.goodsData.map(function (obj) {return obj.id;}); //提取数组里面的每一项里面的id
         var idList = "";for (var index in new_arr) {idList = idList + new_arr[index] + ",";} //去掉双引号
         //去除idList最后一个逗号
-        idList = idList.substring(0, idList.length - 1);_this2.ids = idList;}).catch(function (err) {console.log(err);});}, getQueryString: function getQueryString(str, key) {if (str) {var queryString = str.split('?')[1] || '';var arr = queryString.split('&') || [];for (var i = 0; i < arr.length; i++) {var keyString = decodeURIComponent(arr[i].split('=')[0]);var valueString = decodeURIComponent(arr[i].split('=')[1]);if (key === keyString) {return valueString;
-          }
-        }
-        return;
-      } else {
-        return;
-      }
+        idList = idList.substring(0, idList.length - 1);_this2.ids = idList;}).catch(function (err) {console.log(err);});}, getQueryString: function getQueryString(str, key) {if (str) {var queryString = str.split('?')[1] || '';var arr = queryString.split('&') || [];for (var i = 0; i < arr.length; i++) {var keyString = decodeURIComponent(arr[i].split('=')[0]);var valueString = decodeURIComponent(arr[i].split('=')[1]);if (key === keyString) {return valueString;}}return;} else {return;}
     },
     //获得订单号，才能支付
     SubmitOrder: function SubmitOrder() {
@@ -511,8 +517,7 @@ var _default = { components: {}, data: function data() {return { payUrl: '', isT
     var beforePage = pages[pages.length - 2]; // 前一个页面路径
     if (beforePage.$page.fullPath === '/pages/order/order') {
       this.gtePayORder(); //请求结算
-    } else if (beforePage.$page.fullPath == '/pagesIII/productDetail/productDetail') {
-    }
+    } else if (beforePage.$page.fullPath == '/pagesIII/productDetail/productDetail') {}
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

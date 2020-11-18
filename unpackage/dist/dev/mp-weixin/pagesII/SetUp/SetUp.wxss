@@ -21,7 +21,8 @@ page {
 	margin: 424rpx auto;
 	background: #fff;
 	padding: 26rpx 0;
-	border-radius: 6rpx;
+	-webkit-border-radius: 6rpx;
+	        border-radius: 6rpx;
 	text-align: center;
 	font-size: 36rpx;
 	color: #707070;
@@ -32,7 +33,8 @@ page {
 .tui-title {
 	width: 100%;
 	padding-left: 20rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	color: #333333;
 	font-size: 32rpx;
 	display: -webkit-box;

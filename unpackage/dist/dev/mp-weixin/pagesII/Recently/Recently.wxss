@@ -65,10 +65,12 @@
 }
 .tui-edit-goods {
 	width: 100%;
-	border-radius: 12rpx;
+	-webkit-border-radius: 12rpx;
+	        border-radius: 12rpx;
 	overflow: hidden;
 	padding: 24rpx 30rpx 0 30rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
@@ -105,7 +107,8 @@
 	display: -webkit-flex;
 	display: flex;
 	padding: 30rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	border-bottom: 1px solid #f7f7f7;
 }
 .tui-checkbox {
@@ -121,7 +124,8 @@
 	width: 40rpx;
 	height: 40rpx;
 	margin-right: 0 !important;
-	border-radius: 50% !important;
+	-webkit-border-radius: 50% !important;
+	        border-radius: 50% !important;
 	-webkit-transform: scale(0.8);
 	        transform: scale(0.8);
 	border-color: #d1d1d1 !important;
@@ -161,12 +165,14 @@
 	color: #fff;
 	font-size: 24rpx;
 	padding: 0rpx 16rpx;
-	border-radius: 40rpx;
+	-webkit-border-radius: 40rpx;
+	        border-radius: 40rpx;
 }
 .tui-goods-img {
 	width: 140rpx;
 	height: 140rpx !important;
-	border-radius: 12rpx;
+	-webkit-border-radius: 12rpx;
+	        border-radius: 12rpx;
 	-webkit-flex-shrink: 0;
 	        flex-shrink: 0;
 	display: block;
@@ -186,7 +192,8 @@
 	-webkit-box-pack: justify;
 	-webkit-justify-content: space-between;
 	        justify-content: space-between;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	overflow: hidden;
 }
 .tui-goods-title {
@@ -202,11 +209,13 @@
 }
 .tag-tit {
 	/* 渐变色 */
+	background-image: -webkit-gradient(linear, left top, right top, from(#00c94a), to(#00ac3f));
 	background-image: -webkit-linear-gradient(left, #00c94a, #00ac3f);
 	background-image: linear-gradient(to right, #00c94a, #00ac3f);
 	margin-right: 10rpx;
 	padding: 0 12rpx;
-	border-radius: 15rpx 0 15rpx 0;
+	-webkit-border-radius: 15rpx 0 15rpx 0;
+	        border-radius: 15rpx 0 15rpx 0;
 	color: #fff;
 	font-size: 20rpx;
 }
@@ -223,7 +232,8 @@
 	-webkit-box-pack: justify;
 	-webkit-justify-content: space-between;
 	        justify-content: space-between;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	margin: 14rpx 0;
 }
 .tui-model-text {
@@ -286,7 +296,8 @@
 	-webkit-justify-content: space-between;
 	        justify-content: space-between;
 	padding: 0 30rpx 20rpx 28rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 }
 .tui-buy {
 	display: -webkit-box;
@@ -307,7 +318,8 @@
 	font-size: 24rpx;
 	line-height: 24rpx;
 	padding: 20rpx 30rpx 10rpx 30rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	color: #333;
 	-webkit-transform: scale(0.8);
 	        transform: scale(0.8);
@@ -329,7 +341,8 @@
 	        transform: scale(0.8);
 	-webkit-transform-origin: center center;
 	        transform-origin: center center;
-	border-radius: 4rpx;
+	-webkit-border-radius: 4rpx;
+	        border-radius: 4rpx;
 	-webkit-flex-shrink: 0;
 	        flex-shrink: 0;
 }
@@ -365,7 +378,8 @@
 	-webkit-justify-content: space-between;
 	        justify-content: space-between;
 	padding: 0 30rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	font-size: 24rpx;
 	z-index: 99999;
 }
@@ -412,7 +426,8 @@
 	        flex-direction: row;
 	-webkit-flex-wrap: wrap;
 	        flex-wrap: wrap;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 }
 .tui-product-container {
 	-webkit-box-flex: 1;
@@ -427,8 +442,10 @@
 	width: 100%;
 	margin-bottom: 4%;
 	background: #fff;
-	box-sizing: border-box;
-	border-radius: 12rpx;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+	-webkit-border-radius: 12rpx;
+	        border-radius: 12rpx;
 	overflow: hidden;
 }
 .tui-pro-img {
@@ -446,7 +463,8 @@
 	-webkit-box-pack: justify;
 	-webkit-justify-content: space-between;
 	        justify-content: space-between;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	padding: 20rpx;
 }
 .tui-pro-tit {
@@ -539,7 +557,8 @@
 	transform: scale(1);
 	-webkit-transform-origin: 0 0;
 	transform-origin: 0 0;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 }
 button {
 	background-color: #fff !important;
@@ -549,7 +568,8 @@ button {
 	line-height: inherit;
 }
 button {
-	border-radius: 0;
+	-webkit-border-radius: 0;
+	        border-radius: 0;
 }
 
 /* .btn {
@@ -563,7 +583,8 @@ button {
 	font-size: 30rpx;
 } */
 .btn {
-	border-radius: 100rpx;
+	-webkit-border-radius: 100rpx;
+	        border-radius: 100rpx;
 	height: 80rpx;
 	width: 300rpx;
 	background-color: #ffffff;
@@ -571,6 +592,7 @@ button {
 	color: rgba(0, 197, 42, 1) !important;
 	padding: 16rpx 0;
 	font-size: 32rpx;
-	box-shadow: 0 0 6rpx -1rpx;
+	-webkit-box-shadow: 0 0 6rpx -1rpx;
+	        box-shadow: 0 0 6rpx -1rpx;
 }
 

@@ -35,6 +35,7 @@
 	width: 8.33333333%;
 }
 .gradient-color.data-v-57280228 {
+	background-image: -webkit-gradient(linear, left top, right top, from(#00C94A) , to(#00AC3F));
 	background-image: -webkit-linear-gradient(left, #00C94A , #00AC3F);
 	background-image: linear-gradient(to right, #00C94A , #00AC3F);
 }
@@ -150,7 +151,8 @@
 	background-color: rgba(0, 0, 0, 0.9);
 	font-size: 24rpx;
 	color: #fff;
-	border-radius: 24rpx;
+	-webkit-border-radius: 24rpx;
+	        border-radius: 24rpx;
 	padding: 10rpx 20rpx;
 	z-index: 999;
 }
@@ -269,7 +271,9 @@
 	width: 20px !important;
 	padding: 6px !important;
 
-	border-radius: 50%;
+	-webkit-border-radius: 50%;
+
+	        border-radius: 50%;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
@@ -319,11 +323,13 @@
 /* 水果列表 */
 .tag-tit.data-v-57280228 {
 	/* 渐变色 */
+	background-image: -webkit-gradient(linear, left top, right top, from(#00C94A), to(#00AC3F));
 	background-image: -webkit-linear-gradient(left, #00C94A, #00AC3F);
 	background-image: linear-gradient(to right, #00C94A, #00AC3F);
 	margin-right: 10rpx;
 	padding: 0 10rpx;
-	border-radius: 15rpx 0 15rpx 0;
+	-webkit-border-radius: 15rpx 0 15rpx 0;
+	        border-radius: 15rpx 0 15rpx 0;
 	color: #fff;
 	font-size: 20rpx;
 }
@@ -334,7 +340,8 @@
 .tui-product-box.data-v-57280228 {
 	margin-top: 20rpx;
 	padding: 0 20rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 }
 .tui-product-list.data-v-57280228 {
 
@@ -352,7 +359,8 @@
 	        flex-direction: row;
 	-webkit-flex-wrap: wrap;
 	        flex-wrap: wrap;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	/* padding-top: 20rpx; */
 }
 .tui-product-container.data-v-57280228 {
@@ -371,8 +379,10 @@
 	width: 100%;
 	margin-bottom: 4%;
 	background: #fff;
-	box-sizing: border-box;
-	border-radius: 6rpx;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+	-webkit-border-radius: 6rpx;
+	        border-radius: 6rpx;
 	overflow: hidden;
 }
 .img-mask.data-v-57280228 {
@@ -401,7 +411,8 @@
 	color: #fff;
 	font-size: 28rpx;
 	padding: 6rpx 16rpx;
-	border-radius: 40rpx;
+	-webkit-border-radius: 40rpx;
+	        border-radius: 40rpx;
 }
 .tui-pro-img.data-v-57280228 {
 	width: 100%;
@@ -418,7 +429,8 @@
 	-webkit-box-pack: justify;
 	-webkit-justify-content: space-between;
 	        justify-content: space-between;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	padding: 20rpx;
 }
 .tui-pro-tit.data-v-57280228 {
@@ -525,7 +537,8 @@
 	color: rgba(255, 119, 9, 1);
 	font-size: 18rpx;
 	padding: 2rpx 10rpx;
-	border-radius: 18rpx;
+	-webkit-border-radius: 18rpx;
+	        border-radius: 18rpx;
 	margin-right: 10rpx;
 	display: -webkit-inline-box;
 	display: -webkit-inline-flex;
@@ -556,9 +569,11 @@
 .fixed3fontweione.data-v-57280228 {
 	font-size: 24rpx;
 	color: #fff !important;
+	background-image: -webkit-gradient(linear, left top, right top, from(#00C94A), to(#00AC3F));
 	background-image: -webkit-linear-gradient(left, #00C94A, #00AC3F);
 	background-image: linear-gradient(to right, #00C94A, #00AC3F);
-	border-radius: 60rpx;
+	-webkit-border-radius: 60rpx;
+	        border-radius: 60rpx;
 	padding: 5rpx 0rpx;
 	font-weight: 600;
 }
@@ -601,13 +616,15 @@
 	float: right;
 	position: absolute;
 	top: 40%;
-	border-radius: 1rpx;
+	-webkit-border-radius: 1rpx;
+	        border-radius: 1rpx;
 }
 .borderRight.data-v-57280228:not(:last-child) {}
 
 /* 水果排行 */
 .tui-Fruits-ranking.data-v-57280228 {
-	border-radius: 0 0 30rpx 30rpx;
+	-webkit-border-radius: 0 0 30rpx 30rpx;
+	        border-radius: 0 0 30rpx 30rpx;
 	padding-top: 10rpx;
 	display: -webkit-box;
 	display: -webkit-flex;
@@ -713,7 +730,8 @@
 	display: block;
 	margin: 10rpx auto;
 	border: 1px solid #f5f5f5;
-	border-radius: 10rpx;
+	-webkit-border-radius: 10rpx;
+	        border-radius: 10rpx;
 }
 .active-img.data-v-57280228 {
 	width: 130rpx;
@@ -721,7 +739,8 @@
 	display: block;
 	margin: 10rpx auto;
 	border: 1px solid #f5f5f5;
-	border-radius: 10rpx;
+	-webkit-border-radius: 10rpx;
+	        border-radius: 10rpx;
 }
 .tui-Fruits-ranking-tab .tabimg.data-v-57280228 {
 	border: none;
@@ -741,16 +760,19 @@
 .tui-barcolor.data-v-57280228 {
 	/* background-color: #0062CC; */
 	/* 线性渐变 */
+	background-image: -webkit-gradient(linear, left top, right top, from(rgba(255, 119, 9, 1)), to(rgba(255, 101, 0, 1)));
 	background-image: -webkit-linear-gradient(left, rgba(255, 119, 9, 1), rgba(255, 101, 0, 1));
 	background-image: linear-gradient(to right, rgba(255, 119, 9, 1), rgba(255, 101, 0, 1));
 	color: #fff;
 	font-size: 24rpx;
-	border-radius: 4rpx 20rpx 4rpx 20rpx;
+	-webkit-border-radius: 4rpx 20rpx 4rpx 20rpx;
+	        border-radius: 4rpx 20rpx 4rpx 20rpx;
 	padding: 2rpx 2rpx 2rpx 16rpx;
 	margin-left: 16rpx;
 }
 .tui-count-down.data-v-57280228 {
-	border-radius: 30rpx 30rpx 0 0;
+	-webkit-border-radius: 30rpx 30rpx 0 0;
+	        border-radius: 30rpx 30rpx 0 0;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
@@ -788,7 +810,8 @@
 	line-height: 100rpx;
 	background-color: #fff;
 	margin: 20rpx;
-	border-radius: 20rpx;
+	-webkit-border-radius: 20rpx;
+	        border-radius: 20rpx;
 }
 .icon-weibiaoti34.data-v-57280228 {
 	position: relative;
@@ -842,7 +865,8 @@
 	        justify-content: space-between;
 	height: 180rpx;
 	background-color: #fff;
-	border-radius: 30rpx 30rpx 0 0;
+	-webkit-border-radius: 30rpx 30rpx 0 0;
+	        border-radius: 30rpx 30rpx 0 0;
 	color: #6E6E6E;
 	/* padding: 0 20rpx; */
 	margin: 0 20rpx;
@@ -861,7 +885,8 @@
 	        justify-content: center;
 	color: #6E6E6E;
 	background-color: #fff;
-	border-radius: 0 0 30rpx 30rpx;
+	-webkit-border-radius: 0 0 30rpx 30rpx;
+	        border-radius: 0 0 30rpx 30rpx;
 	/* padding: 0 20rpx; */
 	margin: 0 20rpx;
 }
@@ -896,7 +921,8 @@
 	display: block;
 	margin: 0 auto;
 	background: #f5f5f5;
-	border-radius: 32rpx;
+	-webkit-border-radius: 32rpx;
+	        border-radius: 32rpx;
 }
 .hot-loading-bg.data-v-57280228{
 	width: 100rpx;
@@ -905,7 +931,8 @@
 	display: block;
 	margin: 0 auto;
 	background: #f5f5f5;
-	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	        border-radius: 50%;
 }
 .loading-bg-text.data-v-57280228 {
 	padding-top: 20rpx;
@@ -1031,7 +1058,8 @@
 	left: 0;
 	top: 170rpx;
 	padding: 0 30rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
@@ -1042,7 +1070,8 @@
 
 /* 排行榜 */
 .tui-cent-box.data-v-57280228 {
-	border-radius: 60rpx 60rpx 0 0;
+	-webkit-border-radius: 60rpx 60rpx 0 0;
+	        border-radius: 60rpx 60rpx 0 0;
 	height: 2000px;
 	background-color: #fff;
 	position: relative;
@@ -1061,7 +1090,8 @@
 	display: block;
 	margin-right: 20rpx;
 	border: 1px solid #f5f5f5;
-	border-radius: 6rpx;
+	-webkit-border-radius: 6rpx;
+	        border-radius: 6rpx;
 }
 .tui-pro-tit.data-v-57280228 {
 
@@ -1073,11 +1103,13 @@
 }
 .tag-tit.data-v-57280228 {
 	/* 渐变色 */
+	background-image: -webkit-gradient(linear, left top, right top, from(#00C94A), to(#00AC3F));
 	background-image: -webkit-linear-gradient(left, #00C94A, #00AC3F);
 	background-image: linear-gradient(to right, #00C94A, #00AC3F);
 	margin-right: 10rpx;
 	padding: 0 10rpx;
-	border-radius: 15rpx 0 15rpx 0;
+	-webkit-border-radius: 15rpx 0 15rpx 0;
+	        border-radius: 15rpx 0 15rpx 0;
 	color: #fff;
 	font-size: 20rpx;
 }
@@ -1119,9 +1151,11 @@
 }
 .activetext.data-v-57280228 {
 	color: #fff !important;
+	background-image: -webkit-gradient(linear, left top, right top, from(#FF943D), to(#FF5600));
 	background-image: -webkit-linear-gradient(left, #FF943D, #FF5600);
 	background-image: linear-gradient(to right, #FF943D, #FF5600);
-	border-radius: 60rpx;
+	-webkit-border-radius: 60rpx;
+	        border-radius: 60rpx;
 }
 .tui-cent-tab.data-v-57280228 {
 	position: relative;
@@ -1133,7 +1167,8 @@
 	-webkit-box-pack: justify;
 	-webkit-justify-content: space-between;
 	        justify-content: space-between;
-	border-radius: 60rpx;
+	-webkit-border-radius: 60rpx;
+	        border-radius: 60rpx;
 	background-color: #f7f7f7;
 	margin-bottom: 80rpx;
 }
@@ -1173,7 +1208,8 @@
 	-webkit-justify-content: center;
 	        justify-content: center;
 	padding: 0 30rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 }
 
 /* 头部 */
@@ -1221,7 +1257,9 @@
 	width: 20px !important;
 	padding: 6px !important;
 
-	border-radius: 50%;
+	-webkit-border-radius: 50%;
+
+	        border-radius: 50%;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
@@ -1245,7 +1283,8 @@
 	left: 0;
 	top: 300rpx;
 	padding: 0 30rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	/* display: flex; */
 	-webkit-box-align: center;
 	-webkit-align-items: center;
@@ -1273,7 +1312,8 @@
 .tui-rolling-news.data-v-57280228 {
 	width: 100%;
 	padding: 12rpx 30rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;

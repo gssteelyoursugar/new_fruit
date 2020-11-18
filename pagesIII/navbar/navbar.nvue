@@ -1,14 +1,15 @@
 <template>
 	<view class="tui-tabs">
-		<scroll-view id="tab-bar" scroll-with-animation class="tui-scroll-h" :scroll-x="true" :show-scrollbar="false" :scroll-into-view="scrollInto">
+		<scroll-view id="tab-bar" scroll-with-animation class="tui-scroll-h" :scroll-x="true" :show-scrollbar="false"
+		 :scroll-into-view="scrollInto">
 			<view v-for="(tab, index) in tabBars" :key="tab.id" class="tui-tab-item" :id="tab.id" :data-current="index" @click="tabClick">
 				<!-- #ifndef APP-PLUS -->
 				<view class="tui-tab-item-title" :class="{ 'tui-tab-item-title-active': tabIndex == index }">
-				{{ tab.name }}
-				<view :class="{ 'tui-tab-item-title-active2': tabIndex == index }"> .</view>
+					{{ tab.name }}
+					<view :class="{ 'tui-tab-item-title-active2': tabIndex == index }"> .</view>
 				</view>
-				
-				
+
+
 				<!-- #endif -->
 			</view>
 		</scroll-view>
@@ -16,21 +17,13 @@
 		<swiper :current="tabIndex" class="tui-swiper-box" :duration="300" @change="tabChange">
 			<swiper-item class="tui-swiper-item" v-for="(tab, index1) in newsList" :key="index1">
 				<!-- #ifndef APP-NVUE -->
-				<scroll-view
-					class="tui-scroll-v"
-					refresher-enabled
-					:refresher-triggered="tab.refreshing"
-					refresher-background="#fafafa"
-					enable-back-to-top
-					:refresher-threshold="100"
-					scroll-y
-					@scrolltolower="loadMore(index)"
-					@refresherrefresh="onrefresh"
-				>
+				<scroll-view class="tui-scroll-v" refresher-enabled :refresher-triggered="tab.refreshing" refresher-background="#fafafa"
+				 enable-back-to-top :refresher-threshold="100" scroll-y @scrolltolower="loadMore(index)" @refresherrefresh="onrefresh">
 					<view class="tui-order-item" v-for="(item,index) in AfterSaleData" :key="index">
 						<tui-list-cell :hover="false" :lineLeft="false">
 							<view class="tui-goods-title">
-								<view class="order-munber-box"> <text>服务单号：{{item.after_sale_number}} </text> <text class="iconfont icon-lujing182" @click="clipboard(item.after_sale_number)"></text></view>
+								<view class="order-munber-box"> <text>服务单号：{{item.after_sale_number}} </text> <text class="iconfont icon-lujing182"
+									 @click="clipboard(item.after_sale_number)"></text></view>
 								<view class="tui-order-status" v-if="item.after_sale_status ==0 ">处理中</view>
 								<view class="tui-order-status" v-if="item.after_sale_status ==1 ">同意</view>
 								<view class="tui-order-status" v-if="item.after_sale_status ==2 ">拒绝</view>
@@ -38,41 +31,42 @@
 								<view class="tui-order-status" v-if="item.after_sale_status ==4 ">已确认</view>
 								<view class="tui-order-status" v-if="item.after_sale_status ==5 ">已取消</view>
 								<view class="tui-order-status11" v-if="item.after_sale_status ==11 ">处理完成</view>
-								
+
 							</view>
 						</tui-list-cell>
-						
-							<tui-list-cell padding="0" @click="detail(item.id)">
-								<view class="tui-goods-item">
-									<image :src="item.url" class="tui-goods-img"></image>
-									<view class="tui-goods-center">
-										<view class="tui-goods-name"><text class="tag-tit">采手精选</text>{{item.name}}</view>
-										<view class="tui-goods-attrp">
-											<text>毛重约{{ item.kg1 || 0}}斤/件</text>
-											<text class="goods-num">x{{item.goodsNumber}}</text>
-										</view>
-										<view class="tui-goods-flex">
-											<view class="tui-goods-attr1"><text class="iconyuan">￥</text> <text class="yuanText">{{item.goods_price}} </text><text class="yuanPrice">元</text> </view>
-											<view class="tui-goods-attr">实付: <text class="yuan-tui"> {{item.order_total_price}}</text> (免运费)</view>
-										</view>
+
+						<tui-list-cell padding="0" @click="detail(item.id)">
+							<view class="tui-goods-item">
+								<image :src="item.url" class="tui-goods-img"></image>
+								<view class="tui-goods-center">
+									<view class="tui-goods-name"><text class="tag-tit">采手精选</text>{{item.name}}</view>
+									<view class="chen_dead">
+										<text>毛重约{{ item.kg_1 || 0}}斤/件</text> <text class="goods-num">x{{item.goods_number}}</text>
+
+									</view>
+									<view class="tui-goods-flex">
+										<view class="tui-goods-attr1"><text class="iconyuan">￥</text> <text class="yuanText">{{item.goods_price}}
+											</text><text class="yuanPrice">元</text> </view>
+										<view class="tui-goods-attr">实付: <text class="yuan-tui"> {{item.order_total_price}}</text> (免运费)</view>
 									</view>
 								</view>
-							</tui-list-cell>
+							</view>
+						</tui-list-cell>
 						<view class="tui-order-btn">
 							<view class="tui-btn-ml" v-if="item.after_sale_status ==0 ||item.after_sale_status ==3 ">
-								<button  type="primary"  hover-class='none' class="icon-img3"  @tap="goAfterCancel(item.order_item_id,item.id)">取消申请</button>
+								<button type="primary" hover-class='none' class="icon-img3" @tap="goAfterCancel(item.order_item_id,item.id)">取消申请</button>
 							</view>
 							<view class="tui-btn-ml" v-if="item.after_sale_status ==5 ">
-								<button  type="primary"  hover-class='none' class="icon-img3"   @tap="goAfter(item.order_item_id)">重新申请</button>
+								<button type="primary" hover-class='none' class="icon-img3" @tap="goAfter(item.order_item_id)">重新申请</button>
 							</view>
 							<view class="tui-btn-ml" v-if="item.after_sale_status ==0||item.after_sale_status ==1||item.after_sale_status ==3||item.after_sale_status ==5 ">
-								<button  type="primary"  hover-class='none' class="icon-img3"  @tap="goAfterDetail(item.id)">申请详情</button>
+								<button type="primary" hover-class='none' class="icon-img3" @tap="goAfterDetail(item.id)">申请详情</button>
 							</view>
 							<view class="tui-btn-ml" v-if="item.after_sale_status ==11 ">
-								<button  type="primary"  hover-class='none' class="icon-img3" @tap="goAfterSaleDetail(item.id)">售后详情</button>
+								<button type="primary" hover-class='none' class="icon-img3" @tap="goAfterSaleDetail(item.id)">售后详情</button>
 							</view>
 							<view class="tui-btn-ml" v-if="item.after_sale_status ==3 ">
-								<button type="primary"   class="icon-img3" @tap="goAfterConfirm(item.id)" >去确认</button>
+								<button type="primary" class="icon-img3" @tap="goAfterConfirm(item.id)">去确认</button>
 							</view>
 						</view>
 					</view>
@@ -90,563 +84,576 @@
 				<view class="warp-text">确定要取消申请?</view>
 				<view class="warp-flex">
 					<button @click="goBack" plain="true" class="color-green"> 否</button>
-					<button @click="Goyes" plain="true"  class="color-green">是</button>
+					<button @click="Goyes" plain="true" class="color-green">是</button>
 				</view>
 			</view>
 		</view>
 	</view>
 </template>
 <script>
+	// 缓存最多页数
+	const MAX_CACHE_PAGEINDEX = 3;
+	// 缓存页签数量
+	const MAX_CACHE_PAGE = 3;
 
-// 缓存最多页数
-const MAX_CACHE_PAGEINDEX = 3;
-// 缓存页签数量
-const MAX_CACHE_PAGE = 3;
-
-const newsData = [];
-import {listing,publicing} from '../../api/api.js'
-	import {posAfterSaleList,postAfterCen,getBeConfirmed} from '../../api/request.js'
+	const newsData = [];
+	import {
+		listing,
+		publicing
+	} from '../../api/api.js'
+	import {
+		posAfterSaleList,
+		postAfterCen,
+		getBeConfirmed
+	} from '../../api/request.js'
 	var setdata = uni.getStorageSync('usermen')
-	var {log} = console
+	var {
+		log
+	} = console
 	const thorui = require("@/common/tui-clipboard/tui-clipboard.js")
-export default {
-	
-	data() {
-		return {
-			isIos: false,
-			newsList: [],
-			cacheTab: [],
-			tabIndex: 0,
-			tabBars: [
-			
-				{
-					name: '全部',
-					
-				},
-				{
-					name: '待确认',
-					
-				}
-			],
-			count:0,
-			currentTab: 0,
-			pageIndex: 1,
-			loadding: false,
-			pullUpOn: true,
-			scrollTop: 0,
-			AfterSaleData:[],//列表数据
-			modaishow:false,
-			flag:false,
-			itemid:'',
-			idNum:'',
-			scrollInto: '',
-			showTips: false,
-			pulling: false,
-		};
-	},
-	onLoad(options) {
-		this.id = options.id
-		this.postAfterSalelist()
-		this.getBeConfirmedData()
-		setTimeout(() => {
-			this.newsList = this.randomfn();
-			uni.getSystemInfo({
-				success: res => {
-					this.isIos = 'ios' == res.platform.toLocaleLowerCase();
-				}
-			});
-		}, 200);
-	},
-	methods: {
-		//确定取消
-		Goyes(){
+	export default {
+
+		data() {
+			return {
+				isIos: false,
+				newsList: [],
+				cacheTab: [],
+				tabIndex: 0,
+				tabBars: [
+
+					{
+						name: '全部',
+
+					},
+					{
+						name: '待确认',
+
+					}
+				],
+				count: 0,
+				currentTab: 0,
+				pageIndex: 1,
+				loadding: false,
+				pullUpOn: true,
+				scrollTop: 0,
+				AfterSaleData: [], //列表数据
+				modaishow: false,
+				flag: false,
+				itemid: '',
+				idNum: '',
+				scrollInto: '',
+				showTips: false,
+				pulling: false,
+			};
+		},
+		onLoad(options) {
+			this.id = options.id
+			this.postAfterSalelist()
+			this.getBeConfirmedData()
+			setTimeout(() => {
+				this.newsList = this.randomfn();
+				uni.getSystemInfo({
+					success: res => {
+						this.isIos = 'ios' == res.platform.toLocaleLowerCase();
+					}
+				});
+			}, 200);
+		},
+		methods: {
+			//确定取消
+			Goyes() {
 				var setdata = uni.getStorageSync('usermen')
-				let data ={
-					token:setdata,
-					orderItemId:this.itemid,
-					id:this.idNum
+				let data = {
+					token: setdata,
+					orderItemId: this.itemid,
+					id: this.idNum
 				}
 				log(data)
-				publicing(postAfterCen,data)
-				.then((res)=>{
-					log(res)
-					this.postAfterSalelist()
-					this.getBeConfirmedData()
-					this.messcancel()
-				})
-				.catch((err)=>{
-					log(err)
-				})
-		},
-		//获取待确认
-		getBeConfirmedData(){
-			
-			var setdata = uni.getStorageSync('usermen')
-			let data ={
-				token:"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzZXNzaW9uS2V5IjoiVVgwSEtIRC8yVUJnYm4ya0tGVSt3QT09Iiwiand0LWlkIjoiNGNhMzNkZGQtMjU1MC00M2IyLTkzZDAtNzE3MWNiOTA3ODNlIiwid3hPcGVuSWQiOiJvb0MwNDQxc0JvOTN1ODV0ZFVxSC1iY1Z0NXNVIn0.IEabjDYhD6_crxCFyc1L5LsJUOZTaCYgVHfw1mgjFwU"
-			}
-			listing(getBeConfirmed,data)
-			.then((res)=>{
-				log("res",res)
-				this.count = res.data.data.count
-				log(this.count)
-				
-				this.$set (this.tabBars, 1, {name:`待确认(${this.count})`})
-				
-			})
-			.catch((err)=>{
-				log(err)
-			})
-		},
-		//点击取消
-		goBack(){
-			this.messcancel()
-		},
-		
-		//售后列表请求
-		postAfterSalelist(){
-			var setdata = uni.getStorageSync('usermen')
-			let data ={
-				token:setdata,
-				afterSaleStatus:3
-				
-			}
-			if(this.tabIndex ===0 ){  //如果是默认全部不传afterSaleStatus参数
-				delete data.afterSaleStatus
-			}
-			
-			publicing(posAfterSaleList,data)
-			.then((res)=>{
-				log(res)
-				this.AfterSaleData = res.data.data 
-			})
-			.catch((err)=>{
-				log(err)
-			})
-		},
-			//重新申请售后
-					goAfter(id){
-						
-						uni.navigateTo({
-							url:'../../pagesIII/applyAfter/applyAfter?id=' + id
-						})
-					},
-		//复制
-		//event 当需要异步请求返回数据再进行复制时，需要传入此参数，或者异步方法转为同步方法（H5端）
-		clipboard(event) {
-			let data= event;
-			thorui.getClipboardData(data, (res) => {
-				// #ifdef H5 || MP-ALIPAY
-				if (res) {
-					this.tui.toast("复制成功")
-				} else {
-					this.tui.toast("复制失败")
-				}
-				// #endif
-				},event)
+				publicing(postAfterCen, data)
+					.then((res) => {
+						log(res)
+						this.postAfterSalelist()
+						this.getBeConfirmedData()
+						this.messcancel()
+					})
+					.catch((err) => {
+						log(err)
+					})
 			},
-			
+			//获取待确认
+			getBeConfirmedData() {
+
+				var setdata = uni.getStorageSync('usermen')
+				let data = {
+					token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzZXNzaW9uS2V5IjoiVVgwSEtIRC8yVUJnYm4ya0tGVSt3QT09Iiwiand0LWlkIjoiNGNhMzNkZGQtMjU1MC00M2IyLTkzZDAtNzE3MWNiOTA3ODNlIiwid3hPcGVuSWQiOiJvb0MwNDQxc0JvOTN1ODV0ZFVxSC1iY1Z0NXNVIn0.IEabjDYhD6_crxCFyc1L5LsJUOZTaCYgVHfw1mgjFwU"
+				}
+				listing(getBeConfirmed, data)
+					.then((res) => {
+						log("res", res)
+						this.count = res.data.data.count
+						log(this.count)
+
+						this.$set(this.tabBars, 1, {
+							name: `待确认(${this.count})`
+						})
+
+					})
+					.catch((err) => {
+						log(err)
+					})
+			},
+			//点击取消
+			goBack() {
+				this.messcancel()
+			},
+
+			//售后列表请求
+			postAfterSalelist() {
+				var setdata = uni.getStorageSync('usermen')
+				let data = {
+					token: setdata,
+					afterSaleStatus: 3
+
+				}
+				if (this.tabIndex === 0) { //如果是默认全部不传afterSaleStatus参数
+					delete data.afterSaleStatus
+				}
+
+				publicing(posAfterSaleList, data)
+					.then((res) => {
+						log(res)
+						this.AfterSaleData = res.data.data
+					})
+					.catch((err) => {
+						log(err)
+					})
+			},
+			//重新申请售后
+			goAfter(id) {
+
+				uni.navigateTo({
+					url: '../../pagesIII/applyAfter/applyAfter?id=' + id
+				})
+			},
+			//复制
+			//event 当需要异步请求返回数据再进行复制时，需要传入此参数，或者异步方法转为同步方法（H5端）
+			clipboard(event) {
+				let data = event;
+				thorui.getClipboardData(data, (res) => {
+					// #ifdef H5 || MP-ALIPAY
+					if (res) {
+						this.tui.toast("复制成功")
+					} else {
+						this.tui.toast("复制失败")
+					}
+					// #endif
+				}, event)
+			},
+
 			// 显示
-			init(){
+			init() {
 				this.modaishow = true
 			},
 			// 取消
-			messcancel(){
+			messcancel() {
 				this.modaishow = false
 			},
-		
-		//申请详情
-		goAfterDetail(id){
-			uni.navigateTo({
-				url:'../../pagesIII/afterDetails/afterDetails?id='+id
-			})
-		},
-		//售后详情
-		goAfterSaleDetail(id){
-			uni.navigateTo({
-				url:'../../pagesIII/AfterSaleDetails/AfterSaleDetails?id='+id
-			})
-		},
-		//取消申请
-		goAfterCancel(order_id,id){
-			this.init()
-			this.itemid = order_id
-			this.idNum = id
-			log(this.itemid)
-			
-			
-			
-			// this.Goyes(id)
-		},
-		//去确认售后/售后反馈
-		goAfterConfirm(id){
-			log(id)
-			uni.navigateTo({
-				url:'../../pagesIII/confirmAfter/confirmAfter?id='+id
-			})
-		},
-		change(e) {
-			this.currentTab = e.index
-			if(this.currentTab === 0  ){//全部默认0
+
+			//申请详情
+			goAfterDetail(id) {
+				uni.navigateTo({
+					url: '../../pagesIII/afterDetails/afterDetails?id=' + id
+				})
+			},
+			//售后详情
+			goAfterSaleDetail(id) {
+				uni.navigateTo({
+					url: '../../pagesIII/AfterSaleDetails/AfterSaleDetails?id=' + id
+				})
+			},
+			//取消申请
+			goAfterCancel(order_id, id) {
+				this.init()
+				this.itemid = order_id
+				this.idNum = id
+				log(this.itemid)
+
+
+
+				// this.Goyes(id)
+			},
+			//去确认售后/售后反馈
+			goAfterConfirm(id) {
+				log(id)
+				uni.navigateTo({
+					url: '../../pagesIII/confirmAfter/confirmAfter?id=' + id
+				})
+			},
+			change(e) {
+				this.currentTab = e.index
+				if (this.currentTab === 0) { //全部默认0
+					this.postAfterSalelist()
+					this.getBeConfirmedData()
+				} else if (this.currentTab === 1) { //待确认
+					this.postAfterSalelist()
+					this.getBeConfirmedData()
+				}
+			},
+			detail(id) {
+				return
+				// uni.navigateTo({
+				// 	url: '../orderDetail/orderDetail?id='+id
+				// })
+			},
+			randomfn() {
+				let ary = [];
+				for (let i = 0, length = this.tabBars.length; i < length; i++) {
+					let aryItem = {
+						loadingText: '正在加载...',
+						refreshing: false,
+						refreshText: '',
+						data: [],
+						isLoading: false,
+						pageIndex: 1
+					};
+					if (i === 0) {
+						aryItem.pageIndex = 2;
+						aryItem.data = aryItem.data.concat(newsData);
+					}
+					ary.push(aryItem);
+				}
+				return ary;
+			},
+			getList(index, refresh) {
+				let activeTab = this.newsList[index];
+				let list = newsData || [];
+				if (refresh) {
+					activeTab.data = [];
+					activeTab.loadingText = '正在加载...';
+					activeTab.pageIndex = 2;
+					activeTab.data = list || [];
+				} else {
+					activeTab.data = activeTab.data.concat(list);
+					activeTab.pageIndex++;
+					activeTab.isLoading = false;
+					//根据实际修改判断条件
+					if (activeTab.pageIndex > 3) {
+						activeTab.loadingText = '没有更多了';
+					}
+				}
+			},
+
+			loadMore(e) {
+				let activeTab = this.newsList[this.tabIndex];
+				if (activeTab.pageIndex < 4 && !activeTab.isLoading) {
+					activeTab.isLoading = true;
+					setTimeout(() => {
+						this.getList(this.tabIndex);
+					}, 300);
+				}
+			},
+			tabClick(e) {
+				let index = e.currentTarget.dataset.current;
+				this.switchTab(index);
+			},
+			tabChange(e) {
+				let index = e.target.current || e.detail.current;
+				this.switchTab(index);
 				this.postAfterSalelist()
 				this.getBeConfirmedData()
-			}else if (this.currentTab === 1 ){//待确认
+			},
+			switchTab(index) {
+				if (this.tabIndex === index) return;
+				if (this.newsList[index].data.length === 0) {
+					this.getList(index);
+				}
+				// 缓存 tabId
+				if (this.newsList[this.tabIndex].pageIndex > MAX_CACHE_PAGEINDEX) {
+					let isExist = this.cacheTab.indexOf(this.tabIndex);
+					if (isExist < 0) {
+						this.cacheTab.push(this.tabIndex);
+					}
+				}
+
+				this.tabIndex = index;
+				let scrollIndex = index - 1 < 0 ? 0 : index - 1;
+				this.scrollInto = this.tabBars[scrollIndex].id;
+
+				// 释放 tabId
+				if (this.cacheTab.length > MAX_CACHE_PAGE) {
+					let cacheIndex = this.cacheTab[0];
+					this.clearTabData(cacheIndex);
+					this.cacheTab.splice(0, 1);
+				}
+			},
+			clearTabData(e) {
+				this.newsList[e].data.length = 0;
+				this.newsList[e].loadingText = '加载更多...';
+			},
+			onrefresh(e) {
 				this.postAfterSalelist()
 				this.getBeConfirmedData()
-			}
-		},
-		detail(id) {
-			return
-			// uni.navigateTo({
-			// 	url: '../orderDetail/orderDetail?id='+id
-			// })
-		},
-		randomfn() {
-			let ary = [];
-			for (let i = 0, length = this.tabBars.length; i < length; i++) {
-				let aryItem = {
-					loadingText: '正在加载...',
-					refreshing: false,
-					refreshText: '',
-					data: [],
-					isLoading: false,
-					pageIndex: 1
-				};
-				if (i === 0) {
-					aryItem.pageIndex = 2;
-					aryItem.data = aryItem.data.concat(newsData);
+				var tab = this.newsList[this.tabIndex];
+				// #ifdef APP-PLUS
+				if (!tab.refreshFlag) {
+					return;
 				}
-				ary.push(aryItem);
-			}
-			return ary;
-		},
-		getList(index, refresh) {
-			let activeTab = this.newsList[index];
-			let list = newsData || [];
-			if (refresh) {
-				activeTab.data = [];
-				activeTab.loadingText = '正在加载...';
-				activeTab.pageIndex = 2;
-				activeTab.data = list || [];
-			} else {
-				activeTab.data = activeTab.data.concat(list);
-				activeTab.pageIndex++;
-				activeTab.isLoading = false;
-				//根据实际修改判断条件
-				if (activeTab.pageIndex > 3) {
-					activeTab.loadingText = '没有更多了';
-				}
-			}
-		},
-		
-		loadMore(e) {
-			let activeTab = this.newsList[this.tabIndex];
-			if (activeTab.pageIndex < 4 && !activeTab.isLoading) {
-				activeTab.isLoading = true;
-				setTimeout(() => {
-					this.getList(this.tabIndex);
-				}, 300);
-			}
-		},
-		tabClick(e) {
-			let index = e.currentTarget.dataset.current;
-			this.switchTab(index);
-		},
-		tabChange(e) {
-			let index = e.target.current || e.detail.current;
-			this.switchTab(index);
-			this.postAfterSalelist()
-			this.getBeConfirmedData()
-		},
-		switchTab(index) {
-			if (this.tabIndex === index) return;
-			if (this.newsList[index].data.length === 0) {
-				this.getList(index);
-			}
-			// 缓存 tabId
-			if (this.newsList[this.tabIndex].pageIndex > MAX_CACHE_PAGEINDEX) {
-				let isExist = this.cacheTab.indexOf(this.tabIndex);
-				if (isExist < 0) {
-					this.cacheTab.push(this.tabIndex);
-				}
-			}
-
-			this.tabIndex = index;
-			let scrollIndex = index - 1 < 0 ? 0 : index - 1;
-			this.scrollInto = this.tabBars[scrollIndex].id;
-
-			// 释放 tabId
-			if (this.cacheTab.length > MAX_CACHE_PAGE) {
-				let cacheIndex = this.cacheTab[0];
-				this.clearTabData(cacheIndex);
-				this.cacheTab.splice(0, 1);
-			}
-		},
-		clearTabData(e) {
-			this.newsList[e].data.length = 0;
-			this.newsList[e].loadingText = '加载更多...';
-		},
-		onrefresh(e) {
-			this.postAfterSalelist()
-			this.getBeConfirmedData()
-			var tab = this.newsList[this.tabIndex];
-			// #ifdef APP-PLUS
-			if (!tab.refreshFlag) {
-				return;
-			}
-			// #endif
-
-			// #ifndef APP-PLUS
-			if (tab.refreshing) {
-				return;
-			}
-			// #endif
-
-			tab.refreshing = true;
-			tab.refreshText = '正在刷新...';
-			
-
-			setTimeout(() => {
-				this.getList(this.tabIndex, true);
-				this.pulling = true;
-				tab.refreshing = false;
-				tab.refreshFlag = false;
-				tab.refreshText = '刷新成功';
-				// #ifndef H5
-				uni.showToast({
-					title: '刷新成功',
-					icon: 'none'
-				});
 				// #endif
+
+				// #ifndef APP-PLUS
+				if (tab.refreshing) {
+					return;
+				}
+				// #endif
+
+				tab.refreshing = true;
+				tab.refreshText = '正在刷新...';
+
+
 				setTimeout(() => {
-					// TODO fix ios和Android 动画时间相反问题
-					this.pulling = false;
-				}, 500);
-			}, 1000);
-		},
-	
-	}
-};
+					this.getList(this.tabIndex, true);
+					this.pulling = true;
+					tab.refreshing = false;
+					tab.refreshFlag = false;
+					tab.refreshText = '刷新成功';
+					// #ifndef H5
+					uni.showToast({
+						title: '刷新成功',
+						icon: 'none'
+					});
+					// #endif
+					setTimeout(() => {
+						// TODO fix ios和Android 动画时间相反问题
+						this.pulling = false;
+					}, 500);
+				}, 1000);
+			},
+
+		}
+	};
 </script>
 
 <style>
-/* #ifndef APP-PLUS */
-page {
-	width: 100%;
-	min-height: 100%;
-	display: flex;
-}
-
-/* #endif */
-
-.tui-tabs {
-	flex: 1;
-	flex-direction: column;
-	overflow: hidden;
-	background-color: #fafafa;
-	/* #ifdef MP-ALIPAY || MP-BAIDU */
-	height: 100vh;
-	/* #endif */
-}
-
-.tui-scroll-h {
-	text-align: center;
-	width: 750rpx;
-	height: 98rpx;
-	background-color: #ffffff;
-	flex-direction: row;
 	/* #ifndef APP-PLUS */
-	white-space: nowrap;
+	page {
+		width: 100%;
+		min-height: 100%;
+		display: flex;
+	}
+
 	/* #endif */
-	/* #ifdef H5 */
-	position: fixed;
-	top: 44px;
-	left: 0;
-	z-index:999;
+
+	.tui-tabs {
+		flex: 1;
+		flex-direction: column;
+		overflow: hidden;
+		background-color: #fafafa;
+		/* #ifdef MP-ALIPAY || MP-BAIDU */
+		height: 100vh;
+		/* #endif */
+	}
+
+	.tui-scroll-h {
+		text-align: center;
+		width: 750rpx;
+		height: 98rpx;
+		background-color: #ffffff;
+		flex-direction: row;
+		/* #ifndef APP-PLUS */
+		white-space: nowrap;
+		/* #endif */
+		/* #ifdef H5 */
+		position: fixed;
+		top: 44px;
+		left: 0;
+		z-index: 999;
+		/* #endif */
+	}
+
+	.tui-line-h {
+		/* #ifdef APP-PLUS */
+		height: 1rpx;
+		background-color: #cccccc;
+		/* #endif */
+		position: relative;
+	}
+
+	/* #ifndef APP-PLUS*/
+	.tui-line-h::after {
+		content: '';
+		position: absolute;
+		border-bottom: 1rpx solid #cccccc;
+		-webkit-transform: scaleY(0.5);
+		transform: scaleY(0.5);
+		bottom: 0;
+		right: 0;
+		left: 0;
+	}
+
 	/* #endif */
-}
 
-.tui-line-h {
-	/* #ifdef APP-PLUS */
-	height: 1rpx;
-	background-color: #cccccc;
-	/* #endif */
-	position: relative;
-}
-/* #ifndef APP-PLUS*/
-.tui-line-h::after {
-	content: '';
-	position: absolute;
-	border-bottom: 1rpx solid #cccccc;
-	-webkit-transform: scaleY(0.5);
-	transform: scaleY(0.5);
-	bottom: 0;
-	right: 0;
-	left: 0;
-}
-/* #endif */
+	.tui-tab-item {
+		/* #ifndef APP-PLUS */
+		display: inline-block;
+		/* #endif */
+		flex-wrap: nowrap;
+		padding-left: 104rpx;
+		padding-right: 104rpx;
+		text-align: center !important;
+	}
 
-.tui-tab-item {
-	/* #ifndef APP-PLUS */
-	display: inline-block;
-	/* #endif */
-	flex-wrap: nowrap;
-	padding-left: 104rpx;
-	padding-right: 104rpx;
-	text-align: center!important;
-}
+	.tui-tab-item-title {
+		width: 100%;
+		color: #555;
+		font-size: 30rpx;
+		height: 80rpx;
+		line-height: 80rpx;
+		flex-wrap: nowrap;
+		position: relative;
+		text-align: center !important;
+		/* #ifndef APP-PLUS */
+		white-space: nowrap;
+		/* #endif */
+	}
 
-.tui-tab-item-title {
-	width: 100%;
-	color: #555;
-	font-size: 30rpx;
-	height: 80rpx;
-	line-height: 80rpx;
-	flex-wrap: nowrap;
-	position: relative;
-	text-align: center!important;
-	/* #ifndef APP-PLUS */
-	white-space: nowrap;
-	/* #endif */
-}
+	.tui-tab-item-title-active {
+		width: 100%;
+		color: #00C52A;
+		font-size: 30rpx;
+		font-weight: bold;
+		/* border-bottom-width: 6rpx; */
+		border-style: solid;
+		border-color: #00C52A;
+		text-align: center !important;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 
-.tui-tab-item-title-active {
-	width: 100%;
-	color: #00C52A;
-	font-size: 30rpx;
-	font-weight: bold;
-	/* border-bottom-width: 6rpx; */
-	border-style: solid;
-	border-color: #00C52A;
-	text-align: center!important;
-	 display: flex;
-	  align-items: center;
-	  justify-content: center; 
-	
-	
-	
-	
-}
 
-.tui-tab-item-title-active2 {
-	width: 60rpx;
-	height: 4rpx;
-	background-color: #00C52A;
-	text-align: center!important;
-	border-radius: 4rpx;
-	
-	
-	
-	
-	
-}
 
-.tui-swiper-box {
-	flex: 1 !important;
-	/* #ifdef H5 */
-	margin-top: 80rpx;
-	/* #endif */
-}
 
-.tui-swiper-item {
-	flex: 1 !important;
-	flex-direction: row;
-}
+	}
 
-.tui-scroll-v {
-	flex: 1;
-	/* #ifndef MP-ALIPAY */
-	flex-direction: column;
-	/* #endif */
-	width: 750rpx;
-}
+	.tui-tab-item-title-active2 {
+		width: 60rpx;
+		height: 4rpx;
+		background-color: #00C52A;
+		text-align: center !important;
+		border-radius: 4rpx;
 
-.tui-update-tips {
-	position: absolute;
-	left: 0;
-	top: 41px;
-	right: 0;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	background-color: #fddd9b;
-	align-items: center;
-	justify-content: center;
-	text-align: center;
-}
 
-.tui-update-tips-text {
-	font-size: 14px;
-	color: #ffffff;
-}
 
-.tui-refresh {
-	width: 750rpx;
-	height: 64px;
-	justify-content: center;
-}
 
-.tui-refresh-view {
-	flex-direction: row;
-	flex-wrap: nowrap;
-	align-items: center;
-	justify-content: center;
-}
 
-.tui-refresh-icon {
-	width: 20px;
-	height: 20px;
-	transition-duration: 0.25s;
-	transition-property: transform;
-	transform: rotate(0deg);
-	transform-origin: 10px 10px;
-}
+	}
 
-.tui-refresh-icon-active {
-	transform: rotate(180deg);
-}
+	.tui-swiper-box {
+		flex: 1 !important;
+		/* #ifdef H5 */
+		margin-top: 80rpx;
+		/* #endif */
+	}
 
-.tui-loading-icon {
-	width: 20px;
-	height: 20px;
-	margin-right: 5px;
-	color: #999999;
-}
+	.tui-swiper-item {
+		flex: 1 !important;
+		flex-direction: row;
+	}
 
-.tui-loading-text {
-	margin-left: 2px;
-	font-size: 14px;
-	color: #999999;
-}
+	.tui-scroll-v {
+		flex: 1;
+		/* #ifndef MP-ALIPAY */
+		flex-direction: column;
+		/* #endif */
+		width: 750rpx;
+	}
 
-.tui-loading-more {
-	align-items: center;
-	justify-content: center;
-	padding-top: 15px;
-	padding-bottom: 15px;
-	text-align: center;
-	position: relative;
-}
-.tui-loadmore-line {
-	border-bottom-width: 1rpx;
-	border-bottom-style: solid;
-	border-bottom-color: #e5e5e5;
-	width: 320rpx;
-	position: absolute;
-	z-index: -1;
-}
+	.tui-update-tips {
+		position: absolute;
+		left: 0;
+		top: 41px;
+		right: 0;
+		padding-top: 5px;
+		padding-bottom: 5px;
+		background-color: #fddd9b;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+	}
 
-.tui-loading-more-text {
-	padding-left: 8rpx;
-	padding-right: 8rpx;
-	font-size: 28rpx;
-	line-height: 28rpx;
-	background-color: #fafafa;
-	text-align: center;
-	color: #999;
-}
+	.tui-update-tips-text {
+		font-size: 14px;
+		color: #ffffff;
+	}
 
-/* 内容 */
-.tui-order-item {
+	.tui-refresh {
+		width: 750rpx;
+		height: 64px;
+		justify-content: center;
+	}
+
+	.tui-refresh-view {
+		flex-direction: row;
+		flex-wrap: nowrap;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.tui-refresh-icon {
+		width: 20px;
+		height: 20px;
+		transition-duration: 0.25s;
+		transition-property: transform;
+		transform: rotate(0deg);
+		transform-origin: 10px 10px;
+	}
+
+	.tui-refresh-icon-active {
+		transform: rotate(180deg);
+	}
+
+	.tui-loading-icon {
+		width: 20px;
+		height: 20px;
+		margin-right: 5px;
+		color: #999999;
+	}
+
+	.tui-loading-text {
+		margin-left: 2px;
+		font-size: 14px;
+		color: #999999;
+	}
+
+	.tui-loading-more {
+		align-items: center;
+		justify-content: center;
+		padding-top: 15px;
+		padding-bottom: 15px;
+		text-align: center;
+		position: relative;
+	}
+
+	.tui-loadmore-line {
+		border-bottom-width: 1rpx;
+		border-bottom-style: solid;
+		border-bottom-color: #e5e5e5;
+		width: 320rpx;
+		position: absolute;
+		z-index: -1;
+	}
+
+	.tui-loading-more-text {
+		padding-left: 8rpx;
+		padding-right: 8rpx;
+		font-size: 28rpx;
+		line-height: 28rpx;
+		background-color: #fafafa;
+		text-align: center;
+		color: #999;
+	}
+
+	/* 内容 */
+	.tui-order-item {
 		margin-top: 20rpx;
 		border-radius: 10rpx;
 		overflow: hidden;
@@ -655,22 +662,23 @@ page {
 	.tui-goods-title {
 		width: 100%;
 		font-size: 28rpx;
-		flex-direction:row;
+		flex-direction: row;
 		align-items: center;
 		justify-content: space-between;
 	}
-	.icon-lujing182{
+
+	.icon-lujing182 {
 		font-size: 30rpx;
 		color: rgba(182, 182, 182, 1);
 		margin-left: 12rpx;
-		
-		
+
+
 	}
-	.order-munber{
-		
-	}
-	.order-munber-box{
-		flex-direction:row;
+
+	.order-munber {}
+
+	.order-munber-box {
+		flex-direction: row;
 		font-size: 28rpx;
 		color: rgba(85, 85, 85, 1);
 	}
@@ -679,25 +687,28 @@ page {
 		color: rgba(255, 119, 9, 1);
 		font-size: 24rpx;
 	}
+
 	.tui-order-status11 {
 		color: rgba(0, 197, 42, 1);
 		font-size: 24rpx;
 	}
-	.tag-tit{
-			/* 渐变色 */
-			background-image: linear-gradient(to right, #00C94A , #00AC3F);
-			margin-right: 10rpx;
-			padding: 0 10rpx;
-			border-radius: 15rpx 0 15rpx 0;
-			color: #fff;
-			font-size: 20rpx;
-			font-weight: 0;
-		}
+
+	.tag-tit {
+		/* 渐变色 */
+		background-image: linear-gradient(to right, #00C94A, #00AC3F);
+		margin-right: 10rpx;
+		padding: 0 10rpx;
+		border-radius: 15rpx 0 15rpx 0;
+		color: #fff;
+		font-size: 20rpx;
+		font-weight: 0;
+	}
+
 	.tui-goods-item {
 		width: 100%;
 		padding: 20rpx 30rpx;
 		box-sizing: border-box;
-		flex-direction:row;
+		flex-direction: row;
 		justify-content: space-between;
 	}
 
@@ -726,8 +737,9 @@ page {
 		line-height: 32rpx;
 		font-weight: 500;
 	}
-	.tui-goods-flex{
-		flex-direction:row;
+
+	.tui-goods-flex {
+		flex-direction: row;
 		justify-content: space-between;
 	}
 
@@ -743,13 +755,14 @@ page {
 		-webkit-box-orient: vertical;
 		-webkit-line-clamp: 2;
 	}
-	.tui-goods-attrp {
-		font-size: 24px;
+
+	.chen_dead {
+		font-size: 24rpx;
 		font-weight: 500;
 		color: rgba(102, 102, 102, 1);
 		line-height: 32rpx;
 		padding-top: 20rpx;
-	/* 	word-break: break-all;
+		/* 	word-break: break-all;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		display: -webkit-box;
@@ -758,21 +771,22 @@ page {
 		display: flex;
 		justify-content: space-between;
 	}
-	
-	
-	.tui-goods-attrp .goods-num {
+
+
+	.chen_dead .goods-num {
 		font-size: 28rpx;
 	}
-	
-	.yuan-tui{
+
+	.yuan-tui {
 		color: rgba(51, 51, 51, 1);
 		font-size: 14px;
 		font-weight: 500;
 		margin-left: 4rpx;
 
 	}
+
 	.tui-goods-attr1 {
-		
+
 		color: rgba(255, 86, 0, 1);
 		line-height: 32rpx;
 		padding-top: 20rpx;
@@ -783,15 +797,18 @@ page {
 		-webkit-box-orient: vertical;
 		-webkit-line-clamp: 2;
 	}
-	.iconyuan{
+
+	.iconyuan {
 		font-size: 8px;
 		color: rgba(255, 86, 0, 1);
 	}
-	.yuanText{
+
+	.yuanText {
 		font-size: 16px;
 		font-weight: bold;
 	}
-	.yuanPrice{
+
+	.yuanPrice {
 		font-size: 12px;
 	}
 
@@ -810,7 +827,7 @@ page {
 
 	.tui-goods-price {
 		width: 100%;
-		flex-direction:row;
+		flex-direction: row;
 		align-items: flex-end;
 		justify-content: flex-end;
 		font-size: 24rpx;
@@ -829,7 +846,7 @@ page {
 
 	.tui-order-btn {
 		width: 100%;
-		flex-direction:row;
+		flex-direction: row;
 		align-items: center;
 		justify-content: flex-end;
 		background: #fff;
@@ -840,101 +857,114 @@ page {
 	.tui-btn-ml {
 		margin-left: 20rpx;
 	}
-	.tui-btn-ml:last-child >>>.icon-img3{
-		background-image: linear-gradient(to right, #00C94A , #00AC3F);
-		color: #fff!important;
-		border: none!important;
-		
+
+	.tui-btn-ml:last-child>>>.icon-img3 {
+		background-image: linear-gradient(to right, #00C94A, #00AC3F);
+		color: #fff !important;
+		border: none !important;
+
 	}
-	.icon-img3{
-		background-color: #fff!important;
-		color: rgba(85, 85, 85, 1)!important;
-		width: 160rpx!important;
-		height: 56rpx!important;
+
+	.icon-img3 {
+		background-color: #fff !important;
+		color: rgba(85, 85, 85, 1) !important;
+		width: 160rpx !important;
+		height: 56rpx !important;
 		line-height: 56rpx;
-		font-size: 24rpx!important;
-		border-radius: 50rpx!important;
-		border: 1rpx solid rgba(204, 204, 204, 1)!important;
-		
-		
-	
+		font-size: 24rpx !important;
+		border-radius: 50rpx !important;
+		border: 1rpx solid rgba(204, 204, 204, 1) !important;
+
+
+
 	}
+
 	/* 去除button默认样式 */
-	
+
 	button::after {
-	border: none;
-	
+		border: none;
+
 	}
-	
+
 	button {
-	background-color: transparent;
-	
-	padding-left: 0;
-	
-	padding-right: 0;
-	
-	line-height:inherit;
-	border-radius:0;
-	
+		background-color: transparent;
+
+		padding-left: 0;
+
+		padding-right: 0;
+
+		line-height: inherit;
+		border-radius: 0;
+
 	}
-	
-	
+
+
 	/* 模态弹窗布局 */
-		.warp{
+	.warp {
 		position: fixed;
 		left: 0;
 		right: 0;
 		top: 0;
 		bottom: 0;
-		background: rgba(0,0,0,0.6);
-		z-index: 9999;}
-		.warp-view{width: 500upx;
-				height: 260upx;
-				background: #FFFFFF;
-				margin: auto;
-				position: absolute;
-				-webkit-position:absolute;
-				top: 0;
-				left: 0;
-				bottom: 0;
-				right: 0;
-				border-radius: 8upx;
-				overflow: hidden;
-				}
-		.warp-text{
-			text-align: center;
-			margin-top: 34upx;
-			font-size: 34upx;
-			color: #666666;
-				}
-		.warp-text1{
-			text-align: center;
-			height: 60rpx;
-			line-height: 60rpx;
-			font-size: 34upx;
-			color: #fff;
-			background-color: rgba(0, 197, 42, 1);
-				}		
-		.warp-flex{
-			flex-direction:row;
-			justify-content: space-around;
-			border-top: 1upx solid #EEEEEE;
-			position: absolute;
-			bottom: 0;
-			left: 0;
-			right: 0;
-			height: 80upx;
-			line-height: 80upx;
-			}
-			.color-green{
-				color: rgba(0, 197, 42, 1);
-			}
-		.warp-flex button{border: none;
+		background: rgba(0, 0, 0, 0.6);
+		z-index: 9999;
+	}
+
+	.warp-view {
+		width: 500upx;
+		height: 260upx;
+		background: #FFFFFF;
+		margin: auto;
+		position: absolute;
+		-webkit-position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		border-radius: 8upx;
+		overflow: hidden;
+	}
+
+	.warp-text {
+		text-align: center;
+		margin-top: 34upx;
+		font-size: 34upx;
+		color: #666666;
+	}
+
+	.warp-text1 {
+		text-align: center;
+		height: 60rpx;
+		line-height: 60rpx;
+		font-size: 34upx;
+		color: #fff;
+		background-color: rgba(0, 197, 42, 1);
+	}
+
+	.warp-flex {
+		flex-direction: row;
+		justify-content: space-around;
+		border-top: 1upx solid #EEEEEE;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: 80upx;
+		line-height: 80upx;
+	}
+
+	.color-green {
+		color: rgba(0, 197, 42, 1);
+	}
+
+	.warp-flex button {
+		border: none;
 		font-size: 30upx;
-		}
-			.warp-flex button:nth-child(2){
-				color: rgba(0, 197, 42, 1);
-			}
-		/*end  */
-	
+	}
+
+	.warp-flex button:nth-child(2) {
+		color: rgba(0, 197, 42, 1);
+	}
+
+	/*end  */
 </style>

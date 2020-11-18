@@ -204,11 +204,13 @@
 }
 .tag-tit{
 		/* 渐变色 */
+		background-image: -webkit-gradient(linear, left top, right top, from(#00C94A) , to(#00AC3F));
 		background-image: -webkit-linear-gradient(left, #00C94A , #00AC3F);
 		background-image: linear-gradient(to right, #00C94A , #00AC3F);
 		margin-right: 10rpx;
 		padding: 0 10rpx;
-		border-radius: 15rpx 0 15rpx 0;
+		-webkit-border-radius: 15rpx 0 15rpx 0;
+		        border-radius: 15rpx 0 15rpx 0;
 		color: #fff;
 		font-size: 20rpx;
 }
@@ -244,8 +246,10 @@
 }
 	/* end */
 .tui-button-primary{
-		border-radius: 60rpx;
+		-webkit-border-radius: 60rpx;
+		        border-radius: 60rpx;
 		/* 渐变色 */
+		background-image: -webkit-gradient(linear,   left top, right top,   from(rgba(0, 197, 42, 1)),to(rgba(0, 188, 69, 1)));
 		background-image: -webkit-linear-gradient(left,   rgba(0, 197, 42, 1),rgba(0, 188, 69, 1));
 		background-image: linear-gradient(to right,   rgba(0, 197, 42, 1),rgba(0, 188, 69, 1));
 		color: #fff;
@@ -253,7 +257,8 @@
 }
 .tui-btn-box {
 		padding: 40rpx 50rpx;
-		box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		        box-sizing: border-box;
 		background-color: #fff;
 }
 .tui-title {
@@ -334,9 +339,11 @@
 }
 	/*textarea*/
 .tui-textarea-box {
-		border-radius: 4rpx;
+		-webkit-border-radius: 4rpx;
+		        border-radius: 4rpx;
 		height: 240rpx;
-		box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		        box-sizing: border-box;
 		padding: 0rpx 0rpx 0 40rpx;
 		position: relative;
 		background-color: #fff;
@@ -400,18 +407,21 @@
 }
 .tag-tit{
 		/* 渐变色 */
+		background-image: -webkit-gradient(linear, left top, right top, from(#00C94A) , to(#00AC3F));
 		background-image: -webkit-linear-gradient(left, #00C94A , #00AC3F);
 		background-image: linear-gradient(to right, #00C94A , #00AC3F);
 		margin-right: 10rpx;
 		padding: 0 10rpx;
-		border-radius: 15rpx 0 15rpx 0;
+		-webkit-border-radius: 15rpx 0 15rpx 0;
+		        border-radius: 15rpx 0 15rpx 0;
 		color: #fff;
 		font-size: 20rpx;
 }
 .tui-goods-item {
 		width: 100%;
 		padding: 20rpx 30rpx;
-		box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		        box-sizing: border-box;
 		display: -webkit-box;
 		display: -webkit-flex;
 		display: flex;
@@ -431,7 +441,8 @@
 		-webkit-flex: 1;
 		        flex: 1;
 		padding: 20rpx 8rpx;
-		box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		        box-sizing: border-box;
 }
 .tui-goods-name {
 		/* max-width: 310rpx; */
@@ -502,7 +513,8 @@
 		        justify-content: flex-end;
 		background: #fff;
 		padding: 10rpx 30rpx 20rpx;
-		box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		        box-sizing: border-box;
 }
 .tui-btn-ml {
 		margin-left: 20rpx;

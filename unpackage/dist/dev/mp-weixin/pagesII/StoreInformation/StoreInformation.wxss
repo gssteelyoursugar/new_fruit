@@ -42,7 +42,8 @@
 .tui-list-title2 text.edit-btn{
 	display: inline-block;
 	padding: 4rpx 40rpx;
-	border-radius: 40rpx;
+	-webkit-border-radius: 40rpx;
+	        border-radius: 40rpx;
 	background: #ECFFF0;
 	border: 1px solid #00C52A;
 	color: #00C52A;
@@ -53,7 +54,8 @@
 	margin-top: 20rpx;
 }
 .tui-order-list .tui-order-item .tui-icon-box {
-	border-radius: 6rpx;
+	-webkit-border-radius: 6rpx;
+	        border-radius: 6rpx;
 	overflow: hidden;
 	padding: 10rpx;
 	border: 1px solid #e5e5e5;
@@ -64,7 +66,8 @@
 	background: #f5f5f5;
 	max-width: 300rpx;
 	max-height: 200rpx;
-	border-radius: 4rpx;
+	-webkit-border-radius: 4rpx;
+	        border-radius: 4rpx;
 }
 
 /*上传*/
@@ -125,7 +128,8 @@
 }
 .tui-line-cell {
 	width: 100%;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
@@ -165,7 +169,8 @@
 }
 .tui-btn-box {
 	padding: 40rpx 50rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 }
 .tui-button-gray {
 	margin-top: 30rpx;
@@ -180,7 +185,8 @@
 .tui-content-box {
 	width: 100%;
 	padding: 0 30rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	position: relative;
 	top: -172rpx;
 	z-index: 10;
@@ -188,8 +194,10 @@
 .tui-box {
 	width: 100%;
 	background: #fff;
-	box-shadow: 0 3rpx 20rpx rgba(183, 183, 183, 0.1);
-	border-radius: 10rpx;
+	-webkit-box-shadow: 0 3rpx 20rpx rgba(183, 183, 183, 0.1);
+	        box-shadow: 0 3rpx 20rpx rgba(183, 183, 183, 0.1);
+	-webkit-border-radius: 10rpx;
+	        border-radius: 10rpx;
 	overflow: hidden;
 }
 .tui-order-box {
@@ -199,7 +207,8 @@
 	width: 100%;
 
 	padding: 0 26rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
@@ -226,7 +235,8 @@
 	width: 100%;
 	margin: 20rpx 0;
 	padding: 0 24rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;

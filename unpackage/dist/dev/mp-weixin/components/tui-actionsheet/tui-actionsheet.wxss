@@ -17,8 +17,10 @@
 	min-height: 100rpx;
 }
 .tui-actionsheet-radius.data-v-3fa2aa4e {
-	border-top-left-radius: 20rpx;
-	border-top-right-radius: 20rpx;
+	-webkit-border-top-left-radius: 20rpx;
+	        border-top-left-radius: 20rpx;
+	-webkit-border-top-right-radius: 20rpx;
+	        border-top-right-radius: 20rpx;
 	overflow: hidden;
 }
 .tui-actionsheet-show.data-v-3fa2aa4e {
@@ -29,7 +31,8 @@
 .tui-actionsheet-tips.data-v-3fa2aa4e {
 	width: 100%;
 	padding: 40rpx 60rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	text-align: center;
 	background-color: #fff;
 	display: -webkit-box;

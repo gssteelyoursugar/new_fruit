@@ -87,7 +87,8 @@ to {
 	color: #ffffff;
 }
 .round{
-	border-radius: 20rpx;
+	-webkit-border-radius: 20rpx;
+	        border-radius: 20rpx;
 }
 
 

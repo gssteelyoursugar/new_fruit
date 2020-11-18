@@ -44,9 +44,15 @@
 					<view class="tui-padding tui-flex tui-total-flex">
 						<view style="font-size: 28rpx;color: #666666;margin-right: 12rpx;">共{{allGoodsNum}}件</view>
 						<view style="color: #B6B6B6;font-size: 28rpx;padding-right:20rpx" @click="open">查看清单</view>
+
 					</view>
 				</tui-list-cell>
-				
+				<!-- <view class="pop-tooltips-container">
+					<view class="tri-icon"></view>
+					<view class="tips-text">
+						请认真核对购买清单，若无质量问题不支持无理由退款
+					</view>
+				</view> -->
 			</view>
 			<view class="tui-top">
 				<tui-list-cell unlined :hover="insufficient" :radius="true" :arrow="insufficient">
@@ -214,7 +220,7 @@
 						//去除idList最后一个逗号
 						idList = idList.substring(0, idList.length - 1);
 						this.ids = idList
-						
+
 					})
 					.catch((err) => {
 						console.log(err)
@@ -290,7 +296,7 @@
 						// 		return
 						// 	}
 						// })
-						
+
 						//测试环境代码
 						uni.setClipboardData({
 							data: payinfo,
@@ -307,7 +313,7 @@
 									that.isPaying = false
 								} else if (res.cancel) {
 									that.isPaying = false
-									that.cancelOrder(orderNumber,setdata)
+									that.cancelOrder(orderNumber, setdata)
 									uni.showToast({
 										title: '订单已取消',
 										icon: 'none',
@@ -335,7 +341,7 @@
 				})
 			},
 			// 取消订单
-			cancelOrder(orderNumber,token) {
+			cancelOrder(orderNumber, token) {
 				let data = {
 					token: token,
 					orderNumber: orderNumber
@@ -369,14 +375,50 @@
 			var beforePage = pages[pages.length - 2]; // 前一个页面路径
 			if (beforePage.$page.fullPath === '/pages/order/order') {
 				this.gtePayORder(); //请求结算
-			} else if (beforePage.$page.fullPath == '/pagesIII/productDetail/productDetail') {
-			}
+			} else if (beforePage.$page.fullPath == '/pagesIII/productDetail/productDetail') {}
 		}
 
 	}
 </script>
 
 <style>
+	
+	.pop-tooltips-container {
+		text-align: center;
+		font-size: 24rpx;
+		color: #FF6500;
+		border: 1px solid #FF6500;
+		-webkit-border-radius: 10rpx;
+		border-radius: 10rpx;
+		width: 610rpx;
+		height: 60rpx;
+		line-height: 60rpx;
+		position: relative;
+		z-index: 1;
+		margin: 0 auto;
+
+	}
+	
+	.tri-icon {
+		position: absolute;
+		width: 20rpx;
+		height: 20rpx;
+		border: 1px solid #FF6500;
+		transform: rotate(45deg);
+		right: 24rpx;
+		top: -12rpx;
+		background: #fff;
+		z-index: -1;
+
+	}
+	
+	.tips-text {
+		background: #fff;
+		border-radius: 10rpx;
+		z-index: 3;
+		overflow: hidden;
+	}
+	
 	/* 弹层 */
 	.tui-list-title {
 		position: relative;
