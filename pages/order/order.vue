@@ -32,7 +32,7 @@
 							</label>
 							<view class="img-mask">
 								<image :src="itemTwo.url" class="tui-goods-img" @tap="gotoList(itemTwo.goodsId)" />
-								<view class="img-mask-item" v-if="item.number === 0">
+								<view class="img-mask-item" v-if="itemTwo.goodsNumber === 0">
 									<view class="item-text">抢光了</view>
 								</view>
 							</view>

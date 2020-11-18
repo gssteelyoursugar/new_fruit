@@ -512,7 +512,6 @@ var _console = console,log = _console.log;var cityData = __webpack_require__(/*!
      * 
      */
     postUpdateStore: function postUpdateStore(e) {
-      log(e);
       //表单规则
       var rules = [{
         name: "storeName",
@@ -528,15 +527,15 @@ var _console = console,log = _console.log;var cityData = __webpack_require__(/*!
         rule: ["required", "isMobile"],
         msg: ["请输入手机号", "请输入正确的手机号"] },
 
-      {
-        name: "address",
-        rule: ["minLength:4"], //可使用区间，此处主要测试功能
-        msg: ["请选择地区", "请选择地区!!!", "请选择地区!!!", "请选择地区!!!!"] },
-
+      // {
+      // 	name: "address",
+      // 	rule: ["required"], //可使用区间，此处主要测试功能
+      // 	msg: ["请选择地区"]
+      // },
       {
         name: "addressDetails",
-        rule: ["required", "isChinese", "minLength:4", "maxLength:30"], //可使用区间，此处主要测试功能
-        msg: ["请填写详细地址", "请填写详细地址!!!", "请填写详细地址!!!", "请填写详细地址!!!!"] }];
+        rule: ["required"], //可使用区间，此处主要测试功能
+        msg: ["请填写详细地址"] }];
 
 
 
@@ -729,8 +728,8 @@ var _console = console,log = _console.log;var cityData = __webpack_require__(/*!
       //表单规则
       var rules = [{
         name: "storeName",
-        rule: ["required", "isChinese", "minLength:2", "maxLength:6"], //可使用区间，此处主要测试功能
-        msg: ["请输入店铺名姓名", "姓名必须全部为中文", "姓名必须2个或以上字符", "姓名不能超过6个字符"] },
+        rule: ["required", "minLength:2", "maxLength:6"], //可使用区间，此处主要测试功能
+        msg: ["请输入店铺名姓名", "姓名必须2个或以上字符", "姓名不能超过6个字符"] },
       {
         name: "mobile",
         rule: ["required", "isMobile"],

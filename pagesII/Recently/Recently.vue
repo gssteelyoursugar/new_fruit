@@ -32,7 +32,7 @@
 									<!-- //v-for="dt of item.list" :key="idx" -->
 									<view class="img-mask">
 										<image :src="dt.url" class="tui-goods-img" />
-										<view class="img-mask-item" v-if="item.number === 0">
+										<view class="img-mask-item" v-if="dt.number === 0">
 											<view class="item-text">抢光了</view>
 										</view>
 									</view>

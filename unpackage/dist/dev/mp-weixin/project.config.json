@@ -1,71 +1,89 @@
 {
-  "description": "项目配置文件。",
-  "packOptions": {
-    "ignore": []
-  },
-  "setting": {
-    "urlCheck": false,
-    "es6": true,
-    "postcss": true,
-    "minified": true
-  },
-  "compileType": "miniprogram",
-  "libVersion": "",
-  "appid": "wxc3f10711eb743246",
-  "projectname": "fruit-test",
-  "condition": {
-    "search": {
-      "current": -1,
-      "list": []
-    },
-    "conversation": {
-      "current": -1,
-      "list": []
-    },
-    "game": {
-      "current": -1,
-      "list": []
-    },
-    "miniprogram": {
-      "current": 1,
-      "list": [
-        {
-          "name": "我的123",
-          "query": "",
-          "id": 0,
-          "pathName": "pages/my/my"
-        },
-        {
-          "name": "进货单",
-          "query": "",
-          "id": 1,
-          "pathName": "pages/order/order"
-        },
-        {
-          "name": "我的订单",
-          "query": "",
-          "id": 2,
-          "pathName": "pagesII/myOrder/myOrder"
-        },
-        {
-          "name": "详情",
-          "query": "id=1314864767386910720&__id__=1",
-          "id": 3,
-          "pathName": "pagesIII/productDetail/productDetail"
-        },
-        {
-          "name": "确认订单",
-          "query": "ids=1311225686585892864&__id__=1",
-          "id": 4,
-          "pathName": "pagesIII/submitOrder/submitOrder"
-        },
-        {
-          "name": "支付成功",
-          "query": "",
-          "id": 5,
-          "pathName": "pagesIII/PayOK/PayOK"
-        }
-      ]
-    }
-  }
+	"description": "项目配置文件。",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"preloadBackgroundData": false,
+		"minified": true,
+		"newFeature": true,
+		"coverView": true,
+		"autoAudits": false,
+		"showShadowRootInWxmlPanel": true,
+		"scopeDataCheck": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		},
+		"useCompilerModule": false,
+		"userConfirmedUseCompilerModuleSwitch": false
+	},
+	"compileType": "miniprogram",
+	"libVersion": "",
+	"appid": "wx57b8cd1492538bbf",
+	"projectname": "fruit-test",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"current": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 1,
+			"list": [
+				{
+					"name": "我的123",
+					"query": "",
+					"id": 0,
+					"pathName": "pages/my/my"
+				},
+				{
+					"name": "进货单",
+					"query": "",
+					"id": 1,
+					"pathName": "pages/order/order"
+				},
+				{
+					"name": "我的订单",
+					"query": "",
+					"id": 2,
+					"pathName": "pagesII/myOrder/myOrder"
+				},
+				{
+					"name": "详情",
+					"query": "id=1314864767386910720&__id__=1",
+					"id": 3,
+					"pathName": "pagesIII/productDetail/productDetail"
+				},
+				{
+					"name": "确认订单",
+					"query": "ids=1311225686585892864&__id__=1",
+					"id": 4,
+					"pathName": "pagesIII/submitOrder/submitOrder"
+				},
+				{
+					"name": "支付成功",
+					"query": "",
+					"id": 5,
+					"pathName": "pagesIII/PayOK/PayOK"
+				}
+			]
+		}
+	}
 }

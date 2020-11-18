@@ -395,13 +395,13 @@
 					},
 					{
 						name: "address",
-						rule: ["minLength:4"], //可使用区间，此处主要测试功能
-						msg: ["请选择地区", "请选择地区!!!", "请选择地区!!!", "请选择地区!!!!"]
+						rule: ["required"], 
+						msg: ["请选择地区"]
 					},
 					{
 						name: "address2",
-						rule: ["required", "isChinese", "minLength:4", "maxLength:30"], //可使用区间，此处主要测试功能
-						msg: ["请填写详细地址", "请填写详细地址!!!", "请填写详细地址!!!", "请填写详细地址!!!!"]
+						rule: ["required"], //可使用区间，此处主要测试功能
+						msg: ["请填写详细地址"]
 					},
 
 				];
@@ -513,8 +513,8 @@
 				//表单规则
 				let rules = [{
 						name: "storeName",
-						rule: ["required", "isChinese", "minLength:2", "maxLength:6"], //可使用区间，此处主要测试功能
-						msg: ["请输入店铺名", "姓名必须全部为中文", "姓名必须2个或以上字符", "姓名不能超过6个字符"]
+						rule: ["required", "minLength:2", "maxLength:6"], //可使用区间，此处主要测试功能
+						msg: ["请输入店铺名", "姓名必须2个或以上字符", "姓名不能超过6个字符"]
 					},
 					{
 						name: "storeName",

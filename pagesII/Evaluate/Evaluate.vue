@@ -9,7 +9,7 @@
 			<view class="tui-tab-rank-cent" @click="clickToDetail(itm.id)" v-for="(itm,idx) of item.list" :key="idx">
 				<view class="img-mask">
 					<image :src="itm.url" mode="aspectFill" class="img-rink"></image>
-					<view class="img-mask-item" v-if="item.number === 0">
+					<view class="img-mask-item" v-if="itm.number === 0">
 						<view class="item-text">抢光了</view>
 					</view>
 				</view>
