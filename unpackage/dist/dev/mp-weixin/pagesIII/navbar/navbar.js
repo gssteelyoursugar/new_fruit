@@ -263,13 +263,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 var _api = __webpack_require__(/*! ../../api/api.js */ 20);
 
 
 
 var _request = __webpack_require__(/*! ../../api/request.js */ 22); //
-//
 //
 //
 //
@@ -398,7 +396,8 @@ var MAX_CACHE_PAGE = 3;var newsData = [];var setdata = uni.getStorageSync('userm
     goBack: function goBack() {this.messcancel();}, //售后列表请求
     postAfterSalelist: function postAfterSalelist() {var _this4 = this;var setdata = uni.getStorageSync('usermen');var data = { token: setdata, afterSaleStatus: 3 };if (this.tabIndex === 0) {//如果是默认全部不传afterSaleStatus参数
         delete data.afterSaleStatus;}(0, _api.publicing)(_request.posAfterSaleList, data).then(function (res) {log(res);_this4.AfterSaleData = res.data.data;}).catch(function (err) {log(err);});}, //重新申请售后
-    goAfter: function goAfter(id) {uni.navigateTo({
+    goAfter: function goAfter(id) {
+      uni.navigateTo({
         url: '../../pagesIII/applyAfter/applyAfter?id=' + id });
 
     },

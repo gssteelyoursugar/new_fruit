@@ -11,7 +11,7 @@
 				<view class="tag-tit2">
 					<view class=" ">
 						<view class="tag-tit2-price">
-							{{DetailsData.specification}}×{{DetailsData.goods_number}}
+							毛重约{{DetailsData.kg_1}}斤/件×{{DetailsData.goods_number}}
 						</view>
 						<view class="flex-tui">
 							<view class="tag-tit2-text">

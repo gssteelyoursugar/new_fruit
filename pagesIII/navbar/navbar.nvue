@@ -40,9 +40,8 @@
 								<image :src="item.url" class="tui-goods-img"></image>
 								<view class="tui-goods-center">
 									<view class="tui-goods-name"><text class="tag-tit">采手精选</text>{{item.name}}</view>
-									<view class="chen_dead">
-										<text>毛重约{{ item.kg_1 || 0}}斤/件</text> <text class="goods-num">x{{item.goods_number}}</text>
-
+									<view class="chen_dead tui-goods-flex">
+										<view>毛重约{{ item.kg_1 || 0}}斤/件 </view> <view> x{{item.goods_number}}</view>
 									</view>
 									<view class="tui-goods-flex">
 										<view class="tui-goods-attr1"><text class="iconyuan">￥</text> <text class="yuanText">{{item.goods_price}}
@@ -713,10 +712,11 @@
 	}
 
 	.tui-goods-img {
-		width: 180rpx;
-		height: 180rpx;
+		width: 140rpx;
+		height: 140rpx;
 		display: block;
 		flex-shrink: 0;
+		border-radius: 10rpx;
 	}
 
 	.tui-goods-center {
@@ -768,8 +768,6 @@
 		display: -webkit-box;
 		-webkit-box-orient: vertical;
 		-webkit-line-clamp: 2; */
-		display: flex;
-		justify-content: space-between;
 	}
 
 

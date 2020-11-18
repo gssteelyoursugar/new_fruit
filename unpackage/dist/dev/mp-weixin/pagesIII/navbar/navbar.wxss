@@ -333,11 +333,13 @@ page {
 	        justify-content: space-between;
 }
 .tui-goods-img {
-	width: 180rpx;
-	height: 180rpx;
+	width: 140rpx;
+	height: 140rpx;
 	display: block;
 	-webkit-flex-shrink: 0;
 	        flex-shrink: 0;
+	-webkit-border-radius: 10rpx;
+	        border-radius: 10rpx;
 }
 .tui-goods-center {
 	-webkit-box-flex: 1;
@@ -392,12 +394,6 @@ page {
 	display: -webkit-box;
 	-webkit-box-orient: vertical;
 	-webkit-line-clamp: 2; */
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: flex;
-	-webkit-box-pack: justify;
-	-webkit-justify-content: space-between;
-	        justify-content: space-between;
 }
 .chen_dead .goods-num {
 	font-size: 28rpx;
