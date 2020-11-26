@@ -357,6 +357,7 @@ var _console = console,log = _console.log;var cityData = __webpack_require__(/*!
     //地址选择弹出
 
     picker: function picker(e) {
+
       //获取选中的三级信息
       var value = e.detail.value; //这个是三级的picker分别选中的下标，value=[].length = 3,第一个是一级，第二个是二级。。。
       var one = this.addressOne[value[0]];
@@ -392,7 +393,7 @@ var _console = console,log = _console.log;var cityData = __webpack_require__(/*!
     },
     columnPicker: function columnPicker(e) {
 
-
+      console.log(e);
       //第几列 下标从0开始,0=一级选择，1=二级选择，2=三级选择
       var column = e.detail.column;
       //第几行 下标从0开始

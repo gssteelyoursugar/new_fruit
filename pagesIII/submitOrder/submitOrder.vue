@@ -270,62 +270,62 @@
 							orderNumber
 						} = res.data.data
 						//正式环境代码
-						// let tmp = JSON.parse(payinfo)
-						// uni.requestPayment({
-						// 	timeStamp: tmp.timeStamp,
-						// 	nonceStr: tmp.nonceStr,
-						// 	package: tmp.package,
-						// 	signType: tmp.signType,
-						// 	paySign: tmp.paySign,
-						// 	success(resovle) {
-						// 		uni.showToast({
-						// 			title:"支付成功"
-						// 		})
-						// 		uni.switchTab({
-						// 			url: '../../pages/my/my'
-						// 		})
-						// 		that.isPaying = false
-						// 	},
-						// 	fail(reject) {
-						// 		uni.showToast({
-						// 			title:"取消支付",
-						// 			icon: 'none'
-						// 		})
-						// 		that.cancelOrder(orderNumber,setdata)
-						// 		that.isPaying = false
-						// 		return
-						// 	}
-						// })
-
-						//测试环境代码
-						uni.setClipboardData({
-							data: payinfo,
-							success() {
-								uni.hideToast()
+						let tmp = JSON.parse(payinfo)
+						uni.requestPayment({
+							timeStamp: tmp.timeStamp,
+							nonceStr: tmp.nonceStr,
+							package: tmp.package,
+							signType: tmp.signType,
+							paySign: tmp.paySign,
+							success(resovle) {
+								uni.showToast({
+									title:"支付成功"
+								})
+								uni.switchTab({
+									url: '../../pages/my/my'
+								})
+								that.isPaying = false
+							},
+							fail(reject) {
+								uni.showToast({
+									title:"取消支付",
+									icon: 'none'
+								})
+								that.cancelOrder(orderNumber,setdata)
+								that.isPaying = false
+								return
 							}
 						})
-						uni.showModal({
-							title: '提示',
-							content: '确认支付',
-							success: (res) => {
-								if (res.confirm) {
-									that.btnPay()
-									that.isPaying = false
-								} else if (res.cancel) {
-									that.isPaying = false
-									that.cancelOrder(orderNumber, setdata)
-									uni.showToast({
-										title: '订单已取消',
-										icon: 'none',
-										duration: 2000
-									})
-									uni.switchTab({
-										url: '../../pages/my/my'
-									})
-									return
-								}
-							}
-						});
+
+						//测试环境代码
+						// uni.setClipboardData({
+						// 	data: payinfo,
+						// 	success() {
+						// 		uni.hideToast()
+						// 	}
+						// })
+						// uni.showModal({
+						// 	title: '提示',
+						// 	content: '确认支付',
+						// 	success: (res) => {
+						// 		if (res.confirm) {
+						// 			that.btnPay()
+						// 			that.isPaying = false
+						// 		} else if (res.cancel) {
+						// 			that.isPaying = false
+						// 			that.cancelOrder(orderNumber, setdata)
+						// 			uni.showToast({
+						// 				title: '订单已取消',
+						// 				icon: 'none',
+						// 				duration: 2000
+						// 			})
+						// 			uni.switchTab({
+						// 				url: '../../pages/my/my'
+						// 			})
+						// 			return
+						// 		}
+						// 	}
+						// });
 					})
 					.catch((err) => {
 						log(err)

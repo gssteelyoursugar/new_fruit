@@ -133,7 +133,7 @@
 				//地图信息
 				selectList: cityData, //接口返回picker数据,此处就直接使用本地测试数据
 				multiArray: [], //picker数据
-				value: [0, 0, 0],
+				value: [19, 0, 0],
 				text1: "请选择店铺所处省市区",
 				id: "",
 				addressAllData: [], //全国三级地址
@@ -189,8 +189,10 @@
 			//地址选择弹出
 			picker: function(e) {
 				//获取选中的三级信息
-				let value = e.detail.value; //这个是三级的picker分别选中的下标，value=[].length = 3,第一个是一级，第二个是二级。。。
+				let value = e.detail.value; //这个是三级的picker分别选中的下标，value=[0,0,0].length = 3,第一个是一级，第二个是二级。。。
+				console.log(value,this.addressOne)
 				let one = this.addressOne[value[0]];
+				
 				let two = this.addressTwo[value[1]];
 				let three = this.addressThree[value[2]];
 				this.text1 = one.name + " " + two.name + " " + three.name;
@@ -211,10 +213,14 @@
 				return arr;
 			},
 			columnPicker: function(e) {
-				//第几列 下标从0开始,0=一级选择，1=二级选择，2=三级选择
+				// 处理逻辑： 首先默认获取 一级省市。
+				// 想要默认显示哪一个，就去data中设置value：[0，0，0]的第一个值
+				// 这个columnPicker方法是有滚动行为（省/市/区）发生变化才会触发，e.detail.column对应的是当前选中的省/市/区的下标
+				// 选中之后就根据下标获取对应的（市/区）
 				let column = e.detail.column;
 				//第几行 下标从0开始
-				let value = e.detail.value;
+				console.log(e)
+				let value = e.detail.value; // 
 				if (column === 0) {
 					//获取一级选中的地址信息
 					let one = this.addressOne[value]
@@ -258,7 +264,7 @@
 						this.addressAllData = res.data
 						//初始化三级信息
 						this.addressOne = this.getAddressByPId("0") //一级地址
-						this.addressTwo = this.getAddressByPId(this.addressOne[0].id) //默认显示一级的第一个地址的二级地址
+						this.addressTwo = this.getAddressByPId(this.addressOne[19].id) //默认显示一级的第一个地址的二级地址
 						this.addressThree = this.getAddressByPId(this.addressTwo[0].id) //默认显示二级的第一个地址的三级地址
 						this.multiArray = [
 							this.toArr(this.addressOne),
