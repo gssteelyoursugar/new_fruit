@@ -260,7 +260,8 @@
 					</view>
 				</view>
 			</view>
-			<tui-nomore v-if="!pullUpOn"></tui-nomore>
+			<tui-nomore v-if="noMore"></tui-nomore>
+			<back-top :scrollTop="topss"></back-top>
 			<view class="tui-safearea-bottom"></view>
 		</view>
 	</view>
@@ -307,6 +308,7 @@
 		},
 		data() {
 			return {
+				topss: 0,
 				showAuthTips: true,
 				address: '', //地址
 				ApproveStatus: 0,
@@ -334,12 +336,6 @@
 				mm: 0,
 				ss1: 59,
 				imageUrl: "/static/images/paihang@2x.png",
-				rankBgUrl: "/static/images/paihangbang@2x.png",
-				bannerIndex: 0,
-				menuShow: false,
-				popupShow: false,
-				value: 1,
-				collected: false,
 				WxActivityID: '', //限量批请求id
 				IndexGoods: [],
 				WxActivity: {}, //限量批
@@ -350,7 +346,6 @@
 				WxIndexViewpager: [], //轮播
 				HotVarieties: [], //分类列表区
 				url: 'http://192.168.1.10:8980/',
-				// url:'http://120.25.195.214:8980/js',
 				opcity: 0.3, //渐变
 				bgOpcity: 1,
 				scrollH: 0, //滚动总高度
@@ -360,7 +355,7 @@
 				canSee: 1,
 				num: 0,
 				Sumify: '1', //推荐好货请求页码
-				pullUpOn: true, //加载完了
+				noMore: false, //加载完了
 				loadding: false,
 				pageIndex: 1,
 				praiseNum: 0,
@@ -420,15 +415,110 @@
 				weatherObj: {
 					weather: "",
 					temperature: ""
+				},
+				tempData: {
+					pageNo: 1,
+					pageSize: 10
 				}
 			}
 		},
+		
+		onReachBottom() {
+			console.log(123);
+			if (!this.noMore) {
+				this.tempData.pageNo++
+				this.getIndexClass()
+			}  else {
+				uni.showToast({
+					title: "没有更多啦~",
+					icon: 'none'
+				})
+			}
+		},
 		methods: {
-			goToLimit() {
+			//推荐好货请求
+			flexClick(e) {
+				this.num = e
+				this.IndexGoods = []
+				this.tempData.pageNo = 1
+				this.noMore = false
+				if (this.num === 0) {
+					this.Sumify = 1
+				} else if (this.num === 1) {
+					this.Sumify = 2
+				} else if (this.num === 2) {
+					this.Sumify = 3
+				}
+				this.getIndexClass()
+				
+			},
+			//请求首页列表
+			getIndexClass() {
+				let data2 = Object.assign({indexClassify: this.Sumify,},this.tempData) 
+				console.log(data2)
+				listing(getClassify, data2)
+					.then((res) => {
+						//处理数据格式,praiseNumber
+						let goodsData = res.data.data.data;
+						// this.IndexGoods = goodsData //【1】首页分类数据
+						
+							if(goodsData.length ==0 || goodsData.length < this.tempData.pageSize) {
+								this.noMore = true
+								return
+							} else {
+								this.IndexGoods = this.IndexGoods.concat(goodsData)
+								this.noMore = false
+						} 
+					
+					})
+					.catch((err) => {
+						log(err)
+					})
+			},
+			//请求首页
+			getHomelist() {
+				let setdata = uni.getStorageSync('usermen')
+				let data = {
+					pageNo: '1',
+					pageSize: '1000',
+					token: setdata
+				}
+				listing(getIndex, data) //请求首页数据接口
+					// listing(getIndex,data) //单发请求
+					.then((res) => {
+						console.log(res);
+						this.address = res.data.data.address
+						this.HotVarieties = res.data.data.HotVarieties //【0】首页分类列表
+						this.WxTopNavigationBar = res.data.data.WxTopNavigationBar
+						this.WxIndexViewpager = res.data.data.WxIndexViewpager
+						this.WxPublicMsg = res.data.data.WxPublicMsg
+						this.WxPublicMsgID = res.data.data.WxPublicMsg.id //公告id
+						this.WxPostersBottomAdve = res.data.data.WxPostersBottomAdve
+						this.NewGoods = res.data.data.NewGoods.goods //新果上市
+						this.WxActivity = res.data.data.WxActivity //限量区数据ID+倒计时
+						this.WxActivityID = res.data.data.WxActivity.id //限量区数据ID+倒计时
+						this.WxActivityList = res.data.data.WxActivity.list //首页限量区数据
+						this.startTime = res.data.data.WxActivity.startTime
+						this.endTime = res.data.data.WxActivity.endTime
+						this.createTime = res.data.data.WxActivity.createTime
+						this.ts = (this.endTime - this.createTime) / 1000
+						this.dd = parseInt(this.ts / 60 / 60 / 24, 10); //计算剩余的天数
+						this.hh = parseInt(this.ts / 60 / 60 % 24, 10); //计算剩余的小时数
+						this.mm = parseInt(this.ts / 60 % 60); //计算剩余的分钟数
+						this.ss = parseInt(this.ts % 60, 10); //计算剩余的秒数
+					})
+					.catch((err) => {
+						console.log(err)
+					})
+			},
+			
+			// 点击轮播图跳转			
+			goToLimit(val) {
 				uni.navigateTo({
-					url: "../../pagesII/Limit/Limit?id=1327960611696472064"
+					url: val.url
 				})
 			},
+			
 			getMerchants() {
 				let setdata = uni.getStorageSync('usermen')
 				if (!setdata) {
@@ -539,6 +629,7 @@
 			},
 			// 头部
 			onPageScroll(e) {
+				this.topss = e.scrollTop
 				if (this.statusHeight > 20) {
 					if (e.scrollTop < 20) {
 						this.canSee = 1 - (e.scrollTop / 10)
@@ -626,58 +717,7 @@
 					this.usering = setdata
 				}
 			},
-			//请求首页
-			getHomelist() {
-				let setdata = uni.getStorageSync('usermen')
-				let data = {
-					pageNo: '1',
-					pageSize: '1000',
-					token: setdata
-				}
-				listing(getIndex, data) //请求首页数据接口
-					// listing(getIndex,data) //单发请求
-					.then((res) => {
-						this.address = res.data.data.address
-						this.HotVarieties = res.data.data.HotVarieties //【0】首页分类列表
-						this.WxTopNavigationBar = res.data.data.WxTopNavigationBar
-						this.WxIndexViewpager = res.data.data.WxIndexViewpager
-						this.WxPublicMsg = res.data.data.WxPublicMsg
-						this.WxPublicMsgID = res.data.data.WxPublicMsg.id //公告id
-						this.WxPostersBottomAdve = res.data.data.WxPostersBottomAdve
-						this.NewGoods = res.data.data.NewGoods.goods //新果上市
-						this.WxActivity = res.data.data.WxActivity //限量区数据ID+倒计时
-						this.WxActivityID = res.data.data.WxActivity.id //限量区数据ID+倒计时
-						this.WxActivityList = res.data.data.WxActivity.list //首页限量区数据
-						this.startTime = res.data.data.WxActivity.startTime
-						this.endTime = res.data.data.WxActivity.endTime
-						this.createTime = res.data.data.WxActivity.createTime
-						this.ts = (this.endTime - this.createTime) / 1000
-						this.dd = parseInt(this.ts / 60 / 60 / 24, 10); //计算剩余的天数
-						this.hh = parseInt(this.ts / 60 / 60 % 24, 10); //计算剩余的小时数
-						this.mm = parseInt(this.ts / 60 % 60); //计算剩余的分钟数
-						this.ss = parseInt(this.ts % 60, 10); //计算剩余的秒数
-					})
-					.catch((err) => {
-						console.log(err)
-					})
-			},
-			//请求首页列表
-			getIndexClass() {
-				let data2 = {
-					pageNo: '1',
-					pageSize: '10000',
-					indexClassify: this.Sumify,
-				}
-				listing(getClassify, data2)
-					.then((res) => {
-						//处理数据格式,praiseNumber
-						let goodsData = res.data.data.data;
-						this.IndexGoods = goodsData //【1】首页分类数据
-					})
-					.catch((err) => {
-						log(err)
-					})
-			},
+			
 			//数据处理方法
 			numConvert(num) {
 				if (num >= 10000) {
@@ -696,20 +736,7 @@
 				}
 				return num;
 			},
-			//推荐好货请求
-			flexClick(e) {
-				this.num = e
-				if (this.num === 0) {
-					this.Sumify = 1
-					this.getIndexClass()
-				} else if (this.num === 1) {
-					this.Sumify = 2
-					this.getIndexClass()
-				} else if (this.num === 2) {
-					this.Sumify = 3
-					this.getIndexClass()
-				}
-			},
+			
 			//限量批页面
 			goLimit() {
 				let id = this.WxActivityID
@@ -741,50 +768,7 @@
 					url: '../../pagesIII/productDetail/productDetail?id=' + id
 				})
 			},
-			//下来刷新
-			onPullDownRefresh: function() {
-				this.getMerchants()
-				this.getHomelist()
-				this.getIndexClass()
-				let loadData = JSON.parse(JSON.stringify(this.IndexGoods));
-				loadData = loadData.splice(0, 10);
-				this.IndexGoods = loadData;
-				this.pageIndex = 1;
-				this.pullUpOn = true;
-				this.loadding = false;
-				uni.stopPullDownRefresh();
-				
-			},
-			onReachBottom: function() {
-				//下拉加载
-				if (!this.pullUpOn) return;
-				this.loadding = true;
-				//增加页数
-				if (this.pageIndex == 1) {
-					uni.showLoading({
-						title: '加载中'
-					});
-					uni.hideLoading();
-					this.loadding = false;
-					this.pullUpOn = false;
-				} else {
-					let loadData = JSON.parse(JSON.stringify(this.IndexGoods));
-
-					loadData = loadData.splice(0, 10);
-
-					if (this.pageIndex == 1) {
-						uni.showLoading({
-							title: '刷新中'
-						});
-
-						loadData = loadData.reverse();
-					}
-					this.IndexGoods = this.IndexGoods.concat(loadData);
-					this.pageIndex = this.pageIndex + 1;
-					uni.hideLoading()
-					this.loadding = false;
-				}
-			},
+			
 			// 点赞列表1
 			praise(index) {
 				if (this.IndexGoods[index].showSearch1) {
@@ -820,10 +804,19 @@
 				});
 			},
 		},
+		//下来刷新
+		onPullDownRefresh: function() {
+			this.IndexGoods =[]
+			this.tempData.pageNo = 1
+			this.getMerchants()
+			this.getHomelist()
+			this.getIndexClass()
+			uni.stopPullDownRefresh();
+		},
 		//初始化
 		onLoad() {
 			this.getMerchants()
-			this.getIndexClass()
+			// this.getIndexClass()
 			// this.getGoodsAll()
 			//请求首页
 			this.getHomelist()
@@ -2038,7 +2031,7 @@
 	.tui-info-quanguo {
 		font-size: 28rpx;
 	}
-
+	
 	.tui-banner-tag {
 		position: absolute;
 		color: #fff;

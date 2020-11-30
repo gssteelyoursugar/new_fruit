@@ -110,6 +110,9 @@ var components = {
   },
   tuiNomore: function() {
     return __webpack_require__.e(/*! import() | components/tui-nomore/tui-nomore */ "components/tui-nomore/tui-nomore").then(__webpack_require__.bind(null, /*! @/components/tui-nomore/tui-nomore.vue */ 412))
+  },
+  backTop: function() {
+    return __webpack_require__.e(/*! import() | components/back-top/back-top */ "components/back-top/back-top").then(__webpack_require__.bind(null, /*! @/components/back-top/back-top.vue */ 647))
   }
 }
 var render = function() {
@@ -451,6 +454,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var _vuex = __webpack_require__(/*! vuex */ 12);
 
 
@@ -491,6 +495,7 @@ var isFirst1 = true;var _default =
 
   data: function data() {var _ref;
     return _ref = {
+      topss: 0,
       showAuthTips: true,
       address: '', //地址
       ApproveStatus: 0,
@@ -518,12 +523,6 @@ var isFirst1 = true;var _default =
       mm: 0,
       ss1: 59,
       imageUrl: "/static/images/paihang@2x.png",
-      rankBgUrl: "/static/images/paihangbang@2x.png",
-      bannerIndex: 0,
-      menuShow: false,
-      popupShow: false,
-      value: 1,
-      collected: false,
       WxActivityID: '', //限量批请求id
       IndexGoods: [],
       WxActivity: {}, //限量批
@@ -534,7 +533,6 @@ var isFirst1 = true;var _default =
       WxIndexViewpager: [], //轮播
       HotVarieties: [], //分类列表区
       url: 'http://192.168.1.10:8980/',
-      // url:'http://120.25.195.214:8980/js',
       opcity: 0.3, //渐变
       bgOpcity: 1,
       scrollH: 0, //滚动总高度
@@ -544,7 +542,7 @@ var isFirst1 = true;var _default =
       canSee: 1,
       num: 0,
       Sumify: '1', //推荐好货请求页码
-      pullUpOn: true, //加载完了
+      noMore: false, //加载完了
       loadding: false,
       pageIndex: 1,
       praiseNum: 0,
@@ -603,17 +601,112 @@ var isFirst1 = true;var _default =
     64), _defineProperty(_ref, "weatherObj",
     {
       weather: "",
-      temperature: "" }), _ref;
+      temperature: "" }), _defineProperty(_ref, "tempData",
+
+    {
+      pageNo: 1,
+      pageSize: 10 }), _ref;
 
 
   },
+
+  onReachBottom: function onReachBottom() {
+    console.log(123);
+    if (!this.noMore) {
+      this.tempData.pageNo++;
+      this.getIndexClass();
+    } else {
+      uni.showToast({
+        title: "没有更多啦~",
+        icon: 'none' });
+
+    }
+  },
   methods: (_methods = {
-    goToLimit: function goToLimit() {
-      uni.navigateTo({
-        url: "../../pagesII/Limit/Limit?id=1327960611696472064" });
+    //推荐好货请求
+    flexClick: function flexClick(e) {
+      this.num = e;
+      this.IndexGoods = [];
+      this.tempData.pageNo = 1;
+      this.noMore = false;
+      if (this.num === 0) {
+        this.Sumify = 1;
+      } else if (this.num === 1) {
+        this.Sumify = 2;
+      } else if (this.num === 2) {
+        this.Sumify = 3;
+      }
+      this.getIndexClass();
 
     },
-    getMerchants: function getMerchants() {var _this = this;
+    //请求首页列表
+    getIndexClass: function getIndexClass() {var _this = this;
+      var data2 = Object.assign({ indexClassify: this.Sumify }, this.tempData);
+      console.log(data2);
+      (0, _api.listing)(_request.getClassify, data2).
+      then(function (res) {
+        //处理数据格式,praiseNumber
+        var goodsData = res.data.data.data;
+        // this.IndexGoods = goodsData //【1】首页分类数据
+
+        if (goodsData.length == 0 || goodsData.length < _this.tempData.pageSize) {
+          _this.noMore = true;
+          return;
+        } else {
+          _this.IndexGoods = _this.IndexGoods.concat(goodsData);
+          _this.noMore = false;
+        }
+
+      }).
+      catch(function (err) {
+        log(err);
+      });
+    },
+    //请求首页
+    getHomelist: function getHomelist() {var _this2 = this;
+      var setdata = uni.getStorageSync('usermen');
+      var data = {
+        pageNo: '1',
+        pageSize: '1000',
+        token: setdata };
+
+      (0, _api.listing)(_request.getIndex, data) //请求首页数据接口
+      // listing(getIndex,data) //单发请求
+      .then(function (res) {
+        console.log(res);
+        _this2.address = res.data.data.address;
+        _this2.HotVarieties = res.data.data.HotVarieties; //【0】首页分类列表
+        _this2.WxTopNavigationBar = res.data.data.WxTopNavigationBar;
+        _this2.WxIndexViewpager = res.data.data.WxIndexViewpager;
+        _this2.WxPublicMsg = res.data.data.WxPublicMsg;
+        _this2.WxPublicMsgID = res.data.data.WxPublicMsg.id; //公告id
+        _this2.WxPostersBottomAdve = res.data.data.WxPostersBottomAdve;
+        _this2.NewGoods = res.data.data.NewGoods.goods; //新果上市
+        _this2.WxActivity = res.data.data.WxActivity; //限量区数据ID+倒计时
+        _this2.WxActivityID = res.data.data.WxActivity.id; //限量区数据ID+倒计时
+        _this2.WxActivityList = res.data.data.WxActivity.list; //首页限量区数据
+        _this2.startTime = res.data.data.WxActivity.startTime;
+        _this2.endTime = res.data.data.WxActivity.endTime;
+        _this2.createTime = res.data.data.WxActivity.createTime;
+        _this2.ts = (_this2.endTime - _this2.createTime) / 1000;
+        _this2.dd = parseInt(_this2.ts / 60 / 60 / 24, 10); //计算剩余的天数
+        _this2.hh = parseInt(_this2.ts / 60 / 60 % 24, 10); //计算剩余的小时数
+        _this2.mm = parseInt(_this2.ts / 60 % 60); //计算剩余的分钟数
+        _this2.ss = parseInt(_this2.ts % 60, 10); //计算剩余的秒数
+      }).
+      catch(function (err) {
+        console.log(err);
+      });
+    },
+
+    // 点击轮播图跳转			
+    goToLimit: function goToLimit(val) {
+      uni.navigateTo({
+        url: val.url });
+
+    },
+
+    getMerchants: function getMerchants() {var _this3 = this;
       var setdata = uni.getStorageSync('usermen');
       if (!setdata) {
         this.ApproveStatus = 0;
@@ -625,20 +718,20 @@ var isFirst1 = true;var _default =
         (0, _api.listing)(_request.getClient, data).
         then(function (res) {
           if (res.data.code == 500) {
-            _this.ApproveStatus = 0;
+            _this3.ApproveStatus = 0;
             return;
           }
           ///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
-          _this.ApproveStatus = res.data.data.approveStatus; //获取电偶状态码，0未认证，1已认证，2拒绝
+          _this3.ApproveStatus = res.data.data.approveStatus; //获取电偶状态码，0未认证，1已认证，2拒绝
           var cityCode = res.data.data.address;
-          _this.amapPlugin = new _amapWx.default.AMapWX({
-            key: _this.key });
+          _this3.amapPlugin = new _amapWx.default.AMapWX({
+            key: _this3.key });
 
-          _this.amapPlugin.getWeather({
+          _this3.amapPlugin.getWeather({
             city: cityCode,
             success: function success(wres) {
-              _this.weatherObj.temperature = wres.liveData.temperature;
-              _this.weatherObj.weather = wres.liveData.weather;
+              _this3.weatherObj.temperature = wres.liveData.temperature;
+              _this3.weatherObj.weather = wres.liveData.weather;
             } });
 
         }).
@@ -723,6 +816,7 @@ var isFirst1 = true;var _default =
     },
     // 头部
     onPageScroll: function onPageScroll(e) {
+      this.topss = e.scrollTop;
       if (this.statusHeight > 20) {
         if (e.scrollTop < 20) {
           this.canSee = 1 - e.scrollTop / 10;
@@ -768,11 +862,11 @@ var isFirst1 = true;var _default =
         this.wxCode(wxing.avatarUrl, wxing.nickName);
       }
     },
-    wxCode: function wxCode(avatarUrl, nickName) {var _this2 = this;
+    wxCode: function wxCode(avatarUrl, nickName) {var _this4 = this;
       wx.login({
         success: function success(res) {
           var code = res.code;
-          _this2.wxLogin(avatarUrl, nickName, code);
+          _this4.wxLogin(avatarUrl, nickName, code);
         },
         fail: function fail(err) {
           log(err);
@@ -780,14 +874,14 @@ var isFirst1 = true;var _default =
         } });
 
     },
-    wxLogin: function wxLogin(avatarUrl, nickName, code) {var _this3 = this;
+    wxLogin: function wxLogin(avatarUrl, nickName, code) {var _this5 = this;
       var data = {
         code: code };
 
       (0, _api.publicing)(loginis, data) //发送请求携带参数
       .then(function (res) {
         uni.setStorageSync('usermen', res.data.token); //把token存在本地，小程序提供如同浏览器cookie
-        _this3.ifUser();
+        _this5.ifUser();
       }).
       catch(function (err) {
         log(err);
@@ -810,58 +904,7 @@ var isFirst1 = true;var _default =
         this.usering = setdata;
       }
     },
-    //请求首页
-    getHomelist: function getHomelist() {var _this4 = this;
-      var setdata = uni.getStorageSync('usermen');
-      var data = {
-        pageNo: '1',
-        pageSize: '1000',
-        token: setdata };
 
-      (0, _api.listing)(_request.getIndex, data) //请求首页数据接口
-      // listing(getIndex,data) //单发请求
-      .then(function (res) {
-        _this4.address = res.data.data.address;
-        _this4.HotVarieties = res.data.data.HotVarieties; //【0】首页分类列表
-        _this4.WxTopNavigationBar = res.data.data.WxTopNavigationBar;
-        _this4.WxIndexViewpager = res.data.data.WxIndexViewpager;
-        _this4.WxPublicMsg = res.data.data.WxPublicMsg;
-        _this4.WxPublicMsgID = res.data.data.WxPublicMsg.id; //公告id
-        _this4.WxPostersBottomAdve = res.data.data.WxPostersBottomAdve;
-        _this4.NewGoods = res.data.data.NewGoods.goods; //新果上市
-        _this4.WxActivity = res.data.data.WxActivity; //限量区数据ID+倒计时
-        _this4.WxActivityID = res.data.data.WxActivity.id; //限量区数据ID+倒计时
-        _this4.WxActivityList = res.data.data.WxActivity.list; //首页限量区数据
-        _this4.startTime = res.data.data.WxActivity.startTime;
-        _this4.endTime = res.data.data.WxActivity.endTime;
-        _this4.createTime = res.data.data.WxActivity.createTime;
-        _this4.ts = (_this4.endTime - _this4.createTime) / 1000;
-        _this4.dd = parseInt(_this4.ts / 60 / 60 / 24, 10); //计算剩余的天数
-        _this4.hh = parseInt(_this4.ts / 60 / 60 % 24, 10); //计算剩余的小时数
-        _this4.mm = parseInt(_this4.ts / 60 % 60); //计算剩余的分钟数
-        _this4.ss = parseInt(_this4.ts % 60, 10); //计算剩余的秒数
-      }).
-      catch(function (err) {
-        console.log(err);
-      });
-    },
-    //请求首页列表
-    getIndexClass: function getIndexClass() {var _this5 = this;
-      var data2 = {
-        pageNo: '1',
-        pageSize: '10000',
-        indexClassify: this.Sumify };
-
-      (0, _api.listing)(_request.getClassify, data2).
-      then(function (res) {
-        //处理数据格式,praiseNumber
-        var goodsData = res.data.data.data;
-        _this5.IndexGoods = goodsData; //【1】首页分类数据
-      }).
-      catch(function (err) {
-        log(err);
-      });
-    },
     //数据处理方法
     numConvert: function numConvert(num) {
       if (num >= 10000) {
@@ -879,21 +922,8 @@ var isFirst1 = true;var _default =
       num = Math.round(num / 100) / 10 + 'k';
     }
     return num;
-  }), _defineProperty(_methods, "flexClick", function flexClick(
-
-  e) {
-    this.num = e;
-    if (this.num === 0) {
-      this.Sumify = 1;
-      this.getIndexClass();
-    } else if (this.num === 1) {
-      this.Sumify = 2;
-      this.getIndexClass();
-    } else if (this.num === 2) {
-      this.Sumify = 3;
-      this.getIndexClass();
-    }
   }), _defineProperty(_methods, "goLimit", function goLimit()
+
 
   {
     var id = this.WxActivityID;
@@ -924,51 +954,8 @@ var isFirst1 = true;var _default =
     uni.navigateTo({
       url: '../../pagesIII/productDetail/productDetail?id=' + id });
 
-  }), _defineProperty(_methods, "onPullDownRefresh",
-
-  function onPullDownRefresh() {
-    this.getMerchants();
-    this.getHomelist();
-    this.getIndexClass();
-    var loadData = JSON.parse(JSON.stringify(this.IndexGoods));
-    loadData = loadData.splice(0, 10);
-    this.IndexGoods = loadData;
-    this.pageIndex = 1;
-    this.pullUpOn = true;
-    this.loadding = false;
-    uni.stopPullDownRefresh();
-
-  }), _defineProperty(_methods, "onReachBottom",
-  function onReachBottom() {
-    //下拉加载
-    if (!this.pullUpOn) return;
-    this.loadding = true;
-    //增加页数
-    if (this.pageIndex == 1) {
-      uni.showLoading({
-        title: '加载中' });
-
-      uni.hideLoading();
-      this.loadding = false;
-      this.pullUpOn = false;
-    } else {
-      var loadData = JSON.parse(JSON.stringify(this.IndexGoods));
-
-      loadData = loadData.splice(0, 10);
-
-      if (this.pageIndex == 1) {
-        uni.showLoading({
-          title: '刷新中' });
-
-
-        loadData = loadData.reverse();
-      }
-      this.IndexGoods = this.IndexGoods.concat(loadData);
-      this.pageIndex = this.pageIndex + 1;
-      uni.hideLoading();
-      this.loadding = false;
-    }
   }), _defineProperty(_methods, "praise", function praise(
+
 
   index) {
     if (this.IndexGoods[index].showSearch1) {
@@ -1004,10 +991,19 @@ var isFirst1 = true;var _default =
 
   }), _methods),
 
+  //下来刷新
+  onPullDownRefresh: function onPullDownRefresh() {
+    this.IndexGoods = [];
+    this.tempData.pageNo = 1;
+    this.getMerchants();
+    this.getHomelist();
+    this.getIndexClass();
+    uni.stopPullDownRefresh();
+  },
   //初始化
   onLoad: function onLoad() {var _this6 = this;
     this.getMerchants();
-    this.getIndexClass();
+    // this.getIndexClass()
     // this.getGoodsAll()
     //请求首页
     this.getHomelist();

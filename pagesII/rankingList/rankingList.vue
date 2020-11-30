@@ -37,7 +37,7 @@
 			<view class="tui-rink-sceate">
 				<!-- 销量 -->
 				<view class="tui-tab-rank" :class="[num === 0 ? 'actineclass' : 'errorclass']">
-					<block v-for="(item,index) in goodList" :key="index">
+					<block v-for="(item,index) in goodList" :key="index" v-if="index<10">
 						<view class="tui-tab-rank-cent" @tap="gotoList(item.id)">
 							<view class="rank-box" :style="{borderColor: rankColor[index]}">
 								<text v-if="index<9" :style="{backgroundColor: rankColor[index]}">{{"0"+(index+1)}}</text>
@@ -76,7 +76,7 @@
 				</view>
 				<!-- 评价 -->
 				<view class="tui-tab-rank" :class="[num === 1 ? 'actineclass' : 'errorclass']">
-					<block v-for="(item,index) in goodList" :key="index">
+					<block v-for="(item,index) in goodList" :key="index"  v-if="index<10">
 						<view class="tui-tab-rank-cent" @tap="gotoList(item.id)">
 							<view class="rank-box" :style="{borderColor: rankColor[index]}">
 								<text v-if="index<9" :style="{backgroundColor: rankColor[index]}">{{"0"+(index+1)}}</text>
@@ -111,7 +111,7 @@
 				</view>
 				<!-- 关注 -->
 				<view class="tui-tab-rank" :class="[num === 2 ? 'actineclass' : 'errorclass']">
-					<block v-for="(item,index) in goodList" :key="index">
+					<block v-for="(item,index) in goodList" :key="index"  v-if="index<10">
 						<view class="tui-tab-rank-cent" @tap="gotoList(item.id)">
 							<view class="rank-box" :style="{borderColor: rankColor[index]}">
 								<text v-if="index<9" :style="{backgroundColor: rankColor[index]}">{{"0"+(index+1)}}</text>
@@ -147,7 +147,7 @@
 				</view>
 				<!-- 复购 -->
 				<view class="tui-tab-rank" :class="[num === 3 ? 'actineclass' : 'errorclass']">
-					<block v-for="(item,index) in goodList" :key="index">
+					<block v-for="(item,index) in goodList" :key="index"  v-if="index<10">
 						<view class="tui-tab-rank-cent" @tap="gotoList(item.id)">
 							<view class="rank-box" :style="{borderColor: rankColor[index]}">
 								<text v-if="index<9" :style="{backgroundColor: rankColor[index]}">{{"0"+(index+1)}}</text>

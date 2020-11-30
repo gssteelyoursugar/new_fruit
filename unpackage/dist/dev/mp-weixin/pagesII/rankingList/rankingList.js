@@ -104,8 +104,7 @@ var render = function() {
   var l0 = _vm.__map(_vm.goodList, function(item, index) {
     var $orig = _vm.__get_orig(item)
 
-    var f0 = _vm._f("filterNum")(item.totalPrice || 0)
-
+    var f0 = index < 10 ? _vm._f("filterNum")(item.totalPrice || 0) : null
     return {
       $orig: $orig,
       f0: f0
@@ -115,8 +114,7 @@ var render = function() {
   var l1 = _vm.__map(_vm.goodList, function(item, index) {
     var $orig = _vm.__get_orig(item)
 
-    var f1 = _vm._f("filterNum")(item.praise_number || 0)
-
+    var f1 = index < 10 ? _vm._f("filterNum")(item.praise_number || 0) : null
     return {
       $orig: $orig,
       f1: f1

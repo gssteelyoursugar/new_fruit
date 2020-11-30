@@ -150,9 +150,12 @@ var _default =
     };
   },
   methods: {
-    detail: function detail(idx) {
-      if (idx === 0) {
-        this.$emit("childSwitch");
+    detail: function detail(item) {
+      console.log(item);
+      if (item.jumpUrl) {
+        this.$emit("childSwitch", {
+          url: item.jumpUrl });
+
       }
     } } };exports.default = _default;
 

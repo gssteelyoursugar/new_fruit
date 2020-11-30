@@ -9,6 +9,7 @@
     "tui-icon": "/components/tui-icon/tui-icon",
     "tui-countdown": "/components/tui-countdown/tui-countdown",
     "tui-nomore": "/components/tui-nomore/tui-nomore",
+    "back-top": "/components/back-top/back-top",
     "weather": "/pages/index/components/weather",
     "banner": "/pages/index/components/banner"
   }

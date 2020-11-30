@@ -50,7 +50,7 @@
 	padding: 0;
 	-webkit-box-sizing: border-box;
 	        box-sizing: border-box;
-	
+
 	z-index: 99;
 }
 .tui-banner-swiper.data-v-b188ec42 {

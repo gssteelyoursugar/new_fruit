@@ -8,16 +8,16 @@
 					<swiper :indicator-dots="true" :autoplay="true" :interval="5000" :duration="150" class="tui-banner-swiper"
 					 :circular="true" indicator-color="rgba(255, 255, 255, 0.8)" indicator-active-color="#ff7129">
 						<block v-if="banner">
-							<swiper-item v-for="(item, index) in banner" :key="index" @tap.stop="detail(index)">
-								<image @tap.stop="detail(index)" :src="item.url" class="tui-slide-image" mode="scaleToFill" />
+							<swiper-item v-for="(item, index) in banner" :key="index" @tap.stop="detail(item)">
+								<image @tap.stop="detail(item)" :src="item.url" class="tui-slide-image" mode="scaleToFill" />
 							</swiper-item>
 						</block>
 						<block v-if="!banner || banner.length === 0">
-							<swiper-item v-for="(item, index) in 1" :key="index" >
-								<image style="background: #f5f5f5;"  class="tui-slide-image" />
+							<swiper-item v-for="(item, index) in 1" :key="index">
+								<image style="background: #f5f5f5;" class="tui-slide-image" />
 							</swiper-item>
 						</block>
-						
+
 					</swiper>
 				</view>
 			</view>
@@ -34,10 +34,13 @@
 			}
 		},
 		methods: {
-			detail(idx){
-				if(idx === 0) {
-					this.$emit("childSwitch")
-				} 
+			detail(item) {
+				console.log(item);
+				if (item.jumpUrl) {
+					this.$emit("childSwitch", {
+						url: item.jumpUrl
+					})
+				}
 			}
 		}
 	}
@@ -95,7 +98,7 @@
 		width: 100%;
 		padding: 0;
 		box-sizing: border-box;
-		
+
 		z-index: 99;
 	}
 
