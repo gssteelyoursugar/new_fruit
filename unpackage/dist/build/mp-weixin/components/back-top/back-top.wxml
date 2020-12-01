@@ -1,0 +1,1 @@
+<block wx:if="{{scrollTop>500}}"><view data-event-opts="{{[['tap',[['toTopClick',['$event']]]]]}}" class="{{['backTop',(isShowToTop)?'mescroll-fade-in':'']}}" bindtap="__e"><image src="../../static/back-top/top.png" mode="widthFix"></image></view></block>

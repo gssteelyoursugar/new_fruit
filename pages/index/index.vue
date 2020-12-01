@@ -32,7 +32,7 @@
 			</view>
 		</view>
 		<view class="index-content">
-			
+
 			<Banner @childSwitch="goToLimit" :banner="WxIndexViewpager"></Banner>
 			<view class="bac">
 				<view class="tui-tag">
@@ -46,13 +46,13 @@
 			<!-- 金刚区 -->
 			<view class=" swiper-item-top">
 				<block v-if="WxTopNavigationBar">
-					<view class="conteng-img" @tap="hrefKing(index)"  v-for=" (item,index) in WxTopNavigationBar" :key="index">
+					<view class="conteng-img" @tap="hrefKing(index)" v-for=" (item,index) in WxTopNavigationBar" :key="index">
 						<image :src="item.url" mode="widthFix" class="uploadimg1"></image>
 						<text>{{item.title}}</text>
 					</view>
 				</block>
 				<block v-if="!WxTopNavigationBar || WxTopNavigationBar.length=== 0">
-					<view class="conteng-img" @tap="hrefKing(index)"  v-for="item of 5" :key="item">
+					<view class="conteng-img" @tap="hrefKing(index)" v-for="item of 5" :key="item">
 						<view class="loading-bg"></view>
 						<view class=""></view>
 					</view>
@@ -109,7 +109,7 @@
 				<view class="tui-Fruits" style="width: 50%;text-align: center;" @click="goLimit()">
 					<block v-for="(item,index) in WxActivityList" :key="index">
 						<view class="tui-Fruits-table">
-							<image :src="item.url" mode="aspectFit" class="active-img" ></image>
+							<image :src="item.url" mode="aspectFit" class="active-img"></image>
 							<view class="tui-price">
 								<view class="tui-first-price">&yen;<text class="tui-price-color">{{ ApproveStatus === 1 ?item.platformClinetPrice: '***'}}</text><text
 									 class="price-label">/件</text></view>
@@ -422,13 +422,12 @@
 				}
 			}
 		},
-		
+
 		onReachBottom() {
-			console.log(123);
 			if (!this.noMore) {
 				this.tempData.pageNo++
 				this.getIndexClass()
-			}  else {
+			} else {
 				uni.showToast({
 					title: "没有更多啦~",
 					icon: 'none'
@@ -450,26 +449,24 @@
 					this.Sumify = 3
 				}
 				this.getIndexClass()
-				
+
 			},
 			//请求首页列表
 			getIndexClass() {
-				let data2 = Object.assign({indexClassify: this.Sumify,},this.tempData) 
-				console.log(data2)
+				let data2 = Object.assign({
+					indexClassify: this.Sumify,
+				}, this.tempData)
 				listing(getClassify, data2)
 					.then((res) => {
 						//处理数据格式,praiseNumber
 						let goodsData = res.data.data.data;
 						// this.IndexGoods = goodsData //【1】首页分类数据
-						
-							if(goodsData.length ==0 || goodsData.length < this.tempData.pageSize) {
-								this.noMore = true
-								return
-							} else {
-								this.IndexGoods = this.IndexGoods.concat(goodsData)
-								this.noMore = false
-						} 
-					
+						this.IndexGoods = this.IndexGoods.concat(goodsData)
+						if (goodsData.length == 0 || goodsData.length < this.tempData.pageSize) {
+							this.noMore = true
+							return
+						}
+
 					})
 					.catch((err) => {
 						log(err)
@@ -486,7 +483,6 @@
 				listing(getIndex, data) //请求首页数据接口
 					// listing(getIndex,data) //单发请求
 					.then((res) => {
-						console.log(res);
 						this.address = res.data.data.address
 						this.HotVarieties = res.data.data.HotVarieties //【0】首页分类列表
 						this.WxTopNavigationBar = res.data.data.WxTopNavigationBar
@@ -511,14 +507,14 @@
 						console.log(err)
 					})
 			},
-			
+
 			// 点击轮播图跳转			
 			goToLimit(val) {
 				uni.navigateTo({
 					url: val.url
 				})
 			},
-			
+
 			getMerchants() {
 				let setdata = uni.getStorageSync('usermen')
 				if (!setdata) {
@@ -717,7 +713,7 @@
 					this.usering = setdata
 				}
 			},
-			
+
 			//数据处理方法
 			numConvert(num) {
 				if (num >= 10000) {
@@ -736,7 +732,7 @@
 				}
 				return num;
 			},
-			
+
 			//限量批页面
 			goLimit() {
 				let id = this.WxActivityID
@@ -768,7 +764,7 @@
 					url: '../../pagesIII/productDetail/productDetail?id=' + id
 				})
 			},
-			
+
 			// 点赞列表1
 			praise(index) {
 				if (this.IndexGoods[index].showSearch1) {
@@ -806,8 +802,9 @@
 		},
 		//下来刷新
 		onPullDownRefresh: function() {
-			this.IndexGoods =[]
+			this.IndexGoods = []
 			this.tempData.pageNo = 1
+			this.noMore = false
 			this.getMerchants()
 			this.getHomelist()
 			this.getIndexClass()
@@ -816,7 +813,7 @@
 		//初始化
 		onLoad() {
 			this.getMerchants()
-			// this.getIndexClass()
+			this.getIndexClass()
 			// this.getGoodsAll()
 			//请求首页
 			this.getHomelist()
@@ -850,7 +847,7 @@
 		onShow() {
 			this.getMerchants()
 			this.getHomelist()
-			this.getIndexClass()
+			
 		},
 		// 转发
 		onShareAppMessage: function() {
@@ -861,8 +858,7 @@
 			}
 		},
 		// 监听页面滚动距离
-		mounted() {
-		},
+		mounted() {},
 		filters: {
 			filterNum(val) {
 				if (val) {
@@ -1500,7 +1496,7 @@
 		border: 1px solid #f5f5f5;
 		border-radius: 10rpx;
 	}
-	
+
 	.active-img {
 		width: 130rpx;
 		height: 130rpx;
@@ -1509,7 +1505,7 @@
 		border: 1px solid #f5f5f5;
 		border-radius: 10rpx;
 	}
-	
+
 	.tui-Fruits-ranking-tab .tabimg {
 		border: none;
 	}
@@ -1556,12 +1552,15 @@
 		top: 35rpx;
 		width: 33%;
 	}
+
 	.limit-title {
 		width: 33%;
 	}
-	.new-fruit-title{
+
+	.new-fruit-title {
 		width: 56%;
 	}
+
 	.tui-line {
 		padding-top: 50rpx;
 	}
@@ -1673,7 +1672,7 @@
 		display: block;
 		margin: 0 auto;
 	}
-	
+
 	.loading-bg {
 		width: 100upx;
 		height: 100upx;
@@ -1683,8 +1682,8 @@
 		background: #f5f5f5;
 		border-radius: 32rpx;
 	}
-	
-	.hot-loading-bg{
+
+	.hot-loading-bg {
 		width: 100upx;
 		height: 100upx;
 		/* border-radius: 10upx; */
@@ -1693,15 +1692,15 @@
 		background: #f5f5f5;
 		border-radius: 50%;
 	}
-	
+
 	.loading-bg-text {
 		padding-top: 20upx;
 		background: #f5f5f5;
 		width: 96rpx;
 		height: 52rpx;
 	}
-	
-	
+
+
 
 	.conteng-img text {
 		padding-top: 20upx;
@@ -2031,7 +2030,7 @@
 	.tui-info-quanguo {
 		font-size: 28rpx;
 	}
-	
+
 	.tui-banner-tag {
 		position: absolute;
 		color: #fff;

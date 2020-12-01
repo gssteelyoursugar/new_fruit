@@ -792,7 +792,7 @@
 .limit-title.data-v-57280228 {
 	width: 33%;
 }
-.new-fruit-title.data-v-57280228{
+.new-fruit-title.data-v-57280228 {
 	width: 56%;
 }
 .tui-line.data-v-57280228 {
@@ -924,7 +924,7 @@
 	-webkit-border-radius: 32rpx;
 	        border-radius: 32rpx;
 }
-.hot-loading-bg.data-v-57280228{
+.hot-loading-bg.data-v-57280228 {
 	width: 100rpx;
 	height: 100rpx;
 	/* border-radius: 10upx; */

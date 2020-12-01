@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiSwipeAction: function() {
-    return __webpack_require__.e(/*! import() | components/tui-swipe-action/tui-swipe-action */ "components/tui-swipe-action/tui-swipe-action").then(__webpack_require__.bind(null, /*! @/components/tui-swipe-action/tui-swipe-action.vue */ 433))
+    return __webpack_require__.e(/*! import() | components/tui-swipe-action/tui-swipe-action */ "components/tui-swipe-action/tui-swipe-action").then(__webpack_require__.bind(null, /*! @/components/tui-swipe-action/tui-swipe-action.vue */ 440))
   }
 }
 var render = function() {

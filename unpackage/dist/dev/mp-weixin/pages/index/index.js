@@ -112,7 +112,7 @@ var components = {
     return __webpack_require__.e(/*! import() | components/tui-nomore/tui-nomore */ "components/tui-nomore/tui-nomore").then(__webpack_require__.bind(null, /*! @/components/tui-nomore/tui-nomore.vue */ 412))
   },
   backTop: function() {
-    return __webpack_require__.e(/*! import() | components/back-top/back-top */ "components/back-top/back-top").then(__webpack_require__.bind(null, /*! @/components/back-top/back-top.vue */ 647))
+    return __webpack_require__.e(/*! import() | components/back-top/back-top */ "components/back-top/back-top").then(__webpack_require__.bind(null, /*! @/components/back-top/back-top.vue */ 419))
   }
 }
 var render = function() {
@@ -469,7 +469,7 @@ var _api = __webpack_require__(/*! ../../api/api.js */ 20);
 
 
 
-var _request = __webpack_require__(/*! ../../api/request.js */ 22);var _methods;function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var Weather = function Weather() {__webpack_require__.e(/*! require.ensure | pages/index/components/weather */ "pages/index/components/weather").then((function () {return resolve(__webpack_require__(/*! ./components/weather.vue */ 419));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var Banner = function Banner() {__webpack_require__.e(/*! require.ensure | pages/index/components/banner */ "pages/index/components/banner").then((function () {return resolve(__webpack_require__(/*! ./components/banner.vue */ 426));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _console =
+var _request = __webpack_require__(/*! ../../api/request.js */ 22);var _methods;function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var Weather = function Weather() {__webpack_require__.e(/*! require.ensure | pages/index/components/weather */ "pages/index/components/weather").then((function () {return resolve(__webpack_require__(/*! ./components/weather.vue */ 426));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var Banner = function Banner() {__webpack_require__.e(/*! require.ensure | pages/index/components/banner */ "pages/index/components/banner").then((function () {return resolve(__webpack_require__(/*! ./components/banner.vue */ 433));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _console =
 
 
 
@@ -641,20 +641,19 @@ var isFirst1 = true;var _default =
     },
     //请求首页列表
     getIndexClass: function getIndexClass() {var _this = this;
-      var data2 = Object.assign({ indexClassify: this.Sumify }, this.tempData);
+      var data2 = Object.assign({
+        indexClassify: this.Sumify },
+      this.tempData);
       console.log(data2);
       (0, _api.listing)(_request.getClassify, data2).
       then(function (res) {
         //处理数据格式,praiseNumber
         var goodsData = res.data.data.data;
         // this.IndexGoods = goodsData //【1】首页分类数据
-
+        _this.IndexGoods = _this.IndexGoods.concat(goodsData);
         if (goodsData.length == 0 || goodsData.length < _this.tempData.pageSize) {
           _this.noMore = true;
           return;
-        } else {
-          _this.IndexGoods = _this.IndexGoods.concat(goodsData);
-          _this.noMore = false;
         }
 
       }).
@@ -995,6 +994,7 @@ var isFirst1 = true;var _default =
   onPullDownRefresh: function onPullDownRefresh() {
     this.IndexGoods = [];
     this.tempData.pageNo = 1;
+    this.noMore = false;
     this.getMerchants();
     this.getHomelist();
     this.getIndexClass();
@@ -1003,7 +1003,7 @@ var isFirst1 = true;var _default =
   //初始化
   onLoad: function onLoad() {var _this6 = this;
     this.getMerchants();
-    // this.getIndexClass()
+    this.getIndexClass();
     // this.getGoodsAll()
     //请求首页
     this.getHomelist();
@@ -1037,7 +1037,7 @@ var isFirst1 = true;var _default =
   onShow: function onShow() {
     this.getMerchants();
     this.getHomelist();
-    this.getIndexClass();
+
   },
   // 转发
   onShareAppMessage: function onShareAppMessage() {
@@ -1048,8 +1048,7 @@ var isFirst1 = true;var _default =
     };
   },
   // 监听页面滚动距离
-  mounted: function mounted() {
-  },
+  mounted: function mounted() {},
   filters: {
     filterNum: function filterNum(val) {
       if (val) {
