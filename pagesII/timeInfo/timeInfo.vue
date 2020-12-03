@@ -33,6 +33,15 @@
 				id: ''
 			}
 		},
+		mounted() {
+			uni.showShareMenu({
+				withShareTicket: true,
+			})
+		},
+		
+		onShareAppMessage(e){
+			console.log(e)
+		},
 		methods: {
 			getMsgData(id) {
 				let data = {

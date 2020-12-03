@@ -170,7 +170,16 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 22); //
 //
 //
 //请求地址
-var _console = console,log = _console.log;var _default = { data: function data() {return { title: '', content: '', createDate: '', id: '' };}, methods: { getMsgData: function getMsgData(id) {var _this = this;
+var _console = console,log = _console.log;var _default = { data: function data() {return { title: '', content: '', createDate: '', id: '' };}, mounted: function mounted() {uni.showShareMenu({
+      withShareTicket: true });
+
+  },
+
+  onShareAppMessage: function onShareAppMessage(e) {
+    console.log(e);
+  },
+  methods: {
+    getMsgData: function getMsgData(id) {var _this = this;
       var data = {
         id: id };
 

@@ -611,7 +611,6 @@ var isFirst1 = true;var _default =
   },
 
   onReachBottom: function onReachBottom() {
-    console.log(123);
     if (!this.noMore) {
       this.tempData.pageNo++;
       this.getIndexClass();
@@ -644,7 +643,6 @@ var isFirst1 = true;var _default =
       var data2 = Object.assign({
         indexClassify: this.Sumify },
       this.tempData);
-      console.log(data2);
       (0, _api.listing)(_request.getClassify, data2).
       then(function (res) {
         //处理数据格式,praiseNumber
@@ -672,7 +670,6 @@ var isFirst1 = true;var _default =
       (0, _api.listing)(_request.getIndex, data) //请求首页数据接口
       // listing(getIndex,data) //单发请求
       .then(function (res) {
-        console.log(res);
         _this2.address = res.data.data.address;
         _this2.HotVarieties = res.data.data.HotVarieties; //【0】首页分类列表
         _this2.WxTopNavigationBar = res.data.data.WxTopNavigationBar;

@@ -11,23 +11,21 @@
   },
   "compileType": "miniprogram",
   "libVersion": "",
-  "appid": "wxc3f10711eb743246",
+  "appid": "wx57b8cd1492538bbf",
   "projectname": "fruit-test",
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
   "condition": {
     "search": {
-      "current": -1,
       "list": []
     },
     "conversation": {
-      "current": -1,
       "list": []
     },
     "game": {
-      "current": -1,
       "list": []
     },
     "miniprogram": {
-      "current": 0,
       "list": [
         {
           "name": "我的123",
