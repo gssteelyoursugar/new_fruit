@@ -322,7 +322,7 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 22); //
 //
 //请求地址
 var _console = console,log = _console.log;var setdata = uni.getStorageSync('usermen'); //Token
-var _default = { data: function data() {return { loading: false, active: true, url: '', LimitData: {}, LimitDataList: [], hideing: 0, num: 0, ApproveStatus: 0, ranking: ['销量榜', '评价榜', '关注榜', '回购榜'], imageUrl: "/static/images/limit-1.png", rankBgUrl: "/static/images/paihangbang@2x.png", height: 64, //header高度
+var _default = { data: function data() {return { loading: false, active: true, url: '', LimitData: {}, LimitDataList: [], hideing: 0, num: 0, ApproveStatus: 0, ranking: ['销量榜', '评价榜', '关注榜', '回购榜'], imageUrl: "/static/images/limit-2.png", rankBgUrl: "/static/images/paihangbang@2x.png", height: 64, //header高度
       top: 26, //标题图标距离顶部距离
       scrollH: 0, //滚动总高度
       opcity: 0, iconOpcity: 0.5, bannerIndex: 0, menuShow: false, popupShow: false, value: 1, collected: false, WxActivityID: '', //首页传的id
@@ -331,9 +331,12 @@ var _default = { data: function data() {return { loading: false, active: true, u
         _this.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
       }).catch(function (err) {log(err);});}, scroll: function scroll(e) {},
     //商品详情页
-    gotoList: function gotoList(id) {
-      uni.navigateTo({
-        url: '../../pagesIII/productDetail/productDetail?id=' + id });
+    gotoList: function gotoList(id, num) {
+      if (this.activityStatus !== '3' || num !== 0) {
+        uni.navigateTo({
+          url: '../../pagesIII/productDetail/productDetail?id=' + id });
+
+      }
 
     },
     showTipsOnData: function showTipsOnData(goodsNumber) {
@@ -351,7 +354,9 @@ var _default = { data: function data() {return { loading: false, active: true, u
 
           return;
         }
+
       }
+
 
     },
     //倒计时

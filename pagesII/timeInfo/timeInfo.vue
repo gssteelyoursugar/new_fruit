@@ -36,12 +36,17 @@
 		mounted() {
 			uni.showShareMenu({
 				withShareTicket: true,
+				menus:["shareAppMessage","shareTimeline"]
 			})
 		},
 		
 		onShareAppMessage(e){
 			console.log(e)
 		},
+		onShareTimeline(res){
+			console.log(res)
+		},
+		
 		methods: {
 			getMsgData(id) {
 				let data = {

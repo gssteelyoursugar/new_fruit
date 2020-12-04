@@ -1145,7 +1145,7 @@
 	};
 </script>
 
-<style>
+<style scoped>
 	page {
 		background-color: #fff;
 	}

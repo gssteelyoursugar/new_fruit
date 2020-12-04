@@ -39,7 +39,7 @@
 						<view class="tui-rank-list">
 							<!-- v-for="ll of 20" :key="ll" -->
 							<view class="tui-tab-rank" v-for="(item,index) in LimitDataList" :key="index">
-								<view class="tui-tab-rank-cent"   @tap="gotoList(item.id)">
+								<view class="tui-tab-rank-cent"   @tap.stop="gotoList(item.id,item.number)">
 									<view class="img-wrapper">
 										<image :src="item.url" mode="aspectFill" class="img-rink"></image>
 										<view class="no-goods-bg" v-if="activityStatus == '3' || item.number === 0  ">
@@ -71,8 +71,8 @@
 									</view> -->
 											</view>
 											<!-- <image src="../../static/images/shopcar@2x.png" mode="aspectFill" class="tui-shop-car"></image> -->
-											<view class="robb-item"  @tap="gotoList(item.id)" v-if="activityStatus != '3' && item.number !== 0  ">抢购</view>
-											<view class="robb-item no-item" v-else @click="showTipsOnData(item.number)">抢购</view>
+											<view class="robb-item"  @tap.stop="gotoList(item.id)" v-if="activityStatus != '3' && item.number !== 0">抢购</view>
+											<view class="robb-item no-item" v-else @click.stop="showTipsOnData(item.number)">抢购</view>
 											<!-- <view>购物车</view> -->
 										</view>
 									</view>
@@ -116,7 +116,7 @@
 				num: 0,
 				ApproveStatus: 0,
 				ranking: ['销量榜', '评价榜', '关注榜', '回购榜'],
-				imageUrl: "/static/images/limit-1.png",
+				imageUrl: "/static/images/limit-2.png",
 				rankBgUrl: "/static/images/paihangbang@2x.png",
 				height: 64, //header高度
 				top: 26, //标题图标距离顶部距离
@@ -195,10 +195,13 @@
 			scroll(e) {
 			},
 			//商品详情页
-			gotoList(id) {
-				uni.navigateTo({
-					url: '../../pagesIII/productDetail/productDetail?id=' + id
-				})
+			gotoList(id,num) {
+				if (this.activityStatus !== '3' || num !== 0) {
+					uni.navigateTo({
+						url: '../../pagesIII/productDetail/productDetail?id=' + id
+					})
+				}
+				
 			},
 			showTipsOnData(goodsNumber) {
 				if (this.activityStatus == '3') {
@@ -215,7 +218,9 @@
 						})
 						return
 					}
+				
 				}
+				
 				
 			},
 			//倒计时
