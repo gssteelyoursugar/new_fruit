@@ -10113,6 +10113,9 @@ var wxloginurl = "".concat(url, "wxuser/wxlogin");
 exports.wxloginurl = wxloginurl;var url = "https://qg.zgqgpt.com/";
 // let url = "http://192.168.1.50:8980/"
 
+
+
+
 // let url = 'http://dwh.natapp1.cc/js/'
 exports.url = url;var imgurl = 'http://192.168.1.10:8980';
 

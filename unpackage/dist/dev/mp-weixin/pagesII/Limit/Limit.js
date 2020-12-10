@@ -332,7 +332,7 @@ var _default = { data: function data() {return { loading: false, active: true, u
       }).catch(function (err) {log(err);});}, scroll: function scroll(e) {},
     //商品详情页
     gotoList: function gotoList(id, num) {
-      if (this.activityStatus !== '3' || num !== 0) {
+      if (this.activityStatus !== '3' && num !== 0) {
         uni.navigateTo({
           url: '../../pagesIII/productDetail/productDetail?id=' + id });
 
@@ -354,10 +354,7 @@ var _default = { data: function data() {return { loading: false, active: true, u
 
           return;
         }
-
       }
-
-
     },
     //倒计时
     endOfTime: function endOfTime() {

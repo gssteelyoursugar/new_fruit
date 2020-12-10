@@ -196,7 +196,7 @@
 			},
 			//商品详情页
 			gotoList(id,num) {
-				if (this.activityStatus !== '3' || num !== 0) {
+				if (this.activityStatus !== '3' && num !== 0) {
 					uni.navigateTo({
 						url: '../../pagesIII/productDetail/productDetail?id=' + id
 					})
@@ -217,11 +217,8 @@
 							icon: 'none'
 						})
 						return
-					}
-				
+					}		
 				}
-				
-				
 			},
 			//倒计时
 			endOfTime: function() {
