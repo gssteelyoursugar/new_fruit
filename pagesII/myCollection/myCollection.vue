@@ -105,6 +105,16 @@
 				// log(data)
 				listing(getClient, data)
 					.then(res => {
+						if (res.data.code && res.data.code != 200) {
+							uni.showToast({
+								title: res.data.msg,
+								icon: "none"
+							})
+							uni.switchTab({
+								url: "../../pages/my/my"
+							})
+							return
+						}
 						///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
 						this.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
 					})
@@ -196,10 +206,17 @@
 				}
 				listing(getLike, data)
 					.then((res) => {
-						log(res.data.data)
+						if (res.data.code && res.data.code != 200) {
+							uni.showToast({
+								title: res.data.msg,
+								icon: "none"
+							})
+							uni.switchTab({
+								url: "../../pages/my/my"
+							})
+							return
+						}
 						this.likeDatas = res.data.data
-						log(this.likeDatas)
-
 					})
 					.catch((err) => {
 						log(err)
@@ -225,6 +242,16 @@
 				}
 				publicing(postDelLike, data)
 					.then((res) => {
+						if (res.data.code && res.data.code != 200) {
+							uni.showToast({
+								title: res.data.msg,
+								icon: "none"
+							})
+							uni.switchTab({
+								url: "../../pages/my/my"
+							})
+							return
+						}
 						this.showTips = !this.showTips
 						uni.showToast({
 							 title: `取消收藏` //${res.data.msg}
@@ -240,7 +267,6 @@
 		onShow() {
 			this.getMerchants()
 			let setdata = uni.getStorageSync('usermen')
-			log(setdata)
 			if (!setdata) {
 			} else {
 				this.getLikeData()

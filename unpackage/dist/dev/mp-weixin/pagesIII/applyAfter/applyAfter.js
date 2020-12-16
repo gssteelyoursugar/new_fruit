@@ -346,12 +346,22 @@ var _console = console,log = _console.log;var _default = { data: function data()
           that.files = that.files.concat(res.tempFilePaths); //上传功能已移除
           //...
         } });}, //选择器
-    bindPickerChange: function bindPickerChange(e) {log(e); //  for ( var i = 0; i <this.ValueList.length; i++){
+    bindPickerChange: function bindPickerChange(e) {//  for ( var i = 0; i <this.ValueList.length; i++){
       // }
       this.index = e.target.value;this.ValueText = this.ValueList[e.target.value];this.flagColor = true;}, //获取下拉申请原因
     bindPicker: function bindPicker() {}, //获取商品售后
-    getGoods: function getGoods() {var _this = this;var setdata = uni.getStorageSync('usermen');var data = { id: this.id, token: setdata };(0, _api.listing)(_request.getDetails, data).then(function (res) {_this.goodsData = res.data.data[0];_this.labelList = res.data.data[0].labelList;}).catch(function (err) {log(err);});}, //上传文件
-    uploadImages: function uploadImages(e) {this.flag = true;var that = this;if (that.files.length >= 5) {
+    getGoods: function getGoods() {var _this = this;var setdata = uni.getStorageSync('usermen');var data = { id: this.id, token: setdata };(0, _api.listing)(_request.getDetails, data).then(function (res) {if (res.data.code && res.data.code != 200) {uni.showToast({ title: res.data.msg, icon: "none" });uni.switchTab({ url: "../../pages/my/my" });return;}_this.goodsData = res.data.data[0];_this.labelList = res.data.data[0].labelList;
+      }).
+      catch(function (err) {
+        log(err);
+      });
+    },
+
+    //上传文件
+    uploadImages: function uploadImages(e) {
+      this.flag = true;
+      var that = this;
+      if (that.files.length >= 5) {
         log("最多上传5张图片");
         return;
       }

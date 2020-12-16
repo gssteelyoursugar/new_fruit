@@ -378,12 +378,22 @@ var _default = { components: {}, data: function data() {return { payUrl: '', isT
       hasCoupon: true, insufficient: false, show: false, extraUserInfo: {}, totalPrice: {}, ids2: '', //order结算后的ids2
       orderNumber: '', extraData: {}, idList: '', url: '', name: 'arrowright', unit: 'rpx', size: 32, color: '#000', margin: '0', isPaying: false };}, computed: { allGoodsNum: function allGoodsNum() {var list = this.goodsData;var num = 0;list.forEach(function (item) {num += item.number;});return num;} }, methods: { clip: function clip() {uni.setClipboardData({ data: this.payUrl, success: function success() {uni.hideToast();} });}, //立即购买
     gtePayORderTel: function gtePayORderTel() {var _this = this;var setdata = uni.getStorageSync('usermen');var data = { id: this.ids, token: setdata }; // Promise.all([publicing(postSettle,data),publicing(postSubmitOrder,data2)])
-      (0, _api.publicing)(_request.postSettle, data).then(function (res) {_this.extraUserInfo = res.data.data.extraData.userInfo;_this.goodsData = res.data.data.data;_this.extraData = res.data.data.extraData;}).catch(function (err) {console.log(err);});}, //进来页面请求结算获得一串id
+      (0, _api.publicing)(_request.postSettle, data).then(function (res) {if (res.data.code && res.data.code != 200) {uni.showToast({ title: res.data.msg, icon: "none" });uni.switchTab({ url: "../../pages/my/my" });return;}_this.extraUserInfo = res.data.data.extraData.userInfo;_this.goodsData = res.data.data.data;_this.extraData = res.data.data.extraData;}).catch(function (err) {console.log(err);});}, //进来页面请求结算获得一串id
     gtePayORder: function gtePayORder() {var _this2 = this;var setdata = uni.getStorageSync('usermen');var data = { id: this.ids, token: setdata }; // Promise.all([publicing(postSettle,data),publicing(postSubmitOrder,data2)])
       (0, _api.publicing)(_request.postSettle, data).then(function (res) {_this2.extraUserInfo = res.data.data.extraData.userInfo;_this2.goodsData = res.data.data.data;_this2.extraData = res.data.data.extraData;var new_arr = _this2.goodsData.map(function (obj) {return obj.id;}); //提取数组里面的每一项里面的id
         var idList = "";for (var index in new_arr) {idList = idList + new_arr[index] + ",";} //去掉双引号
         //去除idList最后一个逗号
-        idList = idList.substring(0, idList.length - 1);_this2.ids = idList;}).catch(function (err) {console.log(err);});}, getQueryString: function getQueryString(str, key) {if (str) {var queryString = str.split('?')[1] || '';var arr = queryString.split('&') || [];for (var i = 0; i < arr.length; i++) {var keyString = decodeURIComponent(arr[i].split('=')[0]);var valueString = decodeURIComponent(arr[i].split('=')[1]);if (key === keyString) {return valueString;}}return;} else {return;}
+        idList = idList.substring(0, idList.length - 1);_this2.ids = idList;}).catch(function (err) {console.log(err);});}, getQueryString: function getQueryString(str, key) {if (str) {var queryString = str.split('?')[1] || '';var arr = queryString.split('&') || [];for (var i = 0; i < arr.length; i++) {
+          var keyString = decodeURIComponent(arr[i].split('=')[0]);
+          var valueString = decodeURIComponent(arr[i].split('=')[1]);
+          if (key === keyString) {
+            return valueString;
+          }
+        }
+        return;
+      } else {
+        return;
+      }
     },
     //获得订单号，才能支付
     SubmitOrder: function SubmitOrder() {
@@ -399,6 +409,16 @@ var _default = { components: {}, data: function data() {return { payUrl: '', isT
 
       (0, _api.listing)(_request.getSubmitOrder, data2).
       then(function (res) {
+        if (res.data.code && res.data.code != 200) {
+          uni.showToast({
+            title: res.data.msg,
+            icon: "none" });
+
+          uni.switchTab({
+            url: "../../pages/my/my" });
+
+          return;
+        }
         if (res.data.code === -1) {
           uni.showToast({
             title: res.data.msg,

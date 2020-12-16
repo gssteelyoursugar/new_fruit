@@ -473,6 +473,17 @@ var _console = console,log = _console.log;var _default = { data: function data()
 
       (0, _api.listing)(_request.getClient, data).
       then(function (res) {
+        if (res.data.code && res.data.code != 200) {
+          uni.showToast({
+            title: res.data.msg,
+            icon: "none" });
+
+          uni.switchTab({
+            url: "../my/my" });
+
+          return;
+        }
+
         ///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
         _this3.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
       }).
@@ -508,6 +519,16 @@ var _console = console,log = _console.log;var _default = { data: function data()
 
       (0, _api.listing)(_request.getCart, data).
       then(function (res) {
+        if (res.data.code && res.data.code != 200) {
+          uni.showToast({
+            title: res.data.msg,
+            icon: "none" });
+
+          uni.switchTab({
+            url: '../my/my' });
+
+          return;
+        }
         var lists = res.data.data;
         if (lists) {
           lists.forEach(function (item) {
@@ -573,6 +594,17 @@ var _console = console,log = _console.log;var _default = { data: function data()
       //更新我的加购单
       (0, _api.publicing)(_request.postUpOrder, data).
       then(function (res) {
+        console.log(res);
+        if (res.data.code && res.data.code != 200) {
+          uni.showToast({
+            title: res.data.msg,
+            icon: "none" });
+
+          uni.switchTab({
+            url: "../my/my" });
+
+          return;
+        }
         uni.hideLoading();
         if (res.data.code == -1) {
           uni.showToast({
@@ -608,6 +640,16 @@ var _console = console,log = _console.log;var _default = { data: function data()
 
       (0, _api.publicing)(_request.postDelOrder, data).
       then(function (res) {
+        if (res.data.code && res.data.code != 200) {
+          uni.showToast({
+            title: res.data.msg,
+            icon: "none" });
+
+          uni.switchTab({
+            url: "../my/my" });
+
+          return;
+        }
         uni.showToast({
           title: "".concat(res.data.msg) });
 
@@ -638,6 +680,7 @@ var _console = console,log = _console.log;var _default = { data: function data()
 
         return;
       }
+
       var ids = '';
       for (var index in this.cartIds) {
         ids = ids + this.cartIds[index] + ',';
@@ -650,7 +693,16 @@ var _console = console,log = _console.log;var _default = { data: function data()
         token: setdata };
 
       (0, _api.publicing)(_request.postSettle, s_data).then(function (res) {
-        console.log(res);
+        if (res.data.code && res.data.code != 200) {
+          uni.showToast({
+            title: res.data.msg,
+            icon: "none" });
+
+          uni.switchTab({
+            url: "../my/my" });
+
+          return;
+        }
         if (res.data.data.code == -1) {
           uni.showToast({
             title: res.data.data.msg,

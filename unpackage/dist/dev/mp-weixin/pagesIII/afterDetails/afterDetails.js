@@ -292,7 +292,7 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 22); //
 var thorui = __webpack_require__(/*! @/common/tui-clipboard/tui-clipboard.js */ 83);var _console = console,log = _console.log;var _default = { data: function data() {return { id: '', DetailsData: {}, //申请详情数据
       files: [] };}, methods: { //图片预览
     previewImage: function previewImage(e) {log(e.currentTarget.id);uni.previewImage({ current: e.currentTarget.id, urls: this.files });}, //获取申请详情信息
-    postAfterDetails: function postAfterDetails() {var _this = this;var setdata = uni.getStorageSync('usermen');var data = { token: setdata, id: this.id };(0, _api.publicing)(_request.posAfterDetails, data).then(function (res) {log(res);_this.DetailsData = res.data.data; // this.files = res.data.data.imgList
+    postAfterDetails: function postAfterDetails() {var _this = this;var setdata = uni.getStorageSync('usermen');var data = { token: setdata, id: this.id };(0, _api.publicing)(_request.posAfterDetails, data).then(function (res) {if (res.data.code && res.data.code != 200) {uni.showToast({ title: res.data.msg, icon: "none" });uni.switchTab({ url: "../../pages/my/my" });return;}_this.DetailsData = res.data.data; // this.files = res.data.data.imgList
         var new_arr = res.data.data.imgList.map(function (obj) {return obj.url;}); //把图片链接提取出来
         _this.files = new_arr;}).catch(function (err) {log(err);});}, //复制
     //event 当需要异步请求返回数据再进行复制时，需要传入此参数，或者异步方法转为同步方法（H5端）

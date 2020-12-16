@@ -177,7 +177,7 @@
 			},
 			//选择器
 			bindPickerChange: function(e) {
-				log(e)
+				
 				//  for ( var i = 0; i <this.ValueList.length; i++){
 				// }
 					this.index = e.target.value
@@ -197,6 +197,16 @@
 				}
 				listing(getDetails,data)
 				.then((res)=>{
+					if (res.data.code && res.data.code != 200) {
+						uni.showToast({
+							title: res.data.msg,
+							icon: "none"
+						})
+						uni.switchTab({
+							url: "../../pages/my/my"
+						})
+						return
+					}
 					this.goodsData = res.data.data[0]
 					this.labelList = res.data.data[0].labelList
 				})

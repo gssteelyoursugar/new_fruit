@@ -223,6 +223,16 @@
 				};
 				listing(getClient, data)
 					.then(res => {
+						if (res.data.code != 200) {
+							uni.showToast({
+								title: res.data.msg,
+								icon: "none"
+							})
+							uni.switchTab({
+								url: "../../pages/my/my"
+							})
+							return
+						}
 						//登录成功后显示去认证店铺，如果已认证，显示已认证店铺
 						this.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
 					})
@@ -291,7 +301,9 @@
 						uni.setStorageSync('usermen', res.data.token); 
 						uni.hideLoading();
 						this.modaishow = false;
+						this.getMerchants()
 						this.getRecentlyData();
+						
 					})
 					.catch(err => {
 						uni.showToast({
@@ -310,6 +322,16 @@
 				};
 				listing(getRecently, data)
 					.then(res => {
+						if (res.data.code && res.data.code != 200) {
+							uni.showToast({
+								title: res.data.msg,
+								icon: "none"
+							})
+							uni.switchTab({
+								url: "../../pages/my/my"
+							})
+							return
+						}
 						this.lookDatas = res.data.data;
 					})
 					.catch(err => {
@@ -331,6 +353,16 @@
 					};
 					publicing(postLike, data)
 						.then(res => {
+							if (res.data.code != 200) {
+								uni.showToast({
+									title: res.data.msg,
+									icon: "none"
+								})
+								uni.switchTab({
+									url: "../../pages/my/my"
+								})
+								return
+							}
 							this.getRecentlyData();
 							uni.showToast({
 								title: "已收藏",
@@ -354,6 +386,16 @@
 				};
 				publicing(postDelLike, data)
 					.then(res => {
+						if (res.data.code && res.data.code != 200) {
+							uni.showToast({
+								title: res.data.msg,
+								icon: "none"
+							})
+							uni.switchTab({
+								url: "../../pages/my/my"
+							})
+							return
+						}
 						uni.showToast({
 							title: `取消收藏`
 						});

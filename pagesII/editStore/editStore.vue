@@ -222,6 +222,16 @@
 				}
 				listing(getClient,data)
 				.then((res)=>{
+					if (res.data.code && res.data.code !=200) {
+						uni.showToast({
+							title: res.data.msg,
+							icon:"none"
+						})
+						uni.switchTab({
+							url: "../../pages/my/my"
+						})
+						return
+					}
 					this.ApproveStatus =  res.data.data.approveStatus
 					this.StoreInfo = res.data.data
 					this.urlList = res.data.data.urlList

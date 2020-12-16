@@ -330,6 +330,16 @@
 					id: this.order_id
 				};
 				listing(getDetails, data).then(res => {
+					if (res.data.code && res.data.code != 200) {
+						uni.showToast({
+							title: res.data.msg,
+							icon: "none"
+						})
+						uni.switchTab({
+							url: "../../pages/my/my"
+						})
+						return
+					}
 					this.orderObj = res.data.data[0]
 					if (this.orderObj.goods_id) {
 						let data = {

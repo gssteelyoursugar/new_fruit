@@ -560,21 +560,20 @@ var _console = console,log = _console.log;var logins = __webpack_require__(/*! .
           var code = res.code;_this2.wxLoging(code);}, fail: function fail(err) {log(err);} });}, //发code给后台换取token
     wxLoging: function wxLoging(code) {var _this3 = this;var data = { code: code };uni.showLoading({ title: '加载中', icon: 'none', duration: 2000 // mask:true
       });(0, _api.publicing2)(_request.loginis, data) //发送请求携带参数
-      .then(function (res) {if (res.data.statusCode == 500) {uni.showToast({ title: '登录出错,请重新登录', icon: "none" });setTimeout(function () {uni.removeStorageSync('userIN');uni.removeStorageSync('usermen');uni.removeStorageSync('StoreStatus');uni.removeStorageSync('userIN');_this3.ifUser();}, 1500);return;} else if (res.data.statusCode == 200) {_this3.getOrderData();} // log(res) //获得token
-        uni.setStorageSync('usermen', res.data.token); //把token存在本地，小程序提供如同浏览器cookie
+      .then(function (res) {if (res.data.statusCode == 500) {uni.showToast({ title: '登录出错,请重新登录', icon: "none" });setTimeout(function () {uni.removeStorageSync('userIN');uni.removeStorageSync('usermen');uni.removeStorageSync('StoreStatus');uni.removeStorageSync('userIN');_this3.ifUser();}, 1500);return;} else if (res.data.statusCode == 200) {console.log(res.data);_this3.getOrderData();} // log(res) //获得token
+        console.log(res);uni.setStorageSync('usermen', res.data.token); //把token存在本地，小程序提供如同浏览器cookie
         uni.hideLoading();_this3.getOrderData();_this3.getMerchants();}).catch(function (err) {uni.showToast({ title: "".concat(err) });log(err);});}, //获取申请店铺状态信息
     getMerchants: function getMerchants() {var _this4 = this;var setdata = uni.getStorageSync('usermen'); //Token
-      if (!setdata) {this.modaishow = true;this.ApproveStatus = undefined;return;}this.modaishow = false;var data = { token: setdata };(0, _api.listing)(_request.getClient, data).then(function (res) {// 200 用户正常 201用户停用
-        if (res.data.code == 201) {_this4.dangerUsr = true;_this4.user_phone = res.data.phone;_this4.logMsg = '账户已被停用';return;}if (res.data.code == 500) {uni.showToast({ title: '登录超时,请重试', icon: 'none', duration: 3000 });setTimeout(function () {uni.removeStorageSync('userIN');uni.removeStorageSync('usermen');uni.removeStorageSync('StoreStatus');uni.removeStorageSync('userIN');_this4.ifUser();}, 1500);}if (res.data.code == 200) {_this4.dangerUsr = false; ///登录成功后 未认证或者认证失败 显示去认证店铺，如果已认证，显示已认证店铺
+      if (!setdata) {this.modaishow = true;this.ApproveStatus = undefined;return;}this.modaishow = false;var data = { token: setdata };(0, _api.listing)(_request.getClient, data).then(function (res) {// console.log(res)
+        // 200 用户正常 201用户停用 204 找不到用户信息
+        if (res.data.code == 201 || res.data.code == 204 || res.data.code == 500) {uni.showToast({ title: res.data.msg, icon: 'none', duration: 3000 });setTimeout(function () {uni.removeStorageSync('userIN');uni.removeStorageSync('usermen');uni.removeStorageSync('StoreStatus');uni.removeStorageSync('userIN');_this4.ApproveStatus = undefined;_this4.ifUser();}, 1500);return;}if (res.data.code == 200) {_this4.dangerUsr = false; ///登录成功后 未认证或者认证失败 显示去认证店铺，如果已认证，显示已认证店铺
           _this4.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
           // uni.setStorageSync('StoreStatus', res.data.data.approveStatus)
           // let setStore = uni.getStorageSync('StoreStatus') //状态码
           _this4.user_phone = res.data.data.phone;var valu2 = _this4.ApproveStatus;if (valu2 === undefined || valu2 === null || valu2 === '') {//判断如果请求返回为空说明未申请过店铺认证
             _this4.logMsg = '去认证我的店铺';} else if (valu2 === 0) {_this4.logMsg = '审核中待通过';} else if (valu2 === 1) {_this4.logMsg = '我的店铺已认证';} else if (valu2 === 2) {_this4.logMsg = '未通过,请重新提交';}}}).catch(function (err) {log(err);});}, // 获取订单
     getOrderData: function getOrderData() {var _this5 = this;var setdata = uni.getStorageSync('usermen');if (!setdata) {return;}var data = { token: setdata, pageNo: 1, pageSize: 10000 };(0, _api.listing)(_request.getMyOrder, data).then(function (res) {var list = res.data.data;if (list.length === 0) return;var fukuanList = [];var fahuoList = [];var shouhuoList = [];var tuikuanList = [];list.forEach(function (item) {if (item.payStatus == 0) {fukuanList.push(item);}if (item.tradeStatus == "1" || item.tradeStatus == "2" || item.tradeStatus == "3") {fahuoList.push(item);}if (item.payStatus == '1' && (item.tradeStatus == '4' || item.tradeStatus == '8')) {shouhuoList.push(item);}if (item.tradeStatus == '7') {// 只要 待确定的 3
-            if (item.afterStatus == '3') {tuikuanList.push(item);}}});_this5.fukuanList = fukuanList.length;_this5.fahuoList = fahuoList.length;_this5.shouhuoList = shouhuoList.length;_this5.tuikuanList = tuikuanList.length;_this5.$forceUpdate();}).catch(function (err) {
-        log(err);
-      });
+            if (item.afterStatus == '3') {tuikuanList.push(item);}}});_this5.fukuanList = fukuanList.length;_this5.fahuoList = fahuoList.length;_this5.shouhuoList = shouhuoList.length;_this5.tuikuanList = tuikuanList.length;_this5.$forceUpdate();}).catch(function (err) {log(err);});
     },
     ifUser: function ifUser() {
       var setuserdata = uni.getStorageSync('userIN');

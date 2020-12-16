@@ -274,6 +274,16 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
       // log(data)
       (0, _api.listing)(_request.getClient, data).
       then(function (res) {
+        if (res.data.code && res.data.code != 200) {
+          uni.showToast({
+            title: res.data.msg,
+            icon: "none" });
+
+          uni.switchTab({
+            url: "../../pages/my/my" });
+
+          return;
+        }
         ///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
         _this2.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
       }).

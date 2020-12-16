@@ -155,7 +155,6 @@
 				<view class="tui-recommend">
 					<block v-for="(item,index) in flexing" :key="index">
 						<view class="tui-fixed-3 " @click="flexClick(index)">
-							<view class="borderRight" v-if="index == 1 || index == 2"></view>
 							<view class="fixed-3-font-wei" :class="{fixedweight:index == num}">{{item.title}}</view>
 							<view class="fixed-3-font-weitwo" :class="{fixed3fontweione:index == num}">{{item.name}}</view>
 						</view>
@@ -444,7 +443,7 @@
 				if (this.num === 0) {
 					this.Sumify = 1
 				} else if (this.num === 1) {
-					this.Sumify = 2
+					this.Sumify = 2 // 原本有三项，现改为2项，取消中间的那一项
 				} else if (this.num === 2) {
 					this.Sumify = 3
 				}
@@ -526,8 +525,17 @@
 					}
 					listing(getClient, data)
 						.then((res) => {
-							if (res.data.code == 500) {
-								this.ApproveStatus = 0
+							if (res.data.code && res.data.code != 200) {
+								uni.showToast({
+									title: res.data.msg,
+									icon: 'none',
+									duration: 3000
+								})
+								this.ApproveStatus = undefined
+								uni.switchTab({
+									url: "../my/my"
+								})
+
 								return
 							}
 							///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
@@ -847,7 +855,7 @@
 		onShow() {
 			this.getMerchants()
 			this.getHomelist()
-			
+
 		},
 		// 转发
 		onShareAppMessage: function() {
@@ -1345,6 +1353,10 @@
 	.xiding {
 		position: sticky;
 		z-index: 999;
+		/* 修改成2项 */
+		/* border-radius: 30rpx; */
+		/* overflow: hidden; */
+		/* margin: 14rpx 20rpx 0; */
 
 	}
 

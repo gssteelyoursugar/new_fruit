@@ -73,7 +73,7 @@
 				unitTop: true,
 				radius: true,
 				startYear: 2000,
-				endYear: 2020,
+				endYear:  new Date().getFullYear()+1,
 				dateTime: '',
 				result: '',
 				iconSize: '28',
@@ -146,6 +146,16 @@
 						pageSize: 10000
 					}
 					listing(orderCount, data).then(res => {
+						if (res.data.code && res.data.code != 200) {
+							uni.showToast({
+								title: res.data.msg,
+								icon: "none"
+							})
+							uni.switchTab({
+								url: "../../pages/my/my"
+							})
+							return
+						}
 						this.orderList = res.data.data.list
 						this.totalGoodsNumber = res.data.data.totalGoodsNumber
 						this.totalGoodsPirce = res.data.data.totalGoodsPirce
@@ -159,6 +169,16 @@
 						pageSize: 10000
 					}
 					listing(orderCount, data).then(res => {
+						if (res.data.code && res.data.code != 200) {
+							uni.showToast({
+								title: res.data.msg,
+								icon: "none"
+							})
+							uni.switchTab({
+								url: "../../pages/my/my"
+							})
+							return
+						} 
 						this.orderList = res.data.data.list
 						this.totalGoodsNumber = res.data.data.totalGoodsNumber
 						this.totalGoodsPirce = res.data.data.totalGoodsPirce

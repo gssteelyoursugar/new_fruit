@@ -492,7 +492,7 @@
 				canCollect: true,
 				canCart: true,
 				netStatus: true,
-				
+				userStatus: 0
 
 			};
 		},
@@ -654,11 +654,9 @@
 				};
 				listing(getClient, data)
 					.then(res => {
-						if (res.data.code == 201) {
-							uni.showToast({
-								title: "账户已被停用",
-								icon: 'none',
-								duration: 3000
+						if (res.data.code == 201 ||res.data.code == 204) {
+							uni.switchTab({
+								url: "../../pages/my/my"
 							})
 							return
 						}
@@ -917,6 +915,13 @@
 					this.modaishow = true;
 					return
 				} else {
+					if (this.userStatus === 201) {
+						uni.showToast({
+							title: "账户已被停用",
+							icon:"none"
+						})
+						return
+					}
 					this.modaishow = false;
 					if (this.ApproveStatus === 0) {
 						uni.showToast({
@@ -925,12 +930,11 @@
 						});
 						return;
 					}
-					if (this.ApproveStatus === null || this.ApproveStatus === undefined || this.ApproveStatus === '' || this.ApproveStatus ===
-						2) {
+					if (this.ApproveStatus === null || this.ApproveStatus === undefined || this.ApproveStatus === '' ) {
 						this.toggleVerify()
 						return;
 					}
-
+					
 					if (this.ApproveStatus === 1) {
 						let data = {
 							goodsId: id,
@@ -1000,6 +1004,13 @@
 					this.modaishow = true;
 					return
 				} else {
+					if (this.userStatus === 201) {
+						uni.showToast({
+							title: "账户已被停用",
+							icon:"none"
+						})
+						return
+					}
 					// this.modaishow = false
 					this.modaishow = false;
 					if (this.ApproveStatus === null || this.ApproveStatus === undefined || this.ApproveStatus === '' || this.ApproveStatus ===

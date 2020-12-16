@@ -97,7 +97,16 @@
 				}
 				publicing(posAfterDetails,data)
 				.then((res)=>{
-					log(res)
+					if (res.data.code && res.data.code != 200) {
+						uni.showToast({
+							title: res.data.msg,
+							icon: "none"
+						})
+						uni.switchTab({
+							url: "../../pages/my/my"
+						})
+						return
+					}
 					this.DetailsData = res.data.data
 					// this.files = res.data.data.imgList
 					let new_arr = res.data.data.imgList.map(obj => {return obj.url})//把图片链接提取出来

@@ -115,7 +115,7 @@
 			},
 			//取消申请
 			goAfterSale(id,order_item_id){
-				log(id)
+				
 				var setdata = uni.getStorageSync('usermen')
 				let data ={
 					token:setdata,
@@ -125,7 +125,16 @@
 				}
 				publicing(postAfterCen,data)
 				.then((res)=>{
-					log(res)
+					if (res.data.code && res.data.code != 200) {
+						uni.showToast({
+							title: res.data.msg,
+							icon: "none"
+						})
+						uni.switchTab({
+							url: "../../pages/my/my"
+						})
+						return
+					}
 					
 					this.modaishow = false
 					uni.reLaunch({

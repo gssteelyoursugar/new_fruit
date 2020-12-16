@@ -186,6 +186,16 @@
 				// Promise.all([publicing(postSettle,data),publicing(postSubmitOrder,data2)])
 				publicing(postSettle, data)
 					.then((res) => {
+						if (res.data.code && res.data.code != 200) {
+							uni.showToast({
+								title: res.data.msg,
+								icon: "none"
+							})
+							uni.switchTab({
+								url: "../../pages/my/my"
+							})
+							return
+						}
 						this.extraUserInfo = res.data.data.extraData.userInfo
 						this.goodsData = res.data.data.data
 						this.extraData = res.data.data.extraData
@@ -257,6 +267,16 @@
 				}
 				listing(getSubmitOrder, data2)
 					.then((res) => {
+						if (res.data.code && res.data.code != 200) {
+							uni.showToast({
+								title: res.data.msg,
+								icon: "none"
+							})
+							uni.switchTab({
+								url: "../../pages/my/my"
+							})
+							return
+						}
 						if (res.data.code === -1) {
 							uni.showToast({
 								title: res.data.msg,

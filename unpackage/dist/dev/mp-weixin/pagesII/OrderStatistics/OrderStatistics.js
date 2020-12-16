@@ -212,7 +212,7 @@ var _api = __webpack_require__(/*! ../../api/api.js */ 20);function ownKeys(obje
       unitTop: true,
       radius: true,
       startYear: 2000,
-      endYear: 2020,
+      endYear: new Date().getFullYear() + 1,
       dateTime: '',
       result: '',
       iconSize: '28',
@@ -285,6 +285,16 @@ var _api = __webpack_require__(/*! ../../api/api.js */ 20);function ownKeys(obje
           pageSize: 10000 };
 
         (0, _api.listing)(_request.orderCount, data).then(function (res) {
+          if (res.data.code && res.data.code != 200) {
+            uni.showToast({
+              title: res.data.msg,
+              icon: "none" });
+
+            uni.switchTab({
+              url: "../../pages/my/my" });
+
+            return;
+          }
           _this2.orderList = res.data.data.list;
           _this2.totalGoodsNumber = res.data.data.totalGoodsNumber;
           _this2.totalGoodsPirce = res.data.data.totalGoodsPirce;
@@ -298,6 +308,16 @@ var _api = __webpack_require__(/*! ../../api/api.js */ 20);function ownKeys(obje
           pageSize: 10000 };
 
         (0, _api.listing)(_request.orderCount, _data).then(function (res) {
+          if (res.data.code && res.data.code != 200) {
+            uni.showToast({
+              title: res.data.msg,
+              icon: "none" });
+
+            uni.switchTab({
+              url: "../../pages/my/my" });
+
+            return;
+          }
           _this2.orderList = res.data.data.list;
           _this2.totalGoodsNumber = res.data.data.totalGoodsNumber;
           _this2.totalGoodsPirce = res.data.data.totalGoodsPirce;

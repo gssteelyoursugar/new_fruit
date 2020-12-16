@@ -327,9 +327,19 @@ var _default = { data: function data() {return { loading: false, active: true, u
       scrollH: 0, //滚动总高度
       opcity: 0, iconOpcity: 0.5, bannerIndex: 0, menuShow: false, popupShow: false, value: 1, collected: false, WxActivityID: '', //首页传的id
       startTime: 0, endTime: 0, createTime: 0, ts: 0, te: 3, boxHeight: 44, statusHeight: 20, navHeight: 64, scrollTop: 0, activityStatus: '' // 活动状态
-    };}, onLoad: function onLoad(options) {this.getMerchants();this.WxActivityID = options.id;this.getLimit();this.url = _request.imgurl;this.getLimit();var obj = {};var that = this;setTimeout(function () {that.loading = true;}, 500);var res = uni.getSystemInfoSync();var statusBarHeight = res.statusBarHeight;var info = uni.getMenuButtonBoundingClientRect();var top = info.top,bottom = info.bottom;this.statusHeight = statusBarHeight;var buttonHeight = bottom - statusBarHeight + (top - statusBarHeight);var navHeight = statusBarHeight + buttonHeight + top - statusBarHeight;this.boxHeight = navHeight - statusBarHeight;this.navHeight = navHeight;}, computed: {}, methods: { getMerchants: function getMerchants() {var _this = this;var setdata = uni.getStorageSync("usermen");if (!setdata) {this.ApproveStatus = 0;return;}var data = { token: setdata };(0, _api.listing)(_request.getClient, data).then(function (res) {///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
+    };}, onLoad: function onLoad(options) {this.getMerchants();this.WxActivityID = options.id;this.getLimit();this.url = _request.imgurl;this.getLimit();var obj = {};var that = this;setTimeout(function () {that.loading = true;}, 500);var res = uni.getSystemInfoSync();var statusBarHeight = res.statusBarHeight;var info = uni.getMenuButtonBoundingClientRect();var top = info.top,bottom = info.bottom;this.statusHeight = statusBarHeight;var buttonHeight = bottom - statusBarHeight + (top - statusBarHeight);var navHeight = statusBarHeight + buttonHeight + top - statusBarHeight;this.boxHeight = navHeight - statusBarHeight;this.navHeight = navHeight;}, computed: {}, methods: { getMerchants: function getMerchants() {var _this = this;var setdata = uni.getStorageSync("usermen");if (!setdata) {this.ApproveStatus = 0;return;}var data = { token: setdata };(0, _api.listing)(_request.getClient, data).then(function (res) {if (res.data.code && res.data.code != 200) {uni.showToast({ title: res.data.msg, icon: "none" });uni.switchTab({ url: "../../pages/my/my" });
+
+          return;
+        }
+        ///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
         _this.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
-      }).catch(function (err) {log(err);});}, scroll: function scroll(e) {},
+      }).
+      catch(function (err) {
+        log(err);
+      });
+    },
+    scroll: function scroll(e) {
+    },
     //商品详情页
     gotoList: function gotoList(id, num) {
       if (this.activityStatus !== '3' && num !== 0) {

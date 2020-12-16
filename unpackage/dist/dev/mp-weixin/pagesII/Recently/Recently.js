@@ -359,6 +359,16 @@ console,log = _console.log;var _default = (_data$filters$onPullD = {
 
       (0, _api.listing)(_request.getClient, data).
       then(function (res) {
+        if (res.data.code != 200) {
+          uni.showToast({
+            title: res.data.msg,
+            icon: "none" });
+
+          uni.switchTab({
+            url: "../../pages/my/my" });
+
+          return;
+        }
         //登录成功后显示去认证店铺，如果已认证，显示已认证店铺
         _this.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
       }).
@@ -427,7 +437,9 @@ console,log = _console.log;var _default = (_data$filters$onPullD = {
         uni.setStorageSync('usermen', res.data.token);
         uni.hideLoading();
         _this3.modaishow = false;
+        _this3.getMerchants();
         _this3.getRecentlyData();
+
       }).
       catch(function (err) {
         uni.showToast({
@@ -446,6 +458,16 @@ console,log = _console.log;var _default = (_data$filters$onPullD = {
 
       (0, _api.listing)(_request.getRecently, data).
       then(function (res) {
+        if (res.data.code && res.data.code != 200) {
+          uni.showToast({
+            title: res.data.msg,
+            icon: "none" });
+
+          uni.switchTab({
+            url: "../../pages/my/my" });
+
+          return;
+        }
         _this4.lookDatas = res.data.data;
       }).
       catch(function (err) {
@@ -467,6 +489,16 @@ console,log = _console.log;var _default = (_data$filters$onPullD = {
 
         (0, _api.publicing)(_request.postLike, data).
         then(function (res) {
+          if (res.data.code != 200) {
+            uni.showToast({
+              title: res.data.msg,
+              icon: "none" });
+
+            uni.switchTab({
+              url: "../../pages/my/my" });
+
+            return;
+          }
           _this5.getRecentlyData();
           uni.showToast({
             title: "已收藏",
@@ -490,6 +522,16 @@ console,log = _console.log;var _default = (_data$filters$onPullD = {
 
       (0, _api.publicing)(_request.postDelLike, data).
       then(function (res) {
+        if (res.data.code && res.data.code != 200) {
+          uni.showToast({
+            title: res.data.msg,
+            icon: "none" });
+
+          uni.switchTab({
+            url: "../../pages/my/my" });
+
+          return;
+        }
         uni.showToast({
           title: "\u53D6\u6D88\u6536\u85CF" });
 

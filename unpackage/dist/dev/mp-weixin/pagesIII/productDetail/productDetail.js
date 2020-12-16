@@ -966,7 +966,7 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
       posters: 'https://www.thorui.cn/img/product/4.png', //视频封面
       //videos:'https://6e6f-normal-env-ta6pc-1300924598.tcb.qcloud.la/video-swiper/1589851354869410.mp4?sign=1f636557effa496e074332e3f4b9b8aa&t=1589851461',
       bannerIndex: 0, userInfoData: {}, //物流信息
-      topMenu: [{ icon: 'message', text: '消息', size: 26, badge: 3 }, { icon: 'home', text: '首页', size: 23, badge: 0 }, { icon: 'people', text: '我的', size: 26, badge: 0 }, { icon: 'cart', text: '购物车', size: 23, badge: 2 }, { icon: 'kefu', text: '客服小蜜', size: 26, badge: 0 }, { icon: 'feedback', text: '我要反馈', size: 23, badge: 0 }, { icon: 'share', text: '分享', size: 26, badge: 0 }], productID: 0, menuShow: false, popupShow: false, value: 1, collected: false, Sumify: '', token: '', navHeight: 64, iconTop: 24, tabsTop: 64, canPraise: true, canCollect: true, canCart: true, netStatus: true };}, onLoad: function onLoad(options) {// 导航栏高度 = 状态栏高度 + 胶囊高度 + 胶囊上下边距
+      topMenu: [{ icon: 'message', text: '消息', size: 26, badge: 3 }, { icon: 'home', text: '首页', size: 23, badge: 0 }, { icon: 'people', text: '我的', size: 26, badge: 0 }, { icon: 'cart', text: '购物车', size: 23, badge: 2 }, { icon: 'kefu', text: '客服小蜜', size: 26, badge: 0 }, { icon: 'feedback', text: '我要反馈', size: 23, badge: 0 }, { icon: 'share', text: '分享', size: 26, badge: 0 }], productID: 0, menuShow: false, popupShow: false, value: 1, collected: false, Sumify: '', token: '', navHeight: 64, iconTop: 24, tabsTop: 64, canPraise: true, canCollect: true, canCart: true, netStatus: true, userStatus: 0 };}, onLoad: function onLoad(options) {// 导航栏高度 = 状态栏高度 + 胶囊高度 + 胶囊上下边距
     var that = this;try {var res = uni.getSystemInfoSync();var statusBarHeight = res.statusBarHeight;var info = uni.getMenuButtonBoundingClientRect();var top = info.top,height = info.height,bottom = info.bottom;var buttonHeight = bottom - statusBarHeight + (top - statusBarHeight);that.navHeight = statusBarHeight + buttonHeight + top - statusBarHeight;that.iconTop = statusBarHeight + (top - statusBarHeight);that.tabsTop = statusBarHeight + buttonHeight + top - statusBarHeight;uni.getNetworkType({ success: function success(res) {if (res.networkType === 'wifi') {that.netStatus = true;}if (res.networkType !== 'wifi') {that.netStatus = false;setTimeout(function () {that.netStatus = true;}, 3000);}} });uni.onNetworkStatusChange(function (res) {if (res.isConnected && res.networkType !== 'wifi') {that.netStatus = false;setTimeout(function () {that.netStatus = true;}, 3000);}if (res.isConnected && res.networkType === 'wifi') {that.netStatus = true;}});} catch (err) {console.log(err);} // this.getHomelist()
     var setdata = uni.getStorageSync('usermen');this.token = setdata;this.productID = options.id;this.postDetails();this.postSettle();this.getMerchants();var obj = {};obj = wx.getMenuButtonBoundingClientRect(); // 	setTimeout(() => {
     // 		uni.getSystemInfo({
@@ -985,7 +985,7 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
         // result = data[0] + data[1] + "月" + data[3] + (data[4] * 1 + 1) + "日"
         // }
         return result;}}, countNum: function countNum(val) {return val.toFixed(2) * 1;} }, methods: { clickLink: function clickLink(e) {}, //购买前获取申请店铺状态信息
-    getMerchants: function getMerchants() {var _this = this;var setdata = uni.getStorageSync("usermen");if (!setdata) {this.ApproveStatus = 0;return;}var data = { token: setdata };(0, _api.listing)(_request.getClient, data).then(function (res) {if (res.data.code == 201) {uni.showToast({ title: "账户已被停用", icon: 'none', duration: 3000 });return;}if (res.data.code == 500) {uni.showToast({ title: '登录超时,请重试', icon: 'none', duration: 3000 });_this.ifUser();setTimeout(function () {uni.removeStorageSync('userIN');uni.removeStorageSync('usermen');uni.removeStorageSync('StoreStatus');}, 1500);}if (res.data.code == 200) {_this.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
+    getMerchants: function getMerchants() {var _this = this;var setdata = uni.getStorageSync("usermen");if (!setdata) {this.ApproveStatus = 0;return;}var data = { token: setdata };(0, _api.listing)(_request.getClient, data).then(function (res) {if (res.data.code == 201 || res.data.code == 204) {uni.switchTab({ url: "../../pages/my/my" });return;}if (res.data.code == 500) {uni.showToast({ title: '登录超时,请重试', icon: 'none', duration: 3000 });_this.ifUser();setTimeout(function () {uni.removeStorageSync('userIN');uni.removeStorageSync('usermen');uni.removeStorageSync('StoreStatus');}, 1500);}if (res.data.code == 200) {_this.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
         }}).catch(function (err) {log(err);});}, //物流配送
     postSettle: function postSettle() {var _this2 = this;var setdata = uni.getStorageSync('usermen');if (setdata) {var data = { id: this.productID, token: setdata };(0, _api.publicing)(_request.postSettle, data).then(function (res) {_this2.userInfoData = res.data.data.extraData.userInfo;}).catch(function (err) {log(err);});}}, //结算，立即购买
     buyNow: function buyNow(id) {var setdata = uni.getStorageSync('usermen');if (!setdata) {this.modaishow = true;} else {this.modaishow = false;var data = { goodsId: id, token: setdata, number: this.value2, type: 'nowGoods' };(0, _api.publicing)(_request.postmyOrder, data).then(function (res) {var ids = res.data.data;var code = res.data.code;if (code == -1) {uni.showToast({ title: "".concat(res.data.msg), icon: 'none', duration: 3000 });return;} else if (code == 200) {uni.showToast({ title: "".concat(res.data.msg), icon: 'none', duration: 3000 });uni.navigateTo({ url: '../../pagesIII/submitOrder/submitOrder?ids=' + ids });}}).catch(function (err) {log(err);});}}, //重复点赞
@@ -993,9 +993,7 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
     praiseLike: function praiseLike(id) {var _this3 = this;var setdata = uni.getStorageSync('usermen');if (!setdata) {this.modaishow = true;return;} else {this.modaishow = false;var data = { goodsId: id, token: setdata };if (this.shopListdata.isPraise == true) {uni.showToast({ title: '重复点赞', icon: 'none' });return;}if (this.canPraise === true) {uni.showToast({ title: '重复点赞', icon: 'none' });return;}if (this.shopListdata.isPraise === false) {this.canPraise = true;(0, _api.publicing)(_request.postPraise, data).then(function (res) {// this.postDetails();
             _this3.shopListdata.praiseNumber++;uni.showToast({ title: '点赞成功', icon: 'none' });}).catch(function (err) {log(err);});}}}, change2: function change2(e) {this.value2 = e.value;}, // 显示
     init: function init() {this.modaishow = true;}, // 取消
-    messcancel: function messcancel() {this.modaishow = false;
-    },
-    noGoods: function noGoods() {
+    messcancel: function messcancel() {this.modaishow = false;}, noGoods: function noGoods() {
       uni.showToast({
         title: "正在补货中～",
         icon: 'none' });
@@ -1109,6 +1107,13 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
         this.modaishow = true;
         return;
       } else {
+        if (this.userStatus === 201) {
+          uni.showToast({
+            title: "账户已被停用",
+            icon: "none" });
+
+          return;
+        }
         this.modaishow = false;
         if (this.ApproveStatus === 0) {
           uni.showToast({
@@ -1117,8 +1122,7 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
 
           return;
         }
-        if (this.ApproveStatus === null || this.ApproveStatus === undefined || this.ApproveStatus === '' || this.ApproveStatus ===
-        2) {
+        if (this.ApproveStatus === null || this.ApproveStatus === undefined || this.ApproveStatus === '') {
           this.toggleVerify();
           return;
         }
@@ -1192,6 +1196,13 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
         this.modaishow = true;
         return;
       } else {
+        if (this.userStatus === 201) {
+          uni.showToast({
+            title: "账户已被停用",
+            icon: "none" });
+
+          return;
+        }
         // this.modaishow = false
         this.modaishow = false;
         if (this.ApproveStatus === null || this.ApproveStatus === undefined || this.ApproveStatus === '' || this.ApproveStatus ===

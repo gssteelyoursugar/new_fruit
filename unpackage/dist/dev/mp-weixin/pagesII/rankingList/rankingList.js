@@ -564,7 +564,7 @@ var _console = console,log = _console.log;var _default = { data: function data()
         if (res[2] !== '0') {return res[0] + res[1] + "." + res[2] + unit[res.length];} else {return res[0] + res[1] + "" + unit[res.length];}} else if (res.length === 7) {// 100w √
         if (res[3] !== '0') {return res[0] + res[1] + res[2] + "." + res[3] + unit[res.length];} else {return res[0] + res[1] + res[2] + "" + unit[res.length];}} else if (res.length === 8) {// 1000w√
         if (res[4] !== '0') {return res[0] + res[1] + res[2] + res[3] + "." + res[4] + unit[res.length];} else {return res[0] + res[1] + res[2] + res[3] + "" + unit[res.length];}} else if (res.length === 9) {// 1e
-        if (res[1] !== '0') {return res[0] + "." + res[1] + unit[res.length];} else {return res[0] + "" + unit[res.length];}}} }, methods: { getMerchants: function getMerchants() {var _this2 = this;var setdata = uni.getStorageSync("usermen");if (!setdata) {this.ApproveStatus = 0;return;}var data = { token: setdata };(0, _api.listing)(_request.getClient, data).then(function (res) {///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
+        if (res[1] !== '0') {return res[0] + "." + res[1] + unit[res.length];} else {return res[0] + "" + unit[res.length];}}} }, methods: { getMerchants: function getMerchants() {var _this2 = this;var setdata = uni.getStorageSync("usermen");if (!setdata) {this.ApproveStatus = 0;return;}var data = { token: setdata };(0, _api.listing)(_request.getClient, data).then(function (res) {if (res.data.code && res.data.code != 200) {uni.showToast({ title: res.data.msg, icon: "none" });uni.switchTab({ url: "../../pages/my/my" });return;} ///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
         _this2.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
       }).catch(function (err) {log(err);});}, onPullDownRefresh: function onPullDownRefresh() {this.postRanking();setTimeout(function () {uni.stopPullDownRefresh();}, 1000);}, //商品详情页
     gotoList: function gotoList(id) {uni.navigateTo({ url: '../../pagesIII/productDetail/productDetail?id=' + id });}, //请求数据
@@ -572,7 +572,17 @@ var _console = console,log = _console.log;var _default = { data: function data()
       this.num = index;this.postRanking(); //那这个方法里面的this.valueText怎么会能拿到嘛
       // 子组件调试父组件方法 ：parent
       // this.$parent.fatherMethod(index)
-    }, previewImage: function previewImage(e) {var index = e.currentTarget.dataset.index;uni.previewImage({ current: this.banner[index], urls: this.banner });}, back: function back() {uni.navigateBack();}, openMenu: function openMenu() {this.menuShow = true;}, closeMenu: function closeMenu() {
+    }, previewImage: function previewImage(e) {var index = e.currentTarget.dataset.index;uni.previewImage({ current: this.banner[index],
+        urls: this.banner });
+
+    },
+    back: function back() {
+      uni.navigateBack();
+    },
+    openMenu: function openMenu() {
+      this.menuShow = true;
+    },
+    closeMenu: function closeMenu() {
       this.menuShow = false;
     },
     showPopup: function showPopup() {

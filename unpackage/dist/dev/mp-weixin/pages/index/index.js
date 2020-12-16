@@ -454,7 +454,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 var _vuex = __webpack_require__(/*! vuex */ 12);
 
 
@@ -631,7 +630,7 @@ var isFirst1 = true;var _default =
       if (this.num === 0) {
         this.Sumify = 1;
       } else if (this.num === 1) {
-        this.Sumify = 2;
+        this.Sumify = 2; // 原本有三项，现改为2项，取消中间的那一项
       } else if (this.num === 2) {
         this.Sumify = 3;
       }
@@ -713,8 +712,17 @@ var isFirst1 = true;var _default =
 
         (0, _api.listing)(_request.getClient, data).
         then(function (res) {
-          if (res.data.code == 500) {
-            _this3.ApproveStatus = 0;
+          if (res.data.code && res.data.code != 200) {
+            uni.showToast({
+              title: res.data.msg,
+              icon: 'none',
+              duration: 3000 });
+
+            _this3.ApproveStatus = undefined;
+            uni.switchTab({
+              url: "../my/my" });
+
+
             return;
           }
           ///登录成功后显示去认证店铺，如果已认证，显示已认证店铺

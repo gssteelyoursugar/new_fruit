@@ -589,6 +589,10 @@
 	position: -webkit-sticky;
 	position: sticky;
 	z-index: 999;
+	/* 修改成2项 */
+	/* border-radius: 30rpx; */
+	/* overflow: hidden; */
+	/* margin: 14rpx 20rpx 0; */
 }
 .tui-recommend.data-v-57280228 {
 	margin: 10rpx 0;

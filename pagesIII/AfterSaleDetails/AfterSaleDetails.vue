@@ -129,7 +129,16 @@
 				}
 				publicing(posAfterDetails, data)
 					.then((res) => {
-						log("DetailsData", res.data.data)
+						if (res.data.code && res.data.code != 200) {
+							uni.showToast({
+								title: res.data.msg,
+								icon: "none"
+							})
+							uni.switchTab({
+								url: "../../pages/my/my"
+							})
+							return
+						}
 						this.DetailsData = res.data.data
 						this.refund_money = res.data.data.refund_money //退款金额
 						// this.DetailsData.after_sale_mode = '退款'

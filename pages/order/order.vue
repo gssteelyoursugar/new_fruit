@@ -299,6 +299,17 @@
 				};
 				listing(getClient, data)
 					.then(res => {
+						if (res.data.code && res.data.code != 200) {
+							uni.showToast({
+								title: res.data.msg,
+								icon: "none"
+							})
+							uni.switchTab({
+								url: "../my/my"
+							})
+							return
+						}
+						
 						///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
 						this.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
 					})
@@ -334,6 +345,16 @@
 				};
 				listing(getCart, data)
 					.then(res => {
+						if(res.data.code && res.data.code != 200) {
+							uni.showToast({
+								title: res.data.msg,
+								icon: "none"
+							})
+							uni.switchTab({
+								url: '../my/my'
+							})
+							return
+						}
 						let lists = res.data.data
 						if (lists) {
 							lists.forEach(item => {
@@ -399,6 +420,17 @@
 				//更新我的加购单
 				publicing(postUpOrder, data)
 					.then(res => {
+						console.log(res)
+						if (res.data.code && res.data.code != 200) {
+							uni.showToast({
+								title: res.data.msg,
+								icon: "none"
+							})
+							uni.switchTab({
+								url: "../my/my"
+							})
+							return
+						}
 						uni.hideLoading();
 						if (res.data.code == -1) {
 							uni.showToast({
@@ -434,6 +466,16 @@
 				};
 				publicing(postDelOrder, data)
 					.then(res => {
+						if (res.data.code && res.data.code != 200) {
+							uni.showToast({
+								title: res.data.msg,
+								icon: "none"
+							})
+							uni.switchTab({
+								url: "../my/my"
+							})
+							return
+						}
 						uni.showToast({
 							title: `${res.data.msg}`
 						});
@@ -464,6 +506,7 @@
 					});
 					return;
 				}
+				 
 				let ids = '';
 				for (let index in this.cartIds) {
 					ids = ids + this.cartIds[index] + ',';
@@ -476,7 +519,16 @@
 					token: setdata
 				}
 				publicing(postSettle, s_data).then(res => {
-					console.log(res)
+					if (res.data.code && res.data.code != 200) {
+						uni.showToast({
+							title: res.data.msg,
+							icon: "none"
+						})
+						uni.switchTab({
+							url: "../my/my"
+						})
+						return
+					}
 					if (res.data.data.code == -1) {
 						uni.showToast({
 							title: res.data.data.msg,

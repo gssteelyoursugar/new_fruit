@@ -522,6 +522,17 @@
 				}
 				publicing(postConfirmOrder, data)
 					.then((res) => {
+						if (res.data.code && res.data.code != 200) {
+							this.loadStatus = "noMore"
+							uni.showToast({
+								title: res.data.msg,
+								icon: 'none'
+							})
+							uni.switchTab({
+								url: "../../pages/my/my"
+							})
+							return
+						}
 						if (res.data.code == 200) {
 							uni.showToast({
 								title: "收货成功",
@@ -561,10 +572,18 @@
 				}
 				listing(getMyOrder, data)
 					.then((res) => {
-						if (res.data.code == 201) {
+						if (res.data.code && res.data.code != 200) {
 							this.loadStatus = "noMore"
+							uni.showToast({
+								title: res.data.msg,
+								icon: 'none'
+							})
+							uni.switchTab({
+								url: "../../pages/my/my"
+							})
 							return
 						}
+						
 						if (res.data.data.length === 0) {
 							this.myOrderData = res.data.data
 							setTimeout(() => {

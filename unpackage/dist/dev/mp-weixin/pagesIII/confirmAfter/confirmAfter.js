@@ -317,8 +317,17 @@ var thorui = __webpack_require__(/*! @/common/tui-clipboard/tui-clipboard.js */ 
       files: [], modaishow: false };}, methods: { //复制
     //event 当需要异步请求返回数据再进行复制时，需要传入此参数，或者异步方法转为同步方法（H5端）
     clipboard: function clipboard(event) {var data = event;thorui.getClipboardData(data, function (res) {}, event);}, goBack: function goBack() {this.modaishow = false;}, goAfterCancel: function goAfterCancel() {this.modaishow = true;}, //取消申请
-    goAfterSale: function goAfterSale(id, order_item_id) {var _this = this;log(id);var setdata = uni.getStorageSync('usermen');var data = { token: setdata, id: id, orderItemId: order_item_id };(0, _api.publicing)(_request.postAfterCen, data).then(function (res) {log(res);_this.modaishow = false;uni.reLaunch({ url: '../../pagesIII/navbar/navbar' });}).catch(function (err) {log(err);});}, //确认
-    goAfterConfirm: function goAfterConfirm(id) {log("id是", id);var setdata = uni.getStorageSync('usermen');var datas = { token: setdata, orderItemId: id };(0, _api.publicing)(_request.PostDataById, datas).then(function (res) {log(res);uni.showToast({ title: "".concat(res.data.msg), duration: 2000 });uni.redirectTo({ url: '../../pagesIII/navbar/navbar' });}).catch(function (err) {log(err);});}, previewImage: function previewImage(e) {log(e.currentTarget.id);uni.previewImage({ current: e.currentTarget.id, urls: this.files });}, //获取申请详情信息
+    goAfterSale: function goAfterSale(id, order_item_id) {var _this = this;var setdata = uni.getStorageSync('usermen');var data = { token: setdata, id: id, orderItemId: order_item_id };(0, _api.publicing)(_request.postAfterCen, data).then(function (res) {if (res.data.code && res.data.code != 200) {uni.showToast({ title: res.data.msg, icon: "none" });uni.switchTab({ url: "../../pages/my/my" });return;}_this.modaishow = false;uni.reLaunch({ url: '../../pagesIII/navbar/navbar' });}).catch(function (err) {log(err);});}, //确认
+    goAfterConfirm: function goAfterConfirm(id) {log("id是", id);var setdata = uni.getStorageSync('usermen');var datas = { token: setdata, orderItemId: id };(0, _api.publicing)(_request.PostDataById, datas).then(function (res) {log(res);uni.showToast({ title: "".concat(res.data.msg), duration: 2000 });uni.redirectTo({ url: '../../pagesIII/navbar/navbar' });}).catch(function (err) {log(err);});
+    },
+    previewImage: function previewImage(e) {
+      log(e.currentTarget.id);
+      uni.previewImage({
+        current: e.currentTarget.id,
+        urls: this.files });
+
+    },
+    //获取申请详情信息
     postAfterDetails: function postAfterDetails() {var _this2 = this;
       var setdata = uni.getStorageSync('usermen');
       var data = {

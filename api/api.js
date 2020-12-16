@@ -16,10 +16,8 @@ let listing = function(urling, shopdata) {
 				url: urling,
 				method: 'GET',
 				data: shopdata
-			})
-			.then((res) => {
+			}).then((res) => {
 				resolve(res[1])
-
 			})
 			.catch((err) => {
 				let errs = '服务器错误 请稍后再试'
@@ -28,6 +26,7 @@ let listing = function(urling, shopdata) {
 			})
 	})
 }
+
 
 // GET不带token
 let listing2 = function(urling, shopdata) {

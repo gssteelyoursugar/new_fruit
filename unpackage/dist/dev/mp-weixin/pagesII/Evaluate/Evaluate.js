@@ -240,9 +240,19 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 22); //
 //请求方式
 //请求地址
 var setdata = uni.getStorageSync('usermen');var _default = { data: function data() {return { showTips: false, curIds: undefined, evaList: [], ApproveStatus: 0 };}, onLoad: function onLoad() {this.getMerchants();this.getList();}, onShow: function onShow() {this.getMerchants();this.getList();}, methods: { getMerchants: function getMerchants() {var _this = this;var setdata = uni.getStorageSync("usermen");if (!setdata) {this.ApproveStatus = 0;return;}var data = { token: setdata }; // log(data)
-      (0, _api.listing)(_request.getClient, data).then(function (res) {///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
+      (0, _api.listing)(_request.getClient, data).then(function (res) {if (res.data.code && res.data.code != 200) {uni.showToast({ title: res.data.msg, icon: 'none' });uni.switchTab({ url: '../../pages/my/my' });return;} ///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
         _this.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
-      }).catch(function (err) {log(err);});}, getList: function getList() {var _this2 = this;var data = { token: setdata, pageNo: 1, pageSize: 10000 };(0, _api.publicing)(_request.getEvaluateList, data).then(function (res) {_this2.evaList = res.data.data;});}, clickToDetail: function clickToDetail(id) {
+      }).catch(function (err) {log(err);});}, getList: function getList() {var _this2 = this;var data = {
+        token: setdata,
+        pageNo: 1,
+        pageSize: 10000 };
+
+      (0, _api.publicing)(_request.getEvaluateList, data).then(function (res) {
+        _this2.evaList = res.data.data;
+
+      });
+    },
+    clickToDetail: function clickToDetail(id) {
       uni.navigateTo({
         url: '../../pagesIII/productDetail/productDetail?id=' + id });
 
@@ -263,6 +273,16 @@ var setdata = uni.getStorageSync('usermen');var _default = { data: function data
 
       // return
       (0, _api.publicing)(_request.postCancelPraise, data).then(function (res) {
+        if (res.data.code && res.data.code != 200) {
+          uni.showToast({
+            title: res.data.msg,
+            icon: "none" });
+
+          uni.switchTab({
+            url: "../../pages/my/my" });
+
+          return;
+        }
         uni.showToast({
           title: '已取消点赞' });
 

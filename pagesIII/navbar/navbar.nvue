@@ -167,10 +167,18 @@
 					orderItemId: this.itemid,
 					id: this.idNum
 				}
-				log(data)
 				publicing(postAfterCen, data)
 					.then((res) => {
-						log(res)
+						if (res.data.code && res.data.code != 200) {
+							uni.showToast({
+								title: res.data.msg,
+								icon: "none"
+							})
+							uni.switchTab({
+								url: "../../pages/my/my"
+							})
+							return
+						}
 						this.postAfterSalelist()
 						this.getBeConfirmedData()
 						this.messcancel()
@@ -181,17 +189,14 @@
 			},
 			//获取待确认
 			getBeConfirmedData() {
-
-				var setdata = uni.getStorageSync('usermen')
+				let setdata = uni.getStorageSync('usermen')
 				let data = {
-					token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzZXNzaW9uS2V5IjoiVVgwSEtIRC8yVUJnYm4ya0tGVSt3QT09Iiwiand0LWlkIjoiNGNhMzNkZGQtMjU1MC00M2IyLTkzZDAtNzE3MWNiOTA3ODNlIiwid3hPcGVuSWQiOiJvb0MwNDQxc0JvOTN1ODV0ZFVxSC1iY1Z0NXNVIn0.IEabjDYhD6_crxCFyc1L5LsJUOZTaCYgVHfw1mgjFwU"
+					// token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzZXNzaW9uS2V5IjoiVVgwSEtIRC8yVUJnYm4ya0tGVSt3QT09Iiwiand0LWlkIjoiNGNhMzNkZGQtMjU1MC00M2IyLTkzZDAtNzE3MWNiOTA3ODNlIiwid3hPcGVuSWQiOiJvb0MwNDQxc0JvOTN1ODV0ZFVxSC1iY1Z0NXNVIn0.IEabjDYhD6_crxCFyc1L5LsJUOZTaCYgVHfw1mgjFwU"
+					token: setdata
 				}
 				listing(getBeConfirmed, data)
 					.then((res) => {
-						log("res", res)
 						this.count = res.data.data.count
-						log(this.count)
-
 						this.$set(this.tabBars, 1, {
 							name: `待确认(${this.count})`
 						})
@@ -205,14 +210,12 @@
 			goBack() {
 				this.messcancel()
 			},
-
 			//售后列表请求
 			postAfterSalelist() {
 				var setdata = uni.getStorageSync('usermen')
 				let data = {
 					token: setdata,
 					afterSaleStatus: 3
-
 				}
 				if (this.tabIndex === 0) { //如果是默认全部不传afterSaleStatus参数
 					delete data.afterSaleStatus
@@ -220,7 +223,6 @@
 
 				publicing(posAfterSaleList, data)
 					.then((res) => {
-						log(res)
 						this.AfterSaleData = res.data.data
 					})
 					.catch((err) => {
@@ -229,7 +231,6 @@
 			},
 			//重新申请售后
 			goAfter(id) {
-
 				uni.navigateTo({
 					url: '../../pagesIII/applyAfter/applyAfter?id=' + id
 				})

@@ -358,6 +358,16 @@
 				listing(getClient, data)
 					.then((res) => {
 						//这里查询
+						if (res.data.code && res.data.code !=200) {
+							uni.showToast({
+								title: res.data.msg,
+								icon:"none"
+							})
+							uni.switchTab({
+								url: "../../pages/my/my"
+							})
+							return
+						}
 						this.approveStatus = res.data.data.approveStatus
 						this.StoreInfo = res.data.data
 						let ulist = res.data.data.urlList

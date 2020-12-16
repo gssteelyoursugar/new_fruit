@@ -386,9 +386,19 @@ var _console = console,log = _console.log;var form = __webpack_require__(/*! @/c
       });}, //更新店铺信息
     postUpdateStore: function postUpdateStore() {var setdata = uni.getStorageSync("usermen");var data = { storeName: this.StoreInfo.storeName, merchantsName: this.StoreInfo.merchantsName, phone: this.StoreInfo.phone, address: this.StoreInfo.address, // serviceNumber:'',
         token: setdata, idCard: this.StoreInfo.idCard, fileUrls: JSON.stringify(this.imgDataLi) };(0, _api.publicing2)(_request.postupdateClient, data).then(function (res) {}).catch(function (err) {log(err);});}, //获取申请店铺状态信息
-    getMerchants: function getMerchants() {var _this2 = this;var setdata = uni.getStorageSync("usermen");var data = { token: setdata };(0, _api.listing)(_request.getClient, data).then(function (res) {_this2.ApproveStatus = res.data.data.approveStatus;_this2.StoreInfo = res.data.data;_this2.urlList = res.data.data.urlList;}).catch(function (err) {log(err);});}, //请求保存店铺
-    postsaveStores: function postsaveStores(e) {var setdata = uni.getStorageSync('usermen');var data = { storeName: e.detail.value.storeName, merchantsName: e.detail.value.merchantsName, phone: e.detail.value.phone, address: e.detail.value.address, serviceNumber: e.detail.value.serviceNumber, token: setdata, fileUrls: JSON.stringify(this.imgDataLi) //这个地方不要传json数组，要把json数组转字符串，用JSON.stringify能转为字符串json数组，这样后台才能接收
-      };(0, _api.publicing)(_request.postSaveStore, data).then(function (res) {if (res.data.code === -1) {
+    getMerchants: function getMerchants() {var _this2 = this;var setdata = uni.getStorageSync("usermen");var data = { token: setdata };(0, _api.listing)(_request.getClient, data).then(function (res) {if (res.data.code && res.data.code != 200) {uni.showToast({ title: res.data.msg, icon: "none" });uni.switchTab({ url: "../../pages/my/my" });return;}_this2.ApproveStatus = res.data.data.approveStatus;_this2.StoreInfo = res.data.data;_this2.urlList = res.data.data.urlList;}).catch(function (err) {log(err);});}, //请求保存店铺
+    postsaveStores: function postsaveStores(e) {var setdata = uni.getStorageSync('usermen');var data = {
+        storeName: e.detail.value.storeName,
+        merchantsName: e.detail.value.merchantsName,
+        phone: e.detail.value.phone,
+        address: e.detail.value.address,
+        serviceNumber: e.detail.value.serviceNumber,
+        token: setdata,
+        fileUrls: JSON.stringify(this.imgDataLi) //这个地方不要传json数组，要把json数组转字符串，用JSON.stringify能转为字符串json数组，这样后台才能接收
+      };
+      (0, _api.publicing)(_request.postSaveStore, data).
+      then(function (res) {
+        if (res.data.code === -1) {
           uni.showToast({
             title: "".concat(res.data.msg),
             icon: "none",

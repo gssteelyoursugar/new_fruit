@@ -264,9 +264,19 @@ var _default = { data: function data() {return { url: '', title: '应季专区',
       scrollH: 0, //滚动总高度
       opcity: 0, iconOpcity: 0.5, bannerIndex: 0, menuShow: false, popupShow: false, value: 1, collected: false, importData: [], //请求的数据
       ApproveStatus: 0 };}, onLoad: function onLoad(options) {var _this = this;this.getMerchants();this.title = options.title;this.getImportData();this.url = _request.imgurl;var obj = {};obj = wx.getMenuButtonBoundingClientRect();setTimeout(function () {uni.getSystemInfo({ success: function success(res) {_this.width = obj.left || res.windowWidth;_this.height = obj.top ? obj.top + obj.height + 8 : res.statusBarHeight + 44;_this.top = obj.top ? obj.top + (obj.height - 32) / 2 : res.statusBarHeight + 6;_this.scrollH = res.windowWidth;} });}, 0);}, methods: { getMerchants: function getMerchants() {var _this2 = this;var setdata = uni.getStorageSync("usermen");if (!setdata) {this.ApproveStatus = 0;return;}var data = { token: setdata }; // log(data)
-      (0, _api.listing)(_request.getClient, data).then(function (res) {///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
+      (0, _api.listing)(_request.getClient, data).then(function (res) {if (res.data.code && res.data.code != 200) {uni.showToast({
+            title: res.data.msg,
+            icon: "none" });
+
+          uni.switchTab({
+            url: "../../pages/my/my" });
+
+          return;
+        }
+        ///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
         _this2.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
-      }).catch(function (err) {
+      }).
+      catch(function (err) {
         log(err);
       });
     },

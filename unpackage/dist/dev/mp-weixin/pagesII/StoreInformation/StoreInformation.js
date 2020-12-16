@@ -494,6 +494,16 @@ var _console = console,log = _console.log;var form = __webpack_require__(/*! @/c
       (0, _api.listing)(_request.getClient, data).
       then(function (res) {
         //这里查询
+        if (res.data.code && res.data.code != 200) {
+          uni.showToast({
+            title: res.data.msg,
+            icon: "none" });
+
+          uni.switchTab({
+            url: "../../pages/my/my" });
+
+          return;
+        }
         _this2.approveStatus = res.data.data.approveStatus;
         _this2.StoreInfo = res.data.data;
         var ulist = res.data.data.urlList;

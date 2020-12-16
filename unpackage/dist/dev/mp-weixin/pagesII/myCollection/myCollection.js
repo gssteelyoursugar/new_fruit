@@ -261,13 +261,23 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 22); //
 var setdata = uni.getStorageSync('usermen');var _console = console,log = _console.log;var _default = { data: function data() {return { showTips: false, tips: '', modaishow: false, isCollection: false, isActive: true, //显示
       hasError: false, //隐藏
       showLike: true, url: 'http://192.168.1.10:8980/', likeDatas: [], ApproveStatus: 0, curIds: '' };}, methods: { getMerchants: function getMerchants() {var _this = this;var setdata = uni.getStorageSync("usermen");if (!setdata) {this.ApproveStatus = 0;return;}var data = { token: setdata }; // log(data)
-      (0, _api.listing)(_request.getClient, data).then(function (res) {///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
+      (0, _api.listing)(_request.getClient, data).then(function (res) {if (res.data.code && res.data.code != 200) {uni.showToast({ title: res.data.msg, icon: "none" });uni.switchTab({ url: "../../pages/my/my" });return;} ///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
         _this.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
       }).catch(function (err) {log(err);});}, //获取头像昵称
     getUserInfo: function getUserInfo(event) {log(event);this.usering = event.detail.userInfo;uni.setStorageSync('userIN', event.detail.userInfo); //把头像存在本地，小程序提供如同浏览器cookie
       var userING = uni.setStorageSync('userIN', event.detail.userInfo);if (event.detail.userInfo) {var wxing = event.detail.userInfo;this.wxCode(wxing.avatarUrl, wxing.nickName);} // wx.startPullDownRefresh()
-    }, //获取code
-    wxCode: function wxCode(avatarUrl, nickName) {var _this2 = this;wx.login({ success: function success(res) {log(res);var code = res.code;_this2.wxLoging(code);}, fail: function fail(err) {log(err);
+
+    },
+    //获取code
+    wxCode: function wxCode(avatarUrl, nickName) {var _this2 = this;
+      wx.login({
+        success: function success(res) {
+          log(res);
+          var code = res.code;
+          _this2.wxLoging(code);
+        },
+        fail: function fail(err) {
+          log(err);
         } });
 
 
@@ -328,10 +338,17 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
 
       (0, _api.listing)(_request.getLike, data).
       then(function (res) {
-        log(res.data.data);
-        _this4.likeDatas = res.data.data;
-        log(_this4.likeDatas);
+        if (res.data.code && res.data.code != 200) {
+          uni.showToast({
+            title: res.data.msg,
+            icon: "none" });
 
+          uni.switchTab({
+            url: "../../pages/my/my" });
+
+          return;
+        }
+        _this4.likeDatas = res.data.data;
       }).
       catch(function (err) {
         log(err);
@@ -357,6 +374,16 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
 
       (0, _api.publicing)(_request.postDelLike, data).
       then(function (res) {
+        if (res.data.code && res.data.code != 200) {
+          uni.showToast({
+            title: res.data.msg,
+            icon: "none" });
+
+          uni.switchTab({
+            url: "../../pages/my/my" });
+
+          return;
+        }
         _this5.showTips = !_this5.showTips;
         uni.showToast({
           title: "\u53D6\u6D88\u6536\u85CF" //${res.data.msg}
@@ -372,7 +399,6 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
   onShow: function onShow() {
     this.getMerchants();
     var setdata = uni.getStorageSync('usermen');
-    log(setdata);
     if (!setdata) {
     } else {
       this.getLikeData();

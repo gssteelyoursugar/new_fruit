@@ -318,10 +318,11 @@
 							}, 1500)
 							return
 						} else if (res.data.statusCode == 200) {
+							console.log(res.data)
 							this.getOrderData()
-
 						}
 						// log(res) //获得token
+						console.log(res)
 						uni.setStorageSync('usermen', res.data.token) //把token存在本地，小程序提供如同浏览器cookie
 						uni.hideLoading();
 						this.getOrderData()
@@ -350,16 +351,11 @@
 				}
 				listing(getClient, data)
 					.then((res) => {
-						// 200 用户正常 201用户停用
-						if (res.data.code == 201) {
-							this.dangerUsr = true
-							this.user_phone = res.data.phone
-							this.logMsg = '账户已被停用'
-							return
-						}
-						if (res.data.code == 500) {
+						// console.log(res)
+						// 200 用户正常 201用户停用 204 找不到用户信息
+						if (res.data.code == 201 || res.data.code == 204 || res.data.code == 500) {
 							uni.showToast({
-								title: '登录超时,请重试',
+								title: res.data.msg,
 								icon: 'none',
 								duration: 3000
 							})
@@ -368,9 +364,12 @@
 								uni.removeStorageSync('usermen')
 								uni.removeStorageSync('StoreStatus')
 								uni.removeStorageSync('userIN')
+								this.ApproveStatus = undefined
 								this.ifUser()
 							}, 1500)
+							return
 						}
+						
 						if (res.data.code == 200) {
 							this.dangerUsr = false
 							///登录成功后 未认证或者认证失败 显示去认证店铺，如果已认证，显示已认证店铺
