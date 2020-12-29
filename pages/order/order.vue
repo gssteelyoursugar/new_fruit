@@ -312,6 +312,7 @@
 						
 						///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
 						this.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
+						
 					})
 					.catch(err => {
 						log(err);
@@ -356,7 +357,24 @@
 							return
 						}
 						let lists = res.data.data
+						
 						if (lists) {
+							let cartNum = 0
+							lists.forEach(it=> {
+								if (it.list) {
+									cartNum += it.list.length
+								}
+							})
+							if (lists.length !== 0) {
+								uni.setTabBarBadge({
+									index: 3,
+									text: cartNum + ''
+								})
+							} else{
+								uni.removeTabBarBadge({
+									index: 3
+								})
+							}
 							lists.forEach(item => {
 								item.list.forEach(itm => {
 									Object.assign(itm, {

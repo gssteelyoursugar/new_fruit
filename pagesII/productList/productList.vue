@@ -100,17 +100,17 @@
 								</view>
 								<view class="tui-pro-pic">
 									<view style="color: #FF7709; display: flex;align-items: baseline;">
-										<text style="font-size: 16rpx;">¥</text>
-										<text style="font-size: 28rpx; font-weight: 500">{{ApproveStatus===1?item.platformClientPrice:'***'}}</text>
-										<text style="font-size: 20rpx;color: #B6B6B6;">/件</text>
+										<text style="font-size: 20rpx;margin-right: 4rpx;">¥</text>
+										<text style="font-size: 40rpx; font-weight: 500">{{ApproveStatus===1?item.platformClientPrice:'***'}}</text>
+										<text style="font-size: 24rpx;color: #B6B6B6;">/件</text>
 										<view style="color: #B6B6B6;text-decoration: line-through; margin-left:10rpx;" v-if="item.marketPrice &&item.marketPrice != 0">
-											<text style="font-size: 16rpx;"> ¥</text>
+											<text style="font-size: 20rpx;"> ¥</text>
 											<text style="font-size: 24rpx;font-weight: 500;">{{ApproveStatus === 1? item.marketPrice:'***'}}</text>
 										</view>
 									</view>
-									<text class="tui-praise">
+									<!-- <text class="tui-praise">
 										<text class="tui-praise iconfont icon-dianzan "></text>{{item.praiseNumber| filterNum}}
-									</text>
+									</text> -->
 								</view>
 								<view class="tui-pro-dea">
 									<text class="tui-jin">{{item.specification}}</text>
@@ -152,17 +152,17 @@
 								</view>
 								<view class="tui-pro-pic">
 									<view style="color: #FF7709; display: flex;align-items: baseline;">
-										<text style="font-size: 16rpx;">¥</text>
-										<text style="font-size: 28rpx; font-weight: 500">{{ApproveStatus===1?item.platformClientPrice:'***'}}</text>
-										<text style="font-size: 20rpx;color: #B6B6B6;">/件</text>
+										<text style="font-size: 20rpx;margin-right: 4rpx;">¥</text>
+										<text style="font-size: 40rpx; font-weight: 500">{{ApproveStatus===1?item.platformClientPrice:'***'}}</text>
+										<text style="font-size: 24rpx;color: #B6B6B6;">/件</text>
 										<view style="color: #B6B6B6;text-decoration: line-through;margin-left:10rpx;" v-if=" item.marketPrice &&item.marketPrice != 0">
-											<text style="font-size: 16rpx;"> ¥</text>
+											<text style="font-size: 20rpx;"> ¥</text>
 											<text style="font-size: 24rpx;font-weight: 500">{{ApproveStatus===1?item.marketPrice:'***'}}</text>
 										</view>
 									</view>
-									<text class="tui-praise">
+									<!-- <text class="tui-praise">
 										<text class="tui-praise iconfont icon-dianzan "></text>{{item.praiseNumber | filterNum}}
-									</text>
+									</text> -->
 								</view>
 								<view class="tui-pro-dea">
 									<text class="tui-jin">{{item.specification}}</text>
@@ -1937,7 +1937,7 @@
 		margin-bottom: 10rpx;
 		background: #fff;
 		box-sizing: border-box;
-		border-radius: 6rpx;
+		border-radius: 20rpx;
 		overflow: hidden;
 		transition: all 0.15s ease-in-out;
 	}
@@ -1957,6 +1957,7 @@
 		align-items: center;
 		text-align: center;
 		justify-content: center;
+		border-radius: 20rpx 20rpx 0 0;
 
 	}
 
@@ -1990,13 +1991,13 @@
 		flex-direction: column;
 		justify-content: space-between;
 		box-sizing: border-box;
-		padding: 20rpx;
+		padding: 20rpx 12rpx;
 	}
 
 
 	.tui-pro-tit {
 		color: #2e2e2e;
-		font-size: 26rpx;
+		font-size: 28rpx;
 		word-break: break-all;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -2006,7 +2007,7 @@
 	}
 
 	.tui-sale-price {
-		font-size: 22rpx;
+		font-size: 20rpx;
 		color: #9A9A9A;
 	}
 
@@ -2032,8 +2033,8 @@
 	}
 
 	.tui-jin {
-		color: #9a9a9a;
-		font-size: 22rpx;
+		color: #B6B6B6;
+		font-size: 24rpx;
 	}
 
 	.tui-dea-color {
@@ -2071,9 +2072,9 @@
 	}
 
 	.tag-tit-border {
-		border: 2rpx solid #FFBE33;
-		color: #FFBE33;
-		font-size: 18rpx;
+		border: 2rpx solid #FF7709;
+		color: #FF7709;
+		font-size: 20rpx;
 		padding: 2rpx 10rpx;
 		border-radius: 18rpx;
 		margin-right: 10rpx;

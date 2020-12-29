@@ -211,6 +211,7 @@
 		publicing
 	} from '../../api/api.js'
 	import {
+		getCart,
 		loginis,
 		getClient,
 		getMyOrder
@@ -266,6 +267,43 @@
 			}
 		},
 		methods: {
+			// 获取进货单数量
+			orderIng() {
+				let setdata = uni.getStorageSync('usermen');
+				if (!setdata) {
+					return
+				}
+				let data = {
+					token: setdata
+				};
+				listing(getCart, data).then(res=> {
+					if (res.data.code!=200) {
+						return
+					}
+					if (res.data.data) {
+						let {data} = res.data
+						let cartNum = 0
+						data.forEach(it=> {
+							if (it.list) {
+								cartNum += it.list.length
+							}
+						})
+						
+						if (data.length !== 0){
+							uni.setTabBarBadge({
+								index: 3,
+								text: cartNum + ""
+							})
+						} else {
+							uni.removeTabBarBadge({
+								index: 3
+							})
+						}
+						
+					}
+				
+				})
+			},
 			//获取头像昵称
 			getUserInfo(event) {
 				this.usering = event.detail.userInfo
@@ -318,11 +356,9 @@
 							}, 1500)
 							return
 						} else if (res.data.statusCode == 200) {
-							console.log(res.data)
 							this.getOrderData()
 						}
 						// log(res) //获得token
-						console.log(res)
 						uni.setStorageSync('usermen', res.data.token) //把token存在本地，小程序提供如同浏览器cookie
 						uni.hideLoading();
 						this.getOrderData()
@@ -366,6 +402,9 @@
 								uni.removeStorageSync('userIN')
 								this.ApproveStatus = undefined
 								this.ifUser()
+								uni.removeTabBarBadge({
+									index: 3
+								})
 							}, 1500)
 							return
 						}
@@ -388,6 +427,10 @@
 							} else if (valu2 === 2) {
 								this.logMsg = '未通过,请重新提交'
 							}
+							this.orderIng()
+							// if (this.ApproveStatus == "1") {
+							// 	this.orderIng()
+							// }
 						}
 					})
 					.catch((err) => {

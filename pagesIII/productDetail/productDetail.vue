@@ -59,7 +59,8 @@
 						</view>
 					</view>
 					<view class="tui-original-price tui-gray">{{ shopListdata.describe ||0}}</view>
-					<view class="tui-text-overflow">毛重约{{ shopListdata.kg1 || 0}}斤/件, 净重约{{ shopListdata.kg2 ||0}}斤/件</view>
+					<view class="tui-text-overflow">毛重约{{ shopListdata.kg1 || 0}}斤/{{shopListdata.meteringUnit == "1"?"件": meteringList[(shopListdata.meteringUnit * 1)-1]}},
+						净重约{{ shopListdata.kg2 ||0}}斤/{{shopListdata.meteringUnit == "1"?"件": meteringList[(shopListdata.meteringUnit * 1)-1]}}</view>
 					<view class="tui-pro-titbox">
 						<button open-type="share" class="tui-share-btn tui-share-position" @tap="onShare">
 							<tui-tag type="gray" shape="circleLeft" padding="12rpx 16rpx">
@@ -75,7 +76,7 @@
 							<view class="kilo-price">
 								<view class="kilo-unit">¥</view>
 								<view class="kilo-price-num">{{ApproveStatus===1? shopListdata.kgPrice :'***'}}</view>
-								<view class="kilo-wg">元/斤</view>
+								<view class="kilo-wg">元/{{meteringList[(shopListdata.meteringUnit * 1)-1]}}</view>
 							</view>
 							<view class="line-price">
 								<view class="tui-magin">
@@ -84,7 +85,7 @@
 									<text style="font-size:28rpx;">元</text>
 									<text>/件</text>
 								</view>
-								<view class="tui-huaxian" v-if="shopListdata.marketPrice != 0">￥{{ApproveStatus===1? shopListdata.marketPrice:'***'}}元/件</view>
+								<view class="tui-huaxian" v-if="shopListdata.marketPrice && shopListdata.marketPrice != 0">￥{{ApproveStatus===1? shopListdata.marketPrice:'***' }}元/件</view>
 							</view>
 						</view>
 					</view>
@@ -157,7 +158,7 @@
 					<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
 						<view class="tui-left-one2">
 							<text class="tui-text-left tui-title-class">果径大小</text>
-							<text class=" tui-text-left tui-title-class"  v-if="shopListdata.size && shopListdata.size !==''">{{ shopListdata.size }}mm</text>
+							<text class=" tui-text-left tui-title-class" v-if="shopListdata.size && shopListdata.size !==''">{{ shopListdata.size }}mm</text>
 							<text class=" tui-text-left tui-title-class" v-else>暂无</text>
 						</view>
 						<view class="tui-right-one" style="flex: 4;">
@@ -174,7 +175,7 @@
 						</view>
 						<view class="tui-right-one" style="flex: 4;">
 							<text class="tui-text-left tui-title-class">酸度</text>
-							<text class="tui-text-left tui-title-class"  v-if="shopListdata.acidity && shopListdata.acidity !==''">{{ shopListdata.acidity }}%</text>
+							<text class="tui-text-left tui-title-class" v-if="shopListdata.acidity && shopListdata.acidity !==''">{{ shopListdata.acidity }}%</text>
 							<text class=" tui-text-left tui-title-class" v-else>暂无</text>
 						</view>
 					</view>
@@ -186,7 +187,7 @@
 						</view>
 						<view class="tui-right-one" style="flex: 4;">
 							<text class="tui-text-left tui-title-class">硬度</text>
-							<text class="tui-text-left tui-title-class"  v-if="shopListdata.hardness && shopListdata.hardness !==''">{{ shopListdata.hardness }}kg/.co</text>
+							<text class="tui-text-left tui-title-class" v-if="shopListdata.hardness && shopListdata.hardness !==''">{{ shopListdata.hardness }}kg/.co</text>
 							<text class=" tui-text-left tui-title-class" v-else>暂无</text>
 						</view>
 					</view>
@@ -239,7 +240,7 @@
 						</view>
 					</view>
 					<view class="pay-time">
-						<text class="tui-pay-color">{{payTime < 16 ? '16:00前':'现在'}}完成支付，预计{{ shopListdata.deliveryTime | deliverTime }}送达</text>
+						<text class="tui-pay-color">{{payTime < 21 ? '21:00前':'现在'}}完成支付，预计{{ shopListdata.deliveryTime | deliverTime }}送达</text>
 					</view>
 				</view>
 				<!-- 水果描述 -->
@@ -258,18 +259,18 @@
 				<view class="tui-height-full">
 					<view class="tui-title-line"><text>免赔情况</text></view>
 					<jyf-parser selectable :html="shopListdata.deductible"></jyf-parser>
-					
+
 				</view>
 				<!-- 可售后情况 -->
 				<view class="tui-height-full ">
 					<view class="tui-title-line"><text>可售后情况</text></view>
 					<jyf-parser selectable :html="shopListdata.afterSale"></jyf-parser>
-					
+
 				</view>
 				<view class="tui-height-full tui-full-bac">
 					<view class="tui-title-line"><text>退换货说明</text></view>
 					<jyf-parser selectable :html="shopListdata.regulation"></jyf-parser>
-					
+
 				</view>
 			</view>
 		</view>
@@ -331,7 +332,8 @@
 						<view class="tag-tit3-flex">
 							<view class="tag-tit2-price">购买数量</view>
 							<view class="tag-tit2-text">
-								<tui-numberbox v-if="shopListdata.isRestriction" :min="1" :max="shopListdata.number >= shopListdata.restrictionNumber ? shopListdata.restrictionNumber : shopListdata.number" :value="value2" @change="change2"></tui-numberbox>
+								<tui-numberbox v-if="shopListdata.isRestriction" :min="1" :max="shopListdata.number >= shopListdata.restrictionNumber ? shopListdata.restrictionNumber : shopListdata.number"
+								 :value="value2" @change="change2"></tui-numberbox>
 								<tui-numberbox v-else :min="1" :max="shopListdata.number" :value="value2" @change="change2"></tui-numberbox>
 							</view>
 						</view>
@@ -389,6 +391,7 @@
 		postmyOrder,
 		postLike,
 		postPraise,
+		getCart,
 		loginis,
 		postSettle,
 		getClient
@@ -401,6 +404,7 @@
 	export default {
 		data() {
 			return {
+				meteringList: ["斤", "盒", "份", "个", ],
 				ApproveStatus: '', //店铺认证状态
 				isLogin: false,
 				current: 0, //星星
@@ -492,7 +496,6 @@
 				canCollect: true,
 				canCart: true,
 				netStatus: true,
-				userStatus: 0
 
 			};
 		},
@@ -505,18 +508,18 @@
 					statusBarHeight
 				} = res
 
-					// #ifndef H5 || APP-PLUS || MP-ALIPAY
-					let info = uni.getMenuButtonBoundingClientRect()
-					let {
-						top,
-						height,
-						bottom
-					} = info
-					let buttonHeight = (bottom - statusBarHeight) + (top - statusBarHeight)
-					that.navHeight = statusBarHeight + buttonHeight + top - statusBarHeight
-					that.iconTop = statusBarHeight + (top - statusBarHeight)
-					that.tabsTop = statusBarHeight + buttonHeight + top - statusBarHeight
-					// #endif
+				// #ifndef H5 || APP-PLUS || MP-ALIPAY
+				let info = uni.getMenuButtonBoundingClientRect()
+				let {
+					top,
+					height,
+					bottom
+				} = info
+				let buttonHeight = (bottom - statusBarHeight) + (top - statusBarHeight)
+				that.navHeight = statusBarHeight + buttonHeight + top - statusBarHeight
+				that.iconTop = statusBarHeight + (top - statusBarHeight)
+				that.tabsTop = statusBarHeight + buttonHeight + top - statusBarHeight
+				// #endif
 
 				uni.getNetworkType({
 					success: function(res) {
@@ -630,7 +633,7 @@
 					result = data[0] + data[1] + "月" + data[3] + data[4] + "日"
 					// if (time <= 16) {
 					// } else {
-						// result = data[0] + data[1] + "月" + data[3] + (data[4] * 1 + 1) + "日"
+					// result = data[0] + data[1] + "月" + data[3] + (data[4] * 1 + 1) + "日"
 					// }
 					return result
 				}
@@ -645,7 +648,7 @@
 			//购买前获取申请店铺状态信息
 			getMerchants() {
 				let setdata = uni.getStorageSync("usermen")
-				if (!setdata) { 
+				if (!setdata) {
 					this.ApproveStatus = 0
 					return
 				}
@@ -654,7 +657,7 @@
 				};
 				listing(getClient, data)
 					.then(res => {
-						if (res.data.code == 201 ||res.data.code == 204) {
+						if (res.data.code == 201 || res.data.code == 204) {
 							uni.switchTab({
 								url: "../../pages/my/my"
 							})
@@ -667,11 +670,11 @@
 								duration: 3000
 							})
 							this.ifUser()
-							setTimeout(()=>{
+							setTimeout(() => {
 								uni.removeStorageSync('userIN')
 								uni.removeStorageSync('usermen')
 								uni.removeStorageSync('StoreStatus')
-							},1500)
+							}, 1500)
 						}
 						if (res.data.code == 200) {
 							this.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
@@ -880,27 +883,27 @@
 						if (res.statusCode == 200 && res.data.statusCode == 500) {
 							uni.showToast({
 								title: '登录信息过期,请重新登录',
-								icon:"none"
+								icon: "none"
 							})
-							setTimeout(()=>{
+							setTimeout(() => {
 								uni.removeStorageSync('userIN')
 								uni.removeStorageSync('usermen')
 								uni.removeStorageSync('StoreStatus')
 								this.ifUser()
-							},1000)
+							}, 1000)
 							return
-						} else  {
+						} else {
 							uni.setStorageSync('usermen', res.data.token); //把token存在本地，小程序提供如同浏览器cookie
 							var setdata = uni.getStorageSync('usermen');
 							uni.hideLoading();
-							setTimeout(()=> {
+							setTimeout(() => {
 								uni.showToast({
 									title: '登录成功'
 								});
-							},100)
+							}, 100)
 							this.getMerchants();
 							this.postDetails()
-							
+
 						}
 					})
 					.catch(err => {
@@ -915,13 +918,7 @@
 					this.modaishow = true;
 					return
 				} else {
-					if (this.userStatus === 201) {
-						uni.showToast({
-							title: "账户已被停用",
-							icon:"none"
-						})
-						return
-					}
+				
 					this.modaishow = false;
 					if (this.ApproveStatus === 0) {
 						uni.showToast({
@@ -930,11 +927,11 @@
 						});
 						return;
 					}
-					if (this.ApproveStatus === null || this.ApproveStatus === undefined || this.ApproveStatus === '' ) {
+					if (this.ApproveStatus === null || this.ApproveStatus === undefined || this.ApproveStatus === '') {
 						this.toggleVerify()
 						return;
 					}
-					
+
 					if (this.ApproveStatus === 1) {
 						let data = {
 							goodsId: id,
@@ -985,6 +982,7 @@
 				//这个方法是异步执行的，值还没有赋值，后就先执行了postAct这个，异步，同步，
 				publicing(postdelist, data)
 					.then(res => {
+						console.log(res.data.data);
 						this.shopListdata = res.data.data;
 						this.labelList = res.data.data.labelList;
 						this.urlList = res.data.data.urlList;
@@ -1004,13 +1002,7 @@
 					this.modaishow = true;
 					return
 				} else {
-					if (this.userStatus === 201) {
-						uni.showToast({
-							title: "账户已被停用",
-							icon:"none"
-						})
-						return
-					}
+					
 					// this.modaishow = false
 					this.modaishow = false;
 					if (this.ApproveStatus === null || this.ApproveStatus === undefined || this.ApproveStatus === '' || this.ApproveStatus ===
@@ -1026,7 +1018,7 @@
 						return;
 					}
 					if (this.ApproveStatus === 1) {
-						
+
 						if (this.shopListdata.isCart == true) {
 							uni.showToast({
 								title: '重复加入进货单',
@@ -1052,13 +1044,13 @@
 							publicing(postmyOrder, data)
 								.then(res => {
 									let code = res.data.code;
-									if (code == -1) {
+									if (code != 200) {
 										uni.showToast({
 											title: `${res.data.msg}`,
 											icon: 'none',
 											duration: 3000
 										});
-									} else if (code == 200) {
+									} else {
 										// this.postDetails();
 										this.canCart = true
 										uni.showToast({
@@ -1066,6 +1058,7 @@
 											icon: 'none',
 											duration: 3000
 										});
+										this.orderIng()
 									}
 								})
 								.catch(err => {
@@ -1076,7 +1069,48 @@
 
 				}
 			},
-
+			orderIng() {
+				let setdata = uni.getStorageSync('usermen');
+				let data = {
+					token: setdata
+				};
+				listing(getCart, data)
+					.then(res => {
+						if(res.data.code && res.data.code != 200) {
+							uni.showToast({
+								title: res.data.msg,
+								icon: "none"
+							})
+							uni.switchTab({
+								url: '../../pages/my/my'
+							})
+							return
+						}
+						let lists = res.data.data
+						if (lists) {
+							let cartNum = 0
+							lists.forEach(it=> {
+								if (it.list) {
+									cartNum += it.list.length
+								}
+							})
+							if (lists.length !== 0) {
+								uni.setTabBarBadge({
+									index: 3,
+									text: cartNum + ''
+								})
+							} else{
+								uni.removeTabBarBadge({
+									index: 3
+								})
+							}
+						}
+						
+					})
+					.catch(err => {
+						log(err);
+					});
+			},	
 			bannerChange(e) {
 				this.bannerIndex = e.detail.current;
 			},
@@ -1135,8 +1169,7 @@
 						href: 'https://www.thorui.cn/'
 					},
 					function() {},
-					function(e) {
-					}
+					function(e) {}
 				);
 				//#endif
 				// #ifdef H5
@@ -1900,7 +1933,7 @@
 		margin-top: 10rpx;
 
 	}
-	
+
 	.special-item {
 		background: #FFCFA9;
 		color: #FF6902;

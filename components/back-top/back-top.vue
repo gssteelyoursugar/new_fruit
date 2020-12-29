@@ -31,7 +31,6 @@
 			}
 		},
 		mounted() {
-			console.log(this.scrollTop)
 		},
 		methods: {
 			toTopClick() {

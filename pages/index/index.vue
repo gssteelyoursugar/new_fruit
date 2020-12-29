@@ -32,7 +32,6 @@
 			</view>
 		</view>
 		<view class="index-content">
-
 			<Banner @childSwitch="goToLimit" :banner="WxIndexViewpager"></Banner>
 			<view class="bac">
 				<view class="tui-tag">
@@ -60,96 +59,165 @@
 			</view>
 			<view class="swiper-item">
 				<block v-if="HotVarieties">
-					<view class="conteng-img contentitem" v-for=" (item,index) in HotVarieties" :key="index" @tap="gotoBreed(item.name,item.id)">
+					<view class="conteng-img contentitem" v-if="index<5" v-for="(item,index) in HotVarieties" :key="index" @tap="gotoBreed(item.name,item.id)">
 						<image :src="item.url" mode="widthFix" class="uploadimg"></image>
 						<text>{{item.name}}</text>
 					</view>
 				</block>
 				<block v-if="!HotVarieties || HotVarieties.length === 0">
-					<view class="conteng-img contentitem" v-for=" (item,index) in 9" :key="index" @tap="gotoBreed(item.name,item.id)">
+					<view class="conteng-img contentitem" v-for="(item,index) in 5" :key="index" @tap="gotoBreed(item.name,item.id)">
 						<view class="hot-loading-bg"></view>
 						<view></view>
 					</view>
 				</block>
-				<view class="conteng-img contentitem" @tap="gotoGun">
+				<!-- <view class="conteng-img contentitem" @tap="gotoGun">
 					<image src="../../static/images/gengduo@3x.png" mode="widthFix" class="uploadimg"></image>
 					<text>查看更多</text>
-				</view>
+				</view> -->
 			</view>
 			<!-- 温馨提示 -->
 			<view class="tui-reminder">
 				<view class="tui-rolling-news">
-					<tui-icon style="margin-top: 4rpx;" name="news-fill" :size='28' color='#00BF3D'></tui-icon>
+					<image style="margin-right:20rpx;width: 36rpx;height: 40rpx;" src="../../static/images/message.png" mode=""></image>
 					<swiper vertical autoplay circular interval="3000" class="tui-swiper">
 						<swiper-item v-for="(item,index) in WxPublicMsg" :key="index" class="tui-swiper-item">
-							<view class="tui-news-item">{{item.title}} </view>
-							<text class="tui-see" @tap="goTimeInfo(item.id,item.content,item.title,item.createDate)">查看<text class="iconfont icon-weibiaoti34"></text></text>
+							<view class="tui-news-item" @tap="goTimeInfo(item.id,item.content,item.title,item.createDate)">{{item.title}}
+							</view>
+							<!-- <text class="tui-see" >查看<text class="iconfont icon-weibiaoti34"></text></text> -->
 						</swiper-item>
 					</swiper>
 				</view>
 			</view>
-			<!-- 限量批 -->
-			<view class="tui-count-down">
-				<view class="limit-title" @click="goLimit()">
-					<text class="tui-font">爆品限量批</text>
+
+			<!-- 2020-12-21新版首页限量批-->
+			<view class="new-limit-single-wrap" v-if="WxActivity.status == '0' && WxActivityList && WxActivityList.length !== 0 && WxActivityList.length === 1">
+				<view class="new-limit-single-bg">
+					<image src="../../static/images/limit_bg_single.png" mode=""></image>
 				</view>
-				<!-- 倒计时 -->
-				<view class=" tui-line-hight">
-					<tui-countdown :time="ts" color="#fff" borderColor="rgba(70, 66, 70, 1)" backgroundColor="rgba(70, 66, 70, 1)"
-					 colonColor="rgba(70, 66, 70, 1)" @end="endOfTime">
-					</tui-countdown>
-				</view>
-				<view class="new-fruit-title" @click="fruitGo">
-					<text class="tui-font">新果上市</text>
-					<text class="tui-barcolor">抢鲜市场 <text class="iconfont icon-weibiaoti34"></text> </text>
-				</view>
-			</view>
-			<!-- 限量批 -->
-			<view class="tui-center-Time-New" style="display: flex;">
-				<view class="tui-Fruits" style="width: 50%;text-align: center;" @click="goLimit()">
-					<block v-for="(item,index) in WxActivityList" :key="index">
-						<view class="tui-Fruits-table">
-							<image :src="item.url" mode="aspectFit" class="active-img"></image>
-							<view class="tui-price">
-								<view class="tui-first-price">&yen;<text class="tui-price-color">{{ ApproveStatus === 1 ?item.platformClinetPrice: '***'}}</text><text
-									 class="price-label">/件</text></view>
-								<view class="tui-last-price" v-if="item.marketPrice && item.marketPrice != 0">&yen;<text class="tui-cribing">{{ApproveStatus === 1 ?item.marketPrice:'***'}}</text></view>
-							</view>
-							<text class="tui-weight">{{item.specification}}</text>
+				<view class="new-limit-top" @click="goLimit()">
+					<view class="top-left">
+						<view class="top-left-title">爆款限量批</view>
+						<view class="top-left-countdown">
+							<tui-countdown :time="ts" size="28" width="36" height="36" color="#FF7709" borderColor="#ffffff" backgroundColor="#ffffff"
+							 colonColor="#ffffff" @end="endOfTime">
+							</tui-countdown>
 						</view>
-					</block>
-				</view>
-				<!-- 鲜果上市 -->
-				<view class="tui-Fruits" style="width: 50%;text-align: center;">
-					<block v-for="(item,index) in NewGoods" :key="index">
-						<view class="tui-Fruits-table" @click="fruitGo">
-							<image :src="item.url" mode="aspectFit" class="active-img"></image>
-							<view class="tui-price">
-								<view class="tui-first-price">&yen;<text class="tui-price-color">{{ApproveStatus === 1 ?item.platformClinetPrice:'***'}}</text><text
-									 class="price-label">/件</text></view>
-								<view class="tui-last-price" v-if="item.marketPrice &&item.marketPrice != 0">&yen;<text class="tui-cribing">{{ApproveStatus === 1 ?item.marketPrice:'***'}}</text></view>
-							</view>
-							<text class="tui-weight">{{item.specification}}</text>
-						</view>
-					</block>
-				</view>
-			</view>
-			<!-- 1像素边框 -->
-			<view class="tui-border-top">
-				<view class="tui-border-bottom"></view>
-			</view>
-			<!-- 水果排行榜 -->
-			<view class="tui-Fruits-ranking">
-				<block v-for="(item,index) in dataList" :key="index">
-					<view class="tui-Fruits-ranking-tab" @tap="goToRank(index,item.value)">
-						<text class="tui-Fruits-ranking-font-wei">{{item.name}}</text>
-						<view class="tui-Fruits-ranking-lien">
-							<text class="tui-Fruits-ranking-tab-font">{{item.title}}</text>
-						</view>
-						<image :src="item.imgsrc" class="tabimg"></image>
 					</view>
-				</block>
+					<view class="top-right" @click="goLimit()">
+						<view class="more-btn">查看更多<image src="../../static/images/r_arrow.png" mode=""></image>
+						</view>
+					</view>
+				</view>
+				<view class="new-limit-single-content">
+					<view class="new-limit-single-item" @click="clickToDetail(item.id)" v-for="(item,index) of WxActivityList" :key="index">
+						<view class="item-url">
+							<image :src="item.url" mode=""></image>
+						</view>
+						<view class="item-info">
+							<view class="item-name">{{item.title}}</view>
+							<view class="item-specification">{{item.specification}}</view>
+							<view class="item-buy-btn">
+								<view class="buy-btn-bg">
+									<image src="../../static/images/buy_btn.png" mode=""></image>
+								</view>
+								<view class="item-price-buy">
+									<view class="left-price">
+										<text>¥</text>
+										<text>{{ApproveStatus === 1 ?item.platformClinetPrice: '***'}}</text>
+										<text>/件</text>
+									</view>
+									<view class="right-buy">立刻购买</view>
+								</view>
+							</view>
+						</view>
+
+					</view>
+				</view>
 			</view>
+			
+			<view class="new-limit-multi-wrap" v-if="WxActivity.status == '0' && WxActivityList && WxActivityList.length !== 0 && WxActivityList.length > 1">
+				<view class="new-limit-bg">
+					<image src="../../static/images/new_limit.png" mode=""></image>
+				</view>
+				<view class="new-limit-top" @click="goLimit()">
+					<view class="top-left">
+						<view class="top-left-title">爆款限量批</view>
+						<view class="top-left-countdown">
+							<tui-countdown :time="ts" size="28" width="36" height="36" color="#FF7709" borderColor="#ffffff" backgroundColor="#ffffff"
+							 colonColor="#ffffff" @end="endOfTime">
+							</tui-countdown>
+						</view>
+					</view>
+					<view class="top-right" @click="goLimit()">
+						<view class="more-btn">查看更多<image src="../../static/images/r_arrow.png" mode=""></image>
+						</view>
+					</view>
+				</view>
+				<view class="new-limit-content">
+					<scroll-view scroll-x="true" style="width: 100%">
+						<view class="content-box">
+							<view class="box-item" @click="clickToDetail(item.id)" v-for="(item,index) of WxActivityList" :key="index">
+								<view class="item-url">
+									<image :src="item.url" mode=""></image>
+								</view>
+								<view class="item-name">{{item.title}}</view>
+								<view class="item-price-action">
+									<view class="item-price">
+										<text>¥</text>
+										<text>{{ ApproveStatus === 1 ?item.platformClinetPrice: '***'}}</text>
+										<text>/件</text>
+									</view>
+									<view class="item-action">立即抢购</view>
+								</view>
+							</view>
+						</view>
+					</scroll-view>
+				</view>
+			</view>
+
+
+			<!-- 2020-12-21新版首页排行榜 hotGoods-->
+			<view class="hot-goods-wrap">
+				<view class="hot-goods-bg">
+					<image src="../../static/images/hg_bg.png" mode=""></image>
+				</view>
+				<view class="hot-goods-top">
+					<view class="top-left">
+						<view class="left-icon">
+							<image src="../../static/images/hg_icon.png" mode=""></image>
+						</view>
+						<view class="left-title">
+							<view class="title-left">热销排行榜</view>
+							<view class="title-right">大家都在买</view>
+						</view>
+					</view>
+					<view class="top-right">
+						<view class="more-btn" @click="goToRank()">查看更多<image src="../../static/images/r_arrow.png" mode=""></image>
+						</view>
+					</view>
+				</view>
+				<view class="hot-goods-content">
+					<view class="content-item" @click.stop="clickToDetail(item.id)" v-for="(item,index) of hotGoods" :key="index">
+						<view class="item-url">
+							<image :src="item.url" mode=""></image>
+						</view>
+						<view class="item-name">{{item.name}}</view>
+						<view class="item-specification">
+							{{item.specification}}
+						</view>
+						<view class="item-price-action">
+							<view class="item-price">
+								<text>¥</text>
+								<text>{{ ApproveStatus === 1 ?item.platformClientPrice: '***'}}</text>
+							</view>
+							<view class="item-action" @click.stop="clickToCart(item.id)">
+								<image src="../../static/images/plus_cart.png" mode=""></image>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+
 			<!-- 推荐好货 -->
 			<view class="xiding" :style="{top: navHeight+ 'px'}">
 				<view class="tui-recommend">
@@ -161,104 +229,229 @@
 					</block>
 				</view>
 			</view>
-
-			<!-- 水果列表页 -->
-			<view class="tui-product-box">
-				<view class="tui-product-list">
-					<view class="tui-product-container">
-						<!--商品列表1-->
-						<block v-for="(item, index) in IndexGoods" :key="index" v-if="(index + 1) % 2 != 0" @tap="gotoList(item.id)">
-							<view class="tui-pro-item" hover-class="hover" @tap="gotoList(item.id)" :hover-start-time="150">
-								<view class="img-mask">
-									<image :src="item.url" class="tui-pro-img" mode="widthFix" />
-									<view class="img-mask-item" v-if="item.number === 0">
-										<view class="item-text">抢光了</view>
-									</view>
-								</view>
-								<view class="tui-pro-content">
-									<view class="tui-pro-tit">
-										<text class="tag-tit">{{item.lableName}}</text>
-										<text class="tag-tit-text">{{item.name}}</text>
-									</view>
-									<view>
-										<view class="tui-pro-price">
-											<text class="tui-sale-price">{{item.describe}}</text>
-											<!-- <text class="tui-factory-price">￥20</text> -->
-										</view>
-										<view class="tui-pro-pay">
-											<block v-for="(itemTwo,indexs) in item.goodsType" :key="indexs">
-												<view class="tag-tit-border">{{itemTwo.name}}</view>
-											</block>
-										</view>
-										<view class="tui-pro-pic">
-											<view class="tui-rate">
-												<text>&yen;</text>
-												{{ApproveStatus===1? item.platformClinetPrice:'***'}}
-												<text class="tui-rate-text "> /件</text>
+			<swiper :current="currentSwiperItem" :style="{height: swiperHeight + 'px'}" @change="handleChange" :indicator-dots="false"
+			 :autoplay="false" easing-function="easeInOutCubic">
+				<swiper-item>
+					<!-- 水果列表页 -->
+					<view class="tui-product-box">
+						<view class="tui-product-list">
+							<view class="tui-product-container">
+								<!--商品列表1-->
+								<block v-for="(item, index) in IndexGoods" :key="index" v-if="(index + 1) % 2 != 0" @tap="gotoList(item.id)">
+									<view class="tui-pro-item" hover-class="hover" @tap="gotoList(item.id)" :hover-start-time="150">
+										<view class="img-mask">
+											<image :src="item.url" class="tui-pro-img" mode="widthFix" />
+											<view class="img-mask-item" v-if="item.number === 0">
+												<view class="item-text">抢光了</view>
 											</view>
-											<view class="tui-rate-price" v-if="item.marketPrice &&item.marketPrice != 0"><text>&yen;</text>{{ApproveStatus===1? item.marketPrice:'***'}}</view>
-											<text class="tui-praise  " @tap="praise(index)">
-												<text class="tui-praise iconfont icon-like  " v-if="!item.showSearch1"></text>
-												<text class="tui-praise iconfont icon-dianzan " v-if="item.showSearch1"></text>{{item.praiseNumber |filterNum}}
-											</text>
 										</view>
-										<view class="tui-pro-dea">
-											<text class="tui-jin1">{{item.specification}}</text>
-											<text class="tui-jin">成交<text class="tui-dea-color">{{item.total | filterNum}}</text>元</text>
+										<view class="tui-pro-content">
+											<view class="tui-pro-tit">
+												<text class="tag-tit">{{item.lableName}}</text>
+												<text class="tag-tit-text">{{item.name}}</text>
+											</view>
+											<view>
+												<view class="tui-pro-price">
+													<text class="tui-sale-price">{{item.describe}}</text>
+													<!-- <text class="tui-factory-price">￥20</text> -->
+												</view>
+												<view class="tui-pro-pay">
+													<block v-for="(itemTwo,indexs) in item.goodsType" :key="indexs">
+														<view class="tag-tit-border">{{itemTwo.name}}</view>
+													</block>
+												</view>
+												<view class="tui-pro-pic">
+													<view class="tui-rate">
+														<text>&yen;</text>
+														{{ApproveStatus===1? item.platformClinetPrice:'***'}}
+														<text class="tui-rate-text "> /件</text>
+													</view>
+													<view class="tui-rate-price" v-if="item.marketPrice &&item.marketPrice != 0"><text>&yen;</text>{{ApproveStatus===1? item.marketPrice:'***'}}</view>
+													<!--<text class="tui-praise  " @tap="praise(index)">
+														<text class="tui-praise iconfont icon-like  " v-if="!item.showSearch1"></text>
+														<text class="tui-praise iconfont icon-dianzan " v-if="item.showSearch1"></text>{{item.praiseNumber |filterNum}}
+													</text> -->
+												</view>
+												<view class="tui-pro-dea">
+													<text class="tui-jin1">{{item.specification}}</text>
+													<text class="tui-jin">成交<text class="tui-dea-color">{{item.total | filterNum}}</text>元</text>
+												</view>
+											</view>
 										</view>
 									</view>
-								</view>
+								</block>
 							</view>
-						</block>
+							<view class="tui-product-container2">
+								<!--商品列表2-->
+								<block v-for="(item, index) in IndexGoods" :key="index" v-if="(index + 1) % 2 == 0">
+									<view class="tui-pro-item" hover-class="hover" @tap="gotoList(item.id)" :hover-start-time="150">
+										<view class="img-mask">
+											<image :src="item.url" class="tui-pro-img" mode="widthFix" />
+											<view class="img-mask-item" v-if="item.number === 0">
+												<view class="item-text">抢光了</view>
+											</view>
+										</view>
+										<view class="tui-pro-content">
+											<view class="tui-pro-tit">
+												<text class="tag-tit">{{item.lableName}}</text>
+												<text class="tag-tit-text">{{item.name}}</text>
+											</view>
+											<view>
+												<view class="tui-pro-price">
+													<text class="tui-sale-price">{{item.describe}}</text>
+													<!-- <text class="tui-factory-price">￥20</text> -->
+												</view>
+												<view class="tui-pro-pay">
+													<block v-for="(itemTwo,indexs) in item.goodsType" :key="indexs">
+														<view class="tag-tit-border">{{itemTwo.name}}</view>
+													</block>
+												</view>
+												<view class="tui-pro-pic">
+													<view class="tui-rate">
+														<text>&yen;</text>
+														{{ApproveStatus===1? item.platformClinetPrice:'***'}}
+														<text class="tui-rate-text "> /件</text>
+													</view>
+													<view class="tui-rate-price" v-if="item.marketPrice &&item.marketPrice != 0"> <text>&yen;</text>{{ApproveStatus===1? item.marketPrice:'***'}}</view>
+													<!-- <text class="tui-praise  " @tap="praise(index)">
+														<text class="tui-praise iconfont icon-like  " v-if="!item.showSearch1"></text>
+														<text class="tui-praise iconfont icon-dianzan " v-if="item.showSearch1"></text>{{item.praiseNumber |filterNum}}
+													</text> -->
+												</view>
+												<view class="tui-pro-dea">
+													<text class="tui-jin1">{{item.specification}}</text>
+													<text class="tui-jin">成交<text class="tui-dea-color">{{item.total | filterNum}}</text>元</text>
+												</view>
+											</view>
+										</view>
+									</view>
+								</block>
+							</view>
+						</view>
 					</view>
-					<view class="tui-product-container2">
-						<!--商品列表2-->
-						<block v-for="(item, index) in IndexGoods" :key="index" v-if="(index + 1) % 2 == 0">
-							<view class="tui-pro-item" hover-class="hover" @tap="gotoList(item.id)" :hover-start-time="150">
-								<view class="img-mask">
-									<image :src="item.url" class="tui-pro-img" mode="widthFix" />
-									<view class="img-mask-item" v-if="item.number === 0">
-										<view class="item-text">抢光了</view>
-									</view>
-								</view>
-								<view class="tui-pro-content">
-									<view class="tui-pro-tit">
-										<text class="tag-tit">{{item.lableName}}</text>
-										<text class="tag-tit-text">{{item.name}}</text>
-									</view>
-									<view>
-										<view class="tui-pro-price">
-											<text class="tui-sale-price">{{item.describe}}</text>
-											<!-- <text class="tui-factory-price">￥20</text> -->
-										</view>
-										<view class="tui-pro-pay">
-											<block v-for="(itemTwo,indexs) in item.goodsType" :key="indexs">
-												<view class="tag-tit-border">{{itemTwo.name}}</view>
-											</block>
-										</view>
-										<view class="tui-pro-pic">
-											<view class="tui-rate">
-												<text>&yen;</text>
-												{{ApproveStatus===1? item.platformClinetPrice:'***'}}
-												<text class="tui-rate-text "> /件</text>
+				</swiper-item>
+				<swiper-item>
+					<!-- 水果列表页 -->
+					<view class="tui-product-box">
+						<view class="tui-product-list">
+							<view class="tui-product-container">
+								<!--商品列表1-->
+								<block v-for="(item, index) in IndexGoods" :key="index" v-if="(index + 1) % 2 != 0" @tap="gotoList(item.id)">
+									<view class="tui-pro-item" hover-class="hover" @tap="gotoList(item.id)" :hover-start-time="150">
+										<view class="img-mask">
+											<image :src="item.url" class="tui-pro-img" mode="widthFix" />
+											<view class="img-mask-item" v-if="item.number === 0">
+												<view class="item-text">抢光了</view>
 											</view>
-											<view class="tui-rate-price" v-if="item.marketPrice &&item.marketPrice != 0"> <text>&yen;</text>{{ApproveStatus===1? item.marketPrice:'***'}}</view>
-											<text class="tui-praise  " @tap="praise(index)">
-												<text class="tui-praise iconfont icon-like  " v-if="!item.showSearch1"></text>
-												<text class="tui-praise iconfont icon-dianzan " v-if="item.showSearch1"></text>{{item.praiseNumber |filterNum}}
-											</text>
 										</view>
-										<view class="tui-pro-dea">
-											<text class="tui-jin1">{{item.specification}}</text>
-											<text class="tui-jin">成交<text class="tui-dea-color">{{item.total | filterNum}}</text>元</text>
+										<view class="tui-pro-content">
+											<view class="tui-pro-tit">
+												<text class="tag-tit">{{item.lableName}}</text>
+												<text class="tag-tit-text">{{item.name}}</text>
+											</view>
+											<view>
+												<view class="tui-pro-price">
+													<text class="tui-sale-price">{{item.describe}}</text>
+													<!-- <text class="tui-factory-price">￥20</text> -->
+												</view>
+												<view class="tui-pro-pay">
+													<block v-for="(itemTwo,indexs) in item.goodsType" :key="indexs">
+														<view class="tag-tit-border">{{itemTwo.name}}</view>
+													</block>
+												</view>
+												<view class="tui-pro-pic">
+													<view class="tui-rate">
+														<text>&yen;</text>
+														{{ApproveStatus===1? item.platformClinetPrice:'***'}}
+														<text class="tui-rate-text "> /件</text>
+													</view>
+													<view class="tui-rate-price" v-if="item.marketPrice &&item.marketPrice != 0"><text>&yen;</text>{{ApproveStatus===1? item.marketPrice:'***'}}</view>
+													<text class="tui-praise  " @tap="praise(index)">
+														<text class="tui-praise iconfont icon-like  " v-if="!item.showSearch1"></text>
+														<text class="tui-praise iconfont icon-dianzan " v-if="item.showSearch1"></text>{{item.praiseNumber |filterNum}}
+													</text>
+												</view>
+												<view class="tui-pro-dea">
+													<text class="tui-jin1">{{item.specification}}</text>
+													<text class="tui-jin">成交<text class="tui-dea-color">{{item.total | filterNum}}</text>元</text>
+												</view>
+											</view>
 										</view>
 									</view>
-								</view>
+								</block>
 							</view>
-						</block>
+							<view class="tui-product-container2">
+								<!--商品列表2-->
+								<block v-for="(item, index) in IndexGoods" :key="index" v-if="(index + 1) % 2 == 0">
+									<view class="tui-pro-item" hover-class="hover" @tap="gotoList(item.id)" :hover-start-time="150">
+										<view class="img-mask">
+											<image :src="item.url" class="tui-pro-img" mode="widthFix" />
+											<view class="img-mask-item" v-if="item.number === 0">
+												<view class="item-text">抢光了</view>
+											</view>
+										</view>
+										<view class="tui-pro-content">
+											<view class="tui-pro-tit">
+												<text class="tag-tit">{{item.lableName}}</text>
+												<text class="tag-tit-text">{{item.name}}</text>
+											</view>
+											<view>
+												<view class="tui-pro-price">
+													<text class="tui-sale-price">{{item.describe}}</text>
+													<!-- <text class="tui-factory-price">￥20</text> -->
+												</view>
+												<view class="tui-pro-pay">
+													<block v-for="(itemTwo,indexs) in item.goodsType" :key="indexs">
+														<view class="tag-tit-border">{{itemTwo.name}}</view>
+													</block>
+												</view>
+												<view class="tui-pro-pic">
+													<view class="tui-rate">
+														<text>&yen;</text>
+														{{ApproveStatus===1? item.platformClinetPrice:'***'}}
+														<text class="tui-rate-text "> /件</text>
+													</view>
+													<view class="tui-rate-price" v-if="item.marketPrice &&item.marketPrice != 0"> <text>&yen;</text>{{ApproveStatus===1? item.marketPrice:'***'}}</view>
+													<text class="tui-praise  " @tap="praise(index)">
+														<text class="tui-praise iconfont icon-like  " v-if="!item.showSearch1"></text>
+														<text class="tui-praise iconfont icon-dianzan " v-if="item.showSearch1"></text>{{item.praiseNumber |filterNum}}
+													</text>
+												</view>
+												<view class="tui-pro-dea">
+													<text class="tui-jin1">{{item.specification}}</text>
+													<text class="tui-jin">成交<text class="tui-dea-color">{{item.total | filterNum}}</text>元</text>
+												</view>
+											</view>
+										</view>
+									</view>
+								</block>
+							</view>
+						</view>
+					</view>
+				</swiper-item>
+			</swiper>
+
+			<view class="warp" :style="{top: navHeight + 'px'}" v-if="modaishow">
+				<view class="warp-view">
+					<view class="warp-text1">温馨提示</view>
+					<view class="warp-text">请先登录</view>
+					<view class="warp-flex">
+						<button @click="messcancel()" plain="true">取消</button>
+						<button plain="true" open-type="getUserInfo" @getuserinfo="getUserInfo" class="color-green">登录</button>
 					</view>
 				</view>
 			</view>
+			<view class="warp" :style="{top: navHeight + 'px'}" v-if="isVerify">
+				<view class="warp-view">
+					<view class="warp-text1">温馨提示</view>
+					<view class="warp-text">未验证店铺信息</view>
+					<view class="warp-flex">
+						<button @click="toggleVerify()" plain="true">取消</button>
+						<button plain="true" @click="clickToVerify" class="color-green">前往验证</button>
+					</view>
+				</view>
+			</view>
+
 			<tui-nomore v-if="noMore"></tui-nomore>
 			<back-top :scrollTop="topss"></back-top>
 			<view class="tui-safearea-bottom"></view>
@@ -278,7 +471,8 @@
 	import {
 		listing,
 		publicing,
-		listing2
+		listing2,
+		publicing2
 	} from '../../api/api.js'
 	//请求地址
 	import {
@@ -288,6 +482,9 @@
 		postActivity,
 		getNewsAll,
 		getActivity,
+		getCart,
+		postmyOrder,
+		loginis,
 		getClient
 	} from '../../api/request.js'
 
@@ -307,23 +504,15 @@
 		},
 		data() {
 			return {
+				modaishow: false, //是否登录
+				isVerify: false, //是否验证
+				currentSwiperItem: 0, //推荐好货 的当前轮播模块
+				swiperHeight: 300,
+				hotGoods: [],
 				topss: 0,
 				showAuthTips: true,
 				address: '', //地址
 				ApproveStatus: 0,
-				itemList: [{
-						title: '首页',
-						icon: 'home'
-					},
-					{
-						title: '收藏',
-						icon: 'star'
-					},
-					{
-						title: '分享',
-						icon: 'partake'
-					}
-				],
 				show: false,
 				NewGoods: [], //新果上市
 				WxActivityList: [], //限量批
@@ -333,8 +522,6 @@
 				createTime: 0,
 				ts: 0,
 				mm: 0,
-				ss1: 59,
-				imageUrl: "/static/images/paihang@2x.png",
 				WxActivityID: '', //限量批请求id
 				IndexGoods: [],
 				WxActivity: {}, //限量批
@@ -373,10 +560,10 @@
 						title: '推荐好货',
 						name: '猜你喜欢'
 					},
-					{
-						title: '实时鲜果',
-						name: '今天辛苦了'
-					},
+					// {
+					// 	title: '实时鲜果',
+					// 	name: '今天辛苦了'
+					// },
 					{
 						title: '产地直供',
 						name: '一手货源'
@@ -434,38 +621,185 @@
 			}
 		},
 		methods: {
-			//推荐好货请求
-			flexClick(e) {
-				this.num = e
+			handleChange(e) {
+				const {
+					current
+				} = e.detail
+				this.num = current
+				this.currentSwiperItem = current
 				this.IndexGoods = []
 				this.tempData.pageNo = 1
 				this.noMore = false
 				if (this.num === 0) {
 					this.Sumify = 1
 				} else if (this.num === 1) {
-					this.Sumify = 2 // 原本有三项，现改为2项，取消中间的那一项
-				} else if (this.num === 2) {
-					this.Sumify = 3
+					this.Sumify = 3 // 原本有三项，现改为2项，取消中间的那一项
 				}
 				this.getIndexClass()
+			},
+			//点击进入详情
+			clickToDetail(id) {
+				uni.navigateTo({
+					url: '../../pagesIII/productDetail/productDetail?id=' + id
+				})
+			},
+			// 点击加入购物车
+			clickToCart(id) {
+				const setdata = uni.getStorageSync('usermen')
+				if (!setdata) {
+					this.modaishow = true;
+					return
+				} else {
+					// this.modaishow = false
+					this.modaishow = false;
+					if (this.ApproveStatus === null || this.ApproveStatus === undefined || this.ApproveStatus === '' || this.ApproveStatus ===
+						2) {
+						this.toggleVerify()
+						return;
+					}
+					if (this.ApproveStatus === 0) {
+						uni.showToast({
+							title: '店铺信息审核中',
+							icon: 'none'
+						});
+						return;
+					}
+					if (this.ApproveStatus === 1) {
+						let data = {
+							goodsId: id,
+							token: setdata,
+							number: 1
+						};
+						publicing(postmyOrder, data)
+							.then(res => {
+								let code = res.data.code;
+								if (code != 200) {
+									uni.showToast({
+										title: `${res.data.msg}`,
+										icon: 'none',
+										duration: 3000
+									});
+								} else {
+									// this.postDetails();
+									this.canCart = true
+									uni.showToast({
+										title: '加入进货单成功',
+										icon: 'none',
+										duration: 3000
+									});
+									this.orderIng()
 
+								}
+							})
+							.catch(err => {
+								log(err);
+							});
+					}
+				}
+			},
+			orderIng() {
+				let setdata = uni.getStorageSync('usermen');
+				let data = {
+					token: setdata
+				};
+				listing(getCart, data)
+					.then(res => {
+						if (res.data.code && res.data.code != 200) {
+							uni.showToast({
+								title: res.data.msg,
+								icon: "none"
+							})
+							// uni.switchTab({
+							// 	url: '../my/my'
+							// })
+							return
+						}
+						let lists = res.data.data
+						
+						if (lists) {
+							let cartNum = 0
+							lists.forEach(it=> {
+								if (it.list) {
+									cartNum += it.list.length
+								}
+							})
+							if (lists.length !== 0) {
+								uni.setTabBarBadge({
+									index: 3,
+									text: cartNum + ''
+								})
+							} else {
+								uni.removeTabBarBadge({
+									index: 3
+								})
+							}
+						}
+
+					})
+					.catch(err => {
+						log(err);
+					});
+			},
+			// 取消
+			messcancel() {
+				this.modaishow = false;
+			},
+			toggleVerify() {
+				this.isVerify = !this.isVerify
+			},
+			clickToVerify() {
+				uni.navigateTo({
+					url: '../../pagesII/tendShop/tendShop'
+				})
+				this.toggleVerify()
+			},
+			//获取推荐好货的高度
+			getHeight() {
+				const query = uni.createSelectorQuery().in(this);
+				query.select('.tui-product-list').boundingClientRect(data => {
+					this.swiperHeight = parseInt(data.height)
+				}).exec();
+
+			},
+			//推荐好货请求
+			flexClick(e) {
+				this.num = e
+				this.currentSwiperItem = e
+				// this.IndexGoods = []
+				// this.tempData.pageNo = 1
+				// this.noMore = false
+				// if (this.num === 0) {
+				// 	this.Sumify = 1
+				// } else if (this.num === 1) {
+				// 	this.Sumify = 3 // 原本有三项，现改为2项，取消中间的那一项
+				// }
+				// this.getIndexClass()
 			},
 			//请求首页列表
 			getIndexClass() {
 				let data2 = Object.assign({
 					indexClassify: this.Sumify,
 				}, this.tempData)
+				uni.showLoading({
+					title: "加载中..."
+				})
 				listing(getClassify, data2)
 					.then((res) => {
+						setTimeout(() => {
+							uni.hideLoading()
+						}, 200)
 						//处理数据格式,praiseNumber
 						let goodsData = res.data.data.data;
 						// this.IndexGoods = goodsData //【1】首页分类数据
 						this.IndexGoods = this.IndexGoods.concat(goodsData)
+
+						setTimeout(() => {
+							this.getHeight()
+						}, 100)
 						if (goodsData.length == 0 || goodsData.length < this.tempData.pageSize) {
 							this.noMore = true
 							return
 						}
-
 					})
 					.catch((err) => {
 						log(err)
@@ -482,6 +816,7 @@
 				listing(getIndex, data) //请求首页数据接口
 					// listing(getIndex,data) //单发请求
 					.then((res) => {
+						this.hotGoods = res.data.data.hotGoods
 						this.address = res.data.data.address
 						this.HotVarieties = res.data.data.HotVarieties //【0】首页分类列表
 						this.WxTopNavigationBar = res.data.data.WxTopNavigationBar
@@ -535,7 +870,6 @@
 								uni.switchTab({
 									url: "../my/my"
 								})
-
 								return
 							}
 							///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
@@ -557,18 +891,7 @@
 						})
 				}
 			},
-			//打开气泡
-			rtBubble() {
-				this.$refs.rtBubble.toggle();
-			},
-			topBubble() {
-				this.show = !this.show;
-			},
-			//气泡
-			itemClick(e) {
-				let text = ["首页", "收藏", "分享"][e.index];
-				this.tui.toast(`您点击了：${text}`);
-			},
+
 			//最近看过
 			golook() {
 				uni.navigateTo({
@@ -671,38 +994,62 @@
 					this.canSee = 1
 				}
 			},
-			//获取头像昵称
+			//获取微信昵称
 			getUserInfo(event) {
-				this.userInfo = event.detail.userInfo
 				if (event.detail.userInfo) {
-					let wxing = event.detail.userInfo
-					this.wxCode(wxing.avatarUrl, wxing.nickName)
+					uni.setStorageSync('userIN', event.detail.userInfo); //把token存在本地，小程序提供如同浏览器cookie
+					let wxing = event.detail.userInfo;
+					this.wxCode(wxing.avatarUrl, wxing.nickName);
 				}
+				this.modaishow = false;
 			},
+			//获取微信code
 			wxCode(avatarUrl, nickName) {
 				wx.login({
-					success: (res) => {
-						let code = res.code
-						this.wxLogin(avatarUrl, nickName, code)
+					success: res => {
+						// return
+						let code = res.code;
+						this.wxLoging(code);
 					},
-					fail: (err) => {
-						log(err)
-
+					fail: err => {
+						log(err);
 					}
-				})
+				});
 			},
-			wxLogin(avatarUrl, nickName, code) {
+			//发给后台拿token
+			wxLoging(code) {
 				let data = {
-					code,
-				}
-				publicing(loginis, data) //发送请求携带参数
-					.then((res) => {
-						uni.setStorageSync('usermen', res.data.token) //把token存在本地，小程序提供如同浏览器cookie
-						this.ifUser()
+					code
+				};
+				publicing2(loginis, data) //发送请求携带参数
+					.then(res => {
+						if (res.statusCode == 200 && res.data.statusCode == 500) {
+							uni.showToast({
+								title: '登录信息过期,请重新登录',
+								icon: "none"
+							})
+							setTimeout(() => {
+								uni.removeStorageSync('userIN')
+								uni.removeStorageSync('usermen')
+								uni.removeStorageSync('StoreStatus')
+								this.ifUser()
+							}, 1000)
+							return
+						} else {
+							uni.setStorageSync('usermen', res.data.token); //把token存在本地，小程序提供如同浏览器cookie
+							var setdata = uni.getStorageSync('usermen');
+							uni.hideLoading();
+							setTimeout(() => {
+								uni.showToast({
+									title: '登录成功'
+								});
+							}, 100)
+							this.getMerchants();
+						}
 					})
-					.catch((err) => {
-						log(err)
-					})
+					.catch(err => {
+						log(err);
+					});
 			},
 			ifUser() {
 				let setdata = uni.getStorageSync('usermen')
@@ -755,9 +1102,9 @@
 				})
 			},
 			//排行榜
-			goToRank(index, value) {
+			goToRank() {
 				uni.navigateTo({
-					url: '../../pagesII/rankingList/rankingList?index=' + index + '&value=' + value
+					url: '../../pagesII/rankingList/rankingList?index=0&value=shop'
 				})
 			},
 			//带参数跳转
@@ -848,14 +1195,15 @@
 		},
 
 		onNavigationBarButtonTap(e) {
-			if (e.index === 0) {
-				this.$refs.rtBubble.toggle();
-			}
+
 		},
 		onShow() {
+			let setdata = uni.getStorageSync("usermen")
+			if (setdata) {
+				this.orderIng()
+			}
 			this.getMerchants()
 			this.getHomelist()
-
 		},
 		// 转发
 		onShareAppMessage: function() {
@@ -865,8 +1213,11 @@
 				// path: '/pages/test/test?id=123'
 			}
 		},
+
 		// 监听页面滚动距离
-		mounted() {},
+		mounted() {
+
+		},
 		filters: {
 			filterNum(val) {
 				if (val) {
@@ -909,9 +1260,541 @@
 	}
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 	@import '../../common/css/tui.css';
 	@import '../../common/iconfont/iconfont.css';
+
+	.new-limit-single-wrap {
+		width: 720rpx;
+		margin: 30rpx auto;
+		height: 400rpx;
+		border-radius: 20rpx;
+		position: relative;
+
+		.new-limit-single-bg {
+			width: 100%;
+			height: 400rpx;
+			z-index: -1;
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+
+			image {
+				width: 100%;
+				height: 400rpx;
+			}
+		}
+
+		.new-limit-top {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 10rpx 20rpx 8rpx;
+
+			.top-left {
+				width: 70%;
+				display: flex;
+				align-items: center;
+
+				.top-left-title {
+					font-size: 44rpx;
+					color: #fff;
+					font-weight: bold;
+					padding: 0 8rpx;
+				}
+
+				.top-left-countdown {
+					border-left: 4rpx solid #fff;
+					padding-left: 14rpx;
+				}
+			}
+
+			.top-right {
+				width: 30%;
+				display: flex;
+				justify-content: flex-end;
+
+				.more-btn {
+					background: #fff;
+					width: 140rpx;
+					font-size: 24rpx;
+					text-align: center;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					color: #00BD45;
+					border-radius: 14rpx;
+					height: 46rpx;
+
+					image {
+						width: 10rpx;
+						height: 18rpx;
+						margin-left: 2rpx;
+					}
+				}
+			}
+		}
+
+		.new-limit-single-content {
+			width: 680rpx;
+			height: 300rpx;
+			background: #fff;
+			margin: 0 auto;
+			border-radius: 14rpx;
+
+			.new-limit-single-item {
+				display: flex;
+				justify-content: space-between;
+
+				.item-url {
+					image {
+						width: 300rpx;
+						height: 300rpx;
+						display: block;
+					}
+				}
+
+				.item-info {
+					padding: 0 28rpx;
+
+					.item-name {
+						font-size: 32rpx;
+						color: #333;
+						font-weight: bold;
+						line-height: 46rpx;
+						margin-top: 22rpx;
+						display: -webkit-box;
+						-webkit-box-orient: vertical;
+						-webkit-line-clamp: 2;
+						overflow: hidden;
+						text-overflow: ellipsis;
+						min-height: 92rpx;
+						
+					}
+
+					.item-specification {
+						font-size: 24rpx;
+						color: #7F7F7F;
+						font-weight: 400;
+						margin-bottom: 36rpx;
+						margin-top: 12rpx;
+						overflow: hidden;
+						text-overflow: ellipsis;
+						white-space: nowrap;
+						width: 328rpx;
+						min-height: 34rpx;
+					}
+
+					.item-buy-btn {
+						position: relative;
+						width: 328rpx;
+						height: 84rpx;
+
+						.buy-btn-bg {
+							width: 328rpx;
+							height: 84rpx;
+							position: relative;
+
+							image {
+								width: 328rpx;
+								height: 84rpx;
+								display: block;
+								position: absolute;
+								top: 0;
+								left: 0;
+								right: 0;
+								bottom: 0;
+								z-index: 1;
+							}
+						}
+
+						.item-price-buy {
+							position: absolute;
+							top: 0;
+							left: 0;
+							right: 0;
+							bottom: 0;
+							width: 100%;
+							z-index: 2;
+							display: flex;
+							align-items: center;
+							justify-content: space-between;
+
+							.left-price {
+								width: 50%;
+								text-align: center;
+								color: #FF7709;
+
+								text {
+									&:first-child {
+										font-size: 22rpx;
+										font-weight: 400;
+									}
+
+									&:nth-child(2) {
+										margin: 0 4rpx;
+										font-size: 36rpx;
+										font-weight: 500;
+									}
+
+									&:nth-child(3) {
+										font-size: 24rpx;
+										font-weight: 400;
+									}
+								}
+							}
+
+							.right-buy {
+								width: 50%;
+								text-align: center;
+								font-size: 28rpx;
+								color: #fff;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.new-limit-multi-wrap {
+		width: 720rpx;
+		margin: 30rpx auto;
+		height: 540rpx;
+		// background: #FF0000;
+		border-radius: 20rpx;
+		position: relative;
+
+		.new-limit-bg {
+			width: 100%;
+			height: 540rpx;
+			z-index: -1;
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+
+			image {
+				width: 100%;
+				height: 540rpx;
+			}
+		}
+
+		.new-limit-top {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 10rpx 20rpx 8rpx;
+
+			.top-left {
+				width: 70%;
+				display: flex;
+				align-items: center;
+
+				.top-left-title {
+					font-size: 44rpx;
+					color: #fff;
+					font-weight: bold;
+					padding: 0 8rpx;
+				}
+
+				.top-left-countdown {
+					border-left: 4rpx solid #fff;
+					padding-left: 14rpx;
+				}
+			}
+
+			.top-right {
+				width: 30%;
+				display: flex;
+				justify-content: flex-end;
+
+				.more-btn {
+					background: #fff;
+					width: 140rpx;
+					font-size: 24rpx;
+					text-align: center;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					color: #00BD45;
+					border-radius: 14rpx;
+					height: 46rpx;
+
+					image {
+						width: 10rpx;
+						height: 18rpx;
+						margin-left: 2rpx;
+					}
+				}
+			}
+		}
+
+		.new-limit-content {
+			width: 680rpx;
+			height: 440rpx;
+			background: #fff;
+			margin: 0 auto;
+			border-radius: 14rpx;
+
+			.content-box {
+				padding: 20rpx 24rpx 12rpx;
+				display: flex;
+				/* align-items: center; */
+				justify-content: space-between;
+
+				.box-item {
+					flex: 1;
+					margin-right: 46rpx;
+
+					&:last-child {
+						padding-right: 30rpx;
+					}
+
+					.item-url {
+						image {
+							width: 290rpx;
+							height: 290rpx;
+							display: block;
+							border-radius: 16rpx;
+						}
+					}
+
+					.item-name {
+						text-overflow: ellipsis;
+						white-space: nowrap;
+						overflow: hidden;
+						font-size: 28rpx;
+						color: #333;
+						min-height: 30px;
+						width: 290rpx;
+						height: 60rpx;
+						line-height: 60rpx;
+					}
+
+					.item-price-action {
+						display: flex;
+						align-items: center;
+						justify-content: space-between;
+
+						.item-price {
+							color: #FF7709;
+							margin-right: 10rpx;
+
+							text {
+								&:first-child {
+									font-size: 20rpx;
+									margin-right: 4rpx;
+									font-weight: 500;
+								}
+
+								&:nth-child(2) {
+									font-size: 36rpx;
+									font-weight: bold;
+								}
+
+								&:nth-child(3) {
+									font-size: 24rpx;
+									color: #B6B6B6;
+								}
+							}
+						}
+
+						.item-action {
+							height: 50rpx;
+							width: 130rpx;
+							text-align: center;
+							font-size: 24rpx;
+							background: linear-gradient(to right, #FCA421, #FF7709);
+							border-radius: 14rpx;
+							line-height: 50rpx;
+							color: #fff;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.hot-goods-wrap {
+		width: 720rpx;
+		margin: 30rpx auto;
+		height: 420rpx;
+		-webkit-border-radius: 10px;
+		border-radius: 20rpx;
+		position: relative;
+
+		.hot-goods-bg {
+			width: 100%;
+			height: 120rpx;
+			z-index: -1;
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+
+			image {
+				width: 100%;
+				height: 120rpx;
+				display: block;
+			}
+		}
+
+		.hot-goods-top {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 0 20rpx;
+			height: 82rpx;
+
+			.top-left {
+				width: 70%;
+				display: flex;
+				align-items: center;
+
+				.left-icon {
+					width: 40rpx;
+					height: 40rpx;
+
+					image {
+						width: 40rpx;
+						height: 40rpx;
+						display: block;
+					}
+				}
+
+				.left-title {
+					display: flex;
+					align-items: center;
+
+					.title-left {
+						font-size: 36rpx;
+						color: #fff;
+						font-weight: 500;
+						margin: 0 12rpx;
+					}
+
+					.title-right {
+						font-size: 28rpx;
+						color: #fff;
+						font-weight: 500;
+						padding-left: 12rpx;
+						border-left: 4rpx solid #fff;
+					}
+				}
+			}
+
+			.top-right {
+				width: 30%;
+				display: flex;
+				justify-content: flex-end;
+
+				.more-btn {
+					background: #fff;
+					width: 140rpx;
+					font-size: 24rpx;
+					text-align: center;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					color: #00BD45;
+					border-radius: 14rpx;
+					height: 46rpx;
+
+					image {
+						width: 10rpx;
+						height: 18rpx;
+						margin-left: 2rpx;
+					}
+				}
+			}
+		}
+
+		.hot-goods-content {
+			width: 100%;
+			background: #fff;
+			height: 340rpx;
+			border-radius: 30rpx 30rpx 20rpx 20rpx;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 8rpx 20rpx;
+			box-sizing: border-box;
+
+			.content-item {
+				width: 184rpx;
+
+				.item-url {
+					image {
+						width: 182rpx;
+						height: 182rpx;
+						display: block;
+						border-radius: 16rpx;
+						border: 1px solid #f5f5f5;
+					}
+				}
+
+				.item-name {
+					// display: -webkit-box;
+					// -webkit-box-orient: vertical;
+					// -webkit-line-clamp: 2;
+					white-space: nowrap;
+					width: 182rpx;
+					text-overflow: ellipsis;
+					overflow: hidden;
+					font-size: 26rpx;
+					color: #333;
+					// min-height: 80rpx;
+				}
+
+				.item-specification {
+					font-size: 24rpx;
+					color: #b6b6b6;
+					min-height: 28rpx;
+				}
+
+				.item-price-action {
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+
+					.item-price {
+						color: #FF7709;
+						margin-right: 10rpx;
+
+						text {
+							&:first-child {
+								font-size: 20rpx;
+								margin-right: 4rpx;
+								font-weight: 500;
+							}
+
+							&:nth-child(2) {
+								font-size: 36rpx;
+								font-weight: bold;
+							}
+
+							// &:nth-child(3) {
+							// 	font-size: 16rpx;
+							// 	color: #B6B6B6;
+							// }
+						}
+					}
+
+					.item-action {
+						image {
+							width: 48rpx;
+							height: 48rpx;
+							display: block;
+						}
+					}
+				}
+			}
+		}
+	}
 
 	.weather-tui-class {
 		position: absolute;
@@ -1142,7 +2025,7 @@
 		margin-bottom: 4%;
 		background: #fff;
 		box-sizing: border-box;
-		border-radius: 6rpx;
+		border-radius: 20rpx;
 		overflow: hidden;
 	}
 
@@ -1161,6 +2044,7 @@
 		align-items: center;
 		text-align: center;
 		justify-content: center;
+		border-radius: 20rpx 20rpx 0 0;
 
 	}
 
@@ -1182,7 +2066,8 @@
 		flex-direction: column;
 		justify-content: space-between;
 		box-sizing: border-box;
-		padding: 20rpx;
+		padding: 20rpx 12rpx;
+		border-radius: 0 0 20rpx 20rpx;
 	}
 
 	.tui-pro-tit {
@@ -1202,8 +2087,8 @@
 	}
 
 	.tui-sale-price {
-		font-size: 22rpx;
-		color: #9A9A9A;
+		font-size: 20rpx;
+		color: #7F7F7F;
 	}
 
 	.tui-factory-price {
@@ -1231,8 +2116,8 @@
 
 	/* 省略文字 */
 	.tui-jin1 {
-		color: #9a9a9a;
-		font-size: 20rpx;
+		color: #B6B6B6;
+		font-size: 24rpx;
 		/* width: 100rpx;
 		text-overflow: ellipsis;
 		overflow: hidden;
@@ -1240,8 +2125,8 @@
 	}
 
 	.tui-jin {
-		color: #9a9a9a;
-		font-size: 20rpx;
+		color: #B6B6B6;
+		font-size: 24rpx
 	}
 
 	.tui-dea-color {
@@ -1250,13 +2135,13 @@
 
 	.tui-rate {
 		color: #FF4300;
-		font-size: 28rpx;
+		font-size: 40rpx;
 		font-weight: 500;
 
 	}
 
 	.tui-rate text {
-		font-size: 16rpx;
+		font-size: 20rpx;
 		margin-right: 2rpx;
 	}
 
@@ -1277,7 +2162,7 @@
 	}
 
 	.tui-rate-text {
-		color: #C4C4C4;
+		color: #B6B6B6;
 		font-size: 24rpx;
 		margin-left: 4rpx;
 	}
@@ -1295,7 +2180,7 @@
 	.tag-tit-border {
 		border: 1rpx solid rgba(255, 119, 9, 1);
 		color: rgba(255, 119, 9, 1);
-		font-size: 18rpx;
+		font-size: 20rpx;
 		padding: 2rpx 10rpx;
 		border-radius: 18rpx;
 		margin-right: 10rpx;
@@ -1320,6 +2205,7 @@
 		color: #000;
 		margin: 2rpx 0;
 
+
 	}
 
 	.fixedweight {
@@ -1330,15 +2216,7 @@
 
 	}
 
-	.fixed3fontweione {
-		font-size: 24rpx;
-		color: #fff !important;
-		background-image: linear-gradient(to right, #00C94A, #00AC3F);
-		border-radius: 60rpx;
-		padding: 5rpx 0rpx;
-		font-weight: 600;
 
-	}
 
 	.fixed-3-font-weitwo {
 		font-size: 28rpx;
@@ -1347,6 +2225,15 @@
 		width: 66%;
 		margin: 0 auto;
 		padding: 5rpx 0rpx;
+		border-radius: 60rpx;
+		background: transparent;
+		transition: all .5s;
+
+	}
+
+	.fixed3fontweione {
+		color: #fff !important;
+		background: linear-gradient(to right, #00C94A, #00AC3F);
 
 	}
 
@@ -1581,11 +2468,11 @@
 	.tui-reminder {
 		justify-content: space-around;
 		display: flex;
-		height: 100rpx;
-		line-height: 100rpx;
+		height: 64rpx;
+		line-height: 64rpx;
 		background-color: #fff;
 		margin: 20rpx;
-		border-radius: 20rpx;
+		border-radius: 40rpx;
 
 	}
 
@@ -2088,4 +2975,73 @@
 		font-size: 28rpx;
 
 	}
+
+	/* 模态弹窗布局 */
+	.warp {
+		position: fixed;
+		left: 0;
+		right: 0;
+		top: 130rpx;
+		bottom: 0;
+		background: rgba(0, 0, 0, 0.6);
+		z-index: 9999;
+	}
+
+	.warp-view {
+		width: 500upx;
+		height: 260upx;
+		background: #ffffff;
+		margin: auto;
+		position: absolute;
+		-webkit-position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		border-radius: 8upx;
+		overflow: hidden;
+	}
+
+	.warp-text {
+		text-align: center;
+		margin-top: 34upx;
+		font-size: 34upx;
+		color: #666666;
+	}
+
+	.warp-text1 {
+		text-align: center;
+		height: 60rpx;
+		line-height: 60rpx;
+		font-size: 34upx;
+		color: #fff;
+		background-color: rgba(0, 197, 42, 1);
+	}
+
+	.warp-flex {
+		display: flex;
+		justify-content: space-around;
+		border-top: 1upx solid #eeeeee;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: 80upx;
+		line-height: 80upx;
+	}
+
+	.color-green {
+		color: rgba(0, 197, 42, 1);
+	}
+
+	.warp-flex button {
+		border: none;
+		font-size: 30upx;
+	}
+
+	.warp-flex button:nth-child(2) {
+		color: rgba(0, 197, 42, 1);
+	}
+
+	/*end  */
 </style>

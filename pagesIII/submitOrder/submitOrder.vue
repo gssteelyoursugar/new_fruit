@@ -121,6 +121,7 @@
 		imgurl,
 		postCancelOrder,
 		postOrderPay,
+		getCart,
 		getSubmitOrder
 	} from '../../api/request.js'
 	var setdata = uni.getStorageSync('usermen')
@@ -290,67 +291,123 @@
 							orderNumber
 						} = res.data.data
 						//正式环境代码
-						let tmp = JSON.parse(payinfo)
-						uni.requestPayment({
-							timeStamp: tmp.timeStamp,
-							nonceStr: tmp.nonceStr,
-							package: tmp.package,
-							signType: tmp.signType,
-							paySign: tmp.paySign,
-							success(resovle) {
-								uni.showToast({
-									title:"支付成功"
-								})
-								uni.switchTab({
-									url: '../../pages/my/my'
-								})
-								that.isPaying = false
-							},
-							fail(reject) {
-								uni.showToast({
-									title:"取消支付",
-									icon: 'none'
-								})
-								that.cancelOrder(orderNumber,setdata)
-								that.isPaying = false
-								return
-							}
-						})
-
-						//测试环境代码
-						// uni.setClipboardData({
-						// 	data: payinfo,
-						// 	success() {
-						// 		uni.hideToast()
+						// let tmp = JSON.parse(payinfo)
+						// uni.requestPayment({
+						// 	timeStamp: tmp.timeStamp,
+						// 	nonceStr: tmp.nonceStr,
+						// 	package: tmp.package,
+						// 	signType: tmp.signType,
+						// 	paySign: tmp.paySign,
+						// 	success(resovle) {
+						// 		uni.showToast({
+						// 			title:"支付成功"
+						// 		})
+						// 		uni.switchTab({
+						// 			url: '../../pages/my/my'
+						// 		})
+						// 		that.orderIng()
+						// 		that.isPaying = false
+						
+						// 	},
+						// 	fail(reject) {
+						// 		uni.showToast({
+						// 			title:"取消支付",
+						// 			icon: 'none'
+						// 		})
+						// 		that.cancelOrder(orderNumber,setdata)
+						// 		that.isPaying = false
+						// 		that.orderIng()
+						// 		return
 						// 	}
 						// })
-						// uni.showModal({
-						// 	title: '提示',
-						// 	content: '确认支付',
-						// 	success: (res) => {
-						// 		if (res.confirm) {
-						// 			that.btnPay()
-						// 			that.isPaying = false
-						// 		} else if (res.cancel) {
-						// 			that.isPaying = false
-						// 			that.cancelOrder(orderNumber, setdata)
-						// 			uni.showToast({
-						// 				title: '订单已取消',
-						// 				icon: 'none',
-						// 				duration: 2000
-						// 			})
-						// 			uni.switchTab({
-						// 				url: '../../pages/my/my'
-						// 			})
-						// 			return
-						// 		}
-						// 	}
-						// });
+
+						//测试环境代码
+						uni.setClipboardData({
+							data: payinfo,
+							success() {
+								uni.hideToast()
+							}
+						})
+						uni.showModal({
+							title: '提示',
+							content: '确认支付',
+							success: (res) => {
+								if (res.confirm) {
+									that.btnPay()
+									that.isPaying = false
+									that.orderIng()
+								} else if (res.cancel) {
+									that.isPaying = false
+									that.cancelOrder(orderNumber, setdata)
+									uni.showToast({
+										title: '订单已取消',
+										icon: 'none',
+										duration: 2000
+									})
+									that.orderIng()
+									uni.switchTab({
+										url: '../../pages/my/my'
+									})
+									return
+								}
+							}
+						});
 					})
 					.catch((err) => {
 						log(err)
 					})
 
+			},
+			//请求订单列表
+			orderIng() {
+				let setdata = uni.getStorageSync('usermen');
+				let data = {
+					token: setdata
+				};
+				listing(getCart, data)
+					.then(res => {
+						if(res.data.code && res.data.code != 200) {
+							uni.showToast({
+								title: res.data.msg,
+								icon: "none"
+							})
+							uni.switchTab({
+								url: '../../pages/my/my'
+							})
+							return
+						}
+						let lists = res.data.data
+						if (lists) {
+							let cartNum = 0
+							lists.forEach(it=> {
+								if (it.list) {
+									cartNum += it.list.length
+								}
+							})
+							if (lists.length !== 0) {
+								uni.setTabBarBadge({
+									index: 3,
+									text: cartNum + ''
+								})
+							} else{
+								uni.removeTabBarBadge({
+									index: 3
+								})
+							}
+							lists.forEach(item => {
+								item.list.forEach(itm => {
+									Object.assign(itm, {
+										selected: false
+									})
+								})
+							})
+							this.orderObj = lists;
+						}
+						
+					})
+					.catch(err => {
+						log(err);
+					});
 			},
 			open() {
 				this.$refs.popup.show()

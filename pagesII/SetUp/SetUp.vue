@@ -66,6 +66,9 @@
 				uni.switchTab({
 					url: '../../pages/my/my'
 				})
+				uni.removeTabBarBadge({
+					index: 3
+				})
 				uni.showToast({
 					title: "退出成功",
 					icon: 'none'

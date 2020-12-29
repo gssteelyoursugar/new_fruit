@@ -904,7 +904,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_NAME":"fruit-test","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"fruit-test","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -1807,6 +1807,441 @@ uni$1;exports.default = _default;
 /***/ }),
 
 /***/ 10:
+/*!**************************************************************!*\
+  !*** /Users/gsheng/Downloads/12-28/new_fruit/api/request.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.uploadFiles = exports.orderHistory = exports.getPredictInfo = exports.getPredictList = exports.getAgreeInfo = exports.getAgreeList = exports.getMsgInfo = exports.getEvaluateList = exports.orderCount = exports.getBeConfirmed = exports.PostDataById = exports.postAfterCen = exports.posAfterDetails = exports.posAfterSaleList = exports.postCancelPay = exports.posAfterSale = exports.getAfterSaleData = exports.postConfirmOrder = exports.postDelOrders = exports.postCancelOrder = exports.getDetails = exports.postAgainOrder = exports.postSettle = exports.getMsg = exports.postCancelPraise = exports.getSubmitOrder = exports.postAddressList = exports.postupdateClient = exports.getClient = exports.getNewsAll = exports.postRecentlyDel = exports.getselectSuper = exports.getselectSeasonal = exports.getselectHot = exports.getselectImport = exports.getMyOrder = exports.postOrderPay = exports.getRecently = exports.postPraise = exports.postDelLike = exports.getLike = exports.postLike = exports.postUpOrder = exports.postDelOrder = exports.getCart = exports.postmyOrder = exports.postSaveStore = exports.getActivity = exports.wxloginurl = exports.imgurl = exports.postOrder = exports.url = exports.getAttribute = exports.getGoodsall = exports.postdelist = exports.getClassify = exports.postActivity = exports.getsearch = exports.loginis = exports.getIndex = void 0; // 公用地址
+
+
+//测试用
+// let url = 'https://meituan.thexxdd.cn/api/'
+// 登录测试用
+var wxloginurl = "".concat(url, "wxuser/wxlogin");
+// //本地商品
+// let url = 'http://192.168.1.10:8980/'
+// // 线上	
+// let url = 'https://cs.zgqgpt.com/'
+// let url = "http://testqg.natapp1.cc/"
+// let url = "https://qg.zgqgpt.com/"
+exports.wxloginurl = wxloginurl;var url = "http://192.168.1.50:8980/";
+
+// let url = 'http://dwh.natapp1.cc/js/'
+exports.url = url;var imgurl = 'http://192.168.1.10:8980';
+
+
+//测试
+// 首页
+exports.imgurl = imgurl;var getIndex = "".concat(url, "api/wx/index/getData");
+
+// 进口水果/金刚区
+exports.getIndex = getIndex;var getselectImport = "".concat(url, "api/wx/index/selectImport");
+
+
+// 热门水果/金刚区
+exports.getselectImport = getselectImport;var getselectHot = "".concat(url, "api/wx/index/hot");
+
+
+
+// 热门水果/金刚区
+exports.getselectHot = getselectHot;var getselectSeasonal = "".concat(url, "api/wx/index/seasonal");
+
+
+// 超值专区/金刚区
+exports.getselectSeasonal = getselectSeasonal;var getselectSuper = "".concat(url, "api/wx/index/selectSuper");
+
+
+//首页分类
+exports.getselectSuper = getselectSuper;var getClassify = "".concat(url, "api/wx/index/indexClassify");
+
+//首页资讯
+exports.getClassify = getClassify;var getMsg = "".concat(url, "api/wx/index/msgList");
+
+//资讯详情
+exports.getMsg = getMsg;var getMsgInfo = "".concat(url, "api/wx/index/getMsg");
+
+//商品详情页
+exports.getMsgInfo = getMsgInfo;var postdelist = "".concat(url, "api/wx/goods/getById");
+
+//订单详情
+exports.postdelist = postdelist;var orderHistory = "".concat(url, "api/wx/goods/getByIdHistory");
+
+//商品找水果
+exports.orderHistory = orderHistory;var getGoodsall = "".concat(url, "api/wx/goods/all");
+
+//品种种类
+exports.getGoodsall = getGoodsall;var getAttribute = "".concat(url, "api/wx/goods/selectAttribute");
+
+//鲜果上市所有水果
+exports.getAttribute = getAttribute;var getNewsAll = "".concat(url, "api/wx/goods/selectNewsAll");
+
+
+//排行榜
+exports.getNewsAll = getNewsAll;var postOrder = "".concat(url, "api/wx/goods/order");
+
+
+//限量区列表
+exports.postOrder = postOrder;var getActivity = "".concat(url, "api/wx/activity/select");
+
+
+//限量区时间
+exports.getActivity = getActivity;var postActivity = "".concat(url, "api/wx/activity/select");
+
+
+//登录
+exports.postActivity = postActivity;var loginis = "".concat(url, "api/wx/user/login");
+
+//找水果
+exports.loginis = loginis;var getsearch = "".concat(url, "api/wx/menu/select");
+
+
+//获取申请店铺信息
+exports.getsearch = getsearch;var getClient = "".concat(url, "api/wx/merchants/getClient");
+
+
+//更新店铺信息
+exports.getClient = getClient;var postupdateClient = "".concat(url, "api/wx/merchants/updateClient");
+
+//保存店铺
+exports.postupdateClient = postupdateClient;var postSaveStore = "".concat(url, "api/wx/merchants/saveStore");
+
+
+//添加进货单
+exports.postSaveStore = postSaveStore;var postmyOrder = "".concat(url, "api/wx/cart/save");
+
+
+//进货单列表
+exports.postmyOrder = postmyOrder;var getCart = "".concat(url, "api/wx/cart/select");
+
+
+//订单详情
+exports.getCart = getCart;var getDetails = "".concat(url, "api/wx/order/getDetails");
+
+//删除进货单
+exports.getDetails = getDetails;var postDelOrder = "".concat(url, "api/wx/cart/del");
+
+//删除最近看过
+exports.postDelOrder = postDelOrder;var postRecentlyDel = "".concat(url, "api/wx/goods/delRecently");
+
+//更新进货单
+exports.postRecentlyDel = postRecentlyDel;var postUpOrder = "".concat(url, "api/wx/cart/update");
+
+//再次购买
+exports.postUpOrder = postUpOrder;var postAgainOrder = "".concat(url, "api/wx/order/againOrder");
+
+
+//结算清单
+exports.postAgainOrder = postAgainOrder;var postDetailed = "".concat(url, "api/wx/order/detailed");
+
+//文件上传
+var uploading = "".concat(url, "api/wx/file/uploading");
+
+//收藏商品
+var postLike = "".concat(url, "api/wx/collection/save");
+
+//收藏列表
+exports.postLike = postLike;var getLike = "".concat(url, "api/wx/collection/my");
+
+//收藏列表
+exports.getLike = getLike;var postDelLike = "".concat(url, "api/wx/collection/del");
+
+//点赞
+exports.postDelLike = postDelLike;var postPraise = "".concat(url, "api/wx/goods/savePraise");
+
+//取消点赞
+exports.postPraise = postPraise;var postCancelPraise = "".concat(url, "api/wx/goods/cancelPraise");
+
+//最近看过
+exports.postCancelPraise = postCancelPraise;var getRecently = "".concat(url, "api/wx/goods/recently");
+
+//结算
+exports.getRecently = getRecently;var postSettle = "".concat(url, "api/wx/order/settle");
+
+//提交订单/获得订单号才能支付
+exports.postSettle = postSettle;var getSubmitOrder = "".concat(url, "api/wx/order/submitOrder");
+
+
+//我的订单
+exports.getSubmitOrder = getSubmitOrder;var getMyOrder = "".concat(url, "api/wx/order/myOrder");
+
+//取消订单
+exports.getMyOrder = getMyOrder;var postCancelOrder = "".concat(url, "api/wx/order/cancelOrder");
+
+//取消支付
+exports.postCancelOrder = postCancelOrder;var postCancelPay = "".concat(url, "api/wx/order/cancelPay");
+
+
+//确认收货
+exports.postCancelPay = postCancelPay;var postConfirmOrder = "".concat(url, "api/wx/order/confirmOrder");
+
+//删除订单
+exports.postConfirmOrder = postConfirmOrder;var postDelOrders = "".concat(url, "api/wx/order/del");
+
+//支付订单
+exports.postDelOrders = postDelOrders;var postOrderPay = "".concat(url, "api/wx/order/orderPay");
+
+//获取选择地址数据
+exports.postOrderPay = postOrderPay;var postAddressList = "".concat(url, "api/wx/area/treeDatClinet");
+
+//提交售后
+exports.postAddressList = postAddressList;var posAfterSale = "".concat(url, "api/wx/wxOrderItemAfterSale/save");
+
+//售后列表
+exports.posAfterSale = posAfterSale;var posAfterSaleList = "".concat(url, "api/wx/wxOrderItemAfterSale/list");
+
+//售后详情
+exports.posAfterSaleList = posAfterSaleList;var posAfterDetails = "".concat(url, "api/wx/wxOrderItemAfterSale/details");
+
+//取消申请售后
+exports.posAfterDetails = posAfterDetails;var postAfterCen = "".concat(url, "api/wx/wxOrderItemAfterSale/cancelAfter");
+
+//确认售后
+exports.postAfterCen = postAfterCen;var PostDataById = "".concat(url, "api/wx/wxOrderItemAfterSale/confirm");
+
+//待确认售后
+exports.PostDataById = PostDataById;var getBeConfirmed = "".concat(url, "api/wx/wxOrderItemAfterSale/toBeConfirmed");
+
+//售后下拉数据
+exports.getBeConfirmed = getBeConfirmed;var getAfterSaleData = "".concat(url, "api/wx/afterSale/getAfterSaleData");
+
+// //取消申请
+// let postAfterCen = `${url}api/wx/wxOrderItemAfterSale/cancelAfter`
+
+// 订单统计
+exports.getAfterSaleData = getAfterSaleData;var orderCount = "".concat(url, "api/wx/goods/totalGoods");
+
+// 评价管理
+exports.orderCount = orderCount;var getEvaluateList = "".concat(url, "api/wx/evaluate/list");
+
+//获取协议列表
+exports.getEvaluateList = getEvaluateList;var getAgreeList = "".concat(url, "api/wx/ruleExplain/select");
+
+//获取协议详情
+exports.getAgreeList = getAgreeList;var getAgreeInfo = "".concat(url, "api/wx/ruleExplain/get");
+
+
+
+//获取上市预告列表
+exports.getAgreeInfo = getAgreeInfo;var getPredictList = "".concat(url, "api/wx/prediction/list");
+
+//获取上市预告的详情
+exports.getPredictList = getPredictList;var getPredictInfo = "".concat(url, "api/wx/prediction/getDetails");
+
+//导出请求地址
+exports.getPredictInfo = getPredictInfo;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 导出文件上传
+var uploadFiles = function uploadFiles(callback) {
+  uni.chooseImage({
+    count: 1,
+    success: function success(chooseImageRes) {
+      uni.showLoading({
+        title: '上传中...' });
+
+      var tempFilePaths = chooseImageRes.tempFilePaths;
+      var uploadTask = uni.uploadFile({
+        url: uploading, //上传地址api
+        filePath: tempFilePaths[0],
+        fileType: 'image',
+        name: 'file',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'multipart/form-data' },
+
+        formData: {
+          'method': 'images.upload',
+          'upfile': tempFilePaths[0] },
+
+        success: function success(uploadFileRes) {
+          callback(JSON.parse(uploadFileRes.data));
+        },
+        fail: function fail(error) {
+          if (error && error.response) {
+            showError(error.response);
+          }
+        },
+        complete: function complete() {
+          setTimeout(function () {
+            uni.hideLoading();
+          }, 250);
+        } });
+
+    } });
+
+};exports.uploadFiles = uploadFiles;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 100:
+/*!*************************************************************!*\
+  !*** /Users/gsheng/Downloads/12-28/new_fruit/utils/util.js ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * 数据处理
+ * @author echo.
+ * @version 1.5.0
+ **/
+var utils = {
+  //去空格
+  trim: function trim(value) {
+    return value.replace(/(^\s*)|(\s*$)/g, "");
+  },
+  //内容替换
+  replaceAll: function replaceAll(text, repstr, newstr) {
+    return text.replace(new RegExp(repstr, "gm"), newstr);
+  },
+  //格式化手机号码
+  formatNumber: function formatNumber(num) {
+    return num.length === 11 ? num.replace(/^(\d{3})\d{4}(\d{4})$/, '$1****$2') : num;
+  },
+  //金额格式化
+  rmoney: function rmoney(money) {
+    return parseFloat(money).toFixed(2).toString().split('').reverse().join('').replace(/(\d{3})/g, '$1,').replace(
+    /\,$/, '').split('').reverse().join('');
+  },
+  //日期格式化
+  formatDate: function formatDate(formatStr, fdate) {
+    if (fdate) {
+      if (~fdate.indexOf('.')) {
+        fdate = fdate.substring(0, fdate.indexOf('.'));
+      }
+      fdate = fdate.toString().replace('T', ' ').replace(/\-/g, '/');
+      var fTime,fStr = 'ymdhis';
+      if (!formatStr)
+      formatStr = "y-m-d h:i:s";
+      if (fdate)
+      fTime = new Date(fdate);else
+
+      fTime = new Date();
+      var month = fTime.getMonth() + 1;
+      var day = fTime.getDate();
+      var hours = fTime.getHours();
+      var minu = fTime.getMinutes();
+      var second = fTime.getSeconds();
+      month = month < 10 ? '0' + month : month;
+      day = day < 10 ? '0' + day : day;
+      hours = hours < 10 ? '0' + hours : hours;
+      minu = minu < 10 ? '0' + minu : minu;
+      second = second < 10 ? '0' + second : second;
+      var formatArr = [
+      fTime.getFullYear().toString(),
+      month.toString(),
+      day.toString(),
+      hours.toString(),
+      minu.toString(),
+      second.toString()];
+
+      for (var i = 0; i < formatArr.length; i++) {
+        formatStr = formatStr.replace(fStr.charAt(i), formatArr[i]);
+      }
+      return formatStr;
+    } else {
+      return "";
+    }
+  },
+  rgbToHex: function rgbToHex(r, g, b) {
+    return "#" + utils.toHex(r) + utils.toHex(g) + utils.toHex(b);
+  },
+  toHex: function toHex(n) {
+    n = parseInt(n, 10);
+    if (isNaN(n)) return "00";
+    n = Math.max(0, Math.min(n, 255));
+    return "0123456789ABCDEF".charAt((n - n % 16) / 16) +
+    "0123456789ABCDEF".charAt(n % 16);
+  },
+  hexToRgb: function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16) } :
+    null;
+  } };
+
+
+module.exports = {
+  trim: utils.trim,
+  replaceAll: utils.replaceAll,
+  formatNumber: utils.formatNumber,
+  rmoney: utils.rmoney,
+  formatDate: utils.formatDate,
+  rgbToHex: utils.rgbToHex,
+  hexToRgb: utils.hexToRgb };
+
+/***/ }),
+
+/***/ 13:
 /*!**********************************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js ***!
   \**********************************************************************************************************/
@@ -1935,117 +2370,704 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ 100:
-/*!**************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/new_fruit/utils/util.js ***!
-  \**************************************************************/
+/***/ 132:
+/*!***************************************************************************************!*\
+  !*** /Users/gsheng/Downloads/12-28/new_fruit/common/tui-validation/tui-validation.js ***!
+  \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-/**
- * 数据处理
- * @author echo.
- * @version 1.5.0
- **/
-var utils = {
-  //去空格
-  trim: function trim(value) {
-    return value.replace(/(^\s*)|(\s*$)/g, "");
-  },
-  //内容替换
-  replaceAll: function replaceAll(text, repstr, newstr) {
-    return text.replace(new RegExp(repstr, "gm"), newstr);
-  },
-  //格式化手机号码
-  formatNumber: function formatNumber(num) {
-    return num.length === 11 ? num.replace(/^(\d{3})\d{4}(\d{4})$/, '$1****$2') : num;
-  },
-  //金额格式化
-  rmoney: function rmoney(money) {
-    return parseFloat(money).toFixed(2).toString().split('').reverse().join('').replace(/(\d{3})/g, '$1,').replace(
-    /\,$/, '').split('').reverse().join('');
-  },
-  //日期格式化
-  formatDate: function formatDate(formatStr, fdate) {
-    if (fdate) {
-      if (~fdate.indexOf('.')) {
-        fdate = fdate.substring(0, fdate.indexOf('.'));
-      }
-      fdate = fdate.toString().replace('T', ' ').replace(/\-/g, '/');
-      var fTime,fStr = 'ymdhis';
-      if (!formatStr)
-      formatStr = "y-m-d h:i:s";
-      if (fdate)
-      fTime = new Date(fdate);else
+function _createForOfIteratorHelper(o, allowArrayLike) {var it;if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) {if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {if (it) o = it;var i = 0;var F = function F() {};return { s: F, n: function n() {if (i >= o.length) return { done: true };return { done: false, value: o[i++] };}, e: function e(_e) {throw _e;}, f: F };}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}var normalCompletion = true,didErr = false,err;return { s: function s() {it = o[Symbol.iterator]();}, n: function n() {var step = it.next();normalCompletion = step.done;return step;}, e: function e(_e2) {didErr = true;err = _e2;}, f: function f() {try {if (!normalCompletion && it.return != null) it.return();} finally {if (didErr) throw err;}} };}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;} /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * 表单验证
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * @author echo.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * @version 1.5.0
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        **/
 
-      fTime = new Date();
-      var month = fTime.getMonth() + 1;
-      var day = fTime.getDate();
-      var hours = fTime.getHours();
-      var minu = fTime.getMinutes();
-      var second = fTime.getSeconds();
-      month = month < 10 ? '0' + month : month;
-      day = day < 10 ? '0' + day : day;
-      hours = hours < 10 ? '0' + hours : hours;
-      minu = minu < 10 ? '0' + minu : minu;
-      second = second < 10 ? '0' + second : second;
-      var formatArr = [
-      fTime.getFullYear().toString(),
-      month.toString(),
-      day.toString(),
-      hours.toString(),
-      minu.toString(),
-      second.toString()];
+var form = {
+  //非必填情况下,如果值为空,则不进行校验
+  //当出现错误时返回错误消息，否则返回空即为验证通过
+  /*
+   formData:Object 表单对象。{key:value,key:value},key==rules.name
+   rules: Array [{name:name,rule:[],msg:[]},{name:name,rule:[],msg:[]}]
+  		name:name 属性=> 元素的名称
+  		rule:字符串数组 ["required","isMobile","isEmail","isCarNo","isIdCard","isAmount","isNum","isChinese","isEnglish",isEnAndNo","isSpecial","isEmoji",""isDate","isUrl","isSame:key","range:[1,9]","minLength:9","maxLength:Number"]
+  		msg:数组 []。 与数组 rule 长度相同,对应的错误提示信息
+  */
+  validation: function validation(formData, rules) {var _iterator = _createForOfIteratorHelper(
+    rules),_step;try {for (_iterator.s(); !(_step = _iterator.n()).done;) {var item = _step.value;
+        var key = item.name;
+        var rule = item.rule;
+        var msgArr = item.msg;
+        if (!key || !rule || rule.length === 0 || !msgArr || msgArr.length === 0) {
+          continue;
+        }
+        for (var i = 0, length = rule.length; i < length; i++) {
+          var ruleItem = rule[i];
+          var msg = msgArr[i];
+          if (!ruleItem || !msg || !~rule.indexOf("required") && formData[key].toString().length === 0) {
+            continue;
+          }
+          //数据处理
+          var value = null;
+          if (~ruleItem.indexOf(":")) {
+            var temp = ruleItem.split(":");
+            ruleItem = temp[0];
+            value = temp[1];
+          }
+          var isError = false;
+          switch (ruleItem) {
+            case "required":
+              isError = form._isNullOrEmpty(formData[key]);
+              break;
+            case "isMobile":
+              isError = !form._isMobile(formData[key]);
+              break;
+            case "isEmail":
+              isError = !form._isEmail(formData[key]);
+              break;
+            case "isCarNo":
+              isError = !form._isCarNo(formData[key]);
+              break;
+            case "isIdCard":
+              isError = !form._isIdCard(formData[key]);
+              break;
+            case "isAmount":
+              isError = !form._isAmount(formData[key]);
+              break;
+            case "isNum":
+              isError = !form._isNum(formData[key]);
+              break;
+            case "isChinese":
+              isError = !form._isChinese(formData[key]);
+              break;
+            case "isEnglish":
+              isError = !form._isEnglish(formData[key]);
+              break;
+            case "isEnAndNo":
+              isError = !form._isEnAndNo(formData[key]);
+              break;
+            case "isEnOrNo":
+              isError = !form._isEnOrNo(formData[key]);
+              break;
+            case "isSpecial":
+              isError = form._isSpecial(formData[key]);
+              break;
+            case "isEmoji":
+              isError = form._isEmoji(formData[key]);
+              break;
+            case "isDate":
+              isError = !form._isDate(formData[key]);
+              break;
+            case "isUrl":
+              isError = !form._isUrl(formData[key]);
+              break;
+            case "isSame":
+              isError = !form._isSame(formData[key], formData[value]);
+              break;
+            case "range":
+              var range = null;
+              try {
+                range = JSON.parse(value);
+                if (range.length <= 1) {
+                  throw new Error("range值传入有误！");
+                }
+              } catch (e) {
+                return "range值传入有误！";
+              }
+              isError = !form._isRange(formData[key], range[0], range[1]);
+              break;
+            case "minLength":
+              isError = !form._minLength(formData[key], value);
+              break;
+            case "maxLength":
+              isError = !form._maxLength(formData[key], value);
+              break;
+            default:
+              break;}
 
-      for (var i = 0; i < formatArr.length; i++) {
-        formatStr = formatStr.replace(fStr.charAt(i), formatArr[i]);
-      }
-      return formatStr;
+          if (isError) {
+            return msg;
+          }
+        }
+      }} catch (err) {_iterator.e(err);} finally {_iterator.f();}
+    return "";
+  },
+  _isNullOrEmpty: function _isNullOrEmpty(value) {
+    return value === null || value === '' || value === undefined ? true : false;
+  },
+  _isMobile: function _isMobile(value) {
+    return /^(?:13\d|14\d|15\d|16\d|17\d|18\d|19\d)\d{5}(\d{3}|\*{3})$/.test(value);
+  },
+  _isEmail: function _isEmail(value) {
+    return /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/.test(value);
+  },
+  _isCarNo: function _isCarNo(value) {
+    // 新能源车牌
+    var xreg = /^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}(([0-9]{5}[DF]$)|([DF][A-HJ-NP-Z0-9][0-9]{4}$))/;
+    // 旧车牌
+    var creg = /^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-HJ-NP-Z0-9]{4}[A-HJ-NP-Z0-9挂学警港澳]{1}$/;
+    if (value.length === 7) {
+      return creg.test(value);
+    } else if (value.length === 8) {
+      return xreg.test(value);
     } else {
-      return "";
+      return false;
     }
   },
-  rgbToHex: function rgbToHex(r, g, b) {
-    return "#" + utils.toHex(r) + utils.toHex(g) + utils.toHex(b);
+  _isIdCard: function _isIdCard(value) {
+    var idCard = value;
+    if (idCard.length == 15) {
+      return this.__isValidityBrithBy15IdCard;
+    } else if (idCard.length == 18) {
+      var arrIdCard = idCard.split("");
+      if (this.__isValidityBrithBy18IdCard(idCard) && this.__isTrueValidateCodeBy18IdCard(arrIdCard)) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
   },
-  toHex: function toHex(n) {
-    n = parseInt(n, 10);
-    if (isNaN(n)) return "00";
-    n = Math.max(0, Math.min(n, 255));
-    return "0123456789ABCDEF".charAt((n - n % 16) / 16) +
-    "0123456789ABCDEF".charAt(n % 16);
+  __isTrueValidateCodeBy18IdCard: function __isTrueValidateCodeBy18IdCard(arrIdCard) {
+    var sum = 0;
+    var Wi = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2, 1];
+    var ValideCode = [1, 0, 10, 9, 8, 7, 6, 5, 4, 3, 2];
+    if (arrIdCard[17].toLowerCase() == 'x') {
+      arrIdCard[17] = 10;
+    }
+    for (var i = 0; i < 17; i++) {
+      sum += Wi[i] * arrIdCard[i];
+    }
+    var valCodePosition = sum % 11;
+    if (arrIdCard[17] == ValideCode[valCodePosition]) {
+      return true;
+    } else {
+      return false;
+    }
   },
-  hexToRgb: function hexToRgb(hex) {
-    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result ? {
-      r: parseInt(result[1], 16),
-      g: parseInt(result[2], 16),
-      b: parseInt(result[3], 16) } :
-    null;
+  __isValidityBrithBy18IdCard: function __isValidityBrithBy18IdCard(idCard18) {
+    var year = idCard18.substring(6, 10);
+    var month = idCard18.substring(10, 12);
+    var day = idCard18.substring(12, 14);
+    var temp_date = new Date(year, parseFloat(month) - 1, parseFloat(day));
+    if (temp_date.getFullYear() != parseFloat(year) || temp_date.getMonth() != parseFloat(month) - 1 || temp_date.getDate() !=
+    parseFloat(day)) {
+      return false;
+    } else {
+      return true;
+    }
+  },
+  __isValidityBrithBy15IdCard: function __isValidityBrithBy15IdCard(idCard15) {
+    var year = idCard15.substring(6, 8);
+    var month = idCard15.substring(8, 10);
+    var day = idCard15.substring(10, 12);
+    var temp_date = new Date(year, parseFloat(month) - 1, parseFloat(day));
+
+    if (temp_date.getYear() != parseFloat(year) || temp_date.getMonth() != parseFloat(month) - 1 || temp_date.getDate() !=
+    parseFloat(day)) {
+      return false;
+    } else {
+      return true;
+    }
+  },
+  _isAmount: function _isAmount(value) {
+    //金额，只允许保留两位小数
+    return /^([0-9]*[.]?[0-9])[0-9]{0,1}$/.test(value);
+  },
+  _isNum: function _isNum(value) {
+    //只能为数字
+    return /^[0-9]+$/.test(value);
+  },
+  _isChinese: function _isChinese(value) {
+    // let reg = /.*[\u4e00-\u9fa5]+.*$/; 
+    var reg = /^[\u4e00-\u9fa5]+$/;
+    return value !== "" && reg.test(value) && !form._isSpecial(value) && !form._isEmoji(value);
+  },
+  _isEnglish: function _isEnglish(value) {
+    return /^[a-zA-Z]*$/.test(value);
+  },
+  _isEnAndNo: function _isEnAndNo(value) {
+    //8~20位数字和字母组合
+    return /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,20}$/.test(value);
+  },
+  _isEnOrNo: function _isEnOrNo(value) {
+    //英文或者数字
+    var reg = /.*[\u4e00-\u9fa5]+.*$/;
+    var result = true;
+    if (reg.test(value) || form._isSpecial(value) || form._isEmoji(value)) {
+      result = false;
+    }
+    return result;
+  },
+  _isSpecial: function _isSpecial(value) {
+    //是否包含特殊字符
+    var regEn = /[`~!@#$%^&*()_+<>?:"{},.\/;'[\]]/im,
+    regCn = /[·！#￥（——）：；“”‘、，|《。》？、【】[\]]/im;
+    if (regEn.test(value) || regCn.test(value)) {
+      return true;
+    }
+    return false;
+  },
+  _isEmoji: function _isEmoji(value) {
+    //是否包含表情
+    return /\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/g.test(value);
+  },
+  _isDate: function _isDate(value) {
+    //2019-10-12
+    var reg =
+    /^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$/;
+    return reg.test(value);
+  },
+  _isUrl: function _isUrl(value) {
+    return /^((https?|ftp|file):\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/.test(value);
+  },
+  _isSame: function _isSame(value1, value2) {
+    return value1 === value2;
+  },
+  _isRange: function _isRange(value, range1, range2) {
+    if (!range1 && range1 != 0 && !range2 && range2 != 0) {
+      return true;
+    } else if (!range1 && range1 != 0) {
+      return value <= range2;
+    } else if (!range2 && range2 != 0) {
+      return value >= range1;
+    } else {
+      return value >= range1 && value <= range2;
+    }
+  },
+  _minLength: function _minLength(value, min) {
+    return value.length >= Number(min);
+  },
+  _maxLength: function _maxLength(value, max) {
+    return value.length <= Number(max);
   } };
 
-
 module.exports = {
-  trim: utils.trim,
-  replaceAll: utils.replaceAll,
-  formatNumber: utils.formatNumber,
-  rmoney: utils.rmoney,
-  formatDate: utils.formatDate,
-  rgbToHex: utils.rgbToHex,
-  hexToRgb: utils.hexToRgb };
+  validation: form.validation };
 
 /***/ }),
 
-/***/ 11:
-/*!***************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/new_fruit/store/store.js ***!
-  \***************************************************************/
+/***/ 133:
+/*!********************************************************************!*\
+  !*** /Users/gsheng/Downloads/12-28/new_fruit/utils/picker.city.js ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+//测试数据，数据并非完整，只验证功能
+module.exports = [{
+  "text": "北京市",
+  "value": "110000",
+  "children": [{
+    "text": "北京市市辖区",
+    "value": "110100",
+    "children": [{
+      "text": "东城区",
+      "value": "110101" },
+    {
+      "text": "西城区",
+      "value": "110102" },
+    {
+      "text": "朝阳区",
+      "value": "110105" }] }] },
+
+
+
+{
+  "text": "安徽省",
+  "value": "340000",
+  "children": [{
+    "text": "合肥市",
+    "value": "340100",
+    "children": [{
+      "text": "瑶海区",
+      "value": "340102" },
+    {
+      "text": "庐阳区",
+      "value": "340103" },
+    {
+      "text": "蜀山区",
+      "value": "340104" },
+    {
+      "text": "包河区",
+      "value": "340111" },
+    {
+      "text": "长丰县",
+      "value": "340121" },
+    {
+      "text": "肥东县",
+      "value": "340122" },
+    {
+      "text": "肥西县",
+      "value": "340123" },
+    {
+      "text": "庐江县",
+      "value": "340124" },
+    {
+      "text": "巢湖市",
+      "value": "340181" }] },
+
+  {
+    "text": "芜湖市",
+    "value": "340200",
+    "children": [{
+      "text": "镜湖区",
+      "value": "340202" },
+    {
+      "text": "弋江区",
+      "value": "340203" },
+    {
+      "text": "鸠江区",
+      "value": "340207" },
+    {
+      "text": "三山区",
+      "value": "340208" },
+    {
+      "text": "芜湖县",
+      "value": "340221" },
+    {
+      "text": "繁昌县",
+      "value": "340222" },
+    {
+      "text": "南陵县",
+      "value": "340223" },
+    {
+      "text": "无为县",
+      "value": "340225" }] },
+
+  {
+    "text": "蚌埠市",
+    "value": "340300",
+    "children": [{
+      "text": "龙子湖区",
+      "value": "340302" },
+    {
+      "text": "蚌山区",
+      "value": "340303" },
+    {
+      "text": "禹会区",
+      "value": "340304" },
+    {
+      "text": "淮上区",
+      "value": "340311" },
+    {
+      "text": "怀远县",
+      "value": "340321" },
+    {
+      "text": "五河县",
+      "value": "340322" },
+    {
+      "text": "固镇县",
+      "value": "340323" }] },
+
+  {
+    "text": "淮南市",
+    "value": "340400",
+    "children": [{
+      "text": "大通区",
+      "value": "340402" },
+    {
+      "text": "田家庵区",
+      "value": "340403" },
+    {
+      "text": "谢家集区",
+      "value": "340404" },
+    {
+      "text": "八公山区",
+      "value": "340405" },
+    {
+      "text": "潘集区",
+      "value": "340406" },
+    {
+      "text": "凤台县",
+      "value": "340421" },
+    {
+      "text": "寿县",
+      "value": "340422" }] },
+
+  {
+    "text": "马鞍山市",
+    "value": "340500",
+    "children": [{
+      "text": "花山区",
+      "value": "340503" },
+    {
+      "text": "雨山区",
+      "value": "340504" },
+    {
+      "text": "博望区",
+      "value": "340506" },
+    {
+      "text": "当涂县",
+      "value": "340521" },
+    {
+      "text": "含山县",
+      "value": "340522" },
+    {
+      "text": "和县",
+      "value": "340523" }] },
+
+  {
+    "text": "淮北市",
+    "value": "340600",
+    "children": [{
+      "text": "杜集区",
+      "value": "340602" },
+    {
+      "text": "相山区",
+      "value": "340603" },
+    {
+      "text": "烈山区",
+      "value": "340604" },
+    {
+      "text": "濉溪县",
+      "value": "340621" }] },
+
+  {
+    "text": "铜陵市",
+    "value": "340700",
+    "children": [{
+      "text": "铜官区",
+      "value": "340705" },
+    {
+      "text": "义安区",
+      "value": "340706" },
+    {
+      "text": "郊区",
+      "value": "340711" },
+    {
+      "text": "枞阳县",
+      "value": "340722" }] },
+
+  {
+    "text": "安庆市",
+    "value": "340800",
+    "children": [{
+      "text": "迎江区",
+      "value": "340802" },
+    {
+      "text": "大观区",
+      "value": "340803" },
+    {
+      "text": "宜秀区",
+      "value": "340811" },
+    {
+      "text": "怀宁县",
+      "value": "340822" },
+    {
+      "text": "潜山县",
+      "value": "340824" },
+    {
+      "text": "太湖县",
+      "value": "340825" },
+    {
+      "text": "宿松县",
+      "value": "340826" },
+    {
+      "text": "望江县",
+      "value": "340827" },
+    {
+      "text": "岳西县",
+      "value": "340828" },
+    {
+      "text": "桐城市",
+      "value": "340881" }] },
+
+  {
+    "text": "黄山市",
+    "value": "341000",
+    "children": [{
+      "text": "屯溪区",
+      "value": "341002" },
+    {
+      "text": "黄山区",
+      "value": "341003" },
+    {
+      "text": "徽州区",
+      "value": "341004" },
+    {
+      "text": "歙县",
+      "value": "341021" },
+    {
+      "text": "休宁县",
+      "value": "341022" },
+    {
+      "text": "黟县",
+      "value": "341023" },
+    {
+      "text": "祁门县",
+      "value": "341024" }] },
+
+  {
+    "text": "滁州市",
+    "value": "341100",
+    "children": [{
+      "text": "琅琊区",
+      "value": "341102" },
+    {
+      "text": "南谯区",
+      "value": "341103" },
+    {
+      "text": "来安县",
+      "value": "341122" },
+    {
+      "text": "全椒县",
+      "value": "341124" },
+    {
+      "text": "定远县",
+      "value": "341125" },
+    {
+      "text": "凤阳县",
+      "value": "341126" },
+    {
+      "text": "天长市",
+      "value": "341181" },
+    {
+      "text": "明光市",
+      "value": "341182" }] },
+
+  {
+    "text": "阜阳市",
+    "value": "341200",
+    "children": [{
+      "text": "颍州区",
+      "value": "341202" },
+    {
+      "text": "颍东区",
+      "value": "341203" },
+    {
+      "text": "颍泉区",
+      "value": "341204" },
+    {
+      "text": "临泉县",
+      "value": "341221" },
+    {
+      "text": "太和县",
+      "value": "341222" },
+    {
+      "text": "阜南县",
+      "value": "341225" },
+    {
+      "text": "颍上县",
+      "value": "341226" },
+    {
+      "text": "界首市",
+      "value": "341282" }] },
+
+  {
+    "text": "宿州市",
+    "value": "341300",
+    "children": [{
+      "text": "埇桥区",
+      "value": "341302" },
+    {
+      "text": "砀山县",
+      "value": "341321" },
+    {
+      "text": "萧县",
+      "value": "341322" },
+    {
+      "text": "灵璧县",
+      "value": "341323" },
+    {
+      "text": "泗县",
+      "value": "341324" }] },
+
+  {
+    "text": "六安市",
+    "value": "341500",
+    "children": [{
+      "text": "金安区",
+      "value": "341502" },
+    {
+      "text": "裕安区",
+      "value": "341503" },
+    {
+      "text": "叶集区",
+      "value": "341504" },
+    {
+      "text": "霍邱县",
+      "value": "341522" },
+    {
+      "text": "舒城县",
+      "value": "341523" },
+    {
+      "text": "金寨县",
+      "value": "341524" },
+    {
+      "text": "霍山县",
+      "value": "341525" }] },
+
+  {
+    "text": "亳州市",
+    "value": "341600",
+    "children": [{
+      "text": "谯城区",
+      "value": "341602" },
+    {
+      "text": "涡阳县",
+      "value": "341621" },
+    {
+      "text": "蒙城县",
+      "value": "341622" },
+    {
+      "text": "利辛县",
+      "value": "341623" }] },
+
+  {
+    "text": "池州市",
+    "value": "341700",
+    "children": [{
+      "text": "贵池区",
+      "value": "341702" },
+    {
+      "text": "东至县",
+      "value": "341721" },
+    {
+      "text": "石台县",
+      "value": "341722" },
+    {
+      "text": "青阳县",
+      "value": "341723" }] },
+
+  {
+    "text": "宣城市",
+    "value": "341800",
+    "children": [{
+      "text": "宣州区",
+      "value": "341802" },
+    {
+      "text": "郎溪县",
+      "value": "341821" },
+    {
+      "text": "广德县",
+      "value": "341822" },
+    {
+      "text": "泾县",
+      "value": "341823" },
+    {
+      "text": "绩溪县",
+      "value": "341824" },
+    {
+      "text": "旌德县",
+      "value": "341825" },
+    {
+      "text": "宁国市",
+      "value": "341881" }] }] }];
+
+/***/ }),
+
+/***/ 14:
+/*!**************************************************************!*\
+  !*** /Users/gsheng/Downloads/12-28/new_fruit/store/store.js ***!
+  \**************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _vuex = _interopRequireDefault(__webpack_require__(/*! vuex */ 12));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _vuex = _interopRequireDefault(__webpack_require__(/*! vuex */ 15));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 _vue.default.use(_vuex.default);
 
 var screendata = {
@@ -2099,7 +3121,7 @@ new _vuex.default.Store({
 
 /***/ }),
 
-/***/ 12:
+/***/ 15:
 /*!********************************************!*\
   !*** ./node_modules/vuex/dist/vuex.esm.js ***!
   \********************************************/
@@ -3209,705 +4231,6 @@ var index = {
 
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../webpack/buildin/global.js */ 3)))
-
-/***/ }),
-
-/***/ 132:
-/*!****************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/new_fruit/common/tui-validation/tui-validation.js ***!
-  \****************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _createForOfIteratorHelper(o, allowArrayLike) {var it;if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) {if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {if (it) o = it;var i = 0;var F = function F() {};return { s: F, n: function n() {if (i >= o.length) return { done: true };return { done: false, value: o[i++] };}, e: function e(_e) {throw _e;}, f: F };}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}var normalCompletion = true,didErr = false,err;return { s: function s() {it = o[Symbol.iterator]();}, n: function n() {var step = it.next();normalCompletion = step.done;return step;}, e: function e(_e2) {didErr = true;err = _e2;}, f: function f() {try {if (!normalCompletion && it.return != null) it.return();} finally {if (didErr) throw err;}} };}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;} /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * 表单验证
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * @author echo.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * @version 1.5.0
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        **/
-
-var form = {
-  //非必填情况下,如果值为空,则不进行校验
-  //当出现错误时返回错误消息，否则返回空即为验证通过
-  /*
-   formData:Object 表单对象。{key:value,key:value},key==rules.name
-   rules: Array [{name:name,rule:[],msg:[]},{name:name,rule:[],msg:[]}]
-  		name:name 属性=> 元素的名称
-  		rule:字符串数组 ["required","isMobile","isEmail","isCarNo","isIdCard","isAmount","isNum","isChinese","isEnglish",isEnAndNo","isSpecial","isEmoji",""isDate","isUrl","isSame:key","range:[1,9]","minLength:9","maxLength:Number"]
-  		msg:数组 []。 与数组 rule 长度相同,对应的错误提示信息
-  */
-  validation: function validation(formData, rules) {var _iterator = _createForOfIteratorHelper(
-    rules),_step;try {for (_iterator.s(); !(_step = _iterator.n()).done;) {var item = _step.value;
-        var key = item.name;
-        var rule = item.rule;
-        var msgArr = item.msg;
-        if (!key || !rule || rule.length === 0 || !msgArr || msgArr.length === 0) {
-          continue;
-        }
-        for (var i = 0, length = rule.length; i < length; i++) {
-          var ruleItem = rule[i];
-          var msg = msgArr[i];
-          if (!ruleItem || !msg || !~rule.indexOf("required") && formData[key].toString().length === 0) {
-            continue;
-          }
-          //数据处理
-          var value = null;
-          if (~ruleItem.indexOf(":")) {
-            var temp = ruleItem.split(":");
-            ruleItem = temp[0];
-            value = temp[1];
-          }
-          var isError = false;
-          switch (ruleItem) {
-            case "required":
-              isError = form._isNullOrEmpty(formData[key]);
-              break;
-            case "isMobile":
-              isError = !form._isMobile(formData[key]);
-              break;
-            case "isEmail":
-              isError = !form._isEmail(formData[key]);
-              break;
-            case "isCarNo":
-              isError = !form._isCarNo(formData[key]);
-              break;
-            case "isIdCard":
-              isError = !form._isIdCard(formData[key]);
-              break;
-            case "isAmount":
-              isError = !form._isAmount(formData[key]);
-              break;
-            case "isNum":
-              isError = !form._isNum(formData[key]);
-              break;
-            case "isChinese":
-              isError = !form._isChinese(formData[key]);
-              break;
-            case "isEnglish":
-              isError = !form._isEnglish(formData[key]);
-              break;
-            case "isEnAndNo":
-              isError = !form._isEnAndNo(formData[key]);
-              break;
-            case "isEnOrNo":
-              isError = !form._isEnOrNo(formData[key]);
-              break;
-            case "isSpecial":
-              isError = form._isSpecial(formData[key]);
-              break;
-            case "isEmoji":
-              isError = form._isEmoji(formData[key]);
-              break;
-            case "isDate":
-              isError = !form._isDate(formData[key]);
-              break;
-            case "isUrl":
-              isError = !form._isUrl(formData[key]);
-              break;
-            case "isSame":
-              isError = !form._isSame(formData[key], formData[value]);
-              break;
-            case "range":
-              var range = null;
-              try {
-                range = JSON.parse(value);
-                if (range.length <= 1) {
-                  throw new Error("range值传入有误！");
-                }
-              } catch (e) {
-                return "range值传入有误！";
-              }
-              isError = !form._isRange(formData[key], range[0], range[1]);
-              break;
-            case "minLength":
-              isError = !form._minLength(formData[key], value);
-              break;
-            case "maxLength":
-              isError = !form._maxLength(formData[key], value);
-              break;
-            default:
-              break;}
-
-          if (isError) {
-            return msg;
-          }
-        }
-      }} catch (err) {_iterator.e(err);} finally {_iterator.f();}
-    return "";
-  },
-  _isNullOrEmpty: function _isNullOrEmpty(value) {
-    return value === null || value === '' || value === undefined ? true : false;
-  },
-  _isMobile: function _isMobile(value) {
-    return /^(?:13\d|14\d|15\d|16\d|17\d|18\d|19\d)\d{5}(\d{3}|\*{3})$/.test(value);
-  },
-  _isEmail: function _isEmail(value) {
-    return /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/.test(value);
-  },
-  _isCarNo: function _isCarNo(value) {
-    // 新能源车牌
-    var xreg = /^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}(([0-9]{5}[DF]$)|([DF][A-HJ-NP-Z0-9][0-9]{4}$))/;
-    // 旧车牌
-    var creg = /^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-HJ-NP-Z0-9]{4}[A-HJ-NP-Z0-9挂学警港澳]{1}$/;
-    if (value.length === 7) {
-      return creg.test(value);
-    } else if (value.length === 8) {
-      return xreg.test(value);
-    } else {
-      return false;
-    }
-  },
-  _isIdCard: function _isIdCard(value) {
-    var idCard = value;
-    if (idCard.length == 15) {
-      return this.__isValidityBrithBy15IdCard;
-    } else if (idCard.length == 18) {
-      var arrIdCard = idCard.split("");
-      if (this.__isValidityBrithBy18IdCard(idCard) && this.__isTrueValidateCodeBy18IdCard(arrIdCard)) {
-        return true;
-      } else {
-        return false;
-      }
-    } else {
-      return false;
-    }
-  },
-  __isTrueValidateCodeBy18IdCard: function __isTrueValidateCodeBy18IdCard(arrIdCard) {
-    var sum = 0;
-    var Wi = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2, 1];
-    var ValideCode = [1, 0, 10, 9, 8, 7, 6, 5, 4, 3, 2];
-    if (arrIdCard[17].toLowerCase() == 'x') {
-      arrIdCard[17] = 10;
-    }
-    for (var i = 0; i < 17; i++) {
-      sum += Wi[i] * arrIdCard[i];
-    }
-    var valCodePosition = sum % 11;
-    if (arrIdCard[17] == ValideCode[valCodePosition]) {
-      return true;
-    } else {
-      return false;
-    }
-  },
-  __isValidityBrithBy18IdCard: function __isValidityBrithBy18IdCard(idCard18) {
-    var year = idCard18.substring(6, 10);
-    var month = idCard18.substring(10, 12);
-    var day = idCard18.substring(12, 14);
-    var temp_date = new Date(year, parseFloat(month) - 1, parseFloat(day));
-    if (temp_date.getFullYear() != parseFloat(year) || temp_date.getMonth() != parseFloat(month) - 1 || temp_date.getDate() !=
-    parseFloat(day)) {
-      return false;
-    } else {
-      return true;
-    }
-  },
-  __isValidityBrithBy15IdCard: function __isValidityBrithBy15IdCard(idCard15) {
-    var year = idCard15.substring(6, 8);
-    var month = idCard15.substring(8, 10);
-    var day = idCard15.substring(10, 12);
-    var temp_date = new Date(year, parseFloat(month) - 1, parseFloat(day));
-
-    if (temp_date.getYear() != parseFloat(year) || temp_date.getMonth() != parseFloat(month) - 1 || temp_date.getDate() !=
-    parseFloat(day)) {
-      return false;
-    } else {
-      return true;
-    }
-  },
-  _isAmount: function _isAmount(value) {
-    //金额，只允许保留两位小数
-    return /^([0-9]*[.]?[0-9])[0-9]{0,1}$/.test(value);
-  },
-  _isNum: function _isNum(value) {
-    //只能为数字
-    return /^[0-9]+$/.test(value);
-  },
-  _isChinese: function _isChinese(value) {
-    // let reg = /.*[\u4e00-\u9fa5]+.*$/; 
-    var reg = /^[\u4e00-\u9fa5]+$/;
-    return value !== "" && reg.test(value) && !form._isSpecial(value) && !form._isEmoji(value);
-  },
-  _isEnglish: function _isEnglish(value) {
-    return /^[a-zA-Z]*$/.test(value);
-  },
-  _isEnAndNo: function _isEnAndNo(value) {
-    //8~20位数字和字母组合
-    return /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,20}$/.test(value);
-  },
-  _isEnOrNo: function _isEnOrNo(value) {
-    //英文或者数字
-    var reg = /.*[\u4e00-\u9fa5]+.*$/;
-    var result = true;
-    if (reg.test(value) || form._isSpecial(value) || form._isEmoji(value)) {
-      result = false;
-    }
-    return result;
-  },
-  _isSpecial: function _isSpecial(value) {
-    //是否包含特殊字符
-    var regEn = /[`~!@#$%^&*()_+<>?:"{},.\/;'[\]]/im,
-    regCn = /[·！#￥（——）：；“”‘、，|《。》？、【】[\]]/im;
-    if (regEn.test(value) || regCn.test(value)) {
-      return true;
-    }
-    return false;
-  },
-  _isEmoji: function _isEmoji(value) {
-    //是否包含表情
-    return /\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/g.test(value);
-  },
-  _isDate: function _isDate(value) {
-    //2019-10-12
-    var reg =
-    /^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$/;
-    return reg.test(value);
-  },
-  _isUrl: function _isUrl(value) {
-    return /^((https?|ftp|file):\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/.test(value);
-  },
-  _isSame: function _isSame(value1, value2) {
-    return value1 === value2;
-  },
-  _isRange: function _isRange(value, range1, range2) {
-    if (!range1 && range1 != 0 && !range2 && range2 != 0) {
-      return true;
-    } else if (!range1 && range1 != 0) {
-      return value <= range2;
-    } else if (!range2 && range2 != 0) {
-      return value >= range1;
-    } else {
-      return value >= range1 && value <= range2;
-    }
-  },
-  _minLength: function _minLength(value, min) {
-    return value.length >= Number(min);
-  },
-  _maxLength: function _maxLength(value, max) {
-    return value.length <= Number(max);
-  } };
-
-module.exports = {
-  validation: form.validation };
-
-/***/ }),
-
-/***/ 133:
-/*!*********************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/new_fruit/utils/picker.city.js ***!
-  \*********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-//测试数据，数据并非完整，只验证功能
-module.exports = [{
-  "text": "北京市",
-  "value": "110000",
-  "children": [{
-    "text": "北京市市辖区",
-    "value": "110100",
-    "children": [{
-      "text": "东城区",
-      "value": "110101" },
-    {
-      "text": "西城区",
-      "value": "110102" },
-    {
-      "text": "朝阳区",
-      "value": "110105" }] }] },
-
-
-
-{
-  "text": "安徽省",
-  "value": "340000",
-  "children": [{
-    "text": "合肥市",
-    "value": "340100",
-    "children": [{
-      "text": "瑶海区",
-      "value": "340102" },
-    {
-      "text": "庐阳区",
-      "value": "340103" },
-    {
-      "text": "蜀山区",
-      "value": "340104" },
-    {
-      "text": "包河区",
-      "value": "340111" },
-    {
-      "text": "长丰县",
-      "value": "340121" },
-    {
-      "text": "肥东县",
-      "value": "340122" },
-    {
-      "text": "肥西县",
-      "value": "340123" },
-    {
-      "text": "庐江县",
-      "value": "340124" },
-    {
-      "text": "巢湖市",
-      "value": "340181" }] },
-
-  {
-    "text": "芜湖市",
-    "value": "340200",
-    "children": [{
-      "text": "镜湖区",
-      "value": "340202" },
-    {
-      "text": "弋江区",
-      "value": "340203" },
-    {
-      "text": "鸠江区",
-      "value": "340207" },
-    {
-      "text": "三山区",
-      "value": "340208" },
-    {
-      "text": "芜湖县",
-      "value": "340221" },
-    {
-      "text": "繁昌县",
-      "value": "340222" },
-    {
-      "text": "南陵县",
-      "value": "340223" },
-    {
-      "text": "无为县",
-      "value": "340225" }] },
-
-  {
-    "text": "蚌埠市",
-    "value": "340300",
-    "children": [{
-      "text": "龙子湖区",
-      "value": "340302" },
-    {
-      "text": "蚌山区",
-      "value": "340303" },
-    {
-      "text": "禹会区",
-      "value": "340304" },
-    {
-      "text": "淮上区",
-      "value": "340311" },
-    {
-      "text": "怀远县",
-      "value": "340321" },
-    {
-      "text": "五河县",
-      "value": "340322" },
-    {
-      "text": "固镇县",
-      "value": "340323" }] },
-
-  {
-    "text": "淮南市",
-    "value": "340400",
-    "children": [{
-      "text": "大通区",
-      "value": "340402" },
-    {
-      "text": "田家庵区",
-      "value": "340403" },
-    {
-      "text": "谢家集区",
-      "value": "340404" },
-    {
-      "text": "八公山区",
-      "value": "340405" },
-    {
-      "text": "潘集区",
-      "value": "340406" },
-    {
-      "text": "凤台县",
-      "value": "340421" },
-    {
-      "text": "寿县",
-      "value": "340422" }] },
-
-  {
-    "text": "马鞍山市",
-    "value": "340500",
-    "children": [{
-      "text": "花山区",
-      "value": "340503" },
-    {
-      "text": "雨山区",
-      "value": "340504" },
-    {
-      "text": "博望区",
-      "value": "340506" },
-    {
-      "text": "当涂县",
-      "value": "340521" },
-    {
-      "text": "含山县",
-      "value": "340522" },
-    {
-      "text": "和县",
-      "value": "340523" }] },
-
-  {
-    "text": "淮北市",
-    "value": "340600",
-    "children": [{
-      "text": "杜集区",
-      "value": "340602" },
-    {
-      "text": "相山区",
-      "value": "340603" },
-    {
-      "text": "烈山区",
-      "value": "340604" },
-    {
-      "text": "濉溪县",
-      "value": "340621" }] },
-
-  {
-    "text": "铜陵市",
-    "value": "340700",
-    "children": [{
-      "text": "铜官区",
-      "value": "340705" },
-    {
-      "text": "义安区",
-      "value": "340706" },
-    {
-      "text": "郊区",
-      "value": "340711" },
-    {
-      "text": "枞阳县",
-      "value": "340722" }] },
-
-  {
-    "text": "安庆市",
-    "value": "340800",
-    "children": [{
-      "text": "迎江区",
-      "value": "340802" },
-    {
-      "text": "大观区",
-      "value": "340803" },
-    {
-      "text": "宜秀区",
-      "value": "340811" },
-    {
-      "text": "怀宁县",
-      "value": "340822" },
-    {
-      "text": "潜山县",
-      "value": "340824" },
-    {
-      "text": "太湖县",
-      "value": "340825" },
-    {
-      "text": "宿松县",
-      "value": "340826" },
-    {
-      "text": "望江县",
-      "value": "340827" },
-    {
-      "text": "岳西县",
-      "value": "340828" },
-    {
-      "text": "桐城市",
-      "value": "340881" }] },
-
-  {
-    "text": "黄山市",
-    "value": "341000",
-    "children": [{
-      "text": "屯溪区",
-      "value": "341002" },
-    {
-      "text": "黄山区",
-      "value": "341003" },
-    {
-      "text": "徽州区",
-      "value": "341004" },
-    {
-      "text": "歙县",
-      "value": "341021" },
-    {
-      "text": "休宁县",
-      "value": "341022" },
-    {
-      "text": "黟县",
-      "value": "341023" },
-    {
-      "text": "祁门县",
-      "value": "341024" }] },
-
-  {
-    "text": "滁州市",
-    "value": "341100",
-    "children": [{
-      "text": "琅琊区",
-      "value": "341102" },
-    {
-      "text": "南谯区",
-      "value": "341103" },
-    {
-      "text": "来安县",
-      "value": "341122" },
-    {
-      "text": "全椒县",
-      "value": "341124" },
-    {
-      "text": "定远县",
-      "value": "341125" },
-    {
-      "text": "凤阳县",
-      "value": "341126" },
-    {
-      "text": "天长市",
-      "value": "341181" },
-    {
-      "text": "明光市",
-      "value": "341182" }] },
-
-  {
-    "text": "阜阳市",
-    "value": "341200",
-    "children": [{
-      "text": "颍州区",
-      "value": "341202" },
-    {
-      "text": "颍东区",
-      "value": "341203" },
-    {
-      "text": "颍泉区",
-      "value": "341204" },
-    {
-      "text": "临泉县",
-      "value": "341221" },
-    {
-      "text": "太和县",
-      "value": "341222" },
-    {
-      "text": "阜南县",
-      "value": "341225" },
-    {
-      "text": "颍上县",
-      "value": "341226" },
-    {
-      "text": "界首市",
-      "value": "341282" }] },
-
-  {
-    "text": "宿州市",
-    "value": "341300",
-    "children": [{
-      "text": "埇桥区",
-      "value": "341302" },
-    {
-      "text": "砀山县",
-      "value": "341321" },
-    {
-      "text": "萧县",
-      "value": "341322" },
-    {
-      "text": "灵璧县",
-      "value": "341323" },
-    {
-      "text": "泗县",
-      "value": "341324" }] },
-
-  {
-    "text": "六安市",
-    "value": "341500",
-    "children": [{
-      "text": "金安区",
-      "value": "341502" },
-    {
-      "text": "裕安区",
-      "value": "341503" },
-    {
-      "text": "叶集区",
-      "value": "341504" },
-    {
-      "text": "霍邱县",
-      "value": "341522" },
-    {
-      "text": "舒城县",
-      "value": "341523" },
-    {
-      "text": "金寨县",
-      "value": "341524" },
-    {
-      "text": "霍山县",
-      "value": "341525" }] },
-
-  {
-    "text": "亳州市",
-    "value": "341600",
-    "children": [{
-      "text": "谯城区",
-      "value": "341602" },
-    {
-      "text": "涡阳县",
-      "value": "341621" },
-    {
-      "text": "蒙城县",
-      "value": "341622" },
-    {
-      "text": "利辛县",
-      "value": "341623" }] },
-
-  {
-    "text": "池州市",
-    "value": "341700",
-    "children": [{
-      "text": "贵池区",
-      "value": "341702" },
-    {
-      "text": "东至县",
-      "value": "341721" },
-    {
-      "text": "石台县",
-      "value": "341722" },
-    {
-      "text": "青阳县",
-      "value": "341723" }] },
-
-  {
-    "text": "宣城市",
-    "value": "341800",
-    "children": [{
-      "text": "宣州区",
-      "value": "341802" },
-    {
-      "text": "郎溪县",
-      "value": "341821" },
-    {
-      "text": "广德县",
-      "value": "341822" },
-    {
-      "text": "泾县",
-      "value": "341823" },
-    {
-      "text": "绩溪县",
-      "value": "341824" },
-    {
-      "text": "旌德县",
-      "value": "341825" },
-    {
-      "text": "宁国市",
-      "value": "341881" }] }] }];
-
-/***/ }),
-
-/***/ 19:
-/*!**********************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/new_fruit/common/SDK/amap-wx.js ***!
-  \**********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function AMapWX(a) {this.key = a.key, this.requestConfig = { key: a.key, s: "rsx", platform: "WXJS", appname: a.key, sdkversion: "1.2.0", logversion: "2.0" };}AMapWX.prototype.getWxLocation = function (a, b) {wx.getLocation({ type: "gcj02", success: function success(a) {var c = a.longitude + "," + a.latitude;wx.setStorage({ key: "userLocation", data: c }), b(c);}, fail: function fail(c) {wx.getStorage({ key: "userLocation", success: function success(a) {a.data && b(a.data);} }), a.fail({ errCode: "0", errMsg: c.errMsg || "" });} });}, AMapWX.prototype.getRegeo = function (a) {function c(c) {var d = b.requestConfig;wx.request({ url: "https://restapi.amap.com/v3/geocode/regeo", data: { key: b.key, location: c, extensions: "all", s: d.s, platform: d.platform, appname: b.key, sdkversion: d.sdkversion, logversion: d.logversion }, method: "GET", header: { "content-type": "application/json" }, success: function success(b) {var d, e, f, g, h, i, j, k, l;b.data.status && "1" == b.data.status ? (d = b.data.regeocode, e = d.addressComponent, f = [], g = "", d && d.roads[0] && d.roads[0].name && (g = d.roads[0].name + "附近"), h = c.split(",")[0], i = c.split(",")[1], d.pois && d.pois[0] && (g = d.pois[0].name + "附近", j = d.pois[0].location, j && (h = parseFloat(j.split(",")[0]), i = parseFloat(j.split(",")[1]))), e.provice && f.push(e.provice), e.city && f.push(e.city), e.district && f.push(e.district), e.streetNumber && e.streetNumber.street && e.streetNumber.number ? (f.push(e.streetNumber.street), f.push(e.streetNumber.number)) : (k = "", d && d.roads[0] && d.roads[0].name && (k = d.roads[0].name), f.push(k)), f = f.join(""), l = [{ iconPath: a.iconPath, width: a.iconWidth, height: a.iconHeight, name: f, desc: g, longitude: h, latitude: i, id: 0, regeocodeData: d }], a.success(l)) : a.fail({ errCode: b.data.infocode, errMsg: b.data.info });}, fail: function fail(b) {a.fail({ errCode: "0", errMsg: b.errMsg || "" });} });}var b = this;a.location ? c(a.location) : b.getWxLocation(a, function (a) {c(a);});}, AMapWX.prototype.getWeather = function (a) {function d(d) {var e = "base";a.type && "forecast" == a.type && (e = "all"), wx.request({ url: "https://restapi.amap.com/v3/weather/weatherInfo", data: { key: b.key, city: d, extensions: e, s: c.s, platform: c.platform, appname: b.key, sdkversion: c.sdkversion, logversion: c.logversion }, method: "GET", header: { "content-type": "application/json" }, success: function success(b) {function c(a) {var b = { city: { text: "城市", data: a.city }, weather: { text: "天气", data: a.weather }, temperature: { text: "温度", data: a.temperature }, winddirection: { text: "风向", data: a.winddirection + "风" }, windpower: { text: "风力", data: a.windpower + "级" }, humidity: { text: "湿度", data: a.humidity + "%" } };return b;}var d, e;b.data.status && "1" == b.data.status ? b.data.lives ? (d = b.data.lives, d && d.length > 0 && (d = d[0], e = c(d), e["liveData"] = d, a.success(e))) : b.data.forecasts && b.data.forecasts[0] && a.success({ forecast: b.data.forecasts[0] }) : a.fail({ errCode: b.data.infocode, errMsg: b.data.info });}, fail: function fail(b) {a.fail({ errCode: "0", errMsg: b.errMsg || "" });} });}function e(e) {wx.request({ url: "https://restapi.amap.com/v3/geocode/regeo", data: { key: b.key, location: e, extensions: "all", s: c.s, platform: c.platform, appname: b.key, sdkversion: c.sdkversion, logversion: c.logversion }, method: "GET", header: { "content-type": "application/json" }, success: function success(b) {var c, e;b.data.status && "1" == b.data.status ? (e = b.data.regeocode, e.addressComponent ? c = e.addressComponent.adcode : e.aois && e.aois.length > 0 && (c = e.aois[0].adcode), d(c)) : a.fail({ errCode: b.data.infocode, errMsg: b.data.info });}, fail: function fail(b) {a.fail({ errCode: "0", errMsg: b.errMsg || "" });} });}var b = this,c = b.requestConfig;a.city ? d(a.city) : b.getWxLocation(a, function (a) {e(a);});}, AMapWX.prototype.getPoiAround = function (a) {function d(d) {var e = { key: b.key, location: d, s: c.s, platform: c.platform, appname: b.key, sdkversion: c.sdkversion, logversion: c.logversion };a.querytypes && (e["types"] = a.querytypes), a.querykeywords && (e["keywords"] = a.querykeywords), wx.request({ url: "https://restapi.amap.com/v3/place/around", data: e, method: "GET", header: { "content-type": "application/json" }, success: function success(b) {var c, d, e, f;if (b.data.status && "1" == b.data.status) {if (b = b.data, b && b.pois) {for (c = [], d = 0; d < b.pois.length; d++) {e = 0 == d ? a.iconPathSelected : a.iconPath, c.push({ latitude: parseFloat(b.pois[d].location.split(",")[1]), longitude: parseFloat(b.pois[d].location.split(",")[0]), iconPath: e, width: 22, height: 32, id: d, name: b.pois[d].name, address: b.pois[d].address });}f = { markers: c, poisData: b.pois }, a.success(f);}} else a.fail({ errCode: b.data.infocode, errMsg: b.data.info });}, fail: function fail(b) {a.fail({ errCode: "0", errMsg: b.errMsg || "" });} });}var b = this,c = b.requestConfig;a.location ? d(a.location) : b.getWxLocation(a, function (a) {d(a);});}, AMapWX.prototype.getStaticmap = function (a) {function f(b) {c.push("location=" + b), a.zoom && c.push("zoom=" + a.zoom), a.size && c.push("size=" + a.size), a.scale && c.push("scale=" + a.scale), a.markers && c.push("markers=" + a.markers), a.labels && c.push("labels=" + a.labels), a.paths && c.push("paths=" + a.paths), a.traffic && c.push("traffic=" + a.traffic);var e = d + c.join("&");a.success({ url: e });}var e,b = this,c = [],d = "https://restapi.amap.com/v3/staticmap?";c.push("key=" + b.key), e = b.requestConfig, c.push("s=" + e.s), c.push("platform=" + e.platform), c.push("appname=" + e.appname), c.push("sdkversion=" + e.sdkversion), c.push("logversion=" + e.logversion), a.location ? f(a.location) : b.getWxLocation(a, function (a) {f(a);});}, AMapWX.prototype.getInputtips = function (a) {var b = this,c = b.requestConfig,d = { key: b.key, s: c.s, platform: c.platform, appname: b.key, sdkversion: c.sdkversion, logversion: c.logversion };a.location && (d["location"] = a.location), a.keywords && (d["keywords"] = a.keywords), a.type && (d["type"] = a.type), a.city && (d["city"] = a.city), a.citylimit && (d["citylimit"] = a.citylimit), wx.request({ url: "https://restapi.amap.com/v3/assistant/inputtips", data: d, method: "GET", header: { "content-type": "application/json" }, success: function success(b) {b && b.data && b.data.tips && a.success({ tips: b.data.tips });}, fail: function fail(b) {a.fail({ errCode: "0", errMsg: b.errMsg || "" });} });}, AMapWX.prototype.getDrivingRoute = function (a) {var b = this,c = b.requestConfig,d = { key: b.key, s: c.s, platform: c.platform, appname: b.key, sdkversion: c.sdkversion, logversion: c.logversion };a.origin && (d["origin"] = a.origin), a.destination && (d["destination"] = a.destination), a.strategy && (d["strategy"] = a.strategy), a.waypoints && (d["waypoints"] = a.waypoints), a.avoidpolygons && (d["avoidpolygons"] = a.avoidpolygons), a.avoidroad && (d["avoidroad"] = a.avoidroad), wx.request({ url: "https://restapi.amap.com/v3/direction/driving", data: d, method: "GET", header: { "content-type": "application/json" }, success: function success(b) {b && b.data && b.data.route && a.success({ paths: b.data.route.paths, taxi_cost: b.data.route.taxi_cost || "" });}, fail: function fail(b) {a.fail({ errCode: "0", errMsg: b.errMsg || "" });} });}, AMapWX.prototype.getWalkingRoute = function (a) {var b = this,c = b.requestConfig,d = { key: b.key, s: c.s, platform: c.platform, appname: b.key, sdkversion: c.sdkversion, logversion: c.logversion };a.origin && (d["origin"] = a.origin), a.destination && (d["destination"] = a.destination), wx.request({ url: "https://restapi.amap.com/v3/direction/walking", data: d, method: "GET", header: { "content-type": "application/json" }, success: function success(b) {b && b.data && b.data.route && a.success({ paths: b.data.route.paths });}, fail: function fail(b) {a.fail({ errCode: "0", errMsg: b.errMsg || "" });} });}, AMapWX.prototype.getTransitRoute = function (a) {var b = this,c = b.requestConfig,d = { key: b.key, s: c.s, platform: c.platform, appname: b.key, sdkversion: c.sdkversion, logversion: c.logversion };a.origin && (d["origin"] = a.origin), a.destination && (d["destination"] = a.destination), a.strategy && (d["strategy"] = a.strategy), a.city && (d["city"] = a.city), a.cityd && (d["cityd"] = a.cityd), wx.request({ url: "https://restapi.amap.com/v3/direction/transit/integrated", data: d, method: "GET", header: { "content-type": "application/json" }, success: function success(b) {if (b && b.data && b.data.route) {var c = b.data.route;a.success({ distance: c.distance || "", taxi_cost: c.taxi_cost || "", transits: c.transits });}}, fail: function fail(b) {a.fail({ errCode: "0", errMsg: b.errMsg || "" });} });}, AMapWX.prototype.getRidingRoute = function (a) {var b = this,c = b.requestConfig,d = { key: b.key, s: c.s, platform: c.platform, appname: b.key, sdkversion: c.sdkversion, logversion: c.logversion };a.origin && (d["origin"] = a.origin), a.destination && (d["destination"] = a.destination), wx.request({ url: "https://restapi.amap.com/v4/direction/bicycling", data: d, method: "GET", header: { "content-type": "application/json" }, success: function success(b) {b && b.data && b.data.data && a.success({ paths: b.data.data.paths });}, fail: function fail(b) {a.fail({ errCode: "0", errMsg: b.errMsg || "" });} });}, module.exports.AMapWX = AMapWX;
 
 /***/ }),
 
@@ -9437,7 +9760,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_NAME":"fruit-test","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_NAME":"fruit-test","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -9458,14 +9781,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_NAME":"fruit-test","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_NAME":"fruit-test","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_NAME":"fruit-test","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_NAME":"fruit-test","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -9551,7 +9874,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_NAME":"fruit-test","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"fruit-test","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -9958,468 +10281,14 @@ internalMixin(Vue);
 
 /***/ }),
 
-/***/ 20:
-/*!***********************************************************!*\
-  !*** C:/Users/Administrator/Desktop/new_fruit/api/api.js ***!
-  \***********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.listing2 = exports.publicing2 = exports.publicing = exports.listing = void 0;
-
-
-
-var _errdata = __webpack_require__(/*! api/errdata.js */ 21); // 封装请求：get post
-// 引进提示
-
-
-
-// GET带token
-var listing = function listing(urling, shopdata) {
-  return new Promise(function (resolve, reject) {
-    var setdata = uni.getStorageSync('usermen'); //这个不能放外面，放外面的话，项目一运行的时候就执行了，没登入前就执行了，肯定拿不到token了
-    shopdata.token = setdata;
-    uni.request({
-      url: urling,
-      method: 'GET',
-      data: shopdata }).
-    then(function (res) {
-      resolve(res[1]);
-    }).
-    catch(function (err) {
-      var errs = '服务器错误 请稍后再试';
-      _errdata.errdata.errlist(errs);
-      reject(err);
-    });
-  });
-};
-
-
-// GET不带token
-exports.listing = listing;var listing2 = function listing2(urling, shopdata) {
-  return new Promise(function (resolve, reject) {
-    // shopdata.token = setdata
-    uni.request({
-      url: urling,
-      method: 'GET',
-      data: shopdata }).
-
-    then(function (res) {
-      resolve(res[1]);
-
-    }).
-    catch(function (err) {
-      var errs = '服务器错误 请稍后再试';
-      _errdata.errdata.errlist(errs);
-      reject(err);
-    });
-  });
-};
-
-// POST请求,后台默认键值对方式
-exports.listing2 = listing2;var publicing = function publicing(urling, shopdata) {
-  return new Promise(function (resolve, reject) {
-    uni.request({
-      url: urling,
-      method: 'POST',
-      data: shopdata,
-      header: {
-        'content-type': 'application/x-www-form-urlencoded' } }).
-
-
-    then(function (res) {
-      resolve(res[1]);
-    }).
-    catch(function (err) {
-      var errs = '服务器错误 请稍后再试';
-      _errdata.errdata.errlist(errs);
-      reject(err);
-    });
-  });
-};
-
-// POST,Json格式请求
-exports.publicing = publicing;var publicing2 = function publicing2(urling, shopdata) {
-  return new Promise(function (resolve, reject) {
-    uni.request({
-      url: urling,
-      method: 'POST',
-      data: shopdata
-      // header: {
-      //     'content-type': 'application/x-www-form-urlencoded'
-      //    },
-    }).
-
-    then(function (res) {
-      resolve(res[1]);
-    }).
-    catch(function (err) {
-      var errs = '服务器错误 请稍后再试';
-      _errdata.errdata.errlist(errs);
-      reject(err);
-    });
-  });
-};
-
-//公用方法
-exports.publicing2 = publicing2;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
-
-/***/ 21:
-/*!***************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/new_fruit/api/errdata.js ***!
-  \***************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.errdata = void 0; // 错误提示，反馈提示等。。。
-var errdata = {
-  errlist: function errlist(err) {
-    uni.showToast({
-      icon: 'none',
-      title: err,
-      duration: 3000 });
-
-  } };exports.errdata = errdata;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
-
 /***/ 22:
-/*!***************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/new_fruit/api/request.js ***!
-  \***************************************************************/
+/*!*********************************************************************!*\
+  !*** /Users/gsheng/Downloads/12-28/new_fruit/common/SDK/amap-wx.js ***!
+  \*********************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.uploadFiles = exports.orderHistory = exports.getPredictInfo = exports.getPredictList = exports.getAgreeInfo = exports.getAgreeList = exports.getMsgInfo = exports.getEvaluateList = exports.orderCount = exports.getBeConfirmed = exports.PostDataById = exports.postAfterCen = exports.posAfterDetails = exports.posAfterSaleList = exports.postCancelPay = exports.posAfterSale = exports.getAfterSaleData = exports.postConfirmOrder = exports.postDelOrders = exports.postCancelOrder = exports.getDetails = exports.postAgainOrder = exports.postSettle = exports.getMsg = exports.postCancelPraise = exports.getSubmitOrder = exports.postAddressList = exports.postupdateClient = exports.getClient = exports.getNewsAll = exports.postRecentlyDel = exports.getselectSuper = exports.getselectSeasonal = exports.getselectHot = exports.getselectImport = exports.getMyOrder = exports.postOrderPay = exports.getRecently = exports.postPraise = exports.postDelLike = exports.getLike = exports.postLike = exports.postUpOrder = exports.postDelOrder = exports.getCart = exports.postmyOrder = exports.postSaveStore = exports.getActivity = exports.wxloginurl = exports.imgurl = exports.postOrder = exports.url = exports.getAttribute = exports.getGoodsall = exports.postdelist = exports.getClassify = exports.postActivity = exports.getsearch = exports.loginis = exports.getIndex = void 0; // 公用地址
-
-
-//测试用
-// let url = 'https://meituan.thexxdd.cn/api/'
-// 登录测试用
-var wxloginurl = "".concat(url, "wxuser/wxlogin");
-// //本地商品
-// let url = 'http://192.168.1.10:8980/'
-// // 线上	
-// let url = 'https://cs.zgqgpt.com/'
-// let url = "http://testqg.natapp1.cc/"
-exports.wxloginurl = wxloginurl;var url = "https://qg.zgqgpt.com/";
-// let url = "http://192.168.1.50:8980/"
-
-// let url = 'http://dwh.natapp1.cc/js/'
-exports.url = url;var imgurl = 'http://192.168.1.10:8980';
-
-
-//测试
-// 首页
-exports.imgurl = imgurl;var getIndex = "".concat(url, "api/wx/index/getData");
-
-// 进口水果/金刚区
-exports.getIndex = getIndex;var getselectImport = "".concat(url, "api/wx/index/selectImport");
-
-
-// 热门水果/金刚区
-exports.getselectImport = getselectImport;var getselectHot = "".concat(url, "api/wx/index/hot");
-
-
-
-// 热门水果/金刚区
-exports.getselectHot = getselectHot;var getselectSeasonal = "".concat(url, "api/wx/index/seasonal");
-
-
-// 超值专区/金刚区
-exports.getselectSeasonal = getselectSeasonal;var getselectSuper = "".concat(url, "api/wx/index/selectSuper");
-
-
-//首页分类
-exports.getselectSuper = getselectSuper;var getClassify = "".concat(url, "api/wx/index/indexClassify");
-
-//首页资讯
-exports.getClassify = getClassify;var getMsg = "".concat(url, "api/wx/index/msgList");
-
-//资讯详情
-exports.getMsg = getMsg;var getMsgInfo = "".concat(url, "api/wx/index/getMsg");
-
-//商品详情页
-exports.getMsgInfo = getMsgInfo;var postdelist = "".concat(url, "api/wx/goods/getById");
-
-//订单详情
-exports.postdelist = postdelist;var orderHistory = "".concat(url, "api/wx/goods/getByIdHistory");
-
-//商品找水果
-exports.orderHistory = orderHistory;var getGoodsall = "".concat(url, "api/wx/goods/all");
-
-//品种种类
-exports.getGoodsall = getGoodsall;var getAttribute = "".concat(url, "api/wx/goods/selectAttribute");
-
-//鲜果上市所有水果
-exports.getAttribute = getAttribute;var getNewsAll = "".concat(url, "api/wx/goods/selectNewsAll");
-
-
-//排行榜
-exports.getNewsAll = getNewsAll;var postOrder = "".concat(url, "api/wx/goods/order");
-
-
-//限量区列表
-exports.postOrder = postOrder;var getActivity = "".concat(url, "api/wx/activity/select");
-
-
-//限量区时间
-exports.getActivity = getActivity;var postActivity = "".concat(url, "api/wx/activity/select");
-
-
-//登录
-exports.postActivity = postActivity;var loginis = "".concat(url, "api/wx/user/login");
-
-//找水果
-exports.loginis = loginis;var getsearch = "".concat(url, "api/wx/menu/select");
-
-
-//获取申请店铺信息
-exports.getsearch = getsearch;var getClient = "".concat(url, "api/wx/merchants/getClient");
-
-
-//更新店铺信息
-exports.getClient = getClient;var postupdateClient = "".concat(url, "api/wx/merchants/updateClient");
-
-//保存店铺
-exports.postupdateClient = postupdateClient;var postSaveStore = "".concat(url, "api/wx/merchants/saveStore");
-
-
-//添加进货单
-exports.postSaveStore = postSaveStore;var postmyOrder = "".concat(url, "api/wx/cart/save");
-
-
-//进货单列表
-exports.postmyOrder = postmyOrder;var getCart = "".concat(url, "api/wx/cart/select");
-
-
-//订单详情
-exports.getCart = getCart;var getDetails = "".concat(url, "api/wx/order/getDetails");
-
-//删除进货单
-exports.getDetails = getDetails;var postDelOrder = "".concat(url, "api/wx/cart/del");
-
-//删除最近看过
-exports.postDelOrder = postDelOrder;var postRecentlyDel = "".concat(url, "api/wx/goods/delRecently");
-
-//更新进货单
-exports.postRecentlyDel = postRecentlyDel;var postUpOrder = "".concat(url, "api/wx/cart/update");
-
-//再次购买
-exports.postUpOrder = postUpOrder;var postAgainOrder = "".concat(url, "api/wx/order/againOrder");
-
-
-//结算清单
-exports.postAgainOrder = postAgainOrder;var postDetailed = "".concat(url, "api/wx/order/detailed");
-
-//文件上传
-var uploading = "".concat(url, "api/wx/file/uploading");
-
-//收藏商品
-var postLike = "".concat(url, "api/wx/collection/save");
-
-//收藏列表
-exports.postLike = postLike;var getLike = "".concat(url, "api/wx/collection/my");
-
-//收藏列表
-exports.getLike = getLike;var postDelLike = "".concat(url, "api/wx/collection/del");
-
-//点赞
-exports.postDelLike = postDelLike;var postPraise = "".concat(url, "api/wx/goods/savePraise");
-
-//取消点赞
-exports.postPraise = postPraise;var postCancelPraise = "".concat(url, "api/wx/goods/cancelPraise");
-
-//最近看过
-exports.postCancelPraise = postCancelPraise;var getRecently = "".concat(url, "api/wx/goods/recently");
-
-//结算
-exports.getRecently = getRecently;var postSettle = "".concat(url, "api/wx/order/settle");
-
-//提交订单/获得订单号才能支付
-exports.postSettle = postSettle;var getSubmitOrder = "".concat(url, "api/wx/order/submitOrder");
-
-
-//我的订单
-exports.getSubmitOrder = getSubmitOrder;var getMyOrder = "".concat(url, "api/wx/order/myOrder");
-
-//取消订单
-exports.getMyOrder = getMyOrder;var postCancelOrder = "".concat(url, "api/wx/order/cancelOrder");
-
-//取消支付
-exports.postCancelOrder = postCancelOrder;var postCancelPay = "".concat(url, "api/wx/order/cancelPay");
-
-
-//确认收货
-exports.postCancelPay = postCancelPay;var postConfirmOrder = "".concat(url, "api/wx/order/confirmOrder");
-
-//删除订单
-exports.postConfirmOrder = postConfirmOrder;var postDelOrders = "".concat(url, "api/wx/order/del");
-
-//支付订单
-exports.postDelOrders = postDelOrders;var postOrderPay = "".concat(url, "api/wx/order/orderPay");
-
-//获取选择地址数据
-exports.postOrderPay = postOrderPay;var postAddressList = "".concat(url, "api/wx/area/treeDatClinet");
-
-//提交售后
-exports.postAddressList = postAddressList;var posAfterSale = "".concat(url, "api/wx/wxOrderItemAfterSale/save");
-
-//售后列表
-exports.posAfterSale = posAfterSale;var posAfterSaleList = "".concat(url, "api/wx/wxOrderItemAfterSale/list");
-
-//售后详情
-exports.posAfterSaleList = posAfterSaleList;var posAfterDetails = "".concat(url, "api/wx/wxOrderItemAfterSale/details");
-
-//取消申请售后
-exports.posAfterDetails = posAfterDetails;var postAfterCen = "".concat(url, "api/wx/wxOrderItemAfterSale/cancelAfter");
-
-//确认售后
-exports.postAfterCen = postAfterCen;var PostDataById = "".concat(url, "api/wx/wxOrderItemAfterSale/confirm");
-
-//待确认售后
-exports.PostDataById = PostDataById;var getBeConfirmed = "".concat(url, "api/wx/wxOrderItemAfterSale/toBeConfirmed");
-
-//售后下拉数据
-exports.getBeConfirmed = getBeConfirmed;var getAfterSaleData = "".concat(url, "api/wx/afterSale/getAfterSaleData");
-
-// //取消申请
-// let postAfterCen = `${url}api/wx/wxOrderItemAfterSale/cancelAfter`
-
-// 订单统计
-exports.getAfterSaleData = getAfterSaleData;var orderCount = "".concat(url, "api/wx/goods/totalGoods");
-
-// 评价管理
-exports.orderCount = orderCount;var getEvaluateList = "".concat(url, "api/wx/evaluate/list");
-
-//获取协议列表
-exports.getEvaluateList = getEvaluateList;var getAgreeList = "".concat(url, "api/wx/ruleExplain/select");
-
-//获取协议详情
-exports.getAgreeList = getAgreeList;var getAgreeInfo = "".concat(url, "api/wx/ruleExplain/get");
-
-
-
-//获取上市预告列表
-exports.getAgreeInfo = getAgreeInfo;var getPredictList = "".concat(url, "api/wx/prediction/list");
-
-//获取上市预告的详情
-exports.getPredictList = getPredictList;var getPredictInfo = "".concat(url, "api/wx/prediction/getDetails");
-
-//导出请求地址
-exports.getPredictInfo = getPredictInfo;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// 导出文件上传
-var uploadFiles = function uploadFiles(callback) {
-  uni.chooseImage({
-    count: 1,
-    success: function success(chooseImageRes) {
-      uni.showLoading({
-        title: '上传中...' });
-
-      var tempFilePaths = chooseImageRes.tempFilePaths;
-      var uploadTask = uni.uploadFile({
-        url: uploading, //上传地址api
-        filePath: tempFilePaths[0],
-        fileType: 'image',
-        name: 'file',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'multipart/form-data' },
-
-        formData: {
-          'method': 'images.upload',
-          'upfile': tempFilePaths[0] },
-
-        success: function success(uploadFileRes) {
-          callback(JSON.parse(uploadFileRes.data));
-        },
-        fail: function fail(error) {
-          if (error && error.response) {
-            showError(error.response);
-          }
-        },
-        complete: function complete() {
-          setTimeout(function () {
-            uni.hideLoading();
-          }, 250);
-        } });
-
-    } });
-
-};exports.uploadFiles = uploadFiles;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+function AMapWX(a) {this.key = a.key, this.requestConfig = { key: a.key, s: "rsx", platform: "WXJS", appname: a.key, sdkversion: "1.2.0", logversion: "2.0" };}AMapWX.prototype.getWxLocation = function (a, b) {wx.getLocation({ type: "gcj02", success: function success(a) {var c = a.longitude + "," + a.latitude;wx.setStorage({ key: "userLocation", data: c }), b(c);}, fail: function fail(c) {wx.getStorage({ key: "userLocation", success: function success(a) {a.data && b(a.data);} }), a.fail({ errCode: "0", errMsg: c.errMsg || "" });} });}, AMapWX.prototype.getRegeo = function (a) {function c(c) {var d = b.requestConfig;wx.request({ url: "https://restapi.amap.com/v3/geocode/regeo", data: { key: b.key, location: c, extensions: "all", s: d.s, platform: d.platform, appname: b.key, sdkversion: d.sdkversion, logversion: d.logversion }, method: "GET", header: { "content-type": "application/json" }, success: function success(b) {var d, e, f, g, h, i, j, k, l;b.data.status && "1" == b.data.status ? (d = b.data.regeocode, e = d.addressComponent, f = [], g = "", d && d.roads[0] && d.roads[0].name && (g = d.roads[0].name + "附近"), h = c.split(",")[0], i = c.split(",")[1], d.pois && d.pois[0] && (g = d.pois[0].name + "附近", j = d.pois[0].location, j && (h = parseFloat(j.split(",")[0]), i = parseFloat(j.split(",")[1]))), e.provice && f.push(e.provice), e.city && f.push(e.city), e.district && f.push(e.district), e.streetNumber && e.streetNumber.street && e.streetNumber.number ? (f.push(e.streetNumber.street), f.push(e.streetNumber.number)) : (k = "", d && d.roads[0] && d.roads[0].name && (k = d.roads[0].name), f.push(k)), f = f.join(""), l = [{ iconPath: a.iconPath, width: a.iconWidth, height: a.iconHeight, name: f, desc: g, longitude: h, latitude: i, id: 0, regeocodeData: d }], a.success(l)) : a.fail({ errCode: b.data.infocode, errMsg: b.data.info });}, fail: function fail(b) {a.fail({ errCode: "0", errMsg: b.errMsg || "" });} });}var b = this;a.location ? c(a.location) : b.getWxLocation(a, function (a) {c(a);});}, AMapWX.prototype.getWeather = function (a) {function d(d) {var e = "base";a.type && "forecast" == a.type && (e = "all"), wx.request({ url: "https://restapi.amap.com/v3/weather/weatherInfo", data: { key: b.key, city: d, extensions: e, s: c.s, platform: c.platform, appname: b.key, sdkversion: c.sdkversion, logversion: c.logversion }, method: "GET", header: { "content-type": "application/json" }, success: function success(b) {function c(a) {var b = { city: { text: "城市", data: a.city }, weather: { text: "天气", data: a.weather }, temperature: { text: "温度", data: a.temperature }, winddirection: { text: "风向", data: a.winddirection + "风" }, windpower: { text: "风力", data: a.windpower + "级" }, humidity: { text: "湿度", data: a.humidity + "%" } };return b;}var d, e;b.data.status && "1" == b.data.status ? b.data.lives ? (d = b.data.lives, d && d.length > 0 && (d = d[0], e = c(d), e["liveData"] = d, a.success(e))) : b.data.forecasts && b.data.forecasts[0] && a.success({ forecast: b.data.forecasts[0] }) : a.fail({ errCode: b.data.infocode, errMsg: b.data.info });}, fail: function fail(b) {a.fail({ errCode: "0", errMsg: b.errMsg || "" });} });}function e(e) {wx.request({ url: "https://restapi.amap.com/v3/geocode/regeo", data: { key: b.key, location: e, extensions: "all", s: c.s, platform: c.platform, appname: b.key, sdkversion: c.sdkversion, logversion: c.logversion }, method: "GET", header: { "content-type": "application/json" }, success: function success(b) {var c, e;b.data.status && "1" == b.data.status ? (e = b.data.regeocode, e.addressComponent ? c = e.addressComponent.adcode : e.aois && e.aois.length > 0 && (c = e.aois[0].adcode), d(c)) : a.fail({ errCode: b.data.infocode, errMsg: b.data.info });}, fail: function fail(b) {a.fail({ errCode: "0", errMsg: b.errMsg || "" });} });}var b = this,c = b.requestConfig;a.city ? d(a.city) : b.getWxLocation(a, function (a) {e(a);});}, AMapWX.prototype.getPoiAround = function (a) {function d(d) {var e = { key: b.key, location: d, s: c.s, platform: c.platform, appname: b.key, sdkversion: c.sdkversion, logversion: c.logversion };a.querytypes && (e["types"] = a.querytypes), a.querykeywords && (e["keywords"] = a.querykeywords), wx.request({ url: "https://restapi.amap.com/v3/place/around", data: e, method: "GET", header: { "content-type": "application/json" }, success: function success(b) {var c, d, e, f;if (b.data.status && "1" == b.data.status) {if (b = b.data, b && b.pois) {for (c = [], d = 0; d < b.pois.length; d++) {e = 0 == d ? a.iconPathSelected : a.iconPath, c.push({ latitude: parseFloat(b.pois[d].location.split(",")[1]), longitude: parseFloat(b.pois[d].location.split(",")[0]), iconPath: e, width: 22, height: 32, id: d, name: b.pois[d].name, address: b.pois[d].address });}f = { markers: c, poisData: b.pois }, a.success(f);}} else a.fail({ errCode: b.data.infocode, errMsg: b.data.info });}, fail: function fail(b) {a.fail({ errCode: "0", errMsg: b.errMsg || "" });} });}var b = this,c = b.requestConfig;a.location ? d(a.location) : b.getWxLocation(a, function (a) {d(a);});}, AMapWX.prototype.getStaticmap = function (a) {function f(b) {c.push("location=" + b), a.zoom && c.push("zoom=" + a.zoom), a.size && c.push("size=" + a.size), a.scale && c.push("scale=" + a.scale), a.markers && c.push("markers=" + a.markers), a.labels && c.push("labels=" + a.labels), a.paths && c.push("paths=" + a.paths), a.traffic && c.push("traffic=" + a.traffic);var e = d + c.join("&");a.success({ url: e });}var e,b = this,c = [],d = "https://restapi.amap.com/v3/staticmap?";c.push("key=" + b.key), e = b.requestConfig, c.push("s=" + e.s), c.push("platform=" + e.platform), c.push("appname=" + e.appname), c.push("sdkversion=" + e.sdkversion), c.push("logversion=" + e.logversion), a.location ? f(a.location) : b.getWxLocation(a, function (a) {f(a);});}, AMapWX.prototype.getInputtips = function (a) {var b = this,c = b.requestConfig,d = { key: b.key, s: c.s, platform: c.platform, appname: b.key, sdkversion: c.sdkversion, logversion: c.logversion };a.location && (d["location"] = a.location), a.keywords && (d["keywords"] = a.keywords), a.type && (d["type"] = a.type), a.city && (d["city"] = a.city), a.citylimit && (d["citylimit"] = a.citylimit), wx.request({ url: "https://restapi.amap.com/v3/assistant/inputtips", data: d, method: "GET", header: { "content-type": "application/json" }, success: function success(b) {b && b.data && b.data.tips && a.success({ tips: b.data.tips });}, fail: function fail(b) {a.fail({ errCode: "0", errMsg: b.errMsg || "" });} });}, AMapWX.prototype.getDrivingRoute = function (a) {var b = this,c = b.requestConfig,d = { key: b.key, s: c.s, platform: c.platform, appname: b.key, sdkversion: c.sdkversion, logversion: c.logversion };a.origin && (d["origin"] = a.origin), a.destination && (d["destination"] = a.destination), a.strategy && (d["strategy"] = a.strategy), a.waypoints && (d["waypoints"] = a.waypoints), a.avoidpolygons && (d["avoidpolygons"] = a.avoidpolygons), a.avoidroad && (d["avoidroad"] = a.avoidroad), wx.request({ url: "https://restapi.amap.com/v3/direction/driving", data: d, method: "GET", header: { "content-type": "application/json" }, success: function success(b) {b && b.data && b.data.route && a.success({ paths: b.data.route.paths, taxi_cost: b.data.route.taxi_cost || "" });}, fail: function fail(b) {a.fail({ errCode: "0", errMsg: b.errMsg || "" });} });}, AMapWX.prototype.getWalkingRoute = function (a) {var b = this,c = b.requestConfig,d = { key: b.key, s: c.s, platform: c.platform, appname: b.key, sdkversion: c.sdkversion, logversion: c.logversion };a.origin && (d["origin"] = a.origin), a.destination && (d["destination"] = a.destination), wx.request({ url: "https://restapi.amap.com/v3/direction/walking", data: d, method: "GET", header: { "content-type": "application/json" }, success: function success(b) {b && b.data && b.data.route && a.success({ paths: b.data.route.paths });}, fail: function fail(b) {a.fail({ errCode: "0", errMsg: b.errMsg || "" });} });}, AMapWX.prototype.getTransitRoute = function (a) {var b = this,c = b.requestConfig,d = { key: b.key, s: c.s, platform: c.platform, appname: b.key, sdkversion: c.sdkversion, logversion: c.logversion };a.origin && (d["origin"] = a.origin), a.destination && (d["destination"] = a.destination), a.strategy && (d["strategy"] = a.strategy), a.city && (d["city"] = a.city), a.cityd && (d["cityd"] = a.cityd), wx.request({ url: "https://restapi.amap.com/v3/direction/transit/integrated", data: d, method: "GET", header: { "content-type": "application/json" }, success: function success(b) {if (b && b.data && b.data.route) {var c = b.data.route;a.success({ distance: c.distance || "", taxi_cost: c.taxi_cost || "", transits: c.transits });}}, fail: function fail(b) {a.fail({ errCode: "0", errMsg: b.errMsg || "" });} });}, AMapWX.prototype.getRidingRoute = function (a) {var b = this,c = b.requestConfig,d = { key: b.key, s: c.s, platform: c.platform, appname: b.key, sdkversion: c.sdkversion, logversion: c.logversion };a.origin && (d["origin"] = a.origin), a.destination && (d["destination"] = a.destination), wx.request({ url: "https://restapi.amap.com/v4/direction/bicycling", data: d, method: "GET", header: { "content-type": "application/json" }, success: function success(b) {b && b.data && b.data.data && a.success({ paths: b.data.data.paths });}, fail: function fail(b) {a.fail({ errCode: "0", errMsg: b.errMsg || "" });} });}, module.exports.AMapWX = AMapWX;
 
 /***/ }),
 
@@ -10455,9 +10324,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 4:
-/*!***********************************************************!*\
-  !*** C:/Users/Administrator/Desktop/new_fruit/pages.json ***!
-  \***********************************************************/
+/*!**********************************************************!*\
+  !*** /Users/gsheng/Downloads/12-28/new_fruit/pages.json ***!
+  \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -10466,9 +10335,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 548:
-/*!*******************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/new_fruit/components/jyf-parser/libs/MpHtmlParser.js ***!
-  \*******************************************************************************************/
+/*!******************************************************************************************!*\
+  !*** /Users/gsheng/Downloads/12-28/new_fruit/components/jyf-parser/libs/MpHtmlParser.js ***!
+  \******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11012,9 +10881,9 @@ module.exports = MpHtmlParser;
 /***/ }),
 
 /***/ 549:
-/*!*************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/new_fruit/components/jyf-parser/libs/config.js ***!
-  \*************************************************************************************/
+/*!************************************************************************************!*\
+  !*** /Users/gsheng/Downloads/12-28/new_fruit/components/jyf-parser/libs/config.js ***!
+  \************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -11102,9 +10971,9 @@ module.exports = cfg;
 /***/ }),
 
 /***/ 55:
-/*!***************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/new_fruit/login/login.js ***!
-  \***************************************************************/
+/*!**************************************************************!*\
+  !*** /Users/gsheng/Downloads/12-28/new_fruit/login/login.js ***!
+  \**************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11112,9 +10981,9 @@ module.exports = cfg;
 /* WEBPACK VAR INJECTION */(function(uni) {var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 56));
 
 
-var _api = __webpack_require__(/*! ../api/api.js */ 20);
+var _api = __webpack_require__(/*! ../api/api.js */ 8);
 
-var _request = __webpack_require__(/*! ../api/request.js */ 22);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}var _console =
+var _request = __webpack_require__(/*! ../api/request.js */ 10);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}var _console =
 console,log = _console.log;var
 
 logins = /*#__PURE__*/function () {
@@ -11193,9 +11062,9 @@ module.exports = logins;
 /***/ }),
 
 /***/ 550:
-/*!*****************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/new_fruit/components/jyf-parser/libs/CssHandler.js ***!
-  \*****************************************************************************************/
+/*!****************************************************************************************!*\
+  !*** /Users/gsheng/Downloads/12-28/new_fruit/components/jyf-parser/libs/CssHandler.js ***!
+  \****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12090,10 +11959,120 @@ if (hadRuntime) {
 
 /***/ }),
 
+/***/ 8:
+/*!**********************************************************!*\
+  !*** /Users/gsheng/Downloads/12-28/new_fruit/api/api.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.listing2 = exports.publicing2 = exports.publicing = exports.listing = void 0;
+
+
+
+var _errdata = __webpack_require__(/*! api/errdata.js */ 9); // 封装请求：get post
+// 引进提示
+
+
+
+// GET带token
+var listing = function listing(urling, shopdata) {
+  return new Promise(function (resolve, reject) {
+    var setdata = uni.getStorageSync('usermen'); //这个不能放外面，放外面的话，项目一运行的时候就执行了，没登入前就执行了，肯定拿不到token了
+    shopdata.token = setdata;
+    uni.request({
+      url: urling,
+      method: 'GET',
+      data: shopdata }).
+    then(function (res) {
+      resolve(res[1]);
+    }).
+    catch(function (err) {
+      var errs = '服务器错误 请稍后再试';
+      _errdata.errdata.errlist(errs);
+      reject(err);
+    });
+  });
+};
+
+
+// GET不带token
+exports.listing = listing;var listing2 = function listing2(urling, shopdata) {
+  return new Promise(function (resolve, reject) {
+    // shopdata.token = setdata
+    uni.request({
+      url: urling,
+      method: 'GET',
+      data: shopdata }).
+
+    then(function (res) {
+      resolve(res[1]);
+
+    }).
+    catch(function (err) {
+      var errs = '服务器错误 请稍后再试';
+      _errdata.errdata.errlist(errs);
+      reject(err);
+    });
+  });
+};
+
+// POST请求,后台默认键值对方式
+exports.listing2 = listing2;var publicing = function publicing(urling, shopdata) {
+  return new Promise(function (resolve, reject) {
+    uni.request({
+      url: urling,
+      method: 'POST',
+      data: shopdata,
+      header: {
+        'content-type': 'application/x-www-form-urlencoded' } }).
+
+
+    then(function (res) {
+      resolve(res[1]);
+    }).
+    catch(function (err) {
+      var errs = '服务器错误 请稍后再试';
+      _errdata.errdata.errlist(errs);
+      reject(err);
+    });
+  });
+};
+
+// POST,Json格式请求
+exports.publicing = publicing;var publicing2 = function publicing2(urling, shopdata) {
+  return new Promise(function (resolve, reject) {
+    uni.request({
+      url: urling,
+      method: 'POST',
+      data: shopdata
+      // header: {
+      //     'content-type': 'application/x-www-form-urlencoded'
+      //    },
+    }).
+
+    then(function (res) {
+      resolve(res[1]);
+    }).
+    catch(function (err) {
+      var errs = '服务器错误 请稍后再试';
+      _errdata.errdata.errlist(errs);
+      reject(err);
+    });
+  });
+};
+
+//公用方法
+exports.publicing2 = publicing2;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
 /***/ 83:
-/*!**************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/new_fruit/common/tui-clipboard/tui-clipboard.js ***!
-  \**************************************************************************************/
+/*!*************************************************************************************!*\
+  !*** /Users/gsheng/Downloads/12-28/new_fruit/common/tui-clipboard/tui-clipboard.js ***!
+  \*************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12149,6 +12128,27 @@ var thorui = {
 
 module.exports = {
   getClipboardData: thorui.getClipboardData };
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 9:
+/*!**************************************************************!*\
+  !*** /Users/gsheng/Downloads/12-28/new_fruit/api/errdata.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.errdata = void 0; // 错误提示，反馈提示等。。。
+var errdata = {
+  errlist: function errlist(err) {
+    uni.showToast({
+      icon: 'none',
+      title: err,
+      duration: 3000 });
+
+  } };exports.errdata = errdata;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ })
