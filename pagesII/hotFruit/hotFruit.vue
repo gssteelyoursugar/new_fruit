@@ -14,7 +14,7 @@
 		<!--banner-->
 		<view class="tui-banner-swiper">
 			<!-- <image src="../../static/images/hot_fruit.png" class="tui-my-bg" mode="widthFix"></image> -->
-			<image src="../../static/images/hot_fruit.png" class="tui-my-bg" mode="widthFix"></image>
+			<image src="https://qg-qr.oss-cn-shenzhen.aliyuncs.com/test/1609921697224.png?Expires=1925281696&OSSAccessKeyId=LTAI4G74cnhsbDWNkfvuNew3&Signature=%2FC8P%2FGNmM%2BKtktfNVe01KsE7mbE%3D " class="tui-my-bg" mode="widthFix"></image>
 		</view>
 		<!-- <view class="tui-cent-box">
 			
@@ -103,6 +103,9 @@
 			};
 		},
 		onLoad: function(options) {
+			uni.setNavigationBarTitle({
+				title: options.title
+			})
 			this.getMerchants()
 			this.title = options.title
 			this.getImportData()

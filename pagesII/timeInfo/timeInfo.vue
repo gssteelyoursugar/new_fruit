@@ -42,9 +42,19 @@
 		
 		onShareAppMessage(e){
 			console.log(e)
+			if (this.title !== '') {
+				return {
+					title: this.title,
+				}
+			}
 		},
 		onShareTimeline(res){
 			console.log(res)
+			if (this.title !== '') {
+				return {
+					title: this.title,
+				}
+			}
 		},
 		
 		methods: {

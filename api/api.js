@@ -39,7 +39,6 @@ let listing2 = function(urling, shopdata) {
 			})
 			.then((res) => {
 				resolve(res[1])
-
 			})
 			.catch((err) => {
 				let errs = '服务器错误 请稍后再试'

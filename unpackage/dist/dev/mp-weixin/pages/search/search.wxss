@@ -163,13 +163,14 @@
 
 
 
+
+
 /*tabbar*/
 .tui-header {
 	width: 100%;
 	height: 100rpx;
 	padding: 0 30rpx;
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 	background-color: #fff;
 	display: -webkit-box;
 	display: -webkit-flex;
@@ -222,11 +223,9 @@
 .tui-rolling-search {
 	width: 100%;
 	height: 80rpx;
-	-webkit-border-radius: 100rpx;
-	        border-radius: 100rpx;
+	border-radius: 100rpx;
 	padding: 0 40rpx 0 30rpx;
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 	background-color: #fff;
 	display: -webkit-box;
 	display: -webkit-flex;
@@ -237,8 +236,7 @@
 	-webkit-flex-wrap: nowrap;
 	        flex-wrap: nowrap;
 	color: #999;
-	-webkit-box-shadow: 0 4rpx 8rpx 0rpx rgba(0, 0, 0, .1);
-	        box-shadow: 0 4rpx 8rpx 0rpx rgba(0, 0, 0, .1);
+	box-shadow: 0 4rpx 8rpx 0rpx rgba(0, 0, 0, .1);
 	border: 1px solid #F5F5F5;
 }
 .tui-hot-item {
@@ -268,8 +266,7 @@
 	width: 100%;
 	height: 60rpx;
 	background: #f1f1f1;
-	-webkit-border-radius: 30rpx;
-	        border-radius: 30rpx;
+	border-radius: 30rpx;
 	font-size: 26rpx;
 	color: #999;
 	display: -webkit-box;
@@ -289,12 +286,10 @@
 .class-item {
 	background: #fff;
 	width: 100%;
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 	padding: 0 20rpx 20rpx 0;
 	margin-bottom: 20rpx;
-	-webkit-border-radius: 12rpx;
-	        border-radius: 12rpx;
+	border-radius: 12rpx;
 	margin-left: 15rpx;
 }
 .class-name {

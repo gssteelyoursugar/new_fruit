@@ -36,7 +36,8 @@
         "editStore/editStore",
         "updataStore/updataStore",
         "msg/msg",
-        "prediction/prediction"
+        "prediction/prediction",
+        "testShare/testShare"
       ]
     },
     {

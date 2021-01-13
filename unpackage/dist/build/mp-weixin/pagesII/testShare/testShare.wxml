@@ -1,0 +1,1 @@
+<block wx:if="{{!canShow}}"><view><canvas style="{{'background-color:rgba(0,197,42,.2);'+('width:'+(canvasW/2+'px')+';')+('height:'+(canvasH/2+'px')+';')}}" canvas-id="sharePost" data-event-opts="{{[['tap',[['clickCanvas',['$event']]]]]}}" bindtap="__e"></canvas></view></block>

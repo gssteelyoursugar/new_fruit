@@ -192,7 +192,10 @@
 				uni.stopPullDownRefresh();
 			}, 1000);
 		},
-		onLoad() {
+		onLoad(options) {
+			uni.setNavigationBarTitle({
+				title: options.title
+			})
 			this.getMerchants()
 			const res = uni.getSystemInfoSync();
 			let {

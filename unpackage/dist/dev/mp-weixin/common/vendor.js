@@ -8,7 +8,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.createApp = createApp;exports.createComponent = createComponent;exports.createPage = createPage;exports.default = void 0;var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _iterableToArrayLimit(arr, i) {if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}
+Object.defineProperty(exports, "__esModule", { value: true });exports.createApp = createApp;exports.createComponent = createComponent;exports.createPage = createPage;exports.default = void 0;var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _iterableToArrayLimit(arr, i) {if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}
 
 var _toString = Object.prototype.toString;
 var hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -363,112 +363,7 @@ var baseApi = /*#__PURE__*/Object.freeze({
   upx2px: upx2px,
   addInterceptor: addInterceptor,
   removeInterceptor: removeInterceptor,
-  interceptors: interceptors });var
-
-
-EventChannel = /*#__PURE__*/function () {
-  function EventChannel(id, events) {var _this = this;_classCallCheck(this, EventChannel);
-    this.id = id;
-    this.listener = {};
-    this.emitCache = {};
-    if (events) {
-      Object.keys(events).forEach(function (name) {
-        _this.on(name, events[name]);
-      });
-    }
-  }_createClass(EventChannel, [{ key: "emit", value: function emit(
-
-    eventName) {for (var _len3 = arguments.length, args = new Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {args[_key3 - 1] = arguments[_key3];}
-      var fns = this.listener[eventName];
-      if (!fns) {
-        return (this.emitCache[eventName] || (this.emitCache[eventName] = [])).push(args);
-      }
-      fns.forEach(function (opt) {
-        opt.fn.apply(opt.fn, args);
-      });
-      this.listener[eventName] = fns.filter(function (opt) {return opt.type !== 'once';});
-    } }, { key: "on", value: function on(
-
-    eventName, fn) {
-      this._addListener(eventName, 'on', fn);
-      this._clearCache(eventName);
-    } }, { key: "once", value: function once(
-
-    eventName, fn) {
-      this._addListener(eventName, 'once', fn);
-      this._clearCache(eventName);
-    } }, { key: "off", value: function off(
-
-    eventName, fn) {
-      var fns = this.listener[eventName];
-      if (!fns) {
-        return;
-      }
-      if (fn) {
-        for (var i = 0; i < fns.length;) {
-          if (fns[i].fn === fn) {
-            fns.splice(i, 1);
-            i--;
-          }
-          i++;
-        }
-      } else {
-        delete this.listener[eventName];
-      }
-    } }, { key: "_clearCache", value: function _clearCache(
-
-    eventName) {
-      var cacheArgs = this.emitCache[eventName];
-      if (cacheArgs) {
-        for (; cacheArgs.length > 0;) {
-          this.emit.apply(this, [eventName].concat(cacheArgs.shift()));
-        }
-      }
-    } }, { key: "_addListener", value: function _addListener(
-
-    eventName, type, fn) {
-      (this.listener[eventName] || (this.listener[eventName] = [])).push({
-        fn: fn,
-        type: type });
-
-    } }]);return EventChannel;}();
-
-
-var eventChannels = {};
-
-var eventChannelStack = [];
-
-var id = 0;
-
-function initEventChannel(events) {var cache = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-  id++;
-  var eventChannel = new EventChannel(id, events);
-  if (cache) {
-    eventChannels[id] = eventChannel;
-    eventChannelStack.push(eventChannel);
-  }
-  return eventChannel;
-}
-
-function getEventChannel(id) {
-  if (id) {
-    var eventChannel = eventChannels[id];
-    delete eventChannels[id];
-    return eventChannel;
-  }
-  return eventChannelStack.shift();
-}
-
-var navigateTo = {
-  args: function args(fromArgs, toArgs) {
-    var id = initEventChannel(fromArgs.events).id;
-    if (fromArgs.url) {
-      fromArgs.url = fromArgs.url + (fromArgs.url.indexOf('?') === -1 ? '?' : '&') + '__id__=' + id;
-    }
-  },
-  returnValue: function returnValue(fromRes, toRes) {
-    fromRes.eventChannel = getEventChannel();
-  } };
+  interceptors: interceptors });
 
 
 function findExistsPageIndex(url) {
@@ -537,6 +432,8 @@ var previewImage = {
   } };
 
 
+// import navigateTo from 'uni-helpers/navigate-to'
+
 function addSafeAreaInsets(result) {
   if (result.safeArea) {
     var safeArea = result.safeArea;
@@ -550,7 +447,7 @@ function addSafeAreaInsets(result) {
 }
 var protocols = {
   redirectTo: redirectTo,
-  navigateTo: navigateTo,
+  // navigateTo,  // 由于在微信开发者工具的页面参数，会显示__id__参数，因此暂时关闭mp-weixin对于navigateTo的AOP
   previewImage: previewImage,
   getSystemInfo: {
     returnValue: addSafeAreaInsets },
@@ -771,7 +668,7 @@ function initTriggerEvent(mpInstance) {
     }
   }
   var oldTriggerEvent = mpInstance.triggerEvent;
-  mpInstance.triggerEvent = function (event) {for (var _len4 = arguments.length, args = new Array(_len4 > 1 ? _len4 - 1 : 0), _key4 = 1; _key4 < _len4; _key4++) {args[_key4 - 1] = arguments[_key4];}
+  mpInstance.triggerEvent = function (event) {for (var _len3 = arguments.length, args = new Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {args[_key3 - 1] = arguments[_key3];}
     return oldTriggerEvent.apply(mpInstance, [customize(event)].concat(args));
   };
 }
@@ -784,7 +681,7 @@ function initHook(name, options) {
     };
   } else {
     options[name] = function () {
-      initTriggerEvent(this);for (var _len5 = arguments.length, args = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {args[_key5] = arguments[_key5];}
+      initTriggerEvent(this);for (var _len4 = arguments.length, args = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {args[_key4] = arguments[_key4];}
       return oldHook.apply(this, args);
     };
   }
@@ -1252,7 +1149,7 @@ function getContextVm(vm) {
   return $parent && $parent.$parent;
 }
 
-function handleEvent(event) {var _this2 = this;
+function handleEvent(event) {var _this = this;
   event = wrapper$1(event);
 
   // [['tap',[['handle',[1,2,a]],['handle1',[1,2,a]]]]]
@@ -1283,14 +1180,14 @@ function handleEvent(event) {var _this2 = this;
       eventsArray.forEach(function (eventArray) {
         var methodName = eventArray[0];
         if (methodName) {
-          var handlerCtx = _this2.$vm;
+          var handlerCtx = _this.$vm;
           if (handlerCtx.$options.generic) {// mp-weixin,mp-toutiao 抽象节点模拟 scoped slots
             handlerCtx = getContextVm(handlerCtx) || handlerCtx;
           }
           if (methodName === '$emit') {
             handlerCtx.$emit.apply(handlerCtx,
             processEventArgs(
-            _this2.$vm,
+            _this.$vm,
             event,
             eventArray[1],
             eventArray[2],
@@ -1310,7 +1207,7 @@ function handleEvent(event) {var _this2 = this;
             handler.once = true;
           }
           var params = processEventArgs(
-          _this2.$vm,
+          _this.$vm,
           event,
           eventArray[1],
           eventArray[2],
@@ -1454,16 +1351,28 @@ function initRelation(detail) {
   this.triggerEvent('__l', detail);
 }
 
+function selectAllComponents(mpInstance, selector, $refs) {
+  var components = mpInstance.selectAllComponents(selector);
+  components.forEach(function (component) {
+    var ref = component.dataset.ref;
+    $refs[ref] = component.$vm || component;
+    {
+      if (component.dataset.vueGeneric === 'scoped') {
+        component.selectAllComponents('.scoped-ref').forEach(function (scopedComponent) {
+          selectAllComponents(scopedComponent, selector, $refs);
+        });
+      }
+    }
+  });
+}
+
 function initRefs(vm) {
   var mpInstance = vm.$scope;
   Object.defineProperty(vm, '$refs', {
     get: function get() {
       var $refs = {};
-      var components = mpInstance.selectAllComponents('.vue-ref');
-      components.forEach(function (component) {
-        var ref = component.dataset.ref;
-        $refs[ref] = component.$vm || component;
-      });
+      selectAllComponents(mpInstance, '.vue-ref', $refs);
+      // TODO 暂不考虑 for 中的 scoped
       var forComponents = mpInstance.selectAllComponents('.vue-ref-in-for');
       forComponents.forEach(function (component) {
         var ref = component.dataset.ref;
@@ -1503,12 +1412,25 @@ function parseApp(vm) {
 
 }
 
+var eventChannels = {};
+
+var eventChannelStack = [];
+
+function getEventChannel(id) {
+  if (id) {
+    var eventChannel = eventChannels[id];
+    delete eventChannels[id];
+    return eventChannel;
+  }
+  return eventChannelStack.shift();
+}
+
 function createApp(vm) {
   _vue.default.prototype.getOpenerEventChannel = function () {
-    if (!this.__eventChannel__) {
-      this.__eventChannel__ = new EventChannel();
+    // 微信小程序使用自身getOpenerEventChannel
+    {
+      return this.$scope.getOpenerEventChannel();
     }
-    return this.__eventChannel__;
   };
   var callHook = _vue.default.prototype.__call_hook;
   _vue.default.prototype.__call_hook = function (hook, args) {
@@ -1807,14 +1729,14 @@ uni$1;exports.default = _default;
 /***/ }),
 
 /***/ 10:
-/*!**************************************************************!*\
-  !*** /Users/gsheng/Downloads/12-28/new_fruit/api/request.js ***!
-  \**************************************************************/
+/*!********************************************************!*\
+  !*** /Users/gsheng/Downloads/new_fruit/api/request.js ***!
+  \********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.uploadFiles = exports.orderHistory = exports.getPredictInfo = exports.getPredictList = exports.getAgreeInfo = exports.getAgreeList = exports.getMsgInfo = exports.getEvaluateList = exports.orderCount = exports.getBeConfirmed = exports.PostDataById = exports.postAfterCen = exports.posAfterDetails = exports.posAfterSaleList = exports.postCancelPay = exports.posAfterSale = exports.getAfterSaleData = exports.postConfirmOrder = exports.postDelOrders = exports.postCancelOrder = exports.getDetails = exports.postAgainOrder = exports.postSettle = exports.getMsg = exports.postCancelPraise = exports.getSubmitOrder = exports.postAddressList = exports.postupdateClient = exports.getClient = exports.getNewsAll = exports.postRecentlyDel = exports.getselectSuper = exports.getselectSeasonal = exports.getselectHot = exports.getselectImport = exports.getMyOrder = exports.postOrderPay = exports.getRecently = exports.postPraise = exports.postDelLike = exports.getLike = exports.postLike = exports.postUpOrder = exports.postDelOrder = exports.getCart = exports.postmyOrder = exports.postSaveStore = exports.getActivity = exports.wxloginurl = exports.imgurl = exports.postOrder = exports.url = exports.getAttribute = exports.getGoodsall = exports.postdelist = exports.getClassify = exports.postActivity = exports.getsearch = exports.loginis = exports.getIndex = void 0; // 公用地址
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.uploadFiles = exports.orderHistory = exports.getPredictInfo = exports.getPredictList = exports.getAgreeInfo = exports.getAgreeList = exports.getMsgInfo = exports.getEvaluateList = exports.orderCount = exports.getBeConfirmed = exports.PostDataById = exports.postAfterCen = exports.posAfterDetails = exports.posAfterSaleList = exports.postCancelPay = exports.posAfterSale = exports.getAfterSaleData = exports.postConfirmOrder = exports.postDelOrders = exports.postCancelOrder = exports.getDetails = exports.postAgainOrder = exports.postSettle = exports.getMsg = exports.postCancelPraise = exports.getSubmitOrder = exports.postAddressList = exports.postupdateClient = exports.getClient = exports.getNewsAll = exports.postRecentlyDel = exports.getselectSuper = exports.getselectSeasonal = exports.getselectHot = exports.getselectImport = exports.getMyOrder = exports.postOrderPay = exports.getRecently = exports.postPraise = exports.postDelLike = exports.getLike = exports.postLike = exports.postUpOrder = exports.postDelOrder = exports.getCart = exports.postmyOrder = exports.postSaveStore = exports.getActivity = exports.wxloginurl = exports.imgurl = exports.postOrder = exports.url = exports.getAttribute = exports.getGoodsall = exports.getMpCodeById = exports.postdelist = exports.getClassify = exports.postActivity = exports.getSearchByCode = exports.getsearch = exports.loginis = exports.getIndex = void 0; // 公用地址
 
 
 //测试用
@@ -1826,8 +1748,8 @@ var wxloginurl = "".concat(url, "wxuser/wxlogin");
 // // 线上	
 // let url = 'https://cs.zgqgpt.com/'
 // let url = "http://testqg.natapp1.cc/"
-// let url = "https://qg.zgqgpt.com/"
-exports.wxloginurl = wxloginurl;var url = "http://192.168.1.50:8980/";
+exports.wxloginurl = wxloginurl;var url = "https://qg.zgqgpt.com/";
+// let url = "http://192.168.1.53:8980/"
 
 // let url = 'http://dwh.natapp1.cc/js/'
 exports.url = url;var imgurl = 'http://192.168.1.10:8980';
@@ -1866,8 +1788,12 @@ exports.getMsg = getMsg;var getMsgInfo = "".concat(url, "api/wx/index/getMsg");
 //商品详情页
 exports.getMsgInfo = getMsgInfo;var postdelist = "".concat(url, "api/wx/goods/getById");
 
+
+//商品详情页面菊花码
+exports.postdelist = postdelist;var getMpCodeById = "".concat(url, "api/wx/view/ganQr");
+
 //订单详情
-exports.postdelist = postdelist;var orderHistory = "".concat(url, "api/wx/goods/getByIdHistory");
+exports.getMpCodeById = getMpCodeById;var orderHistory = "".concat(url, "api/wx/goods/getByIdHistory");
 
 //商品找水果
 exports.orderHistory = orderHistory;var getGoodsall = "".concat(url, "api/wx/goods/all");
@@ -1895,11 +1821,13 @@ exports.getActivity = getActivity;var postActivity = "".concat(url, "api/wx/acti
 exports.postActivity = postActivity;var loginis = "".concat(url, "api/wx/user/login");
 
 //找水果
-exports.loginis = loginis;var getsearch = "".concat(url, "api/wx/menu/select");
+exports.loginis = loginis;var getsearch = "".concat(url, "api/wx/menu/select");exports.getsearch = getsearch;
+
+var getSearchByCode = "".concat(url, "api/wx/menu/selectByMenuCode");
 
 
 //获取申请店铺信息
-exports.getsearch = getsearch;var getClient = "".concat(url, "api/wx/merchants/getClient");
+exports.getSearchByCode = getSearchByCode;var getClient = "".concat(url, "api/wx/merchants/getClient");
 
 
 //更新店铺信息
@@ -2097,6 +2025,8 @@ exports.getPredictInfo = getPredictInfo;
 
 
 
+
+
 // 导出文件上传
 var uploadFiles = function uploadFiles(callback) {
   uni.chooseImage({
@@ -2141,9 +2071,9 @@ var uploadFiles = function uploadFiles(callback) {
 /***/ }),
 
 /***/ 100:
-/*!*************************************************************!*\
-  !*** /Users/gsheng/Downloads/12-28/new_fruit/utils/util.js ***!
-  \*************************************************************/
+/*!*******************************************************!*\
+  !*** /Users/gsheng/Downloads/new_fruit/utils/util.js ***!
+  \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -2371,9 +2301,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 132:
-/*!***************************************************************************************!*\
-  !*** /Users/gsheng/Downloads/12-28/new_fruit/common/tui-validation/tui-validation.js ***!
-  \***************************************************************************************/
+/*!*********************************************************************************!*\
+  !*** /Users/gsheng/Downloads/new_fruit/common/tui-validation/tui-validation.js ***!
+  \*********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -2649,9 +2579,9 @@ module.exports = {
 /***/ }),
 
 /***/ 133:
-/*!********************************************************************!*\
-  !*** /Users/gsheng/Downloads/12-28/new_fruit/utils/picker.city.js ***!
-  \********************************************************************/
+/*!**************************************************************!*\
+  !*** /Users/gsheng/Downloads/new_fruit/utils/picker.city.js ***!
+  \**************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -3059,9 +2989,9 @@ module.exports = [{
 /***/ }),
 
 /***/ 14:
-/*!**************************************************************!*\
-  !*** /Users/gsheng/Downloads/12-28/new_fruit/store/store.js ***!
-  \**************************************************************/
+/*!********************************************************!*\
+  !*** /Users/gsheng/Downloads/new_fruit/store/store.js ***!
+  \********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10282,9 +10212,9 @@ internalMixin(Vue);
 /***/ }),
 
 /***/ 22:
-/*!*********************************************************************!*\
-  !*** /Users/gsheng/Downloads/12-28/new_fruit/common/SDK/amap-wx.js ***!
-  \*********************************************************************/
+/*!***************************************************************!*\
+  !*** /Users/gsheng/Downloads/new_fruit/common/SDK/amap-wx.js ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -10324,9 +10254,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 4:
-/*!**********************************************************!*\
-  !*** /Users/gsheng/Downloads/12-28/new_fruit/pages.json ***!
-  \**********************************************************/
+/*!****************************************************!*\
+  !*** /Users/gsheng/Downloads/new_fruit/pages.json ***!
+  \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -10334,10 +10264,101 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 548:
-/*!******************************************************************************************!*\
-  !*** /Users/gsheng/Downloads/12-28/new_fruit/components/jyf-parser/libs/MpHtmlParser.js ***!
-  \******************************************************************************************/
+/***/ 55:
+/*!********************************************************!*\
+  !*** /Users/gsheng/Downloads/new_fruit/login/login.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 56));
+
+
+var _api = __webpack_require__(/*! ../api/api.js */ 8);
+
+var _request = __webpack_require__(/*! ../api/request.js */ 10);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}var _console =
+console,log = _console.log;var
+
+logins = /*#__PURE__*/function () {
+  // 构造方法执行：必须是类已经实例化
+  function logins(wxuser) {_classCallCheck(this, logins);
+    this.wxuser = wxuser;
+    log(wxuser);
+  }
+
+  // 先获取发起请求的必须条件
+  _createClass(logins, [{ key: "listing", value: function () {var _listing = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var userdata, usermen;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
+
+                  this.wxlogin());case 2:userdata = _context.sent;
+                log(userdata);
+                // 请求接口：登录
+                _context.next = 6;return this.gologin(userdata);case 6:usermen = _context.sent;return _context.abrupt("return",
+                usermen);case 8:case "end":return _context.stop();}}}, _callee, this);}));function listing() {return _listing.apply(this, arguments);}return listing;}()
+
+
+    // 拿到用户头像，昵称，code
+  }, { key: "wxlogin", value: function wxlogin() {
+      var wxuser = this.wxuser;
+      return new Promise(function (resolve, reject) {
+        if (wxuser != undefined) {
+          wx.login({
+            success: function success(res) {
+              log(res);
+              var data = {
+                appid: 'wxb820c791e554616c',
+                secret: 'adb3d89546af6e74f2ccb8e16aba51ae',
+                nickName: wxuser.nickName,
+                avatarUrl: wxuser.avatarUrl,
+                code: res.code };
+
+              resolve(data);
+            },
+            fail: function fail(err) {
+              log(err);
+              reject('获取code失败');
+            } });
+
+        } else {
+          reject('FAIL');
+        }
+      });
+    }
+
+    // 请求接口：登录
+  }, { key: "gologin", value: function gologin(userdata) {
+      return new Promise(function (resolve, reject) {
+        (0, _api.publicing)(_request.wxloginurl, userdata).
+        then(function (res) {
+          log(res);
+          if (res.data.msg == 'success') {
+            // 存入本地
+            resolve('SUCCESS');
+            uni.setStorageSync('usermen', res.data.datas);
+          }
+        }).
+        catch(function (err) {
+          log(err);
+        });
+      });
+    }
+
+
+
+    // 获取用户信息和code
+  }]);return logins;}();
+
+
+// 模块
+module.exports = logins;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 556:
+/*!************************************************************************************!*\
+  !*** /Users/gsheng/Downloads/new_fruit/components/jyf-parser/libs/MpHtmlParser.js ***!
+  \************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10348,9 +10369,9 @@ module.exports = g;
  * @author JinYufeng
  * @listens MIT
  */
-var cfg = __webpack_require__(/*! ./config.js */ 549),
+var cfg = __webpack_require__(/*! ./config.js */ 557),
 blankChar = cfg.blankChar,
-CssHandler = __webpack_require__(/*! ./CssHandler.js */ 550),
+CssHandler = __webpack_require__(/*! ./CssHandler.js */ 558),
 windowWidth = uni.getSystemInfoSync().windowWidth;
 var emoji;
 
@@ -10880,10 +10901,10 @@ module.exports = MpHtmlParser;
 
 /***/ }),
 
-/***/ 549:
-/*!************************************************************************************!*\
-  !*** /Users/gsheng/Downloads/12-28/new_fruit/components/jyf-parser/libs/config.js ***!
-  \************************************************************************************/
+/***/ 557:
+/*!******************************************************************************!*\
+  !*** /Users/gsheng/Downloads/new_fruit/components/jyf-parser/libs/config.js ***!
+  \******************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -10970,105 +10991,14 @@ module.exports = cfg;
 
 /***/ }),
 
-/***/ 55:
-/*!**************************************************************!*\
-  !*** /Users/gsheng/Downloads/12-28/new_fruit/login/login.js ***!
-  \**************************************************************/
+/***/ 558:
+/*!**********************************************************************************!*\
+  !*** /Users/gsheng/Downloads/new_fruit/components/jyf-parser/libs/CssHandler.js ***!
+  \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 56));
-
-
-var _api = __webpack_require__(/*! ../api/api.js */ 8);
-
-var _request = __webpack_require__(/*! ../api/request.js */ 10);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}var _console =
-console,log = _console.log;var
-
-logins = /*#__PURE__*/function () {
-  // 构造方法执行：必须是类已经实例化
-  function logins(wxuser) {_classCallCheck(this, logins);
-    this.wxuser = wxuser;
-    log(wxuser);
-  }
-
-  // 先获取发起请求的必须条件
-  _createClass(logins, [{ key: "listing", value: function () {var _listing = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var userdata, usermen;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
-
-                  this.wxlogin());case 2:userdata = _context.sent;
-                log(userdata);
-                // 请求接口：登录
-                _context.next = 6;return this.gologin(userdata);case 6:usermen = _context.sent;return _context.abrupt("return",
-                usermen);case 8:case "end":return _context.stop();}}}, _callee, this);}));function listing() {return _listing.apply(this, arguments);}return listing;}()
-
-
-    // 拿到用户头像，昵称，code
-  }, { key: "wxlogin", value: function wxlogin() {
-      var wxuser = this.wxuser;
-      return new Promise(function (resolve, reject) {
-        if (wxuser != undefined) {
-          wx.login({
-            success: function success(res) {
-              log(res);
-              var data = {
-                appid: 'wxb820c791e554616c',
-                secret: 'adb3d89546af6e74f2ccb8e16aba51ae',
-                nickName: wxuser.nickName,
-                avatarUrl: wxuser.avatarUrl,
-                code: res.code };
-
-              resolve(data);
-            },
-            fail: function fail(err) {
-              log(err);
-              reject('获取code失败');
-            } });
-
-        } else {
-          reject('FAIL');
-        }
-      });
-    }
-
-    // 请求接口：登录
-  }, { key: "gologin", value: function gologin(userdata) {
-      return new Promise(function (resolve, reject) {
-        (0, _api.publicing)(_request.wxloginurl, userdata).
-        then(function (res) {
-          log(res);
-          if (res.data.msg == 'success') {
-            // 存入本地
-            resolve('SUCCESS');
-            uni.setStorageSync('usermen', res.data.datas);
-          }
-        }).
-        catch(function (err) {
-          log(err);
-        });
-      });
-    }
-
-
-
-    // 获取用户信息和code
-  }]);return logins;}();
-
-
-// 模块
-module.exports = logins;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
-
-/***/ 550:
-/*!****************************************************************************************!*\
-  !*** /Users/gsheng/Downloads/12-28/new_fruit/components/jyf-parser/libs/CssHandler.js ***!
-  \****************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var cfg = __webpack_require__(/*! ./config.js */ 549),
+var cfg = __webpack_require__(/*! ./config.js */ 557),
 isLetter = function isLetter(c) {return c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z';};
 
 function CssHandler(tagStyle) {
@@ -11960,9 +11890,9 @@ if (hadRuntime) {
 /***/ }),
 
 /***/ 8:
-/*!**********************************************************!*\
-  !*** /Users/gsheng/Downloads/12-28/new_fruit/api/api.js ***!
-  \**********************************************************/
+/*!****************************************************!*\
+  !*** /Users/gsheng/Downloads/new_fruit/api/api.js ***!
+  \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12008,7 +11938,6 @@ exports.listing = listing;var listing2 = function listing2(urling, shopdata) {
 
     then(function (res) {
       resolve(res[1]);
-
     }).
     catch(function (err) {
       var errs = '服务器错误 请稍后再试';
@@ -12070,9 +11999,9 @@ exports.publicing2 = publicing2;
 /***/ }),
 
 /***/ 83:
-/*!*************************************************************************************!*\
-  !*** /Users/gsheng/Downloads/12-28/new_fruit/common/tui-clipboard/tui-clipboard.js ***!
-  \*************************************************************************************/
+/*!*******************************************************************************!*\
+  !*** /Users/gsheng/Downloads/new_fruit/common/tui-clipboard/tui-clipboard.js ***!
+  \*******************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12133,9 +12062,9 @@ module.exports = {
 /***/ }),
 
 /***/ 9:
-/*!**************************************************************!*\
-  !*** /Users/gsheng/Downloads/12-28/new_fruit/api/errdata.js ***!
-  \**************************************************************/
+/*!********************************************************!*\
+  !*** /Users/gsheng/Downloads/new_fruit/api/errdata.js ***!
+  \********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

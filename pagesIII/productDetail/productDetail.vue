@@ -1,5 +1,9 @@
 <template>
 	<view class="container">
+		<view>
+			<canvas style="background-color: #fff;z-index: 99999;position:fixed;left: 1000px;" :style="{ width: canvasW / 2+ 'px', height: canvasH / 2+ 'px' }"
+			 canvas-id="sharePost"></canvas>
+		</view>
 		<!--header-->
 		<view class="tui-header-box" :style="{ height: navHeight + 'px', background: 'rgba(255,255,255,' + opcity + ')' }">
 			<!-- <view class="tui-header" :style="{ paddingTop: top + 'px', opacity: opcity }"></view> -->
@@ -49,6 +53,7 @@
 							<text class="tag-tit">{{ item.name || ''}}</text>
 						</block>
 						<text class="tag-tit-text">{{ shopListdata.name ||''}}</text>
+
 						<view class="tag-tit-pra" v-if="!canPraise" @tap="praiseLike(shopListdata.id)">
 							<tui-icon name="agree" color="#B6B6B6" :size="15"></tui-icon>
 							<text style="font-size: 28rpx;">{{ shopListdata.praiseNumber||0 |filterNum}}</text>
@@ -61,16 +66,21 @@
 					<view class="tui-original-price tui-gray">{{ shopListdata.describe ||0}}</view>
 					<view class="tui-text-overflow">毛重约{{ shopListdata.kg1 || 0}}斤/{{shopListdata.meteringUnit == "1"?"件": meteringList[(shopListdata.meteringUnit * 1)-1]}},
 						净重约{{ shopListdata.kg2 ||0}}斤/{{shopListdata.meteringUnit == "1"?"件": meteringList[(shopListdata.meteringUnit * 1)-1]}}</view>
-					<view class="tui-pro-titbox">
+					<!-- <view class="tui-pro-titbox">
 						<button open-type="share" class="tui-share-btn tui-share-position" @tap="onShare">
-							<tui-tag type="gray" shape="circleLeft" padding="12rpx 16rpx">
-								<view class="tui-share-box">
-									<tui-icon name="partake" color="#999" :size="15"></tui-icon>
-									<text class="tui-share-text tui-gray tui-size">分享</text>
-								</view>
-							</tui-tag>
+						<tui-tag type="warning" shape="circleLeft" padding="12rpx 16rpx">
+							<view class="tui-share-box">
+								<image style="width: 28rpx;height: 28rpx;display: block;" src="../../static/images/share_icon.png" mode=""></image>
+								<text class="tui-share-text tui-size">分享</text>
+							</view>
+						</tui-tag>
 						</button>
+					</view> -->
+					<view class="user-share-btn" @click="handleLongTap">
+						<image src="../../static/images/share_icon.png" mode=""></image>
+						<text>分享</text>
 					</view>
+
 					<view class="tui-padding">
 						<view class="tui-sale-info tui-size tui-gray">
 							<view class="kilo-price">
@@ -191,42 +201,7 @@
 							<text class=" tui-text-left tui-title-class" v-else>暂无</text>
 						</view>
 					</view>
-					<!-- 	<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
-						<view class="tui-left-one">
-							<text class="tui-text-left tui-title-class">外观等级</text>
-						</view>
-						<view class="tui-right-one">
-							<text class="tui-title-class">{{shopListdata.facadeLevel}}</text>
-						</view>
-						
-					</view>
-					<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
-						<view class="tui-left-one">
-							<text class="tui-text-left tui-title-class">果形等级</text>
-						</view>
-						<view class="tui-right-one">
-							<text class="tui-title-class">{{shopListdata.shapeLevel}}</text>
-						</view>
-						
-					</view>
-					<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
-						<view class="tui-left-one">
-							<text class="tui-text-left tui-title-class">不良率</text>
-						</view>
-						<view class="tui-right-one">
-							<text class="tui-title-class">{{shopListdata.rejectRatio}}</text>
-						</view>
-						
-					</view>
-					<view class="tui-height-flex-two tui-magin-left-on tui-border-1px">
-						<view class="tui-left-one">
-							<text class="tui-text-left tui-title-class">售后时效	</text>
-						</view>
-						<view class="tui-right-one">
-							<text class=" tui-title-class">{{shopListdata.afterSalesTime}}</text>
-						</view>
-						
-					</view> -->
+
 				</view>
 				<!-- 物流配送 -->
 				<view class="tui-height-full">
@@ -274,6 +249,13 @@
 				</view>
 			</view>
 		</view>
+
+		<!-- 分享canvas -->
+		<view class="showShareBox" v-if="canShow" @click="clickCanvas">
+			<image @longtap.stop="handleLongTap" :style="{width: canvasW  + 'rpx',height: (canvasW  / canvasImgTimes)  + 'rpx'}"
+			 :src="shareImageSrc" mode=""></image>
+		</view>
+
 		<tui-nomore text="已经到最底了" backgroundColor="#f7f7f7"></tui-nomore>
 		<view class="tui-safearea-bottom"></view>
 		<!--底部操作栏-->
@@ -305,7 +287,6 @@
 					<view class="tui-tab-rank">
 						<view class="tui-tab-rank-cent">
 							<image :src="shopListdata.urlVideo!==''? urlList[1]:urlList[0]" mode="aspectFill" class="img-rink"></image>
-
 							<view class="tui-pro-tit" style="padding: 0 30rpx 0 0;">
 								<text class="tag-tit">{{ item.name }}</text>
 								<text class="tag-tit-text" style="font-size:28rpx">{{ shopListdata.name }}</text>
@@ -380,6 +361,7 @@
 <script>
 	import {
 		listing,
+		listing2,
 		publicing,
 		publicing2
 	} from '../../api/api.js';
@@ -394,6 +376,7 @@
 		getCart,
 		loginis,
 		postSettle,
+		getMpCodeById,
 		getClient
 	} from '../../api/request.js';
 
@@ -404,7 +387,7 @@
 	export default {
 		data() {
 			return {
-				meteringList: ["斤", "盒", "份", "个", ],
+				meteringList: ["斤", "盒", "份", "个"],
 				ApproveStatus: '', //店铺认证状态
 				isLogin: false,
 				current: 0, //星星
@@ -496,10 +479,33 @@
 				canCollect: true,
 				canCart: true,
 				netStatus: true,
+				shareTitle: "",
+				shareImg: "",
 
+				canShow: false,
+				canvasW: 750,
+				canvasH: 1206,
+				canvasImgTimes: 1,
+				mainImg: {},
+				SystemInfo: {},
+				title: '田阳巨无霸桂七芒果1个500克以上', // 商品标题
+				price: '999.99', // 价格
+				Oldprice: '350.00', // 原价
+				name: '天涯过客', // 推荐人,
+				shareImageSrc: "",
+				tmpPic: "",
+				mpCodePic: {},
+				tempCodePic: ''
 			};
 		},
-		onLoad(options) {
+		mounted() {
+			uni.showShareMenu({
+				withShareTicket: true,
+				menus: ["shareAppMessage", "shareTimeline"]
+			})
+		},
+
+		async onLoad(options) {
 			// 导航栏高度 = 状态栏高度 + 胶囊高度 + 胶囊上下边距
 			let that = this
 			try {
@@ -551,31 +557,21 @@
 			// this.getHomelist()
 			let setdata = uni.getStorageSync('usermen');
 			this.token = setdata;
-			this.productID = options.id;
+			if (options.scene) {
+				let scene = decodeURIComponent(options.scene).substr(4)
+				this.productID = scene;
+			} else {
+				this.productID = options.id;
+			}
+			this.SystemInfo = await this.getSystemInfo();
+			this.canvasW = this.SystemInfo.windowWidth * 2; // 画布宽度
+			this.canvasH = this.SystemInfo.windowHeight * 2; // 画布高度
+			this.canvasImgTimes = this.canvasW / this.canvasH
 			this.postDetails();
 			this.postSettle();
 			this.getMerchants();
-			let obj = {};
-			// #ifdef MP-WEIXIN
-			obj = wx.getMenuButtonBoundingClientRect();
-			// #endif
-			// #ifdef MP-BAIDU
-			obj = swan.getMenuButtonBoundingClientRect();
-			// #endif
-			// #ifdef MP-ALIPAY
-			my.hideAddToDesktopMenu();
-			// #endif
-			// 	setTimeout(() => {
-			// 		uni.getSystemInfo({
-			// 			success: res => {
-			// 				this.width = obj.left || res.windowWidth;
-			// 				this.height = obj.top ? obj.top + obj.height + 8 : res.statusBarHeight + 44;
-			// 				this.top = obj.top ? obj.top + (obj.height - 32) / 2 : res.statusBarHeight + 6;
-			// 				this.scrollH = res.windowWidth;
-			// 			}
-			// 		});
-			// 	}, 0);
-			// 
+
+
 		},
 		computed: {
 			swiperList() {
@@ -592,6 +588,13 @@
 				let time = new Date().getHours()
 				return time
 			},
+		},
+		onReady() {
+			// uni.onUserCaptureScreen(function() {
+			//    uni.navigateTo({
+			// 	url: '../../pagesII/testShare/testShare'
+			//    })
+			// });
 		},
 		filters: {
 			filterNum(val) {
@@ -644,6 +647,200 @@
 		},
 
 		methods: {
+			drawCanvas() {
+				uni.getImageInfo({
+					src: this.shareImg,
+					success: (res) => {
+						this.mainImg = res
+						
+						this.drawSec()
+					}
+				})
+			},
+			drawSec() {
+				uni.getImageInfo({
+					src: this.tempCodePic,
+					success: (rs) => {
+						this.mpCodePic = rs
+						if (this.mpCodePic.errMsg == 'getImageInfo:ok' && this.mainImg.errMsg == 'getImageInfo:ok' && this.SystemInfo
+							.errMsg == 'getSystemInfo:ok') {
+							setTimeout(() => {
+								const ctx = uni.createCanvasContext('sharePost', this)
+								// 设置矩形边框
+								ctx.setFillStyle("#FFF");
+								// 设置矩形宽高 （x,y,宽度，高度） x这里要除2次 ‘2’，
+								// 第一次除是因为canvasW是乘了2的值，这里需要还原成没乘之前的值，
+								// 第二次除是因为得到的是 2边空白的宽度，
+								let bgHeight = this.canvasW / 2 * 0.84 + 150 + this.canvasW / 2 * 0.25 + this.canvasW / 2 * 0.08 / 2
+
+								ctx.fillRect(this.canvasW / 2 * 0.08 / 2, this.canvasW / 2 * 0.08 / 2, this.canvasW / 2 * 0.92,
+									bgHeight) // fillRect(x,y,宽度，高度)
+
+								// 商品主图
+								ctx.drawImage(this.mainImg.path, this.canvasW / 2 * 0.08, this.canvasH / 2 * 0.08 / 1.2, this.canvasW /
+									2 *
+									0.84,
+									this.canvasW / 2 * 0.84)
+
+								// 3、绘制商品标题，多余文字自动换行
+								ctx.setFontSize(20); // setFontSize() 设置字体字号
+								ctx.setFillStyle('#000'); // setFillStyle() 设置字体颜色
+
+								/* canvas不能自动换行，需要自行计算 */
+								let _strlineW = 0;
+								let _strLastIndex = 0; //每次开始截取的字符串的索引
+								let _strHeight = this.canvasW / 2 * 0.84 + this.canvasH / 2 * 0.1 + 10; //绘制字体距离canvas顶部的初始高度
+								let _num = 1;
+								for (let i = 0; i < this.shareTitle.length; i++) {
+									_strlineW += ctx.measureText(this.shareTitle[i]).width;
+									if (_strlineW > this.canvasW / 2 * 0.84 - 10) {
+										if (_num == 2 && 2) {
+											//文字换行数量大于二进行省略号处理
+											ctx.fillText(this.shareTitle.substring(_strLastIndex, i - 5) + '...', this.canvasW / 2 * 0.08,
+												_strHeight);
+											_strlineW = 0;
+											_strLastIndex = i;
+											_num++;
+											break;
+										} else {
+											ctx.fillText(this.shareTitle.substring(_strLastIndex, i), this.canvasW / 2 * 0.08, _strHeight);
+											_strlineW = 0;
+											_strHeight += 30;
+											_strLastIndex = i;
+											_num++;
+										}
+									} else if (i == this.shareTitle.length - 1) {
+										ctx.fillText(this.shareTitle.substring(_strLastIndex, i + 1), this.canvasW / 2 * 0.08, _strHeight);
+										_strlineW = 0;
+									}
+								}
+								/* end */
+								//商品描述
+								ctx.setFontSize(14) // 字号
+								ctx.setFillStyle('#999') // 颜色
+								ctx.fillText(this.shopListdata.describe, this.canvasW / 2 * 0.08, _strHeight + 20); // （文字，x，y）
+
+								// 毛重 净重
+								let tempMeteringList = {
+									1: '件',
+									2: '盒',
+									3: '份',
+									4: '个'
+								}
+								ctx.setFontSize(14) // 字号
+								ctx.setFillStyle('#999') // 颜色
+								ctx.fillText("毛重约" + this.shopListdata.kg1 + "斤/" + tempMeteringList[this.shopListdata.meteringUnit *
+										1] +
+									"，净重约" + this.shopListdata.kg1 + "斤/" + tempMeteringList[this.shopListdata.meteringUnit * 1], this.canvasW /
+									2 * 0.08, _strHeight + 44); // （文字，x，y）
+
+								//4、商品价格
+
+								ctx.setFontSize(14) // 字号
+								ctx.setFillStyle('#e31d1a') // 颜色
+								ctx.fillText('每' + this.meteringList[this.shopListdata.meteringUnit * 1 - 1] + '￥', this.canvasW / 2 *
+									0.08,
+									_strHeight + 74); // （文字，x，y）
+
+								ctx.setFontSize(24) // 字号
+								ctx.setFillStyle('#e31d1a') // 颜色
+								ctx.fillText(this.shopListdata.kgPrice, this.canvasW / 2 * 0.08 + 42, _strHeight + 74); // （文字，x，y）
+
+								ctx.setFontSize(14)
+								ctx.setFillStyle('#333')
+								ctx.fillText('每件￥', this.canvasW / 2 * 0.08, _strHeight + 100);
+
+								ctx.setFontSize(18) // 字号
+								ctx.setFillStyle('#333') // 颜色
+								ctx.fillText(this.shopListdata.platformClientPrice, this.canvasW / 2 * 0.08 + 42, _strHeight + 100); // （文字，x，y）
+
+								//5、文案
+								ctx.setFontSize(14)
+								ctx.setFillStyle('#b8b8b8')
+								ctx.fillText('长按保存或识别小程序码访问', this.canvasW / 2 * 0.08, _strHeight + 130);
+
+								//5、公司名称
+								ctx.setFontSize(16)
+								ctx.setFillStyle('rgba(0,197,42,1)')
+								ctx.fillText('圈果平台', this.canvasW / 2 * 0.08, bgHeight);
+								// 商品菊花图'../../static/images/jhm.jpg'
+								ctx.drawImage(this.mpCodePic.path, this.canvasW / 2 - this.canvasW / 2 * 0.34, bgHeight -
+									this.canvasW /
+									2 * 0.25, this.canvasW / 2 * 0.25,
+									this.canvasW / 2 * 0.25)
+								// 最终绘制
+								let that = this
+								ctx.draw(true, (ret) => { // draw方法 把以上内容画到 canvas 中。
+									uni.canvasToTempFilePath({ // 保存canvas为图片
+										canvasId: 'sharePost',
+										x: 0,
+										y: 0,
+										width: that.canvasW,
+										height: bgHeight + 30,
+										quality: 1,
+										fail: function(res) {
+											console.log(res);
+											uni.showToast({
+												title: "哎呀出错了"
+											})
+											return
+										},
+										complete: function(res) {
+											that.shareImageSrc = res.tempFilePath
+											console.log(that.shareImageSrc,res)
+										},
+									})
+								});
+							}, 300)
+						}
+					}
+				})
+			},
+			clickCanvas() {
+				this.canShow = !this.canShow
+			},
+			handleLongTap() {
+				this.GetMpCodeById()
+				uni.showLoading({
+					title: "请稍等～"
+				})
+				setTimeout(() => {
+					uni.hideLoading()
+					console.log(this.shareImageSrc,123123)
+					if (this.shareImageSrc !== '') {
+						uni.previewImage({
+							urls: [this.shareImageSrc],
+						});
+					} else {
+						uni.showToast({
+							title:"生成失败，请重新再试！",
+							icon: 'none'
+						})
+					}
+				}, 3000)
+
+			},
+			// 获取图片信息
+			getImageInfo(image) {
+				return new Promise((req, rej) => {
+					uni.getImageInfo({
+						src: image,
+						success: function(res) {
+							req(res)
+						},
+					});
+				})
+			},
+			// 获取设备信息
+			getSystemInfo() {
+				return new Promise((req, rej) => {
+					uni.getSystemInfo({
+						success: function(res) {
+							req(res)
+						}
+					});
+				})
+			},
 			clickLink(e) {},
 			//购买前获取申请店铺状态信息
 			getMerchants() {
@@ -741,6 +938,10 @@
 							log(err);
 						});
 				}
+			},
+			clickToShare() {
+
+
 			},
 			//重复点赞
 			praiseLikeTwo() {
@@ -918,7 +1119,7 @@
 					this.modaishow = true;
 					return
 				} else {
-				
+
 					this.modaishow = false;
 					if (this.ApproveStatus === 0) {
 						uni.showToast({
@@ -970,30 +1171,53 @@
 			},
 			//请求商品详情
 			postDetails() {
+				let that = this
 				uni.showLoading({
 					title: '加载中'
 				});
 				let user_token = uni.getStorageSync('usermen')
 				let data = {
-					id: this.productID,
+					id: that.productID,
 					token: user_token,
 				};
 				// 批量并发请求多个接口，Promise.all =>可以并发请求多个接口。并且同时得到多个接口的数据
 				//这个方法是异步执行的，值还没有赋值，后就先执行了postAct这个，异步，同步，
 				publicing(postdelist, data)
 					.then(res => {
-						console.log(res.data.data);
-						this.shopListdata = res.data.data;
-						this.labelList = res.data.data.labelList;
-						this.urlList = res.data.data.urlList;
-						this.canPraise = res.data.data.isPraise
-						this.canCollect = res.data.data.isCollection
-						this.canCart = res.data.data.isCart
+						// console.log(res.data.data);
+						that.shareTitle = res.data.data.name;
+						that.shareImg = res.data.data.urlList[0];
+						that.shopListdata = res.data.data;
+						that.labelList = res.data.data.labelList;
+						that.urlList = res.data.data.urlList;
+						that.canPraise = res.data.data.isPraise;
+						that.canCollect = res.data.data.isCollection;
+						that.canCart = res.data.data.isCart;
 					})
 					.catch(err => {
 						console.log(err);
 					});
 				uni.hideLoading();
+			},
+			GetMpCodeById() {
+				let data = {
+					id: this.productID
+				}
+				listing2(getMpCodeById, data).then(res => {
+					let {
+						extraData
+					} = res.data.apiResult
+					this.tempCodePic = extraData.url
+					this.drawCanvas()
+					// uni.getImageInfo({
+					// 	src: extraData.url,
+					// 	success: (rs) => {
+					// 		console.log(rs);
+					// 		this.mpCodePic = rs
+					// 		console.log(this.mpCodePic)
+					// 	}
+					// })
+				})
 			},
 			//立即购买/加进货单
 			postShopping(id) {
@@ -1002,7 +1226,7 @@
 					this.modaishow = true;
 					return
 				} else {
-					
+
 					// this.modaishow = false
 					this.modaishow = false;
 					if (this.ApproveStatus === null || this.ApproveStatus === undefined || this.ApproveStatus === '' || this.ApproveStatus ===
@@ -1076,7 +1300,7 @@
 				};
 				listing(getCart, data)
 					.then(res => {
-						if(res.data.code && res.data.code != 200) {
+						if (res.data.code && res.data.code != 200) {
 							uni.showToast({
 								title: res.data.msg,
 								icon: "none"
@@ -1089,7 +1313,7 @@
 						let lists = res.data.data
 						if (lists) {
 							let cartNum = 0
-							lists.forEach(it=> {
+							lists.forEach(it => {
 								if (it.list) {
 									cartNum += it.list.length
 								}
@@ -1099,18 +1323,18 @@
 									index: 3,
 									text: cartNum + ''
 								})
-							} else{
+							} else {
 								uni.removeTabBarBadge({
 									index: 3
 								})
 							}
 						}
-						
+
 					})
 					.catch(err => {
 						log(err);
 					});
-			},	
+			},
 			bannerChange(e) {
 				this.bannerIndex = e.detail.current;
 			},
@@ -1163,18 +1387,24 @@
 				});
 			},
 			onShare() {
-				//#ifdef APP-PLUS
-				plus.share.sendWithSystem({
-						content: '',
-						href: 'https://www.thorui.cn/'
-					},
-					function() {},
-					function(e) {}
-				);
-				//#endif
-				// #ifdef H5
-				location.href = 'https://www.thorui.cn/';
-				// #endif
+
+			},
+
+		},
+		onShareAppMessage(e) {
+			if (this.shareTitle !== '') {
+				return {
+					title: this.shareTitle,
+					imageUrl: this.shareImg
+				}
+			}
+		},
+		onShareTimeline(res) {
+			if (this.shareTitle !== '') {
+				return {
+					title: this.shareTitle,
+					imageUrl: this.shareImg
+				}
 			}
 		},
 		onPageScroll(e) {
@@ -1189,11 +1419,27 @@
 	};
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 	page {
 		background-color: #fff;
 	}
 
+	.showShareBox {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 999;
+		background: rgba(0, 0, 0, .8);
+		display: flex;
+		justify-content: center;
+		// padding-top: 30%;
+	}
+
+	.tui-pro-titbox /deep/ .tui-warning {
+		background-color: rgba(255, 119, 9, 0.35) !important;
+	}
 
 	/* 弹层 */
 	.tui-list-title {
@@ -1567,6 +1813,26 @@
 
 	/* #endif */
 
+	.user-share-btn {
+		color: #ff7709;
+		display: flex;
+		align-items: center;
+		font-size: 24rpx;
+		background: rgba(255, 119, 9, 0.35);
+		position: absolute;
+		right: 0;
+		padding: 4rpx 10rpx 4rpx 20rpx;
+		border-radius: 40rpx 0 0 40rpx;
+		height: 40rpx;
+
+		image {
+			width: 28rpx;
+			height: 28rpx;
+			display: block;
+			margin-right: 4rpx;
+		}
+	}
+
 	.tui-size {
 		font-size: 24rpx;
 		line-height: 24rpx;
@@ -1616,6 +1882,8 @@
 	.tui-gray {
 		color: #999;
 	}
+
+
 
 	.tui-icon-red {
 		color: #ff201f;
@@ -1845,10 +2113,10 @@
 		right: 0;
 		background-color: #ededed;
 		padding: 5rpx 20rpx 5rpx 20rpx;
-		border-radius: 10px 0 0 10px;
+		border-radius: 40rpx 0 0 40rpx;
 		color: rgba(182, 182, 182, 1);
 		font-size: 24rpx;
-		top: 150rpx;
+		top: 130rpx;
 		height: 40rpx;
 		display: flex;
 		align-items: center;
@@ -1965,6 +2233,7 @@
 
 	.tui-share-text {
 		padding-left: 8rpx;
+		color: #ff7709;
 	}
 
 	.tui-sub-title {

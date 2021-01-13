@@ -20,9 +20,9 @@
 		data() {
 			return {
 				searchKey: '',
-				img1: 'http://qg-qr.oss-cn-shenzhen.aliyuncs.com/test/1599825743093.png?Expires=1915185734&OSSAccessKeyId=LTAI4G74cnhsbDWNkfvuNew3&Signature=SKzdpCezA%2BRAXPDOk2fOrA1iAYA%3D',
-				img2: 'http://qg-qr.oss-cn-shenzhen.aliyuncs.com/test/1599825772354.png?Expires=1915185765&OSSAccessKeyId=LTAI4G74cnhsbDWNkfvuNew3&Signature=lUcaUKSt10HwyipxoMSil9C9i1o%3D',
-				img3: 'http://qg-qr.oss-cn-shenzhen.aliyuncs.com/test/1599825787322.png?Expires=1915185780&OSSAccessKeyId=LTAI4G74cnhsbDWNkfvuNew3&Signature=gfzIKuRSjSAgJlLculXHxuUJ4HU%3D'
+				img1: 'https://qg-qr.oss-cn-shenzhen.aliyuncs.com/test/1609927390266.png?Expires=1925287389&OSSAccessKeyId=LTAI4G74cnhsbDWNkfvuNew3&Signature=ZG23vinx%2B7dXdvZBZDkraJZh8Uw%3D',
+				img2: 'https://qg-qr.oss-cn-shenzhen.aliyuncs.com/test/1609927695970.png?Expires=1925287695&OSSAccessKeyId=LTAI4G74cnhsbDWNkfvuNew3&Signature=V%2BYRmHE94sqPhTGhYt0DxqiLj3Q%3D',
+				img3: 'https://qg-qr.oss-cn-shenzhen.aliyuncs.com/test/1609927714719.png?Expires=1925287712&OSSAccessKeyId=LTAI4G74cnhsbDWNkfvuNew3&Signature=Fll6xIgg%2FpOHSdWmXHhLqWRMZD0%3D'
 			}
 		},
 		methods: {

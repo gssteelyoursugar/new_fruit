@@ -1,8 +1,6 @@
 <template>
 	<view>
-
 		<view class="tui-header">
-
 			<view class="tui-rolling-search" @click="goToSearchGoods">
 				<tui-icon name="search-2" :size="36" unit="rpx"></tui-icon>
 				<!-- <icon type="search" :size="13" color="#999"></icon> -->
@@ -19,7 +17,6 @@
 			<scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh - 100upx)"
 			 :scroll-into-view="'main-'+mainCur" @scroll="VerticalMain">
 				<view class="padding-top padding-lr" v-for="(item,index) in menuList" :key="index" :id="'main-'+index">
-
 					<view class="cu-bar solid-bottom bg-white">
 						<view class="action">
 							<!-- <text class="cuIcon-title text-green">777</text> -->
@@ -37,7 +34,6 @@
 									<image :src="itemTwo.url" class="g-image" />
 									<view class="g-title">{{itemTwo.title}}</view>
 								</view>
-
 							</view>
 						</view>
 					</view>
@@ -52,7 +48,8 @@
 		listing2
 	} from '../../api/api.js'
 	import {
-		getsearch
+		getsearch,
+		getSearchByCode
 	} from '../../api/request.js'
 	const {
 		log
@@ -66,7 +63,9 @@
 				tabCur: 0,
 				mainCur: 0,
 				verticalNavTop: 0,
-				load: true
+				load: true,
+				specialList: [],
+				tapType: 1
 			};
 		},
 		onLoad() {
@@ -117,7 +116,10 @@
 				this.tabCur = e.id;
 				this.mainCur = e.id;
 				this.verticalNavTop = (e.id - 1) * 50
+				
+				
 			},
+			
 			navBar(name, id) {
 				uni.navigateTo({
 					url: '../../pagesII/productList/productList?name=' + name + '&id=' + id

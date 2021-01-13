@@ -125,7 +125,6 @@
 				
 				let videoData = JSON.parse(e.data)
 				this.VideoDatas = videoData.data
-				log(this.VideoDatas)
 				// this.uploadFileResData = JSON.parse(uploadFileRes.data)
 			},
 			//返回
@@ -158,7 +157,6 @@
 			chooseImage (e) {
 				let that = this;
 				if (that.files.length >= 5) {
-					log("最多上传9张图片");
 					return
 				}
 				
@@ -167,7 +165,6 @@
 					sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
 					sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
 					success: function (res) {
-						log(res)
 						// 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
 						that.files=that.files.concat(res.tempFilePaths)
 						//上传功能已移除
@@ -220,7 +217,6 @@
 				this.flag = true
 				let that = this;
 				if (that.files.length >= 5) {
-					log("最多上传5张图片");
 					return
 				}
 				
@@ -251,11 +247,9 @@
 					})
 					return
 				}else{
-					log('成了')
 					
 					let setdata = uni.getStorageSync('usermen')
 					let newArr = this.files.toString()+','+ this.VideoDatas //上传图片和视频
-					log(newArr)
 					let data ={
 						orderItemId:this.id,
 						afterSaleDescribe:this.Describe,  //售后描述
@@ -268,15 +262,11 @@
 					//判断用户是否点击上传图片，是否要传fileUrls,flase不传值
 					if(this.flag == false){
 						delete data.fileUrls
-						log('没有上传图片')
 					}else if(this.flag == true){
-						log('点击了上传图片')
 					}
-					log(data)
 					
 					publicing(posAfterSale,data)
 					.then((res)=>{
-						log(res)
 						let code = res.data.code
 						if(code ==200){
 							 this.Describe = ""
@@ -321,7 +311,6 @@
 					let new_arr = this.ValueList.map(obj => {return obj.treeNames})//提取数组里面的每一项里面的id
 					
 					this.ValueList = new_arr
-					log(this.ValueList)
 				})
 				.catch((err)=>{
 					console.log(err)

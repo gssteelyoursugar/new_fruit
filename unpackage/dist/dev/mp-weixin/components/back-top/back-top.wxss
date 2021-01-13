@@ -14,8 +14,7 @@
 
 	width: 72rpx;
 	height: 72rpx;
-	-webkit-border-radius: 50%;
-	        border-radius: 50%;
+	border-radius: 50%;
 	transform: translateZ(0);
 	-webkit-transform: translateZ(0);
 }

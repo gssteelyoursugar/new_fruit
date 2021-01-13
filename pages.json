@@ -185,7 +185,7 @@
 					"style": {
 						"enablePullDownRefresh": true,
 						// "navigationStyle":"custom",
-						"navigationBarTitleText": "超值专区"
+						"navigationBarTitleText": "特价专区"
 					}
 				}, {
 					"path": "OrderStatistics/OrderStatistics",
@@ -272,6 +272,15 @@
                     "style" :                                                                                    
                 {
                     "navigationBarTitleText": "上市预告",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+                ,{
+                    "path" : "testShare/testShare",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "测试分享",
                     "enablePullDownRefresh": false
                 }
                 

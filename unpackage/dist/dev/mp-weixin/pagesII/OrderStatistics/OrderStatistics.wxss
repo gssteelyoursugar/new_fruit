@@ -6,8 +6,7 @@
 	left: 0;
 	right: 0;
 	width: 100%;
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 	height: 224rpx;
 	top: 0;
 	border-top: 20rpx solid #f5f5f5;
@@ -72,8 +71,7 @@
 	display: block;
 	margin-right: 10rpx;
 	/* background: #eee; */
-	-webkit-border-radius: 6rpx;
-	        border-radius: 6rpx;
+	border-radius: 6rpx;
 }
 .tui-pro-tit {
 	-webkit-box-flex: 5;
@@ -82,13 +80,11 @@
 }
 .tag-tit {
 	/* 渐变色 */
-	background-image: -webkit-gradient(linear, left top, right top, from(#00c94a), to(#00ac3f));
 	background-image: -webkit-linear-gradient(left, #00c94a, #00ac3f);
 	background-image: linear-gradient(to right, #00c94a, #00ac3f);
 	margin-right: 10rpx;
 	padding: 0 10rpx;
-	-webkit-border-radius: 15rpx 0 15rpx 0;
-	        border-radius: 15rpx 0 15rpx 0;
+	border-radius: 15rpx 0 15rpx 0;
 	color: #fff;
 	font-size: 24rpx;
 }
@@ -146,8 +142,7 @@
 	height: 80rpx;
 	line-height: 80rpx;
 	border: 1rpx solid rgba(0, 197, 42, 1);
-	-webkit-border-radius: 60rpx;
-	        border-radius: 60rpx;
+	border-radius: 60rpx;
 	text-align: center;
 	color: rgba(0, 197, 42, 1);
 	margin-top: 60rpx;

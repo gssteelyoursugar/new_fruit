@@ -1,10 +1,10 @@
 <template>
-	<view class="container" :style="{paddingTop: navHeight + 'px'}">
-		<view class="index-bg" :style="{opacity: bgOpcity}">
-			<image src="../../static/images/index_bg.png" :style="{height: statusHeight <= 20 ?'318rpx' : '338rpx'}" mode="aspectFill"></image>
+	<view class="container" :style="{ paddingTop: navHeight + 'px' }">
+		<view class="index-bg" :style="{ opacity: bgOpcity }">
+			<image src="../../static/images/index_bg.png" :style="{ height: statusHeight <= 20 ? '318rpx' : '338rpx' }" mode="aspectFill"></image>
 		</view>
 		<view class="tui-header-box" :style="{ height: navHeight + 'px', background: 'rgba(0,197,42,' + opcity + ')' }">
-			<view class="tui-header" :style="{ marginTop: statusHeight + 'px',height: boxHeight + 'px' }">
+			<view class="tui-header" :style="{ marginTop: statusHeight + 'px', height: boxHeight + 'px' }">
 				<view class="tui-left" @click="scanCode">
 					<image src="../../static/images/sceen.png" mode="aspectFit" class="tui-left-saoma"></image>
 				</view>
@@ -14,20 +14,18 @@
 				<view class="tui-left"></view>
 			</view>
 		</view>
-		<view class="weather-container" style="margin: 10rpx 0 20rpx;" :style="{opacity: canSee}">
+		<view class="weather-container" style="margin: 10rpx 0 20rpx;" :style="{ opacity: canSee }">
 			<view class="weather-tui-flex ">
 				<view class="weather-tui-left ">
 					<image src="../../static/images/dingwei@2x.png" mode="aspectFit" class="weather-dingwei"></image>
-					<text class="weather-city" style="font-size: 24rpx;" v-if="address&& ApproveStatus === 1">配送至{{address}}</text>
+					<text class="weather-city" style="font-size: 24rpx;" v-if="address && ApproveStatus === 1">配送至{{ address }}</text>
 					<text class="weather-city" v-if="ApproveStatus !== 1">配送至</text>
-					<view class="weather-tui-class" v-if="ApproveStatus !== 1 && showAuthTips">
-					</view>
-					<view class="weather-tui-class2" v-if="ApproveStatus !== 1 && showAuthTips">
-						请认证店铺信息
-					</view>
+					<view class="weather-tui-class" v-if="ApproveStatus !== 1 && showAuthTips"></view>
+					<view class="weather-tui-class2" v-if="ApproveStatus !== 1 && showAuthTips">请认证店铺信息</view>
 				</view>
-				<view class="weather-tui-right" v-if="ApproveStatus === 1 ">
-					<text>{{weatherObj.weather}}</text><text>{{weatherObj.temperature}}℃</text>
+				<view class="weather-tui-right" v-if="ApproveStatus === 1">
+					<text>{{ weatherObj.weather }}</text>
+					<text>{{ weatherObj.temperature }}℃</text>
 				</view>
 			</view>
 		</view>
@@ -35,9 +33,10 @@
 			<Banner @childSwitch="goToLimit" :banner="WxIndexViewpager"></Banner>
 			<view class="bac">
 				<view class="tui-tag">
-					<block v-for="(item,index) in WxPostersBottomAdve" :key="index">
+					<block v-for="(item, index) in WxPostersBottomAdve" :key="index">
 						<view class="tui-row">
-							<image :src="item.url" mode="aspectFit" class="iconImg icon-right"></image> {{item.title}}
+							<image :src="item.url" mode="aspectFit" class="iconImg icon-right"></image>
+							{{ item.title }}
 						</view>
 					</block>
 				</view>
@@ -45,13 +44,13 @@
 			<!-- 金刚区 -->
 			<view class=" swiper-item-top">
 				<block v-if="WxTopNavigationBar">
-					<view class="conteng-img" @tap="hrefKing(index)" v-for=" (item,index) in WxTopNavigationBar" :key="index">
+					<view class="conteng-img" @tap="hrefKing(index,item.title)" v-for="(item, index) in WxTopNavigationBar" :key="index">
 						<image :src="item.url" mode="widthFix" class="uploadimg1"></image>
-						<text>{{item.title}}</text>
+						<text>{{ item.title }}</text>
 					</view>
 				</block>
-				<block v-if="!WxTopNavigationBar || WxTopNavigationBar.length=== 0">
-					<view class="conteng-img" @tap="hrefKing(index)" v-for="item of 5" :key="item">
+				<block v-if="!WxTopNavigationBar || WxTopNavigationBar.length === 0">
+					<view class="conteng-img" @tap="hrefKing(index,item.title)" v-for="item of 5" :key="item">
 						<view class="loading-bg"></view>
 						<view class=""></view>
 					</view>
@@ -59,13 +58,13 @@
 			</view>
 			<view class="swiper-item">
 				<block v-if="HotVarieties">
-					<view class="conteng-img contentitem" v-if="index<5" v-for="(item,index) in HotVarieties" :key="index" @tap="gotoBreed(item.name,item.id)">
+					<view class="conteng-img contentitem" v-if="index < 5" v-for="(item, index) in HotVarieties" :key="index" @tap="gotoBreed(item.name, item.id)">
 						<image :src="item.url" mode="widthFix" class="uploadimg"></image>
-						<text>{{item.name}}</text>
+						<text>{{ item.name }}</text>
 					</view>
 				</block>
 				<block v-if="!HotVarieties || HotVarieties.length === 0">
-					<view class="conteng-img contentitem" v-for="(item,index) in 5" :key="index" @tap="gotoBreed(item.name,item.id)">
+					<view class="conteng-img contentitem" v-for="(item, index) in 5" :key="index" @tap="gotoBreed(item.name, item.id)">
 						<view class="hot-loading-bg"></view>
 						<view></view>
 					</view>
@@ -80,9 +79,8 @@
 				<view class="tui-rolling-news">
 					<image style="margin-right:20rpx;width: 36rpx;height: 40rpx;" src="../../static/images/message.png" mode=""></image>
 					<swiper vertical autoplay circular interval="3000" class="tui-swiper">
-						<swiper-item v-for="(item,index) in WxPublicMsg" :key="index" class="tui-swiper-item">
-							<view class="tui-news-item" @tap="goTimeInfo(item.id,item.content,item.title,item.createDate)">{{item.title}}
-							</view>
+						<swiper-item v-for="(item, index) in WxPublicMsg" :key="index" class="tui-swiper-item">
+							<view class="tui-news-item" @tap="goTimeInfo(item.id, item.content, item.title, item.createDate)">{{ item.title }}</view>
 							<!-- <text class="tui-see" >查看<text class="iconfont icon-weibiaoti34"></text></text> -->
 						</swiper-item>
 					</swiper>
@@ -99,23 +97,24 @@
 						<view class="top-left-title">爆款限量批</view>
 						<view class="top-left-countdown">
 							<tui-countdown :time="ts" size="28" width="36" height="36" color="#FF7709" borderColor="#ffffff" backgroundColor="#ffffff"
-							 colonColor="#ffffff" @end="endOfTime">
-							</tui-countdown>
+							 colonColor="#ffffff" @end="endOfTime"></tui-countdown>
 						</view>
 					</view>
 					<view class="top-right" @click="goLimit()">
-						<view class="more-btn">查看更多<image src="../../static/images/r_arrow.png" mode=""></image>
+						<view class="more-btn">
+							查看更多
+							<image src="../../static/images/r_arrow.png" mode=""></image>
 						</view>
 					</view>
 				</view>
 				<view class="new-limit-single-content">
-					<view class="new-limit-single-item" @click="clickToDetail(item.id)" v-for="(item,index) of WxActivityList" :key="index">
+					<view class="new-limit-single-item" @click="clickToDetail(item.id)" v-for="(item, index) of WxActivityList" :key="index">
 						<view class="item-url">
 							<image :src="item.url" mode=""></image>
 						</view>
 						<view class="item-info">
-							<view class="item-name">{{item.title}}</view>
-							<view class="item-specification">{{item.specification}}</view>
+							<view class="item-name">{{ item.title }}</view>
+							<view class="item-specification">{{ item.specification }}</view>
 							<view class="item-buy-btn">
 								<view class="buy-btn-bg">
 									<image src="../../static/images/buy_btn.png" mode=""></image>
@@ -123,18 +122,17 @@
 								<view class="item-price-buy">
 									<view class="left-price">
 										<text>¥</text>
-										<text>{{ApproveStatus === 1 ?item.platformClinetPrice: '***'}}</text>
+										<text>{{ ApproveStatus === 1 ? item.platformClinetPrice : '***' }}</text>
 										<text>/件</text>
 									</view>
 									<view class="right-buy">立刻购买</view>
 								</view>
 							</view>
 						</view>
-
 					</view>
 				</view>
 			</view>
-			
+
 			<view class="new-limit-multi-wrap" v-if="WxActivity.status == '0' && WxActivityList && WxActivityList.length !== 0 && WxActivityList.length > 1">
 				<view class="new-limit-bg">
 					<image src="../../static/images/new_limit.png" mode=""></image>
@@ -144,28 +142,30 @@
 						<view class="top-left-title">爆款限量批</view>
 						<view class="top-left-countdown">
 							<tui-countdown :time="ts" size="28" width="36" height="36" color="#FF7709" borderColor="#ffffff" backgroundColor="#ffffff"
-							 colonColor="#ffffff" @end="endOfTime">
-							</tui-countdown>
+							 colonColor="#ffffff" @end="endOfTime"></tui-countdown>
 						</view>
 					</view>
 					<view class="top-right" @click="goLimit()">
-						<view class="more-btn">查看更多<image src="../../static/images/r_arrow.png" mode=""></image>
+						<view class="more-btn">
+							查看更多
+							<image src="../../static/images/r_arrow.png" mode=""></image>
 						</view>
 					</view>
 				</view>
 				<view class="new-limit-content">
 					<scroll-view scroll-x="true" style="width: 100%">
 						<view class="content-box">
-							<view class="box-item" @click="clickToDetail(item.id)" v-for="(item,index) of WxActivityList" :key="index">
+							<view class="box-item" @click="clickToDetail(item.id)" v-for="(item, index) of WxActivityList" :key="index">
 								<view class="item-url">
 									<image :src="item.url" mode=""></image>
 								</view>
-								<view class="item-name">{{item.title}}</view>
+								<view class="item-name">{{ item.title }}</view>
 								<view class="item-price-action">
 									<view class="item-price">
 										<text>¥</text>
-										<text>{{ ApproveStatus === 1 ?item.platformClinetPrice: '***'}}</text>
+										<text>{{ ApproveStatus === 1 ? item.platformClinetPrice : '***' }}</text>
 										<text>/件</text>
+										<!-- 如果4位数的话就不显示/件 v-if="Math.floor(item.platformClinetPrice).toString().length < 4" -->
 									</view>
 									<view class="item-action">立即抢购</view>
 								</view>
@@ -174,7 +174,6 @@
 					</scroll-view>
 				</view>
 			</view>
-
 
 			<!-- 2020-12-21新版首页排行榜 hotGoods-->
 			<view class="hot-goods-wrap">
@@ -192,23 +191,23 @@
 						</view>
 					</view>
 					<view class="top-right">
-						<view class="more-btn" @click="goToRank()">查看更多<image src="../../static/images/r_arrow.png" mode=""></image>
+						<view class="more-btn" @click="goToRank()">
+							查看更多
+							<image src="../../static/images/r_arrow.png" mode=""></image>
 						</view>
 					</view>
 				</view>
 				<view class="hot-goods-content">
-					<view class="content-item" @click.stop="clickToDetail(item.id)" v-for="(item,index) of hotGoods" :key="index">
+					<view class="content-item" @click.stop="clickToDetail(item.id)" v-for="(item, index) of hotGoods" :key="index">
 						<view class="item-url">
 							<image :src="item.url" mode=""></image>
 						</view>
-						<view class="item-name">{{item.name}}</view>
-						<view class="item-specification">
-							{{item.specification}}
-						</view>
+						<view class="item-name">{{ item.name }}</view>
+						<view class="item-specification">{{ item.specification }}</view>
 						<view class="item-price-action">
 							<view class="item-price">
 								<text>¥</text>
-								<text>{{ ApproveStatus === 1 ?item.platformClientPrice: '***'}}</text>
+								<text>{{ ApproveStatus === 1 ? item.platformClientPrice : '***' }}</text>
 							</view>
 							<view class="item-action" @click.stop="clickToCart(item.id)">
 								<image src="../../static/images/plus_cart.png" mode=""></image>
@@ -219,17 +218,17 @@
 			</view>
 
 			<!-- 推荐好货 -->
-			<view class="xiding" :style="{top: navHeight+ 'px'}">
+			<view class="xiding" :style="{ top: navHeight + 'px' }">
 				<view class="tui-recommend">
-					<block v-for="(item,index) in flexing" :key="index">
+					<block v-for="(item, index) in flexing" :key="index">
 						<view class="tui-fixed-3 " @click="flexClick(index)">
-							<view class="fixed-3-font-wei" :class="{fixedweight:index == num}">{{item.title}}</view>
-							<view class="fixed-3-font-weitwo" :class="{fixed3fontweione:index == num}">{{item.name}}</view>
+							<view class="fixed-3-font-wei" :class="{ fixedweight: index == num }">{{ item.title }}</view>
+							<view class="fixed-3-font-weitwo" :class="{ fixed3fontweione: index == num }">{{ item.name }}</view>
 						</view>
 					</block>
 				</view>
 			</view>
-			<swiper :current="currentSwiperItem" :style="{height: swiperHeight + 'px'}" @change="handleChange" :indicator-dots="false"
+			<swiper :current="currentSwiperItem" :style="{ height: swiperHeight + 'px' }" @change="handleChange" :indicator-dots="false"
 			 :autoplay="false" easing-function="easeInOutCubic">
 				<swiper-item>
 					<!-- 水果列表页 -->
@@ -247,34 +246,41 @@
 										</view>
 										<view class="tui-pro-content">
 											<view class="tui-pro-tit">
-												<text class="tag-tit">{{item.lableName}}</text>
-												<text class="tag-tit-text">{{item.name}}</text>
+												<text class="tag-tit">{{ item.lableName }}</text>
+												<text class="tag-tit-text">{{ item.name }}</text>
 											</view>
 											<view>
 												<view class="tui-pro-price">
-													<text class="tui-sale-price">{{item.describe}}</text>
+													<text class="tui-sale-price">{{ item.describe }}</text>
 													<!-- <text class="tui-factory-price">￥20</text> -->
 												</view>
 												<view class="tui-pro-pay">
-													<block v-for="(itemTwo,indexs) in item.goodsType" :key="indexs">
-														<view class="tag-tit-border">{{itemTwo.name}}</view>
+													<block v-for="(itemTwo, indexs) in item.goodsType" :key="indexs">
+														<view class="tag-tit-border">{{ itemTwo.name }}</view>
 													</block>
 												</view>
 												<view class="tui-pro-pic">
 													<view class="tui-rate">
 														<text>&yen;</text>
-														{{ApproveStatus===1? item.platformClinetPrice:'***'}}
-														<text class="tui-rate-text "> /件</text>
+														{{ ApproveStatus === 1 ? item.platformClinetPrice : '***' }}
+														<text class="tui-rate-text ">/件</text>
 													</view>
-													<view class="tui-rate-price" v-if="item.marketPrice &&item.marketPrice != 0"><text>&yen;</text>{{ApproveStatus===1? item.marketPrice:'***'}}</view>
+													<view class="tui-rate-price" v-if="item.marketPrice && item.marketPrice != 0">
+														<text>&yen;</text>
+														{{ ApproveStatus === 1 ? item.marketPrice : '***' }}
+													</view>
 													<!--<text class="tui-praise  " @tap="praise(index)">
 														<text class="tui-praise iconfont icon-like  " v-if="!item.showSearch1"></text>
 														<text class="tui-praise iconfont icon-dianzan " v-if="item.showSearch1"></text>{{item.praiseNumber |filterNum}}
 													</text> -->
 												</view>
 												<view class="tui-pro-dea">
-													<text class="tui-jin1">{{item.specification}}</text>
-													<text class="tui-jin">成交<text class="tui-dea-color">{{item.total | filterNum}}</text>元</text>
+													<text class="tui-jin1">{{ item.specification }}</text>
+													<text class="tui-jin">
+														成交
+														<text class="tui-dea-color">{{ item.total | filterNum }}</text>
+														元
+													</text>
 												</view>
 											</view>
 										</view>
@@ -293,34 +299,41 @@
 										</view>
 										<view class="tui-pro-content">
 											<view class="tui-pro-tit">
-												<text class="tag-tit">{{item.lableName}}</text>
-												<text class="tag-tit-text">{{item.name}}</text>
+												<text class="tag-tit">{{ item.lableName }}</text>
+												<text class="tag-tit-text">{{ item.name }}</text>
 											</view>
 											<view>
 												<view class="tui-pro-price">
-													<text class="tui-sale-price">{{item.describe}}</text>
+													<text class="tui-sale-price">{{ item.describe }}</text>
 													<!-- <text class="tui-factory-price">￥20</text> -->
 												</view>
 												<view class="tui-pro-pay">
-													<block v-for="(itemTwo,indexs) in item.goodsType" :key="indexs">
-														<view class="tag-tit-border">{{itemTwo.name}}</view>
+													<block v-for="(itemTwo, indexs) in item.goodsType" :key="indexs">
+														<view class="tag-tit-border">{{ itemTwo.name }}</view>
 													</block>
 												</view>
 												<view class="tui-pro-pic">
 													<view class="tui-rate">
 														<text>&yen;</text>
-														{{ApproveStatus===1? item.platformClinetPrice:'***'}}
-														<text class="tui-rate-text "> /件</text>
+														{{ ApproveStatus === 1 ? item.platformClinetPrice : '***' }}
+														<text class="tui-rate-text ">/件</text>
 													</view>
-													<view class="tui-rate-price" v-if="item.marketPrice &&item.marketPrice != 0"> <text>&yen;</text>{{ApproveStatus===1? item.marketPrice:'***'}}</view>
+													<view class="tui-rate-price" v-if="item.marketPrice && item.marketPrice != 0">
+														<text>&yen;</text>
+														{{ ApproveStatus === 1 ? item.marketPrice : '***' }}
+													</view>
 													<!-- <text class="tui-praise  " @tap="praise(index)">
 														<text class="tui-praise iconfont icon-like  " v-if="!item.showSearch1"></text>
 														<text class="tui-praise iconfont icon-dianzan " v-if="item.showSearch1"></text>{{item.praiseNumber |filterNum}}
 													</text> -->
 												</view>
 												<view class="tui-pro-dea">
-													<text class="tui-jin1">{{item.specification}}</text>
-													<text class="tui-jin">成交<text class="tui-dea-color">{{item.total | filterNum}}</text>元</text>
+													<text class="tui-jin1">{{ item.specification }}</text>
+													<text class="tui-jin">
+														成交
+														<text class="tui-dea-color">{{ item.total | filterNum }}</text>
+														元
+													</text>
 												</view>
 											</view>
 										</view>
@@ -346,34 +359,42 @@
 										</view>
 										<view class="tui-pro-content">
 											<view class="tui-pro-tit">
-												<text class="tag-tit">{{item.lableName}}</text>
-												<text class="tag-tit-text">{{item.name}}</text>
+												<text class="tag-tit">{{ item.lableName }}</text>
+												<text class="tag-tit-text">{{ item.name }}</text>
 											</view>
 											<view>
 												<view class="tui-pro-price">
-													<text class="tui-sale-price">{{item.describe}}</text>
+													<text class="tui-sale-price">{{ item.describe }}</text>
 													<!-- <text class="tui-factory-price">￥20</text> -->
 												</view>
 												<view class="tui-pro-pay">
-													<block v-for="(itemTwo,indexs) in item.goodsType" :key="indexs">
-														<view class="tag-tit-border">{{itemTwo.name}}</view>
+													<block v-for="(itemTwo, indexs) in item.goodsType" :key="indexs">
+														<view class="tag-tit-border">{{ itemTwo.name }}</view>
 													</block>
 												</view>
 												<view class="tui-pro-pic">
 													<view class="tui-rate">
 														<text>&yen;</text>
-														{{ApproveStatus===1? item.platformClinetPrice:'***'}}
-														<text class="tui-rate-text "> /件</text>
+														{{ ApproveStatus === 1 ? item.platformClinetPrice : '***' }}
+														<text class="tui-rate-text ">/件</text>
 													</view>
-													<view class="tui-rate-price" v-if="item.marketPrice &&item.marketPrice != 0"><text>&yen;</text>{{ApproveStatus===1? item.marketPrice:'***'}}</view>
+													<view class="tui-rate-price" v-if="item.marketPrice && item.marketPrice != 0">
+														<text>&yen;</text>
+														{{ ApproveStatus === 1 ? item.marketPrice : '***' }}
+													</view>
 													<text class="tui-praise  " @tap="praise(index)">
 														<text class="tui-praise iconfont icon-like  " v-if="!item.showSearch1"></text>
-														<text class="tui-praise iconfont icon-dianzan " v-if="item.showSearch1"></text>{{item.praiseNumber |filterNum}}
+														<text class="tui-praise iconfont icon-dianzan " v-if="item.showSearch1"></text>
+														{{ item.praiseNumber | filterNum }}
 													</text>
 												</view>
 												<view class="tui-pro-dea">
-													<text class="tui-jin1">{{item.specification}}</text>
-													<text class="tui-jin">成交<text class="tui-dea-color">{{item.total | filterNum}}</text>元</text>
+													<text class="tui-jin1">{{ item.specification }}</text>
+													<text class="tui-jin">
+														成交
+														<text class="tui-dea-color">{{ item.total | filterNum }}</text>
+														元
+													</text>
 												</view>
 											</view>
 										</view>
@@ -392,34 +413,42 @@
 										</view>
 										<view class="tui-pro-content">
 											<view class="tui-pro-tit">
-												<text class="tag-tit">{{item.lableName}}</text>
-												<text class="tag-tit-text">{{item.name}}</text>
+												<text class="tag-tit">{{ item.lableName }}</text>
+												<text class="tag-tit-text">{{ item.name }}</text>
 											</view>
 											<view>
 												<view class="tui-pro-price">
-													<text class="tui-sale-price">{{item.describe}}</text>
+													<text class="tui-sale-price">{{ item.describe }}</text>
 													<!-- <text class="tui-factory-price">￥20</text> -->
 												</view>
 												<view class="tui-pro-pay">
-													<block v-for="(itemTwo,indexs) in item.goodsType" :key="indexs">
-														<view class="tag-tit-border">{{itemTwo.name}}</view>
+													<block v-for="(itemTwo, indexs) in item.goodsType" :key="indexs">
+														<view class="tag-tit-border">{{ itemTwo.name }}</view>
 													</block>
 												</view>
 												<view class="tui-pro-pic">
 													<view class="tui-rate">
 														<text>&yen;</text>
-														{{ApproveStatus===1? item.platformClinetPrice:'***'}}
-														<text class="tui-rate-text "> /件</text>
+														{{ ApproveStatus === 1 ? item.platformClinetPrice : '***' }}
+														<text class="tui-rate-text ">/件</text>
 													</view>
-													<view class="tui-rate-price" v-if="item.marketPrice &&item.marketPrice != 0"> <text>&yen;</text>{{ApproveStatus===1? item.marketPrice:'***'}}</view>
+													<view class="tui-rate-price" v-if="item.marketPrice && item.marketPrice != 0">
+														<text>&yen;</text>
+														{{ ApproveStatus === 1 ? item.marketPrice : '***' }}
+													</view>
 													<text class="tui-praise  " @tap="praise(index)">
 														<text class="tui-praise iconfont icon-like  " v-if="!item.showSearch1"></text>
-														<text class="tui-praise iconfont icon-dianzan " v-if="item.showSearch1"></text>{{item.praiseNumber |filterNum}}
+														<text class="tui-praise iconfont icon-dianzan " v-if="item.showSearch1"></text>
+														{{ item.praiseNumber | filterNum }}
 													</text>
 												</view>
 												<view class="tui-pro-dea">
-													<text class="tui-jin1">{{item.specification}}</text>
-													<text class="tui-jin">成交<text class="tui-dea-color">{{item.total | filterNum}}</text>元</text>
+													<text class="tui-jin1">{{ item.specification }}</text>
+													<text class="tui-jin">
+														成交
+														<text class="tui-dea-color">{{ item.total | filterNum }}</text>
+														元
+													</text>
 												</view>
 											</view>
 										</view>
@@ -431,7 +460,7 @@
 				</swiper-item>
 			</swiper>
 
-			<view class="warp" :style="{top: navHeight + 'px'}" v-if="modaishow">
+			<view class="warp" :style="{ top: navHeight + 'px' }" v-if="modaishow">
 				<view class="warp-view">
 					<view class="warp-text1">温馨提示</view>
 					<view class="warp-text">请先登录</view>
@@ -441,7 +470,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="warp" :style="{top: navHeight + 'px'}" v-if="isVerify">
+			<view class="warp" :style="{ top: navHeight + 'px' }" v-if="isVerify">
 				<view class="warp-view">
 					<view class="warp-text1">温馨提示</view>
 					<view class="warp-text">未验证店铺信息</view>
@@ -456,6 +485,10 @@
 			<back-top :scrollTop="topss"></back-top>
 			<view class="tui-safearea-bottom"></view>
 		</view>
+		<view class="now-to-login" v-if="!wxlogin">
+			<view class="login-tips-text">登录后可查看商品价格</view>
+			<view class="login-button"><button open-type="getUserInfo" @getuserinfo="getUserInfo">立即登录</button></view>
+		</view>
 	</view>
 </template>
 
@@ -463,8 +496,8 @@
 	import {
 		mapMutations
 	} from 'vuex';
-	import Weather from './components/weather.vue'
-	import Banner from './components/banner.vue'
+	import Weather from './components/weather.vue';
+	import Banner from './components/banner.vue';
 	// import amap from '@/common/SDK/amap-wx.js'
 	import amap from '../../common/SDK/amap-wx.js';
 	//请求
@@ -473,7 +506,7 @@
 		publicing,
 		listing2,
 		publicing2
-	} from '../../api/api.js'
+	} from '../../api/api.js';
 	//请求地址
 	import {
 		getIndex,
@@ -486,15 +519,15 @@
 		postmyOrder,
 		loginis,
 		getClient
-	} from '../../api/request.js'
+	} from '../../api/request.js';
 
 	// 引入vuex的mapstate
 	import {
 		mapState
-	} from 'vuex'
+	} from 'vuex';
 	var {
 		log
-	} = console
+	} = console;
 	var isFirst = true;
 	var isFirst1 = true;
 	export default {
@@ -504,10 +537,11 @@
 		},
 		data() {
 			return {
+				wxlogin: true,
 				modaishow: false, //是否登录
 				isVerify: false, //是否验证
 				currentSwiperItem: 0, //推荐好货 的当前轮播模块
-				swiperHeight: 300,
+				swiperHeight: 0,
 				hotGoods: [],
 				topss: 0,
 				showAuthTips: true,
@@ -557,8 +591,8 @@
 				key: '69d24a06f6710467afea85cb0c8db3e1',
 				banner: ['6.jpg', '6.jpg', '6.jpg', '6.jpg', '6.jpg'],
 				flexing: [{
-						title: '推荐好货',
-						name: '猜你喜欢'
+						title: '批发市场', //推荐好货
+						name: '送货到店' // 猜你喜欢
 					},
 					// {
 					// 	title: '实时鲜果',
@@ -567,7 +601,6 @@
 					{
 						title: '产地直供',
 						name: '一手货源'
-
 					}
 				],
 				dataList: [{
@@ -599,62 +632,62 @@
 				boxHeight: 44,
 				navHeight: 64,
 				weatherObj: {
-					weather: "",
-					temperature: ""
+					weather: '',
+					temperature: ''
 				},
 				tempData: {
 					pageNo: 1,
 					pageSize: 10
 				}
-			}
+			};
 		},
 
 		onReachBottom() {
 			if (!this.noMore) {
-				this.tempData.pageNo++
-				this.getIndexClass()
+				this.tempData.pageNo++;
+				this.getIndexClass();
 			} else {
 				uni.showToast({
-					title: "没有更多啦~",
+					title: '没有更多啦~',
 					icon: 'none'
-				})
+				});
 			}
 		},
 		methods: {
 			handleChange(e) {
 				const {
 					current
-				} = e.detail
-				this.num = current
-				this.currentSwiperItem = current
-				this.IndexGoods = []
-				this.tempData.pageNo = 1
-				this.noMore = false
+				} = e.detail;
+				this.num = current;
+				this.currentSwiperItem = current;
+				this.IndexGoods = [];
+				this.tempData.pageNo = 1;
+				this.noMore = false;
 				if (this.num === 0) {
-					this.Sumify = 1
+					this.Sumify = 1;
 				} else if (this.num === 1) {
-					this.Sumify = 3 // 原本有三项，现改为2项，取消中间的那一项
+					this.Sumify = 3; // 原本有三项，现改为2项，取消中间的那一项
 				}
-				this.getIndexClass()
+				this.getIndexClass();
 			},
 			//点击进入详情
 			clickToDetail(id) {
 				uni.navigateTo({
 					url: '../../pagesIII/productDetail/productDetail?id=' + id
-				})
+				});
 			},
 			// 点击加入购物车
 			clickToCart(id) {
-				const setdata = uni.getStorageSync('usermen')
+				const setdata = uni.getStorageSync('usermen');
 				if (!setdata) {
 					this.modaishow = true;
-					return
+					return;
 				} else {
 					// this.modaishow = false
 					this.modaishow = false;
 					if (this.ApproveStatus === null || this.ApproveStatus === undefined || this.ApproveStatus === '' || this.ApproveStatus ===
 						2) {
-						this.toggleVerify()
+						this.toggleVerify();
 						return;
 					}
 					if (this.ApproveStatus === 0) {
@@ -681,14 +714,13 @@
 									});
 								} else {
 									// this.postDetails();
-									this.canCart = true
+									this.canCart = true;
 									uni.showToast({
 										title: '加入进货单成功',
 										icon: 'none',
 										duration: 3000
 									});
-									this.orderIng()
-
+									this.orderIng();
 								}
 							})
 							.catch(err => {
@@ -707,34 +739,33 @@
 						if (res.data.code && res.data.code != 200) {
 							uni.showToast({
 								title: res.data.msg,
-								icon: "none"
-							})
+								icon: 'none'
+							});
 							// uni.switchTab({
 							// 	url: '../my/my'
 							// })
-							return
+							return;
 						}
-						let lists = res.data.data
-						
+						let lists = res.data.data;
+
 						if (lists) {
-							let cartNum = 0
-							lists.forEach(it=> {
+							let cartNum = 0;
+							lists.forEach(it => {
 								if (it.list) {
-									cartNum += it.list.length
+									cartNum += it.list.length;
 								}
-							})
+							});
 							if (lists.length !== 0) {
 								uni.setTabBarBadge({
 									index: 3,
 									text: cartNum + ''
-								})
+								});
 							} else {
 								uni.removeTabBarBadge({
 									index: 3
-								})
+								});
 							}
 						}
-
 					})
 					.catch(err => {
 						log(err);
@@ -745,26 +776,28 @@
 				this.modaishow = false;
 			},
 			toggleVerify() {
-				this.isVerify = !this.isVerify
+				this.isVerify = !this.isVerify;
 			},
 			clickToVerify() {
 				uni.navigateTo({
 					url: '../../pagesII/tendShop/tendShop'
-				})
-				this.toggleVerify()
+				});
+				this.toggleVerify();
 			},
 			//获取推荐好货的高度
 			getHeight() {
 				const query = uni.createSelectorQuery().in(this);
-				query.select('.tui-product-list').boundingClientRect(data => {
-					this.swiperHeight = parseInt(data.height)
-				}).exec();
-
+				query
+					.select('.tui-product-list')
+					.boundingClientRect(data => {
+						this.swiperHeight = parseInt(data.height);
+					})
+					.exec();
 			},
 			//推荐好货请求
 			flexClick(e) {
-				this.num = e
-				this.currentSwiperItem = e
+				this.num = e;
+				this.currentSwiperItem = e;
 				// this.IndexGoods = []
 				// this.tempData.pageNo = 1
 				// this.noMore = false
@@ -778,117 +811,119 @@
 			//请求首页列表
 			getIndexClass() {
 				let data2 = Object.assign({
-					indexClassify: this.Sumify,
-				}, this.tempData)
+						indexClassify: this.Sumify
+					},
+					this.tempData
+				);
 				uni.showLoading({
-					title: "加载中..."
-				})
+					title: '加载中...'
+				});
 				listing(getClassify, data2)
-					.then((res) => {
+					.then(res => {
 						setTimeout(() => {
-							uni.hideLoading()
-						}, 200)
+							uni.hideLoading();
+						}, 200);
 						//处理数据格式,praiseNumber
 						let goodsData = res.data.data.data;
 						// this.IndexGoods = goodsData //【1】首页分类数据
-						this.IndexGoods = this.IndexGoods.concat(goodsData)
+						this.IndexGoods = this.IndexGoods.concat(goodsData);
 
 						setTimeout(() => {
-							this.getHeight()
-						}, 100)
+							this.getHeight();
+						}, 100);
 						if (goodsData.length == 0 || goodsData.length < this.tempData.pageSize) {
-							this.noMore = true
-							return
+							this.noMore = true;
+							return;
 						}
 					})
-					.catch((err) => {
-						log(err)
-					})
+					.catch(err => {
+						log(err);
+					});
 			},
 			//请求首页
 			getHomelist() {
-				let setdata = uni.getStorageSync('usermen')
+				let setdata = uni.getStorageSync('usermen');
 				let data = {
 					pageNo: '1',
 					pageSize: '1000',
 					token: setdata
-				}
+				};
 				listing(getIndex, data) //请求首页数据接口
 					// listing(getIndex,data) //单发请求
-					.then((res) => {
-						this.hotGoods = res.data.data.hotGoods
-						this.address = res.data.data.address
-						this.HotVarieties = res.data.data.HotVarieties //【0】首页分类列表
-						this.WxTopNavigationBar = res.data.data.WxTopNavigationBar
-						this.WxIndexViewpager = res.data.data.WxIndexViewpager
-						this.WxPublicMsg = res.data.data.WxPublicMsg
-						this.WxPublicMsgID = res.data.data.WxPublicMsg.id //公告id
-						this.WxPostersBottomAdve = res.data.data.WxPostersBottomAdve
-						this.NewGoods = res.data.data.NewGoods.goods //新果上市
-						this.WxActivity = res.data.data.WxActivity //限量区数据ID+倒计时
-						this.WxActivityID = res.data.data.WxActivity.id //限量区数据ID+倒计时
-						this.WxActivityList = res.data.data.WxActivity.list //首页限量区数据
-						this.startTime = res.data.data.WxActivity.startTime
-						this.endTime = res.data.data.WxActivity.endTime
-						this.createTime = res.data.data.WxActivity.createTime
-						this.ts = (this.endTime - this.createTime) / 1000
+					.then(res => {
+						this.hotGoods = res.data.data.hotGoods;
+						this.address = res.data.data.address;
+						this.HotVarieties = res.data.data.HotVarieties; //【0】首页分类列表
+						this.WxTopNavigationBar = res.data.data.WxTopNavigationBar;
+						this.WxIndexViewpager = res.data.data.WxIndexViewpager;
+						this.WxPublicMsg = res.data.data.WxPublicMsg;
+						this.WxPublicMsgID = res.data.data.WxPublicMsg.id; //公告id
+						this.WxPostersBottomAdve = res.data.data.WxPostersBottomAdve;
+						this.NewGoods = res.data.data.NewGoods.goods; //新果上市
+						this.WxActivity = res.data.data.WxActivity; //限量区数据ID+倒计时
+						this.WxActivityID = res.data.data.WxActivity.id; //限量区数据ID+倒计时
+						this.WxActivityList = res.data.data.WxActivity.list; //首页限量区数据
+						this.startTime = res.data.data.WxActivity.startTime;
+						this.endTime = res.data.data.WxActivity.endTime;
+						this.createTime = res.data.data.WxActivity.createTime;
+						this.ts = (this.endTime - this.createTime) / 1000;
 						this.dd = parseInt(this.ts / 60 / 60 / 24, 10); //计算剩余的天数
-						this.hh = parseInt(this.ts / 60 / 60 % 24, 10); //计算剩余的小时数
-						this.mm = parseInt(this.ts / 60 % 60); //计算剩余的分钟数
+						this.hh = parseInt((this.ts / 60 / 60) % 24, 10); //计算剩余的小时数
+						this.mm = parseInt((this.ts / 60) % 60); //计算剩余的分钟数
 						this.ss = parseInt(this.ts % 60, 10); //计算剩余的秒数
 					})
-					.catch((err) => {
-						console.log(err)
-					})
+					.catch(err => {
+						console.log(err);
+					});
 			},
 
-			// 点击轮播图跳转			
+			// 点击轮播图跳转
 			goToLimit(val) {
 				uni.navigateTo({
 					url: val.url
-				})
+				});
 			},
 
 			getMerchants() {
-				let setdata = uni.getStorageSync('usermen')
+				let setdata = uni.getStorageSync('usermen');
 				if (!setdata) {
-					this.ApproveStatus = 0
-					return
+					this.ApproveStatus = 0;
+					return;
 				} else {
 					let data = {
 						token: setdata
-					}
+					};
 					listing(getClient, data)
-						.then((res) => {
+						.then(res => {
 							if (res.data.code && res.data.code != 200) {
 								uni.showToast({
 									title: res.data.msg,
 									icon: 'none',
 									duration: 3000
-								})
-								this.ApproveStatus = undefined
+								});
+								this.ApproveStatus = undefined;
 								uni.switchTab({
-									url: "../my/my"
-								})
-								return
+									url: '../my/my'
+								});
+								return;
 							}
 							///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
-							this.ApproveStatus = res.data.data.approveStatus //获取电偶状态码，0未认证，1已认证，2拒绝
-							let cityCode = res.data.data.address
+							this.ApproveStatus = res.data.data.approveStatus; //获取电偶状态码，0未认证，1已认证，2拒绝
+							let cityCode = res.data.data.address;
 							this.amapPlugin = new amap.AMapWX({
-								key: this.key,
+								key: this.key
 							});
 							this.amapPlugin.getWeather({
 								city: cityCode,
-								success: (wres) => {
-									this.weatherObj.temperature = wres.liveData.temperature
-									this.weatherObj.weather = wres.liveData.weather
+								success: wres => {
+									this.weatherObj.temperature = wres.liveData.temperature;
+									this.weatherObj.weather = wres.liveData.weather;
 								}
 							});
 						})
-						.catch((err) => {
-							log(err)
-						})
+						.catch(err => {
+							log(err);
+						});
 				}
 			},
 
@@ -896,7 +931,7 @@
 			golook() {
 				uni.navigateTo({
 					url: '../../pagesII/Recently/Recently'
-				})
+				});
 			},
 			//弹出协议
 			popupState(state) {},
@@ -906,28 +941,28 @@
 				uni.navigateTo({
 					url: '../../pagesII/timeInfo/timeInfo?id=' + id + '&content=' + content + '&createDate=' + createDate +
 						'&title=' + title
-				})
+				});
 			},
 			//倒计时
 			endOfTime: function() {},
 			//金刚区跳转
-			hrefKing(index) {
-				let url = "";
+			hrefKing(index, title) {
+				let url = '';
 				switch (index) {
 					case 0:
-						url = "../../pagesII/seasonal/seasonal" //应季专区
+						url = '../../pagesII/seasonal/seasonal?title=' + title; //应季专区
 						break;
 					case 1:
-						url = "../../pagesII/hotFruit/hotFruit" //热门品种
+						url = '../../pagesII/hotFruit/hotFruit?title=' + title; //热门品种
 						break;
 					case 2:
-						url = "../../pagesII/ImportedFruit/ImportedFruit" //进口水果
+						url = '../../pagesII/ImportedFruit/ImportedFruit?title=' + title; //进口水果
 						break;
 					case 3:
-						url = "../../pagesII/superValue/superValue" //超值专区
+						url = '../../pagesII/superValue/superValue?title=' + title; //超值专区
 						break;
 					case 4:
-						url = "../../pagesII/Recently/Recently" //最近看过
+						url = '../../pagesII/Recently/Recently?title=' + title; //最近看过
 						break;
 					default:
 						break;
@@ -935,63 +970,63 @@
 				if (url) {
 					uni.navigateTo({
 						url: url
-					})
+					});
 				} else {
 					uni.showToast({
 						title: '功能未完成~',
 						icon: 'none'
-					})
+					});
 				}
 			},
 			//资讯页
 			goMessage() {
 				uni.navigateTo({
 					url: '../../pagesII/message/message'
-				})
+				});
 			},
 			gotoGun() {
 				uni.switchTab({
 					url: '../../pages/search/search'
-				})
+				});
 			},
 			// 头部
 			onPageScroll(e) {
-				this.topss = e.scrollTop
+				this.topss = e.scrollTop;
 				if (this.statusHeight > 20) {
 					if (e.scrollTop < 20) {
-						this.canSee = 1 - (e.scrollTop / 10)
-						this.opcity = 0.3 + (e.scrollTop / 50)
+						this.canSee = 1 - e.scrollTop / 10;
+						this.opcity = 0.3 + e.scrollTop / 50;
 					}
 					if (e.scrollTop < 70) {
-						this.bgOpcity = 1 + (e.scrollTop / 100)
+						this.bgOpcity = 1 + e.scrollTop / 100;
 					}
 					if (e.scrollTop >= 70) {
-						this.opcity = 1
-						this.canSee = 0
+						this.opcity = 1;
+						this.canSee = 0;
 					}
 					if (e.scrollTop > 70) {
-						this.bgOpcity = 0
+						this.bgOpcity = 0;
 					}
 				} else {
 					if (e.scrollTop < 14) {
-						this.canSee = 1 - (e.scrollTop / 10)
-						this.opcity = 0.3 + (e.scrollTop / 50)
+						this.canSee = 1 - e.scrollTop / 10;
+						this.opcity = 0.3 + e.scrollTop / 50;
 					}
 					if (e.scrollTop < 40) {
-						this.bgOpcity = 1 + (e.scrollTop / 100)
+						this.bgOpcity = 1 + e.scrollTop / 100;
 					}
 					if (e.scrollTop >= 40) {
-						this.opcity = 1
-						this.canSee = 0
+						this.opcity = 1;
+						this.canSee = 0;
 					}
 					if (e.scrollTop > 40) {
-						this.bgOpcity = 0
+						this.bgOpcity = 0;
 					}
 				}
 				if (e.scrollTop === 0) {
 					// this.WeatherHide = true
-					this.opcity = 0
-					this.canSee = 1
+					this.opcity = 0;
+					this.canSee = 1;
 				}
 			},
 			//获取微信昵称
@@ -1026,15 +1061,16 @@
 						if (res.statusCode == 200 && res.data.statusCode == 500) {
 							uni.showToast({
 								title: '登录信息过期,请重新登录',
-								icon: "none"
-							})
+								icon: 'none'
+							});
 							setTimeout(() => {
-								uni.removeStorageSync('userIN')
-								uni.removeStorageSync('usermen')
-								uni.removeStorageSync('StoreStatus')
-								this.ifUser()
-							}, 1000)
-							return
+								uni.removeStorageSync('userIN');
+								uni.removeStorageSync('usermen');
+								uni.removeStorageSync('StoreStatus');
+								this.ifUser();
+								
+							}, 1000);
+							return;
 						} else {
 							uni.setStorageSync('usermen', res.data.token); //把token存在本地，小程序提供如同浏览器cookie
 							var setdata = uni.getStorageSync('usermen');
@@ -1043,7 +1079,8 @@
 								uni.showToast({
 									title: '登录成功'
 								});
-							}, 100)
+							}, 100);
+							this.wxlogin = true
 							this.getMerchants();
 						}
 					})
@@ -1052,20 +1089,20 @@
 					});
 			},
 			ifUser() {
-				let setdata = uni.getStorageSync('usermen')
+				let setdata = uni.getStorageSync('usermen');
 				if (!setdata) {
-					uni.showToast({
-						title: '请登录',
-						duration: 2000
-					});
-					this.wxlogin = false
+					// uni.showToast({
+					// 	title: '请登录',
+					// 	duration: 2000
+					// });
+					this.wxlogin = false;
 				} else {
-					uni.showToast({
-						title: '已登录',
-						duration: 2000
-					});
-					this.wxlogin = true
-					this.usering = setdata
+					// uni.showToast({
+					// 	title: '已登录',
+					// 	duration: 2000
+					// });
+					this.wxlogin = true;
+					this.usering = setdata;
 				}
 			},
 
@@ -1090,34 +1127,34 @@
 
 			//限量批页面
 			goLimit() {
-				let id = this.WxActivityID
+				let id = this.WxActivityID;
 				uni.navigateTo({
 					url: '../../pagesII/Limit/Limit?id=' + id
-				})
+				});
 			},
 			//新果上市
 			fruitGo() {
 				uni.navigateTo({
 					url: '../../pagesII/fruitList/fruitList'
-				})
+				});
 			},
 			//排行榜
 			goToRank() {
 				uni.navigateTo({
 					url: '../../pagesII/rankingList/rankingList?index=0&value=shop'
-				})
+				});
 			},
 			//带参数跳转
 			gotoBreed(name, id) {
 				uni.navigateTo({
 					url: '../../pagesII/productList/productList?name=' + name + '&id=' + id
-				})
+				});
 			},
 			//商品详情页
 			gotoList(id) {
 				uni.navigateTo({
 					url: '../../pagesIII/productDetail/productDetail?id=' + id
-				})
+				});
 			},
 
 			// 点赞列表1
@@ -1133,8 +1170,8 @@
 			// 点赞列表2
 			praise1(e) {
 				if (isFirst1) {
-					this.showSearch1 = !this.showSearch1
-					this.praiseNum1++ //点赞一次
+					this.showSearch1 = !this.showSearch1;
+					this.praiseNum1++; //点赞一次
 					isFirst1 = false;
 				}
 			},
@@ -1154,69 +1191,73 @@
 					}
 				});
 			},
+
+
 		},
 		//下来刷新
 		onPullDownRefresh: function() {
-			this.IndexGoods = []
-			this.tempData.pageNo = 1
-			this.noMore = false
-			this.getMerchants()
-			this.getHomelist()
-			this.getIndexClass()
+			this.IndexGoods = [];
+			this.tempData.pageNo = 1;
+			this.noMore = false;
+			this.getMerchants();
+			this.getHomelist();
+			this.getIndexClass();
 			uni.stopPullDownRefresh();
 		},
 		//初始化
 		onLoad() {
-			this.getMerchants()
-			this.getIndexClass()
+			this.getMerchants();
+			this.getIndexClass();
 			// this.getGoodsAll()
 			//请求首页
-			this.getHomelist()
+			this.getHomelist();
 			//新版头部
 			// #ifndef H5 || APP-PLUS || MP-ALIPAY
 			const res = uni.getSystemInfoSync();
 			let {
 				statusBarHeight
-			} = res
-			let info = uni.getMenuButtonBoundingClientRect()
+			} = res;
+			let info = uni.getMenuButtonBoundingClientRect();
 			let {
 				top,
 				bottom
-			} = info
-			this.statusHeight = statusBarHeight
-			let buttonHeight = (bottom - statusBarHeight) + (top - statusBarHeight)
-			let navHeight = statusBarHeight + buttonHeight + top - statusBarHeight //状态栏+导航栏的高度（页面初始高度）
-			this.boxHeight = navHeight - statusBarHeight //导航栏高度
-			this.navHeight = navHeight
+			} = info;
+			this.statusHeight = statusBarHeight;
+			let buttonHeight = bottom - statusBarHeight + (top - statusBarHeight);
+			let navHeight = statusBarHeight + buttonHeight + top - statusBarHeight; //状态栏+导航栏的高度（页面初始高度）
+			this.boxHeight = navHeight - statusBarHeight; //导航栏高度
+			this.navHeight = navHeight;
 			// #endif
 			setTimeout(() => {
-				this.showAuthTips = false
-			}, 5000)
+				this.showAuthTips = false;
+			}, 5000);
 		},
 
-		onNavigationBarButtonTap(e) {
-
-		},
+		onNavigationBarButtonTap(e) {},
+		
 		onShow() {
-			let setdata = uni.getStorageSync("usermen")
+			let setdata = uni.getStorageSync('usermen');
 			if (setdata) {
-				this.orderIng()
+				this.orderIng();
 			}
-			this.getMerchants()
-			this.getHomelist()
+			this.getMerchants();
+			this.getHomelist();
+			this.ifUser()
 		},
 		// 转发
 		onShareAppMessage: function() {
 			return {
 				title: '',
-				imageUrl: '../../static/images/taozi.jpg',
+				imageUrl: '../../static/images/taozi.jpg'
 				// path: '/pages/test/test?id=123'
-			}
+			};
 		},
 
-		// 监听页面滚动距离
 		mounted() {
-
+			uni.showShareMenu({
+				withShareTicket: true,
+				menus: ['shareAppMessage', 'shareTimeline']
+			});
 		},
 		filters: {
 			filterNum(val) {
@@ -1227,22 +1268,22 @@
 						res = val;
 					}
 					if (words.length === 5) {
-						res = words[0] + "." + words[1] + '万';
+						res = words[0] + '.' + words[1] + '万';
 					}
 					if (words.length === 6) {
-						res = words[0] + words[1] + "." + words[2] + '万';
+						res = words[0] + words[1] + '.' + words[2] + '万';
 					}
 					if (words.length === 7) {
-						res = words[0] + words[1] + words[2] + "." + words[3] + '万';
+						res = words[0] + words[1] + words[2] + '.' + words[3] + '万';
 					}
 					if (words.length === 8) {
-						res = words[0] + words[1] + words[2] + words[3] + "." + words[4] + '万';
+						res = words[0] + words[1] + words[2] + words[3] + '.' + words[4] + '万';
 					}
 					if (words.length === 9) {
-						res = words[0] + "." + words[1] + '亿';
+						res = words[0] + '.' + words[1] + '亿';
 					}
 					if (words.length === 10) {
-						res = words[0] + words[1] + "." + words[2] + '亿';
+						res = words[0] + words[1] + '.' + words[2] + '亿';
 					}
 					return res;
 				} else {
@@ -1253,11 +1294,12 @@
 		computed: {
 			...mapState(['screendata']),
 			// 筛选来的商家数据
-			count() {
-				this.takeshop = this.screendata.screenarr
+
+			isShowUnit(val) {
+				return;
 			}
 		}
-	}
+	};
 </script>
 
 <style lang="less" scoped>
@@ -1324,7 +1366,7 @@
 					display: flex;
 					align-items: center;
 					justify-content: center;
-					color: #00BD45;
+					color: #00bd45;
 					border-radius: 14rpx;
 					height: 46rpx;
 
@@ -1371,12 +1413,11 @@
 						overflow: hidden;
 						text-overflow: ellipsis;
 						min-height: 92rpx;
-						
 					}
 
 					.item-specification {
 						font-size: 24rpx;
-						color: #7F7F7F;
+						color: #7f7f7f;
 						font-weight: 400;
 						margin-bottom: 36rpx;
 						margin-top: 12rpx;
@@ -1425,7 +1466,7 @@
 							.left-price {
 								width: 50%;
 								text-align: center;
-								color: #FF7709;
+								color: #ff7709;
 
 								text {
 									&:first-child {
@@ -1520,7 +1561,7 @@
 					display: flex;
 					align-items: center;
 					justify-content: center;
-					color: #00BD45;
+					color: #00bd45;
 					border-radius: 14rpx;
 					height: 46rpx;
 
@@ -1581,7 +1622,7 @@
 						justify-content: space-between;
 
 						.item-price {
-							color: #FF7709;
+							color: #ff7709;
 							margin-right: 10rpx;
 
 							text {
@@ -1598,17 +1639,17 @@
 
 								&:nth-child(3) {
 									font-size: 24rpx;
-									color: #B6B6B6;
+									color: #b6b6b6;
 								}
 							}
 						}
 
 						.item-action {
 							height: 50rpx;
-							width: 130rpx;
+							width: 110rpx;
 							text-align: center;
-							font-size: 24rpx;
-							background: linear-gradient(to right, #FCA421, #FF7709);
+							font-size: 20rpx;
+							background: linear-gradient(to right, #fca421, #ff7709);
 							border-radius: 14rpx;
 							line-height: 50rpx;
 							color: #fff;
@@ -1700,7 +1741,7 @@
 					display: flex;
 					align-items: center;
 					justify-content: center;
-					color: #00BD45;
+					color: #00bd45;
 					border-radius: 14rpx;
 					height: 46rpx;
 
@@ -1762,7 +1803,7 @@
 					justify-content: space-between;
 
 					.item-price {
-						color: #FF7709;
+						color: #ff7709;
 						margin-right: 10rpx;
 
 						text {
@@ -1807,7 +1848,6 @@
 		-webkit-transform: rotate(40deg);
 		-moz-transform: rotate(40deg);
 		background-color: rgba(0, 0, 0, 0.9);
-
 	}
 
 	.weather-tui-class2 {
@@ -1831,7 +1871,7 @@
 	}
 
 	.weather-container {
-		transition: all .3s;
+		transition: all 0.3s;
 	}
 
 	.weather-tui-flex {
@@ -1847,7 +1887,6 @@
 		flex: 3;
 		display: flex;
 		align-items: center;
-
 	}
 
 	.weather-tui-right {
@@ -1884,7 +1923,6 @@
 		font-size: 30rpx;
 		margin: 0 4rpx;
 		font-weight: 500;
-
 	}
 
 	/* 协议 */
@@ -1898,7 +1936,7 @@
 		left: 0;
 		right: 0;
 		z-index: -1;
-		transition: all .1s;
+		transition: all 0.1s;
 	}
 
 	.index-bg image {
@@ -1907,8 +1945,43 @@
 		z-index: -1;
 	}
 
+	.now-to-login {
+		display: flex;
+		position: fixed;
+		bottom: 14rpx;
+		justify-content: space-between;
+		left: 14rpx;
+		right: 14rpx;
+		background: rgba(0, 0, 0, .5);
+		border-radius: 12rpx;
+		align-items: center;
+		color: #fff;
+		box-sizing: border-box;
+		padding: 0 20rpx;
+		height: 80rpx;
+		z-index: 9999;
+
+		.login-tips-text {
+			font-size: 24rpx;
+			font-weight: 500;
+		}
+
+		.login-button {
+			button {
+				font-size: 24rpx;
+				padding: 8rpx 20rpx;
+				margin: 0;
+				line-height: unset;
+				border-radius: 60rpx;
+				background: #21ca2b;
+				font-weight: 500;
+				color: #fff;
+			}
+		}
+	}
+
 	.index-content {
-		z-index: 999
+		z-index: 999;
 	}
 
 	.tui-header-icon {
@@ -1942,11 +2015,11 @@
 	}
 
 	.yangshi2 {
-		color: #F00E2C !important;
+		color: #f00e2c !important;
 	}
 
 	.icon-dianzan {
-		color: #FFBE33 !important;
+		color: #ffbe33 !important;
 		margin-right: 8rpx;
 	}
 
@@ -1954,7 +2027,6 @@
 		width: 30rpx;
 		height: 30rpx;
 		display: block;
-
 	}
 
 	.dalaba-icon {
@@ -1981,7 +2053,7 @@
 	/* 水果列表 */
 	.tag-tit {
 		/* 渐变色 */
-		background-image: linear-gradient(to right, #00C94A, #00AC3F);
+		background-image: linear-gradient(to right, #00c94a, #00ac3f);
 		margin-right: 10rpx;
 		padding: 0 10rpx;
 		border-radius: 15rpx 0 15rpx 0;
@@ -2001,7 +2073,6 @@
 	}
 
 	.tui-product-list {
-
 		display: flex;
 		justify-content: space-between;
 		flex-direction: row;
@@ -2039,17 +2110,16 @@
 		right: 0;
 		left: 0;
 		bottom: 0;
-		background: rgba(255, 255, 255, .5);
+		background: rgba(255, 255, 255, 0.5);
 		display: flex;
 		align-items: center;
 		text-align: center;
 		justify-content: center;
 		border-radius: 20rpx 20rpx 0 0;
-
 	}
 
 	.item-text {
-		background: rgba(0, 0, 0, .6);
+		background: rgba(0, 0, 0, 0.6);
 		color: #fff;
 		font-size: 28rpx;
 		padding: 6rpx 16rpx;
@@ -2088,7 +2158,7 @@
 
 	.tui-sale-price {
 		font-size: 20rpx;
-		color: #7F7F7F;
+		color: #7f7f7f;
 	}
 
 	.tui-factory-price {
@@ -2106,7 +2176,6 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: baseline;
-
 	}
 
 	.tui-pro-dea {
@@ -2116,7 +2185,7 @@
 
 	/* 省略文字 */
 	.tui-jin1 {
-		color: #B6B6B6;
+		color: #b6b6b6;
 		font-size: 24rpx;
 		/* width: 100rpx;
 		text-overflow: ellipsis;
@@ -2125,19 +2194,18 @@
 	}
 
 	.tui-jin {
-		color: #B6B6B6;
-		font-size: 24rpx
+		color: #b6b6b6;
+		font-size: 24rpx;
 	}
 
 	.tui-dea-color {
-		color: #FF4300;
+		color: #ff4300;
 	}
 
 	.tui-rate {
-		color: #FF4300;
+		color: #ff4300;
 		font-size: 40rpx;
 		font-weight: 500;
-
 	}
 
 	.tui-rate text {
@@ -2146,7 +2214,7 @@
 	}
 
 	.tui-rate-price {
-		color: #B6B6B6;
+		color: #b6b6b6;
 		font-size: 24rpx;
 		font-weight: 700;
 		text-decoration: line-through;
@@ -2156,21 +2224,19 @@
 
 	.tui-rate-price text {
 		font-size: 16rpx;
-		color: #B6B6B6;
+		color: #b6b6b6;
 		margin-right: 2rpx;
-
 	}
 
 	.tui-rate-text {
-		color: #B6B6B6;
+		color: #b6b6b6;
 		font-size: 24rpx;
 		margin-left: 4rpx;
 	}
 
 	.tui-praise {
-		color: #C4C4C4;
+		color: #c4c4c4;
 		font-size: 24rpx;
-
 	}
 
 	.icon-like {
@@ -2185,13 +2251,12 @@
 		border-radius: 18rpx;
 		margin-right: 10rpx;
 		display: inline-flex;
-
 	}
 
 	/* 推荐好货 */
 	.border1px {
-		border-left: 1rpx solid #E9E9E9;
-		border-right: 1rpx solid #E9E9E9;
+		border-left: 1rpx solid #e9e9e9;
+		border-right: 1rpx solid #e9e9e9;
 		padding: 10rpx 0;
 	}
 
@@ -2202,39 +2267,36 @@
 	.fixed-3-font-wei {
 		font-size: 36rpx;
 		font-weight: 700;
-		color: #000;
+		// color: #000;
+		color: #fff;
 		margin: 2rpx 0;
-
-
 	}
 
 	.fixedweight {
 		font-weight: 700;
-		color: rgba(0, 198, 42, 1);
+		// color: rgba(0, 198, 42, 1);
+		color: #fff;
 		font-size: 36rpx;
 		margin: 2rpx 0;
-
 	}
-
-
 
 	.fixed-3-font-weitwo {
 		font-size: 28rpx;
-		color: #9A9A9A;
+		// color: #9a9a9a;
+		color: #fff;
 		font-weight: 400;
 		width: 66%;
 		margin: 0 auto;
 		padding: 5rpx 0rpx;
 		border-radius: 60rpx;
 		background: transparent;
-		transition: all .5s;
-
+		transition: all 0.5s;
 	}
 
 	.fixed3fontweione {
 		color: #fff !important;
-		background: linear-gradient(to right, #00C94A, #00AC3F);
-
+		// background: linear-gradient(to right, #00c94a, #00ac3f);
+		background: linear-gradient(to right, #FF7709, #FF7709);
 	}
 
 	.xiding {
@@ -2244,7 +2306,6 @@
 		/* border-radius: 30rpx; */
 		/* overflow: hidden; */
 		/* margin: 14rpx 20rpx 0; */
-
 	}
 
 	.tui-recommend {
@@ -2253,7 +2314,8 @@
 		text-align: center;
 		display: flex;
 		justify-content: space-around;
-		background-color: #fff;
+		// background-color: #fff;
+		background: rgba(0, 197, 42, 1);
 		padding: 20rpx 0;
 	}
 
@@ -2320,7 +2382,6 @@
 		justify-content: space-around;
 		width: 100%;
 		background-color: #fff;
-
 	}
 
 	/* 1像素边框 */
@@ -2333,16 +2394,12 @@
 		height: 20rpx;
 		text-align: center;
 		/* border-bottom: 1rpx solid #e9e9e9; */
-
-
-
 	}
 
 	.tui-price-color {
-		color: #FF4300;
+		color: #ff4300;
 		font-size: 32rpx;
 		font-weight: 500;
-
 	}
 
 	.tui-weight {
@@ -2356,9 +2413,8 @@
 		display: flex;
 		-webkit-align-items: baseline;
 		align-items: baseline;
-		color: #FF6500;
+		color: #ff6500;
 		margin-top: 14rpx;
-
 	}
 
 	.tui-first-price {
@@ -2366,17 +2422,15 @@
 		align-items: baseline;
 		width: 100%;
 		justify-content: center;
-
 	}
 
 	.tui-last-price {
-		color: #B6B6B6;
+		color: #b6b6b6;
 		margin-left: 6rpx;
-
 	}
 
 	.price-label {
-		color: #B6B6B6;
+		color: #b6b6b6;
 		font-size: 20rpx;
 	}
 
@@ -2410,10 +2464,8 @@
 	}
 
 	.tui-Fruits-table {
-
 		text-align: center;
 		line-height: 26rpx;
-
 	}
 
 	/* 限量批 */
@@ -2432,7 +2484,6 @@
 		border-radius: 4rpx 20rpx 4rpx 20rpx;
 		padding: 2rpx 2rpx 2rpx 16rpx;
 		margin-left: 16rpx;
-
 	}
 
 	.tui-count-down {
@@ -2473,7 +2524,6 @@
 		background-color: #fff;
 		margin: 20rpx;
 		border-radius: 40rpx;
-
 	}
 
 	.icon-weibiaoti34 {
@@ -2482,7 +2532,7 @@
 	}
 
 	.icon-laba {
-		color: #00AC3F;
+		color: #00ac3f;
 		font-size: 36rpx;
 	}
 
@@ -2494,7 +2544,6 @@
 		float: left;
 		right: -10rpx;
 		display: block;
-
 	}
 
 	.tui-tips {
@@ -2505,7 +2554,6 @@
 		white-space: nowrap;
 		text-overflow: ellipsis;
 		font-weight: 600;
-
 	}
 
 	.tui-magin-left {
@@ -2527,7 +2575,7 @@
 		height: 180rpx;
 		background-color: #fff;
 		border-radius: 30rpx 30rpx 0 0;
-		color: #6E6E6E;
+		color: #6e6e6e;
 		/* padding: 0 20rpx; */
 		margin: 0 20rpx;
 	}
@@ -2537,7 +2585,7 @@
 		flex-wrap: wrap;
 		align-items: center;
 		justify-content: center;
-		color: #6E6E6E;
+		color: #6e6e6e;
 		background-color: #fff;
 		border-radius: 0 0 30rpx 30rpx;
 		/* padding: 0 20rpx; */
@@ -2553,7 +2601,7 @@
 	}
 
 	.contentitem {
-		content: "";
+		content: '';
 	}
 
 	.uploadimg {
@@ -2599,8 +2647,6 @@
 		height: 52rpx;
 	}
 
-
-
 	.conteng-img text {
 		padding-top: 20upx;
 		font-size: 25upx;
@@ -2613,7 +2659,7 @@
 		/* height: 290rpx; */
 		margin: 0 14rpx;
 		background-color: #f7f7f7;
-		color: #00AC3F;
+		color: #00ac3f;
 		position: relative;
 	}
 
@@ -2641,7 +2687,6 @@
 		color: #00ac3f;
 		display: flex;
 		align-items: center;
-
 	}
 
 	/* 主体 */
@@ -2655,7 +2700,6 @@
 
 	.tui-left {
 		flex: 1;
-
 	}
 
 	.tui-mid {
@@ -2680,8 +2724,6 @@
 		height: env(safe-area-inset-bottom);
 	}
 
-
-
 	.bgimg1 {
 		position: fixed;
 		top: 0;
@@ -2699,10 +2741,9 @@
 	}
 
 	.icon-saomiao {
-		color: #FFFFFF;
+		color: #ffffff;
 		font-size: 50rpx;
 	}
-
 
 	/* 新版头部渐变 */
 	.tui-my-bg {
@@ -2731,13 +2772,11 @@
 		position: relative;
 		top: -42rpx;
 		padding: 0 30rpx;
-
 	}
 
 	.tui-tab-rank-cent {
 		display: flex;
 		padding: 20rpx 0;
-
 	}
 
 	.img-rink {
@@ -2750,15 +2789,12 @@
 	}
 
 	.tui-pro-tit {
-
 		flex: 5;
-
-
 	}
 
 	.tag-tit {
 		/* 渐变色 */
-		background-image: linear-gradient(to right, #00C94A, #00AC3F);
+		background-image: linear-gradient(to right, #00c94a, #00ac3f);
 		margin-right: 10rpx;
 		padding: 0 10rpx;
 		border-radius: 15rpx 0 15rpx 0;
@@ -2772,7 +2808,7 @@
 	}
 
 	.tag-tit2-price {
-		color: #FF5600;
+		color: #ff5600;
 		font-size: 16rpx;
 	}
 
@@ -2808,7 +2844,7 @@
 
 	.activetext {
 		color: #fff !important;
-		background-image: linear-gradient(to right, #FF943D, #FF5600);
+		background-image: linear-gradient(to right, #ff943d, #ff5600);
 		border-radius: 60rpx;
 	}
 
@@ -2821,7 +2857,6 @@
 		border-radius: 60rpx;
 		background-color: #f7f7f7;
 		margin-bottom: 80rpx;
-
 	}
 
 	.tui-tab-btn {
@@ -2831,7 +2866,6 @@
 		font-size: 20rpx;
 		color: #333333;
 		line-height: 60rpx;
-
 	}
 
 	.tui-header-box {
@@ -2841,7 +2875,7 @@
 		top: 0;
 		z-index: 995;
 		transition: all 400;
-		transition: all .3s;
+		transition: all 0.3s;
 	}
 
 	.tui-header {
@@ -2962,7 +2996,7 @@
 
 	.tui-swiper-item {
 		display: flex;
-		align-items: center
+		align-items: center;
 	}
 
 	.tui-news-item {
@@ -2970,10 +3004,9 @@
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
-		color: #0E0E0E;
+		color: #0e0e0e;
 		font-weight: normal;
 		font-size: 28rpx;
-
 	}
 
 	/* 模态弹窗布局 */

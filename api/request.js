@@ -10,8 +10,8 @@ let wxloginurl = `${url}wxuser/wxlogin`
 // // 线上	
 // let url = 'https://cs.zgqgpt.com/'
 // let url = "http://testqg.natapp1.cc/"
-// let url = "https://qg.zgqgpt.com/"
-let url = "http://192.168.1.50:8980/"
+let url = "https://qg.zgqgpt.com/"
+// let url = "http://192.168.1.53:8980/"
 
 // let url = 'http://dwh.natapp1.cc/js/'
 let imgurl = 'http://192.168.1.10:8980'
@@ -50,6 +50,10 @@ let getMsgInfo = `${url}api/wx/index/getMsg`
 //商品详情页
 let postdelist = `${url}api/wx/goods/getById`
 
+
+//商品详情页面菊花码
+let getMpCodeById = `${url}api/wx/view/ganQr`
+
 //订单详情
 let orderHistory = `${url}api/wx/goods/getByIdHistory`
 
@@ -80,6 +84,8 @@ let loginis = `${url}api/wx/user/login`
 
 //找水果
 let getsearch = `${url}api/wx/menu/select`
+
+let getSearchByCode = `${url}api/wx/menu/selectByMenuCode`
 
 
 //获取申请店铺信息
@@ -219,9 +225,11 @@ export {
 	getIndex,
 	loginis,
 	getsearch,
+	getSearchByCode,
 	postActivity,
 	getClassify,
 	postdelist,
+	getMpCodeById,
 	getGoodsall,
 	getAttribute,
 	url,
