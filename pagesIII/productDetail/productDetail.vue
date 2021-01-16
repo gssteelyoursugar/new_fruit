@@ -92,12 +92,27 @@
 								<view class="tui-magin">
 									<text class="tui-code">￥</text>
 									<text class="tui-price-one">{{ApproveStatus===1? shopListdata.platformClientPrice:'***' }}</text>
-									<text style="font-size:28rpx;">元</text>
+									<text style="font-size:28rpx;margin-left: 4rpx;">元</text>
 									<text>/件</text>
 								</view>
 								<view class="tui-huaxian" v-if="shopListdata.marketPrice && shopListdata.marketPrice != 0">￥{{ApproveStatus===1? shopListdata.marketPrice:'***' }}元/件</view>
 							</view>
 						</view>
+					</view>
+					<view class="shop-identify" v-if="shopListdata.enterName && shopListdata.enterName !== ''">
+						<block v-if="shopListdata.enterNumber && shopListdata.enterNumber !== ''">
+							<view class="shop-no">
+								<text>海吉星档口号:</text><text>{{shopListdata.enterNumber}}</text>
+							</view>
+							<view class="shop-name" >
+								<text>档口名称:</text><text>{{shopListdata.enterName}}</text>
+							</view>
+						</block>
+						<block v-else>
+							<view class="shop-name">
+								<text>基地名称:</text><text>{{shopListdata.enterName}}</text>
+							</view>
+						</block>
 					</view>
 					<view class="tui-pro-title">
 						<text class="tui-pro-title-tag special-item" v-if="shopListdata.restrictionNumber">每人限购{{ shopListdata.restrictionNumber || 0 }}件</text>
@@ -298,7 +313,7 @@
 												<text class="tui-price-one" style="font-size: 20rpx;">￥</text>
 												<view class="tui-price-one">
 													{{ApproveStatus===1 ?shopListdata.platformClientPrice:'***' }}
-													<text style="font-size: 24rpx;">元</text>
+													<text style="font-size: 24rpx;margin-left: 4rpx;">元</text>
 												</view>
 												/件
 											</view>
@@ -558,15 +573,15 @@
 			let setdata = uni.getStorageSync('usermen');
 			this.token = setdata;
 			if (options.scene) {
-				let scene = decodeURIComponent(options.scene).substr(4)
-				this.productID = scene;
+				// let scene = decodeURIComponent(options.scene).substr(4)
+				this.productID = options.scene;
 			} else {
 				this.productID = options.id;
 			}
 			this.SystemInfo = await this.getSystemInfo();
 			this.canvasW = this.SystemInfo.windowWidth * 2; // 画布宽度
 			this.canvasH = this.SystemInfo.windowHeight * 2; // 画布高度
-			this.canvasImgTimes = this.canvasW / this.canvasH
+			this.canvasImgTimes = this.canvasW / this.canvasH // 画布比例
 			this.postDetails();
 			this.postSettle();
 			this.getMerchants();
@@ -652,7 +667,7 @@
 					src: this.shareImg,
 					success: (res) => {
 						this.mainImg = res
-						
+
 						this.drawSec()
 					}
 				})
@@ -787,7 +802,7 @@
 										},
 										complete: function(res) {
 											that.shareImageSrc = res.tempFilePath
-											console.log(that.shareImageSrc,res)
+											console.log(that.shareImageSrc, res)
 										},
 									})
 								});
@@ -806,14 +821,14 @@
 				})
 				setTimeout(() => {
 					uni.hideLoading()
-					console.log(this.shareImageSrc,123123)
+					console.log(this.shareImageSrc, 123123)
 					if (this.shareImageSrc !== '') {
 						uni.previewImage({
 							urls: [this.shareImageSrc],
 						});
 					} else {
 						uni.showToast({
-							title:"生成失败，请重新再试！",
+							title: "生成失败，请重新再试！",
 							icon: 'none'
 						})
 					}
@@ -1797,6 +1812,35 @@
 
 	/*内容 部分*/
 
+	.shop-identify {
+		display: flex;
+		padding: 0 30rpx;
+
+		.shop-no {
+			margin-right: 28rpx;
+		}
+
+		.shop-no,
+		.shop-name {
+			text {
+				font-size: 24rpx;
+				font-weight: 500;
+
+				&:first-child {
+					color: #333;
+				}
+
+				&:last-child {
+					font-size: 28rpx;
+					color: #FF7709;
+					font-weight: 500;
+					margin-left: 8rpx;
+				}
+			}
+		}
+	}
+
+
 	.tui-padding {
 		padding: 0 30rpx;
 		box-sizing: border-box;
@@ -2242,6 +2286,8 @@
 	}
 
 	.tui-sale-info {
+		display: flex;
+		align-items: center;
 		/* display: flex;
 		align-items: baseline; */
 		/* justify-content: space-between; */
@@ -2276,6 +2322,7 @@
 	.line-price {
 		display: flex;
 		align-items: baseline;
+		margin-left: 20rpx;
 	}
 
 	.tui-discount-box {

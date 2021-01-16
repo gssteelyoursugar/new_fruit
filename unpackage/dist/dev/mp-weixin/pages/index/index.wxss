@@ -1038,8 +1038,14 @@
 
 /* 省略文字 */
 .tui-jin1.data-v-57280228 {
-  color: #b6b6b6;
+  color: #313131;
   font-size: 24rpx;
+  font-weight: 400;
+  display: inline-block;
+  width: 160rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   /* width: 100rpx;
 	text-overflow: ellipsis;
 	overflow: hidden;

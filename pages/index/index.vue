@@ -265,22 +265,22 @@
 														{{ ApproveStatus === 1 ? item.platformClinetPrice : '***' }}
 														<text class="tui-rate-text ">/件</text>
 													</view>
-													<view class="tui-rate-price" v-if="item.marketPrice && item.marketPrice != 0">
+													<!-- <view class="tui-rate-price" v-if="item.marketPrice && item.marketPrice != 0">
 														<text>&yen;</text>
 														{{ ApproveStatus === 1 ? item.marketPrice : '***' }}
-													</view>
+													</view> -->
 													<!--<text class="tui-praise  " @tap="praise(index)">
 														<text class="tui-praise iconfont icon-like  " v-if="!item.showSearch1"></text>
 														<text class="tui-praise iconfont icon-dianzan " v-if="item.showSearch1"></text>{{item.praiseNumber |filterNum}}
 													</text> -->
 												</view>
 												<view class="tui-pro-dea">
-													<text class="tui-jin1">{{ item.specification }}</text>
-													<text class="tui-jin">
+													<view class="tui-jin1"><text v-if="item.enterName!== ''">{{item.enterName}}</text> <text v-if="item.enterNumber!== ''">{{item.enterNumber}} </text> </view><!-- {{ item.specification }} -->
+													<view class="tui-jin">
 														成交
 														<text class="tui-dea-color">{{ item.total | filterNum }}</text>
 														元
-													</text>
+													</view>
 												</view>
 											</view>
 										</view>
@@ -318,17 +318,17 @@
 														{{ ApproveStatus === 1 ? item.platformClinetPrice : '***' }}
 														<text class="tui-rate-text ">/件</text>
 													</view>
-													<view class="tui-rate-price" v-if="item.marketPrice && item.marketPrice != 0">
+													<!-- <view class="tui-rate-price" v-if="item.marketPrice && item.marketPrice != 0">
 														<text>&yen;</text>
 														{{ ApproveStatus === 1 ? item.marketPrice : '***' }}
-													</view>
+													</view> -->
 													<!-- <text class="tui-praise  " @tap="praise(index)">
 														<text class="tui-praise iconfont icon-like  " v-if="!item.showSearch1"></text>
 														<text class="tui-praise iconfont icon-dianzan " v-if="item.showSearch1"></text>{{item.praiseNumber |filterNum}}
 													</text> -->
 												</view>
 												<view class="tui-pro-dea">
-													<text class="tui-jin1">{{ item.specification }}</text>
+													<view class="tui-jin1"><text v-if="item.enterName !== ''">{{item.enterName}}</text> <text v-if="enterNumber!== ''">{{item.erterNumber}}</text></view><!-- {{ item.specification }} -->
 													<text class="tui-jin">
 														成交
 														<text class="tui-dea-color">{{ item.total | filterNum }}</text>
@@ -389,7 +389,8 @@
 													</text>
 												</view>
 												<view class="tui-pro-dea">
-													<text class="tui-jin1">{{ item.specification }}</text>
+													<view class="tui-jin1"><text v-if="item.enterName !== ''">{{item.enterName}}</text> <text v-if="enterNumber!== ''">{{item.erterNumber}}</text></view><!-- {{ item.specification }} -->
+													<!-- <text class="tui-jin1">{{ item.specification }}</text> -->
 													<text class="tui-jin">
 														成交
 														<text class="tui-dea-color">{{ item.total | filterNum }}</text>
@@ -443,7 +444,8 @@
 													</text>
 												</view>
 												<view class="tui-pro-dea">
-													<text class="tui-jin1">{{ item.specification }}</text>
+													<view class="tui-jin1"><text v-if="item.enterName !== ''">{{item.enterName}}</text> <text v-if="enterNumber!== ''">{{item.erterNumber}}</text></view><!-- {{ item.specification }} -->
+													<!-- <text class="tui-jin1">{{ item.specification }}</text> -->
 													<text class="tui-jin">
 														成交
 														<text class="tui-dea-color">{{ item.total | filterNum }}</text>
@@ -2185,8 +2187,14 @@
 
 	/* 省略文字 */
 	.tui-jin1 {
-		color: #b6b6b6;
+		color: #313131;
 		font-size: 24rpx;
+		font-weight: 400;
+		display: inline-block;
+		width: 160rpx;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 		/* width: 100rpx;
 		text-overflow: ellipsis;
 		overflow: hidden;

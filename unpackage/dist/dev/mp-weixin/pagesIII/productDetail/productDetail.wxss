@@ -397,6 +397,31 @@ page.data-v-684acb55 {
 }
 /*顶部菜单*/
 /*内容 部分*/
+.shop-identify.data-v-684acb55 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  padding: 0 30rpx;
+}
+.shop-identify .shop-no.data-v-684acb55 {
+  margin-right: 28rpx;
+}
+.shop-identify .shop-no text.data-v-684acb55,
+.shop-identify .shop-name text.data-v-684acb55 {
+  font-size: 24rpx;
+  font-weight: 500;
+}
+.shop-identify .shop-no text.data-v-684acb55:first-child,
+.shop-identify .shop-name text.data-v-684acb55:first-child {
+  color: #333;
+}
+.shop-identify .shop-no text.data-v-684acb55:last-child,
+.shop-identify .shop-name text.data-v-684acb55:last-child {
+  font-size: 28rpx;
+  color: #FF7709;
+  font-weight: 500;
+  margin-left: 8rpx;
+}
 .tui-padding.data-v-684acb55 {
   padding: 0 30rpx;
   box-sizing: border-box;
@@ -823,6 +848,12 @@ page.data-v-684acb55 {
   line-height: 32rpx;
 }
 .tui-sale-info.data-v-684acb55 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
   /* display: flex;
 	align-items: baseline; */
   /* justify-content: space-between; */
@@ -859,6 +890,7 @@ page.data-v-684acb55 {
   -webkit-box-align: baseline;
   -webkit-align-items: baseline;
           align-items: baseline;
+  margin-left: 20rpx;
 }
 .tui-discount-box.data-v-684acb55 {
   background: #fff;

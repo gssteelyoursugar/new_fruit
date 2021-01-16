@@ -113,7 +113,8 @@
 									</text> -->
 								</view>
 								<view class="tui-pro-dea">
-									<text class="tui-jin">{{item.specification}}</text>
+									<view class="tui-jin1"><text v-if="item.enterName !== ''">{{item.enterName}}</text> <text v-if="enterNumber!== ''">{{item.erterNumber}}</text></view><!-- {{ item.specification }} -->
+									<!-- <text class="tui-jin">{{item.specification}}</text> -->
 									<text class="tui-jin">成交<text class="tui-dea-color">{{item.totalPirce | filterNum}}</text>元</text>
 
 								</view>
@@ -165,7 +166,8 @@
 									</text> -->
 								</view>
 								<view class="tui-pro-dea">
-									<text class="tui-jin">{{item.specification}}</text>
+									<view class="tui-jin1"><text v-if="item.enterName !== ''">{{item.enterName}}</text> <text v-if="enterNumber!== ''">{{item.erterNumber}}</text></view><!-- {{ item.specification }} -->
+									<!-- <text class="tui-jin">{{item.specification}}</text> -->
 									<text class="tui-jin">成交<text class="tui-dea-color">{{item.totalPirce | filterNum}}</text>元</text>
 								</view>
 							</view>
@@ -2035,6 +2037,20 @@
 	.tui-jin {
 		color: #B6B6B6;
 		font-size: 24rpx;
+	}
+	.tui-jin1 {
+		color: #313131;
+		font-size: 24rpx;
+		font-weight: 400;
+		display: inline-block;
+		width: 160rpx;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		/* width: 100rpx;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		white-space: nowrap; */
 	}
 
 	.tui-dea-color {

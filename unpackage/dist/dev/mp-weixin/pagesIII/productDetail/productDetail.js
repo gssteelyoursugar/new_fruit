@@ -567,6 +567,21 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var _api = __webpack_require__(/*! ../../api/api.js */ 8);
 
 
@@ -713,7 +728,7 @@ console,log = _console.log;var _default =
 
   },
 
-  onLoad: function onLoad(options) {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var that, res, statusBarHeight, info, top, height, bottom, buttonHeight, setdata, scene;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+  onLoad: function onLoad(options) {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var that, res, statusBarHeight, info, top, height, bottom, buttonHeight, setdata;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
               // 导航栏高度 = 状态栏高度 + 胶囊高度 + 胶囊上下边距
               that = _this;
               try {
@@ -766,15 +781,15 @@ console,log = _console.log;var _default =
               setdata = uni.getStorageSync('usermen');
               _this.token = setdata;
               if (options.scene) {
-                scene = decodeURIComponent(options.scene).substr(4);
-                _this.productID = scene;
+                // let scene = decodeURIComponent(options.scene).substr(4)
+                _this.productID = options.scene;
               } else {
                 _this.productID = options.id;
               }_context.next = 7;return (
                 _this.getSystemInfo());case 7:_this.SystemInfo = _context.sent;
               _this.canvasW = _this.SystemInfo.windowWidth * 2; // 画布宽度
               _this.canvasH = _this.SystemInfo.windowHeight * 2; // 画布高度
-              _this.canvasImgTimes = _this.canvasW / _this.canvasH;
+              _this.canvasImgTimes = _this.canvasW / _this.canvasH; // 画布比例
               _this.postDetails();
               _this.postSettle();
               _this.getMerchants();case 14:case "end":return _context.stop();}}}, _callee);}))();
