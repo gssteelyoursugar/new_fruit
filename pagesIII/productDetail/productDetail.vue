@@ -46,6 +46,7 @@
 				</view>
 				<view class="net-tip" v-if="!netStatus&& shopListdata.urlVideo!==''">当前为非wifi环境，使用流量播放视频</view>
 			</view>
+
 			<view class="tui-pro-detail">
 				<view class="tui-product-title tui-border-radius">
 					<view class="tui-pro-tit">
@@ -76,13 +77,15 @@
 						</tui-tag>
 						</button>
 					</view> -->
-					<view class="user-share-btn" @click="handleLongTap">
+					<view class="user-share-btn" @click="handleShareTap(shopListdata.isGroup)">
 						<image src="../../static/images/share_icon.png" mode=""></image>
-						<text>分享</text>
+						<text v-if="shopListdata.isGroup != '2'">分享</text>
+						<text v-else>生成海报</text>
 					</view>
 
 					<view class="tui-padding">
-						<view class="tui-sale-info tui-size tui-gray">
+						<!-- 不是团长专区的商品 -->
+						<view class="tui-sale-info tui-size tui-gray" v-if="shopListdata.isGroup != '2'">
 							<view class="kilo-price">
 								<view class="kilo-unit">¥</view>
 								<view class="kilo-price-num">{{ApproveStatus===1? shopListdata.kgPrice :'***'}}</view>
@@ -98,13 +101,21 @@
 								<view class="tui-huaxian" v-if="shopListdata.marketPrice && shopListdata.marketPrice != 0">￥{{ApproveStatus===1? shopListdata.marketPrice:'***' }}元/件</view>
 							</view>
 						</view>
+						<!-- 是团长专区的商品 -->
+						<view class="tui-sale-info tui-size tui-gray" v-if="shopListdata.isGroup == '2'">
+							<view class="kilo-price">
+								<view class="kilo-unit">¥</view>
+								<view class="kilo-price-num">{{ApproveStatus===1? shopListdata.platformClientPrice :'***'}}</view>
+								<view class="kilo-wg">元/份</view>
+							</view>
+						</view>
 					</view>
 					<view class="shop-identify" v-if="shopListdata.enterName && shopListdata.enterName !== ''">
 						<block v-if="shopListdata.enterNumber && shopListdata.enterNumber !== ''">
 							<view class="shop-no">
 								<text>海吉星档口号:</text><text>{{shopListdata.enterNumber}}</text>
 							</view>
-							<view class="shop-name" >
+							<view class="shop-name">
 								<text>档口名称:</text><text>{{shopListdata.enterName}}</text>
 							</view>
 						</block>
@@ -267,7 +278,7 @@
 
 		<!-- 分享canvas -->
 		<view class="showShareBox" v-if="canShow" @click="clickCanvas">
-			<image @longtap.stop="handleLongTap" :style="{width: canvasW  + 'rpx',height: (canvasW  / canvasImgTimes)  + 'rpx'}"
+			<image @longtap.stop="handleShareTap" :style="{width: canvasW  + 'rpx',height: (canvasW  / canvasImgTimes)  + 'rpx'}"
 			 :src="shareImageSrc" mode=""></image>
 		</view>
 
@@ -315,7 +326,7 @@
 													{{ApproveStatus===1 ?shopListdata.platformClientPrice:'***' }}
 													<text style="font-size: 24rpx;margin-left: 4rpx;">元</text>
 												</view>
-												/件
+												/{{shopListdata.isGroup == '2'?'份':'件' }}
 											</view>
 											<view class="tui-huaxian" v-if="shopListdata.marketPrice != 0">￥{{ApproveStatus===1? shopListdata.marketPrice:'***' }}<text
 												 style="font-size: 24rpx;">元</text></view>
@@ -369,6 +380,27 @@
 					<button plain="true" @click="clickToVerify" class="color-green">前往验证</button>
 				</view>
 			</view>
+		</view>
+		<view class="price-box" :style="{top: navHeight + 'px'}" v-if="showPriceBox">
+			<view class="box-wrapper" style="">
+				<!-- <view class="close-box-btn">
+					<image style="width: 44rpx;height: 44rpx;" src="../../static/images/close.png" mode=""></image>
+				</view> -->
+				<view class="price-box-title">请填写您期望生成的海报价格</view>
+				<view class="price-input">
+					<text>￥</text><input type="digit" auto-focus="true" v-model="priceBoxVal" /><text>元</text>
+				</view>
+				<view class="warp-flex">
+					<button @click="showPriceBox = false" plain="true">取消</button>
+					<button plain="true" @click="handleGroupCode" class="color-green">生成图片</button>
+				</view>
+			</view>
+		</view>
+		<view class="show-group-code" @click="clickToHide" :style="{top: navHeight + 'px'}" v-if="showPicSucc">
+			<view :style="{width: canvasW * 1 + 'rpx'}" style="margin: 10% auto;">
+				<image style="width: 100%;" :style="{height: (canvasW * 1) / 0.7 + 'rpx'}" :src="shareImageSrc"></image>
+			</view>
+			<view class="save-pic-btn" @click="saveSharePic">保存图片</view>
 		</view>
 	</view>
 </template>
@@ -432,60 +464,13 @@
 				iconOpcity: 0.5,
 				urlList: [],
 				url: 'http://192.168.1.10:8980',
-				// url:'http://120.25.195.214:8980/js',
-				posters: 'https://www.thorui.cn/img/product/4.png', //视频封面
-				//videos:'https://6e6f-normal-env-ta6pc-1300924598.tcb.qcloud.la/video-swiper/1589851354869410.mp4?sign=1f636557effa496e074332e3f4b9b8aa&t=1589851461',
 				bannerIndex: 0,
 				userInfoData: {}, //物流信息
-				topMenu: [{
-						icon: 'message',
-						text: '消息',
-						size: 26,
-						badge: 3
-					},
-					{
-						icon: 'home',
-						text: '首页',
-						size: 23,
-						badge: 0
-					},
-					{
-						icon: 'people',
-						text: '我的',
-						size: 26,
-						badge: 0
-					},
-					{
-						icon: 'cart',
-						text: '购物车',
-						size: 23,
-						badge: 2
-					},
-					{
-						icon: 'kefu',
-						text: '客服小蜜',
-						size: 26,
-						badge: 0
-					},
-					{
-						icon: 'feedback',
-						text: '我要反馈',
-						size: 23,
-						badge: 0
-					},
-					{
-						icon: 'share',
-						text: '分享',
-						size: 26,
-						badge: 0
-					}
-				],
 				productID: 0,
 				menuShow: false,
 				popupShow: false,
 				value: 1,
 				collected: false,
-				Sumify: '',
 				token: '',
 				navHeight: 64,
 				iconTop: 24,
@@ -508,9 +493,12 @@
 				Oldprice: '350.00', // 原价
 				name: '天涯过客', // 推荐人,
 				shareImageSrc: "",
-				tmpPic: "",
 				mpCodePic: {},
-				tempCodePic: ''
+				tempCodePic: '',
+				showPriceBox: false,
+				priceBoxVal: '',
+				showPicSucc: false,
+				canClickBox: true
 			};
 		},
 		mounted() {
@@ -585,8 +573,6 @@
 			this.postDetails();
 			this.postSettle();
 			this.getMerchants();
-
-
 		},
 		computed: {
 			swiperList() {
@@ -662,12 +648,77 @@
 		},
 
 		methods: {
+			clickToHide(){
+				this.showPicSucc = false
+			},
+			saveSharePic() {
+				if (this.shareImageSrc && this.shareImageSrc !== '') {
+					uni.saveImageToPhotosAlbum({
+						filePath: this.shareImageSrc,
+						success: function() {
+							console.log('save success');
+						}
+					});
+					uni.showToast({
+						title: "已保存至相册",
+						icon: 'none'
+					})
+				} else {
+					uni.showToast({
+						title: "保存失败，请重新再试",
+						icon: 'none'
+					})
+				}
+				this.showPicSucc = false
+			},
+			handleGroupCode() {
+				if (this.canClickBox) {
+					if (this.priceBoxVal === '') {
+						uni.showToast({
+							title: "请先填写价格",
+							icon: 'none'
+						})
+						return
+					}
+					this.drawGroupCode()
+				}
+				this.canClickBox = false
+			},
+			drawGroupCode() {
+				uni.getImageInfo({
+					src: this.shareImg,
+					success: (res) => {
+						this.mainImg = res
+						this.drawCodeSec()
+						uni.showLoading({
+							title: "请稍等～"
+						})
+						setTimeout(() => {
+							uni.hideLoading()
+							this.showPriceBox = !this.showPriceBox
+							this.priceBoxVal = ''
+							if (this.shareImageSrc !== '') {
+								// uni.previewImage({
+								// 	urls: [this.shareImageSrc],
+								// });
+								this.showPicSucc = !this.showPicSucc
+								this.canClickBox = true
+							} else {
+								uni.showToast({
+									title: "生成失败，请重新再试！",
+									icon: 'none'
+								})
+							}
+						}, 3000)
+					}
+				})
+				
+			},
 			drawCanvas() {
 				uni.getImageInfo({
 					src: this.shareImg,
 					success: (res) => {
 						this.mainImg = res
-
 						this.drawSec()
 					}
 				})
@@ -794,7 +845,6 @@
 										height: bgHeight + 30,
 										quality: 1,
 										fail: function(res) {
-											console.log(res);
 											uni.showToast({
 												title: "哎呀出错了"
 											})
@@ -802,7 +852,6 @@
 										},
 										complete: function(res) {
 											that.shareImageSrc = res.tempFilePath
-											console.log(that.shareImageSrc, res)
 										},
 									})
 								});
@@ -811,28 +860,141 @@
 					}
 				})
 			},
+			drawCodeSec() {
+				if (this.priceBoxVal !== '' && this.mainImg.errMsg == 'getImageInfo:ok' && this.SystemInfo.errMsg ==
+					'getSystemInfo:ok') {
+					setTimeout(() => {
+						const ctx = uni.createCanvasContext('sharePost', this)
+						// 设置矩形边框
+						ctx.setFillStyle("#FFF");
+						// 设置矩形宽高 （x,y,宽度，高度） x这里要除2次 ‘2’，
+						// 第一次除是因为canvasW是乘了2的值，这里需要还原成没乘之前的值，
+						// 第二次除是因为得到的是 2边空白的宽度，
+						let bgHeight = this.canvasW / 2 * 0.84 + 70 + this.canvasW / 2 * 0.25 + this.canvasW / 2 * 0.08 / 2
+
+						ctx.fillRect(this.canvasW / 2 * 0.08 / 2, this.canvasW / 2 * 0.08 / 2, this.canvasW / 2 * 0.92,
+							bgHeight) // fillRect(x,y,宽度，高度)
+
+						// 商品主图
+						ctx.drawImage(this.mainImg.path, this.canvasW / 2 * 0.08, this.canvasH / 2 * 0.08 / 1.2, this.canvasW /
+							2 *
+							0.84,
+							this.canvasW / 2 * 0.84)
+
+						// 3、绘制商品标题，多余文字自动换行
+						ctx.setFontSize(20); // setFontSize() 设置字体字号
+						ctx.setFillStyle('#000'); // setFillStyle() 设置字体颜色
+
+						/* canvas不能自动换行，需要自行计算 */
+						let _strlineW = 0;
+						let _strLastIndex = 0; //每次开始截取的字符串的索引
+						let _strHeight = this.canvasW / 2 * 0.84 + this.canvasH / 2 * 0.1 + 10; //绘制字体距离canvas顶部的初始高度
+						let _num = 1;
+						for (let i = 0; i < this.shareTitle.length; i++) {
+							_strlineW += ctx.measureText(this.shareTitle[i]).width;
+							if (_strlineW > this.canvasW / 2 * 0.84 - 10) {
+								if (_num == 2 && 2) {
+									//文字换行数量大于二进行省略号处理
+									ctx.fillText(this.shareTitle.substring(_strLastIndex, i - 5) + '...', this.canvasW / 2 * 0.08,
+										_strHeight);
+									_strlineW = 0;
+									_strLastIndex = i;
+									_num++;
+									break;
+								} else {
+									ctx.fillText(this.shareTitle.substring(_strLastIndex, i), this.canvasW / 2 * 0.08, _strHeight);
+									_strlineW = 0;
+									_strHeight += 30;
+									_strLastIndex = i;
+									_num++;
+								}
+							} else if (i == this.shareTitle.length - 1) {
+								ctx.fillText(this.shareTitle.substring(_strLastIndex, i + 1), this.canvasW / 2 * 0.08, _strHeight);
+								_strlineW = 0;
+							}
+						}
+						/* end */
+						//商品描述
+						ctx.setFontSize(14) // 字号
+						ctx.setFillStyle('#999') // 颜色
+						ctx.fillText(this.shopListdata.describe, this.canvasW / 2 * 0.08, _strHeight + 20); // （文字，x，y）
+
+						// 毛重 净重
+						let tempMeteringList = {
+							1: '件',
+							2: '盒',
+							3: '份',
+							4: '个'
+						}
+						ctx.setFontSize(14) // 字号
+						ctx.setFillStyle('#999') // 颜色
+						ctx.fillText("毛重约" + this.shopListdata.kg1 + "斤/" + tempMeteringList[this.shopListdata.meteringUnit *
+								1] +
+							"，净重约" + this.shopListdata.kg1 + "斤/" + tempMeteringList[this.shopListdata.meteringUnit * 1], this.canvasW /
+							2 * 0.08, _strHeight + 44); // （文字，x，y）
+
+						//4、商品价格
+						ctx.setFontSize(14) // 字号
+						ctx.setFillStyle('#e31d1a') // 颜色
+						ctx.fillText('每份￥', this.canvasW / 2 * 0.08, _strHeight + 74); // （文字，x，y）
+
+						ctx.setFontSize(24) // 字号
+						ctx.setFillStyle('#e31d1a') // 颜色
+						ctx.fillText(this.priceBoxVal, this.canvasW / 2 * 0.08 + 42, _strHeight + 74); // （文字，x，y）
+
+
+						// 最终绘制
+						let that = this
+						ctx.draw(true, (ret) => { // draw方法 把以上内容画到 canvas 中。
+							uni.canvasToTempFilePath({ // 保存canvas为图片
+								canvasId: 'sharePost',
+								x: 0,
+								y: 0,
+								width: that.canvasW,
+								height: bgHeight + 30,
+								quality: 1,
+								fail: function(res) {
+									uni.showToast({
+										title: "哎呀出错了"
+									})
+									return
+								},
+								complete: function(res) {
+									that.shareImageSrc = res.tempFilePath
+								},
+							})
+						});
+					}, 100)
+				}
+			},
 			clickCanvas() {
 				this.canShow = !this.canShow
 			},
-			handleLongTap() {
-				this.GetMpCodeById()
-				uni.showLoading({
-					title: "请稍等～"
-				})
-				setTimeout(() => {
-					uni.hideLoading()
-					console.log(this.shareImageSrc, 123123)
-					if (this.shareImageSrc !== '') {
-						uni.previewImage({
-							urls: [this.shareImageSrc],
-						});
-					} else {
-						uni.showToast({
-							title: "生成失败，请重新再试！",
-							icon: 'none'
-						})
-					}
-				}, 3000)
+			// tpye = 2 团长专区; 1 正常生成海报
+			handleShareTap(type) {
+				if (type == '2') {
+					this.showPriceBox = !this.showPriceBox
+				} else {
+					this.GetMpCodeById()
+					uni.showLoading({
+						title: "请稍等～"
+					})
+					setTimeout(() => {
+						uni.hideLoading()
+						if (this.shareImageSrc !== '') {
+							uni.previewImage({
+								urls: [this.shareImageSrc],
+							});
+						} else {
+							uni.showToast({
+								title: "生成失败，请重新再试！",
+								icon: 'none'
+							})
+						}
+					}, 3000)
+
+				}
+
 
 			},
 			// 获取图片信息
@@ -954,10 +1116,7 @@
 						});
 				}
 			},
-			clickToShare() {
 
-
-			},
 			//重复点赞
 			praiseLikeTwo() {
 				uni.showToast({
@@ -2160,7 +2319,7 @@
 		border-radius: 40rpx 0 0 40rpx;
 		color: rgba(182, 182, 182, 1);
 		font-size: 24rpx;
-		top: 130rpx;
+		top: 100rpx;
 		height: 40rpx;
 		display: flex;
 		align-items: center;
@@ -2700,6 +2859,7 @@
 
 	/*底部选择弹层*/
 
+
 	/* 模态弹窗布局 */
 	.warp {
 		position: fixed;
@@ -2765,6 +2925,101 @@
 
 	.warp-flex button:nth-child(2) {
 		color: rgba(0, 197, 42, 1);
+	}
+
+	.price-box {
+		position: fixed;
+		left: 0;
+		right: 0;
+		top: 130rpx;
+		bottom: 0;
+		background: rgba(0, 0, 0, 0.6);
+		z-index: 9999;
+
+		.box-wrapper {
+			width: 500upx;
+			height: 300upx;
+			background: #ffffff;
+			margin: 50% auto;
+			position: absolute;
+			-webkit-position: absolute;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+			border-radius: 8upx;
+
+			.close-box-btn {
+				position: absolute;
+				right: -14rpx;
+				top: -14rpx;
+
+			}
+
+			.price-box-title {
+				text-align: center;
+				font-size: 28rpx;
+				margin: 20rpx 0;
+				font-weight: 500;
+				color: #333;
+			}
+
+			.price-input {
+				display: flex;
+				justify-content: center;
+				align-items: baseline;
+				padding: 40rpx 0;
+
+				text {
+					font-size: 24rpx;
+
+					&:first-child {
+						color: #ff6500;
+						font-weight: 400;
+					}
+
+					&:last-child {
+						color: #969696;
+						font-weight: 400;
+					}
+				}
+
+				input {
+					text-align: center;
+					width: 40%;
+					border-bottom: 1px solid #DBDBDB;
+					margin: 0 8rpx;
+					font-size: 46rpx;
+				}
+			}
+		}
+	}
+
+	.show-group-code {
+		position: fixed;
+		left: 0;
+		right: 0;
+		top: 130rpx;
+		bottom: 0;
+		background: rgba(0, 0, 0, 0.9);
+		z-index: 9999;
+
+		image {
+			
+		}
+
+		.save-pic-btn {
+			width: 30%;
+			background: rgb(0,195,46);
+			text-align: center;
+			padding: 14rpx 0;
+			font-size: 28rpx;
+			color: #fff;
+			font-weight: 500;
+			margin: 30rpx auto;
+			border-radius: 14rpx;
+		}
+
 	}
 
 	/*end  */

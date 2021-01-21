@@ -102,7 +102,7 @@
 									<view style="color: #FF7709; display: flex;align-items: baseline;">
 										<text style="font-size: 20rpx;margin-right: 4rpx;">¥</text>
 										<text style="font-size: 40rpx; font-weight: 500">{{ApproveStatus===1?item.platformClientPrice:'***'}}</text>
-										<text style="font-size: 24rpx;color: #B6B6B6;">/件</text>
+										<text style="font-size: 24rpx;color: #B6B6B6;">/{{item.isGroup == '2'?'份':'件' }}</text>
 										<view style="color: #B6B6B6;text-decoration: line-through; margin-left:10rpx;" v-if="item.marketPrice &&item.marketPrice != 0">
 											<text style="font-size: 20rpx;"> ¥</text>
 											<text style="font-size: 24rpx;font-weight: 500;">{{ApproveStatus === 1? item.marketPrice:'***'}}</text>
@@ -113,7 +113,10 @@
 									</text> -->
 								</view>
 								<view class="tui-pro-dea">
-									<view class="tui-jin1"><text v-if="item.enterName !== ''">{{item.enterName}}</text> <text v-if="enterNumber!== ''">{{item.erterNumber}}</text></view><!-- {{ item.specification }} -->
+									<view class="tui-jin1">
+										<text style="margin-right: 8rpx;" v-if="item.enterNumber!== ''">{{item.enterNumber}}</text>
+										<text v-if="item.enterName !== ''">{{item.enterName}}</text> 
+									</view><!-- {{ item.specification }} -->
 									<!-- <text class="tui-jin">{{item.specification}}</text> -->
 									<text class="tui-jin">成交<text class="tui-dea-color">{{item.totalPirce | filterNum}}</text>元</text>
 
@@ -155,7 +158,7 @@
 									<view style="color: #FF7709; display: flex;align-items: baseline;">
 										<text style="font-size: 20rpx;margin-right: 4rpx;">¥</text>
 										<text style="font-size: 40rpx; font-weight: 500">{{ApproveStatus===1?item.platformClientPrice:'***'}}</text>
-										<text style="font-size: 24rpx;color: #B6B6B6;">/件</text>
+										<text style="font-size: 24rpx;color: #B6B6B6;">/{{item.isGroup == '2'?'份':'件' }}</text>
 										<view style="color: #B6B6B6;text-decoration: line-through;margin-left:10rpx;" v-if=" item.marketPrice &&item.marketPrice != 0">
 											<text style="font-size: 20rpx;"> ¥</text>
 											<text style="font-size: 24rpx;font-weight: 500">{{ApproveStatus===1?item.marketPrice:'***'}}</text>
@@ -166,7 +169,10 @@
 									</text> -->
 								</view>
 								<view class="tui-pro-dea">
-									<view class="tui-jin1"><text v-if="item.enterName !== ''">{{item.enterName}}</text> <text v-if="enterNumber!== ''">{{item.erterNumber}}</text></view><!-- {{ item.specification }} -->
+									<view class="tui-jin1">
+										<text style="margin-right: 8rpx;"  v-if="item.enterNumber!== ''">{{item.enterNumber}}</text>
+										<text v-if="item.enterName !== ''">{{item.enterName}}</text> 
+									</view><!-- {{ item.specification }} -->
 									<!-- <text class="tui-jin">{{item.specification}}</text> -->
 									<text class="tui-jin">成交<text class="tui-dea-color">{{item.totalPirce | filterNum}}</text>元</text>
 								</view>

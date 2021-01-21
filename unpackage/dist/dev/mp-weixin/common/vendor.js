@@ -1729,14 +1729,14 @@ uni$1;exports.default = _default;
 /***/ }),
 
 /***/ 10:
-/*!********************************************************!*\
-  !*** /Users/gsheng/Downloads/new_fruit/api/request.js ***!
-  \********************************************************/
+/*!***************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/new_fruit/api/request.js ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.uploadFiles = exports.orderHistory = exports.getPredictInfo = exports.getPredictList = exports.getAgreeInfo = exports.getAgreeList = exports.getMsgInfo = exports.getEvaluateList = exports.orderCount = exports.getBeConfirmed = exports.PostDataById = exports.postAfterCen = exports.posAfterDetails = exports.posAfterSaleList = exports.postCancelPay = exports.posAfterSale = exports.getAfterSaleData = exports.postConfirmOrder = exports.postDelOrders = exports.postCancelOrder = exports.getDetails = exports.postAgainOrder = exports.postSettle = exports.getMsg = exports.postCancelPraise = exports.getSubmitOrder = exports.postAddressList = exports.postupdateClient = exports.getClient = exports.getNewsAll = exports.postRecentlyDel = exports.getselectSuper = exports.getselectSeasonal = exports.getselectHot = exports.getselectImport = exports.getMyOrder = exports.postOrderPay = exports.getRecently = exports.postPraise = exports.postDelLike = exports.getLike = exports.postLike = exports.postUpOrder = exports.postDelOrder = exports.getCart = exports.postmyOrder = exports.postSaveStore = exports.getActivity = exports.wxloginurl = exports.imgurl = exports.postOrder = exports.url = exports.getAttribute = exports.getGoodsall = exports.getMpCodeById = exports.postdelist = exports.getClassify = exports.postActivity = exports.getSearchByCode = exports.getsearch = exports.loginis = exports.getIndex = void 0; // 公用地址
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.uploadFiles = exports.orderHistory = exports.getPredictInfo = exports.getPredictList = exports.getAgreeInfo = exports.getAgreeList = exports.getMsgInfo = exports.getEvaluateList = exports.orderCount = exports.getBeConfirmed = exports.PostDataById = exports.postAfterCen = exports.posAfterDetails = exports.posAfterSaleList = exports.postCancelPay = exports.posAfterSale = exports.getAfterSaleData = exports.postConfirmOrder = exports.postDelOrders = exports.postCancelOrder = exports.getDetails = exports.postAgainOrder = exports.postSettle = exports.getMsg = exports.postCancelPraise = exports.getSubmitOrder = exports.postAddressList = exports.postupdateClient = exports.getClient = exports.getNewsAll = exports.postRecentlyDel = exports.getselectSuper = exports.getselectSeasonal = exports.getselectHot = exports.getselectImport = exports.getMyOrder = exports.postOrderPay = exports.getRecently = exports.getGroup = exports.postPraise = exports.postDelLike = exports.getLike = exports.postLike = exports.postUpOrder = exports.postDelOrder = exports.getCart = exports.postmyOrder = exports.postSaveStore = exports.getActivity = exports.wxloginurl = exports.imgurl = exports.postOrder = exports.url = exports.getAttribute = exports.getGoodsall = exports.getMpCodeById = exports.postdelist = exports.getClassify = exports.postActivity = exports.getSearchByCode = exports.getsearch = exports.loginis = exports.getIndex = void 0; // 公用地址
 
 
 //测试用
@@ -1882,8 +1882,11 @@ exports.postDelLike = postDelLike;var postPraise = "".concat(url, "api/wx/goods/
 //取消点赞
 exports.postPraise = postPraise;var postCancelPraise = "".concat(url, "api/wx/goods/cancelPraise");
 
+//团购专区
+exports.postCancelPraise = postCancelPraise;var getGroup = "".concat(url, "api/wx/index/group");
+
 //最近看过
-exports.postCancelPraise = postCancelPraise;var getRecently = "".concat(url, "api/wx/goods/recently");
+exports.getGroup = getGroup;var getRecently = "".concat(url, "api/wx/goods/recently");
 
 //结算
 exports.getRecently = getRecently;var postSettle = "".concat(url, "api/wx/order/settle");
@@ -2027,6 +2030,7 @@ exports.getPredictInfo = getPredictInfo;
 
 
 
+
 // 导出文件上传
 var uploadFiles = function uploadFiles(callback) {
   uni.chooseImage({
@@ -2071,9 +2075,9 @@ var uploadFiles = function uploadFiles(callback) {
 /***/ }),
 
 /***/ 100:
-/*!*******************************************************!*\
-  !*** /Users/gsheng/Downloads/new_fruit/utils/util.js ***!
-  \*******************************************************/
+/*!**************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/new_fruit/utils/util.js ***!
+  \**************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -2301,9 +2305,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 132:
-/*!*********************************************************************************!*\
-  !*** /Users/gsheng/Downloads/new_fruit/common/tui-validation/tui-validation.js ***!
-  \*********************************************************************************/
+/*!****************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/new_fruit/common/tui-validation/tui-validation.js ***!
+  \****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -2579,9 +2583,9 @@ module.exports = {
 /***/ }),
 
 /***/ 133:
-/*!**************************************************************!*\
-  !*** /Users/gsheng/Downloads/new_fruit/utils/picker.city.js ***!
-  \**************************************************************/
+/*!*********************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/new_fruit/utils/picker.city.js ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -2989,9 +2993,9 @@ module.exports = [{
 /***/ }),
 
 /***/ 14:
-/*!********************************************************!*\
-  !*** /Users/gsheng/Downloads/new_fruit/store/store.js ***!
-  \********************************************************/
+/*!***************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/new_fruit/store/store.js ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10212,9 +10216,9 @@ internalMixin(Vue);
 /***/ }),
 
 /***/ 22:
-/*!***************************************************************!*\
-  !*** /Users/gsheng/Downloads/new_fruit/common/SDK/amap-wx.js ***!
-  \***************************************************************/
+/*!**********************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/new_fruit/common/SDK/amap-wx.js ***!
+  \**********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -10254,9 +10258,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 4:
-/*!****************************************************!*\
-  !*** /Users/gsheng/Downloads/new_fruit/pages.json ***!
-  \****************************************************/
+/*!***********************************************************!*\
+  !*** C:/Users/Administrator/Desktop/new_fruit/pages.json ***!
+  \***********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -10265,9 +10269,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 55:
-/*!********************************************************!*\
-  !*** /Users/gsheng/Downloads/new_fruit/login/login.js ***!
-  \********************************************************/
+/*!***************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/new_fruit/login/login.js ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10356,9 +10360,9 @@ module.exports = logins;
 /***/ }),
 
 /***/ 556:
-/*!************************************************************************************!*\
-  !*** /Users/gsheng/Downloads/new_fruit/components/jyf-parser/libs/MpHtmlParser.js ***!
-  \************************************************************************************/
+/*!*******************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/new_fruit/components/jyf-parser/libs/MpHtmlParser.js ***!
+  \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10902,9 +10906,9 @@ module.exports = MpHtmlParser;
 /***/ }),
 
 /***/ 557:
-/*!******************************************************************************!*\
-  !*** /Users/gsheng/Downloads/new_fruit/components/jyf-parser/libs/config.js ***!
-  \******************************************************************************/
+/*!*************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/new_fruit/components/jyf-parser/libs/config.js ***!
+  \*************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -10992,9 +10996,9 @@ module.exports = cfg;
 /***/ }),
 
 /***/ 558:
-/*!**********************************************************************************!*\
-  !*** /Users/gsheng/Downloads/new_fruit/components/jyf-parser/libs/CssHandler.js ***!
-  \**********************************************************************************/
+/*!*****************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/new_fruit/components/jyf-parser/libs/CssHandler.js ***!
+  \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11890,9 +11894,9 @@ if (hadRuntime) {
 /***/ }),
 
 /***/ 8:
-/*!****************************************************!*\
-  !*** /Users/gsheng/Downloads/new_fruit/api/api.js ***!
-  \****************************************************/
+/*!***********************************************************!*\
+  !*** C:/Users/Administrator/Desktop/new_fruit/api/api.js ***!
+  \***********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11999,9 +12003,9 @@ exports.publicing2 = publicing2;
 /***/ }),
 
 /***/ 83:
-/*!*******************************************************************************!*\
-  !*** /Users/gsheng/Downloads/new_fruit/common/tui-clipboard/tui-clipboard.js ***!
-  \*******************************************************************************/
+/*!**************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/new_fruit/common/tui-clipboard/tui-clipboard.js ***!
+  \**************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12062,9 +12066,9 @@ module.exports = {
 /***/ }),
 
 /***/ 9:
-/*!********************************************************!*\
-  !*** /Users/gsheng/Downloads/new_fruit/api/errdata.js ***!
-  \********************************************************/
+/*!***************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/new_fruit/api/errdata.js ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

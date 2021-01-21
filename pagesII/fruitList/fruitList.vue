@@ -68,7 +68,7 @@
 										<text style="font-size: 16rpx;">¥</text>
 										<text style="font-size: 40rpx;font-weight: bold;margin: 0 4rpx;">{{ApproveStatus===1? item.platformClinetPrice:'***'}}</text>
 										<text style="font-size: 24rpx;font-weight: 400;">元</text>
-										<text style="font-size: 20rpx;color: #b6b6b6;">/件</text>
+										<text style="font-size: 20rpx;color: #b6b6b6;">/{{item.isGroup =='2'? '份': '件' }}</text>
 									</view>
 
 								</view>

@@ -44,13 +44,13 @@
 			<!-- 金刚区 -->
 			<view class=" swiper-item-top">
 				<block v-if="WxTopNavigationBar">
-					<view class="conteng-img" @tap="hrefKing(index,item.title)" v-for="(item, index) in WxTopNavigationBar" :key="index">
+					<view class="conteng-img" @tap="hrefKing(index,item.id,item.title)" v-for="(item, index) in WxTopNavigationBar" :key="index">
 						<image :src="item.url" mode="widthFix" class="uploadimg1"></image>
 						<text>{{ item.title }}</text>
 					</view>
 				</block>
 				<block v-if="!WxTopNavigationBar || WxTopNavigationBar.length === 0">
-					<view class="conteng-img" @tap="hrefKing(index,item.title)" v-for="item of 5" :key="item">
+					<view class="conteng-img" @tap="hrefKing(index,item.id,item.title)" v-for="item of 5" :key="item">
 						<view class="loading-bg"></view>
 						<view class=""></view>
 					</view>
@@ -123,7 +123,7 @@
 									<view class="left-price">
 										<text>¥</text>
 										<text>{{ ApproveStatus === 1 ? item.platformClinetPrice : '***' }}</text>
-										<text>/件</text>
+										<text>/{{item.isGroup == '2'?'份':'件' }}</text>
 									</view>
 									<view class="right-buy">立刻购买</view>
 								</view>
@@ -164,7 +164,7 @@
 									<view class="item-price">
 										<text>¥</text>
 										<text>{{ ApproveStatus === 1 ? item.platformClinetPrice : '***' }}</text>
-										<text>/件</text>
+										<text>/{{item.isGroup == '2'?'份':'件' }}</text>
 										<!-- 如果4位数的话就不显示/件 v-if="Math.floor(item.platformClinetPrice).toString().length < 4" -->
 									</view>
 									<view class="item-action">立即抢购</view>
@@ -263,7 +263,7 @@
 													<view class="tui-rate">
 														<text>&yen;</text>
 														{{ ApproveStatus === 1 ? item.platformClinetPrice : '***' }}
-														<text class="tui-rate-text ">/件</text>
+														<text class="tui-rate-text ">/{{item.isGroup == '2'?'份':'件' }}</text>
 													</view>
 													<!-- <view class="tui-rate-price" v-if="item.marketPrice && item.marketPrice != 0">
 														<text>&yen;</text>
@@ -275,7 +275,10 @@
 													</text> -->
 												</view>
 												<view class="tui-pro-dea">
-													<view class="tui-jin1"><text v-if="item.enterName!== ''">{{item.enterName}}</text> <text v-if="item.enterNumber!== ''">{{item.enterNumber}} </text> </view><!-- {{ item.specification }} -->
+													<view class="tui-jin1">
+														<text style="margin-right: 8rpx;" v-if="item.enterNumber!== ''">{{item.enterNumber}}</text>
+														<text v-if="item.enterName!== ''">{{item.enterName}}</text>
+													</view><!-- {{ item.specification }} -->
 													<view class="tui-jin">
 														成交
 														<text class="tui-dea-color">{{ item.total | filterNum }}</text>
@@ -316,7 +319,7 @@
 													<view class="tui-rate">
 														<text>&yen;</text>
 														{{ ApproveStatus === 1 ? item.platformClinetPrice : '***' }}
-														<text class="tui-rate-text ">/件</text>
+														<text class="tui-rate-text ">/{{item.isGroup == '2'?'份':'件' }}</text>
 													</view>
 													<!-- <view class="tui-rate-price" v-if="item.marketPrice && item.marketPrice != 0">
 														<text>&yen;</text>
@@ -328,7 +331,10 @@
 													</text> -->
 												</view>
 												<view class="tui-pro-dea">
-													<view class="tui-jin1"><text v-if="item.enterName !== ''">{{item.enterName}}</text> <text v-if="enterNumber!== ''">{{item.erterNumber}}</text></view><!-- {{ item.specification }} -->
+													<view class="tui-jin1">
+														<text style="margin-right: 8rpx;"  v-if="item.enterNumber!== ''">{{item.enterNumber}}</text>
+														<text v-if="item.enterName !== ''">{{item.enterName}}</text>
+													</view><!-- {{ item.specification }} -->
 													<text class="tui-jin">
 														成交
 														<text class="tui-dea-color">{{ item.total | filterNum }}</text>
@@ -376,7 +382,7 @@
 													<view class="tui-rate">
 														<text>&yen;</text>
 														{{ ApproveStatus === 1 ? item.platformClinetPrice : '***' }}
-														<text class="tui-rate-text ">/件</text>
+														<text class="tui-rate-text ">/{{item.isGroup == '2'?'份':'件' }}</text>
 													</view>
 													<view class="tui-rate-price" v-if="item.marketPrice && item.marketPrice != 0">
 														<text>&yen;</text>
@@ -389,7 +395,10 @@
 													</text>
 												</view>
 												<view class="tui-pro-dea">
-													<view class="tui-jin1"><text v-if="item.enterName !== ''">{{item.enterName}}</text> <text v-if="enterNumber!== ''">{{item.erterNumber}}</text></view><!-- {{ item.specification }} -->
+													<view class="tui-jin1">
+														<text style="margin-right: 8rpx;" v-if="item.enterNumber!== ''">{{item.enterNumber}}</text>
+														<text v-if="item.enterName !== ''">{{item.enterName}}</text> 
+													</view><!-- {{ item.specification }} -->
 													<!-- <text class="tui-jin1">{{ item.specification }}</text> -->
 													<text class="tui-jin">
 														成交
@@ -431,7 +440,7 @@
 													<view class="tui-rate">
 														<text>&yen;</text>
 														{{ ApproveStatus === 1 ? item.platformClinetPrice : '***' }}
-														<text class="tui-rate-text ">/件</text>
+														<text class="tui-rate-text ">/{{item.isGroup == '2'?'份':'件' }}</text>
 													</view>
 													<view class="tui-rate-price" v-if="item.marketPrice && item.marketPrice != 0">
 														<text>&yen;</text>
@@ -444,7 +453,10 @@
 													</text>
 												</view>
 												<view class="tui-pro-dea">
-													<view class="tui-jin1"><text v-if="item.enterName !== ''">{{item.enterName}}</text> <text v-if="enterNumber!== ''">{{item.erterNumber}}</text></view><!-- {{ item.specification }} -->
+													<view class="tui-jin1">
+														<text style="margin-right: 8rpx;" v-if="item.enterNumber !== ''">{{item.enterNumber}}</text>
+														<text v-if="item.enterName !== ''">{{item.enterName}}</text> 
+													</view><!-- {{ item.specification }} -->
 													<!-- <text class="tui-jin1">{{ item.specification }}</text> -->
 													<text class="tui-jin">
 														成交
@@ -948,23 +960,23 @@
 			//倒计时
 			endOfTime: function() {},
 			//金刚区跳转
-			hrefKing(index, title) {
+			hrefKing(index, id, title) {
 				let url = '';
 				switch (index) {
 					case 0:
-						url = '../../pagesII/seasonal/seasonal?title=' + title; //应季专区
+						url = '../../pagesII/seasonal/seasonal?title=' + title + '&id=' + id; //应季专区
 						break;
 					case 1:
-						url = '../../pagesII/hotFruit/hotFruit?title=' + title; //热门品种
+						url = '../../pagesII/hotFruit/hotFruit?title=' + title + '&id=' + id; //热门品种（团长专区）
 						break;
 					case 2:
-						url = '../../pagesII/ImportedFruit/ImportedFruit?title=' + title; //进口水果
+						url = '../../pagesII/ImportedFruit/ImportedFruit?title=' + title + '&id=' + id; //进口水果
 						break;
 					case 3:
-						url = '../../pagesII/superValue/superValue?title=' + title; //超值专区
+						url = '../../pagesII/superValue/superValue?title=' + title + '&id=' + id; //超值专区
 						break;
 					case 4:
-						url = '../../pagesII/Recently/Recently?title=' + title; //最近看过
+						url = '../../pagesII/Recently/Recently?title=' + title + '&id=' + id; //最近看过
 						break;
 					default:
 						break;
@@ -1070,7 +1082,7 @@
 								uni.removeStorageSync('usermen');
 								uni.removeStorageSync('StoreStatus');
 								this.ifUser();
-								
+
 							}, 1000);
 							return;
 						} else {
@@ -1236,7 +1248,7 @@
 		},
 
 		onNavigationBarButtonTap(e) {},
-		
+
 		onShow() {
 			let setdata = uni.getStorageSync('usermen');
 			if (setdata) {

@@ -14,7 +14,7 @@
 		<!--banner-->
 		<view class="tui-banner-swiper">
 			<!-- <image src="../../static/images/hot_fruit.png" class="tui-my-bg" mode="widthFix"></image> -->
-			<image src="https://qg-qr.oss-cn-shenzhen.aliyuncs.com/test/1609921697224.png?Expires=1925281696&OSSAccessKeyId=LTAI4G74cnhsbDWNkfvuNew3&Signature=%2FC8P%2FGNmM%2BKtktfNVe01KsE7mbE%3D " class="tui-my-bg" mode="widthFix"></image>
+			<image :src="bgUrl" class="tui-my-bg" mode="widthFix"></image>
 		</view>
 		<!-- <view class="tui-cent-box">
 			
@@ -36,8 +36,8 @@
 									<view class="tag-tit2-price">
 										<text class="text-color1">限量价</text>
 										<text class="text-color2">￥</text>
-										{{ ApproveStatus===1?item.platformClientPrice: '***'}}<text style="color: #FF5600;font-size: 24rpx;font-weight: 400;">元</text><text
-										 class="text-color">/件</text>
+										{{ ApproveStatus===1?item.platformClinetPrice: '***'}}<text style="color: #FF5600;font-size: 24rpx;font-weight: 400;">元</text><text
+										 class="text-color">/{{item.isGroup =='2'? '份': '件' }}</text>
 									</view>
 									<!-- <view class="tag-tit2-text">
 										{{item.number}}点赞
@@ -72,6 +72,7 @@
 	import {
 		getClient,
 		getselectHot,
+		getGroup,
 		imgurl
 	} from '../../api/request.js'
 	var setdata = uni.getStorageSync('usermen');
@@ -83,7 +84,7 @@
 		data() {
 			return {
 				url: '',
-				title: '热门品种',
+				title: '团长专区',
 				hideing: 0,
 				num: 0,
 				ApproveStatus: 0,
@@ -100,6 +101,8 @@
 				value: 1,
 				collected: false,
 				importData: [], //请求的数据
+				bgUrl: "",
+				sectionId: ""
 			};
 		},
 		onLoad: function(options) {
@@ -108,6 +111,7 @@
 			})
 			this.getMerchants()
 			this.title = options.title
+			this.sectionId = options.id
 			this.getImportData()
 			this.url = imgurl
 			let obj = {};
@@ -172,11 +176,15 @@
 					uni.stopPullDownRefresh();
 				}, 1000);
 			},
-			//获取进口水果
+			//获取
 			getImportData() {
-				listing2(getselectHot)
+				let data = {
+					posterId: this.sectionId
+				}
+				listing2(getGroup,data)
 					.then((res) => {
 						this.importData = res.data.data
+						this.bgUrl = res.data.extraData.fileUrl
 					})
 					.catch((err) => {
 						console.log(err)

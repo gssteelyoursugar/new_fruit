@@ -13,7 +13,7 @@
 		<!--header-->
 		<!--banner-->
 		<view class="tui-banner-swiper">
-		<image src="https://qg-qr.oss-cn-shenzhen.aliyuncs.com/test/1609981257861.png?Expires=1925341253&OSSAccessKeyId=LTAI4G74cnhsbDWNkfvuNew3&Signature=UJUYM0Qg%2Fpy7BiS0TL3WHFYobLY%3D" class="tui-my-bg" mode="widthFix"></image>
+		<image :src="bgUrl" class="tui-my-bg" mode="widthFix"></image>
 		</view>
 		<!-- <view class="tui-cent-box">
 			
@@ -35,7 +35,7 @@
 									<view class="tag-tit2-price">
 										<text class="text-color1">限量价</text>
 										<text class="text-color2">￥</text>
-										{{ApproveStatus === 1?item.platformClientPrice:'***'}}<text style="color: #FF5600;font-size: 24rpx;font-weight: 400;">元</text><text class="text-color">/件</text>
+										{{ApproveStatus === 1?item.platformClientPrice:'***'}}<text style="color: #FF5600;font-size: 24rpx;font-weight: 400;">元</text><text class="text-color">/{{item.isGroup == '2'?'份':'件' }}</text>
 									</view>
 									<!-- <view class="tag-tit2-text">
 										{{item.number}}点赞
@@ -88,6 +88,8 @@
 				value: 1,
 				collected: false,
 				importData:[],//请求的数据
+				bgUrl: '',
+				sectionId: ''
 			};
 		},
 		onLoad: function(options) {
@@ -96,6 +98,7 @@
 			})
 			this.getMerchants()
 			this.title = options.title
+			this.sectionId = options.id
 			this.getImportData()
 			this.url = imgurl
 			let obj = {};
@@ -163,9 +166,13 @@
 			    },
 			//获取进口水果
 			getImportData(){
-				listing2(getselectSuper)
+				let data = {
+					id: this.sectionId
+				}
+				listing2(getselectSuper,data)
 				.then((res)=>{
 					this.importData =  res.data.data
+					this.bgUrl = res.data.extraData.fileUrl
 				})
 				.catch((err)=>{
 					console.log(err)

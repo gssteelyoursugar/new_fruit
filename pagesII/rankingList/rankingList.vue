@@ -56,7 +56,7 @@
 											<text style="font-size: 16rpx;">¥</text>
 											<text style="font-size: 40rpx;font-weight: bold;margin: 0 4rpx;">{{ApproveStatus===1?item.platformClientPrice:'***'}}</text>
 											<text style="font-size: 24rpx;font-weight: 400;">元</text>
-											<text style="font-size: 20rpx;color: #b6b6b6;">/件</text>
+											<text style="font-size: 20rpx;color: #b6b6b6;">/{{item.isGroup == '2'?'份':'件' }}</text>
 										</view>
 										<view class="tag-tit2-text">
 											累计成交
@@ -95,7 +95,7 @@
 											<text style="font-size: 16rpx;">¥</text>
 											<text style="font-size: 40rpx;font-weight: bold;margin: 0 4rpx;">{{ApproveStatus === 1?item.platformClientPrice:'***'}}</text>
 											<text style="font-size: 24rpx;font-weight: 400;">元</text>
-											<text style="font-size: 20rpx;color: #b6b6b6;">/件</text>
+											<text style="font-size: 20rpx;color: #b6b6b6;">/{{item.isGroup == '2'?'份':'件' }}</text>
 										</view>
 										<view class="tag-tit2-text">
 											{{item.praise_number || 0 |filterNum}}人点了赞
@@ -130,7 +130,7 @@
 											<text style="font-size: 16rpx;">¥</text>
 											<text style="font-size: 40rpx;font-weight: bold;margin: 0 4rpx;">{{ApproveStatus ===1?item.platformClientPrice:'***'}}</text>
 											<text style="font-size: 24rpx;font-weight: 400;">元</text>
-											<text style="font-size: 20rpx;color: #b6b6b6;">/件</text>
+											<text style="font-size: 20rpx;color: #b6b6b6;">/{{item.isGroup == '2'?'份':'件' }}</text>
 										</view>
 										<view class="tag-tit2-text">
 											{{item.followNumber ||0}}人关注收藏了
@@ -166,7 +166,7 @@
 											<text style="font-size: 16rpx;">¥</text>
 											<text style="font-size: 40rpx;font-weight: bold;margin: 0 4rpx;">{{ApproveStatus===1?item.platformClientPrice:'***'}}</text>
 											<text style="font-size: 24rpx;font-weight: 400;">元</text>
-											<text style="font-size: 20rpx;color: #b6b6b6;">/件</text>
+											<text style="font-size: 20rpx;color: #b6b6b6;">/{{item.isGroup == '2'?'份':'件' }}</text>
 										</view>
 										<view class="tag-tit2-text">
 											{{item.backNumber || 0}}人买了之后又买

@@ -49,7 +49,7 @@
 									<view class="tui-goods-price">
 										<text class="goods-price-tag">￥</text>
 										<text class="goods-price-num">{{ ApproveStatus === 1 ? itemTwo.platformClientPrice :'***' | getPrice }}</text>
-										<text>/件</text>
+										<text>/{{itemTwo.isGroup == '2'?'份':'件' }}</text>
 									</view>
 									<!-- :custom="index" :index="indexs" 
 									这个存储用的，第一个是存储最大外面的那个下标

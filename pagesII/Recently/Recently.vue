@@ -49,7 +49,7 @@
 												<text class="text-color2">￥</text>
 												{{ApproveStatus ===1? dt.platformClientPrice:'***' }}
 												<text style="font-size: 20rpx;font-weight: 400;margin-left: 4rpx;">元</text>
-												<text class="price2">/件</text>
+												<text class="price2">/{{dt.isGroup == '2'?'份':'件' }}</text>
 											</view>
 											<view class="">
 												<image src="../../static/images/like1.png" mode="aspectFill" class="tui-shop-car" v-if="dt.isCollection"

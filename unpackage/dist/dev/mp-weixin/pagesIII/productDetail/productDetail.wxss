@@ -713,7 +713,7 @@ page.data-v-684acb55 {
   border-radius: 40rpx 0 0 40rpx;
   color: #b6b6b6;
   font-size: 24rpx;
-  top: 130rpx;
+  top: 100rpx;
   height: 40rpx;
   display: -webkit-box;
   display: -webkit-flex;
@@ -1341,6 +1341,90 @@ page.data-v-684acb55 {
 }
 .warp-flex button.data-v-684acb55:nth-child(2) {
   color: #00c52a;
+}
+.price-box.data-v-684acb55 {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 130rpx;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 9999;
+}
+.price-box .box-wrapper.data-v-684acb55 {
+  width: 500rpx;
+  height: 300rpx;
+  background: #ffffff;
+  margin: 50% auto;
+  position: absolute;
+  -webkit-position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border-radius: 8rpx;
+}
+.price-box .box-wrapper .close-box-btn.data-v-684acb55 {
+  position: absolute;
+  right: -14rpx;
+  top: -14rpx;
+}
+.price-box .box-wrapper .price-box-title.data-v-684acb55 {
+  text-align: center;
+  font-size: 28rpx;
+  margin: 20rpx 0;
+  font-weight: 500;
+  color: #333;
+}
+.price-box .box-wrapper .price-input.data-v-684acb55 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-align: baseline;
+  -webkit-align-items: baseline;
+          align-items: baseline;
+  padding: 40rpx 0;
+}
+.price-box .box-wrapper .price-input text.data-v-684acb55 {
+  font-size: 24rpx;
+}
+.price-box .box-wrapper .price-input text.data-v-684acb55:first-child {
+  color: #ff6500;
+  font-weight: 400;
+}
+.price-box .box-wrapper .price-input text.data-v-684acb55:last-child {
+  color: #969696;
+  font-weight: 400;
+}
+.price-box .box-wrapper .price-input input.data-v-684acb55 {
+  text-align: center;
+  width: 40%;
+  border-bottom: 1px solid #DBDBDB;
+  margin: 0 8rpx;
+  font-size: 46rpx;
+}
+.show-group-code.data-v-684acb55 {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 130rpx;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 9999;
+}
+.show-group-code .save-pic-btn.data-v-684acb55 {
+  width: 30%;
+  background: #00c32e;
+  text-align: center;
+  padding: 14rpx 0;
+  font-size: 28rpx;
+  color: #fff;
+  font-weight: 500;
+  margin: 30rpx auto;
+  border-radius: 14rpx;
 }
 /*end  */
 

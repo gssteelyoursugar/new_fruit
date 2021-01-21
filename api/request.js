@@ -144,6 +144,9 @@ let postPraise = `${url}api/wx/goods/savePraise`
 //取消点赞
 let postCancelPraise = `${url}api/wx/goods/cancelPraise`
 
+//团购专区
+let getGroup = `${url}api/wx/index/group`
+
 //最近看过
 let getRecently = `${url}api/wx/goods/recently`
 
@@ -246,6 +249,7 @@ export {
 	getLike,
 	postDelLike,
 	postPraise,
+	getGroup,
 	getRecently,
 	postOrderPay,
 	getMyOrder,

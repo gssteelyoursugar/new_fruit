@@ -24,7 +24,7 @@
 								<text class="price1">
 									<text style="font-size: 20rpx;margin-right:4rpx;">¥</text>{{ApproveStatus === 1 ?itm.platformClientPrice : '***'}}<text
 									 style="font-size: 20rpx;margin-left:4rpx;">元</text>
-									<text class="price2">/件</text>
+									<text class="price2">/{{itm.isGroup == '2'?'份':'件'}}</text>
 								</text>
 							</view>
 						</view>

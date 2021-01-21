@@ -38,7 +38,7 @@
 								<text style="font-size: 20rpx;margin-right:4rpx;">¥</text>
 								{{item.platformClientPrice}}
 								<text style="font-size: 20rpx;margin-left:4rpx;">元</text>
-								<text class="price2">/件</text>
+								<text class="price2">/{{item.isGroup == '2'?'份':'件' }}</text>
 							</view>
 							<view style="font-size: 24rpx;color: #666;">
 								实付:

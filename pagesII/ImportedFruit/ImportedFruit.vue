@@ -14,7 +14,7 @@
 		<!--banner-->
 		<view class="tui-banner-swiper">
 			<!-- <image src="../../static/images/import_fruit.png" class="tui-my-bg" mode="widthFix "></image> -->
-			<image src="https://qg-qr.oss-cn-shenzhen.aliyuncs.com/test/1609921735566.png?Expires=1925281728&OSSAccessKeyId=LTAI4G74cnhsbDWNkfvuNew3&Signature=IBN6uil1BNTAN0Dd4tGwRKW6YH8%3D " class="tui-my-bg" mode="widthFix "></image>
+			<image :src="bgUrl" class="tui-my-bg" mode="widthFix "></image>
 		</view>
 		<!-- <view class="tui-cent-box">
 			
@@ -36,7 +36,7 @@
 									<view class="tag-tit2-price">
 										<text class="text-color1">限量价</text>
 										<text class="text-color2">￥</text>
-										{{ApproveStatus===1?item.platformClientPrice:'***'}} <text style="color: #FF5600;font-size: 24rpx;font-weight: 400;">元</text><text class="text-color">/件</text>
+										{{ApproveStatus===1?item.platformClientPrice:'***'}} <text style="color: #FF5600;font-size: 24rpx;font-weight: 400;">元</text><text class="text-color">/{{item.isGroup =='2'? '份': '件' }}</text>
 									</view>
 									<!-- <view class="tag-tit2-text">
 										{{item.number}}点赞
@@ -76,9 +76,6 @@
 				hideing: 0,
 				num:0,
 				ApproveStatus :0,
-				imageUrl:"http://qg-qr.oss-cn-shenzhen.aliyuncs.com/test/1599787305445.png?Expires=1915147298&OSSAccessKeyId=LTAI4G74cnhsbDWNkfvuNew3&Signature=BvRoSHSXKpQrTAgEtaTTtkJLTdA%3D",
-				rankBgUrl:"/static/images/paihangbang@2x.png",
-				height: 64, //header高度
 				top: 26, //标题图标距离顶部距离
 				scrollH: 0, //滚动总高度
 				opcity: 0,
@@ -89,6 +86,8 @@
 				value: 1,
 				collected: false,
 				importData:[],//请求的数据
+				sectionId: '',
+				bgUrl: ""
 			};
 		},
 		onLoad: function(options) {
@@ -97,6 +96,7 @@
 			})
 			this.getMerchants()
 			this.title = options.title
+			this.sectionId = options.id
 			this.getImportData()
 			this.url = imgurl
 			let obj = {};
@@ -164,9 +164,15 @@
 			},
 			//获取进口水果
 			getImportData(){
-				listing2(getselectImport)
+				let data = {
+					id: this.sectionId
+				}
+				listing2(getselectImport,data)
 				.then((res)=>{
+					console.log(res);
 					this.importData =  res.data.data
+					this.bgUrl = res.data.extraData.fileUrl
+					console.log(this.bgUrl)
 				})
 				.catch((err)=>{
 					console.log(err)
